@@ -12,7 +12,9 @@ export default defineNuxtConfig({
   '~/assets/layouts/modern-light-menu/css/dark/loader.css',
   '~/assets/layouts/modern-light-menu/css/light/plugins.css',
   '~/assets/src/assets/css/light/authentication/auth-boxed.css',
-  '~/assets/layouts/modern-light-menu/css/dark/loader.css'
+  '~/assets/src/plugins/src/table/datatable/datatables.css',
+  '~/assets/src/plugins/css/light/table/datatable/dt-global_style.css',
+  '~/assets/src/plugins/css/dark/table/datatable/dt-global_style.css',
 ],
 
 
@@ -31,10 +33,14 @@ app:{
       { src: '/src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js', defer: true },
       { src: '/src/plugins/src/mousetrap/mousetrap.min.js', defer: true },
       { src: '/src/plugins/src/waves/waves.min.js', defer: true },
-      { src: '/src/plugins/src/apex/apexcharts.min.js', defer: true }
+      { src: '/src/plugins/src/apex/apexcharts.min.js', defer: true },
+
     ]
   },
 },
+
+
+
 
 
 vite: {
