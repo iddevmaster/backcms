@@ -63,8 +63,18 @@ const data = [
 
 
   <div id="content" class="main-content">
-            <div class="layout-px-spacing">
 
+
+          
+            <div class="layout-px-spacing">
+              <div class="page-meta">
+                        <nav class="breadcrumb-style-one" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Elements</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Breadcrumbs</li>
+                            </ol>
+                        </nav>
+                    </div>
 
                 <div class="middle-content container-xxl p-0">
 
@@ -94,6 +104,8 @@ const data = [
       </thead>
     </DataTable>
 
+
+    
                             </div>
                         </div>
 
@@ -108,8 +120,9 @@ const data = [
                 </div>
 
             </div>
+          </div>
+ 
        
-        </div>
 </template>
 
 <style>
