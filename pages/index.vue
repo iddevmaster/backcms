@@ -1,12 +1,3 @@
-
-
-
-<script setup lang="ts">
-
-
-console.log('test');
-
-</script>
 <template>
 <div id="content" class="main-content">
             <div class="layout-px-spacing">
@@ -565,5 +556,13 @@ console.log('test');
             <!--  END FOOTER  -->
         </div>
 </template>
+<script setup lang="ts">
+/*Call Components*/
+import { storeToRefs } from 'pinia';
+import { defineComponent } from 'vue';
+definePageMeta({
+    middleware: 'auth' // this should match the name of the file inside the middleware directory 
+})
 
+</script>
 <style scoped></style>

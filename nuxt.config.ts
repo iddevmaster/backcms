@@ -9,12 +9,19 @@ export default defineNuxtConfig({
   '~/assets/src/assets/css/light/dashboard/dash_1.css',
   '~/assets/src/assets/css/dark/dashboard/dash_1.css',
   '~/assets/layouts/modern-light-menu/css/light/loader.css',
+  '~/assets/layouts/modern-light-menu/css/dark/loader.css',
+  '~/assets/layouts/modern-light-menu/css/light/plugins.css',
+  '~/assets/src/assets/css/light/authentication/auth-boxed.css',
   '~/assets/layouts/modern-light-menu/css/dark/loader.css'
 ],
 
+
 modules: [
-  
+  '@pinia/nuxt',
 ],
+imports: {
+    dirs: ['./store'],
+  },
 app:{
 
   head: {
@@ -24,8 +31,7 @@ app:{
       { src: '/src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js', defer: true },
       { src: '/src/plugins/src/mousetrap/mousetrap.min.js', defer: true },
       { src: '/src/plugins/src/waves/waves.min.js', defer: true },
-      { src: '/src/plugins/src/apex/apexcharts.min.js', defer: true },
-      { src: '/src/assets/js/dashboard/dash_1.js', defer: true }
+      { src: '/src/plugins/src/apex/apexcharts.min.js', defer: true }
     ]
   },
 },
