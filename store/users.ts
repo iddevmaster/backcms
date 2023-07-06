@@ -20,6 +20,15 @@ export const usersStore = defineStore('users', {
         office: 'Edinburgh',
         extn: 518,
       },
+      {
+        id: 2,
+        name: '2',
+        position: "System Architect",
+        salary: "$320,800",
+        start_date: "2011/04/25",
+        office: 'Edinburgh',
+        extn: 518,
+      },
     ],
   }
 ),
@@ -43,6 +52,7 @@ export const usersStore = defineStore('users', {
  try {
   const response = await apiClient.get('/products');
   this.posts = response.data;
+  console.log(this.posts);
  
 } catch (error) {
   this.error = error
@@ -51,6 +61,32 @@ export const usersStore = defineStore('users', {
 }
 
     },
+
+    async deleteItem(x) {
+      // this.desserts.filter((item) => item.id !== x )
+      // console.log(this.desserts);
+
+      const index = this.posts.products.findIndex(item => item.id === x)
+      if (index !== -1) {
+        this.posts.products.splice(index, 1)
+      }
+
+      console.log(this.posts.products);
+     // this.posts = this.items.filter((item) => item.id !== itemId)
+    //  console.log(this.posts.products.filter((item) => item.id !== x ));
+     // this.posts = this.posts.products.filter(post => post.id !== x);
+
+      // try {
+      //   this.posts = this.posts.filter(posts => console.log(posts.id) !== x);
+      //  console.log(this.posts);
+      // } catch (error) {
+       
+      // } finally {
+       
+      // }
+      
+    },
+    
 
   },
 });

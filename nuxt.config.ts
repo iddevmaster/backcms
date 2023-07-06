@@ -17,6 +17,8 @@ export default defineNuxtConfig({
   '~/assets/src/plugins/css/dark/table/datatable/dt-global_style.css',
 ],
 
+// css: ['~/assets/styles/main.scss'],
+
 
 modules: [
   '@pinia/nuxt',
@@ -24,22 +26,27 @@ modules: [
 imports: {
     dirs: ['./store'],
   },
-app:{
+// app:{
 
-  head: {
-    script: [
-      { src: '/src/bootstrap/js/bootstrap.bundle.min.js', defer: true },
-      { src: '/layouts/modern-light-menu/app.js', defer: true },
-      { src: '/src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js', defer: true },
-      { src: '/src/plugins/src/mousetrap/mousetrap.min.js', defer: true },
-      { src: '/src/plugins/src/waves/waves.min.js', defer: true },
-      { src: '/src/plugins/src/apex/apexcharts.min.js', defer: true },
+//   head: {
+//     script: [
+      
+//       { src: '/src/bootstrap/js/bootstrap.bundle.min.js', defer: true },
+//       { src: '/layouts/modern-light-menu/app.js', defer: true },
+//       { src: '/src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js', defer: true },
+//       { src: '/src/plugins/src/mousetrap/mousetrap.min.js', defer: true },
+//       { src: '/src/plugins/src/waves/waves.min.js', defer: true },
+//       { src: '/src/plugins/src/apex/apexcharts.min.js', defer: true },
+//       { src: '/src/assets/js/apps/invoice-list.js', defer: true },
+//       { src: '/src/plugins/src/table/datatable/datatables.js', defer: true },
+//       { src: '/src/plugins/src/table/datatable/button-ext/dataTables.buttons.min.js', defer: true },
+//       { src: '/src/plugins/src/global/vendors.min.js', defer: true },
 
-    ]
+//     ]
 
-    
-  },
-},
+//   },
+// },
+
 
 
 
