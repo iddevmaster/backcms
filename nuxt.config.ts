@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: false },
-
+  ssr: false,
   css: ['~/assets/src/bootstrap/css/bootstrap.min.css',
   '~/assets/src/bootstrap/css/bootstrap.min.css',
   '~/assets/layouts/modern-light-menu/css/light/plugins.css',
@@ -36,6 +36,8 @@ app:{
       { src: '/src/plugins/src/apex/apexcharts.min.js', defer: true },
 
     ]
+
+    
   },
 },
 
@@ -47,5 +49,6 @@ vite: {
   define: {
     "process.env.DEBUG": false,
   },
+  
 },
 })

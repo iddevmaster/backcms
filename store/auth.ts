@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
-import ENV from '../env';
-
+import { useEnvStore } from '@/store/env'
 
 interface UserPayloadInterface {
   username: string;
@@ -24,8 +23,9 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async authenticateUser({ username, password }: UserPayloadInterface) {
       // useFetch from nuxt 3
-      const { error, data, statusCode }: any = await useFetch(ENV.API_AUTH, {
+      const { error, data, statusCode }: any = await useFetch('/auth/login', {
         method: 'post',
+        baseURL:useEnvStore().apidev,
         headers: { 'Content-Type': 'application/json' },
         body: {
           username,

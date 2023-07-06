@@ -38,12 +38,10 @@ export const usersStore = defineStore('users', {
   actions: {
     async fetchUsers() {
       // useFetch from nuxt 3
-     
- console.log('fetchUsers');
  this.posts = []
 
  try {
-  const response = await apiClient.get('/posts');
+  const response = await apiClient.get('/products');
   this.posts = response.data;
  
 } catch (error) {
