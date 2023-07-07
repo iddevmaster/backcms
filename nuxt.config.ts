@@ -15,6 +15,7 @@ export default defineNuxtConfig({
   '~/assets/src/plugins/src/table/datatable/datatables.css',
   '~/assets/src/plugins/css/light/table/datatable/dt-global_style.css',
   '~/assets/src/plugins/css/dark/table/datatable/dt-global_style.css',
+  '~/assets/src/assets/css/light/components/modal.css',
 ],
 
 // css: ['~/assets/styles/main.scss'],
