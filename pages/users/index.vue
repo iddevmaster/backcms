@@ -8,6 +8,7 @@ import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import { usersStore } from '@/store/users'
 import UserList from '@/components/users/UserList.vue'
+import { useModalStore } from '@/store/modal';
 const store = usersStore()
 const { posts } = storeToRefs(usersStore())
   const { deleteItem } = usersStore();//Action
@@ -15,6 +16,12 @@ const { posts } = storeToRefs(usersStore())
   const { selectone } = usersStore();//Action
   const { getSelect } = storeToRefs(store); //Get Getter
   const { getSelectALL } = storeToRefs(store); //Get Getter
+  const modalStore = useModalStore();
+  const { GetopenModal } = storeToRefs(modalStore); //Get Getter
+
+  const closeModal = () => {
+      modalStore.closeModal();
+    };
   
 </script>
 
@@ -42,109 +49,53 @@ const { posts } = storeToRefs(usersStore())
                 </div>
             </div>
           </div>
-          <div class="modal-mask">
-      <div class="modal-wrapper">
-        <div class="modal-container">
-
-          <div class="modal-header">
-            <slot name="header">
-              default header
-            </slot>
-          </div>  
-
-          <div class="modal-body">
-            <slot name="body">
-              default body
-            </slot>
-          </div>
-
-          <div class="modal-footer">
-            <slot name="footer">
-              default footer
-              <button class="modal-default-button" >
-                OK
-              </button>
-            </slot>
-          </div>
-        </div>
-      </div>
-    </div> 
-
+  <div v-if="GetopenModal" class="modal">
+<div class="modal-content" id="deleteConformationLabel">
+                                <div class="modal-header">
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                    </div>
+                                    <h5 class="modal-title" id="exampleModalLabel">Delete the task?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="">If you delete the task it will be gone forever. Are you sure you want to proceed?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal" >Cancel</button>
+                                    <button type="button" class="btn btn-danger" data-remove="task">Delete</button>
+                                </div>
+                            </div>
+  </div>
 
     
     
-    <transition name="modal">
-    <modal v-if="getSelectALL">
-      <!--
-        you can use custom content here to overwrite
-        default content
-      -->
-      <template v-slot:header>
-        <h3>custom header</h3>
-      </template>
-    </modal>
-  </transition>
+
        
 </template>
 
 <style>
-.modal-mask {
+.modal {
   position: fixed;
-  z-index: 9998;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: table;
-  transition: opacity 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  width: 50%;
 }
 
-.modal-container {
-  width: 300px;
-  margin: 0px auto;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  transition: all 0.3s ease;
-  font-family: Helvetica, Arial, sans-serif;
-}
-
-.modal-header h3 {
-  margin-top: 0;
-  color: #42b983;
-}
-
-.modal-body {
-  margin: 20px 0;
-}
-
-.modal-default-button {
-  float: right;
-}
-
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
-
-.modal-enter-from, .modal-leave-to {
-  opacity: 0;
-}
-
-.modal-enter-active .modal-container,
-.modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+button {
+  margin-top: 10px;
 }
 </style>

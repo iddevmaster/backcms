@@ -2,20 +2,17 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: false,
-  css: ['~/assets/src/bootstrap/css/bootstrap.min.css',
+  css: [
   '~/assets/src/bootstrap/css/bootstrap.min.css',
   '~/assets/layouts/modern-light-menu/css/light/plugins.css',
   '~/assets/src/plugins/src/apex/apexcharts.css',
   '~/assets/src/assets/css/light/dashboard/dash_1.css',
-  '~/assets/src/assets/css/dark/dashboard/dash_1.css',
   '~/assets/layouts/modern-light-menu/css/light/loader.css',
-  '~/assets/layouts/modern-light-menu/css/dark/loader.css',
   '~/assets/layouts/modern-light-menu/css/light/plugins.css',
   '~/assets/src/assets/css/light/authentication/auth-boxed.css',
   '~/assets/src/plugins/src/table/datatable/datatables.css',
   '~/assets/src/plugins/css/light/table/datatable/dt-global_style.css',
-  '~/assets/src/plugins/css/dark/table/datatable/dt-global_style.css',
-  '~/assets/src/assets/css/light/components/modal.css',
+  // '~/assets/src/assets/css/light/components/modal.css',
 ],
 
 // css: ['~/assets/styles/main.scss'],
