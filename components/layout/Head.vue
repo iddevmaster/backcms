@@ -1,6 +1,7 @@
 
 
 <template>
+
      <div class="header-container container-xxl">
         <header class="header navbar navbar-expand-sm expand-header">
             <a href="javascript:void(0);" class="sidebarCollapse">

@@ -5,11 +5,12 @@ import { defineComponent } from 'vue';
 import { usersStore } from '@/store/users'
 import  UserCreate from '@/components/users/UserCreate.vue'
 
-
+import Loading from '@/components/layout/Success.vue';
 
 
 const store = usersStore()
 const { posts } = storeToRefs(usersStore())
+  const { Pending } = storeToRefs(store); //Get Getter
 </script>
 
 <template>
@@ -23,6 +24,7 @@ const { posts } = storeToRefs(usersStore())
                             </ol>
                         </nav>
                     </div>
+<Loading v-if="Pending"></Loading>
 
                 <div class="middle-content container-xxl p-0">
                     <div class="row layout-top-spacing">
@@ -32,6 +34,7 @@ const { posts } = storeToRefs(usersStore())
            <UserCreate></UserCreate>
                                </div>
                               </div>
+                              
  </div>
 
                 </div>

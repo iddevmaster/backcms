@@ -15,7 +15,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                      <tr v-for="user in posts.data" :key="user.id">
+                                      <tr v-for="user in posts.data" :key="user.user_id">
                                         <td><input type="checkbox" v-model="store.selected" :value="user" number></td>
             <td>{{ user.user_firstname }} {{ user.user_lastname }}</td>
             <td>{{ user.user_name }}</td>
@@ -39,6 +39,7 @@
           </tr>
                                     </tbody>
                                 </table>
+                                {{store.selected}}
    
    </template>
 

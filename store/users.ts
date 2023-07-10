@@ -9,6 +9,7 @@ export const usersStore = defineStore('users', {
     locale:true,
     load:true,
     posts:{},
+    pending:false,
     selected: [],
     checkboxes: [], // Array to store checkbox values
     isAllSelected: false,
@@ -34,6 +35,9 @@ export const usersStore = defineStore('users', {
     getForm(state){
       return state.formDataregister;
     },
+    Pending(state){
+      return state.pending;
+    },
     doubleCount(state) {
       return state.count * 2
     },
@@ -48,13 +52,10 @@ export const usersStore = defineStore('users', {
   
   actions: {
     async fetchUsers() {
-      // useFetch from nuxt 3
-
-
-
 
  try {
-  const { error, data } = await useFetch('/user/list?user_type=3', {
+  this.pending = true
+  const { pending , error, data } = await useFetch('/user/list?user_type=3', {
     method: 'post',
     baseURL:useEnvStore().apidev,
     headers: new Headers({
@@ -73,12 +74,13 @@ export const usersStore = defineStore('users', {
   if (data.value.data) {
     this.posts = data.value
   }
-  console.log(this.posts);
+  
  
 } catch (error) {
   this.error = error
 } finally {
   this.loading = false
+  this.pending = false
 }
     },
 
@@ -104,8 +106,10 @@ export const usersStore = defineStore('users', {
     async selectall() {
 
       this.selected = [];
+  
       if (!this.isAllSelected) {
-        this.posts.products.forEach((value, index) => {
+        this.posts.data.forEach((value, index) => {
+          console.log(value);
           this.selected.push(value);
       });
       
@@ -135,9 +139,24 @@ export const usersStore = defineStore('users', {
       this.isAllSelected = false;
     },
     async SaveForm(){
-console.log(this.formDataregister);
-console.log('สำเร็จ');
-
+      try {
+        this.pending = true
+        const { error, data } = await useFetch('/user/create', {
+          method: 'post',
+          baseURL:useEnvStore().apidev,
+          headers: new Headers({
+            'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+            'Content-Type': 'application/json'
+        }), 
+        body:this.formDataregister,
+        });
+      
+       
+      } catch (error) {
+       
+      } finally {
+        this.pending = false;
+      }
 this.formDataregister = {
   user_name:'',
   user_password:'',

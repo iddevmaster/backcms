@@ -9,6 +9,7 @@ import { defineComponent } from 'vue';
 import { usersStore } from '@/store/users'
 import UserList from '@/components/users/UserList.vue'
 import { useModalStore } from '@/store/modal';
+import Loading from '@/components/layout/Success.vue';
 const store = usersStore()
 const { posts } = storeToRefs(usersStore())
   const { deleteItem } = usersStore();//Action
@@ -19,6 +20,8 @@ const { posts } = storeToRefs(usersStore())
   const modalStore = useModalStore();
   const { GetopenModal } = storeToRefs(modalStore); //Get Getter
 
+  const { Pending } = storeToRefs(store); //Get Getter
+
   const closeModal = () => {
       modalStore.closeModal();
     };
@@ -26,7 +29,9 @@ const { posts } = storeToRefs(usersStore())
 </script>
 
 <template>
+
   <div id="content" class="main-content">
+    
             <div class="layout-px-spacing">
               <div class="page-meta">
                         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
@@ -37,6 +42,7 @@ const { posts } = storeToRefs(usersStore())
                         </nav>
                     </div>
 
+                <Loading v-if="Pending"></Loading>
                 <div class="middle-content container-xxl p-0">
                     <div class="row layout-top-spacing">
                         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
@@ -98,4 +104,5 @@ const { posts } = storeToRefs(usersStore())
 button {
   margin-top: 10px;
 }
+
 </style>
