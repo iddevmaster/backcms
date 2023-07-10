@@ -4,7 +4,7 @@
       <div class="col-12 col-sm-12 d-flex">
       <div class="dataTables_length" id="zero-config_length">
         <label>Results :  
-          <select name="zero-config_length" aria-controls="zero-config" @change="onChange($event)" >
+          <select name="zero-config_length" aria-controls="zero-config" @change="selectshowdata($event)" >
           <option value="7">7</option>
           <option value="10">10</option>
           <option value="20">20</option>
@@ -172,7 +172,7 @@ await store.fetchUsers()
   await store.fetchUsers()
  };
 
-const onChange = async (x) => {
+const selectshowdata = async (x) => {
 console.log(x.target.value);
  };
 
