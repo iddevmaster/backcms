@@ -102,7 +102,8 @@
                                 <nuxt-link to="/users">User Manage</nuxt-link>
                             </li>
                             <li>
-                                <a href="./table-datatable-striped-table.html"> Add Users </a>
+
+                                <nuxt-link to="/users/create">Add Users</nuxt-link>
                             </li>
                         </ul>
                     </li>

@@ -8,39 +8,31 @@ export const usersStore = defineStore('users', {
   state: () => ({
     locale:true,
     load:true,
-    posts:[],
+    posts:{},
     selected: [],
     checkboxes: [], // Array to store checkbox values
     isAllSelected: false,
     count: 0,
-    desserts: [
-      {
-        id: 1,
-        name: '518',
-        position: "System Architect",
-        salary: "$320,800",
-        start_date: "2011/04/25",
-        office: 'Edinburgh',
-        extn: 518,
-      },
-      {
-        id: 2,
-        name: '2',
-        position: "System Architect",
-        salary: "$320,800",
-        start_date: "2011/04/25",
-        office: 'Edinburgh',
-        extn: 518,
-      },
-    ],
+    formDataregister:{
+      user_name: null,
+      user_password: null,
+      user_firstname: null,
+      user_lastname: null,
+      user_email: null,
+      user_phone:null,
+      user_type: 3,
+    }
   }
+     
 ),
 
 
   getters: {
     data(state) {
-      console.log(state.desserts)
-      return state.desserts;
+   
+    },
+    getForm(state){
+      return state.formDataregister;
     },
     doubleCount(state) {
       return state.count * 2
@@ -57,11 +49,30 @@ export const usersStore = defineStore('users', {
   actions: {
     async fetchUsers() {
       // useFetch from nuxt 3
- this.posts = []
+
+
+
 
  try {
-  const response = await apiClient.get('/products');
-  this.posts = response.data;
+  const { error, data } = await useFetch('/user/list?user_type=3', {
+    method: 'post',
+    baseURL:useEnvStore().apidev,
+    headers: new Headers({
+      'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+      'Content-Type': 'application/json'
+  }), 
+  body: {
+    "page" : 1,
+    "per_page" : 3,
+    "search" :""
+},
+  });
+
+
+
+  if (data.value.data) {
+    this.posts = data.value
+  }
   console.log(this.posts);
  
 } catch (error) {
@@ -122,8 +133,24 @@ export const usersStore = defineStore('users', {
 
     cance() {
       this.isAllSelected = false;
+    },
+    async SaveForm(){
+console.log(this.formDataregister);
+console.log('สำเร็จ');
+
+this.formDataregister = {
+  user_name:'',
+  user_password:'',
+  user_firstname:'',
+  user_lastname:'',
+  user_email:'',
+  user_phone:'',
+  user_type:3,
+};
+
     }
     
+
 
 
   },
