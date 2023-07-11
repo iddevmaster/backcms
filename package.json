@@ -11,6 +11,7 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@pinia/nuxt": "^0.4.11",
+    "@sentry/vite-plugin": "^2.4.0",
     "@types/node": "^18",
     "@typescript-eslint/typescript-estree": "^5.60.1",
     "@vuelidate/core": "^2.0.2",

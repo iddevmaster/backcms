@@ -17,7 +17,7 @@ export default defineNuxtConfig({
 
 // css: ['~/assets/styles/main.scss'],
 
-
+sourcemap: { server: true, client: false },
 modules: [
   '@pinia/nuxt',
 ],
