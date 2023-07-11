@@ -5,6 +5,7 @@
       <div class="dataTables_length" id="zero-config_length">
         <label>Results :  
           <select name="zero-config_length" aria-controls="zero-config" @change="selectshowdata($event)" >
+          <option value="2">2</option>
           <option value="7">7</option>
           <option value="10">10</option>
           <option value="20">20</option>
@@ -14,7 +15,7 @@
           </div>
           </div>
               <div class ="table-responsive">
- <table  id="example" class="table" style="width:100%">
+ <table  id="example" class="table table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
                                            
@@ -30,29 +31,22 @@
                                     <tbody>
                                       <tr v-for="user in posts.data" :key="user.user_id">
                                         <td><input type="checkbox" v-model="store.selected" :value="user" number></td>
-            <td>{{ user.user_firstname }} {{ user.user_lastname }}</td>
+            <td>{{ user.user_firstname }} {{ user.user_lastname }} {{ user.user_id }}</td>
             <td>{{ user.user_name }}</td>
             <td>{{ user.user_email }}</td>
             <td>{{ user.user_phone }}</td>
             <td>{{ coverttime(user.udp_date) }}</td>
-          
-
-            <!-- "user_name": "rkknoob",
-            "user_firstname": "xx1",
-            "user_lastname": "xx2",
-            "user_email": "rkknoob@gmail.com",
-            "user_phone": "0833268813",
-            "user_type": 3, -->
-         
-             <td>
-                                                <a class="badge badge-light-primary text-start me-2 action-edit" @click="editItem(user.id)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></a>
-                                                <a class="badge badge-light-danger text-start action-delete" @click="del(user.id)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a>
+                                                <td>
+                                                  <NuxtLink :to="'/users/' + user.user_id">
+                                                <a class="badge badge-light-primary text-start me-2 action-edit"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></a>
+                                            </NuxtLink>
+                                                <a class="badge badge-light-danger text-start action-delete" @click="del(user.user_id)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a>
                                             </td>
           
           </tr>
                                     </tbody>
                                 </table>
-                                {{posts.current_page}}
+                             
    
      <div>
     <!-- <button
@@ -85,7 +79,6 @@
               <a href="#" aria-controls="zero-config" data-dt-idx="1" tabindex="0" class="page-link" @click="setCurrentPageclick(page)">
               {{page}}</a>
               </li>
- 
             <li class="paginate_button page-item next" id="zero-config_next"><a href="#" aria-controls="zero-config" data-dt-idx="4" tabindex="0" class="page-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></li></ul></div>
             </div>
 
@@ -118,25 +111,14 @@ const { posts } = storeToRefs(usersStore())
   const { selectone } = usersStore();//Action
   const { setCurrentPage } = usersStore();//Action
   const { sortLists } = usersStore();//Action
+  const { selectentires } = usersStore();//Action
+  
   
   const { getSelect } = storeToRefs(store); //Get Getter
   const { getSelectALL } = storeToRefs(store); //Get Getter
   const { getPaginate } = storeToRefs(store); //Get Getter
   
 store.fetchUsers()
-
-const columns = [
-  { data: 'id' },
-  { data: 'id' },
-  { data: 'id' },
-  { data: 'id' },
-  { data: 'id' },
-  { data: 'id' },
-  { data: 'id' },
-];
- 
-
-
 
 
 
@@ -145,10 +127,10 @@ const columns = [
     console.log('editItem');
  }
 
+ const del = async (id) => {
 
- const del = async (x) => {
- await deleteItem(x); 
-await store.fetchUsers()
+ await deleteItem(id); 
+ await store.fetchUsers()
  };
  
 
@@ -173,7 +155,9 @@ await store.fetchUsers()
  };
 
 const selectshowdata = async (x) => {
-console.log(x.target.value);
+
+await selectentires(x.target.value);
+await store.fetchUsers()
  };
 
  const sortList = async (sortBy) => {
@@ -181,13 +165,6 @@ console.log(x.target.value);
 await sortLists (sortBy)
 
  };
-
-
- 
-
-
-
- 
 
  function coverttime(date) {
 const datetime = new Date(date);
@@ -202,3 +179,8 @@ return formattedDatetime;
 
   
 </script>
+<style>
+.dt--pagination{
+  float: right;
+}
+</style>

@@ -7,7 +7,6 @@ export const useModalStore = defineStore('modal', {
 
   getters: {
     GetopenModal(state) {
-    
       return state.isOpen;
     },
 

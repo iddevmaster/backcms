@@ -10,6 +10,7 @@ import { usersStore } from '@/store/users'
 import UserList from '@/components/users/UserList.vue'
 import { useModalStore } from '@/store/modal';
 import Loading from '@/components/layout/Success.vue';
+import Alert from '@/components/layout/Alert.vue';
 const store = usersStore()
 const { posts } = storeToRefs(usersStore())
   const { deleteItem } = usersStore();//Action
@@ -18,20 +19,26 @@ const { posts } = storeToRefs(usersStore())
   const { getSelect } = storeToRefs(store); //Get Getter
   const { getSelectALL } = storeToRefs(store); //Get Getter
   const modalStore = useModalStore();
-  const { GetopenModal } = storeToRefs(modalStore); //Get Getter
+  const { GetopenModal } = storeToRefs(store); //Get Getter
+  const { GetopenModal_ID } = storeToRefs(store); //Get Getter
 
   const { Pending } = storeToRefs(store); //Get Getter
 
   const closeModal = () => {
-      modalStore.closeModal();
-    };
+    store.closeModal();
+  };
+
+
+const delete_userid = async (id) => {
+  await store.deleteItem_id(id);
+  await store.fetchUsers()
+  };
   
 </script>
 
 <template>
 
   <div id="content" class="main-content">
-    
             <div class="layout-px-spacing">
               <div class="page-meta">
                         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
@@ -41,8 +48,9 @@ const { posts } = storeToRefs(usersStore())
                             </ol>
                         </nav>
                     </div>
-
+                
                 <Loading v-if="Pending"></Loading>
+                
                 <div class="middle-content container-xxl p-0">
                     <div class="row layout-top-spacing">
                         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
@@ -72,7 +80,7 @@ const { posts } = storeToRefs(usersStore())
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal" >Cancel</button>
-                                    <button type="button" class="btn btn-danger" data-remove="task">Delete</button>
+                                    <button type="button" class="btn btn-danger" data-remove="task" @click="delete_userid(GetopenModal_ID)">Delete {{ GetopenModal_ID }}</button>
                                 </div>
                             </div>
   </div>

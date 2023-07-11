@@ -12,7 +12,7 @@ export default defineNuxtConfig({
   '~/assets/src/assets/css/light/authentication/auth-boxed.css',
   '~/assets/src/plugins/src/table/datatable/datatables.css',
   '~/assets/src/plugins/css/light/table/datatable/dt-global_style.css',
-  // '~/assets/src/assets/css/light/components/modal.css',
+  '~/assets/src/assets/css/light/elements/alert.css',
 ],
 
 // css: ['~/assets/styles/main.scss'],

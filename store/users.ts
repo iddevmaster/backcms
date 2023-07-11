@@ -8,8 +8,11 @@ export const usersStore = defineStore('users', {
   state: () => ({
     locale:true,
     load:true,
+    isOpen: false,
+    AlertText:null,
     posts:{},
     pending:false,
+    pending_form:false,
     sortedbyASC: true,
     selected: [],
     checkboxes: [], // Array to store checkbox values
@@ -23,6 +26,7 @@ export const usersStore = defineStore('users', {
     total_filter:null,
     total:null,
     itemsPerPage: 3,
+    user_id_del:null,
     formDataregister:{
       user_name: null,
       user_password: null,
@@ -41,11 +45,23 @@ export const usersStore = defineStore('users', {
     data(state) {
    
     },
+    GetopenModal(state) {
+      return state.isOpen;
+    },
+    GetopenModal_ID(state) {
+      return state.user_id_del;
+    },
     getForm(state){
       return state.formDataregister;
     },
     Pending(state){
       return state.pending;
+    },
+    PendingForm(state){
+      return state.pending_form;
+    },
+    AlertTextForm(state){
+      return state.AlertText;
     },
     doubleCount(state) {
       return state.count * 2
@@ -61,7 +77,18 @@ export const usersStore = defineStore('users', {
   },
   
   actions: {
+    openModal() {
+      this.isOpen = true;
+    },
+    closeModal() {
+      this.isOpen = false;
+    },
+
+
+  
     async fetchUsers() {
+      this.selected = [];
+      this.isAllSelected = false;
 
  try {
   this.pending = true
@@ -88,8 +115,6 @@ export const usersStore = defineStore('users', {
     this.current_page = data.value.current_page
     this.total_filter = data.value.total_filter
     this.total = data.value.total
-
-
   }
   
  
@@ -97,45 +122,66 @@ export const usersStore = defineStore('users', {
   this.error = error
 } finally {
   this.loading = false
-  this.pending = false
+   this.pending = false
 }
     },
 
-    async deleteItem(x) {
-      const index = this.posts.products.findIndex(item => item.id === x)
-      if (index !== -1) {
-        this.posts.products.splice(index, 1)
-      }
-     // this.posts = this.items.filter((item) => item.id !== itemId)
-    //  console.log(this.posts.products.filter((item) => item.id !== x ));
-     // this.posts = this.posts.products.filter(post => post.id !== x);
+    async fetchUsersId(user_id) {
+      const index = this.posts.data;
+      console.log(index);
+    
+    },
 
-      // try {
-      //   this.posts = this.posts.filter(posts => console.log(posts.id) !== x);
-      //  console.log(this.posts);
-      // } catch (error) {
-       
-      // } finally {
-       
-      // }
+    async deleteItem_id(user_id) {
+        const index = this.posts.data.findIndex(item => item.user_id === user_id)
+      if (index !== -1) {
+        this.posts.data.splice(index, 1)
+      }
+
+      try {
+        this.pending = true
+        const { pending , error, data } = await useFetch('/user/delete/' + user_id, {
+          method: 'DELETE',
+          baseURL:useEnvStore().apidev,
+          headers: new Headers({
+            'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+            'Content-Type': 'application/json'
+        }), 
+        });
+      
+
+        this.isOpen = false;
+      } catch (error) {
+        this.error = error
+      } finally {
+        this.loading = false
+        this.pending = false
+      }
+
+
+    },
+
+    async deleteItem(user_id) {
+
+      this.isOpen = true;
+      this.user_id_del = user_id;
+
+    
       
     },
     async selectall() {
 
       this.selected = [];
-  
+
       if (!this.isAllSelected) {
         this.posts.data.forEach((value, index) => {
-          console.log(value);
+   
           this.selected.push(value);
       });
       
       }
 
       this.isAllSelected = !this.isAllSelected;
-
-
-      
     },
 
     async selectone(x) {
@@ -144,10 +190,8 @@ export const usersStore = defineStore('users', {
       const index = this.selected.indexOf(x);
 
       if (index !== -1) {
-        console.log('if');
         this.selected.splice(index, 1); // Remove value if already present
       } else {
-        console.log('else');
         this.selected.push(x); // Add value if not present
       }
     },
@@ -157,8 +201,7 @@ export const usersStore = defineStore('users', {
     },
     async SaveForm(){
       try {
-        this.pending = true
-        const { error, data } = await useFetch('/user/create', {
+        const { pending,error, data } = await useFetch('/user/create', {
           method: 'post',
           baseURL:useEnvStore().apidev,
           headers: new Headers({
@@ -167,12 +210,20 @@ export const usersStore = defineStore('users', {
         }), 
         body:this.formDataregister,
         });
-      
-       
+   
+     
+        if(data.value){
+          this.AlertText = 'success';
+        }else {
+          this.AlertText = 'danger';
+        }
+        this.pending_form = true;
       } catch (error) {
-       
+        this.AlertText = 'danger';
       } finally {
         this.pending = false;
+
+    
       }
 this.formDataregister = {
   user_name:'',
@@ -193,8 +244,6 @@ this.formDataregister = {
     },
 
     sortLists(sortBy){
-  
-
       if (this.sortedbyASC) {
         this.posts.data.sort((x, y) => (x[sortBy] > y[sortBy] ? -1 : 1));
         this.sortedbyASC = false;
@@ -202,15 +251,17 @@ this.formDataregister = {
         this.posts.data.sort((x, y) => (x[sortBy] < y[sortBy] ? -1 : 1));
         this.sortedbyASC = true;
       }
+    },
 
-      console.log(this.sortedbyASC);
+    selectentires(data_entires) {
+this.per_page = data_entires;
+this.page = 1;
 
-    }
+
+    },
     
 
 
 
   },
 });
-
-// {"__v_isShallow":false,"__v_isRef":true,"_rawValue":null,"_value":null}

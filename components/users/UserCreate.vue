@@ -2,7 +2,7 @@
  
      
  <div class="row mb-4">
-   
+  
         <div class="col-sm-6">
             <input type="text" class="form-control" id="inputEmail3" placeholder="First Name *" v-model="store.formDataregister.user_firstname"
             :class="{
@@ -109,6 +109,8 @@ const store = usersStore();
 
 const { SaveForm } = usersStore(); // use authenticateUser action from  auth store
 const { getForm } = storeToRefs(store);
+
+
 const formDataregister = reactive({
     user_name: store.formDataregister.user_name,
     user_password: store.formDataregister.user_password,
