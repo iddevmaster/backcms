@@ -35,6 +35,15 @@ export const usersStore = defineStore('users', {
       user_email: null,
       user_phone:null,
       user_type: 3,
+    },
+    formDataEdit:{
+      user_name: null,
+      user_password: null,
+      user_firstname: null,
+      user_lastname: null,
+      user_email: null,
+      user_phone:null,
+      user_type: 3,
     }
   }
      
@@ -44,6 +53,9 @@ export const usersStore = defineStore('users', {
   getters: {
     data(state) {
    
+    },
+    FormEdit(state) {
+      return state.formDataEdit;
     },
     GetopenModal(state) {
       return state.isOpen;
@@ -127,8 +139,32 @@ export const usersStore = defineStore('users', {
     },
 
     async fetchUsersId(user_id) {
-      const index = this.posts.data;
-      console.log(index);
+
+
+      try {
+        
+        const { pending , error, data } = await useFetch('/user/get/' + user_id, {
+          method: 'GET',
+          baseURL:useEnvStore().apidev,
+          headers: new Headers({
+            'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+            'Content-Type': 'application/json'
+        }), 
+        });
+        this.formDataEdit.user_firstname = data.value.user_firstname
+        this.formDataEdit.user_name = data.value.user_name
+        this.formDataEdit.user_password = data.value.user_password
+        this.formDataEdit.user_lastname = data.value.user_lastname
+        this.formDataEdit.user_email = data.value.user_email
+        this.formDataEdit.user_phone = data.value.user_phone
+     
+      
+      } catch (error) {
+        this.error = error
+      } finally {
+        this.loading = false
+        this.pending = false
+      }
     
     },
 
@@ -237,6 +273,11 @@ this.formDataregister = {
 
     },
 
+    async EditForm(){
+
+      console.log('save');
+    },
+
     setCurrentPage(page) {
       this.page = page
       this.selected = [];
@@ -256,8 +297,6 @@ this.formDataregister = {
     selectentires(data_entires) {
 this.per_page = data_entires;
 this.page = 1;
-
-
     },
     
 
