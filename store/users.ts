@@ -173,7 +173,6 @@ export const usersStore = defineStore('users', {
       if (index !== -1) {
         this.posts.data.splice(index, 1)
       }
-
       try {
         this.pending = true
         const { pending , error, data } = await useFetch('/user/delete/' + user_id, {
@@ -196,6 +195,38 @@ export const usersStore = defineStore('users', {
 
 
     },
+
+    async Update(user_id) {
+
+     
+ 
+    try {
+      this.pending = true
+      const { pending , error, data } = await useFetch('/user/update/' + user_id, {
+        method: 'PUT',
+        baseURL:useEnvStore().apidev,
+        headers: new Headers({
+          'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+          'Content-Type': 'application/json'
+      }), 
+      body:this.formDataEdit,
+      });
+
+      
+    
+      if(data.value){
+        this.AlertText = 'success';
+      }else {
+        this.AlertText = 'danger';
+      }
+      this.pending_form = true;
+    } catch (error) {
+      this.AlertText = 'danger';
+    } finally {
+      this.pending = false;
+    }
+
+  },
 
     async deleteItem(user_id) {
 
@@ -258,8 +289,6 @@ export const usersStore = defineStore('users', {
         this.AlertText = 'danger';
       } finally {
         this.pending = false;
-
-    
       }
 this.formDataregister = {
   user_name:'',

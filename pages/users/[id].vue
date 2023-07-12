@@ -9,11 +9,10 @@ import Alert from '@/components/layout/Alert.vue';
 
 const store = usersStore()
 const { posts } = storeToRefs(usersStore())
-  const { PendingForm } = storeToRefs(store); //Get Getter
+const { PendingForm } = storeToRefs(store); //Get Getter
+const { AlertTextForm } = storeToRefs(store); //Get Getter
 
-  const { AlertTextForm } = storeToRefs(store); //Get Getter
 
-  await store.fetchUsers()
 </script>
 
 <template>

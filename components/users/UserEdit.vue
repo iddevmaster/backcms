@@ -2,8 +2,13 @@
  
      
  <div class="row mb-4">
-  {{FormEdit}}
+  <div id="form_grid_layouts" class="col-lg-12">
+                            <div class="seperator-header">
+                                <h4 class="">Form Edit User</h4>
+                            </div>
+                        </div>
         <div class="col-sm-6">
+          <label for="exampleFormControlInput1">First Name</label>
             <input type="text" class="form-control" id="inputEmail3" placeholder="First Name *" v-model="store.formDataEdit.user_firstname"
                   :class="{
                 'border-red-500 focus:border-red-500': v$.user_firstname.$error,
@@ -20,6 +25,7 @@
 
 
         <div class="col-sm-6">
+          <label for="exampleFormControlInput1">Last Name</label>
             <input type="text" class="form-control" id="inputEmail3" placeholder="Last Name *" v-model="store.formDataEdit.user_lastname"
          :class="{
                 'border-red-500 focus:border-red-500': v$.user_lastname.$error,
@@ -38,6 +44,7 @@
     <div class="row mb-4">
       
         <div class="col-sm-6">
+          <label for="exampleFormControlInput1">UsersName</label>
             <input type="text" class="form-control" id="inputPassword3" placeholder="Username *" v-model="store.formDataEdit.user_name"
        :class="{
                 'border-red-500 focus:border-red-500': v$.user_name.$error,
@@ -54,6 +61,7 @@
         </div>
 
         <div class="col-sm-6">
+          <label for="exampleFormControlInput1">Password</label>
             <input type="text" class="form-control" id="inputPassword3" placeholder="Password *" v-model="store.formDataEdit.user_password"
           :class="{
                 'border-red-500 focus:border-red-500': v$.user_password.$error,
@@ -70,6 +78,7 @@
     </div>
     <div class="row mb-4">
         <div class="col-sm-6">
+          <label for="exampleFormControlInput1">Email</label>
                 <input type="text" class="form-control" id="inputPassword3" placeholder="Email *" v-model="store.formDataEdit.user_email"
                  :class="{
                 'border-red-500 focus:border-red-500': v$.user_email.$error,
@@ -84,7 +93,8 @@
               
         </div>
         <div class="col-sm-6">
-                <input type="text" class="form-control" id="inputPassword3" placeholder="Tel *" v-model="store.formDataEdit.user_phone"
+          <label for="exampleFormControlInput1">Phone</label>
+                <input type="text" class="form-control" id="inputPassword3" placeholder="Phone *" v-model="store.formDataEdit.user_phone"
                :class="{
                 'border-red-500 focus:border-red-500': v$.user_phone.$error,
                 'border-[#42d392] ': !v$.user_phone.$invalid,
@@ -99,7 +109,7 @@
         
         </div>
         </div>
-    <button type="button" class="btn btn-primary" @click="save()">แก้ไข {{store.formDataEdit}}</button>      
+    <button type="button" class="btn btn-primary" @click="save()">แก้ไข</button>      
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
@@ -127,7 +137,7 @@ await store.fetchUsersId(router.currentRoute.value.params.id)
 //     user_type: 3,
 // });
 
-const { EditForm } = usersStore(); // use authenticateUser action from  auth store
+const { Update } = usersStore(); // use authenticateUser action from  auth store
 
 const rules = computed(() => {
   return {
@@ -163,13 +173,13 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, FormEdit);
 
-console.log(FormEdit);
+
 
 const save = async () => {
   
     v$.value.$validate();
     if (!v$.value.$error) {
-    await EditForm(); //save form  ส่งไป Store User
+    await Update(router.currentRoute.value.params.id); //save form  ส่งไป Store User
   }
 }
 

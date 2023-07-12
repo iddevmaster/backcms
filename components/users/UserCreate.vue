@@ -2,8 +2,13 @@
  
      
  <div class="row mb-4">
-  
+  <div id="form_grid_layouts" class="col-lg-12">
+                            <div class="seperator-header">
+                                <h4 class="">Form Add User</h4>
+                            </div>
+                        </div>
         <div class="col-sm-6">
+          <label for="exampleFormControlInput1">First Name</label>
             <input type="text" class="form-control" id="inputEmail3" placeholder="First Name *" v-model="store.formDataregister.user_firstname"
             :class="{
                 'border-red-500 focus:border-red-500': v$.user_firstname.$error,
@@ -20,6 +25,7 @@
 
 
         <div class="col-sm-6">
+          <label for="exampleFormControlInput1">Last Name</label>
             <input type="text" class="form-control" id="inputEmail3" placeholder="Last Name *" v-model="store.formDataregister.user_lastname"
             :class="{
                 'border-red-500 focus:border-red-500': v$.user_lastname.$error,
@@ -38,6 +44,7 @@
     <div class="row mb-4">
       
         <div class="col-sm-6">
+          <label for="exampleFormControlInput1">Username</label>
             <input type="text" class="form-control" id="inputPassword3" placeholder="Username *" v-model="store.formDataregister.user_name"
             :class="{
                 'border-red-500 focus:border-red-500': v$.user_name.$error,
@@ -52,6 +59,7 @@
         </div>
 
         <div class="col-sm-6">
+          <label for="exampleFormControlInput1">Password</label>
             <input type="text" class="form-control" id="inputPassword3" placeholder="Password *" v-model="store.formDataregister.user_password"
             :class="{
                 'border-red-500 focus:border-red-500': v$.user_password.$error,
@@ -67,6 +75,7 @@
     </div>
     <div class="row mb-4">
         <div class="col-sm-6">
+          <label for="exampleFormControlInput1">Email</label>
                 <input type="text" class="form-control" id="inputPassword3" placeholder="Email *" v-model="store.formDataregister.user_email"
                 :class="{
                 'border-red-500 focus:border-red-500': v$.user_email.$error,
@@ -80,6 +89,7 @@
           }}</span>
         </div>
         <div class="col-sm-6">
+          <label for="exampleFormControlInput1">Phone</label>
                 <input type="text" class="form-control" id="inputPassword3" placeholder="Tel *" v-model="store.formDataregister.user_phone"
                 :class="{
                 'border-red-500 focus:border-red-500': v$.user_phone.$error,
