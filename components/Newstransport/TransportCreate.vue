@@ -4,106 +4,55 @@
  <div class="row mb-4">
   <div id="form_grid_layouts" class="col-lg-12">
                             <div class="seperator-header">
-                                <h4 class="">Form Add User</h4>
+                                <h4 class="">Form Add News</h4>
                             </div>
                         </div>
-        <div class="col-sm-6">
-          <label for="exampleFormControlInput1">First Name</label>
-            <input type="text" class="form-control" id="inputEmail3" placeholder="First Name *" v-model="store.formDataregister.user_firstname"
-            :class="{
+   
+
+
+<!-- 
+        <div class="col-sm-12">
+          <label for="exampleFormControlInput1">News Description</label>
+               <textarea class="form-control" aria-label="With textarea"></textarea>
+            <span class="text-xs text-red-500" style="color:red" v-if="v$.user_lastname.$error">{{
+            v$.user_lastname.$errors[0].$message
+          }}</span>
+        </div>
+         -->
+
+         <div class="form-group mb-4">
+                                            <label for="formGroupExampleInput">Example label</label>
+                                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="News Title *"
+                                                 :class="{
                 'border-red-500 focus:border-red-500': v$.user_firstname.$error,
                 'border-[#42d392] ': !v$.user_firstname.$invalid,
               }"
               @change="v$.user_firstname.$touch"
               autocomplete="off"
-            >
-            <span class="text-xs text-red-500" style="color:red" v-if="v$.user_firstname.$error">{{
-            v$.user_firstname.$errors[0].$message
-          }}</span>
-        </div>
+                                            >
+                                        </div>
+                                        <div class="form-group mb-4">
+                                            <label for="formGroupExampleInput2">Another label</label>
+                                            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+                                        </div>
 
+                                         <div class="form-group mb-4">
+                                            <label for="exampleFormControlTextarea1">Example textarea</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        </div>
+                                        <div class="form-group mb-4 mt-3">
+                                            <label for="exampleFormControlFile1">Example file input</label>
+                                            <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple>
+                                        </div>
+                                        <div>
 
-
-        <div class="col-sm-6">
-          <label for="exampleFormControlInput1">Last Name</label>
-            <input type="text" class="form-control" id="inputEmail3" placeholder="Last Name *" v-model="store.formDataregister.user_lastname"
-            :class="{
-                'border-red-500 focus:border-red-500': v$.user_lastname.$error,
-                'border-[#42d392] ': !v$.user_lastname.$invalid,
-              }"
-              @change="v$.user_lastname.$touch"
-              autocomplete="off"
-            >
-            <span class="text-xs text-red-500" style="color:red" v-if="v$.user_lastname.$error">{{
-            v$.user_lastname.$errors[0].$message
-          }}</span>
-        </div>
+  </div>
+                                        
 
 
     </div>
-    <div class="row mb-4">
-      
-        <div class="col-sm-6">
-          <label for="exampleFormControlInput1">Username</label>
-            <input type="text" class="form-control" id="inputPassword3" placeholder="Username *" v-model="store.formDataregister.user_name"
-            :class="{
-                'border-red-500 focus:border-red-500': v$.user_name.$error,
-                'border-[#42d392] ': !v$.user_name.$invalid,
-              }"
-              @change="v$.user_name.$touch"
-              autocomplete="off"
-            >
-            <span class="text-xs text-red-500" style="color:red" v-if="v$.user_name.$error">{{
-            v$.user_name.$errors[0].$message
-          }}</span>
-        </div>
-
-        <div class="col-sm-6">
-          <label for="exampleFormControlInput1">Password</label>
-            <input type="text" class="form-control" id="inputPassword3" placeholder="Password *" v-model="store.formDataregister.user_password"
-            :class="{
-                'border-red-500 focus:border-red-500': v$.user_password.$error,
-                'border-[#42d392] ': !v$.user_password.$invalid,
-              }"
-              @change="v$.user_password.$touch"
-              autocomplete="off"
-            >
-            <span class="text-xs text-red-500" style="color:red" v-if="v$.user_password.$error">{{
-            v$.user_password.$errors[0].$message
-          }}</span>
-        </div>
-    </div>
-    <div class="row mb-4">
-        <div class="col-sm-6">
-          <label for="exampleFormControlInput1">Email</label>
-                <input type="text" class="form-control" id="inputPassword3" placeholder="Email *" v-model="store.formDataregister.user_email"
-                :class="{
-                'border-red-500 focus:border-red-500': v$.user_email.$error,
-                'border-[#42d392] ': !v$.user_email.$invalid,
-              }"
-              @change="v$.user_email.$touch"
-              autocomplete="off"
-                >
-                <span class="text-xs text-red-500" style="color:red" v-if="v$.user_email.$error">{{
-            v$.user_email.$errors[0].$message
-          }}</span>
-        </div>
-        <div class="col-sm-6">
-          <label for="exampleFormControlInput1">Phone</label>
-                <input type="text" class="form-control" id="inputPassword3" placeholder="Tel *" v-model="store.formDataregister.user_phone"
-                :class="{
-                'border-red-500 focus:border-red-500': v$.user_phone.$error,
-                'border-[#42d392] ': !v$.user_phone.$invalid,
-              }"
-              @change="v$.user_phone.$touch"
-              autocomplete="off"
-               
-                >
-                <span class="text-xs text-red-500" style="color:red" v-if="v$.user_phone.$error">{{
-            v$.user_phone.$errors[0].$message
-          }}</span>
-        </div>
-        </div>
+   
+   
     <button type="button" class="btn btn-primary" @click="save()">บันทึก</button>      
 </template>
 <script setup lang="ts">
