@@ -110,7 +110,7 @@ store.fetchNewTransport()
 
  await deleteItem(id); 
 
- //await store.fetchNewTransport()
+ await store.fetchNewTransport()
  };
  
 

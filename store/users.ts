@@ -271,6 +271,7 @@ export const usersStore = defineStore('users', {
         const { pending,error, data } = await useFetch('/user/create', {
           method: 'post',
           baseURL:useEnvStore().apidev,
+          
           headers: new Headers({
             'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
             'Content-Type': 'application/json'

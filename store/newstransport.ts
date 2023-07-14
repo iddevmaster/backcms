@@ -9,9 +9,10 @@ export const newTransportStore = defineStore('newstransport', {
     locale:true,
     load:true,
     isOpen: false,
-    AlertText:null,
+    AlertNewsTransport:null,
     datanewstransport:{},
     pending:false,
+    AlertText:'',
     pending_form:false,
     sortedbyASC: true,
     selected: [],
@@ -27,6 +28,13 @@ export const newTransportStore = defineStore('newstransport', {
     total:null,
     itemsPerPage: 3,
     news_id:null,
+    formDataNews:{
+      news_cover: "ไม่บอก อย่าหลอกถาม 36",
+      news_title: "12345",
+      news_description: "เจน",
+      news_type: "2",
+      user_id: 1
+  }
 
   
   }
@@ -47,8 +55,8 @@ export const newTransportStore = defineStore('newstransport', {
     GetopenModal_ID(state) {
       return state.news_id;
     },
-    getForm(state){
-      return state.formDataregister;
+    getFormNews(state){
+      return state.formDataNews;
     },
     Pending(state){
       return state.pending;
@@ -85,7 +93,6 @@ export const newTransportStore = defineStore('newstransport', {
     async fetchNewTransport() {
       this.selected = [];
       this.isAllSelected = false;
-
  try {
   this.pending = true
   const { pending , error, data } = await useFetch('/news/list', {
@@ -248,7 +255,9 @@ console.log(id);
     cance() {
       this.isAllSelected = false;
     },
-    async SaveForm(){
+    async SaveFormNews(){
+
+      console.log(this.formDataNews)
       try {
         const { pending,error, data } = await useFetch('/news/create', {
           method: 'post',
@@ -257,37 +266,24 @@ console.log(id);
             'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
             'Content-Type': 'application/json'
         }), 
-        body:this.formDataregister,
+        
+        body:this.formDataNews,
         });
-   
-     
-        if(data.value){
-          this.AlertText = 'success';
-        }else {
-          this.AlertText = 'danger';
-        }
+
+ 
         this.pending_form = true;
+   
+     console.log(data);
+
       } catch (error) {
         this.AlertText = 'danger';
       } finally {
-        this.pending = false;
+        this.AlertText = 'success';
+
       }
-this.formDataregister = {
-  user_name:'',
-  user_password:'',
-  user_firstname:'',
-  user_lastname:'',
-  user_email:'',
-  user_phone:'',
-  user_type:3,
-};
-
     },
 
-    async EditForm(){
-
-      console.log('save');
-    },
+   
 
     setCurrentPage(page) {
       this.page = page
