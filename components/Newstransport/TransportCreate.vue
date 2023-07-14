@@ -49,8 +49,9 @@
 
                                         <div class="form-group mb-4 mt-3">
                                             <label for="exampleFormControlFile1">Example file input</label>
-                                            <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple>
+                                            <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple @change="onFileChange">
                                         </div>
+                                        
                                         <div>
 
   </div>
@@ -116,4 +117,23 @@ const save = async () => {
   }
 }
 
+const onFileChange = async (e) => {
+   
+
+  var selectedFiles = e.target.files;
+  console.log(selectedFiles);
+}
+
+
+
 </script>
+<style>
+ .preview{
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  height: 100px;
+		  width: 100px;
+		}
+
+</style>
