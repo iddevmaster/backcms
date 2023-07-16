@@ -20,7 +20,7 @@ export const newTransportStore = defineStore('newstransport', {
     isAllSelected: false,
     count: 0,
     page:1,
-    per_page:2,
+    per_page:5,
     total_page:null,
     limit_page:null,
     current_page:null,
@@ -189,7 +189,7 @@ export const newTransportStore = defineStore('newstransport', {
   },
 
     async deleteItem(id) {
-console.log(id);
+
       this.isOpen = true;
       this.news_id = id;
 

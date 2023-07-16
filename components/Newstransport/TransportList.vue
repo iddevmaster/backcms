@@ -30,7 +30,9 @@
                                     <tbody>
                                       <tr v-for="datanew in datanewstransport.data" :key="datanew.news_id">
                                         <td><input type="checkbox" v-model="store.selected" :value="datanew" number></td>
-            <td>{{ datanew.news_cover }} </td>
+            <td>
+                 <img :src="image(datanew.news_cover)" class="img-fluid" />
+            </td>
             <td>{{ datanew.news_title }}</td>
             <td>{{ datanew.news_description }}</td>
             <td>{{ datanew.news_type }}</td>
@@ -154,6 +156,15 @@ const formattedDatetime = datetime.toLocaleString(undefined, options);
 return formattedDatetime;
 
  }
+
+function image(i) {
+
+return "http://oasapi.iddriver.com/media_file/file/?f="+i;
+
+ }
+
+
+ 
 
 
 
