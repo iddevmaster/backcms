@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import apiClient from '~/services/api.service';
+import axios from "axios";
 
 
 
@@ -30,8 +31,8 @@ export const newTransportStore = defineStore('newstransport', {
     news_id:null,
     formDataNews:{
       news_cover: "ไม่บอก อย่าหลอกถาม 36",
-      news_title: "12345",
-      news_description: "เจน",
+      news_title: "",
+      news_description: "",
       news_type: "2",
       user_id: 1
   }
@@ -255,11 +256,32 @@ console.log(id);
     cance() {
       this.isAllSelected = false;
     },
-    async SaveFormNews(){
 
-      console.log(this.formDataNews)
-      try {
-        const { pending,error, data } = await useFetch('/news/create', {
+    SaveDataNew (x){
+
+     
+
+  //    this.formDataNews.news_cover = x[0].path;
+
+    //  console.log(x);
+    const array = [];
+     for (let obj of x) {
+     
+      array.push(obj.path)
+   }
+
+   console.log(array);
+   const string = array.join(',');
+
+   console.log(string);
+   this.formDataNews.news_cover = string;
+
+      // x.forEach((value,key) => {
+      //   console.log('xxxx',key+value)
+      //    });
+
+  try {
+        const { pending,error, data } = useFetch('/news/create', {
           method: 'post',
           baseURL:useEnvStore().apidev,
           headers: new Headers({
@@ -272,8 +294,17 @@ console.log(id);
 
  
         this.pending_form = true;
-   
-     console.log(data);
+
+        if(data){
+         
+
+          this.AlertText = 'success';
+        }else {
+        
+          this.AlertText = 'danger';
+        }
+      
+    
 
       } catch (error) {
         this.AlertText = 'danger';
@@ -281,6 +312,80 @@ console.log(id);
         this.AlertText = 'success';
 
       }
+    },
+    async SaveFormNews(){
+
+          const counterStorage = UploadStore();
+            counterStorage.formi
+
+      console.log(counterStorage.formi)
+
+      counterStorage.formi.forEach((value,key) => {
+    console.log('xxxx',key+value)
+     });
+
+
+
+     /////////  step 1 upload ////// 
+
+
+          axios.post('http://oasapi.iddriver.com/media_file/upload/file',
+          counterStorage.formi, {
+       headers: {
+        'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+         'Content-Type': 'multipart/form-data'
+       }
+     }
+   ).then(function (response) {
+     console.log('SUCCESS!!',response.data);
+ //    this.SaveDataNew(response.data);
+
+     const counterStorage = newTransportStore();
+            counterStorage.SaveDataNew(response.data);
+
+
+    
+   })
+   .catch(function () {
+     console.log('FAILURE!!');
+   });
+
+     //////// step 2 insert New //////
+     
+
+
+      // try {
+      //   const { pending,error, data } = await useFetch('/news/create', {
+      //     method: 'post',
+      //     baseURL:useEnvStore().apidev,
+      //     headers: new Headers({
+      //       'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+      //       'Content-Type': 'application/json'
+      //   }), 
+        
+      //   body:this.formDataNews,
+      //   });
+
+ 
+      //   this.pending_form = true;
+
+      //   if(data){
+         
+
+      //     this.AlertText = 'success';
+      //   }else {
+        
+      //     this.AlertText = 'danger';
+      //   }
+      
+    
+
+      // } catch (error) {
+      //   this.AlertText = 'danger';
+      // } finally {
+      //   this.AlertText = 'success';
+
+      // }
     },
 
    
