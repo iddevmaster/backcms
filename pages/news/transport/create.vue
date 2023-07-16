@@ -2,7 +2,6 @@
 
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-import { newTransportStore } from '@/store/newstransport'
 import  NewsCreate from '@/components/Newstransport/TransportCreate.vue'
 
 import Alert from '@/components/layout/Alert.vue';

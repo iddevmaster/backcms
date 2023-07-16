@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import apiClient from '~/services/api.service';
 import axios from "axios";
 
 
@@ -129,35 +128,6 @@ export const newTransportStore = defineStore('newstransport', {
 }
     },
 
-    async fetchUsersId(id) {
-
-
-      try {
-        
-        const { pending , error, data } = await useFetch('/user/get/' + id, {
-          method: 'GET',
-          baseURL:useEnvStore().apidev,
-          headers: new Headers({
-            'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-            'Content-Type': 'application/json'
-        }), 
-        });
-        this.formDataEdit.user_firstname = data.value.user_firstname
-        this.formDataEdit.user_name = data.value.user_name
-        this.formDataEdit.user_password = data.value.user_password
-        this.formDataEdit.user_lastname = data.value.user_lastname
-        this.formDataEdit.user_email = data.value.user_email
-        this.formDataEdit.user_phone = data.value.user_phone
-     
-      
-      } catch (error) {
-        this.error = error
-      } finally {
-        this.loading = false
-        this.pending = false
-      }
-    
-    },
 
     async deleteItem_id(id) {
       console.log('id',id);
@@ -226,113 +196,74 @@ console.log(id);
     
       
     },
-    async selectall() {
 
-      this.selected = [];
 
-      if (!this.isAllSelected) {
-        this.posts.data.forEach((value, index) => {
-   
-          this.selected.push(value);
-      });
-      
-      }
 
-      this.isAllSelected = !this.isAllSelected;
-    },
-
-    async selectone(x) {
-
-    
-      const index = this.selected.indexOf(x);
-
-      if (index !== -1) {
-        this.selected.splice(index, 1); // Remove value if already present
-      } else {
-        this.selected.push(x); // Add value if not present
-      }
-    },
-
-    cance() {
-      this.isAllSelected = false;
-    },
-
-    SaveDataNew (){
+ 
+  async SaveDataNew (){
 
       try {
-        console.log('SaveDataNew');
-        // const { pending,error, data } = useFetch('/news/create', {
-        //   method: 'post',
-        //   baseURL:useEnvStore().apidev,
-        //   headers: new Headers({
-        //     'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-        //     'Content-Type': 'application/json'
-        // }), 
-        
-        // body:this.formDataNews,
-        // });
-
- 
-        // this.pending_form = true;
-
-        // if(data){
-        //   this.AlertText = 'success';
-        // }else {
-        
-        //   this.AlertText = 'danger';
-        // }
+        const { pending,error, data } = await useFetch('/news/create', {
+          method: 'post',
+          baseURL:useEnvStore().apidev,
+          headers: new Headers({
+            'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+            'Content-Type': 'application/json'
+        }), 
+        body:this.formDataNews,
+        });
+        const TransportStorage = newTransportStore();
+        await TransportStorage.ResetForm();
+     
+        if(data.value){
+          this.AlertText = 'success';
+        }else {
+          this.AlertText = 'danger';
+        }
+        this.pending_form = true;
       } catch (error) {
         this.AlertText = 'danger';
       } finally {
-        this.AlertText = 'success';
-
+        this.pending = false;
       }
     },
 
-    SaveDataNewImage (){
-
-     
-  //   const array = [];
-  //    for (let obj of x) {
-  //     array.push(obj.path)
-  //  }
-
-  //  const string = array.join(',');
 
 
-  //  this.formDataNews.news_cover = string;
+    async SaveDataNewImage (x){
 
-   
-
-  try {
-    console.log('SaveDataNewImage');
-    this.AlertText = 'success';
-        // const { pending,error, data } = useFetch('/news/create', {
-        //   method: 'post',
-        //   baseURL:useEnvStore().apidev,
-        //   headers: new Headers({
-        //     'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-        //     'Content-Type': 'application/json'
-        // }), 
-        
-        // body:this.formDataNews,
-        // });
-
+      const array = [];
+      for (let obj of x) {
+       array.push(obj.path)
+     }
  
-        // this.pending_form = true;
-
-        // if(data){
-        //   this.AlertText = 'success';
-        // }else {
-        
-        //   this.AlertText = 'danger';
-        // }
+    const string = array.join(',');
+    this.formDataNews.news_cover = string;
+      try {
+        const { pending,error, data } = await useFetch('/news/create', {
+          method: 'post',
+          baseURL:useEnvStore().apidev,
+          headers: new Headers({
+            'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+            'Content-Type': 'application/json'
+        }), 
+        body:this.formDataNews,
+        });
+   
+     
+        if(data.value){
+          this.AlertText = 'success';
+        }else {
+          this.AlertText = 'danger';
+        }
+        this.pending_form = true;
       } catch (error) {
         this.AlertText = 'danger';
       } finally {
-        this.AlertText = 'success';
-
+        this.pending = false;
       }
+
+    
     },
     async SaveFormNews(){
 
@@ -345,67 +276,28 @@ console.log(id);
               console.log("File is empty");
 
             const TransportStorage = newTransportStore();
-           await TransportStorage.SaveDataNew();
-           await TransportStorage.ResetForm();
-           
-
-
-
-
-                 // try {
-      //   const { pending,error, data } = await useFetch('/news/create', {
-      //     method: 'post',
-      //     baseURL:useEnvStore().apidev,
-      //     headers: new Headers({
-      //       'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-      //       'Content-Type': 'application/json'
-      //   }), 
-        
-      //   body:this.formDataNews,
-      //   });
-
- 
-      //   this.pending_form = true;
-
-      //   if(data){
-         
-
-      //     this.AlertText = 'success';
-      //   }else {
-        
-      //     this.AlertText = 'danger';
-      //   }
-      
-    
-
-      // } catch (error) {
-      //   this.AlertText = 'danger';
-      // } finally {
-      //   this.AlertText = 'success';
-
-      // }
+            await TransportStorage.SaveDataNew();
             } else {
               // File has content
               console.log("File has content");
-              const TransportStorage = newTransportStore();
-              await TransportStorage.SaveDataNewImage();
-              await TransportStorage.ResetForm();
 
-  //                       axios.post('http://oasapi.iddriver.com/media_file/upload/file',
-  //         counterStorage.formi, {
-  //      headers: {
-  //       'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-  //        'Content-Type': 'multipart/form-data'
-  //      }
-  //    }
-  //  ).then(function (response) {
-    
-  //           const TransportStorage = newTransportStore();
-  //           TransportStorage.SaveDataNewImage(response.data);
-  //  })
-  //  .catch(function () {
-  //    console.log('FAILURE!!');
-  //  });
+
+          axios.post('http://oasapi.iddriver.com/media_file/upload/file',
+          counterStorage.formi, {
+       headers: {
+        'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+         'Content-Type': 'multipart/form-data'
+       }
+     }
+   ).then(function (response) {
+           const TransportStorage = newTransportStore();
+            TransportStorage.SaveDataNewImage(response.data);
+         
+            TransportStorage.ResetForm();
+   })
+   .catch(function () {
+     console.log('FAILURE!!');
+   });
 
             //       const TransportStorage = newTransportStore();
             // TransportStorage.SaveDataNewImage(1);
@@ -481,7 +373,9 @@ console.log(id);
       this.formDataNews = {
         news_cover:'',
         news_title:'',
-        news_description:''
+        news_description:'',
+        news_type:"2",
+        user_id:1,
       };
 
 
@@ -493,6 +387,8 @@ console.log(id);
       UploadStorage.preview_list = [],
       UploadStorage.image_list = [],
       UploadStorage.formi = []
+
+      console.log('reset upload');
     },
 
    

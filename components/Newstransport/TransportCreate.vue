@@ -6,49 +6,39 @@
                             <div class="seperator-header">
                                 <h4 class="">Form Add News</h4>
                             </div>
-                        </div>
-   
-
-
-
-
-         <div class="form-group mb-4">
-                                            <label for="formGroupExampleInput">News Title</label>
-                                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="News Title *" v-model="store.formDataNews.news_title"
-                                                 :class="{
+    </div>
+        <div class="form-group mb-4">
+          <label for="formGroupExampleInput">News Title</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="News Title *" v-model="store.formDataNews.news_title"
+          :class="{
                 'border-red-500 focus:border-red-500': v$.news_title.$error,
                 'border-[#42d392] ': !v$.news_title.$invalid,
               }"
               @change="v$.news_title.$touch"
-              autocomplete="off">
+             >
               <span class="text-xs text-red-500" style="color:red" v-if="v$.news_title.$error">{{
             v$.news_title.$errors[0].$message
           }}</span>
-                                        </div>
-                                    
-                                         <div class="form-group mb-4">
-                                            <label for="exampleFormControlTextarea1">News Description</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  
-                                            :class="{
+          </div>
+          <div class="form-group mb-4"> 
+            <label for="exampleFormControlTextarea1">News Description</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
+            :class="{
                 'border-red-500 focus:border-red-500': v$.news_description.$error,
                 'border-[#42d392] ': !v$.news_description.$invalid,
               }"
               @change="v$.news_description.$touch"
-              autocomplete="off"
-              v-model="store.formDataNews.news_description" ></textarea>
-
-
-                                            <span class="text-xs text-red-500" style="color:red" v-if="v$.news_description.$error">{{
+              v-model="store.formDataNews.news_description">
+              </textarea><span class="text-xs text-red-500" style="color:red" v-if="v$.news_description.$error">{{
             v$.news_description.$errors[0].$message
           }}</span>
-                                        </div>
-
-                                        <div class="form-group mb-4 mt-3">
+          </div> 
+          <div class="form-group mb-4 mt-3">
                                             <label for="exampleFormControlFile1">Example file input</label>
                                             <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple @change="onFileChange" ref="fileupload">
                                         </div>
                                         <div class="border p-2 mt-3">
-            <p>Preview Here: {{storeupload.preview_list}}</p>
+            <p>Preview Here:</p>
             <template v-if="storeupload.preview_list.length">
               <div v-for="item, index in storeupload.preview_list" :key="index">
                 <img :src="item" class="img-fluid" />
@@ -81,20 +71,20 @@ import { UploadStore } from '@/store/upload'; // import the auth store we just c
 import { ref } from "vue";
 
 
+console.log('start');
 const router = useRouter();
 const store = newTransportStore()
 const storeupload = UploadStore()
 
 
-const { SaveFormNews } = newTransportStore(); // use authenticateUser action from  auth store
-const { Saveimages } = UploadStore(); // use authenticateUser action from  auth store
+
+
+const { SaveDataNew } = newTransportStore(); // use  action
+const { SaveFormNews } = newTransportStore(); // use  action from   store
+const { SaveDataNewImage } = newTransportStore(); // use  action from   store
 const { getFormNews } = storeToRefs(store);
+const { Saveimages } = UploadStore(); // use authenticateUser action from  auth store
 
-
-const formDataNews = reactive({
-    title: store.formDataNews.title,
-    news_description: store.formDataNews.news_description,
-});
 
 
 
@@ -120,17 +110,19 @@ const rules = computed(() => {
 const v$ = useVuelidate(rules, getFormNews);
 
 const save = async () => {
+ 
     v$.value.$validate();
     if (!v$.value.$error) {
     
-  SaveFormNews(); //save form  ส่งไป Store User
-  v$.value.$reset();
-
-
-
+  await SaveFormNews(); //save form  ส่งไป Store User
+v$.value.$reset();
 
    const input = document.querySelector('input[type="file"]');
-      input.value = '';
+  input.value = '';
+
+
+  //  const input = document.querySelector('input[type="file"]');
+  //     input.value = '';
 
   }
 }
