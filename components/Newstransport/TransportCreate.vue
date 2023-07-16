@@ -13,7 +13,7 @@
 
 
          <div class="form-group mb-4">
-                                            <label for="formGroupExampleInput">Example label</label>
+                                            <label for="formGroupExampleInput">News Title</label>
                                             <input type="text" class="form-control" id="formGroupExampleInput" placeholder="News Title *" v-model="store.formDataNews.news_title"
                                                  :class="{
                 'border-red-500 focus:border-red-500': v$.news_title.$error,
@@ -25,13 +25,9 @@
             v$.news_title.$errors[0].$message
           }}</span>
                                         </div>
-                                        <div class="form-group mb-4">
-                                            <label for="formGroupExampleInput2">Another label</label>
-                                            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
-                                        </div>
-
+                                    
                                          <div class="form-group mb-4">
-                                            <label for="exampleFormControlTextarea1">Example textarea</label>
+                                            <label for="exampleFormControlTextarea1">News Description</label>
                                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  
                                             :class="{
                 'border-red-500 focus:border-red-500': v$.news_description.$error,
@@ -49,10 +45,10 @@
 
                                         <div class="form-group mb-4 mt-3">
                                             <label for="exampleFormControlFile1">Example file input</label>
-                                            <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple @change="onFileChange">
+                                            <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple @change="onFileChange" ref="fileupload">
                                         </div>
                                         <div class="border p-2 mt-3">
-            <p>Preview Here:</p>
+            <p>Preview Here: {{storeupload.preview_list}}</p>
             <template v-if="storeupload.preview_list.length">
               <div v-for="item, index in storeupload.preview_list" :key="index">
                 <img :src="item" class="img-fluid" />
@@ -82,6 +78,7 @@ import { newTransportStore } from '@/store/newstransport'; // import the auth st
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
 import { UploadStore } from '@/store/upload'; // import the auth store we just created
+import { ref } from "vue";
 
 
 const router = useRouter();
@@ -104,11 +101,11 @@ const formDataNews = reactive({
 const rules = computed(() => {
   return {
     news_title: {
-      required: helpers.withMessage('The User name field is required', required),
+      required: helpers.withMessage('The News Title field is required', required),
       minLength: minLength(6),
     },
     news_description: {
-      required: helpers.withMessage('The Description is required', required),
+      required: helpers.withMessage('The News Description is required', required),
       minLength: minLength(6),
     },
 
@@ -127,10 +124,13 @@ const save = async () => {
     if (!v$.value.$error) {
     
   SaveFormNews(); //save form  ส่งไป Store User
- v$.value.$reset();
+  v$.value.$reset();
 
 
 
+
+   const input = document.querySelector('input[type="file"]');
+      input.value = '';
 
   }
 }

@@ -30,7 +30,7 @@ export const newTransportStore = defineStore('newstransport', {
     itemsPerPage: 3,
     news_id:null,
     formDataNews:{
-      news_cover: "ไม่บอก อย่าหลอกถาม 36",
+      news_cover: "",
       news_title: "",
       news_description: "",
       news_type: "2",
@@ -257,55 +257,76 @@ console.log(id);
       this.isAllSelected = false;
     },
 
-    SaveDataNew (x){
+    SaveDataNew (){
 
-     
-
-  //    this.formDataNews.news_cover = x[0].path;
-
-    //  console.log(x);
-    const array = [];
-     for (let obj of x) {
-     
-      array.push(obj.path)
-   }
-
-   console.log(array);
-   const string = array.join(',');
-
-   console.log(string);
-   this.formDataNews.news_cover = string;
-
-      // x.forEach((value,key) => {
-      //   console.log('xxxx',key+value)
-      //    });
-
-  try {
-        const { pending,error, data } = useFetch('/news/create', {
-          method: 'post',
-          baseURL:useEnvStore().apidev,
-          headers: new Headers({
-            'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-            'Content-Type': 'application/json'
-        }), 
+      try {
+        console.log('SaveDataNew');
+        // const { pending,error, data } = useFetch('/news/create', {
+        //   method: 'post',
+        //   baseURL:useEnvStore().apidev,
+        //   headers: new Headers({
+        //     'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+        //     'Content-Type': 'application/json'
+        // }), 
         
-        body:this.formDataNews,
-        });
+        // body:this.formDataNews,
+        // });
 
  
-        this.pending_form = true;
+        // this.pending_form = true;
 
-        if(data){
-         
-
-          this.AlertText = 'success';
-        }else {
+        // if(data){
+        //   this.AlertText = 'success';
+        // }else {
         
-          this.AlertText = 'danger';
-        }
-      
-    
+        //   this.AlertText = 'danger';
+        // }
+      } catch (error) {
+        this.AlertText = 'danger';
+      } finally {
+        this.AlertText = 'success';
 
+      }
+    },
+
+    SaveDataNewImage (){
+
+     
+  //   const array = [];
+  //    for (let obj of x) {
+  //     array.push(obj.path)
+  //  }
+
+  //  const string = array.join(',');
+
+
+  //  this.formDataNews.news_cover = string;
+
+   
+
+  try {
+    console.log('SaveDataNewImage');
+    this.AlertText = 'success';
+        // const { pending,error, data } = useFetch('/news/create', {
+        //   method: 'post',
+        //   baseURL:useEnvStore().apidev,
+        //   headers: new Headers({
+        //     'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+        //     'Content-Type': 'application/json'
+        // }), 
+        
+        // body:this.formDataNews,
+        // });
+
+ 
+        // this.pending_form = true;
+
+        // if(data){
+        //   this.AlertText = 'success';
+        // }else {
+        
+        //   this.AlertText = 'danger';
+        // }
       } catch (error) {
         this.AlertText = 'danger';
       } finally {
@@ -315,40 +336,107 @@ console.log(id);
     },
     async SaveFormNews(){
 
+
           const counterStorage = UploadStore();
             counterStorage.formi
 
-      console.log(counterStorage.formi)
+            if (counterStorage.formi.length === 0) {
+              // File is empty
+              console.log("File is empty");
 
-      counterStorage.formi.forEach((value,key) => {
-    console.log('xxxx',key+value)
-     });
+            const TransportStorage = newTransportStore();
+           await TransportStorage.SaveDataNew();
+           await TransportStorage.ResetForm();
+           
+
+
+
+
+                 // try {
+      //   const { pending,error, data } = await useFetch('/news/create', {
+      //     method: 'post',
+      //     baseURL:useEnvStore().apidev,
+      //     headers: new Headers({
+      //       'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+      //       'Content-Type': 'application/json'
+      //   }), 
+        
+      //   body:this.formDataNews,
+      //   });
+
+ 
+      //   this.pending_form = true;
+
+      //   if(data){
+         
+
+      //     this.AlertText = 'success';
+      //   }else {
+        
+      //     this.AlertText = 'danger';
+      //   }
+      
+    
+
+      // } catch (error) {
+      //   this.AlertText = 'danger';
+      // } finally {
+      //   this.AlertText = 'success';
+
+      // }
+            } else {
+              // File has content
+              console.log("File has content");
+              const TransportStorage = newTransportStore();
+              await TransportStorage.SaveDataNewImage();
+              await TransportStorage.ResetForm();
+
+  //                       axios.post('http://oasapi.iddriver.com/media_file/upload/file',
+  //         counterStorage.formi, {
+  //      headers: {
+  //       'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+  //        'Content-Type': 'multipart/form-data'
+  //      }
+  //    }
+  //  ).then(function (response) {
+    
+  //           const TransportStorage = newTransportStore();
+  //           TransportStorage.SaveDataNewImage(response.data);
+  //  })
+  //  .catch(function () {
+  //    console.log('FAILURE!!');
+  //  });
+
+            //       const TransportStorage = newTransportStore();
+            // TransportStorage.SaveDataNewImage(1);
+    
+            }
+            // counterStorage.formi.forEach((value,key) => {
+            //   console.log('counterStorage',value);
+            // });
+
+
+
 
 
 
      /////////  step 1 upload ////// 
 
 
-          axios.post('http://oasapi.iddriver.com/media_file/upload/file',
-          counterStorage.formi, {
-       headers: {
-        'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-         'Content-Type': 'multipart/form-data'
-       }
-     }
-   ).then(function (response) {
-     console.log('SUCCESS!!',response.data);
- //    this.SaveDataNew(response.data);
-
-     const counterStorage = newTransportStore();
-            counterStorage.SaveDataNew(response.data);
-
-
-    
-   })
-   .catch(function () {
-     console.log('FAILURE!!');
-   });
+  //         axios.post('http://oasapi.iddriver.com/media_file/upload/file',
+  //         counterStorage.formi, {
+  //      headers: {
+  //       'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+  //        'Content-Type': 'multipart/form-data'
+  //      }
+  //    }
+  //  ).then(function (response) {
+  //    const counterStorage = newTransportStore();
+  //           counterStorage.SaveDataNew(response.data);
+  //  })
+  //  .catch(function () {
+  //    console.log('FAILURE!!');
+  //  });
 
      //////// step 2 insert New //////
      
@@ -388,6 +476,25 @@ console.log(id);
       // }
     },
 
+    ResetForm(){
+
+      this.formDataNews = {
+        news_cover:'',
+        news_title:'',
+        news_description:''
+      };
+
+
+      
+      const UploadStorage = UploadStore();
+
+      UploadStorage.preview = null,
+      UploadStorage.image = null,
+      UploadStorage.preview_list = [],
+      UploadStorage.image_list = [],
+      UploadStorage.formi = []
+    },
+
    
 
     setCurrentPage(page) {
@@ -416,3 +523,5 @@ this.page = 1;
 
   },
 });
+
+
