@@ -7,8 +7,11 @@
 <div class="container mx-auto align-self-center">
 
     <div class="row">
-
         <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-8 col-12 d-flex flex-column align-self-center mx-auto">
+          <div class="alert alert-light-danger alert-dismissible fade show border-0 mb-4" role="alert" v-if="Loginfail == false"> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> 
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-bs-dismiss="alert"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>  Invalid Credentials Error With Correct Username/Password
+         </div>
             <div class="card mt-3 mb-3">
                 <div class="card-body">
 
@@ -124,8 +127,9 @@ const router = useRouter();
   const v$ = useVuelidate(rules, formData)
   const { authenticateUser } = useAuthStore();
   const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
+  const { Loginfail } = storeToRefs(useAuthStore()); //Get Getter
 
-
+  
 const login = async () => {
 
 v$.value.$validate();

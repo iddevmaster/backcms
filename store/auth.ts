@@ -12,75 +12,93 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     authenticated: false,
     loading: false,
+    status_login: true,
     count:11
   }),
   getters: {
     load(state) {
       return state.loading;
     },
+    Loginfail(state) {
+      return state.status_login;
+    },
   },
   
   actions: {
     async authenticateUser({ username, password }: UserPayloadInterface) {
       // useFetch from nuxt 3
-      const { error, data, statusCode }: any = await useFetch('/user/login', {
-        method: 'post',
-        baseURL:useEnvStore().apidev,
-        headers: new Headers({
-          'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-          'Content-Type': 'application/json'
-      }), 
-        body: {
-          "user_name": username,
-          "user_password": password
-      },
-      });
-      console.log(data);
-      if (data.value) {
-    
-        const token = useCookie('token'); // useCookie new hook in nuxt 3
-        token.value = "ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p"; // set token to cookie
-        // token.value = data?.value?.token; // set token to cookie
-        this.authenticated = true; // set authenticated  state value to true
+      // const { error, data, statusCode }: any = await useFetch('/user/login', {
+      //   method: 'post',
+      //   baseURL:useEnvStore().apidev,
+      //   headers: new Headers({
+      //     'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+      //     'Content-Type': 'application/json'
+      // }), 
+      //   body: {
+      //     "user_name": username,
+      //     "user_password": password
+      // },
+      // });
+
+      
+
+
+      try {
+        const { data } = await useFetch('/user/login', {
+          method: 'post',
+          baseURL:useEnvStore().apidev,
+          headers: new Headers({
+            'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+            'Content-Type': 'application/json'
+        }), 
+          body: {
+            "user_name": username,
+            "user_password": password
+        },
+        });
+
+        
+        if (data.value) {
+          console.log('if 1');
+          const token = useCookie('token'); // useCookie new hook in nuxt 3
+          const user_id = useCookie('user_id'); // useCookie new hook in nuxt 3
+          token.value = "ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p"; // set token to cookie
+          user_id.value = data.value.user_id; // set token to cookie
+  
+          // token.value = data?.value?.token; // set token to cookie
+          this.authenticated = true; // set authenticated  state value to true
+          this.status_login = true;
+        }else{
+          this.status_login = false;
+        }
+
+        // if (response.error.value.statusCode) {
+        //   console.log('if 2');
+        //   this.status_login = false;
+
+        // }
+      
+
+      } catch (error) {
+       console.log('error');
+       this.status_login = false;
+      } finally {
+     
       }
-      if (!data.value) {
-        this.loading = true;
-      }
 
-    //   const res = await useFetch('https://dummyjson.com/auth/login', {
-    //     method: 'POST',
-    //     body: {
-    //       username,
-    //       password,
-    //     },
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     }
-    // });
-    // const output = await JSON.stringify(res);
 
-    // console.log('output',output);
     
+      
+      
 
-     // if (data.value) {
-      //   const token = useCookie('token'); // useCookie new hook in nuxt 3
-      //   token.value = data?.value?.token; // set token to cookie
-      //   this.authenticated = true; // set authenticated  state value to true
-      // }
-      // if (!data.value) {
-      //   this.loading = true;
-      // }
-
-
-
- 
- 
 
     },
     logUserOut() {
       const token = useCookie('token'); // useCookie new hook in nuxt 3
+      const user_id = useCookie('user_id');
       this.authenticated = false; // set authenticated  state value to false
       token.value = null; // clear the token cookie
+      user_id.value = null;
       this.loading = false;
       return navigateTo('/auth/login');
     },

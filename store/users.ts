@@ -278,16 +278,24 @@ export const usersStore = defineStore('users', {
         }), 
         body:this.formDataregister,
         });
-   
+        console.log(data.value);
+       // const Alert = AlertStore();
+       // await Alert.AlertSuccess();
+       if(data.value){
+        const Alert = AlertStore();
+       await Alert.AlertSuccess();
+       }
+       if(data.value == ''){
+        const Alert = AlertStore();
+       Alert.AlertError();
+       }
      
-        if(data.value){
-          this.AlertText = 'success';
-        }else {
-          this.AlertText = 'danger';
-        }
+   
         this.pending_form = true;
       } catch (error) {
-        this.AlertText = 'danger';
+        const Alert = AlertStore();
+        Alert.AlertError();
+   
       } finally {
         this.pending = false;
       }

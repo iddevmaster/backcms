@@ -6,13 +6,20 @@ import { usersStore } from '@/store/users'
 import  UserCreate from '@/components/users/UserCreate.vue'
 
 import Alert from '@/components/layout/Alert.vue';
+import { AlertStore } from '@/store/alert'; // import the auth store we just created
 
+
+
+const storealert = AlertStore()
+const { Clear } = AlertStore(); // use  action
 
 const store = usersStore()
 const { posts } = storeToRefs(usersStore())
   const { PendingForm } = storeToRefs(store); //Get Getter
 
   const { AlertTextForm } = storeToRefs(store); //Get Getter
+
+  storealert.Clear()
 </script>
 
 <template>
@@ -26,7 +33,7 @@ const { posts } = storeToRefs(usersStore())
                             </ol>
                         </nav>
                     </div>
-<Alert v-if="PendingForm"></Alert>
+<Alert></Alert>
                 <div class="middle-content container-xxl p-0">
                     <div class="row layout-top-spacing">
                         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">

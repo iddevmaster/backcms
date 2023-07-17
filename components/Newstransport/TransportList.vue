@@ -18,7 +18,8 @@
  <table  id="example" class="table table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
-                                           <th><input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"></th>
+                                           <th>#</th>
+                                           <!-- <th><input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"></th> -->
                                             <th @click="sortList('id')">News Cover</th>
                                             <th @click="sortList('user_name')">News Title</th>
                                             <th @click="sortList('user_email')">News Description</th>
@@ -31,7 +32,7 @@
                                       <tr v-for="datanew in datanewstransport.data" :key="datanew.news_id">
                                         <td><input type="checkbox" v-model="store.selected" :value="datanew" number></td>
             <td>
-                 <img :src="image(datanew.news_cover)" class="img-fluid" />
+                 <img :src="image(datanew.news_cover)" class="img-fluid" width="80" height="80" />
             </td>
             <td>{{ datanew.news_title }}</td>
             <td>{{ datanew.news_description }}</td>
@@ -111,7 +112,6 @@ store.fetchNewTransport()
  const del = async (id) => {
 
  await deleteItem(id); 
-
  await store.fetchNewTransport()
  };
  
@@ -159,7 +159,23 @@ return formattedDatetime;
 
 function image(i) {
 
-return "http://oasapi.iddriver.com/media_file/file/?f="+i;
+  
+// const usingSplit = i.split(',');
+
+// const image = '';
+// if(usingSplit.length > 0){
+//   const image = usingSplit[0];
+// }
+var x = null;
+if(i){
+console.log('if');
+const usingSplit = i.split(',');
+var x = usingSplit[0];
+}else {
+var x = 'static/upload/2023/7/files-1689561047889.jpg';
+}
+
+return "http://oasapi.iddriver.com/media_file/file/?f="+x;
 
  }
 

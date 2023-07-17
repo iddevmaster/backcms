@@ -68,17 +68,19 @@ import { newTransportStore } from '@/store/newstransport'; // import the auth st
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
 import { UploadStore } from '@/store/upload'; // import the auth store we just created
+import { AlertStore } from '@/store/alert'; // import the auth store we just created
 import { ref } from "vue";
 
 
-console.log('start');
+
 const router = useRouter();
 const store = newTransportStore()
 const storeupload = UploadStore()
+const storealert = AlertStore()
 
 
 
-
+const { Clear } = AlertStore(); // use  action
 const { SaveDataNew } = newTransportStore(); // use  action
 const { SaveFormNews } = newTransportStore(); // use  action from   store
 const { SaveDataNewImage } = newTransportStore(); // use  action from   store
@@ -87,6 +89,7 @@ const { Saveimages } = UploadStore(); // use authenticateUser action from  auth 
 
 
 
+storealert.Clear()
 
 const rules = computed(() => {
   return {
@@ -113,7 +116,7 @@ const save = async () => {
  
     v$.value.$validate();
     if (!v$.value.$error) {
-    
+  
   await SaveFormNews(); //save form  ส่งไป Store User
 v$.value.$reset();
 

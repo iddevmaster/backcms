@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from "axios";
-
+const user_id = useCookie('user_id');
 
 
 
@@ -33,7 +33,7 @@ export const newTransportStore = defineStore('newstransport', {
       news_title: "",
       news_description: "",
       news_type: "2",
-      user_id: 1
+      user_id:user_id.value
   }
 
   
@@ -91,6 +91,7 @@ export const newTransportStore = defineStore('newstransport', {
 
   
     async fetchNewTransport() {
+
       this.selected = [];
       this.isAllSelected = false;
  try {
@@ -130,7 +131,6 @@ export const newTransportStore = defineStore('newstransport', {
 
 
     async deleteItem_id(id) {
-      console.log('id',id);
         const index = this.datanewstransport.data.findIndex(item => item.id === id)
       if (index !== -1) {
         this.datanewstransport.data.splice(index, 1)
@@ -202,6 +202,8 @@ export const newTransportStore = defineStore('newstransport', {
  
   async SaveDataNew (){
 
+
+    console.log(this.formDataNews);
       try {
         const { pending,error, data } = await useFetch('/news/create', {
           method: 'post',
@@ -214,15 +216,15 @@ export const newTransportStore = defineStore('newstransport', {
         });
         const TransportStorage = newTransportStore();
         await TransportStorage.ResetForm();
+
+        const Alert = AlertStore();
+        await Alert.AlertSuccess();
      
-        if(data.value){
-          this.AlertText = 'success';
-        }else {
-          this.AlertText = 'danger';
-        }
+       
         this.pending_form = true;
       } catch (error) {
-        this.AlertText = 'danger';
+        const Alert = AlertStore();
+        Alert.AlertError();
       } finally {
         this.pending = false;
       }
@@ -375,7 +377,7 @@ export const newTransportStore = defineStore('newstransport', {
         news_title:'',
         news_description:'',
         news_type:"2",
-        user_id:1,
+        user_id:user_id.value,
       };
 
 
