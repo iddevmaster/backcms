@@ -38,7 +38,7 @@
                                             <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple @change="onFileChange" ref="fileupload">
                                         </div>
                                         <div class="border p-2 mt-3">
-            <p>Preview Here:</p>
+            <p>Preview Here: {{storeupload.formi}}</p>
             <template v-if="storeupload.preview_list.length">
               <div v-for="item, index in storeupload.preview_list" :key="index">
                 <img :src="item" class="img-fluid" />
@@ -88,7 +88,6 @@ const { getFormNews } = storeToRefs(store);
 const { Saveimages } = UploadStore(); // use authenticateUser action from  auth store
 
 
-
 storealert.Clear()
 
 const rules = computed(() => {
@@ -118,6 +117,13 @@ const save = async () => {
     if (!v$.value.$error) {
   
   await SaveFormNews(); //save form  ส่งไป Store User
+
+  // const formData = new FormData();
+  //         for (const i of Object.keys(storeupload.formi)) {
+  //           formData.append('files', storeupload.formi[i])
+  //           console.log(storeupload.formi[i])
+  //         }
+
 v$.value.$reset();
 
    const input = document.querySelector('input[type="file"]');
@@ -133,21 +139,33 @@ v$.value.$reset();
 const onFileChange = async (event) => {
    
 
-
-
-
   var input = event.target;
       var count = input.files.length;
       var index = 0;
+      	for(let i = 0; i<count; i++)
+	  {
+		storeupload.formi.push(event.target.files[i]);
+    }
 
 
-      let formData = new FormData();
-     // formData.append('files', input.files[0]);
-      for (var i = 0; i < count; i++ ){
-        let x = input.files[i];
+      //const formData = new FormData();
+      const formData = new FormData();
+          for (const i of Object.keys(storeupload.formi)) {
+            formData.append('files', storeupload.formi[i])
+           
+          }
+
+
+
+    //   let formData = new FormData();
+    //  // formData.append('files', input.files[0]);
+    //   for (var i = 0; i < count; i++ ){
+    //     let x = input.files[i];
       
-        formData.append('files', input.files[i]);
-      }
+    //     formData.append('files', input.files[i]);
+    //   }
+
+
       // formData.append('files['+ 0 +']', input.files);
       // formData.append('files['+ 1 +']', input.files);
    //   console.log('>> formData >> ', formData);
@@ -159,7 +177,7 @@ const onFileChange = async (event) => {
       //   formData.append('files[' + i + ']', input.files[i]);
       // }
 
-      await Saveimages(formData);
+// Saveimages(formData);
 
       if (input.files) {
         while(count --) {

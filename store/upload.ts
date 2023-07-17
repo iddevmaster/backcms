@@ -38,11 +38,21 @@ alert('SaveData');
     },
     Saveimages(formData)
     {
-      this.formi = formData;
 
-    //   this.formi.forEach((value,key) => {
-    // console.log('xxxx',key+value)
-    //  });
+     
+    
+   //   this.formi = formData;
+
+      //let x = []
+// formData.forEach((value,index) =>{
+//    console.log(value);
+// })
+
+
+
+  //    this.formi.push(formData);
+
+  
 
   //    axios.post('http://oasapi.iddriver.com/media_file/upload/file',
   //    formData, {

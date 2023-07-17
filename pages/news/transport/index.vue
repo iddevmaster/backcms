@@ -80,7 +80,7 @@ const delete_userid = async (id) => {
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal" >Cancel</button>
-                                    <button type="button" class="btn btn-danger" data-remove="task" @click="delete_userid(GetopenModal_ID)">Delete {{ GetopenModal_ID }}</button>
+                                    <button type="button" class="btn btn-danger" data-remove="task" @click="delete_userid(GetopenModal_ID)">Delete</button>
                                 </div>
                             </div>
   </div>

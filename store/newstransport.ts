@@ -131,13 +131,16 @@ export const newTransportStore = defineStore('newstransport', {
 
 
     async deleteItem_id(id) {
-        const index = this.datanewstransport.data.findIndex(item => item.id === id)
+
+ 
+        const index = this.datanewstransport.data.findIndex(item => item.id === id.news_id)
+      
       if (index !== -1) {
         this.datanewstransport.data.splice(index, 1)
       }
       try {
         this.pending = true
-        const { pending , error, data } = await useFetch('/news/delete/' + id, {
+        const { pending , error, data } = await useFetch('/news/delete/' + id.news_id, {
           method: 'DELETE',
           baseURL:useEnvStore().apidev,
           headers: new Headers({
@@ -147,6 +150,7 @@ export const newTransportStore = defineStore('newstransport', {
         });
       
         this.isOpen = false;
+        this.deleteImage(id.news_cover);
       } catch (error) {
         this.error = error
       } finally {
@@ -193,8 +197,33 @@ export const newTransportStore = defineStore('newstransport', {
       this.isOpen = true;
       this.news_id = id;
 
-    
+    },
+
+    async deleteImage(path) {
+
+
+      if(path){
+        try {
+          this.pending = true
+          const { pending , error, data } = await useFetch('/media_file/file/?f=' + path, {
+            method: 'DELETE',
+            baseURL:useEnvStore().apidev,
+            headers: new Headers({
+              'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+              'Content-Type': 'application/json'
+          }), 
+          });
+        
+  
+        } catch (error) {
+         
+        } finally {
       
+        }
+  
+       
+      }
+
     },
 
 
@@ -281,11 +310,15 @@ export const newTransportStore = defineStore('newstransport', {
             await TransportStorage.SaveDataNew();
             } else {
               // File has content
-              console.log("File has content");
-
+              console.log("File has content",counterStorage.formi);
+              const formData = new FormData();
+              for (const i of Object.keys(counterStorage.formi)) {
+                formData.append('files', counterStorage.formi[i])
+               
+              }
 
           axios.post('http://oasapi.iddriver.com/media_file/upload/file',
-          counterStorage.formi, {
+          formData, {
        headers: {
         'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
          'Content-Type': 'multipart/form-data'
@@ -393,7 +426,11 @@ this.formDataNews.news_description = data.value.news_description
 this.formDataNews.news_type = data.value.news_type
 this.formDataNews.user_id = user_id.value
 
-this.viewupload(data.value.news_cover);
+if(data.value.news_cover){
+  this.viewupload(data.value.news_cover);
+}
+
+
 
 } catch (error) {
   
@@ -472,6 +509,10 @@ this.viewupload(data.value.news_cover);
     async UpdateFormNewsDataUpload(path){
 
       console.log(path);
+
+     // this.formDataNews.news_cover
+
+     
 
     },
 
