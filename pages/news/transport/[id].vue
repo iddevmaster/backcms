@@ -2,17 +2,16 @@
 
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-import { usersStore } from '@/store/users'
-import  UserEdit from '@/components/users/UserEdit.vue'
+import  NewsEdit from '@/components/Newstransport/TransportEdit.vue'
+
 import Alert from '@/components/layout/Alert.vue';
 
 
-const store = usersStore()
+const store = newTransportStore()
 const { posts } = storeToRefs(usersStore())
-const { PendingForm } = storeToRefs(store); //Get Getter
-const { AlertTextForm } = storeToRefs(store); //Get Getter
+  const { PendingForm } = storeToRefs(store); //Get Getter
 
-
+  const { AlertTextForm } = storeToRefs(store); //Get Getter
 </script>
 
 <template>
@@ -21,18 +20,18 @@ const { AlertTextForm } = storeToRefs(store); //Get Getter
               <div class="page-meta">
                         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Users</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Edit User</li>
+                                <li class="breadcrumb-item"><a href="#">News </a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Edit News Transport</li>
                             </ol>
                         </nav>
                     </div>
-<Alert v-if="PendingForm"></Alert>
+<Alert></Alert>
                 <div class="middle-content container-xxl p-0">
                     <div class="row layout-top-spacing">
                         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
           
                             <div class="widget-content widget-content-area br-8 p-3">
-           <UserEdit></UserEdit>
+           <NewsEdit></NewsEdit>
                                </div>
                               </div>
                               

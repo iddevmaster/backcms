@@ -1,189 +1,189 @@
 <template>
  
      
- <div class="row mb-4">
-  <div id="form_grid_layouts" class="col-lg-12">
-                            <div class="seperator-header">
-                                <h4 class="">Form Edit User</h4>
-                            </div>
-                        </div>
-        <div class="col-sm-6">
-          <label for="exampleFormControlInput1">First Name</label>
-            <input type="text" class="form-control" id="inputEmail3" placeholder="First Name *" v-model="store.formDataEdit.user_firstname"
-                  :class="{
-                'border-red-500 focus:border-red-500': v$.user_firstname.$error,
-                'border-[#42d392] ': !v$.user_firstname.$invalid,
-              }"
-              @change="v$.user_firstname.$touch"
-              autocomplete="off"
-            >
-            <span class="text-xs text-red-500" style="color:red" v-if="v$.user_firstname.$error">{{
-            v$.user_firstname.$errors[0].$message
-          }}</span>
-        </div>
-
-
-
-        <div class="col-sm-6">
-          <label for="exampleFormControlInput1">Last Name</label>
-            <input type="text" class="form-control" id="inputEmail3" placeholder="Last Name *" v-model="store.formDataEdit.user_lastname"
-         :class="{
-                'border-red-500 focus:border-red-500': v$.user_lastname.$error,
-                'border-[#42d392] ': !v$.user_lastname.$invalid,
-              }"
-              @change="v$.user_lastname.$touch"
-              autocomplete="off"
-            >
-            <span class="text-xs text-red-500" style="color:red" v-if="v$.user_lastname.$error">{{
-            v$.user_lastname.$errors[0].$message
-          }}</span>
-        </div>
-
-
-    </div>
-    <div class="row mb-4">
-      
-        <div class="col-sm-6">
-          <label for="exampleFormControlInput1">UsersName</label>
-            <input type="text" class="form-control" id="inputPassword3" placeholder="Username *" v-model="store.formDataEdit.user_name"
-       :class="{
-                'border-red-500 focus:border-red-500': v$.user_name.$error,
-                'border-[#42d392] ': !v$.user_name.$invalid,
-              }"
-              @change="v$.user_name.$touch"
-              autocomplete="off"
-            >
-            <span class="text-xs text-red-500" style="color:red" v-if="v$.user_name.$error">{{
-            v$.user_name.$errors[0].$message
-          }}</span>
-            
-        
-        </div>
-
-        <div class="col-sm-6">
-          <label for="exampleFormControlInput1">Password</label>
-            <input type="text" class="form-control" id="inputPassword3" placeholder="Password *" v-model="store.formDataEdit.user_password"
-          :class="{
-                'border-red-500 focus:border-red-500': v$.user_password.$error,
-                'border-[#42d392] ': !v$.user_password.$invalid,
-              }"
-              @change="v$.user_password.$touch"
-              autocomplete="off"
-            >
-            <span class="text-xs text-red-500" style="color:red" v-if="v$.user_password.$error">{{
-            v$.user_password.$errors[0].$message
-          }}</span>
- 
-        </div>
-    </div>
-    <div class="row mb-4">
-        <div class="col-sm-6">
-          <label for="exampleFormControlInput1">Email</label>
-                <input type="text" class="form-control" id="inputPassword3" placeholder="Email *" v-model="store.formDataEdit.user_email"
-                 :class="{
-                'border-red-500 focus:border-red-500': v$.user_email.$error,
-                'border-[#42d392] ': !v$.user_email.$invalid,
-              }"
-              @change="v$.user_email.$touch"
-              autocomplete="off"
-                >
-                <span class="text-xs text-red-500" style="color:red" v-if="v$.user_email.$error">{{
-            v$.user_email.$errors[0].$message
-          }}</span>
-              
-        </div>
-        <div class="col-sm-6">
-          <label for="exampleFormControlInput1">Phone</label>
-                <input type="text" class="form-control" id="inputPassword3" placeholder="Phone *" v-model="store.formDataEdit.user_phone"
-               :class="{
-                'border-red-500 focus:border-red-500': v$.user_phone.$error,
-                'border-[#42d392] ': !v$.user_phone.$invalid,
-              }"
-              @change="v$.user_phone.$touch"
-              autocomplete="off"
+  <div class="row mb-4">
+   <div id="form_grid_layouts" class="col-lg-12">
+                             <div class="seperator-header">
+                                 <h4 class="">Form Edit News</h4>
+                             </div>
+     </div>
+         <div class="form-group mb-4">
+           <label for="formGroupExampleInput">News Title</label>
+           <input type="text" class="form-control" id="formGroupExampleInput" placeholder="News Title *" v-model="store.formDataNews.news_title"
+           :class="{
+                 'border-red-500 focus:border-red-500': v$.news_title.$error,
+                 'border-[#42d392] ': !v$.news_title.$invalid,
+               }"
+               @change="v$.news_title.$touch"
+              >
+               <span class="text-xs text-red-500" style="color:red" v-if="v$.news_title.$error">{{
+             v$.news_title.$errors[0].$message
+           }}</span>
+           </div>
+           <div class="form-group mb-4"> 
+             <label for="exampleFormControlTextarea1">News Description</label>
+             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
+             :class="{
+                 'border-red-500 focus:border-red-500': v$.news_description.$error,
+                 'border-[#42d392] ': !v$.news_description.$invalid,
+               }"
+               @change="v$.news_description.$touch"
+               v-model="store.formDataNews.news_description">
+               </textarea><span class="text-xs text-red-500" style="color:red" v-if="v$.news_description.$error">{{
+             v$.news_description.$errors[0].$message
+           }}</span>
+           </div> 
+           <div class="form-group mb-4 mt-3">
+                                             <label for="exampleFormControlFile1">Example file input</label>
+                                             <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple @change="onFileChange" ref="fileupload">
+                                         </div>
+                                         <div class="border p-2 mt-3">
+             <p>Preview Here: </p>
+             <template v-if="storeupload.preview_list.length">
+               <div v-for="item, index in storeupload.preview_list" :key="index">
+                 <img :src="CoverImage(item)" class="img-fluid" />
                
-                >
-                <span class="text-xs text-red-500" style="color:red" v-if="v$.user_phone.$error">{{
-            v$.user_phone.$errors[0].$message
-          }}</span>
-        
-        </div>
-        </div>
-    <button type="button" class="btn btn-primary" @click="save()">แก้ไข</button>      
-</template>
-<script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { defineComponent } from 'vue';
-import { usersStore } from '@/store/users'; // import the auth store we just created
-import { useVuelidate } from '@vuelidate/core';
-import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
-
-const router = useRouter();
-const store = usersStore();
-
-const { FormEdit } = storeToRefs(store);
-
-
-await store.fetchUsersId(router.currentRoute.value.params.id)
-
-
-//  const formDataEdit = reactive({
-//     user_name: store.formDataEdit.user_name,
-//     user_password: "",
-//     user_firstname: store.formDataEdit.user_firstname,
-//     user_lastname: store.formDataEdit.user_lastname,
-//     user_email: store.formDataEdit.user_email,
-//     user_phone:store.formDataEdit.user_phone,
-//     user_type: 3,
-// });
-
-const { Update } = usersStore(); // use authenticateUser action from  auth store
-
-const rules = computed(() => {
-  return {
-    user_name: {
-      required: helpers.withMessage('The User name field is required', required),
-      minLength: minLength(6),
-    },
-    user_password: {
-      required: helpers.withMessage('The Password field is required', required),
-      minLength: minLength(6),
-    },
-    user_firstname: {
-      required: helpers.withMessage('The First Name field is required', required),
-      minLength: minLength(6),
-    },
-    user_lastname: {
-      required: helpers.withMessage('The Last Name field is required', required),
-      minLength: minLength(6),
-    },
-
-    user_phone: {
-      required: helpers.withMessage('The tel field is required', required),
-      minLength: minLength(6),
-    },
+               </div>
+               {{ storeupload.preview_list }}
+             </template>
+           </div>
+           <div>
+ 
+   </div>
+                                         
+ 
+ 
+     </div>
     
-    user_email: {
-      required: helpers.withMessage('The password confirmation field is required', required),
-      email: helpers.withMessage('Invalid email format', email),
-    },
-  };
-});
+    
+     <button type="button" class="btn btn-primary" @click="edit()">แก้ไข</button>      
+ </template>
+ <script setup lang="ts">
+ import { storeToRefs } from 'pinia';
+ import { defineComponent } from 'vue';
+ import { newTransportStore } from '@/store/newstransport'; // import the auth store we just created
+ import { useVuelidate } from '@vuelidate/core';
+ import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
+ import { UploadStore } from '@/store/upload'; // import the auth store we just created
+ import { AlertStore } from '@/store/alert'; // import the auth store we just created
+ import { ref } from "vue";
+ 
+ 
+ 
+ const router = useRouter();
+ const store = newTransportStore()
+ const storeupload = UploadStore()
+ const storealert = AlertStore()
+ 
+ 
+ 
+ const { Clear } = AlertStore(); // use  action
+ const { UpdateFormNews } = newTransportStore(); // use  action
+ const { getFormNews } = storeToRefs(store);
+ const { Saveimages } = UploadStore(); // use authenticateUser action from  auth store
+ 
+ 
+ 
+ storealert.Clear()
+
+ await store.fetchNewsId(router.currentRoute.value.params.id)
+ 
+ const rules = computed(() => {
+   return {
+     news_title: {
+       required: helpers.withMessage('The News Title field is required', required),
+       minLength: minLength(6),
+     },
+     news_description: {
+       required: helpers.withMessage('The News Description is required', required),
+       minLength: minLength(6),
+     },
+ 
+   };
+ });
 
 
-const v$ = useVuelidate(rules, FormEdit);
+
+ 
+ 
+
+ 
+function CoverImage(x) {
+
+  var result = x.slice(0, 6);
 
 
-
-const save = async () => {
-  
-    v$.value.$validate();
-    if (!v$.value.$error) {
-    await Update(router.currentRoute.value.params.id); //save form  ส่งไป Store User
-  }
+if (result === "static") {
+  return 'http://oasapi.iddriver.com/media_file/file/?f='+ x;
+} else {
+  return x;
 }
 
 
 
+ }
+ 
+ 
+ const v$ = useVuelidate(rules, getFormNews);
+ 
+ const edit = async () => {
+  
+     v$.value.$validate();
+     if (!v$.value.$error) {
+   
+   await UpdateFormNews(); //save form  ส่งไป Store User
 
-</script>
+ 
+
+ 
+   }
+ }
+ 
+ const onFileChange = async (event) => {
+    
+ 
+   var input = event.target;
+       var count = input.files.length;
+       var index = 0;
+ 
+ 
+       let formData = new FormData();
+      // formData.append('files', input.files[0]);
+       for (var i = 0; i < count; i++ ){
+         let x = input.files[i];
+       
+         formData.append('files', input.files[i]);
+       }
+ 
+ 
+       await Saveimages(formData);
+ 
+       if (input.files) {
+         while(count --) {
+           var reader = new FileReader();
+           reader.onload = (e) => {
+             storeupload.preview_list.push(e.target.result);
+           }
+           storeupload.image_list.push(input.files[index]);
+           reader.readAsDataURL(input.files[index]);
+           index ++;
+         }
+       }
+ }
+ 
+
+
+ 
+ 
+ </script>
+ <style>
+  .preview{
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       height: 100px;
+       width: 100px;
+     }
+ 
+ </style>
+ 

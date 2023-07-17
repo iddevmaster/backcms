@@ -370,6 +370,111 @@ export const newTransportStore = defineStore('newstransport', {
       // }
     },
 
+  async fetchNewsId(id){
+
+    this.news_id = id;
+try {
+        
+  const { pending , error, data } = await useFetch('/news/get/' + id, {
+    method: 'GET',
+    baseURL:useEnvStore().apidev,
+    headers: new Headers({
+      'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+      'Content-Type': 'application/json'
+  }), 
+  });
+ 
+
+
+
+this.formDataNews.news_cover = data.value.news_cover
+this.formDataNews.news_title = data.value.news_title
+this.formDataNews.news_description = data.value.news_description
+this.formDataNews.news_type = data.value.news_type
+this.formDataNews.user_id = user_id.value
+
+this.viewupload(data.value.news_cover);
+
+} catch (error) {
+  
+} finally {
+
+}
+    },
+     
+    async UpdateFormNews(){
+
+      const counterStorage = UploadStore();
+      counterStorage.formi
+
+      if (counterStorage.formi.length === 0) {
+        // File is empty
+     this.UpdateFormNewsNoUpload();
+        console.log("Edit File is empty");
+      } else {
+        console.log("Edit Hash file");
+        this.UpdateFormNewsUpload();
+
+      }
+ 
+     
+    },
+    async UpdateFormNewsNoUpload(){
+
+       try {
+        const { pending,error, data } = await useFetch('/news/update/'+ this.news_id, {
+          method: 'PUT',
+          baseURL:useEnvStore().apidev,
+          headers: new Headers({
+            'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+            'Content-Type': 'application/json'
+        }), 
+        body:this.formDataNews,
+        });
+        const TransportStorage = newTransportStore();
+    
+
+        const Alert = AlertStore();
+        await Alert.AlertSuccess();
+     
+       
+        this.pending_form = true;
+      } catch (error) {
+        const Alert = AlertStore();
+        Alert.AlertError();
+      } finally {
+        this.pending = false;
+      }
+
+
+    },
+    async UpdateFormNewsUpload(){
+
+      const counterStorage = UploadStore();
+      counterStorage.formi
+
+      axios.post('http://oasapi.iddriver.com/media_file/upload/file',
+      counterStorage.formi, {
+   headers: {
+    'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+     'Content-Type': 'multipart/form-data'
+   }
+ }
+).then(function (response) {
+       const TransportStorage = newTransportStore();
+        TransportStorage.UpdateFormNewsDataUpload(response.data);
+     
+})
+.catch(function () {
+ console.log('FAILURE!!');
+});
+    },
+    async UpdateFormNewsDataUpload(path){
+
+      console.log(path);
+
+    },
+
     ResetForm(){
 
       this.formDataNews = {
@@ -393,8 +498,7 @@ export const newTransportStore = defineStore('newstransport', {
       console.log('reset upload');
     },
 
-   
-
+  
     setCurrentPage(page) {
       this.page = page
       this.selected = [];
@@ -415,10 +519,12 @@ export const newTransportStore = defineStore('newstransport', {
 this.per_page = data_entires;
 this.page = 1;
     },
+
+    viewupload(i) {
+const UpdtStorage = UploadStore();
+UpdtStorage.Viewimage(i);
+    },
     
-
-
-
   },
 });
 

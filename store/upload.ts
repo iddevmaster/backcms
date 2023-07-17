@@ -27,9 +27,17 @@ export const UploadStore = defineStore('upload', {
     {
 alert('SaveData');
     },
+    Viewimage(i)
+    {
+     
+
+    this.preview_list.push(i);
+
+    
+
+    },
     Saveimages(formData)
     {
-
       this.formi = formData;
 
     //   this.formi.forEach((value,key) => {
