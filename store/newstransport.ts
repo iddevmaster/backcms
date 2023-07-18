@@ -132,9 +132,16 @@ export const newTransportStore = defineStore('newstransport', {
 
     async deleteItem_id(id) {
 
- 
+     let im = this.changeimagetoarry(id.news_cover);
+
+if(im.length > 0){
+     for (var i = 0; i < im.length; i++) {
+      this.deleteImage(im[i]);
+  }
+}
+
+     
         const index = this.datanewstransport.data.findIndex(item => item.id === id.news_id)
-      
       if (index !== -1) {
         this.datanewstransport.data.splice(index, 1)
       }
@@ -150,7 +157,7 @@ export const newTransportStore = defineStore('newstransport', {
         });
       
         this.isOpen = false;
-        this.deleteImage(id.news_cover);
+        
       } catch (error) {
         this.error = error
       } finally {
@@ -213,7 +220,7 @@ export const newTransportStore = defineStore('newstransport', {
               'Content-Type': 'application/json'
           }), 
           });
-        
+       
   
         } catch (error) {
          
@@ -232,7 +239,6 @@ export const newTransportStore = defineStore('newstransport', {
   async SaveDataNew (){
 
 
-    console.log(this.formDataNews);
       try {
         const { pending,error, data } = await useFetch('/news/create', {
           method: 'post',
@@ -270,6 +276,7 @@ export const newTransportStore = defineStore('newstransport', {
  
     const string = array.join(',');
     this.formDataNews.news_cover = string;
+ 
       try {
         const { pending,error, data } = await useFetch('/news/create', {
           method: 'post',
@@ -280,16 +287,14 @@ export const newTransportStore = defineStore('newstransport', {
         }), 
         body:this.formDataNews,
         });
-   
-     
-        if(data.value){
-          this.AlertText = 'success';
-        }else {
-          this.AlertText = 'danger';
-        }
-        this.pending_form = true;
+        const TransportStorage = newTransportStore();
+        await TransportStorage.ResetForm();
+
+        const Alert = AlertStore();
+        await Alert.AlertSuccess();
       } catch (error) {
-        this.AlertText = 'danger';
+        const Alert = AlertStore();
+        Alert.AlertError();
       } finally {
         this.pending = false;
       }
@@ -325,10 +330,11 @@ export const newTransportStore = defineStore('newstransport', {
        }
      }
    ).then(function (response) {
+    console.log(response.data);
            const TransportStorage = newTransportStore();
-            TransportStorage.SaveDataNewImage(response.data);
+          TransportStorage.SaveDataNewImage(response.data);
          
-            TransportStorage.ResetForm();
+          //  TransportStorage.ResetForm();
    })
    .catch(function () {
      console.log('FAILURE!!');
@@ -564,6 +570,35 @@ this.page = 1;
     viewupload(i) {
 const UpdtStorage = UploadStore();
 UpdtStorage.Viewimage(i);
+    },
+
+    changeimagetoarry(i) {
+
+    //   const array = [];
+    //   for (let obj of x) {
+    //    array.push(obj.path)
+    //  }
+
+   
+
+const usingSplit = i.split(',');
+
+if(usingSplit == ''){
+  // const usingSplit = [];
+  // usingSplit.length == 0;
+  // return usingSplit = [];
+
+  return [];
+}else{
+ 
+  return usingSplit;
+}
+
+
+ 
+    // const string = array.join(',');
+    // this.formDataNews.news_cover = string;
+
     },
     
   },

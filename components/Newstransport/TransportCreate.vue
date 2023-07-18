@@ -44,6 +44,7 @@
                 <img :src="item" class="img-fluid" />
                 <p class="mb-0">file name: {{ storeupload.image_list[index].name }}</p>
                 <p>size: {{ storeupload.image_list[index].size/1024 }}KB</p>
+                <button @click="removeImage(index)">Remove image</button>
               </div>
             </template>
           </div>
@@ -136,6 +137,11 @@ v$.value.$reset();
   }
 }
 
+const removeImage = async (remove) => {
+  storeupload.preview_list.splice(remove, 1)
+  storeupload.formi.splice(remove, 1)
+
+}
 const onFileChange = async (event) => {
    
 
