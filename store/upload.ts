@@ -47,6 +47,16 @@ alert('SaveData');
     
 
     },
+    imagedisplay(data)  {
+   
+      if(data.length > 0){
+        for (var i = 0; i < data.length; i++) {
+          this.preview_list.push(data[i].ni_path_file);
+
+        }
+    }
+
+    },
     Saveimages(formData)
     {
 

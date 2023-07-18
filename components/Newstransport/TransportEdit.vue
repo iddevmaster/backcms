@@ -42,10 +42,10 @@
              <template v-if="storeupload.preview_list.length">
                <div v-for="item, index in storeupload.preview_list" :key="index">
                  <img :src="CoverImage(item)" class="img-fluid" />
-               
+                <button @click="removeImage(index)">Remove image</button>
                </div>
                {{ storeupload.preview_list }}
-                <button @click="removeImage(index)">Remove image</button>
+               
              </template>
            </div>
            <div>

@@ -160,7 +160,7 @@ const onFileChange = async (event) => {
           for (const i of Object.keys(storeupload.formi)) {
             const aaaa = storeupload.formi[i];
             formData.append('files', storeupload.formi[i])   
-            console.log(aaaa);
+           
           }
           
 

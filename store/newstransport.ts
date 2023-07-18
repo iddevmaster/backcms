@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import axios from "axios";
 import { OrdersService } from "../services/orders.service";
 import ApiService from '../services/api.service';
+import { error } from 'console';
 const user_id = useCookie('user_id');
 
 
@@ -138,10 +139,21 @@ export const newTransportStore = defineStore('newstransport', {
       if (index !== -1) {
         this.datanewstransport.data.splice(index, 1)
       }
+    //  this.GetPathImage(id.news_id);
+    await this.DelImage(id.news_id);
       try {
         this.pending = true
         const response = await ApiService.delete('/news/delete/'+id.news_id).then(response => {
           this.isOpen = false;
+       
+          if(response.status == 200){
+            ////next function
+            console.log('ok');
+          }else {
+            console.log('error');
+          }
+
+          
         });
 
       } catch (error) {
@@ -179,11 +191,34 @@ export const newTransportStore = defineStore('newstransport', {
 
   // },
 
-    async deleteItem(id) {
+  async GetPathImage(id) {
 
+
+   await ApiService.get('/news/get/'+id).then(response => {
+      if(response.data.images_list?.length > 0) {
+        ///////////// วนลูป ลบรูปภาพก่อน 
+        for (let i = 0; i < response.data.images_list.length; i++) {
+          console.log('newsdata',response.data.images_list[i]);
+const delimage =  ApiService.delete('media_file/file/?f='+response.data.images_list[i].ni_path_file).then(delimage => {
+console.log('del',delimage);
+});
+
+        }
+      }
+      });
+    
+  },
+
+  async DelImage(id){
+    ApiService.delete('/news/image/delete/'+id).then(response => {
+      console.log('response',response); 
+    });
+
+  },
+
+    async deleteItem(id) {
       this.isOpen = true;
       this.news_id = id;
-
     },
 
     async deleteImage(path) {
@@ -280,9 +315,7 @@ if(x.length > 0){
     const savedata = await ApiService.post('/news/create',this.formDataNews).then(response => {
       this.formNewsImage.news_id = response.data.insertId;
     });
-    console.log(this.formNewsImage.news_id);
-
-
+ 
       for (let i = 0; i < x.length; i++) {
         const { pending,error, data } = useFetch('/news/image/create', {
           method: 'post',
@@ -298,6 +331,7 @@ if(x.length > 0){
       }
         }); 
       }
+   
     },
     async SaveSubmitForm(){
           const counterStorage = UploadStore();
@@ -310,36 +344,50 @@ if(x.length > 0){
             await TransportStorage.SaveDataNew();
             } else {
               // File has content
-           
-              const formData = new FormData();
-              for (const i of Object.keys(counterStorage.formi)) {
-                formData.append('files', counterStorage.formi[i]) 
-                console.log("File has content",counterStorage.formi[i]);
-              }
-
-      axios.post('https://oasapi.iddriver.com/media_file/upload/file',
-      formData, {
-       headers: {
-        'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-         'Content-Type': 'multipart/form-data'
-       }
-     }
-   ).then(function (response) {
-    console.log('pic',response.data);
-    const TransportStorage = newTransportStore();
-   TransportStorage.SaveData(response.data);
-    //  TransportStorage.SaveImageData(x);
 
 
-    
-
+              try {
+              
+                const formData = new FormData();
+                for (const i of Object.keys(counterStorage.formi)) {
+                  formData.append('files', counterStorage.formi[i]) 
+                  console.log("File has content",counterStorage.formi[i]);
+                }
   
-         
-          //  TransportStorage.ResetForm();
-   })
-   .catch(function () {
-     console.log('FAILURE!!');
-   });
+        axios.post('https://oasapi.iddriver.com/media_file/upload/file',
+        formData, {
+         headers: {
+          'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+           'Content-Type': 'multipart/form-data'
+         }
+       }
+     ).then(function (response) {
+      console.log(response.data);
+      const TransportStorage = newTransportStore();
+     TransportStorage.SaveData(response.data);
+      //  TransportStorage.SaveImageData(x);
+  
+     // this.$nextTick(this.ResetForm);
+      
+  
+      const Alert = AlertStore();
+       Alert.AlertSuccess();
+
+   
+       TransportStorage.ResetForm();
+           
+            //  TransportStorage.ResetForm();
+     })
+     .catch(function () {
+      const Alert = AlertStore();
+      Alert.AlertError();
+     });
+              } catch (error) {
+                const Alert = AlertStore();
+      Alert.AlertError();
+              }
+           
+      
 
   
             }
@@ -351,24 +399,20 @@ if(x.length > 0){
     this.news_id = id;
 try {
         
-  const { pending , error, data } = await useFetch('/news/get/' + id, {
-    method: 'GET',
-    baseURL:useEnvStore().apidev,
-    headers: new Headers({
-      'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-      'Content-Type': 'application/json'
-  }), 
-  });
- 
+
+  const dat = await ApiService.get('/news/get/'+id);
+
+  this.formDataNews.news_cover = dat.data.news_cover
+  this.formDataNews.news_title = dat.data.news_title
+  this.formDataNews.news_description = dat.data.news_description
+  this.formDataNews.news_type = dat.data.news_type
+  this.formDataNews.user_id = user_id.value
+  this.formDataNews.images_list = dat.data?.images_list
 
 
+const ImageUpload = UploadStore();
+ImageUpload.imagedisplay(this.formDataNews.images_list);
 
-this.formDataNews.news_cover = data.value.news_cover
-this.formDataNews.news_title = data.value.news_title
-this.formDataNews.news_description = data.value.news_description
-this.formDataNews.news_type = data.value.news_type
-this.formDataNews.user_id = user_id.value
-this.formDataNews.images_list = data.value.images_list
 
 
 
@@ -436,7 +480,6 @@ this.formDataNews.images_list = data.value.images_list
 const formData = new FormData();
 for (const i of Object.keys(counterStorage.formi)) {
   formData.append('files', counterStorage.formi[i])
- 
 }
 
 axios.post('https://oasapi.iddriver.com/media_file/upload/file',
@@ -447,9 +490,20 @@ headers: {
 }
 }
 ).then(function (response) {
+console.log(response.data)
 
-const TransportStorage = newTransportStore();
-TransportStorage.UpdateFormNewsDataUpload(response.data);
+const counterStorage = UploadStore();
+counterStorage.preview_list.length
+
+
+for (var i = 0; i < counterStorage.preview_list.length; i++) {
+    console.log(counterStorage.preview_list[i]);
+    //Do something
+}
+
+
+//const TransportStorage = newTransportStore();
+//TransportStorage.UpdateFormNewsDataUpload(response.data);
 
 //  TransportStorage.ResetForm();
 })
