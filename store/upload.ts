@@ -27,11 +27,22 @@ export const UploadStore = defineStore('upload', {
     {
 alert('SaveData');
     },
-    Viewimage(i)
+    Viewimage(a)
     {
      
+ 
 
-    this.preview_list.push(i);
+      const x = a.split(',');
+      console.log(x);
+
+      if(x.length > 0){
+        for (var i = 0; i < x.length; i++) {
+    
+     this.preview_list.push(x[i]);
+        }
+    }
+
+   
 
     
 

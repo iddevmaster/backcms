@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from "axios";
+import { OrdersService } from "../services/orders.service";
+import ApiService from '../services/api.service';
 const user_id = useCookie('user_id');
 
 
@@ -28,18 +30,27 @@ export const newTransportStore = defineStore('newstransport', {
     total:null,
     itemsPerPage: 3,
     news_id:null,
+    form:{},
     formDataNews:{
       news_cover: "",
       news_title: "",
       news_description: "",
       news_type: "2",
+      images_list:[],
       user_id:user_id.value
+  },
+  formNewsImage:{
+    ni_path_file: "",
+    ni_name_file: "",
+    news_id: "",
   }
 
   
   }
      
 ),
+
+
 
 
   getters: {
@@ -91,35 +102,26 @@ export const newTransportStore = defineStore('newstransport', {
 
   
     async fetchNewTransport() {
-
       this.selected = [];
       this.isAllSelected = false;
- try {
-  this.pending = true
-  const { pending , error, data } = await useFetch('/news/list', {
-    method: 'post',
-    baseURL:useEnvStore().apidev,
-    headers: new Headers({
-      'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-      'Content-Type': 'application/json'
-  }), 
-  body: {
-    "page" : this.page,
-    "per_page" : this.per_page,
-    "search" :""
-},
-  });
+      this.form.page = this.page;
+      this.form.per_page = this.per_page;
+      this.form.search = "";
 
-
-  if (data.value.data) {
-    this.datanewstransport = data.value
-    this.total_page = data.value.total_page
-    this.limit_page = data.value.limit_page
-    this.current_page = data.value.current_page
-    this.total_filter = data.value.total_filter
-    this.total = data.value.total
-  }
   
+
+     try {
+  this.pending = true
+  const response = await ApiService.post('/news/list',this.form).then(response => {
+    if (response) {
+      this.datanewstransport = response.data
+      this.total_page = response.data.total_page
+      this.limit_page = response.data.limit_page
+      this.current_page = response.data.current_page
+      this.total_filter = response.data.total_filter
+      this.total = response.data.total
+    }
+    });
  
 } catch (error) {
   this.error = error
@@ -127,77 +129,55 @@ export const newTransportStore = defineStore('newstransport', {
   this.loading = false
    this.pending = false
 }
+   
     },
 
 
     async deleteItem_id(id) {
-
-     let im = this.changeimagetoarry(id.news_cover);
-
-if(im.length > 0){
-     for (var i = 0; i < im.length; i++) {
-      this.deleteImage(im[i]);
-  }
-}
-
-     
-        const index = this.datanewstransport.data.findIndex(item => item.id === id.news_id)
+      const index = this.datanewstransport.data.findIndex(item => item.id === id.news_id)
       if (index !== -1) {
         this.datanewstransport.data.splice(index, 1)
       }
       try {
         this.pending = true
-        const { pending , error, data } = await useFetch('/news/delete/' + id.news_id, {
-          method: 'DELETE',
-          baseURL:useEnvStore().apidev,
-          headers: new Headers({
-            'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-            'Content-Type': 'application/json'
-        }), 
+        const response = await ApiService.delete('/news/delete/'+id.news_id).then(response => {
+          this.isOpen = false;
         });
-      
-        this.isOpen = false;
-        
+
       } catch (error) {
         this.error = error
       } finally {
         this.loading = false
         this.pending = false
       }
-
-
     },
 
-    async Update(id) {
+  //   async Update(id) {
+  //   try {
+  //     this.pending = true
+  //     const { pending , error, data } = await useFetch('/news/update/' + id, {
+  //       method: 'PUT',
+  //       baseURL:useEnvStore().apidev,
+  //       headers: new Headers({
+  //         'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+  //         'Content-Type': 'application/json'
+  //     }), 
+  //     body:this.formDataEdit,
+  //     });
 
-    
-    try {
-      this.pending = true
-      const { pending , error, data } = await useFetch('/news/update/' + id, {
-        method: 'PUT',
-        baseURL:useEnvStore().apidev,
-        headers: new Headers({
-          'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-          'Content-Type': 'application/json'
-      }), 
-      body:this.formDataEdit,
-      });
+  //     if(data.value){
+  //       this.AlertText = 'success';
+  //     }else {
+  //       this.AlertText = 'danger';
+  //     }
+  //     this.pending_form = true;
+  //   } catch (error) {
+  //     this.AlertText = 'danger';
+  //   } finally {
+  //     this.pending = false;
+  //   }
 
-      
-    
-      if(data.value){
-        this.AlertText = 'success';
-      }else {
-        this.AlertText = 'danger';
-      }
-      this.pending_form = true;
-    } catch (error) {
-      this.AlertText = 'danger';
-    } finally {
-      this.pending = false;
-    }
-
-  },
+  // },
 
     async deleteItem(id) {
 
@@ -234,11 +214,41 @@ if(im.length > 0){
     },
 
 
+    
+  async SaveImageData (x){
+   
+if(x.length > 0){
+  for (var i = 0; i < x.length; i++) {
+   
+    this.formNewsImage.ni_path_file = x[i].path
+    this.formNewsImage.ni_name_file = x[i].filename
 
+
+    const { pending,error, data } = await useFetch('/news/image/create', {
+      method: 'post',
+      baseURL:useEnvStore().apidev,
+      headers: new Headers({
+        'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+        'Content-Type': 'application/json'
+    }), 
+    body:this.formNewsImage,
+    });
+
+    console.log(data);
+
+  }
+  
+
+
+//console.log(this.formNewsImage);
+}
+
+
+
+
+  },
  
   async SaveDataNew (){
-
-
       try {
         const { pending,error, data } = await useFetch('/news/create', {
           method: 'post',
@@ -267,28 +277,19 @@ if(im.length > 0){
 
 
 
-    async SaveDataNewImage (x){
-
-      const array = [];
-      for (let obj of x) {
-       array.push(obj.path)
-     }
- 
-    const string = array.join(',');
-    this.formDataNews.news_cover = string;
- 
+    async SaveData (x){
+    
+    this.formDataNews.news_cover = x[0].path;
       try {
-        const { pending,error, data } = await useFetch('/news/create', {
-          method: 'post',
-          baseURL:useEnvStore().apidev,
-          headers: new Headers({
-            'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-            'Content-Type': 'application/json'
-        }), 
-        body:this.formDataNews,
+        const savedata = await ApiService.post('/news/create',this.formDataNews).then(response => {
+          this.formNewsImage.news_id = response.data.insertId;
         });
-        const TransportStorage = newTransportStore();
-        await TransportStorage.ResetForm();
+        console.log(this.formNewsImage.news_id);
+     //   this.formNewsImage.news_id = data.value.insertId;
+     const TransportStorage = newTransportStore();
+   
+       await TransportStorage.SaveImageData(x);
+     //   await TransportStorage.ResetForm();
 
         const Alert = AlertStore();
         await Alert.AlertSuccess();
@@ -298,15 +299,10 @@ if(im.length > 0){
       } finally {
         this.pending = false;
       }
-
-    
     },
-    async SaveFormNews(){
-
-
+    async SaveSubmitForm(){
           const counterStorage = UploadStore();
             counterStorage.formi
-
             if (counterStorage.formi.length === 0) {
               // File is empty
               console.log("File is empty");
@@ -315,24 +311,24 @@ if(im.length > 0){
             await TransportStorage.SaveDataNew();
             } else {
               // File has content
-              console.log("File has content",counterStorage.formi);
+           
               const formData = new FormData();
               for (const i of Object.keys(counterStorage.formi)) {
-                formData.append('files', counterStorage.formi[i])
-               
+                formData.append('files', counterStorage.formi[i]) 
+                console.log("File has content",counterStorage.formi[i]);
               }
 
-          axios.post('http://oasapi.iddriver.com/media_file/upload/file',
-          formData, {
+      axios.post('https://oasapi.iddriver.com/media_file/upload/file',
+      formData, {
        headers: {
         'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
          'Content-Type': 'multipart/form-data'
        }
      }
    ).then(function (response) {
-    console.log(response.data);
-           const TransportStorage = newTransportStore();
-          TransportStorage.SaveDataNewImage(response.data);
+    console.log('pic',response.data);
+        const TransportStorage = newTransportStore();
+       TransportStorage.SaveData(response.data);
          
           //  TransportStorage.ResetForm();
    })
@@ -340,73 +336,9 @@ if(im.length > 0){
      console.log('FAILURE!!');
    });
 
-            //       const TransportStorage = newTransportStore();
-            // TransportStorage.SaveDataNewImage(1);
-    
+  
             }
-            // counterStorage.formi.forEach((value,key) => {
-            //   console.log('counterStorage',value);
-            // });
 
-
-
-
-
-
-     /////////  step 1 upload ////// 
-
-
-  //         axios.post('http://oasapi.iddriver.com/media_file/upload/file',
-  //         counterStorage.formi, {
-  //      headers: {
-  //       'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-  //        'Content-Type': 'multipart/form-data'
-  //      }
-  //    }
-  //  ).then(function (response) {
-  //    const counterStorage = newTransportStore();
-  //           counterStorage.SaveDataNew(response.data);
-  //  })
-  //  .catch(function () {
-  //    console.log('FAILURE!!');
-  //  });
-
-     //////// step 2 insert New //////
-     
-
-
-      // try {
-      //   const { pending,error, data } = await useFetch('/news/create', {
-      //     method: 'post',
-      //     baseURL:useEnvStore().apidev,
-      //     headers: new Headers({
-      //       'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-      //       'Content-Type': 'application/json'
-      //   }), 
-        
-      //   body:this.formDataNews,
-      //   });
-
- 
-      //   this.pending_form = true;
-
-      //   if(data){
-         
-
-      //     this.AlertText = 'success';
-      //   }else {
-        
-      //     this.AlertText = 'danger';
-      //   }
-      
-    
-
-      // } catch (error) {
-      //   this.AlertText = 'danger';
-      // } finally {
-      //   this.AlertText = 'success';
-
-      // }
     },
 
   async fetchNewsId(id){
@@ -431,10 +363,10 @@ this.formDataNews.news_title = data.value.news_title
 this.formDataNews.news_description = data.value.news_description
 this.formDataNews.news_type = data.value.news_type
 this.formDataNews.user_id = user_id.value
+this.formDataNews.images_list = data.value.images_list
 
-if(data.value.news_cover){
-  this.viewupload(data.value.news_cover);
-}
+
+
 
 
 
@@ -496,31 +428,69 @@ if(data.value.news_cover){
       const counterStorage = UploadStore();
       counterStorage.formi
 
-      axios.post('http://oasapi.iddriver.com/media_file/upload/file',
-      counterStorage.formi, {
-   headers: {
-    'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-     'Content-Type': 'multipart/form-data'
-   }
- }
+const formData = new FormData();
+for (const i of Object.keys(counterStorage.formi)) {
+  formData.append('files', counterStorage.formi[i])
+ 
+}
+
+axios.post('https://oasapi.iddriver.com/media_file/upload/file',
+formData, {
+headers: {
+'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+'Content-Type': 'multipart/form-data'
+}
+}
 ).then(function (response) {
-       const TransportStorage = newTransportStore();
-        TransportStorage.UpdateFormNewsDataUpload(response.data);
-     
+
+const TransportStorage = newTransportStore();
+TransportStorage.UpdateFormNewsDataUpload(response.data);
+
+//  TransportStorage.ResetForm();
 })
 .catch(function () {
- console.log('FAILURE!!');
+console.log('FAILURE!!');
 });
-    },
-    async UpdateFormNewsDataUpload(path){
-
-      console.log(path);
-
-     // this.formDataNews.news_cover
-
-     
 
     },
+    async UpdateFormNewsDataUpload(data){
+     this.formDataNews.news_cover
+     const x = this.formDataNews.news_cover.split(',');
+       for (var i = 0; i < data.length; i++) {
+ console.log(x.push(data[i].path));
+        }
+      const string = x.join(',');
+      this.formDataNews.news_cover = string;
+
+  
+
+
+      // try {
+      //   const { pending,error, data } = await useFetch('/news/update/'+ this.news_id, {
+      //     method: 'PUT',
+      //     baseURL:useEnvStore().apidev,
+      //     headers: new Headers({
+      //       'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+      //       'Content-Type': 'application/json'
+      //   }), 
+      //   body:this.formDataNews,
+      //   });
+      
+       
+       
+      // } catch (error) {
+      //   const Alert = AlertStore();
+      //   Alert.AlertError();
+      // } finally {
+      //   this.pending = false;
+      // }
+
+ 
+
+    
+    },
+
+
 
     ResetForm(){
 
@@ -567,41 +537,37 @@ this.per_page = data_entires;
 this.page = 1;
     },
 
-    viewupload(i) {
-const UpdtStorage = UploadStore();
-UpdtStorage.Viewimage(i);
-    },
+//     viewupload(i) {
+// const UpdtStorage = UploadStore();
+// UpdtStorage.Viewimage(i);
+//     },
 
-    changeimagetoarry(i) {
+//     changeimagetoarry(i) {
 
-    //   const array = [];
-    //   for (let obj of x) {
-    //    array.push(obj.path)
-    //  }
+// const usingSplit = i.split(',');
 
-   
+// if(usingSplit == ''){
+//   // const usingSplit = [];
+//   // usingSplit.length == 0;
+//   // return usingSplit = [];
 
-const usingSplit = i.split(',');
-
-if(usingSplit == ''){
-  // const usingSplit = [];
-  // usingSplit.length == 0;
-  // return usingSplit = [];
-
-  return [];
-}else{
+//   return [];
+// }else{
  
-  return usingSplit;
-}
+//   return usingSplit;
+// }
 
 
  
-    // const string = array.join(',');
-    // this.formDataNews.news_cover = string;
+//     // const string = array.join(',');
+//     // this.formDataNews.news_cover = string;
 
-    },
+//     },
     
   },
+
+
+
 });
 
 

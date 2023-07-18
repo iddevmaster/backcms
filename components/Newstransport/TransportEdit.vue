@@ -45,6 +45,7 @@
                
                </div>
                {{ storeupload.preview_list }}
+                <button @click="removeImage(index)">Remove image</button>
              </template>
            </div>
            <div>
@@ -114,7 +115,7 @@ function CoverImage(x) {
 
 
 if (result === "static") {
-  return 'http://oasapi.iddriver.com/media_file/file/?f='+ x;
+  return 'https://oasapi.iddriver.com/media_file/file/?f='+ x;
 } else {
   return x;
 }
@@ -125,6 +126,12 @@ if (result === "static") {
  
  
  const v$ = useVuelidate(rules, getFormNews);
+
+ const removeImage = async (remove) => {
+  storeupload.preview_list.splice(remove, 1)
+  storeupload.formi.splice(remove, 1)
+
+}
  
  const edit = async () => {
   
@@ -145,18 +152,19 @@ if (result === "static") {
    var input = event.target;
        var count = input.files.length;
        var index = 0;
+       for(let i = 0; i<count; i++)
+	  {
+		storeupload.formi.push(event.target.files[i]);
+    }
+ 
+    const formData = new FormData();
+          for (const i of Object.keys(storeupload.formi)) {
+            formData.append('files', storeupload.formi[i])
+           
+          }
  
  
-       let formData = new FormData();
-      // formData.append('files', input.files[0]);
-       for (var i = 0; i < count; i++ ){
-         let x = input.files[i];
-       
-         formData.append('files', input.files[i]);
-       }
- 
- 
-       await Saveimages(formData);
+   //    await Saveimages(formData);
  
        if (input.files) {
          while(count --) {

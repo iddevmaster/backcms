@@ -83,7 +83,7 @@ const storealert = AlertStore()
 
 const { Clear } = AlertStore(); // use  action
 const { SaveDataNew } = newTransportStore(); // use  action
-const { SaveFormNews } = newTransportStore(); // use  action from   store
+const { SaveSubmitForm } = newTransportStore(); // use  action from   store
 const { SaveDataNewImage } = newTransportStore(); // use  action from   store
 const { getFormNews } = storeToRefs(store);
 const { Saveimages } = UploadStore(); // use authenticateUser action from  auth store
@@ -117,7 +117,8 @@ const save = async () => {
     v$.value.$validate();
     if (!v$.value.$error) {
   
-  await SaveFormNews(); //save form  ส่งไป Store User
+      await  SaveSubmitForm(); //save form  ส่งไป Store User
+
 
   // const formData = new FormData();
   //         for (const i of Object.keys(storeupload.formi)) {
@@ -129,6 +130,8 @@ v$.value.$reset();
 
    const input = document.querySelector('input[type="file"]');
   input.value = '';
+
+  
 
 
   //  const input = document.querySelector('input[type="file"]');
@@ -143,9 +146,7 @@ const removeImage = async (remove) => {
 
 }
 const onFileChange = async (event) => {
-   
-
-  var input = event.target;
+      var input = event.target;
       var count = input.files.length;
       var index = 0;
       	for(let i = 0; i<count; i++)
@@ -157,31 +158,11 @@ const onFileChange = async (event) => {
       //const formData = new FormData();
       const formData = new FormData();
           for (const i of Object.keys(storeupload.formi)) {
-            formData.append('files', storeupload.formi[i])
-           
+            const aaaa = storeupload.formi[i];
+            formData.append('files', storeupload.formi[i])   
+            console.log(aaaa);
           }
-
-
-
-    //   let formData = new FormData();
-    //  // formData.append('files', input.files[0]);
-    //   for (var i = 0; i < count; i++ ){
-    //     let x = input.files[i];
-      
-    //     formData.append('files', input.files[i]);
-    //   }
-
-
-      // formData.append('files['+ 0 +']', input.files);
-      // formData.append('files['+ 1 +']', input.files);
-   //   console.log('>> formData >> ', formData);
-  //  formData.forEach((value,key) => {
-  //   console.log('xxxx',key+value)
-  //    });
-
-      // for (var i = 0; i < count; i++ ){
-      //   formData.append('files[' + i + ']', input.files[i]);
-      // }
+          
 
 // Saveimages(formData);
 
