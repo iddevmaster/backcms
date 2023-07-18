@@ -219,11 +219,8 @@ export const newTransportStore = defineStore('newstransport', {
    
 if(x.length > 0){
   for (var i = 0; i < x.length; i++) {
-   
     this.formNewsImage.ni_path_file = x[i].path
     this.formNewsImage.ni_name_file = x[i].filename
-
-
     const { pending,error, data } = await useFetch('/news/image/create', {
       method: 'post',
       baseURL:useEnvStore().apidev,
@@ -280,24 +277,26 @@ if(x.length > 0){
     async SaveData (x){
     
     this.formDataNews.news_cover = x[0].path;
-      try {
-        const savedata = await ApiService.post('/news/create',this.formDataNews).then(response => {
-          this.formNewsImage.news_id = response.data.insertId;
-        });
-        console.log(this.formNewsImage.news_id);
-     //   this.formNewsImage.news_id = data.value.insertId;
-     const TransportStorage = newTransportStore();
-   
-       await TransportStorage.SaveImageData(x);
-     //   await TransportStorage.ResetForm();
+    const savedata = await ApiService.post('/news/create',this.formDataNews).then(response => {
+      this.formNewsImage.news_id = response.data.insertId;
+    });
+    console.log(this.formNewsImage.news_id);
 
-        const Alert = AlertStore();
-        await Alert.AlertSuccess();
-      } catch (error) {
-        const Alert = AlertStore();
-        Alert.AlertError();
-      } finally {
-        this.pending = false;
+
+      for (let i = 0; i < x.length; i++) {
+        const { pending,error, data } = useFetch('/news/image/create', {
+          method: 'post',
+          baseURL:useEnvStore().apidev,
+          headers: new Headers({
+            'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+            'Content-Type': 'application/json'
+        }), 
+        body:{
+          "ni_path_file": x[i].path,
+          "ni_name_file": x[i].filename,
+          "news_id": this.formNewsImage.news_id
+      }
+        }); 
       }
     },
     async SaveSubmitForm(){
@@ -327,8 +326,14 @@ if(x.length > 0){
      }
    ).then(function (response) {
     console.log('pic',response.data);
-        const TransportStorage = newTransportStore();
-       TransportStorage.SaveData(response.data);
+    const TransportStorage = newTransportStore();
+   TransportStorage.SaveData(response.data);
+    //  TransportStorage.SaveImageData(x);
+
+
+    
+
+  
          
           //  TransportStorage.ResetForm();
    })
