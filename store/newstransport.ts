@@ -1,12 +1,8 @@
 import { defineStore } from 'pinia';
 import axios from "axios";
-import { OrdersService } from "../services/orders.service";
 import ApiService from '../services/api.service';
-import { error } from 'console';
+
 const user_id = useCookie('user_id');
-
-
-
 export const newTransportStore = defineStore('newstransport', {
   state: () => ({
     locale:true,

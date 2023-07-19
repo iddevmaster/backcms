@@ -1,7 +1,7 @@
 <template>
  
      <div class="row">
-      <div class="col-12 col-sm-12 d-flex">
+      <div class="col-6 col-sm-10 d-flex">
       <div class="dataTables_length" id="zero-config_length">
         <label>Results :  
           <select name="zero-config_length" aria-controls="zero-config" @change="selectshowdata($event)" >
@@ -12,6 +12,12 @@
           <option value="50">50</option></select>
           </label>
           </div>
+          
+          </div>
+
+                <div class="col-6 col-sm-2 d-flex">
+   <div id="zero-config_filter" class="dataTables_filter"><label><input type="search" class="form-control" placeholder="Search..." aria-controls="zero-config" v-model="store.searchDa" @keyup="searchData"></label></div> 
+          
           </div>
           </div>
               <div class ="table-responsive">
@@ -19,7 +25,10 @@
                                     <thead>
                                         <tr>
                                            
-                                           <th><input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"></th>
+                                           <th>
+                                            #
+                                            <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
+                                           </th>
                                             <th @click="sortList('id')">ชื่อ - นามสกุล &#8597;</th>
                                             <th @click="sortList('user_name')">Username &#8597;</th>
                                             <th @click="sortList('user_email')">อีเมล &#8597;</th>
@@ -30,8 +39,9 @@
                                     </thead>
                                     <tbody>
                                       <tr v-for="user in posts.data" :key="user.user_id">
-                                        <td><input type="checkbox" v-model="store.selected" :value="user" number></td>
-            <td>{{ user.user_firstname }} {{ user.user_lastname }} {{ user.user_id }}</td>
+                                        <!-- <td><input type="checkbox" v-model="store.selected" :value="user" number></td> -->
+                                          <td>{{ user.user_id }}</td>
+            <td>{{ user.user_firstname }} {{ user.user_lastname }}</td>
             <td>{{ user.user_name }}</td>
             <td>{{ user.user_email }}</td>
             <td>{{ user.user_phone }}</td>
@@ -117,22 +127,24 @@ const { posts } = storeToRefs(usersStore())
   const { getSelect } = storeToRefs(store); //Get Getter
   const { getSelectALL } = storeToRefs(store); //Get Getter
   const { getPaginate } = storeToRefs(store); //Get Getter
+  const { search } = storeToRefs(store); //Get Getter
   
 store.fetchUsers()
 
 
 
 
- function editItem() {
-    console.log('editItem');
- }
-
  const del = async (id) => {
-
  await deleteItem(id); 
  await store.fetchUsers()
  };
  
+
+ 
+const searchData = async () => {
+
+ await store.fetchUsers()
+ };
 
  const selchk = async (x) => {
   await selectone(x); 
@@ -142,7 +154,7 @@ store.fetchUsers()
   await selectall(); 
  };
 
- 
+
 
   function goToPage(page) {
       console.log(page)
@@ -153,6 +165,8 @@ store.fetchUsers()
   await setCurrentPage (page)
   await store.fetchUsers()
  };
+
+ 
 
 const selectshowdata = async (x) => {
 

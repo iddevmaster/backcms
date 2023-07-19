@@ -119,7 +119,7 @@ import { useVuelidate } from '@vuelidate/core';
 import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
 import { useToast } from 'vue-toastification'
 const toast = useToast()
-  toast.success('Hello world!')
+
 const router = useRouter();
 const store = usersStore();
 
@@ -181,7 +181,12 @@ const save = async () => {
   
     v$.value.$validate();
     if (!v$.value.$error) {
+    try {
     await Update(router.currentRoute.value.params.id); //save form  ส่งไป Store User
+    await toast.success('Save Data')
+    } catch (e) {
+     await toast.error('Fall Save Data')
+    }
   
   }
 }

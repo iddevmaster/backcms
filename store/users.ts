@@ -19,7 +19,8 @@ export const usersStore = defineStore('users', {
     isAllSelected: false,
     count: 0,
     page:1,
-    per_page:2,
+    per_page:20,
+    searchDa:'',
     total_page:null,
     limit_page:null,
     current_page:null,
@@ -53,6 +54,12 @@ export const usersStore = defineStore('users', {
   getters: {
     data(state) {
    
+    },
+
+    filteredItems () {
+      return this.posts.filter(item => {
+        return item.user_name.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+     })
     },
     FormEdit(state) {
       return state.formDataEdit;
@@ -114,7 +121,7 @@ export const usersStore = defineStore('users', {
   body: {
     "page" : this.page,
     "per_page" : this.per_page,
-    "search" :""
+    "search" :this.searchDa
 },
   });
 
@@ -335,6 +342,10 @@ this.formDataregister = {
     selectentires(data_entires) {
 this.per_page = data_entires;
 this.page = 1;
+    },
+
+  async search() {
+    this.fetchUsers();
     },
     
 
