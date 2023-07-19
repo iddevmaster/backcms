@@ -18,6 +18,7 @@ export const newTransportStore = defineStore('newstransport', {
     AlertText:'',
     pending_form:false,
     sortedbyASC: true,
+    getFile:false,
     selected: [],
     checkboxes: [], // Array to store checkbox values
     isAllSelected: false,
@@ -39,7 +40,15 @@ export const newTransportStore = defineStore('newstransport', {
       news_type: "2",
       images_list:[],
       user_id:user_id.value
-  },
+    },
+    formDataNewsEdit:{
+      news_cover: "",
+      news_title: "",
+      news_description: "",
+      news_type: "2",
+      images_list:[],
+      user_id:user_id.value
+    },
   formNewsImage:{
     ni_path_file: "",
     ni_name_file: "",
@@ -61,6 +70,9 @@ export const newTransportStore = defineStore('newstransport', {
     FormEdit(state) {
       return state.formDataEdit;
     },
+    getAlertFile(state) {
+      return state.getFile;
+    },
     GetopenModal(state) {
       return state.isOpen;
     },
@@ -69,6 +81,9 @@ export const newTransportStore = defineStore('newstransport', {
     },
     getFormNews(state){
       return state.formDataNews;
+    },
+    getFormEditNews(state){
+      return state.formDataNewsEdit;
     },
     Pending(state){
       return state.pending;
@@ -109,7 +124,8 @@ export const newTransportStore = defineStore('newstransport', {
       this.form.per_page = this.per_page;
       this.form.search = "";
 
-  
+
+
 
      try {
   this.pending = true
@@ -398,20 +414,18 @@ if(x.length > 0){
 
     this.news_id = id;
 try {
-        
-
   const dat = await ApiService.get('/news/get/'+id);
 
-  this.formDataNews.news_cover = dat.data.news_cover
-  this.formDataNews.news_title = dat.data.news_title
-  this.formDataNews.news_description = dat.data.news_description
-  this.formDataNews.news_type = dat.data.news_type
-  this.formDataNews.user_id = user_id.value
-  this.formDataNews.images_list = dat.data?.images_list
+  this.formDataNewsEdit.news_cover = dat.data.news_cover
+  this.formDataNewsEdit.news_title = dat.data.news_title
+  this.formDataNewsEdit.news_description = dat.data.news_description
+  this.formDataNewsEdit.news_type = dat.data.news_type
+  this.formDataNewsEdit.user_id = user_id.value
+  this.formDataNewsEdit.images_list = dat.data?.images_list
 
 
 const ImageUpload = UploadStore();
-ImageUpload.imagedisplay(this.formDataNews.images_list);
+ImageUpload.imagedisplay(this.formDataNewsEdit.images_list);
 
 
 
@@ -433,17 +447,16 @@ ImageUpload.imagedisplay(this.formDataNews.images_list);
 
       if (counterStorage.formi.length === 0) {
         // File is empty
-     this.UpdateFormNewsNoUpload();
+        await   this.UpdateFormNewsNoUpload();
         console.log("Edit File is empty");
       } else {
         console.log("Edit Hash file");
         const formData = new FormData();
         for (const i of Object.keys(counterStorage.formi)) {
           formData.append('files', counterStorage.formi[i]) 
-          console.log("File has content",counterStorage.formi[i]);
         }
 
-axios.post('https://oasapi.iddriver.com/media_file/upload/file',
+        await  axios.post('https://oasapi.iddriver.com/media_file/upload/file',
 formData, {
  headers: {
   'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
@@ -478,21 +491,22 @@ formData, {
     obj2.push(a);
    }
  
- // obj2.push(response.data[i]);
 
 
   for (const element of obj2) {
     obj1.push(element);
   }
 
- // this.formDataNews.news_cover = obj1[0];
- // let result = text.slice(0, 5);
- //console.log('this.formDataNews',this.formDataNews);
 
- console.log('obj1',obj1);
- 
-// const a =  TransportStorage.CheckData(obj1[0].ni_path_file)
-// const b =  TransportStorage.InsertImageNews(obj1)
+const a =  TransportStorage.CheckData(obj1[0].ni_path_file)
+
+for (var x = 0; x < obj1.length; x++) {
+  const b =  TransportStorage.InsertImageNews(obj1[x])
+
+
+
+}
+
 
 })
 
@@ -503,28 +517,10 @@ formData, {
  
      
     },
-    InsertImageNews(obj1){
-
-      for (var x = 0; x < obj1.length; x++) {
-        console.log(obj1[x]);
-       const SaveDataImage = ApiService.post('/news/image/create',obj1[x]).then(response => {
-
-          if(response.status == 200){
-            console.log('Insert ok');
-          }
-
-      });
-      
-       }
-      // const SaveDataImage = ApiService.post('/news/image/create',this.form).then(response => {
-      
-      // });
-    },
-  CheckData(data){
-      this.formDataNews.news_cover = data;
-      
+    async CheckData(data){
+      this.formDataNewsEdit.news_cover = data;
       //////////////////////////////// update News
-      const response = ApiService.put('/news/update/'+this.news_id,this.formDataNews).then(response => {
+      const response = ApiService.put('/news/update/'+this.news_id,this.formDataNewsEdit).then(response => {
         if(response.status == 200){
           ////next function
 
@@ -563,6 +559,18 @@ formData, {
       ////////////////////////////////
 
     },
+
+    async InsertImageNews(obj1){
+      setTimeout(function(){
+        console.log(obj1);
+      const SaveDataImage = ApiService.post('/news/image/create',obj1).then(response => {
+        if(response.status == 200){
+          console.log(response.data);
+        }
+    });
+  
+      }, 3000 );
+    },
     async UpdateFormNewsNoUpload(){
 
        try {
@@ -573,7 +581,7 @@ formData, {
             'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
             'Content-Type': 'application/json'
         }), 
-        body:this.formDataNews,
+        body:this.formDataNewsEdit,
         });
         const TransportStorage = newTransportStore();
     
@@ -633,13 +641,13 @@ console.log('FAILURE!!');
 
     },
     async UpdateFormNewsDataUpload(data){
-     this.formDataNews.news_cover
-     const x = this.formDataNews.news_cover.split(',');
+     this.formDataNewsEdit.news_cover
+     const x = this.formDataNewsEdit.news_cover.split(',');
        for (var i = 0; i < data.length; i++) {
  console.log(x.push(data[i].path));
         }
       const string = x.join(',');
-      this.formDataNews.news_cover = string;
+      this.formDataNewsEdit.news_cover = string;
 
   
 
@@ -718,34 +726,26 @@ this.page = 1;
    async UploadImage(image){
     console.log(image);
 
-    }
+    },
 
-//     viewupload(i) {
-// const UpdtStorage = UploadStore();
-// UpdtStorage.Viewimage(i);
-//     },
+    async ClearData(){
+  
+    const UpStorage = UploadStore();
+    UpStorage.formi = []
+    UpStorage.preview_list = [];
 
-//     changeimagetoarry(i) {
-
-// const usingSplit = i.split(',');
-
-// if(usingSplit == ''){
-//   // const usingSplit = [];
-//   // usingSplit.length == 0;
-//   // return usingSplit = [];
-
-//   return [];
-// }else{
- 
-//   return usingSplit;
-// }
+    UpStorage.preview = null;
+    UpStorage.image = null;
+    UpStorage.image_list = [];
+    UpStorage.preview_list_same = [];
+    UpStorage.data_list_image = [];
+    UpStorage.data_list_image_same = [];
+    },
 
 
- 
-//     // const string = array.join(',');
-//     // this.formDataNews.news_cover = string;
 
-//     },
+    
+
     
   },
 

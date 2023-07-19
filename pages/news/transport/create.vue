@@ -3,15 +3,13 @@
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import  NewsCreate from '@/components/Newstransport/TransportCreate.vue'
-
 import Alert from '@/components/layout/Alert.vue';
 
 
 const store = newTransportStore()
 const { posts } = storeToRefs(usersStore())
-  const { PendingForm } = storeToRefs(store); //Get Getter
-
-  const { AlertTextForm } = storeToRefs(store); //Get Getter
+const { PendingForm } = storeToRefs(store); //Get Getter
+const { AlertTextForm } = storeToRefs(store); //Get Getter
 </script>
 
 <template>

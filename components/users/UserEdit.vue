@@ -117,7 +117,9 @@ import { defineComponent } from 'vue';
 import { usersStore } from '@/store/users'; // import the auth store we just created
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
-
+import { useToast } from 'vue-toastification'
+const toast = useToast()
+  toast.success('Hello world!')
 const router = useRouter();
 const store = usersStore();
 
@@ -173,13 +175,14 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, FormEdit);
 
-
+  
 
 const save = async () => {
   
     v$.value.$validate();
     if (!v$.value.$error) {
     await Update(router.currentRoute.value.params.id); //save form  ส่งไป Store User
+  
   }
 }
 

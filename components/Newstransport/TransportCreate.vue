@@ -38,14 +38,15 @@
                                             <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple @change="onFileChange" ref="fileupload">
                                         </div>
                                         <div class="border p-2 mt-3">
-            <p>Preview Here: {{storeupload.formi}}</p>
+            <p>Preview Here:</p>
             <template v-if="storeupload.preview_list.length">
-              <div v-for="item, index in storeupload.preview_list" :key="index">
-                <img :src="item" class="img-fluid" />
-                <p class="mb-0">file name: {{ storeupload.image_list[index].name }}</p>
-                <p>size: {{ storeupload.image_list[index].size/1024 }}KB</p>
-                <button @click="removeImage(index)">Remove image</button>
-              </div>
+              <div class="row">
+              <div class="col-3" v-for="item, index in storeupload.preview_list" :key="index">
+              <img :src="item" class="img-fluid" />
+               <button @click="removeImage(index)">Remove image</button>
+             </div>
+             </div>
+              
             </template>
           </div>
 
@@ -71,9 +72,10 @@ import { required, email, sameAs, minLength, helpers } from '@vuelidate/validato
 import { UploadStore } from '@/store/upload'; // import the auth store we just created
 import { AlertStore } from '@/store/alert'; // import the auth store we just created
 import { ref } from "vue";
+ import { useToast } from 'vue-toastification'
 
 
-
+const toast = useToast()
 const router = useRouter();
 const store = newTransportStore()
 const storeupload = UploadStore()
@@ -88,7 +90,7 @@ const { SaveDataNewImage } = newTransportStore(); // use  action from   store
 const { getFormNews } = storeToRefs(store);
 const { Saveimages } = UploadStore(); // use authenticateUser action from  auth store
 
-
+store.ClearData();
 storealert.Clear()
 
 const rules = computed(() => {
@@ -116,16 +118,14 @@ const save = async () => {
  
     v$.value.$validate();
     if (!v$.value.$error) {
+
+    try {
+    await  SaveSubmitForm(); //save form  ส่งไป Store User
+    await toast.success('Save Data')
+    } catch (e) {
+     await toast.error('Fall Save Data')
+   }
   
-      await  SaveSubmitForm(); //save form  ส่งไป Store User
-
-
-  // const formData = new FormData();
-  //         for (const i of Object.keys(storeupload.formi)) {
-  //           formData.append('files', storeupload.formi[i])
-  //           console.log(storeupload.formi[i])
-  //         }
-
 v$.value.$reset();
 
    const input = document.querySelector('input[type="file"]');
