@@ -35,8 +35,12 @@
            </div> 
            <div class="form-group mb-4 mt-3">
                                              <label for="exampleFormControlFile1">Example file input</label>
-                                             <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple @change="onFileChange" ref="fileupload">
+                                             <input type="file" class="form-control-file" :class="{
+                 'border-red-500 focus:border-red-500': v$.file.$error,
+                 'border-[#42d392] ': !v$.file.$invalid,
+               }" id="exampleFormControlFile1" multiple @change="onFileChange" ref="fileupload">
                                          </div>
+                                         <p style="color: red;">File size exceeds the limit 2 MB.</p>
                                          <div class="border p-2 mt-3">
              <p>Preview Here: </p>
              <template v-if="storeupload.preview_list.length">
@@ -44,14 +48,15 @@
                  <img :src="CoverImage(item)" class="img-fluid" />
                 <button @click="removeImage(index)">Remove image</button>
                </div>
-               {{ storeupload.preview_list }}
+              New {{ storeupload.preview_list }}
+           
                
              </template>
            </div>
            <div>
  
    </div>
-                                         
+                {{ storeupload.data_list_image }}                         
  
  
      </div>
@@ -99,7 +104,12 @@
        required: helpers.withMessage('The News Description is required', required),
        minLength: minLength(6),
      },
+     file:{
+      required: helpers.withMessage('The News Description is required', required),
+     }
  
+
+     
    };
  });
 
@@ -130,28 +140,30 @@ if (result === "static") {
  const removeImage = async (remove) => {
   storeupload.preview_list.splice(remove, 1)
   storeupload.formi.splice(remove, 1)
+  storeupload.data_list_image.splice(remove, 1)
 
 }
  
  const edit = async () => {
-  
+  const new_image = ['x1','x2'];
+  const same_image = ['x1','x2','x3'];
      v$.value.$validate();
      if (!v$.value.$error) {
-   
-   await UpdateFormNews(); //save form  ส่งไป Store User
-
- 
-
- 
+  await UpdateFormNews(); //save form  ส่งไป Store User
    }
  }
  
  const onFileChange = async (event) => {
     
+
+  
  
    var input = event.target;
        var count = input.files.length;
        var index = 0;
+
+
+       
        for(let i = 0; i<count; i++)
 	  {
 		storeupload.formi.push(event.target.files[i]);
@@ -161,16 +173,20 @@ if (result === "static") {
           for (const i of Object.keys(storeupload.formi)) {
             formData.append('files', storeupload.formi[i])
            
-          }
+     }
  
  
-   //    await Saveimages(formData);
+   // await Saveimages();
  
        if (input.files) {
          while(count --) {
            var reader = new FileReader();
            reader.onload = (e) => {
+   
+
              storeupload.preview_list.push(e.target.result);
+             let a = { ni_name_file:e.target.result,ni_path_file:e.target.result}
+             storeupload.data_list_image.push(a);
            }
            storeupload.image_list.push(input.files[index]);
            reader.readAsDataURL(input.files[index]);

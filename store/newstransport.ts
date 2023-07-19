@@ -437,11 +437,131 @@ ImageUpload.imagedisplay(this.formDataNews.images_list);
         console.log("Edit File is empty");
       } else {
         console.log("Edit Hash file");
-        this.UpdateFormNewsUpload();
+        const formData = new FormData();
+        for (const i of Object.keys(counterStorage.formi)) {
+          formData.append('files', counterStorage.formi[i]) 
+          console.log("File has content",counterStorage.formi[i]);
+        }
 
+axios.post('https://oasapi.iddriver.com/media_file/upload/file',
+formData, {
+ headers: {
+  'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+   'Content-Type': 'multipart/form-data'
+ }
+}
+).then(function (response) {
+
+
+  //////////////remove //////////
+  const counterStorage = UploadStore();
+  const TransportStorage = newTransportStore();
+
+  //////////////////////////////////////check array/////////////
+  let obj1 = [];
+  let obj2 = [];
+
+  for (var i = 0; i < counterStorage.data_list_image.length; i++) {
+   
+  let result = counterStorage.data_list_image[i].ni_path_file.slice(0, 6);
+
+ //  obj1.push(counterStorage.data_list_image_same[i])
+   if(result === 'static'){
+
+    let a = { ni_name_file:counterStorage.data_list_image[i].ni_name_file,ni_path_file:counterStorage.data_list_image[i].ni_path_file,news_id:Number(TransportStorage.news_id)}
+  obj1.push(a)
+   }
+  }
+
+  for (var x = 0; x < response.data.length; x++) {
+    let a = { ni_name_file:response.data[x].filename,ni_path_file:response.data[x].path,news_id:Number(TransportStorage.news_id) }
+    obj2.push(a);
+   }
+ 
+ // obj2.push(response.data[i]);
+
+
+  for (const element of obj2) {
+    obj1.push(element);
+  }
+
+ // this.formDataNews.news_cover = obj1[0];
+ // let result = text.slice(0, 5);
+ //console.log('this.formDataNews',this.formDataNews);
+
+ console.log('obj1',obj1);
+ 
+// const a =  TransportStorage.CheckData(obj1[0].ni_path_file)
+// const b =  TransportStorage.InsertImageNews(obj1)
+
+})
+
+        
+     //   this.UpdateFormNewsUpload();
       }
+    
  
      
+    },
+    InsertImageNews(obj1){
+
+      for (var x = 0; x < obj1.length; x++) {
+        console.log(obj1[x]);
+       const SaveDataImage = ApiService.post('/news/image/create',obj1[x]).then(response => {
+
+          if(response.status == 200){
+            console.log('Insert ok');
+          }
+
+      });
+      
+       }
+      // const SaveDataImage = ApiService.post('/news/image/create',this.form).then(response => {
+      
+      // });
+    },
+  CheckData(data){
+      this.formDataNews.news_cover = data;
+      
+      //////////////////////////////// update News
+      const response = ApiService.put('/news/update/'+this.news_id,this.formDataNews).then(response => {
+        if(response.status == 200){
+          ////next function
+
+          const Alert = AlertStore();
+          Alert.AlertSuccess();
+          console.log('ok');
+          ////////////// delete new Image เดิม
+          const Upload = UploadStore();
+          console.log('data ลบ',Upload.data_list_image_same);
+          
+          for (var j = 0; j < Upload.data_list_image_same.length; j++) {
+    
+ ApiService.delete('/news/image/delete/'+Upload.data_list_image_same[j].ni_id).then(response => {
+          /////Insert ใหม่
+          if(response.status == 200){
+            console.log('ลบ ok');
+          }
+          });
+           }
+
+          // ApiService.delete('/news/image/delete/'+this.news_id).then(response => {
+          // /////Insert ใหม่
+          // if(response.status == 200){
+          //   console.log('ลบ ok');
+          // }
+          // });
+
+          /////////////
+        }else {
+          console.log('error');
+        }
+
+        
+      });
+
+      ////////////////////////////////
+
     },
     async UpdateFormNewsNoUpload(){
 
@@ -595,6 +715,10 @@ console.log('FAILURE!!');
 this.per_page = data_entires;
 this.page = 1;
     },
+   async UploadImage(image){
+    console.log(image);
+
+    }
 
 //     viewupload(i) {
 // const UpdtStorage = UploadStore();
@@ -624,6 +748,9 @@ this.page = 1;
 //     },
     
   },
+
+
+  
 
 
 

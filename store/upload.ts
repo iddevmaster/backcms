@@ -12,6 +12,9 @@ export const UploadStore = defineStore('upload', {
     preview_list: [],
     image_list: [],
     formi:[],
+    preview_list_same:[],
+    data_list_image:[],
+    data_list_image_same:[]
   }
      
 ),
@@ -48,54 +51,27 @@ alert('SaveData');
 
     },
     imagedisplay(data)  {
-   
+ 
+ 
+   console.log(this.data_list_image);
       if(data.length > 0){
         for (var i = 0; i < data.length; i++) {
           this.preview_list.push(data[i].ni_path_file);
-
+          let obj2 = { ni_name_file: data[i].ni_name_file, ni_path_file: data[i].ni_path_file,ni_id: data[i].ni_id,news_id:data[i].news_id };
+          this.data_list_image.push(obj2);
+          this.data_list_image_same.push(obj2);
         }
     }
+
+
+    this.preview_list_same = this.preview_list;
 
     },
     Saveimages(formData)
     {
 
      
-    
-   //   this.formi = formData;
-
-      //let x = []
-// formData.forEach((value,index) =>{
-//    console.log(value);
-// })
-
-
-
-  //    this.formi.push(formData);
-
-  
-
-  //    axios.post('http://oasapi.iddriver.com/media_file/upload/file',
-  //    formData, {
-  //      headers: {
-  //       'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-  //        'Content-Type': 'multipart/form-data'
-  //      }
-  //    }
-  //  ).then(function (response) {
-  //    console.log('SUCCESS!!',response.data);
-  //    this.SaveData(response.data);
-
-  //    const counterStorage = UploadStore();
-  //           counterStorage.SaveData(response.data);
-
-
-    
-  //  })
-  //  .catch(function () {
-  //    console.log('FAILURE!!');
-  //  });
-
+ 
 
 
     }
