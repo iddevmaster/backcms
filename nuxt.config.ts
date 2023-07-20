@@ -13,7 +13,10 @@ export default defineNuxtConfig({
   '~/assets/src/plugins/src/table/datatable/datatables.css',
   '~/assets/src/plugins/css/light/table/datatable/dt-global_style.css',
   '~/assets/src/assets/css/light/elements/alert.css',
+  '~/assets/src/assets/css/light/elements/custom-pagination.css',
 ],
+
+
 
 // css: ['~/assets/styles/main.scss'],
 

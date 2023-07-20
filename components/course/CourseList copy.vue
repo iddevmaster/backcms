@@ -1,0 +1,215 @@
+<template>
+ 
+     <div class="row">
+
+        <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4" v-for="item in store.courselist" :key="item.course_id">
+                            <a href="./app-blog-post.html" class="card style-2 mb-md-0 mb-4">
+                                <img src="https://oasapi.iddriver.com/media_file/file/?f=static/upload/2023/7/files-1689870698432.jpeg" class="card-img-top" alt="...">
+                                <div class="card-body px-0 pb-0">
+                                    <h5 class="card-title mb-3">14 Tips to improve your photography</h5>
+                                    <div class="media mt-4 mb-0 pt-1">
+                                        <img src="https://oasapi.iddriver.com/media_file/file/?f=static/upload/2023/7/files-1689870698432.jpeg" class="card-media-image me-3" alt="">
+                                        <div class="media-body">
+                                            <h4 class="media-heading mb-1">Shaun Park</h4>
+                                            <p class="media-text">01 May</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+      <div class="col-12 col-sm-12 d-flex">
+      <div class="dataTables_length" id="zero-config_length">
+        <label>Results :  
+          <select name="zero-config_length" aria-controls="zero-config">
+          <option value="2">2</option>
+          <option value="7">7</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option></select>
+          </label>
+          </div>
+          </div>
+          </div>
+              <div class ="table-responsive">
+ <table  id="example" class="table table-bordered" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                           <th>#</th>
+                                           <!-- <th><input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"></th> -->
+                                            <th @click="sortList('id')"> Course cover</th>
+                                            <th @click="sortList('course_code')">Course code</th>
+                                            <th @click="sortList('course_name')">Course_name</th>
+                                            <th @click="sortList('udp_date')">Update</th>
+                                           
+                                            <th class="no-content">จัดการ</th>
+                                        </tr>
+                                    </thead>
+
+                                 
+   
+                                    <tbody>
+                                      
+                                      <tr v-for="item in store.courselist" :key="item.course_id">
+                                        <td>{{ item.course_id }}</td>
+            <td>
+              {{ item.course_code }}  
+            </td>
+            <td> {{ item.course_name }}  </td>
+            <td> {{ item.course_description }}  </td>
+            <td> {{ item.udp_date }}</td>
+          
+                                                <td>
+
+                                                  
+                                                  <NuxtLink :to="'/news/transport/' + item.course_id">
+                                                <a class="badge badge-light-primary text-start me-2 action-edit"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></a>
+                                            </NuxtLink>
+                                                <a class="badge badge-light-danger text-start action-delete" @click="del(item)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a>
+                                            </td>
+          
+          </tr>
+                                    </tbody>
+                                </table>
+                             
+   
+     <div>
+
+      
+
+   
+
+     </div>
+  </div>
+
+
+        <!-- <div class="dt--pagination" v-if="datanewstransport.total_page > 1">
+      <div class="dataTables_paginate paging_simple_numbers" id="zero-config_paginate">
+        <ul class="pagination"><li class="paginate_button page-item previous" id="zero-config_previous">
+          <a href="#" aria-controls="zero-config" data-dt-idx="0" tabindex="0" class="page-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></a></li>
+            <li class="paginate_button page-item " v-for="page in datanewstransport.total_page" :key="page">
+              <a href="#" aria-controls="zero-config" data-dt-idx="1" tabindex="0" class="page-link" @click="setCurrentPageclick(page)">
+              {{page}}</a>
+              </li>
+            <li class="paginate_button page-item next" id="zero-config_next"><a href="#" aria-controls="zero-config" data-dt-idx="4" tabindex="0" class="page-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></li></ul></div>
+            </div> -->
+
+   </template>
+
+
+
+<script setup lang="ts">
+// import DataTable from 'datatables.net-vue3';
+// import DataTablesCore from 'datatables.net-bs5';
+import { storeToRefs } from 'pinia';
+import { defineComponent } from 'vue';
+import { CourseStore } from '@/store/course'
+import 'jquery/dist/jquery.min.js';
+//Datatable Modules
+import "datatables.net-dt/js/dataTables.dataTables"
+import "datatables.net-dt/css/jquery.dataTables.min.css"
+ import $ from 'jquery'
+ import Paginate from "vuejs-paginate-next";
+ import { useToast } from 'vue-toastification';
+
+
+  
+const toast = useToast()
+const store = CourseStore()
+const { Courselist } = storeToRefs(store);
+  // const { deleteItem } = newTransportStore();//Action
+  // const { selectall } = newTransportStore(); //Action
+  // const { selectone } = newTransportStore();//Action
+  // const { setCurrentPage } = newTransportStore();//Action
+  // const { sortLists } = newTransportStore();//Action
+  // const { selectentires } = newTransportStore();//Action
+  
+  
+//   const { getSelect } = storeToRefs(store); //Get Getter
+//   const { getSelectALL } = storeToRefs(store); //Get Getter
+//   const { getPaginate } = storeToRefs(store); //Get Getter
+  
+ const courselist = await store.fetchCourslist();
+ if (courselist === false){
+  console.log('false');
+ }
+
+
+
+
+
+
+ const del = async (id) => {
+ //await deleteItem(id); 
+ //await store.fetchNewTransport()
+ };
+ 
+
+ const selchk = async (x) => {
+ // await selectone(x); 
+ };
+
+ const selectAll = async () => {
+ // await selectall(); 
+ };
+
+ 
+
+  function goToPage(page) {
+      console.log(page)
+  }
+
+
+ const setCurrentPageclick = async (page) => {
+//  await setCurrentPage (page)
+//  await store.fetchNewTransport()
+ };
+
+const selectshowdata = async (x) => {
+
+//await selectentires(x.target.value);
+//await store.fetchNewTransport()
+ };
+
+ const sortList = async (sortBy) => {
+
+//await sortLists (sortBy)
+
+ };
+
+ function coverttime(date) {
+const datetime = new Date(date);
+const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+const formattedDatetime = datetime.toLocaleString(undefined, options);
+
+return formattedDatetime;
+
+ }
+
+function image(i) {
+
+var x = null;
+if(i){
+console.log('if');
+const usingSplit = i.split(',');
+var x = usingSplit[0];
+}else {
+var x = 'static/upload/2023/7/files-1689561047889.jpg';
+}
+return "http://oasapi.iddriver.com/media_file/file/?f="+x;
+
+ }
+
+
+ 
+
+
+
+  
+</script>
+<style>
+.dt--pagination{
+  float: right;
+}
+</style>

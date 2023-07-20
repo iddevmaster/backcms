@@ -44,24 +44,14 @@ const delete_userid = async (id) => {
                         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">News </a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Transport List</li>
+                                <li class="breadcrumb-item active" aria-current="page">Course List</li>
                             </ol>
                         </nav>
                     </div>
                 
                 <Loading v-if="Pending"></Loading>
                 
-                <div class="middle-content container-xxl p-0">
-                    <div class="row layout-top-spacing">
-                        <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-                            <div class="widget-content widget-content-area br-8 p-3">
-                           
-                              <CourseList></CourseList>
-                               
-                              </div>
-                        </div>
-                    </div>
-                </div>
+            <CourseList></CourseList>
             </div>
           </div>
   <!-- <div class="modal">
