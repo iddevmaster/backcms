@@ -6,25 +6,23 @@
 // import DataTablesCore from 'datatables.net-bs5';
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-import { usersStore } from '@/store/users'
-import UserList from '@/components/users/UserList.vue'
+import { newTransportStore } from '@/store/newstransport'
+import CourseList from '@/components/course/CourseList.vue'
 import { useModalStore } from '@/store/modal';
 import Loading from '@/components/layout/Success.vue';
 import Alert from '@/components/layout/Alert.vue';
-import { useToast } from 'vue-toastification'
-
- 
-const toast = useToast()
-const store = usersStore()
-
-
+const store = newTransportStore()
+const { posts } = storeToRefs(newTransportStore())
+  const { deleteItem } = newTransportStore();//Action
+  const { selectall } = newTransportStore(); //Action
+  const { selectone } = newTransportStore();//Action
   const { getSelect } = storeToRefs(store); //Get Getter
   const { getSelectALL } = storeToRefs(store); //Get Getter
   const modalStore = useModalStore();
   const { GetopenModal } = storeToRefs(store); //Get Getter
   const { GetopenModal_ID } = storeToRefs(store); //Get Getter
+
   const { Pending } = storeToRefs(store); //Get Getter
-  
 
   const closeModal = () => {
     store.closeModal();
@@ -32,14 +30,8 @@ const store = usersStore()
 
 
 const delete_userid = async (id) => {
- const deleitem = await store.deleteItem_id(id);
-  if(deleitem){
-    toast.success('Save Data');
-    await store.fetchUsers()
-  }else{
-    toast.error('Fall Save Data')
-  }
- // await store.fetchUsers()
+  await store.deleteItem_id(id);
+  await store.fetchNewTransport()
   };
   
 </script>
@@ -51,8 +43,8 @@ const delete_userid = async (id) => {
               <div class="page-meta">
                         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Users</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">User List</li>
+                                <li class="breadcrumb-item"><a href="#">News </a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Transport List</li>
                             </ol>
                         </nav>
                     </div>
@@ -64,15 +56,15 @@ const delete_userid = async (id) => {
                         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                             <div class="widget-content widget-content-area br-8 p-3">
                            
-                              <UserList></UserList>
-                                {{ getSelectALL }}
+                              <CourseList></CourseList>
+                               
                               </div>
                         </div>
                     </div>
                 </div>
             </div>
           </div>
-  <div v-if="GetopenModal" class="modal">
+  <!-- <div class="modal">
 <div class="modal-content" id="deleteConformationLabel">
                                 <div class="modal-header">
                                     <div class="icon">
@@ -87,11 +79,11 @@ const delete_userid = async (id) => {
                                     <p class="">If you delete the task it will be gone forever. Are you sure you want to proceed?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal" >Cancel</button>
-                                    <button type="button" class="btn btn-danger" data-remove="task" @click="delete_userid(GetopenModal_ID)">Delete {{ GetopenModal_ID }}</button>
+                                    <button type="button" class="btn" data-bs-dismiss="modal" >Cancel</button>
+                                    <button type="button" class="btn btn-danger" data-remove="task">Delete</button>
                                 </div>
                             </div>
-  </div>
+  </div> -->
 
     
     

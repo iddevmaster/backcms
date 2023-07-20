@@ -113,7 +113,10 @@ import "datatables.net-dt/js/dataTables.dataTables"
 import "datatables.net-dt/css/jquery.dataTables.min.css"
  import $ from 'jquery'
  import Paginate from "vuejs-paginate-next";
+ import { useToast } from 'vue-toastification'
 
+ 
+const toast = useToast()
 const store = usersStore()
 const { posts } = storeToRefs(usersStore())
   const { deleteItem } = usersStore();//Action
@@ -132,8 +135,6 @@ const { posts } = storeToRefs(usersStore())
 store.fetchUsers()
 
 
-
-
  const del = async (id) => {
  await deleteItem(id); 
  await store.fetchUsers()
@@ -142,7 +143,6 @@ store.fetchUsers()
 
  
 const searchData = async () => {
-
  await store.fetchUsers()
  };
 
@@ -154,28 +154,18 @@ const searchData = async () => {
   await selectall(); 
  };
 
-
-
-  function goToPage(page) {
-      console.log(page)
-  }
-
-
  const setCurrentPageclick = async (page) => {
   await setCurrentPage (page)
   await store.fetchUsers()
  };
 
- 
 
 const selectshowdata = async (x) => {
-
 await selectentires(x.target.value);
 await store.fetchUsers()
  };
 
  const sortList = async (sortBy) => {
-
 await sortLists (sortBy)
 
  };

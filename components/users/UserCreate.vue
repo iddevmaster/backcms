@@ -112,13 +112,18 @@ import { defineComponent } from 'vue';
 import { usersStore } from '@/store/users'; // import the auth store we just created
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
+import { useToast } from 'vue-toastification';
 
+
+  
+const toast = useToast()
 const router = useRouter();
 const store = usersStore();
 
-
+store.ResetForm();
 const { SaveForm } = usersStore(); // use authenticateUser action from  auth store
 const { getForm } = storeToRefs(store);
+const { ResetForm } = usersStore(); // use authenticateUser action from  auth store
 
 
 const formDataregister = reactive({
@@ -175,10 +180,14 @@ const save = async () => {
     v$.value.$validate();
     if (!v$.value.$error) {
     
- await SaveForm(); //save form  ส่งไป Store User
- v$.value.$reset();
-
-
+  const data = await SaveForm();
+  if(data){
+    toast.success('Save Data');
+    await ResetForm();
+    v$.value.$reset();
+  }else{
+    toast.error('Fall Save Data')
+  }
   }
 }
 

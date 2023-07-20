@@ -178,17 +178,16 @@ const v$ = useVuelidate(rules, FormEdit);
   
 
 const save = async () => {
-  
     v$.value.$validate();
     if (!v$.value.$error) {
-    try {
-    await Update(router.currentRoute.value.params.id); //save form  ส่งไป Store User
-    await toast.success('Save Data')
-    } catch (e) {
-     await toast.error('Fall Save Data')
-    }
+      let updatedata = await Update(router.currentRoute.value.params.id); //save form  ส่งไป Store User
+      if(updatedata){
+    toast.success('Save Data');
+      }else{
+    toast.error('Fall Save Data')
+      }
   
-  }
+      }
 }
 
 
