@@ -20,26 +20,31 @@
                                         <tr>
                                            <th>#</th>
                                            <!-- <th><input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"></th> -->
-                                            <th @click="sortList('id')">News Cover</th>
-                                            <th @click="sortList('user_name')">News Title</th>
-                                            <th @click="sortList('user_email')">News Description</th>
-                                            <th @click="sortList('user_phone')">News Type</th>
-                                            <th>Update</th>
+                                            <th @click="sortList('id')"> Course cover</th>
+                                            <th @click="sortList('course_code')">Course code</th>
+                                            <th @click="sortList('course_name')">Course_name</th>
+                                            <th @click="sortList('udp_date')">Update</th>
+                                           
                                             <th class="no-content">จัดการ</th>
                                         </tr>
                                     </thead>
+
+                                 
+   
                                     <tbody>
                                       
                                       <tr v-for="item in store.courselist" :key="item.course_id">
                                         <td>{{ item.course_id }}</td>
             <td>
-              {{ item.course_name }}  
+              {{ item.course_code }}  
             </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td> {{ item.course_name }}  </td>
+            <td> {{ item.course_description }}  </td>
+            <td> {{ item.udp_date }}</td>
+          
                                                 <td>
+
+                                                  
                                                   <NuxtLink :to="'/news/transport/' + item.course_id">
                                                 <a class="badge badge-light-primary text-start me-2 action-edit"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></a>
                                             </NuxtLink>

@@ -29,7 +29,8 @@
               }"
               @change="v$.news_description.$touch"
               v-model="store.formDataNews.news_description">
-              </textarea><span class="text-xs text-red-500" style="color:red" v-if="v$.news_description.$error">{{
+              </textarea>
+              <span class="text-xs text-red-500" style="color:red" v-if="v$.news_description.$error">{{
             v$.news_description.$errors[0].$message
           }}</span>
           </div> 

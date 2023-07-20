@@ -10,12 +10,27 @@ const apiClient = axios.create({
   }
 });
 
+
+const apiUpload = axios.create({
+  baseURL: 'https://oasapi.iddriver.com',
+  // ตั้งค่า baseURL ให้เป็น URL ของเซิร์ฟเวอร์ API ที่ต้องการเชื่อมต่อ
+  headers: {
+    'Content-Type': 'multipart/form-data',
+    'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
+    // ตั้งค่า headers ตามที่ API ระบุ (ตัวอย่างเป็น JSON)
+  }
+});
+
+
 export default {
   get(resource) {
     return apiClient.get(resource);
   },
   post(resource, data) {
     return apiClient.post(resource, data);
+  },
+  upload(resource, data) {
+    return apiUpload.post(resource, data);
   },
   put(resource, data) {
     return apiClient.put(resource, data);
