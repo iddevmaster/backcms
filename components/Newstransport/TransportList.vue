@@ -158,14 +158,6 @@ return formattedDatetime;
  }
 
 function image(i) {
-
-  
-// const usingSplit = i.split(',');
-
-// const image = '';
-// if(usingSplit.length > 0){
-//   const image = usingSplit[0];
-// }
 var x = null;
 if(i){
 console.log('if');
@@ -174,9 +166,7 @@ var x = usingSplit[0];
 }else {
 var x = 'static/upload/2023/7/files-1689561047889.jpg';
 }
-
 return "http://oasapi.iddriver.com/media_file/file/?f="+x;
-
  }
 
 

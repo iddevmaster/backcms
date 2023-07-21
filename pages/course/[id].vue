@@ -2,15 +2,9 @@
 
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-import  NewsEdit from '@/components/Newstransport/TransportEdit.vue'
+import  CoursetEdit from '@/components/course/CoursetEdit.vue'
 
-import Alert from '@/components/layout/Alert.vue';
 
-const store = newTransportStore()
-const { posts } = storeToRefs(usersStore())
-  const { PendingForm } = storeToRefs(store); //Get Getter
-
-  const { AlertTextForm } = storeToRefs(store); //Get Getter
 </script>
 
 <template>
@@ -19,18 +13,18 @@ const { posts } = storeToRefs(usersStore())
               <div class="page-meta">
                         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">News </a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Edit News Transport</li>
+                                <li class="breadcrumb-item"><a href="#">Course </a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Edit Course</li>
                             </ol>
                         </nav>
                     </div>
-<Alert></Alert>
+
                 <div class="middle-content container-xxl p-0">
                     <div class="row layout-top-spacing">
                         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
           
                             <div class="widget-content widget-content-area br-8 p-3">
-           <NewsEdit></NewsEdit>
+           <CoursetEdit></CoursetEdit>
                                </div>
                               </div>
                               

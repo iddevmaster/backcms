@@ -14,8 +14,10 @@ export default defineNuxtConfig({
   '~/assets/src/plugins/css/light/table/datatable/dt-global_style.css',
   '~/assets/src/assets/css/light/elements/alert.css',
   '~/assets/src/assets/css/light/elements/custom-pagination.css',
+  '~/assets/src/plugins/css/light/filepond/custom-filepond.css',
+  '~/assets/src/plugins/css/light/flatpickr/custom-flatpickr.css',
+  '~/assets/src/assets/css/light/apps/invoice-add.css',
 ],
-
 
 
 // css: ['~/assets/styles/main.scss'],

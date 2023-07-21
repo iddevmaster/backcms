@@ -6,18 +6,19 @@
 // import DataTablesCore from 'datatables.net-bs5';
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-import { newTransportStore } from '@/store/newstransport'
+import { CourseStore } from '@/store/course'
 import CourseList from '@/components/course/CourseList.vue'
 import { useModalStore } from '@/store/modal';
 import Loading from '@/components/layout/Success.vue';
 import Alert from '@/components/layout/Alert.vue';
-const store = newTransportStore()
+import { useToast } from 'vue-toastification';
+
+const toast = useToast()
+const store = CourseStore()
 const { posts } = storeToRefs(newTransportStore())
-  const { deleteItem } = newTransportStore();//Action
-  const { selectall } = newTransportStore(); //Action
-  const { selectone } = newTransportStore();//Action
-  const { getSelect } = storeToRefs(store); //Get Getter
-  const { getSelectALL } = storeToRefs(store); //Get Getter
+  const { deleteItem_id } = CourseStore();//Action
+  const { fetchCourslist } = CourseStore();//Action
+  
   const modalStore = useModalStore();
   const { GetopenModal } = storeToRefs(store); //Get Getter
   const { GetopenModal_ID } = storeToRefs(store); //Get Getter
@@ -30,8 +31,16 @@ const { posts } = storeToRefs(newTransportStore())
 
 
 const delete_userid = async (id) => {
-  await store.deleteItem_id(id);
-  await store.fetchNewTransport()
+
+  const delc = await store.deleteItem_id(id);
+
+  if(delc){
+    toast.success('Delete Success');
+    await store.fetchCourslist()
+      }else{
+   toast.error('Failed  Delete Data')
+      }
+
   };
   
 </script>
@@ -54,7 +63,7 @@ const delete_userid = async (id) => {
             <CourseList></CourseList>
             </div>
           </div>
-  <!-- <div class="modal">
+  <div class="modal"  v-if="GetopenModal">
 <div class="modal-content" id="deleteConformationLabel">
                                 <div class="modal-header">
                                     <div class="icon">
@@ -69,11 +78,11 @@ const delete_userid = async (id) => {
                                     <p class="">If you delete the task it will be gone forever. Are you sure you want to proceed?</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn" data-bs-dismiss="modal" >Cancel</button>
-                                    <button type="button" class="btn btn-danger" data-remove="task">Delete</button>
+                                    <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal" >Cancel</button>
+                                    <button type="button" class="btn btn-danger" data-remove="task"  @click="delete_userid(GetopenModal_ID)">Delete </button>
                                 </div>
                             </div>
-  </div> -->
+  </div>
 
     
     

@@ -2,7 +2,7 @@
  
      
  <div class="row mb-4 g-3">
-  <div id="form_grid_layouts" class="col-lg-9">
+  <div id="form_grid_layouts" class="col-lg-12">
                             <div class="seperator-header">
                                 <h4 class="">Form Add News</h4>
                             </div>
@@ -80,57 +80,7 @@
     </div>
    
    
-    <button class="btn btn-dark additem _effect--ripple waves-effect waves-light"  @click="addlesson()">Add Item</button> 
-
-    <div class="invoice-detail-items">
-      {{ store.lessonlist }}
-    <div class="table-responsive">
-        <table class="table item-table">
-            <thead>
-                <tr>
-                    <th class=""></th>
-                    <th>cs_name && cs_description</th>
-                    <th class="">cs_name</th>
-                    <th class="">cs_video</th>
-                    <th class="text-right">cs_cover</th>
-                  
-                </tr>
-                <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
-            </thead>
-           
-            <tbody>
-                <tr  v-for="(item, index) in store.lessonlist" :key="index">
-                    <td class="delete-item-row">
-                        <ul class="table-controls">
-                            <li><a href="javascript:void(0);" @click="removelesson(item.cs_id)" class="delete-item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></a></li>
-                        </ul>
-                    </td>
-                    <td class="description">
-                      <input type="text" class="form-control form-control-sm" placeholder="Item Description" v-model="item.cs_name"> 
-                      <textarea class="form-control" placeholder="cs_Description" v-model="item.cs_description">{{ item.cs_description }}</textarea></td>
-                    <td class="rate">
-                      <input type="file" id="input"   @change="handleFiles($event, item.cs_id)" >
-                      <img :src="image(item.cs_cover)" class="img-fluid" width="40"  height="40"/>
-                    </td>
-                    <td class="text-right qty">
-                      <input type="file" id="input"   @change="handleFiles($event, item.cs_id)" >
-                    </td>
-                    <td class="text-right amount"><span class="editable-amount"><span class="currency">$</span> <span class="amount">100.00</span></span></td>
-          
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-  
-    
-</div>
-<div class="col-xl-12 col-md-12">
-  <button type="button" class="btn btn-success" @click="save()">บันทึก</button>    
-                                                    </div>
-
-                   
-    
+    <button type="button" class="btn btn-primary" @click="save()">บันทึก</button>      
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
@@ -151,13 +101,9 @@ const store = CourseStore()
 // const { Clear } = AlertStore(); // use  action
 const { FormDataCourse } = storeToRefs(store);
 const { Images } = storeToRefs(store);
-const { SaveCourse } = CourseStore();
-const { SaveLesson } = CourseStore();
+const { SaveCourse } = CourseStore(); 
 const { ResetForm } = CourseStore(); 
 const { UploadfileCourse } = CourseStore(); 
-const { deletelesson } = CourseStore(); 
-const { Adlesson } = CourseStore(); 
-const { uploadfilecourse } = CourseStore(); 
 
 
 // store.ClearData();
@@ -191,6 +137,8 @@ const rules = computed(() => {
 const v$ = useVuelidate(rules, FormDataCourse);
 
 const save = async () => {
+  
+
     v$.value.$validate();
     if (!v$.value.$error) {
     let uploadfile = await UploadfileCourse();    
@@ -198,8 +146,6 @@ const save = async () => {
         await toast.error('Fall Save Data')
       }else {
         let save = await SaveCourse();
-    
-      //  let savelesson = await SaveLesson();
         await toast.success('Save Data')
         await ResetForm();
         const input = document.querySelector('input[type="file"]');
@@ -210,40 +156,12 @@ const save = async () => {
   }
 }
 
-
-
-const addlesson = async () => {
- await Adlesson();
-
-}
-const removelesson = async (x) => {
- await deletelesson(x);
- 
-}
 const removeImage = async () => {
 
 store.image = null;
 const input = document.querySelector('input[type="file"]');
   input.value = '';
 }
-const handleFiles = async (event,x) => {
-
-  let formData = new FormData();
-  formData.append('files', event.target.files[0]);
- const image = await uploadfilecourse(formData);
- 
- 
- const index = store.lessonlist.findIndex(item => item.cs_id === x)
- console.log(image.data[0].path);
- if (index !== -1) {
-  // แทนค่า name ใน object ที่มี id เป็น 2 เป็น 'Alice'
- store.lessonlist[index].cs_cover = image.data[0].path;
-
-}
-
-
-}
-
 const onFileChange = async (event) => {
   var input = event.target;
       if (input.files) {
@@ -255,18 +173,6 @@ const onFileChange = async (event) => {
         reader.readAsDataURL(input.files[0]);
       }
 
-}
-
-function image(i) {
-  var x = null;
-  if (i) {
-    console.log("if");
-    const usingSplit = i.split(",");
-    var x = usingSplit[0];
-  } else {
-    var x = "static/upload/2023/7/files-1689561047889.jpg";
-  }
-  return "http://oasapi.iddriver.com/media_file/file/?f=" + x;
 }
 
 

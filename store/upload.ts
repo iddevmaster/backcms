@@ -76,7 +76,13 @@ alert('SaveData');
 
     }
   
-
+    // try {
+    //   const data = await ApiService.upload('/media_file/upload/file',formData);
+    //   this.path = data.data[0].path
+    //   return true;
+    //   } catch (error) {
+    //     return false;
+    //   } 
 
 
 

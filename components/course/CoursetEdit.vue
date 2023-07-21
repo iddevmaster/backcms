@@ -1,207 +1,262 @@
 <template>
  
      
-  <div class="row mb-4">
-   <div id="form_grid_layouts" class="col-lg-12">
+  <div class="row mb-4 g-3">
+   <div id="form_grid_layouts" class="col-lg-9">
                              <div class="seperator-header">
-                                 <h4 class="">Form Edit News</h4>
+                                 <h4 class="">Form Edit Course</h4>
                              </div>
      </div>
-         <div class="form-group mb-4">
-           <label for="formGroupExampleInput">News Title</label>
-           <input type="text" class="form-control" id="formGroupExampleInput" placeholder="News Title *" v-model="store.formDataNewsEdit.news_title"
-           :class="{
-                 'border-red-500 focus:border-red-500': v$.news_title.$error,
-                 'border-[#42d392] ': !v$.news_title.$invalid,
+     <div class="col-md-6">
+         <label for="inputEmail4" class="form-label">Course code</label>
+         <input type="text" class="form-control" id="inputEmail4" v-model="store.formDataEditCourse.course_code"
+         :class="{
+                 'border-red-500 focus:border-red-500': v$.course_code.$error,
+                 'border-[#42d392] ': !v$.course_code.$invalid,
                }"
-               @change="v$.news_title.$touch"
-              >
-               <span class="text-xs text-red-500" style="color:red" v-if="v$.news_title.$error">{{
-             v$.news_title.$errors[0].$message
+               @change="v$.course_code.$touch"
+         >
+         <span class="text-xs text-red-500" style="color:red" v-if="v$.course_code.$error">{{
+             v$.course_code.$errors[0].$message
            }}</span>
-           </div>
-           <div class="form-group mb-4"> 
-             <label for="exampleFormControlTextarea1">News Description</label>
-             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
+     </div>
+     <div class="col-md-6">
+         <label for="inputPassword4" class="form-label">Course Name</label>
+         <input type="text" class="form-control" id="inputPassword4" v-model="store.formDataEditCourse.course_name"
+         :class="{
+                 'border-red-500 focus:border-red-500': v$.course_name.$error,
+                 'border-[#42d392] ': !v$.course_name.$invalid,
+               }"
+               @change="v$.course_name.$touch"
+              
+         >
+         <span class="text-xs text-red-500" style="color:red" v-if="v$.course_name.$error">{{
+             v$.course_name.$errors[0].$message
+           }}</span>
+     </div>
+     <div class="col-12">
+         <label for="inputAddress" class="form-label">Course Description</label>
+         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
              :class="{
-                 'border-red-500 focus:border-red-500': v$.news_description.$error,
-                 'border-[#42d392] ': !v$.news_description.$invalid,
+                 'border-red-500 focus:border-red-500': v$.course_description.$error,
+                 'border-[#42d392] ': !v$.course_description.$invalid,
                }"
-               @change="v$.news_description.$touch"
-               v-model="store.formDataNewsEdit.news_description">
-               </textarea><span class="text-xs text-red-500" style="color:red" v-if="v$.news_description.$error">{{
-             v$.news_description.$errors[0].$message
+               @change="v$.course_description.$touch"
+               v-model="store.formDataEditCourse.course_description">
+               </textarea>
+               <span class="text-xs text-red-500" style="color:red" v-if="v$.course_description.$error">{{
+             v$.course_description.$errors[0].$message
            }}</span>
-           </div> 
+     </div>
+     
+    
            <div class="form-group mb-4 mt-3">
                                              <label for="exampleFormControlFile1">Example file input</label>
-                                             <input type="file" class="form-control-file"  id="exampleFormControlFile1" multiple @change="onFileChange" ref="fileupload">
+                                             <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChange" ref="fileupload">
                                          </div>
-                                      
-                                         <p style="color: red;" v-if="store.getFile === true">File size exceeds the limit 2 MB. </p>
                                          <div class="border p-2 mt-3">
-             <p>Preview Here:  </p>
-             <template v-if="storeupload.preview_list.length">
-        
-                 <div class="row">
-    <div class="col-3" v-for="item, index in storeupload.preview_list" :key="index">
-       <img :src="CoverImage(item)" class="img-fluid" />
-          <button @click="removeImage(index)">Remove image</button>
-    </div>
+             <p>Preview Here:</p>
  
-  </div>
+             <template v-if="store.formDataEditCourse.course_cover">
+               <div class="row">
+               <div class="col-3">
+               <img :src="image(store.formDataEditCourse.course_cover)" class="img-fluid" />
+               <button @click="removeImage()">Remove image</button>
+             </div>
+              </div>
              </template>
+ 
+          
            </div>
-           <div>
+ 
+                                         
+                                         
+                                         <div>
  
    </div>
-                {{ storeupload.data_list_image }}                         
+                                         
  
  
      </div>
     
     
-     <button type="button" class="btn btn-primary" @click="edit()">แก้ไข</button>      
+     <button class="btn btn-dark additem _effect--ripple waves-effect waves-light"  @click="addlesson()">Add Item</button> 
+ {{ store.del_lesson }}
+     <div class="invoice-detail-items">
+       {{ store.lessonlist }}
+     <div class="table-responsive">
+         <table class="table item-table">
+             <thead>
+                 <tr>
+                     <th class=""></th>
+                     <th>cs_name && cs_description</th>
+                     <th class="">cs_name</th>
+                     <th class="">cs_video</th>
+                     <th class="text-right">cs_cover</th>
+                   
+                 </tr>
+                 <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
+             </thead>
+            
+             <tbody>
+                 <tr  v-for="(item, index) in store.lessonlist" :key="index">
+                     <td class="delete-item-row">
+                         <ul class="table-controls">
+                             <li><a href="javascript:void(0);" @click="removelesson(item.cs_id)" class="delete-item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></a></li>
+                         </ul>
+                     </td>
+                     <td class="description">
+                       <input type="text" class="form-control form-control-sm" placeholder="Item Description" v-model="item.cs_name"> 
+                       <textarea class="form-control" placeholder="cs_Description" v-model="item.cs_description">{{ item.cs_description }}</textarea></td>
+                     <td class="rate">
+                       <input type="file" id="input"   @change="handleFiles($event, item.cs_id)" >
+                       <img :src="image(item.cs_cover)" class="img-fluid" width="40"  height="40"/>
+                     </td>
+                     <td class="text-right qty">
+                       <input type="file" id="input"   @change="handleFiles($event, item.cs_id)" >
+                     </td>
+                     <td class="text-right amount"><span class="editable-amount"><span class="currency">$</span> <span class="amount">100.00</span></span></td>
+           
+                 </tr>
+             </tbody>
+         </table>
+     </div>
+ 
+   
+     
+ </div>
+ <div class="col-xl-12 col-md-12">
+   <button type="button" class="btn btn-success" @click="save()">แก้ไข้</button>    
+                                                     </div>
+ 
+                    
+     
  </template>
  <script setup lang="ts">
  import { storeToRefs } from 'pinia';
  import { defineComponent } from 'vue';
- import { newTransportStore } from '@/store/newstransport'; // import the auth store we just created
+ import { CourseStore } from '@/store/course'; // import the auth store we just created
  import { useVuelidate } from '@vuelidate/core';
  import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
- import { UploadStore } from '@/store/upload'; // import the auth store we just created
- import { AlertStore } from '@/store/alert'; // import the auth store we just created
- import { ref } from "vue";
  import { useToast } from 'vue-toastification'
-
-
-  const toast = useToast()
+ 
+ 
+ const toast = useToast()
  const router = useRouter();
- const store = newTransportStore()
- const storeupload = UploadStore()
- const storealert = AlertStore()
- 
- 
- 
- const { Clear } = AlertStore(); // use  action
- const { UpdateFormNews } = newTransportStore(); // use  action
- const { getFormEditNews } = newTransportStore();
- const { getAlertFile } = storeToRefs(store);
- const { Saveimages } = UploadStore(); // use authenticateUser action from  auth store
+ const store = CourseStore()
 
 
+ await store.fetchCourslist()
+ await store.fetchCourseId(router.currentRoute.value.params.id)
  
- storealert.Clear()
-
- await store.fetchNewsId(router.currentRoute.value.params.id)
+ // const { Clear } = AlertStore(); // use  action
+ const { FormDataCourse } = storeToRefs(store);
+ const { FormDataEditCourse } = storeToRefs(store);
+ const { Images } = storeToRefs(store);
+ const { SaveCourse } = CourseStore();
+ const { UpdateCourse } = CourseStore();
+ const { SaveLesson } = CourseStore();
+ const { ResetForm } = CourseStore(); 
+ const { UploadfileCourse } = CourseStore(); 
+ const { deletelesson } = CourseStore(); 
+ const { Adlesson } = CourseStore(); 
+ const { uploadfilecourse } = CourseStore(); 
+ 
+ 
+ // store.ClearData();
+ // storealert.Clear()
  
  const rules = computed(() => {
    return {
-     news_title: {
+     course_code: {
        required: helpers.withMessage('The News Title field is required', required),
        minLength: minLength(6),
      },
-     news_description: {
+     course_name: {
        required: helpers.withMessage('The News Description is required', required),
        minLength: minLength(6),
      },
-
-
-     
+   
+     course_description: {
+       required: helpers.withMessage('The News Description is required', required),
+       minLength: minLength(6),
+     },
+   
+ 
    };
  });
-
-
-
  
  
-
- ////////////////ใส่ Url///////////
-
-  const CoverImage = (img) => {
-    let result = img.slice(0, 6);
-  if (result === "static") {
-    return 'https://oasapi.iddriver.com/media_file/file/?f='+ img;
-  } else {
-    return img;
-    }
-  }
  
- const v$ = useVuelidate(rules, getFormEditNews);
-
- const removeImage = async (remove) => {
-  storeupload.preview_list.splice(remove, 1)
-  storeupload.formi.splice(remove, 1)
-  storeupload.data_list_image.splice(remove, 1)
-
-}
-
-
  
- const edit = async () => {
-
+ 
+ 
+ const v$ = useVuelidate(rules, FormDataEditCourse);
+ 
+ const save = async () => {
      v$.value.$validate();
      if (!v$.value.$error) {
-  try {
- await UpdateFormNews(); //save form  ส่งไป Store User
- await toast.success('Save Data')
-  } catch (e) {
-   await toast.error('Fall Save Data')
-  }
+    let s = await UpdateCourse();
+
    }
  }
  
- const onFileChange = async (event) => {
+ 
+ 
+ const addlesson = async () => {
+  await Adlesson();
+ 
+ }
+ const removelesson = async (x) => {
+  await deletelesson(x);
   
-        var input = event.target;
-        var count = input.files.length;
-        var index = 0;
-        const maxSize = 1024 * 1024; // 2 MB in bytes
-
-    for(let x = 0; x <count; x++)
-	  {
-    if (event.target.files[x].size > maxSize) {    ///////////////////////File size ดักก่อน ///////////
-    store.getFile = true;
-    await toast.error('Can not Upload File')
-    const input = document.querySelector('input[type="file"]');
-     input.value = '';
-       return false;
-    }
-     store.getFile = false; ///////////////////////ถ้า ผ่านข้างบนให้ปิด alert ///////////
-    }
-
-    for(let i = 0; i<count; i++)     ///////////////////////เก็บ data ไปไว้ใน state ///////////
-	  {
-		storeupload.formi.push(event.target.files[i]);
-    }
+ }
+ const removeImage = async () => {
  
-    const formData = new FormData();
-          for (const i of Object.keys(storeupload.formi)) {
-             setTimeout(function(scope) {
-                formData.append('files', storeupload.formi[i])
-    }, 500);        
-     }
+ store.image = null;
+ const input = document.querySelector('input[type="file"]');
+   input.value = '';
+ }
+ const handleFiles = async (event,x) => {
+   let formData = new FormData();
+   formData.append('files', event.target.files[0]);
+  const image = await uploadfilecourse(formData);
+  const index = store.lessonlist.findIndex(item => item.cs_id === x)
+  if (index !== -1) {
+   // แทนค่า name ใน object ที่มี id เป็น 2 เป็น 'Alice'
+  store.lessonlist[index].cs_cover = image.data[0].path;
  
- 
-   // await Saveimages();
- 
-       if (input.files) {
-         while(count --) {
-           var reader = new FileReader();
-           reader.onload = (e) => {
-             storeupload.preview_list.push(e.target.result); ///////////////////////จับ Data ใส่ array ///////////
-             let a = { ni_name_file:e.target.result,ni_path_file:e.target.result}
-             storeupload.data_list_image.push(a);
-           }
-           storeupload.image_list.push(input.files[index]); ///////////////////////จับ Data ใส่ array ///////////
-           reader.readAsDataURL(input.files[index]); ///////////////////////อ่านไฟล์ภาพ ///////////
-           index ++;
-         }
-       }
  }
  
-
-
+ 
+ }
+ 
+ const onFileChange = async (event) => {
+   var input = event.target;
+       if (input.files) {
+         var reader = new FileReader();
+         reader.onload = (e) => {
+           store.image = e.target.result;
+         }
+         store.imagelist=input.files[0];
+         reader.readAsDataURL(input.files[0]);
+       }
+ 
+ }
+ 
+ function image(i) {
+   var x = null;
+   if (i) {
+     const usingSplit = i.split(",");
+     var x = usingSplit[0];
+   } else {
+     var x = "static/upload/2023/7/files-1689561047889.jpg";
+   }
+   return "http://oasapi.iddriver.com/media_file/file/?f=" + x;
+ }
+ 
+ 
+ 
  
  
  </script>
@@ -213,13 +268,8 @@
        height: 100px;
        width: 100px;
      }
-
-    .img {
-  width: 30%;
-  margin: auto;
-  display: block;
-  margin-bottom: 10px;
-}
+ 
+     
  
  </style>
  
