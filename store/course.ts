@@ -102,6 +102,7 @@ vdo:"/assets/images/sample-5.mp4"
   },
   async fetchCourseId(id){
 this.course_id = id;
+
 let item  = this.courselist.filter(actor => actor.course_id == id);
 this.formDataEditCourse.course_cover = item[0].course_cover
 this.formDataEditCourse.course_code = item[0].course_code
@@ -113,20 +114,15 @@ const data = await ApiService.post('/course/lesson/list/'+id, this.formsearchcou
 
 
 if(response.data.data){
-  for (var i = 0; i < response.data.data.length; i++) {
-
-// this.formDataeditlesson.cs_cover = response.data.data[i]
-// this.formDataeditlesson.cs_name = response.data.data[i]
-// this.formDataeditlesson.cs_video = response.data.data[i]
-// this.formDataeditlesson.cs_description = response.data.data[i]
-// this.formDataeditlesson.course_id = response.data.data[i]
-// this.formDataeditlesson.user_id = user_id.value
-
-// console.log(i);
-// console.log(response.data.data[i]);
-this.lessonlist.push(response.data.data[i]);
-
-this.del_lesson.push(response.data.data[i].cs_id);
+  this.lessonlist = [];
+  this.del_lesson = [];
+  const sortedArray = response.data.data;
+  // Sort the array based on the 'id' property in ascending order
+  sortedArray.sort((a, b) => a.cs_id - b.cs_id
+  );
+  for (var i = 0; i < sortedArray.length; i++) {
+this.lessonlist.push(sortedArray[i]);
+this.del_lesson.push(sortedArray[i].cs_id);
   }
 
 }
@@ -138,7 +134,7 @@ this.del_lesson.push(response.data.data[i].cs_id);
 
   async SaveCourse() {
     this.formDataCourse.course_cover = this.path
- 
+   
     try {
       const data = await ApiService.post('/course/create', this.formDataCourse).then(response => {
       this.SaveLesson(response.data.insertId)
@@ -151,6 +147,7 @@ this.del_lesson.push(response.data.data[i].cs_id);
     }
   },
   async SaveLesson(id) {
+  
     for (var i = 0; i < this.lessonlist.length; i++) {
      this.formDatalesson.cs_cover = this.lessonlist[i].cs_cover
      this.formDatalesson.cs_name = this.lessonlist[i].cs_name
@@ -160,11 +157,13 @@ this.del_lesson.push(response.data.data[i].cs_id);
      this.formDatalesson.user_id = user_id.value
      try {
       const data = await ApiService.post('/course/lesson/create', this.formDatalesson).then(response => {
+      //  this.lessonlist = []
         return true;
       });
     } catch (error) {
       return false;
     } finally {
+
     }
     
   {
@@ -180,16 +179,16 @@ this.del_lesson.push(response.data.data[i].cs_id);
   async UpdateCourse(){
     try {
       const updatecourse = await ApiService.put('/course/update/' + this.course_id, this.formDataEditCourse);
-      await this.Dellessons();
-     // await this.UpdateLesson();
-      return response.data
+      await this.Dellessons(this.course_id);
+      await this.SaveLesson(this.course_id);
+  //    return response.data
     } catch (error) {
       return [];
     }
   },
   async UpdateLesson(){
-    ////
-    const del = await ApiService.delete('/course/lesson/delete/' + course_id);
+    console.log('update UpdateLesson');
+   // const del = await ApiService.delete('/course/lesson/delete/' + course_id);
 
 
   },
@@ -227,6 +226,8 @@ this.del_lesson.push(response.data.data[i].cs_id);
     this.image = ""
     this.imagelist = ""
     this.path = ""
+    this.lessonlist = [];
+
   },
   async UploadfileCourse() {  
     let formData = new FormData();
@@ -269,7 +270,7 @@ this.del_lesson.push(response.data.data[i].cs_id);
     }
   },
   async Dellessons(id){
-
+console.log('delete Dellessons');
   const getid = await ApiService.post('/course/lesson/list/'+id, this.formsearchcourse).then(response => {
  if(response.data.data){
 for (var i = 0; i < response.data.data.length; i++) {
@@ -283,10 +284,10 @@ for (var i = 0; i < response.data.data.length; i++) {
   async Adlesson(){
 this.lessonlist
 const daa = {
-  cs_cover:"007",
-  cs_name:"007",
-  cs_video:"007",
-  cs_description:"007",
+  cs_cover:"-",
+  cs_name:"-",
+  cs_video:"-",
+  cs_description:"-",
   crt_date:"2023-07-19T10:24:10.000Z",
   udp_date:"2023-07-19T10:24:10.000Z",
   user_create:"เจน เป็นมงคล",

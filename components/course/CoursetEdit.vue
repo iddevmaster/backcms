@@ -89,11 +89,9 @@
              <thead>
                  <tr>
                      <th class=""></th>
-                     <th>cs_name && cs_description</th>
-                     <th class="">cs_name</th>
-                     <th class="">cs_video</th>
-                     <th class="text-right">cs_cover</th>
-                   
+                     <th>Name && Description</th>
+                     <th class="">Cover</th>
+                     <th class="">Video</th>
                  </tr>
                  <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
              </thead>
@@ -109,13 +107,13 @@
                        <input type="text" class="form-control form-control-sm" placeholder="Item Description" v-model="item.cs_name"> 
                        <textarea class="form-control" placeholder="cs_Description" v-model="item.cs_description">{{ item.cs_description }}</textarea></td>
                      <td class="rate">
-                       <input type="file" id="input"   @change="handleFiles($event, item.cs_id)" >
+                       <input type="file" id="input"   @change="handleFiles($event, index)" >
                        <img :src="image(item.cs_cover)" class="img-fluid" width="40"  height="40"/>
                      </td>
                      <td class="text-right qty">
-                       <input type="file" id="input"   @change="handleFiles($event, item.cs_id)" >
+                       <input type="file" id="input"   @change="handleFiles($event, index)" >
                      </td>
-                     <td class="text-right amount"><span class="editable-amount"><span class="currency">$</span> <span class="amount">100.00</span></span></td>
+                   
            
                  </tr>
              </tbody>
@@ -196,8 +194,9 @@
  const save = async () => {
      v$.value.$validate();
      if (!v$.value.$error) {
-    let s = await UpdateCourse();
-
+    let update = await UpdateCourse();
+ await toast.success("Save Data");
+  await store.fetchCourseId(router.currentRoute.value.params.id)
    }
  }
  
@@ -217,19 +216,32 @@
  const input = document.querySelector('input[type="file"]');
    input.value = '';
  }
- const handleFiles = async (event,x) => {
-   let formData = new FormData();
-   formData.append('files', event.target.files[0]);
+
+
+ const handleFiles = async (event, x) => {
+  let formData = new FormData();
+  formData.append("files", event.target.files[0]);
   const image = await uploadfilecourse(formData);
-  const index = store.lessonlist.findIndex(item => item.cs_id === x)
-  if (index !== -1) {
-   // แทนค่า name ใน object ที่มี id เป็น 2 เป็น 'Alice'
-  store.lessonlist[index].cs_cover = image.data[0].path;
- 
- }
- 
- 
- }
+  const index = store.lessonlist;
+
+  index[x].cs_cover = image.data[0].path;
+
+  //  this.events.splice(index, 1);
+  //  if (index !== -1) {
+  //   // แทนค่า name ใน object ที่มี id เป็น 2 เป็น 'Alice'
+  //  store.lessonlist[index].cs_cover = image.data[0].path;
+  // }
+};
+
+const handleFilesVideo = async (event, x) => {
+  let formData = new FormData();
+  formData.append("files", event.target.files[0]);
+  const video = await uploadfilecourse(formData);
+
+  const index = store.lessonlist;
+  index[x].cs_video = video.data[0].path;
+
+};
  
  const onFileChange = async (event) => {
    var input = event.target;
@@ -269,7 +281,19 @@
        width: 100px;
      }
  
-     
+  .video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio (change this value as per your video's aspect ratio) */
+}
+
+video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}   
  
  </style>
  
