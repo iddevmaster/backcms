@@ -33,7 +33,6 @@ const { posts } = storeToRefs(newTransportStore())
 const delete_userid = async (id) => {
 
   const delc = await store.deleteItem_id(id);
-
   if(delc){
     toast.success('Delete Success');
     await store.fetchCourslist()

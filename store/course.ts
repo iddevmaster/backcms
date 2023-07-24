@@ -14,6 +14,7 @@ course_id:null,
 isOpen:false,
 lessonlist:[],
 del_lesson:[],
+get_lesson_id:[],
 lessoneditlist:[],
 formDataCourse: {
   course_cover: "",
@@ -50,6 +51,7 @@ formsearchcourse: {
   per_page: 10,
   search: '',
 },
+vdo:"/assets/images/sample-5.mp4"
   }
      
 ),
@@ -191,6 +193,28 @@ this.del_lesson.push(response.data.data[i].cs_id);
 
 
   },
+  async GetLesson(id){
+    ////
+
+    // this.formsearchcourse.page = "1"
+    // this.formsearchcourse.per_page = ""
+    // this.formsearchcourse.search = ""
+    this.get_lesson_id = []
+    const getid = await ApiService.post('/course/lesson/list/'+id, this.formsearchcourse).then(response => {
+
+   if(response.data.data){
+
+    for (var i = 0; i < response.data.data.length; i++) {
+      this.get_lesson_id.push(response.data.data[i].cs_id);
+
+   }
+   }
+   
+     });
+ 
+
+
+  },
 
   async ResetForm() {   ////reset Form
     this.formDataCourse = {
@@ -222,8 +246,9 @@ this.del_lesson.push(response.data.data[i].cs_id);
   async deleteItem_id(course_id){
 
     try {
-      console.log('try');
+      const getlesson = await this.Dellessons(course_id);
       const del = await ApiService.delete('/course/delete/' + course_id);
+
       this.isOpen = false;
       const index = this.courselist.findIndex(item => item.course_id === course_id)
       if (index !== -1) {
@@ -243,8 +268,15 @@ this.del_lesson.push(response.data.data[i].cs_id);
       this.lessonlist.splice(index, 1)
     }
   },
-  async Dellessons(){
-  //  const del = await ApiService.delete('/course/lesson/delete/' + course_id);
+  async Dellessons(id){
+
+  const getid = await ApiService.post('/course/lesson/list/'+id, this.formsearchcourse).then(response => {
+ if(response.data.data){
+for (var i = 0; i < response.data.data.length; i++) {
+    const del =  ApiService.delete('/course/lesson/delete/' + response.data.data[i].cs_id);
+ }
+ }
+   });
   },
 
   
