@@ -110,9 +110,8 @@ this.formDataEditCourse.course_name = item[0].course_name
 this.formDataEditCourse.course_description = item[0].course_description
 this.formDataEditCourse.user_id = user_id.value
 
+
 const data = await ApiService.post('/course/lesson/list/'+id, this.formsearchcourse).then(response => {
-
-
 if(response.data.data){
   this.lessonlist = [];
   this.del_lesson = [];

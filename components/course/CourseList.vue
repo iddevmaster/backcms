@@ -8,6 +8,7 @@
         placeholder="Search"
         class="form-control"
         required=""
+        v-model="store.formsearchcourse.search" @keyup="searchData"
       />
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
@@ -19,8 +20,6 @@
         class="form-select form-select"
         aria-label="Default select example"
       >
-        <option value="2">2</option>
-        <option value="7">7</option>
         <option value="10">10</option>
         <option value="20">20</option>
         <option value="50">50</option>
@@ -71,20 +70,17 @@
     
     
   </div>
-
          <div>
-
-                                    <div class="paginating-container pagination-solid">
-
-                                        <ul class="pagination">
-                                            <li class="prev"><a href="javascript:void(0);">Prev</a></li>
-                                            <li><a href="javascript:void(0);">1</a></li>
-                                            <li class="active"><a href="javascript:void(0);">2</a></li>
-                                            <li><a href="javascript:void(0);">3</a></li>
-                                            <li class="next"><a href="javascript:void(0);">Next</a></li>
-                                        </ul>
- </div>
-                                    </div>
+          <div class="paginating-container pagination-solid"> 
+            <ul class="pagination">    
+              <li class="prev"><a href="javascript:void(0);">Prev</a></li>
+               <li><a href="javascript:void(0);">1</a></li>
+               <li class="active"><a href="javascript:void(0);">2</a></li>
+               <li><a href="javascript:void(0);">3</a></li>
+               <li class="next"><a href="javascript:void(0);">Next</a></li>
+             </ul>
+             </div>
+            </div>
 
   <!-- <div class="dt--pagination" v-if="datanewstransport.total_page > 1">
       <div class="dataTables_paginate paging_simple_numbers" id="zero-config_paginate">
@@ -96,9 +92,8 @@
               {{page}}</a>
               </li>
             <li class="paginate_button page-item next" id="zero-config_next"><a href="#" aria-controls="zero-config" data-dt-idx="4" tabindex="0" class="page-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></li></ul></div>
-            </div> -->
+       </div> -->
 </template>
-
 
 
 <script setup lang="ts">
@@ -138,11 +133,7 @@ if (courselist === false) {
 }
 
 const del = async (id) => {
- 
  const delecourse =  await deleteItem(id);
-
-
-  //await store.fetchNewTransport()
 };
 const edit = async (id) => {
  // alert('edit');
@@ -157,10 +148,14 @@ const selchk = async (x) => {
 const selectAll = async () => {
   // await selectall();
 };
+const searchData = async () => {
+ await store.fetchCourslist()
+ };
 
 function goToPage(page) {
   console.log(page);
 }
+
 
 const setCurrentPageclick = async (page) => {
   //  await setCurrentPage (page)
