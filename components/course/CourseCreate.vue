@@ -183,8 +183,6 @@ const rules = computed(() => {
       required: helpers.withMessage('The News Description is required', required),
       minLength: minLength(6),
     },
-  
-
   };
 });
 

@@ -8,7 +8,7 @@
         placeholder="Search"
         class="form-control"
         required=""
-        v-model="store.formsearchcourse.search" @keyup="searchData"
+
       />
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
@@ -18,7 +18,7 @@
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <select
         class="form-select form-select"
-        aria-label="Default select example"  @change="selectshowdata($event)" 
+        aria-label="Default select example"   
       >
         <option value="10">10</option>
         <option value="20">20</option>
@@ -26,7 +26,44 @@
       </select>
     </div>
   </div>
-  <div class="row">
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Exam Code</th>
+                <th scope="col">Exam Name</th>
+                <th class="text-center" scope="col">Exam cover</th>
+                <th class="text-center" scope="col">Exam Description</th>
+                <th class="text-center" scope="col">Exam Random</th>
+                <th class="text-center" scope="col">Action</th>
+            </tr>
+        </thead>
+
+     
+        <tbody>
+      
+          
+            <tr   v-for="(item, index) in 5" :key="index">
+                <td>001{{index}}</td>
+                <td>
+                  <span class="table-inner-text">ປະເພດລົດບັນທຸກ C</span>
+                </td>
+                <td class="text-center">784</td>
+                <td class="text-center">มีเสียงบรรยาย (ข้อสอบสำรอง)</td>
+                <td class="text-center">
+                    <span class="badge badge-light-secondary">50</span>
+                </td>
+                <td><NuxtLink>
+                  <a class="badge badge-light-primary text-start me-2 action-edit"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></a>
+                   </NuxtLink>
+                   <a class="badge badge-light-danger text-start action-delete" @click="del(1)" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+  <!-- <div class="row">
     <div
       class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4"
       v-for="item in store.courselist"
@@ -69,8 +106,8 @@
     </div>
     
     
-  </div>
-         <!-- <div>
+  </div> -->
+         <div>
           <div class="paginating-container pagination-solid"  v-if="store.total_page > 1"> 
             <ul class="pagination">    
               <li class="prev"><a href="javascript:void(0);">Prev</a></li>
@@ -80,9 +117,10 @@
                <li class="next"><a href="javascript:void(0);">Next</a></li>
              </ul>
              </div>
-            </div> -->
+            </div>
 
-  <div class="paginating-container" v-if="store.total_page > 1">
+            <!-- pageinate -->
+  <!-- <div class="paginating-container" v-if="store.total_page > 1">
       <div class="dataTables_paginate paging_simple_numbers" id="zero-config_paginate">
         <ul class="pagination">
           <li class="paginate_button page-item previous" id="zero-config_previous">
@@ -94,7 +132,7 @@
             </a>
               </li>
             <li class="paginate_button page-item next" id="zero-config_next"><a href="#" aria-controls="zero-config" data-dt-idx="4" tabindex="0" class="page-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></li></ul></div>
-       </div>
+       </div> -->
 </template>
 
 
@@ -103,7 +141,7 @@
 // import DataTablesCore from 'datatables.net-bs5';
 import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
-import { CourseStore } from "@/store/course";
+import { ExamStore } from "@/store/exam";
 import "jquery/dist/jquery.min.js";
 //Datatable Modules
 import "datatables.net-dt/js/dataTables.dataTables";
@@ -113,11 +151,10 @@ import Paginate from "vuejs-paginate-next";
 import { useToast } from "vue-toastification";
 
 const toast = useToast();
-const store = CourseStore();
-const { Courselist } = storeToRefs(store);
- const { deleteItem } = CourseStore();//Action
- const { selectentires } = CourseStore();//Action
- const { setCurrentPage } = CourseStore();//Action
+const store = ExamStore();
+
+ const { deleteItem } = ExamStore();//Action
+
 
 
 
@@ -128,7 +165,7 @@ if (courselist === false) {
 }
 
 const del = async (id) => {
- const delecourse =  await deleteItem(id);
+const deleExam =  await deleteItem(id);
 };
 const edit = async (id) => {
  // alert('edit');
@@ -201,4 +238,41 @@ function image(i) {
 .dt--pagination {
   float: right;
 }
+
+
+/* .modal-content {
+  background-color: white;
+  padding: 20px;
+  width: 70%;
+} */
+
+/* @media only screen and (min-width: 576px) {
+
+.modal-content {
+background-color: white;
+padding: 20px;
+width: 100%;
+}
+} */
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
 </style>
