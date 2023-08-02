@@ -42,17 +42,23 @@
 
      
         <tbody>
-      
+           
           
-            <tr   v-for="(item, index) in 5" :key="index">
-                <td>001{{index}}</td>
+            <tr  v-for="item in store.examlist" :key="item.em_id">
+                <td>{{item.em_code}}</td>
                 <td>
-                  <span class="table-inner-text">ປະເພດລົດບັນທຸກ C</span>
+                  <span class="table-inner-text">ປະເພດລົດບັນທຸກ C
+                    {{item.em_name}}
+                  </span>
                 </td>
-                <td class="text-center">784</td>
-                <td class="text-center">มีเสียงบรรยาย (ข้อสอบสำรอง)</td>
                 <td class="text-center">
-                    <span class="badge badge-light-secondary">50</span>
+  <img :src="image(item.em_cover)" class="img-fluid" width="80" height="80" />
+                </td>
+                <td class="text-center">
+                  {{item.em_description}}
+                </td>
+                <td class="text-center">
+                    <span class="badge badge-light-secondary">{{item.em_random_amount}}</span>
                 </td>
                 <td><NuxtLink>
                   <a class="badge badge-light-primary text-start me-2 action-edit"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></a>
@@ -157,12 +163,12 @@ const store = ExamStore();
 
 
 
+const Examlist = await store.fetchExamlist();
 
-
-const courselist = await store.fetchCourslist();
-if (courselist === false) {
-  console.log("false");
-}
+// const courselist = await store.fetchCourslist();
+// if (courselist === false) {
+//   console.log("false");
+// }
 
 const del = async (id) => {
 const deleExam =  await deleteItem(id);
@@ -225,7 +231,6 @@ function coverttime(date) {
 function image(i) {
   var x = null;
   if (i) {
-    console.log("if");
     const usingSplit = i.split(",");
     var x = usingSplit[0];
   } else {

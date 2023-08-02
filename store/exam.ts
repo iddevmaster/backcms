@@ -8,14 +8,23 @@ export const ExamStore = defineStore('exam', {
   state: () => ({
     isOpen:false,
     isOpenCreate:false,
+    image:null,
+    imagelist:null,
+    path:"",
+    examlist:[],
     formexam: {
       em_code: "",
       em_name: "",
       em_cover: "",
       em_description: "",
       em_random_amount: null,
-      em_time:null,
+      em_time:"00:59:00",
       user_id: user_id.value
+    },
+    formsearchexam: {
+      page: 1,
+      per_page: 10,
+      search: '',
     },
 }
      
@@ -42,7 +51,20 @@ export const ExamStore = defineStore('exam', {
 
 
 
-  async fetchCourslist() {
+  async fetchExamlist() {
+
+    try {
+      const data = await ApiService.post('/exam/main/list', this.formsearchexam).then(response => {
+       this.examlist = response.data.data   
+       console.log(this.examlist);
+      });
+
+    } catch (error) {
+      console.log('error');
+      return false;
+    } finally {
+
+    }
 
 
   },
@@ -58,11 +80,23 @@ export const ExamStore = defineStore('exam', {
   setCurrentPage(page) {
     this.formsearchcourse.page = page
   },
-  async SaveLesson(id) {
+  async SaveExam() {
+    this.formexam.em_cover = this.path
 
-
-
+    try {
+      const data = await ApiService.post('/exam/main/create', this.formexam).then(response => {
     
+       return true;
+      });
+    } catch (error) {
+   
+      return false
+   
+    } finally {
+      this.closeModal();
+    }
+
+
   },
   async UpdateCourse(){
     try {
@@ -75,7 +109,7 @@ export const ExamStore = defineStore('exam', {
     }
   },
   async UpdateLesson(){
-    console.log('update UpdateLesson');
+
    // const del = await ApiService.delete('/course/lesson/delete/' + course_id);
 
 
@@ -83,17 +117,15 @@ export const ExamStore = defineStore('exam', {
 
 
   async ResetForm() {   ////reset Form
-    this.formDataCourse = {
-      course_cover: '',
-      course_code: '',
-      course_name: '',
-      course_description: '',
+    this.formexam = {
+      em_code: '',
+      em_name: '',
+      em_cover: '',
+      em_description: '',
+      em_random_amount: null,
+      em_time: "00:59:00",
       user_id: user_id.value,
     };
-    this.image = ""
-    this.imagelist = ""
-    this.path = ""
-    this.lessonlist = [];
 
   },
 
@@ -107,25 +139,28 @@ export const ExamStore = defineStore('exam', {
 
 
   async deleteItem(id) {
-    console.log('deleteItem',id);
+  
     this.isOpen = true;
   //  this.news_id = id;
   },
 
   closeModal() {
-    this.isOpen = false;
+    this.isOpenCreate = false;
   },
 
-  async uploadfilecourse(x){
-    const data = await ApiService.upload('/media_file/upload/file',x);
-    return data;
-
+  async UploadfileExam() {  
+    let formData = new FormData();
+    formData.append('files', this.imagelist);
+    try {
+    const data = await ApiService.upload('/media_file/upload/file',formData);
+    this.path = data.data[0].path
+    return true;
+    } catch (error) {
+      return false;
+    } 
   },
 
-  async uploadf(x){
-    const data = await ApiService.upload('/media_file/upload/file',x);
-   return data;
-  },
+
   },
 
 

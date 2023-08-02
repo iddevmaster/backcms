@@ -92,7 +92,6 @@ vdo:"/assets/images/sample-5.mp4"
 
 
   async fetchCourslist() {
-    console.log(this.formsearchcourse);
     try {
       const data = await ApiService.post('/course/list', this.formsearchcourse).then(response => {
        this.courselist = response.data.data   
@@ -205,7 +204,7 @@ this.del_lesson.push(sortedArray[i].cs_id);
     }
   },
   async UpdateLesson(){
-    console.log('update UpdateLesson');
+
    // const del = await ApiService.delete('/course/lesson/delete/' + course_id);
 
 
@@ -288,7 +287,7 @@ this.del_lesson.push(sortedArray[i].cs_id);
     }
   },
   async Dellessons(id){
-console.log('delete Dellessons');
+
   const getid = await ApiService.post('/course/lesson/list/'+id, this.formsearchcourse).then(response => {
  if(response.data.data){
 for (var i = 0; i < response.data.data.length; i++) {

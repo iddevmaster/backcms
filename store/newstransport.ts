@@ -608,7 +608,7 @@ export const newTransportStore = defineStore('newstransport', {
         }
       }
       ).then(function (response) {
-        console.log(response.data)
+  
 
         const counterStorage = UploadStore();
         counterStorage.preview_list.length
@@ -634,7 +634,7 @@ export const newTransportStore = defineStore('newstransport', {
       this.formDataNewsEdit.news_cover
       const x = this.formDataNewsEdit.news_cover.split(',');
       for (var i = 0; i < data.length; i++) {
-        console.log(x.push(data[i].path));
+     
       }
       const string = x.join(',');
       this.formDataNewsEdit.news_cover = string;

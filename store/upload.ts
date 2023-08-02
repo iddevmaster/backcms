@@ -36,7 +36,7 @@ alert('SaveData');
  
 
       const x = a.split(',');
-      console.log(x);
+  
 
       if(x.length > 0){
         for (var i = 0; i < x.length; i++) {
@@ -53,7 +53,7 @@ alert('SaveData');
     imagedisplay(data)  {
  
  
-   console.log(this.data_list_image);
+  
       if(data.length > 0){
         for (var i = 0; i < data.length; i++) {
           this.preview_list.push(data[i].ni_path_file);
