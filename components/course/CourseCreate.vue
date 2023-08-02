@@ -234,8 +234,10 @@ const handleFiles = async (event,x) => {
   let formData = new FormData();
   formData.append('files', event.target.files[0]);
  const image = await uploadfilecourse(formData);
+
 const index = store.lessonlist;
- console.log('x',index[x]);
+
+  index[x].cs_cover = image.data[0].path;
 //  if (index !== -1) {
 //   // แทนค่า name ใน object ที่มี id เป็น 2 เป็น 'Alice'
 //  store.lessonlist[index].cs_cover = image.data[0].path;
