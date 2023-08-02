@@ -82,7 +82,6 @@
     
      <button class="btn btn-dark additem _effect--ripple waves-effect waves-light"  @click="addlesson()">Add Lesson</button> 
      <div class="invoice-detail-items">
-       {{ store.lessonlist }}
      <div class="table-responsive">
          <table class="table item-table">
              <thead>

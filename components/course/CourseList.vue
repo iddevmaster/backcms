@@ -47,8 +47,8 @@
               alt=""
             />
             <div class="media-body">
-              <h4 class="media-heading mb-1">Shaun Park</h4>
-              <p class="media-text">01 May</p>
+              <h4 class="media-heading mb-1">{{ item.user_create }}</h4>
+              <p class="media-text">{{ coverttime(item.crt_date) }}</p>
             </div>
             <div class="action-btns">
                                  <NuxtLink :to="'/course/' + item.course_id">
@@ -185,6 +185,8 @@ function coverttime(date) {
   return formattedDatetime;
 }
 
+
+
 function image(i) {
   var x = null;
   if (i) {
@@ -196,6 +198,8 @@ function image(i) {
   }
   return "http://oasapi.iddriver.com/media_file/file/?f=" + x;
 }
+
+
 </script>
 <style>
 .dt--pagination {
