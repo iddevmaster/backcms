@@ -133,6 +133,9 @@
                             <li>
                                 <nuxt-link to="/exam">Exam List</nuxt-link>
                             </li>
+                            <li>
+                                <nuxt-link to="/exam/question">Exam Question</nuxt-link>
+                            </li>
                           
                         </ul>
                     </li>

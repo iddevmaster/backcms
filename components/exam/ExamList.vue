@@ -7,8 +7,7 @@
         name="txt"
         placeholder="Search"
         class="form-control"
-        required=""
-
+        required=""   v-model="store.formsearchexam.search" @keyup="searchData"
       />
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
@@ -18,7 +17,7 @@
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <select
         class="form-select form-select"
-        aria-label="Default select example"   
+        aria-label="Default select example"   @change="selectshowdata($event)" 
       >
         <option value="10">10</option>
         <option value="20">20</option>
@@ -31,23 +30,22 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th scope="col">Exam Code</th>
-                <th scope="col">Exam Name</th>
+       
+                <th scope="col" @click="sortList('em_code')">Exam Code &#8597;</th>
+                <th scope="col" @click="sortList('em_name')">Exam Name &#8597;</th>
                 <th class="text-center" scope="col">Exam cover</th>
                 <th class="text-center" scope="col">Exam Description</th>
-                <th class="text-center" scope="col">Exam Random</th>
+                <th class="text-center" scope="col" @click="sortList('em_random_amount')">Exam Random &#8597;</th>
                 <th class="text-center" scope="col">Action</th>
             </tr>
         </thead>
 
      
         <tbody>
-           
-          
             <tr  v-for="item in store.examlist" :key="item.em_id">
                 <td>{{item.em_code}}</td>
                 <td>
-                  <span class="table-inner-text">ປະເພດລົດບັນທຸກ C
+                  <span class="table-inner-text">
                     {{item.em_name}}
                   </span>
                 </td>
@@ -61,72 +59,18 @@
                     <span class="badge badge-light-secondary">{{item.em_random_amount}}</span>
                 </td>
                 <td><NuxtLink>
-                  <a class="badge badge-light-primary text-start me-2 action-edit"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></a>
+                  <a class="badge badge-light-primary text-start me-2 action-edit" @click="edit(item)"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></a>
                    </NuxtLink>
-                   <a class="badge badge-light-danger text-start action-delete" @click="del(1)" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a>
+                   <a class="badge badge-light-danger text-start action-delete" @click="del(item)" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
-  <!-- <div class="row">
-    <div
-      class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4"
-      v-for="item in store.courselist"
-      :key="item.course_id"
-    >
-      <a class="card style-2 mb-md-0 mb-4">
-        <img
-          :src="image(item.course_cover)"
-          class="card-img-top"
-          alt="..."
-        />
-        <div class="card-body px-0 pb-0">
-          <h5 class="card-title mb-3">{{ item.course_name }}</h5>
-          <div class="media mt-4 mb-0 pt-1">
-            <img
-              src="https://oasapi.iddriver.com/media_file/file/?f=static/upload/2023/7/files-1689870698432.jpeg"
-              class="card-media-image me-3"
-              alt=""
-            />
-            <div class="media-body">
-              <h4 class="media-heading mb-1">Shaun Park</h4>
-              <p class="media-text">01 May</p>
-            </div>
-            <div class="action-btns">
-                                 <NuxtLink :to="'/course/' + item.course_id">
-                                             
-                                                            <a href="javascript:void(0);" class="action-btn btn-edit bs-tooltip me-2" @click="edit(item)" data-toggle="tooltip" data-placement="top" aria-label="Edit" data-bs-original-title="Edit">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-                                                            </a>
-                                                          </NuxtLink>
 
-                                                            <a href="javascript:void(0);" class="action-btn btn-delete bs-tooltip" @click="del(item)" data-toggle="tooltip" data-placement="top" aria-label="Delete" data-bs-original-title="Delete">
-                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                                            </a>
-                                                        </div>
-          </div>
-        </div>
-      </a>
-      
-    </div>
-    
-    
-  </div> -->
-         <div>
-          <div class="paginating-container pagination-solid"  v-if="store.total_page > 1"> 
-            <ul class="pagination">    
-              <li class="prev"><a href="javascript:void(0);">Prev</a></li>
-               <li><a href="javascript:void(0);">1</a></li>
-               <li class="active"><a href="javascript:void(0);">2</a></li>
-               <li><a href="javascript:void(0);">3</a></li>
-               <li class="next"><a href="javascript:void(0);">Next</a></li>
-             </ul>
-             </div>
-            </div>
 
             <!-- pageinate -->
-  <!-- <div class="paginating-container" v-if="store.total_page > 1">
+  <div class="paginating-container" v-if="store.total_page > 1">
       <div class="dataTables_paginate paging_simple_numbers" id="zero-config_paginate">
         <ul class="pagination">
           <li class="paginate_button page-item previous" id="zero-config_previous">
@@ -138,7 +82,7 @@
             </a>
               </li>
             <li class="paginate_button page-item next" id="zero-config_next"><a href="#" aria-controls="zero-config" data-dt-idx="4" tabindex="0" class="page-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a></li></ul></div>
-       </div> -->
+       </div>
 </template>
 
 
@@ -148,41 +92,33 @@
 import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
 import { ExamStore } from "@/store/exam";
-import "jquery/dist/jquery.min.js";
-//Datatable Modules
-import "datatables.net-dt/js/dataTables.dataTables";
-import "datatables.net-dt/css/jquery.dataTables.min.css";
-import $ from "jquery";
-import Paginate from "vuejs-paginate-next";
 import { useToast } from "vue-toastification";
 
 const toast = useToast();
 const store = ExamStore();
 
- const { deleteItem } = ExamStore();//Action
-
-
+ const { Openmodaldelete } = ExamStore();//Action
+ const { OpenEditItem } = ExamStore();//Action
+ const { setCurrentPage } = ExamStore();//Action
+ const { selectentires } = ExamStore();//Action
+ const { sortLists } = ExamStore();//Action
+ const { GetopenModalEdit } = storeToRefs(store); //Get Getter
 
 const Examlist = await store.fetchExamlist();
 
-// const courselist = await store.fetchCourslist();
-// if (courselist === false) {
-//   console.log("false");
-// }
-
-const del = async (id) => {
-const deleExam =  await deleteItem(id);
+const del = async (item) => {
+const deleExam =  await Openmodaldelete(item);
 };
-const edit = async (id) => {
- // alert('edit');
-  //await deleteItem(id);
+const edit = async (item) => {
+
+  await OpenEditItem(item);
   //await store.fetchNewTransport()
 };
 
 const selectshowdata = async (sel) => {
  
 await selectentires(sel.target.value);
-await store.fetchCourslist()
+await store.fetchExamlist()
  };
 
 const selchk = async (x) => {
@@ -193,25 +129,25 @@ const selectAll = async () => {
   // await selectall();
 };
 const searchData = async () => {
- await store.fetchCourslist()
+ await store.fetchExamlist()
  };
+
+ 
 
 function goToPage(page) {
   console.log(page);
 }
 
+const sortList = async (sortBy) => {
+await sortLists (sortBy)
+ };
+
 
 const setCurrentPageclick = async (page) => {
-
  await setCurrentPage (page)
- await store.fetchCourslist()
+ await store.fetchExamlist()
 };
 
-
-
-const sortList = async (sortBy) => {
-  //await sortLists (sortBy)
-};
 
 function coverttime(date) {
   const datetime = new Date(date);

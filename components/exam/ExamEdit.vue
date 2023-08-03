@@ -1,248 +1,179 @@
 <template>
  
      
-  <div class="row mb-4 g-3">
-   <div id="form_grid_layouts" class="col-lg-9">
-                             <div class="seperator-header">
-                                 <h4 class="">Form Edit Course</h4>
-                             </div>
-     </div>
-     <div class="col-md-6">
-         <label for="inputEmail4" class="form-label">Course code</label>
-         <input type="text" class="form-control" id="inputEmail4" v-model="store.formDataEditCourse.course_code"
-         :class="{
-                 'border-red-500 focus:border-red-500': v$.course_code.$error,
-                 'border-[#42d392] ': !v$.course_code.$invalid,
-               }"
-               @change="v$.course_code.$touch"
-         >
-         <span class="text-xs text-red-500" style="color:red" v-if="v$.course_code.$error">{{
-             v$.course_code.$errors[0].$message
-           }}</span>
-     </div>
-     <div class="col-md-6">
-         <label for="inputPassword4" class="form-label">Course Name</label>
-         <input type="text" class="form-control" id="inputPassword4" v-model="store.formDataEditCourse.course_name"
-         :class="{
-                 'border-red-500 focus:border-red-500': v$.course_name.$error,
-                 'border-[#42d392] ': !v$.course_name.$invalid,
-               }"
-               @change="v$.course_name.$touch"
-              
-         >
-         <span class="text-xs text-red-500" style="color:red" v-if="v$.course_name.$error">{{
-             v$.course_name.$errors[0].$message
-           }}</span>
-     </div>
-     <div class="col-12">
-         <label for="inputAddress" class="form-label">Course Description</label>
-         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
-             :class="{
-                 'border-red-500 focus:border-red-500': v$.course_description.$error,
-                 'border-[#42d392] ': !v$.course_description.$invalid,
-               }"
-               @change="v$.course_description.$touch"
-               v-model="store.formDataEditCourse.course_description">
-               </textarea>
-               <span class="text-xs text-red-500" style="color:red" v-if="v$.course_description.$error">{{
-             v$.course_description.$errors[0].$message
-           }}</span>
-     </div>
-     
-    
-           <div class="form-group mb-4 mt-3">
-                                          <label for="exampleFormControlFile1">Course cover</label>
-                                             <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChange" ref="fileupload">
-                                         </div>
-                                         <div class="border p-2 mt-3">
-             <p>Preview Here:</p>
+  <div v-if="GetopenModalEdit" class="modal">
  
-             <template v-if="store.formDataEditCourse.course_cover">
+ <div class="modal-content modal-dialog modal-xl" id="deleteConformationLabel">
+                                 <div class="modal-header">
+                                 
+                                     <h5 class="modal-title" id="exampleModalLabel">Edit Exam</h5>
+                                   
+                                 </div>
+                                 <div class="modal-body">
+         <form>
+           
+           <div class="mb-3">
+             <label for="recipient-name" class="col-form-label">Exam code:</label>  <span class="text-xs text-red-500" style="color:red" v-if="v$.em_code.$error">{{
+             v$.em_code.$errors[0].$message
+           }}</span>
+             <input type="text" class="form-control" id="recipient-name" v-model="store.formexamedit.em_code">
+           </div>
+          
+           <div class="mb-3">
+             <label for="message-text" class="col-form-label">Exam name:</label> <span class="text-xs text-red-500" style="color:red" v-if="v$.em_name.$error">{{
+             v$.em_name.$errors[0].$message
+           }}</span>
+             <input type="text" class="form-control" id="recipient-name" v-model="store.formexamedit.em_name">
+           </div>
+          
+           <div class="mb-3">
+             <label for="message-text" class="col-form-label">Exam Description:</label>  <span class="text-xs text-red-500" style="color:red" v-if="v$.em_description.$error">{{
+             v$.em_description.$errors[0].$message
+           }}</span>
+             <input type="text" class="form-control" id="recipient-name"  v-model="store.formexamedit.em_description">
+           </div>
+          
+           <div class="mb-3">
+             <label for="message-text" class="col-form-label">Exam Random:</label> <span class="text-xs text-red-500" style="color:red" v-if="v$.em_random_amount.$error">{{
+             v$.em_random_amount.$errors[0].$message
+           }}</span>
+             <input type="number" class="form-control" id="recipient-name" v-model="store.formexamedit.em_random_amount" min="50">
+           </div>
+           
+           <div class="mb-3">
+             <label for="message-text" class="col-form-label">Exam Time</label>  <span class="text-xs text-red-500" style="color:red" v-if="v$.em_time.$error">{{
+             v$.em_time.$errors[0].$message
+           }}</span>
+             <VueDatePicker v-model="store.formexamedit.em_time" time-picker  enable-seconds  placeholder="Select Time" />
+           </div>
+          
+  
+           <div class="mb-3">
+             <label for="message-text" class="col-form-label">Exam cover:</label><span class="text-xs text-red-500" style="color:red" v-if="store.imageReq == true"> Invalid file selected</span>
+              <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChange" ref="fileupload">
+           </div>
+            <div class="border p-2 mt-3">
+             <p>Preview Here:</p>
+
+             <template v-if="store.image">
                <div class="row">
                <div class="col-3">
-               <img :src="image(store.formDataEditCourse.course_cover)" class="img-fluid" />
+               <img  :src="coverimage(store.image)"  class="img-fluid" />
                <button @click="removeImage()">Remove image</button>
              </div>
               </div>
-             </template>
- 
-          
+             </template>   
            </div>
- 
-                                         
-                                         
-                                         <div>
- 
-   </div>
-                                         
- 
- 
-     </div>
-    
-    
-     <button class="btn btn-dark additem _effect--ripple waves-effect waves-light"  @click="addlesson()">Add Lesson</button> 
-     <div class="invoice-detail-items">
-       {{ store.lessonlist }}
-     <div class="table-responsive">
-         <table class="table item-table">
-             <thead>
-                 <tr>
-                     <th class=""></th>
-                     <th>Name && Description</th>
-                     <th class="">Cover</th>
-                     <th class="">Video</th>
-                 </tr>
-                 <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
-             </thead>
-            
-             <tbody>
-                 <tr  v-for="(item, index) in store.lessonlist" :key="index">
-                     <td class="delete-item-row">
-                         <ul class="table-controls">
-                             <li><a href="javascript:void(0);" @click="removelesson(item.cs_id)" class="delete-item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg></a></li>
-                         </ul>
-                     </td>
-                     <td class="description">
-                       <input type="text" class="form-control form-control-sm" placeholder="Item Description" v-model="item.cs_name"> 
-                       <textarea class="form-control" placeholder="cs_Description" v-model="item.cs_description">{{ item.cs_description }}</textarea></td>
-                     <td class="rate">
-                       <input type="file" id="input"   @change="handleFiles($event, index)" >
-                       <img :src="image(item.cs_cover)" class="img-fluid" width="40"  height="40"/>
-                     </td>
-                     <td class="text-right qty">
-                       <input type="file" id="input"   @change="handleFiles($event, index)" >
-                     </td>
-                   
+         </form>
+       </div>
+       <div class="modal-footer">
+                 <button class="btn btn btn-light-dark" data-bs-dismiss="modal"  @click="closeModal">
+                   <i class="flaticon-cancel-12"></i> Cancel</button>
+                 <button type="button" class="btn btn-primary" @click="Updatedata()">Update</button>
+             </div>
+                            
            
-                 </tr>
-             </tbody>
-         </table>
-     </div>
+           
+           </div>
+   </div>
  
-   
-     
- </div>
- <div class="col-xl-12 col-md-12">
-   <button type="button" class="btn btn-success" @click="save()">แก้ไข้</button>    
-                                                     </div>
  
                     
      
  </template>
+ 
+ 
+ 
+ 
  <script setup lang="ts">
+ // import DataTable from 'datatables.net-vue3';
+ // import DataTablesCore from 'datatables.net-bs5';
  import { storeToRefs } from 'pinia';
  import { defineComponent } from 'vue';
- import { CourseStore } from '@/store/course'; // import the auth store we just created
+ import { ExamStore } from '@/store/exam'
+ import { useToast } from 'vue-toastification';
  import { useVuelidate } from '@vuelidate/core';
- import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
- import { useToast } from 'vue-toastification'
+ import { required, email, sameAs, minLength, helpers, } from '@vuelidate/validators';
+ import VueDatePicker from '@vuepic/vue-datepicker';
+ import '@vuepic/vue-datepicker/dist/main.css'
+ import { ref } from 'vue';
+ 
+ 
  
  
  const toast = useToast()
- const router = useRouter();
- const store = CourseStore()
+ const store = ExamStore()
 
+ const { GetopenModalEdit } = storeToRefs(store); //Get Getter
+ const { OpenFormInser } = ExamStore();//Action
+ const { UpdateExam } = ExamStore();//Action
+ const { UploadfileExam } = ExamStore();//Action
+ const { FormExamEdit } = storeToRefs(store);
+ const { ResetForm } = ExamStore();//Action
+ 
 
- await store.fetchCourslist()
- await store.fetchCourseId(router.currentRoute.value.params.id)
  
- // const { Clear } = AlertStore(); // use  action
- const { FormDataCourse } = storeToRefs(store);
- const { FormDataEditCourse } = storeToRefs(store);
- const { Images } = storeToRefs(store);
- const { SaveCourse } = CourseStore();
- const { UpdateCourse } = CourseStore();
- const { SaveLesson } = CourseStore();
- const { ResetForm } = CourseStore(); 
- const { UploadfileCourse } = CourseStore(); 
- const { deletelesson } = CourseStore(); 
- const { Adlesson } = CourseStore(); 
- const { uploadfilecourse } = CourseStore(); 
+ const loginPattern = helpers.regex('alpha', /^(?:[01]\d|2[0-3]):[0-5]\d$/);
  
  
- // store.ClearData();
- // storealert.Clear()
  
- const rules = computed(() => {
+ 
+ const OpenFormInsert = async () => {
+ await store.OpenFormInser()
+  };
+ 
+ 
+ 
+ const closeModal = async () => {
+ await store.closeModal()
+  };
+
+  
+  
+  const rules = computed(() => {
    return {
-     course_code: {
-       required: helpers.withMessage('The News Title field is required', required),
+     em_code: {
+       required: helpers.withMessage('Exam code field is required', required),
        minLength: minLength(6),
      },
-     course_name: {
-       required: helpers.withMessage('The News Description is required', required),
+     em_name: {
+       required: helpers.withMessage('Exam Name field is required', required),
        minLength: minLength(6),
      },
-   
-     course_description: {
-       required: helpers.withMessage('The News Description is required', required),
+     em_description: {
+       required: helpers.withMessage('Exam Description field is required', required),
        minLength: minLength(6),
      },
-   
- 
+     em_random_amount: {
+       required: helpers.withMessage('Exam Amount field is required', required),
+       minLength: minLength(1),
+     },
+     em_time: {
+       pattern: /^(2[0-3]|[0-1]?[\d]):[0-5][\d]:[0-5][\d]$/,
+       required: helpers.withMessage('em_time', required),
+       },
    };
  });
- 
- 
- 
- 
- 
- 
- const v$ = useVuelidate(rules, FormDataEditCourse);
- 
- const save = async () => {
-     v$.value.$validate();
+ const v$ = useVuelidate(rules, FormExamEdit);
+ const Updatedata = async () => {
+  if(!store.image){/////////////////// req image  ใช้ rules ไม่ได้ 
+store.imageReq = true;
+return false;
+}
+   v$.value.$validate();
      if (!v$.value.$error) {
-    let update = await UpdateCourse();
- await toast.success("Save Data");
-  await store.fetchCourseId(router.currentRoute.value.params.id)
-   }
- }
+ await store.UploadfileExam()
+ await store.UpdateExam()
+ await toast.success('Save Data')
+ await store.fetchExamlist();
+ 
+     }
+  };
  
  
  
- const addlesson = async () => {
-  await Adlesson();
  
- }
- const removelesson = async (x) => {
-  await deletelesson(x);
-  
- }
- const removeImage = async () => {
- 
- store.image = null;
- const input = document.querySelector('input[type="file"]');
-   input.value = '';
- }
-
-
- const handleFiles = async (event, x) => {
-  let formData = new FormData();
-  formData.append("files", event.target.files[0]);
-  const image = await uploadfilecourse(formData);
-  const index = store.lessonlist;
-
-  index[x].cs_cover = image.data[0].path;
-
-  //  this.events.splice(index, 1);
-  //  if (index !== -1) {
-  //   // แทนค่า name ใน object ที่มี id เป็น 2 เป็น 'Alice'
-  //  store.lessonlist[index].cs_cover = image.data[0].path;
-  // }
-};
-
-const handleFilesVideo = async (event, x) => {
-  let formData = new FormData();
-  formData.append("files", event.target.files[0]);
-  const video = await uploadfilecourse(formData);
-
-  const index = store.lessonlist;
-  index[x].cs_video = video.data[0].path;
-
-};
- 
- const onFileChange = async (event) => {
+  const onFileChange = async (event) => {
    var input = event.target;
        if (input.files) {
          var reader = new FileReader();
@@ -255,44 +186,36 @@ const handleFilesVideo = async (event, x) => {
  
  }
  
- function image(i) {
-   var x = null;
-   if (i) {
-     const usingSplit = i.split(",");
-     var x = usingSplit[0];
-   } else {
-     var x = "static/upload/2023/7/files-1689561047889.jpg";
-   }
-   return "http://oasapi.iddriver.com/media_file/file/?f=" + x;
+ const removeImage = async () => {
+ 
+ store.image = null;
+ const input = document.querySelector('input[type="file"]');
+   input.value = '';
  }
  
  
  
+     const formatTime = async () => {
+         const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+       
+       if (store.formexam.em_time && !timeRegex.test(store.formexam.em_time)) {
+         // If the entered time doesn't match the format, clear the input
+       //  this.time = '';
+       }
+ 
+  };
+
+function coverimage(i) {
+  let result = i.slice(0, 6);
+if (result === 'static') {
+  return "http://oasapi.iddriver.com/media_file/file/?f="+i;
+}else {
+  return i;
+}
+ }
+
  
  
  </script>
- <style>
-  .preview{
-       display: flex;
-       justify-content: center;
-       align-items: center;
-       height: 100px;
-       width: 100px;
-     }
  
-  .video-container {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio (change this value as per your video's aspect ratio) */
-}
-
-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}   
- 
- </style>
  
