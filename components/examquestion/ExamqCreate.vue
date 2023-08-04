@@ -6,6 +6,8 @@
       </div>
     </div>
     <div class="col-md-12">
+
+       {{ store.formExamq }}
       <label for="inputEmail4" class="form-label">Question</label>
       <input type="text" class="form-control" id="inputEmail4" v-model="store.formExamq.eq_name" :class="{
         'border-red-500 focus:border-red-500': v$.eq_name.$error,
@@ -62,7 +64,7 @@
 
         <tbody>
           <tr v-for="(item, index) in store.choicelist" :key="index">
-            {{ item }}
+            {{ item.ec_image }}
             <td class="delete-item-row">
               <ul class="table-controls">
                 <li><a href="javascript:void(0);" @click="removeChoice(item.id)" class="delete-item"
@@ -112,7 +114,8 @@ const { SaveExamq } = ExamquestionStore();//Action
 const { AdChoice } = ExamquestionStore();//Action
 const { deleteChoice } = ExamquestionStore();//Action
 const { UploadfileExamq } = ExamquestionStore();//Action
-
+const { uploadfileexam } = ExamquestionStore();//Action
+const { ResetForm } = ExamquestionStore();//Action
 
 const rules = computed(() => {
   return {
@@ -156,11 +159,16 @@ return false;
 }
   if (!v$.value.$error) {
 
-    let upload = await UploadfileExamq();  ///////////save 
+    let upload = await UploadfileExamq();
     let save = await SaveExamq();  ///////////save 
 
-    console.log('save',save);
+
+
     await toast.success('Save Data')
+
+  const input = document.querySelector('input[type="file"]');
+        input.value = '';
+   v$.value.$reset();
   }
 }
 
@@ -177,22 +185,6 @@ const removeImage = async () => {
   const input = document.querySelector('input[type="file"]');
   input.value = '';
 }
-const handleFiles = async (event, x) => {
-
-  let formData = new FormData();
-  formData.append('files', event.target.files[0]);
-  const image = await uploadfilecourse(formData);
-
-  const index = store.lessonlist;
-
-  index[x].cs_cover = image.data[0].path;
-  //  if (index !== -1) {
-  //   // แทนค่า name ใน object ที่มี id เป็น 2 เป็น 'Alice'
-  //  store.lessonlist[index].cs_cover = image.data[0].path;
-  // }
-
-}
-
 
 
 const onFileChange = async (event) => {
@@ -206,17 +198,25 @@ const onFileChange = async (event) => {
     store.imagelist = input.files[0];
     reader.readAsDataURL(input.files[0]);
   }
-
 }
+
+const handleFiles = async (event,x) => {
+
+  let formData = new FormData();
+  formData.append('files', event.target.files[0]);
+ const image = await uploadfileexam(formData);
+const index = store.choicelist;
+  index[x].ec_image = image.data[0].path;
+}
+
 
 function image(i) {
   var x = null;
   if (i) {
-    console.log("if");
     const usingSplit = i.split(",");
     var x = usingSplit[0];
   } else {
-    var x = "static/upload/2023/7/files-1689561047889.jpg";
+    var x = "static/upload/2023/8/files-BuxyK5Sy7I.png";
   }
   return "http://oasapi.iddriver.com/media_file/file/?f=" + x;
 }

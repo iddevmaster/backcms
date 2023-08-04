@@ -173,7 +173,7 @@ this.ChangeFormateTime('add');
     return true;
   },
 
-  async ResetForm() {   ////reset Form
+  async ResetForm() {  
 this.imageReq = false;
 this.image = null;
 this.imagelist = null;

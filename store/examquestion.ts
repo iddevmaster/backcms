@@ -90,21 +90,20 @@ formChoice: {
   },
   async SaveChoice(id) {
    
+  
     for (var i = 0; i < this.choicelist.length; i++) {
       const x = i+1;
-      await this.delay(500);
       this.formChoice.ec_index = x;
       this.formChoice.ec_name = this.choicelist[i].ec_name
       this.formChoice.ec_image = this.choicelist[i].ec_image
       this.formChoice.eq_id = id
+      await this.delay(500);
       const data = await ApiService.post('/exam/choice/create', this.formChoice);
-
    {
- 
- 
      }
-   
    }
+
+   await this.ResetForm();
 
   },
   delay(ms) {
@@ -125,20 +124,31 @@ formChoice: {
  
   },
 
-  async ResetForm() {   ////reset Form
+  async ResetForm() {  
 
 
-  },
+    this.choicelist = [];
+    this.image = null,
+    this.imageReq = false,
+    this.imagelist = null,
+    this.formExamq = {
+          eq_name: "",
+          eq_image: "",
+          eq_answer: null,
+          em_id: 40,
+          id : 0,
+        };
+    
+      },
 
   async AdChoice(){
     var x = this.choicelist.length + 1
-    
     const daa = {
       id:x,
       ec_index:null,
       ec_name:"-",
-      ec_image:"-",
-      eq_id:8,
+      ec_image:"",
+      eq_id:null,
     }
     this.choicelist.push(daa);
     },
@@ -170,11 +180,8 @@ formChoice: {
 
 
   async UploadfileExamq() {  
-  
     let formData = new FormData();
     formData.append('files', this.imagelist);
-
-
     if(this.imagelist){
       try {
         const data = await ApiService.upload('/media_file/upload/file',formData);
@@ -184,9 +191,13 @@ formChoice: {
         } catch (error) {
           return false;
         } 
-    
     }
    
+  },
+
+  async uploadfileexam(x){
+    const data = await ApiService.upload('/media_file/upload/file',x);
+    return data;
   },
 
   async ChangeFormateTime() {
