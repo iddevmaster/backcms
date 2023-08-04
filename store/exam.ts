@@ -241,8 +241,6 @@ this.isOpenEdit = true;
   
     let formData = new FormData();
     formData.append('files', this.imagelist);
-
-
     if(this.imagelist){
       try {
         const data = await ApiService.upload('/media_file/upload/file',formData);
@@ -253,9 +251,7 @@ this.isOpenEdit = true;
         } catch (error) {
           return false;
         } 
-    
     }
-   
   },
 
   async ChangeFormateTime(item) {

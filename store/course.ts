@@ -122,6 +122,7 @@ this.formDataEditCourse.user_id = user_id.value
 
 
 const data = await ApiService.post('/course/lesson/list/'+id, this.formsearchcourse).then(response => {
+  console.log(response.data.data);
 if(response.data.data){
   this.lessonlist = [];
   this.del_lesson = [];
@@ -172,23 +173,19 @@ this.del_lesson.push(sortedArray[i].cs_id);
      this.formDatalesson.cs_description = this.lessonlist[i].cs_description
      this.formDatalesson.course_id = id
      this.formDatalesson.user_id = user_id.value
-     try {
-      const data = await ApiService.post('/course/lesson/create', this.formDatalesson).then(response => {
-      //  this.lessonlist = []
-        return true;
-      });
-    } catch (error) {
-      return false;
-    } finally {
+  
+setTimeout(() => {
+   const data = ApiService.post('/course/lesson/create', this.formDatalesson)
+}, 500);
 
-    }
-    
   {
 
-     
+
     }
   
   }
+
+ await this.ResetForm()
 
 
     
@@ -280,11 +277,14 @@ this.del_lesson.push(sortedArray[i].cs_id);
     }
 
   },
-  async deletelesson(cs_id){
-    const index = this.lessonlist.findIndex(item => item.cs_id === cs_id)
+  async deletelesson(item){
+  
+    const index = this.lessonlist[item]
     if (index !== -1) {
       this.lessonlist.splice(index, 1)
     }
+
+  
   },
   async Dellessons(id){
 
