@@ -15,7 +15,6 @@ import { useToast } from 'vue-toastification';
 
 const toast = useToast()
 const store = CourseStore()
-const { posts } = storeToRefs(newTransportStore())
   const { deleteItem_id } = CourseStore();//Action
   const { fetchCourslist } = CourseStore();//Action
   
@@ -56,9 +55,7 @@ const delete_userid = async (id) => {
                             </ol>
                         </nav>
                     </div>
-                
                 <Loading v-if="Pending"></Loading>
-                
             <CourseList></CourseList>
             </div>
           </div>
