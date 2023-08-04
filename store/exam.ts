@@ -174,7 +174,7 @@ this.ChangeFormateTime('add');
   },
 
   async ResetForm() {  
-this.imageReq = false;
+
 this.image = null;
 this.imagelist = null;
 this.path = "";
@@ -197,6 +197,7 @@ this.path = "";
 
 
   async OpenFormInser() {
+    this.image = null;
     this.isOpenCreate = true;
   },
   async OpenEditItem(item) {

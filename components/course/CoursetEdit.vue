@@ -230,14 +230,14 @@ const rules = computed(() => {
   return {
     course_code: {
       required: helpers.withMessage(
-        "The News Title field is required",
+        "The Course Code field is required",
         required
       ),
       minLength: minLength(6),
     },
     course_name: {
       required: helpers.withMessage(
-        "The News Description is required",
+        "The Course Name is required",
         required
       ),
       minLength: minLength(6),
@@ -245,7 +245,7 @@ const rules = computed(() => {
 
     course_description: {
       required: helpers.withMessage(
-        "The News Description is required",
+        "The Course cover is required",
         required
       ),
       minLength: minLength(6),
@@ -261,15 +261,22 @@ const save = async () => {
      await toast.warning("Wait Save Data",{
   timeout: 2000,
 });
-    let updatefile = await UploadfileCourse()
+   
+    try {
+     let updatefile = await UploadfileCourse()
     let updatedata = await UpdateCourse();
-    await toast.success("Save Data");
     await store.fetchCourslist()
    await setTimeout(() => {
        store.fetchCourseId(router.currentRoute.value.params.id);
     }, 500);
-    
-
+     
+      await setTimeout(() => {
+        toast.success("Save Data");
+      }, 500);
+     
+    } catch (error) {
+      await toast.error("Fail Save Data");
+    }
     
   }
 };

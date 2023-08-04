@@ -42,7 +42,7 @@
           <h5 class="card-title mb-3">{{ item.course_name }}</h5>
           <div class="media mt-4 mb-0 pt-1">
             <img
-              src="https://oasapi.iddriver.com/media_file/file/?f=static/upload/2023/7/files-1689870698432.jpeg"
+              src="https://oasapi.iddriver.com/media_file/file/?f=static/upload/2023/8/files-nokBVoCxZy.png"
               class="card-media-image me-3"
               alt=""
             />
@@ -70,17 +70,7 @@
     
     
   </div>
-         <!-- <div>
-          <div class="paginating-container pagination-solid"  v-if="store.total_page > 1"> 
-            <ul class="pagination">    
-              <li class="prev"><a href="javascript:void(0);">Prev</a></li>
-               <li><a href="javascript:void(0);">1</a></li>
-               <li class="active"><a href="javascript:void(0);">2</a></li>
-               <li><a href="javascript:void(0);">3</a></li>
-               <li class="next"><a href="javascript:void(0);">Next</a></li>
-             </ul>
-             </div>
-            </div> -->
+
 
   <div class="paginating-container" v-if="store.total_page > 1">
       <div class="dataTables_paginate paging_simple_numbers" id="zero-config_paginate">
@@ -130,11 +120,7 @@ if (courselist === false) {
 const del = async (id) => {
  const delecourse =  await deleteItem(id);
 };
-const edit = async (id) => {
- // alert('edit');
-  //await deleteItem(id);
-  //await store.fetchNewTransport()
-};
+
 
 const selectshowdata = async (sel) => {
  

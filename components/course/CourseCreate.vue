@@ -234,14 +234,14 @@ const rules = computed(() => {
   return {
     course_code: {
       required: helpers.withMessage(
-        "The News Title field is required",
+        "The Course Code field is required",
         required
       ),
       minLength: minLength(6),
     },
     course_name: {
       required: helpers.withMessage(
-        "The News Description is required",
+        "The Course Name is required",
         required
       ),
       minLength: minLength(6),
@@ -249,7 +249,7 @@ const rules = computed(() => {
 
     course_description: {
       required: helpers.withMessage(
-        "The News Description is required",
+        "The Course Description is required",
         required
       ),
       minLength: minLength(6),
@@ -268,11 +268,9 @@ const save = async () => {
       });
       let uploadfile = await UploadfileCourse();
       let updateCourse = await SaveCourse();
-
       await setTimeout(() => {
         toast.success("Save Data");
       }, 500);
-
       const input = document.querySelector('input[type="file"]');
       input.value = "";
       v$.value.$reset();
