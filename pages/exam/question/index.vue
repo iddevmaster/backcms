@@ -184,61 +184,8 @@ const goToCreatePage = async () => {
                                                                 </div>
                                                             </div>
                                                             
-                                                            <div class="inv--total-amounts">
-                                                            
-                                                                <div class="row mt-4">
-                                                                    <div class="col-sm-5 col-12 order-sm-0 order-1">
-                                                                    </div>
-                                                                    <div class="col-sm-7 col-12 order-sm-1 order-0">
-                                                                        <div class="text-sm-end">
-                                                                            <div class="row">
-                                                                                <div class="col-sm-8 col-7">
-                                                                                    <p class="">Sub Total :</p>
-                                                                                </div>
-                                                                                <div class="col-sm-4 col-5">
-                                                                                    <p class="">$3155</p>
-                                                                                </div>
-                                                                                <div class="col-sm-8 col-7">
-                                                                                    <p class="">Tax 10% :</p>
-                                                                                </div>
-                                                                                <div class="col-sm-4 col-5">
-                                                                                    <p class="">$315</p>
-                                                                                </div>
-                                                                                <div class="col-sm-8 col-7">
-                                                                                    <p class=" discount-rate">Shipping :</p>
-                                                                                </div>
-                                                                                <div class="col-sm-4 col-5">
-                                                                                    <p class="">$10</p>
-                                                                                </div>
-                                                                                <div class="col-sm-8 col-7">
-                                                                                    <p class=" discount-rate">Discount 5% :</p>
-                                                                                </div>
-                                                                                <div class="col-sm-4 col-5">
-                                                                                    <p class="">$150</p>
-                                                                                </div>
-                                                                                <div class="col-sm-8 col-7 grand-total-title mt-3">
-                                                                                    <h4 class="">Grand Total : </h4>
-                                                                                </div>
-                                                                                <div class="col-sm-4 col-5 grand-total-amount mt-3">
-                                                                                    <h4 class="">$3480</h4>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-    
-                                                            </div>
-    
-                                                            <div class="inv--note">
-    
-                                                                <div class="row mt-4">
-                                                                    <div class="col-sm-12 col-12 order-sm-0 order-1">
-                                                                        <p>Note: Thank you for doing Business with us.</p>
-                                                                    </div>
-                                                                </div>
-    
-                                                            </div>
-        
+                                                
+     
                                                         </div>
                                                     </div> 
                                                     
@@ -252,11 +199,8 @@ const goToCreatePage = async () => {
                                     </div>
     
                                     <div class="col-xl-3">
-    
                                         <div class="invoice-actions-btn">
-    
                                             <div class="invoice-action-btn">
-
                                                 <div class="row">
                                                     <div class="col-xl-12 col-md-3 col-sm-6">
                                                         <a href="javascript:void(0);" class="btn btn-primary btn-send">Send Invoice</a>
