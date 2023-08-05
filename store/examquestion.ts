@@ -13,6 +13,7 @@ export const ExamquestionStore = defineStore('examquestion', {
     isOpenEdit: false,
     image: null,
     examqlist:[],
+    examqlisttotal:null,
     sortedbyASC: true,
     imageReq: false,
     imagelist: null,
@@ -58,6 +59,20 @@ export const ExamquestionStore = defineStore('examquestion', {
 
   actions: {
     async fetchExamquestionlist() {
+
+      try {
+        const data = await ApiService.post('/exam/question/5/list', this.formsearchexamquestion).then(response => {
+       console.log(response.data.data.length);
+       this.examqlist = response.data.data
+       this.examqlisttotal = response.data.data.length
+        });
+
+      } catch (error) {
+        console.log('error');
+        return false;
+      } finally {
+
+      }
 
 
     },

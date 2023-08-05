@@ -1,74 +1,24 @@
 <template>
   <div class="row layout-top-spacing">
-    <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
-      <input
-        id="t-text"
-        type="text"
-        name="txt"
-        placeholder="Search"
-        class="form-control"
-        required="" 
-      />
-    </div>
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
-
-    </div>
-
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
-      <select
-        class="form-select form-select"
-        aria-label="Default select example"   @change="selectshowdata($event)" 
-      >
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="50">50</option>
-      </select>
+    <div class="col-xl-12 col-lg-12">
+<div class="pagination-no_spacing">
+    <ul class="pagination">
+        <li><a href="javascript:void(0);" class="prev"><svg> ... </svg></a></li>
+        <li>
+             <div class="col-xs-1" >
+        <input id="ex1" type="number" style="width:50px">
+      </div>
+        
+          
+          </li>
+        <li><a href="javascript:void(0);" >/</a></li>
+        <li><a href="javascript:void(0);">{{store.examqlisttotal}}</a></li>
+        <li><a href="javascript:void(0);" class="next"><svg> ... </svg></a></li>
+    </ul>
+</div>
     </div>
   </div>
 
-  <div class="table-responsive">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-       
-                <th scope="col" @click="sortList('eq_id')">eq_id &#8597;</th>
-                <th scope="col" @click="sortList('eq_name')">eq_name &#8597;</th>
-                <th class="text-center" scope="col">Eq cover</th>
-                <th class="text-center" scope="col">eq_answer</th>
-                <th class="text-center" scope="col">Action</th>
-            </tr>
-        </thead>
-
-     
-        <tbody>
-            <tr  v-for="item in store.examqlist">
-                <td>x</td>
-                <td>
-                  <span class="table-inner-text">
-                   x
-                  </span>
-                </td>
-                <td class="text-center">
-x
-                </td>
-                <td class="text-center">
-              x
-                </td>
-                <td class="text-center">
-                    <span class="badge badge-light-secondary">
-                      x
-                    </span>
-                </td>
-                <td><NuxtLink>
-                  <a class="badge badge-light-primary text-start me-2 action-edit" @click="edit(item)"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></a>
-                   </NuxtLink>
-                   <a class="badge badge-light-danger text-start action-delete" @click="del(item)" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    
-</div>
 
 
             <!-- pageinate -->

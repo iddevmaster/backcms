@@ -72,8 +72,7 @@ const goToCreatePage = async () => {
                               </div>
                         </div>
 
-
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="doc-container">
                                 <div class="row">
                                     <div class="col-xl-9">
@@ -86,9 +85,8 @@ const goToCreatePage = async () => {
                                                         <div class="content-section">
         
                                                             <div class="inv--head-section inv--detail-section">
-                                                            
+                                                        
                                                                 <div class="row">
-
                                                                     <div class="col-sm-6 col-12 mr-auto">
                                                                         <div class="d-flex">
                                                                             <img class="company-logo" src="../src/assets/img/cork-logo.png" alt="company">
@@ -108,36 +106,7 @@ const goToCreatePage = async () => {
                                                                 
                                                             </div>
         
-                                                            <div class="inv--detail-section inv--customer-detail-section">
-    
-                                                                <div class="row">
-        
-                                                                    <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4 align-self-center">
-                                                                        <p class="inv-to">Invoice To</p>
-                                                                    </div>
-    
-                                                                    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 align-self-center order-sm-0 order-1 text-sm-end mt-sm-0 mt-5">
-                                                                        <h6 class=" inv-title">Invoice From</h6>
-                                                                    </div>
-                                                                    
-                                                                    <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
-                                                                        <p class="inv-customer-name">Jesse Cory</p>
-                                                                        <p class="inv-street-addr">405 Mulberry Rd., NC, 28649</p>
-                                                                        <p class="inv-email-address">jcory@company.com</p>
-                                                                        <p class="inv-email-address">(128) 666 070</p>
-                                                                    </div>
-                                                                    
-                                                                    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 order-sm-0 order-1 text-sm-end">
-                                                                        <p class="inv-customer-name">Oscar Garner</p>
-                                                                        <p class="inv-street-addr">2161 Ferrell Street, MN, 56545 </p>
-                                                                        <p class="inv-email-address">info@mail.com</p>
-                                                                        <p class="inv-email-address">(218) 356 9954</p>
-                                                                    </div>
-    
-                                                                </div>
-                                                                
-                                                            </div>
-    
+                                                  
                                                             <div class="inv--product-table-section">
                                                                 <div class="table-responsive">
                                                                     <table class="table">
@@ -229,6 +198,8 @@ const goToCreatePage = async () => {
                         </div>
 
                         
+
+            
 
                         
                     </div>
