@@ -12,7 +12,7 @@ export const ExamquestionStore = defineStore('examquestion', {
     isOpenCreate: false,
     isOpenEdit: false,
     image: null,
-
+    examqlist:[],
     sortedbyASC: true,
     imageReq: false,
     imagelist: null,
@@ -57,7 +57,7 @@ export const ExamquestionStore = defineStore('examquestion', {
   },
 
   actions: {
-    async fetchExamlist() {
+    async fetchExamquestionlist() {
 
 
     },

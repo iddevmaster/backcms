@@ -17,6 +17,7 @@ export default defineNuxtConfig({
   '~/assets/src/plugins/css/light/filepond/custom-filepond.css',
   '~/assets/src/plugins/css/light/flatpickr/custom-flatpickr.css',
   '~/assets/src/assets/css/light/apps/invoice-add.css',
+  '~/assets/src/assets/css/light/apps/invoice-preview.css',
 ],
 
 
