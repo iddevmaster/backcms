@@ -8,13 +8,14 @@ const user_id = useCookie('user_id');
 
 export const ExamquestionStore = defineStore('examquestion', {
   state: () => ({
-    quest_Id:2,
+    quest_Id: 1,
     isOpen: false,
     isOpenCreate: false,
     isOpenEdit: false,
     image: null,
-    examqlist:[],
-    examqlisttotal:null,
+    examqlist: [],
+    em_id: 0,
+    examqlisttotal: null,
     sortedbyASC: true,
     imageReq: false,
     imagelist: null,
@@ -28,7 +29,7 @@ export const ExamquestionStore = defineStore('examquestion', {
       eq_name: "",
       eq_image: "",
       eq_answer: null,
-      em_id: 40,
+      em_id: 0,
       id: 0,
     },
     formChoice: {
@@ -37,19 +38,20 @@ export const ExamquestionStore = defineStore('examquestion', {
       ec_image: "",
       eq_id: null,
     },
-    path: "",
-    examlist: [],
-    exam: null,
-    formsearchexamquestion: {
+    formsearchexam: {
       page: 1,
       per_page: 10,
       search: '',
     },
-    eq: {
-      eq_name: null,
-      eq_image: null,
-      eq_answer: null,
+    path: "",
+    examlist: [],
+    exam: [],
+    formsearchexamquestion: {
+      page: 1,
+      per_page: 200,
+      search: '',
     },
+    eq: [],
   }
 
   ),
@@ -65,19 +67,18 @@ export const ExamquestionStore = defineStore('examquestion', {
 
   actions: {
     async fetchExamquestionlist() {
-
       try {
-        const data = await ApiService.post('/exam/question/5/list', this.formsearchexamquestion).then(response => {
-     let a = this.quest_Id - 1;
+        const data = await ApiService.post('/exam/question/' + this.em_id + '/list', this.formsearchexamquestion).then(response => {
+          this.examqlist = response.data.data
+          this.examqlisttotal = response.data.data.length
+          const examdata = ApiService.post('/exam/main/list', this.formsearchexam).then(exam => {  /////////////ดึง หลักสูตร
+            this.examlist = exam.data.data
+            this.exam = this.examlist.filter(item => item.em_id == this.em_id);
+            this.formExamq.em_id = this.exam[0].em_id
 
-       this.examqlist = response.data.data[a]
 
-       this.eq.eq_answer = response.data.data[a].eq_answer
-       this.eq.eq_image = response.data.data[a].eq_image
-       this.eq.eq_name = response.data.data[a].eq_name
-       this.examqlisttotal = response.data.data.length
-
-       console.log(this.eq);
+          });
+          this.questionlist();
         });
 
       } catch (error) {
@@ -91,6 +92,46 @@ export const ExamquestionStore = defineStore('examquestion', {
     },
 
     sortLists(sortBy) {
+
+    },
+
+    async questionlist() {
+      this.eq = [];
+
+
+
+      if (this.quest_Id > this.examqlist.length) {
+        let numx = this.examqlist.length - 1
+        this.eq.eq_answer = this.examqlist[numx]?.eq_answer
+        this.eq.eq_image = this.examqlist[numx]?.eq_image
+        this.eq.eq_name = this.examqlist[numx]?.eq_name
+        this.quest_Id = this.examqlist.length
+        this.choicelist = this.examqlist[numx]?.choices
+      } else {
+
+        let numx = this.quest_Id - 1
+        const newItem = { eq_answer: this.examqlist[numx]?.eq_answer, eq_image: this.examqlist[numx]?.eq_image, eq_name: this.examqlist[numx]?.eq_name };
+        this.choicelist = this.examqlist[numx]?.choices
+        this.eq.push(newItem);
+        console.log(this.examqlist[numx]);
+
+        // if(numx == -1){
+        //   this.eq.eq_answer = this.examqlist[numx]?.eq_answer
+        //   this.eq.eq_image = this.examqlist[numx]?.eq_image
+        //   this.eq.eq_name = this.examqlist[numx]?.eq_name
+        //   this.quest_Id = 1
+        // }else {
+        // this.eq.eq_answer = this.examqlist[numx]?.eq_answer
+        // this.eq.eq_image = this.examqlist[numx]?.eq_image
+        // this.eq.eq_name = this.examqlist[numx]?.eq_name
+        // }
+
+
+      }
+
+
+
+
 
     },
 
@@ -117,8 +158,6 @@ export const ExamquestionStore = defineStore('examquestion', {
 
     },
     async SaveChoice(id) {
-
-
       for (var i = 0; i < this.choicelist.length; i++) {
         const x = i + 1;
         this.formChoice.ec_index = x;
@@ -130,9 +169,7 @@ export const ExamquestionStore = defineStore('examquestion', {
         {
         }
       }
-
       await this.ResetForm();
-
     },
     delay(ms) {
       return new Promise((resolve) => setTimeout(resolve, ms));

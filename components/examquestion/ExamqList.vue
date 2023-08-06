@@ -1,19 +1,23 @@
 <template>
   <div class="row layout-top-spacing">
     <div class="col-xl-12 col-lg-12">
-<div class="pagination-no_spacing">
+<div class="pagination-no_spacing" v-if="store.examqlisttotal > 0">
     <ul class="pagination">
         <li><a href="javascript:void(0);" class="prev"><svg> ... </svg></a></li>
         <li>
              <div class="col-xs-1" >
-        <input id="ex1" type="number" style="width:50px" v-model="store.quest_Id" :max="store.examqlisttotal" min="1" @keypress="validatePNumber($event)">
+        <input id="ex1" type="number" style="width:50px" v-model="store.quest_Id" :max="store.examqlisttotal" min="1" @input="validatePNumber($event)">
       </div>
-        
-          
           </li>
-        <li><a href="javascript:void(0);" >/</a></li>
+        <li><a href="javascript:void(0);" >/ {{store.quest_Id}}</a></li>
         <li><a href="javascript:void(0);">{{store.examqlisttotal}}</a></li>
         <li><a href="javascript:void(0);" class="next"><svg> ... </svg></a></li>
+    </ul>
+</div>
+
+<div class="pagination-no_spacing" v-else>
+    <ul class="pagination">
+       ไม่มีข้อมูล
     </ul>
 </div>
     </div>
@@ -48,10 +52,12 @@ import { useToast } from "vue-toastification";
 
 const toast = useToast();
 const store = ExamquestionStore();
-
+const { questionlist } = ExamquestionStore();//Action
 
 
 const Examlistq = await store.fetchExamquestionlist();
+
+
 
 const del = async (item) => {
 
@@ -97,9 +103,9 @@ const validatePNumber = async (evt) => {
 const keysAllowed: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   const keyPressed: string = evt.key;
   if (!keysAllowed.includes(keyPressed)) {
- 
          evt.preventDefault()
   }
+  await questionlist();
 }
 
 

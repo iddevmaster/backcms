@@ -117,6 +117,8 @@ const { UploadfileExamq } = ExamquestionStore();//Action
 const { uploadfileexam } = ExamquestionStore();//Action
 const { ResetForm } = ExamquestionStore();//Action
 
+ store.choicelist = [];
+
 const rules = computed(() => {
   return {
     eq_name: {

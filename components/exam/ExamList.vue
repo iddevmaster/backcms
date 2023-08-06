@@ -33,9 +33,11 @@
        
                 <th scope="col" @click="sortList('em_code')">Exam Code &#8597;</th>
                 <th scope="col" @click="sortList('em_name')">Exam Name &#8597;</th>
-                <th class="text-center" scope="col">Exam cover</th>
+                <th class="text-center" scope="col">Exam Cover</th>
                 <th class="text-center" scope="col">Exam Description</th>
                 <th class="text-center" scope="col" @click="sortList('em_random_amount')">Exam Random &#8597;</th>
+                 <th class="text-center" scope="col" @click="sortList('total_question')">Total Question &#8597;</th>
+            
                 <th class="text-center" scope="col">Action</th>
             </tr>
         </thead>
@@ -58,11 +60,23 @@
                 <td class="text-center">
                     <span class="badge badge-light-secondary">{{item.em_random_amount}}</span>
                 </td>
-                <td><NuxtLink>
+                 <td class="text-center">
+                    <span class="badge badge-light-secondary">{{item.total_question}}</span>
+                </td>
+                <!-- <td>
+                  <NuxtLink>
                   <a class="badge badge-light-primary text-start me-2 action-edit" @click="edit(item)"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg></a>
                    </NuxtLink>
+
                    <a class="badge badge-light-danger text-start action-delete" @click="del(item)" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></a>
-                </td>
+                </td> -->
+                <td align="center">
+             <div class="btn-group-vertical">
+            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" @click="edit(item)">แก้ไข</button>
+            <button type="button" class="btn btn-success" style="background-color:#3F2C73;"  @click="goToAddEx(item)">เพิ่มข้อสอบ</button>
+            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" @click="del(item)">ลบ</button>
+            </div>
+          </td>
             </tr>
         </tbody>
     </table>
@@ -93,6 +107,7 @@ import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
 import { ExamStore } from "@/store/exam";
 import { useToast } from "vue-toastification";
+const router = useRouter();
 
 const toast = useToast();
 const store = ExamStore();
@@ -135,7 +150,15 @@ const searchData = async () => {
  
 
 function goToPage(page) {
-  console.log(page);
+
+}
+
+function goToAddEx(item) {
+
+localStorage.setItem('em_id', item.em_id);
+localStorage.setItem('em_name', item.em_name);
+
+ router.push({ path: 'exam/question/'+item.em_id})
 }
 
 const sortList = async (sortBy) => {
