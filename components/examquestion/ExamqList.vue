@@ -6,7 +6,7 @@
         <li><a href="javascript:void(0);" class="prev"><svg> ... </svg></a></li>
         <li>
              <div class="col-xs-1" >
-        <input id="ex1" type="number" style="width:50px">
+        <input id="ex1" type="number" style="width:50px" v-model="store.quest_Id" :max="store.examqlisttotal" min="1" @keypress="validatePNumber($event)">
       </div>
         
           
@@ -91,6 +91,17 @@ const setCurrentPageclick = async (page) => {
  await setCurrentPage (page)
  await store.fetchExamlist()
 };
+
+const validatePNumber = async (evt) => {
+
+const keysAllowed: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  const keyPressed: string = evt.key;
+  if (!keysAllowed.includes(keyPressed)) {
+ 
+         evt.preventDefault()
+  }
+}
+
 
 
 function coverttime(date) {

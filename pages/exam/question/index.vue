@@ -16,7 +16,7 @@ import { required, email, sameAs, minLength, helpers, } from '@vuelidate/validat
 
 
 const toast = useToast()
-const store = ExamStore()
+const store = ExamquestionStore()
 const router = useRouter();
 
 
@@ -90,7 +90,7 @@ const goToCreatePage = async () => {
                                                                     <div class="col-sm-6 col-12 mr-auto">
                                                                         <div class="d-flex">
                                                                             <img class="company-logo" src="../src/assets/img/cork-logo.png" alt="company">
-                                                                            <h3 class="in-heading align-self-center">Cork Inc.</h3>
+                                                                            <h3 class="in-heading align-self-center">Cork Inc.</h3> {{ store.eq.eq_name }}
                                                                         </div>
                                                                         <p class="inv-street-addr mt-3">XYZ Delta Street</p>
                                                                         <p class="inv-email-address">info@company.com</p>
@@ -98,7 +98,7 @@ const goToCreatePage = async () => {
                                                                     </div>
                                                                     
                                                                     <div class="col-sm-6 text-sm-end">
-                                                                        <p class="inv-list-number mt-sm-3 pb-sm-2 mt-4"><span class="inv-title">Invoice : </span> <span class="inv-number">#0001</span></p>
+                                                                        <p class="inv-list-number mt-sm-3 pb-sm-2 mt-4"><span class="inv-title">Answer : </span> <span class="inv-number">{{ store.eq.eq_answer }}</span></p>
                                                                         <p class="inv-created-date mt-sm-5 mt-3"><span class="inv-title">Invoice Date : </span> <span class="inv-date">20 Mar 2022</span></p>
                                                                         <p class="inv-due-date"><span class="inv-title">Due Date : </span> <span class="inv-date">26 Mar 2022</span></p>
                                                                     </div>                                                                

@@ -8,6 +8,7 @@ const user_id = useCookie('user_id');
 
 export const ExamquestionStore = defineStore('examquestion', {
   state: () => ({
+    quest_Id:2,
     isOpen: false,
     isOpenCreate: false,
     isOpenEdit: false,
@@ -44,6 +45,11 @@ export const ExamquestionStore = defineStore('examquestion', {
       per_page: 10,
       search: '',
     },
+    eq: {
+      eq_name: null,
+      eq_image: null,
+      eq_answer: null,
+    },
   }
 
   ),
@@ -62,9 +68,16 @@ export const ExamquestionStore = defineStore('examquestion', {
 
       try {
         const data = await ApiService.post('/exam/question/5/list', this.formsearchexamquestion).then(response => {
-       console.log(response.data.data.length);
-       this.examqlist = response.data.data
+     let a = this.quest_Id - 1;
+
+       this.examqlist = response.data.data[a]
+
+       this.eq.eq_answer = response.data.data[a].eq_answer
+       this.eq.eq_image = response.data.data[a].eq_image
+       this.eq.eq_name = response.data.data[a].eq_name
        this.examqlisttotal = response.data.data.length
+
+       console.log(this.eq);
         });
 
       } catch (error) {
