@@ -16,8 +16,10 @@
       </div>
     </div>
     <div class="col-md-12">
+
+       {{ store.formEditExamq }}
       <label for="inputEmail4" class="form-label">Question</label>
-      <input type="text" class="form-control" id="inputEmail4" v-model="store.formExamq.eq_name" :class="{
+      <input type="text" class="form-control" id="inputEmail4" v-model="store.formEditExamq.eq_name" :class="{
         'border-red-500 focus:border-red-500': v$.eq_name.$error,
         'border-[#42d392] ': !v$.eq_name.$invalid,
       }" @change="v$.eq_name.$touch">
@@ -27,10 +29,10 @@
     </div>
     <div class="col-md-12">
       <label for="inputPassword4" class="form-label">Answer</label>
-      <input type="text" class="form-control" id="inputPassword4" v-model="store.formExamq.eq_answer" :class="{
+      <input type="text" class="form-control" id="inputPassword4" v-model="store.formEditExamq.eq_answer" :class="{
         'border-red-500 focus:border-red-500': v$.eq_answer.$error,
         'border-[#42d392] ': !v$.eq_answer.$invalid,
-      }" @change="v$.eq_answer.$touch" min="1" @keypress="validatePNumber($event)" minlength="1" maxlength="1">
+      }" @change="v$.eq_answer.$touch" min="1"    @keypress="validatePNumber($event)" minlength="1" maxlength="1">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.eq_answer.$error">{{
         v$.eq_answer.$errors[0].$message
       }}</span>
@@ -38,8 +40,7 @@
 
 
     <div class="form-group mb-4 mt-3">
-      <label for="exampleFormControlFile1">Image</label> <span class="text-xs text-red-500" style="color:red"
-        v-if="store.imageReq == true"> Invalid file selected</span>
+      <label for="exampleFormControlFile1">Image</label> <span class="text-xs text-red-500" style="color:red" v-if="store.imageReq == true"> Invalid file selected</span>
       <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChange" ref="fileupload">
     </div>
     <div class="border p-2 mt-3">
@@ -47,7 +48,7 @@
       <template v-if="store.image">
         <div class="row">
           <div class="col-3">
-            <img :src="store.image" class="img-fluid" />
+            <img  :src="coverimage(store.image)" class="img-fluid" />
             <button @click="removeImage()">Remove image</button>
           </div>
         </div>
@@ -73,13 +74,15 @@
 
         <tbody>
           <tr v-for="(item, index) in store.choicelist" :key="index">
-            {{ item }}
+        {{ item }}
+        {{ store.deletechoice }}
             <td class="delete-item-row">
               <ul class="table-controls">
-                <li><a href="javascript:void(0);" @click="removeChoice(item.id)" class="delete-item" data-toggle="tooltip"
-                    data-placement="top" title="" data-original-title="Delete"><svg xmlns="http://www.w3.org/2000/svg"
-                      width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                      stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle">
+                <li><a href="javascript:void(0);" @click="removeChoice(item.id)" class="delete-item"
+                    data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><svg
+                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="feather feather-x-circle">
                       <circle cx="12" cy="12" r="10"></circle>
                       <line x1="15" y1="9" x2="9" y2="15"></line>
                       <line x1="9" y1="9" x2="15" y2="15"></line>
@@ -102,7 +105,7 @@
     </div>
   </div>
   <div class="col-xl-12 col-md-12">
-    <button type="button" class="btn btn-success" @click="save()">บันทึก</button>
+    <button type="button" class="btn btn-success" @click="save()">แก้ไข</button>
   </div>
 </template>
 <script setup lang="ts">
@@ -117,19 +120,24 @@ import { useToast } from 'vue-toastification'
 const toast = useToast()
 const router = useRouter();
 const store = ExamquestionStore()
-const { FormExamq } = storeToRefs(store);
-const { SaveExamq } = ExamquestionStore();//Action
+const { FormEditExamq } = storeToRefs(store);
+const { UpdateExamq } = ExamquestionStore();//Action
 const { AdChoice } = ExamquestionStore();//Action
 const { deleteChoice } = ExamquestionStore();//Action
 const { UploadfileExamq } = ExamquestionStore();//Action
 const { uploadfileexam } = ExamquestionStore();//Action
 const { ResetForm } = ExamquestionStore();//Action
-const { ClearLocal } = ExamquestionStore();//Action
 
 
-store.choicelist = [];
 store.formExamq.em_id = localStorage.getItem('em_id');
 let name = localStorage.getItem('em_name');
+
+
+
+
+await store.edit();
+
+
 
 const rules = computed(() => {
   return {
@@ -146,62 +154,37 @@ const rules = computed(() => {
 
 
 
+
+
+
 const validatePNumber = async (evt) => {
 
   const keysAllowed: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  const keyPressed: string = evt.key;
-  if (!keysAllowed.includes(keyPressed)) {
-    evt.preventDefault()
+    const keyPressed: string = evt.key;
+    if (!keysAllowed.includes(keyPressed)) {
+           evt.preventDefault()
+    }
   }
-}
 
 
 
 
 
-const v$ = useVuelidate(rules, FormExamq);
+const v$ = useVuelidate(rules, FormEditExamq);
 
 const save = async () => {
   v$.value.$validate();
-
-  if (!store.image) {/////////////////// req image  ใช้ rules ไม่ได้ 
-    store.imageReq = true;
-    return false;
-  }
-  if (!v$.value.$error) {
-    await toast.warning("Wait Save Data", {
-      timeout: 2000,
-    });
-    let upload = await UploadfileExamq();
-    let save = await SaveExamq();  ///////////save 
-    let clear = await ClearLocal();  ///////////save 
-
-
-    await toast.success('Save Data')
-    const input = document.querySelector('input[type="file"]');
-    input.value = '';
-    v$.value.$reset();
-
-    setTimeout(() => {
-      router.go(-1);
-    }, 500);
-
-
-
-  }
+if(!store.image){/////////////////// req image  ใช้ rules ไม่ได้ 
+store.imageReq = true;
+return false;
 }
+  if (!v$.value.$error) {
 
-const Clear = async () => {
+   // let upload = await UploadfileExamq();
+    let save = await UpdateExamq();  ///////////save 
+    await toast.success('Save Data')
 
-
-  // localStorage.clear();
-  //  setTimeout(() => {
-  //    router.go(-1);
-  //  }, 500);
-
-  //  const input = document.querySelector('input[type="file"]');
-  //       input.value = '';
-  //  v$.value.$reset();
+  }
 }
 
 const addChoice = async () => {
@@ -209,7 +192,6 @@ const addChoice = async () => {
 }
 const removeChoice = async (x) => {
   await deleteChoice(x);
-
 }
 const removeImage = async () => {
 
@@ -232,12 +214,12 @@ const onFileChange = async (event) => {
   }
 }
 
-const handleFiles = async (event, x) => {
+const handleFiles = async (event,x) => {
 
   let formData = new FormData();
   formData.append('files', event.target.files[0]);
-  const image = await uploadfileexam(formData);
-  const index = store.choicelist;
+ const image = await uploadfileexam(formData);
+const index = store.choicelist;
   index[x].ec_image = image.data[0].path;
 }
 
@@ -252,6 +234,16 @@ function image(i) {
   }
   return "http://oasapi.iddriver.com/media_file/file/?f=" + x;
 }
+
+function coverimage(i) {
+let result = i.slice(0, 6);
+if (result === 'static') {
+  return "http://oasapi.iddriver.com/media_file/file/?f="+i;
+}else {
+  return i;
+}
+ }
+
 
 
 

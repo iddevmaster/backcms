@@ -59,25 +59,9 @@
                         <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>APPLICATIONS</span></div>
                     </li>
 
-                    <li class="menu">
-                        <a href="#" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                
-                                <nuxt-link to="/table">Table</nuxt-link>
-                            </div>
-                        </a>
-                    </li>
+                  
 
-                    <li class="menu">
-                        <a href="#" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                 
-                                <nuxt-link to="/users">User Manage</nuxt-link>
-                            </div>
-                        </a>
-                    </li>
                     <li class="menu">
                         <a href="#course" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
@@ -98,25 +82,7 @@
                         </ul>
                     </li>
 
-                          <li class="menu">
-                        <a href="#lesson" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                                <span>Lesson Manage</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                        <ul class="collapse submenu list-unstyled" id="lesson" data-bs-parent="#accordionExample">
-                            <li>
-                                <nuxt-link to="/lesson">Lesson List</nuxt-link>
-                            </li>
-                            <li>
-                                <nuxt-link to="/lesson/create">Add Lesson</nuxt-link>
-                            </li>
-                        </ul>
-                    </li>
+                
 
 
                     <li class="menu">
@@ -133,10 +99,6 @@
                             <li>
                                 <nuxt-link to="/exam">Exam List</nuxt-link>
                             </li>
-                            <li>
-                                <nuxt-link to="/exam/question">Exam Question</nuxt-link>
-                            </li>
-                          
                         </ul>
                     </li>
 

@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import ApiService from '../services/api.service';
 import axios from "axios";
 import { ref } from 'vue';
+import { fail } from 'assert';
 const user_id = useCookie('user_id');
 
 
@@ -9,11 +10,13 @@ const user_id = useCookie('user_id');
 export const ExamquestionStore = defineStore('examquestion', {
   state: () => ({
     quest_Id: 1,
+    pending:false,
     isOpen: false,
     isOpenCreate: false,
     isOpenEdit: false,
     image: null,
     examqlist: [],
+    deletechoice:[],
     em_id: 0,
     examqlisttotal: null,
     sortedbyASC: true,
@@ -51,7 +54,22 @@ export const ExamquestionStore = defineStore('examquestion', {
       per_page: 200,
       search: '',
     },
+    formExam: {
+      eq_name: "",
+      eq_image: "",
+      eq_answer: null,
+      em_id: 0,
+      id: 0,
+    },
+    formEditExamq: {
+      eq_name: "",
+      eq_image: "",
+      eq_answer: null,
+      em_id: 0,
+      id: 0,
+    },
     eq: [],
+    modaldelete: false,
   }
 
   ),
@@ -61,6 +79,17 @@ export const ExamquestionStore = defineStore('examquestion', {
     FormExamq(state) {
       return state.formExamq;
     },
+    FormEditExamq(state) {
+      return state.formEditExamq;
+    },
+    GetopenModalDelete(state) {
+      return state.modaldelete;
+    },
+    Pending(state) {
+      return state.pending;
+    },
+
+    
 
 
   },
@@ -71,12 +100,11 @@ export const ExamquestionStore = defineStore('examquestion', {
         const data = await ApiService.post('/exam/question/' + this.em_id + '/list', this.formsearchexamquestion).then(response => {
           this.examqlist = response.data.data
           this.examqlisttotal = response.data.data.length
+
           const examdata = ApiService.post('/exam/main/list', this.formsearchexam).then(exam => {  /////////////ดึง หลักสูตร
             this.examlist = exam.data.data
             this.exam = this.examlist.filter(item => item.em_id == this.em_id);
             this.formExamq.em_id = this.exam[0].em_id
-
-
           });
           this.questionlist();
         });
@@ -96,40 +124,34 @@ export const ExamquestionStore = defineStore('examquestion', {
     },
 
     async questionlist() {
+      console.log(this.quest_Id);
       this.eq = [];
-      if (this.quest_Id > this.examqlist.length) {
-        let numx = this.examqlist.length - 1
-        this.eq.eq_answer = this.examqlist[numx]?.eq_answer
-        this.eq.eq_image = this.examqlist[numx]?.eq_image
-        this.eq.eq_name = this.examqlist[numx]?.eq_name
-        this.quest_Id = this.examqlist.length
-        this.choicelist = this.examqlist[numx]?.choices
-      } else {
-
-        let numx = this.quest_Id - 1
-        const newItem = { eq_answer: this.examqlist[numx]?.eq_answer, eq_image: this.examqlist[numx]?.eq_image, eq_name: this.examqlist[numx]?.eq_name };
-        this.choicelist = this.examqlist[numx]?.choices
-        this.eq.push(newItem);
-        console.log(this.examqlist[numx]);
-
-        // if(numx == -1){
-        //   this.eq.eq_answer = this.examqlist[numx]?.eq_answer
-        //   this.eq.eq_image = this.examqlist[numx]?.eq_image
-        //   this.eq.eq_name = this.examqlist[numx]?.eq_name
-        //   this.quest_Id = 1
-        // }else {
-        // this.eq.eq_answer = this.examqlist[numx]?.eq_answer
-        // this.eq.eq_image = this.examqlist[numx]?.eq_image
-        // this.eq.eq_name = this.examqlist[numx]?.eq_name
-        // }
-
-
+    
+      if (this.examqlist.length == 0) {    //////////เช็ค ก่อนว่า มี ข้อสอบไหม  if คือ ไม่มี
+        this.eq = [];
+      } else {//////////เช็ค ก่อนว่า มี ข้อสอบไหม else  คือมี
+        if (this.quest_Id > this.examqlist.length) {
+          let numx = 0
+          this.quest_Id = 1
+          const newItem = { eq_answer: this.examqlist[0]?.eq_answer, eq_image: this.examqlist[0]?.eq_image, eq_name: this.examqlist[0]?.eq_name, id: this.examqlist[0]?.eq_id, em_id: this.examqlist[0]?.em_id };
+          this.choicelist = this.examqlist[numx]?.choices
+          this.eq.push(newItem);
+          this.choicelist = this.examqlist[0]?.choices
+        } else { 
+          if (this.quest_Id == 1) {
+            let numx = this.quest_Id - 1
+            const newItem = { eq_answer: this.examqlist[numx]?.eq_answer, eq_image: this.examqlist[numx]?.eq_image, eq_name: this.examqlist[numx]?.eq_name, id: this.examqlist[numx]?.eq_id, em_id: this.examqlist[0]?.em_id };
+            this.choicelist = this.examqlist[numx]?.choices
+            this.eq.push(newItem);
+          } else {
+            let numx = this.quest_Id - 1
+            const newItem = { eq_answer: this.examqlist[numx]?.eq_answer, eq_image: this.examqlist[numx]?.eq_image, eq_name: this.examqlist[numx]?.eq_name, id: this.examqlist[numx]?.eq_id };
+            this.choicelist = this.examqlist[numx]?.choices
+            this.eq.push(newItem);
+          }
+        }
       }
-
-
-
-
-
+      
     },
 
     async selectentires(data_entires) {
@@ -143,9 +165,8 @@ export const ExamquestionStore = defineStore('examquestion', {
 
       try {
         const data = await ApiService.post('/exam/question/create', this.formExamq).then(response => {
-          console.log(response.data.insertId);
-          this.SaveChoice(response.data.insertId)
-          return true;
+        let choice = this.SaveChoice(response.data.insertId)
+          return choice;
         });
       } catch (error) {
         return false;
@@ -162,24 +183,99 @@ export const ExamquestionStore = defineStore('examquestion', {
         this.formChoice.ec_image = this.choicelist[i].ec_image
         this.formChoice.eq_id = id
         await this.delay(500);
+        console.log(i);
         const data = await ApiService.post('/exam/choice/create', this.formChoice);
         {
         }
       }
       await this.ResetForm();
+
+
+      return true;
     },
     delay(ms) {
       return new Promise((resolve) => setTimeout(resolve, ms));
     },
+
+    async edit() {
+      console.log('edit');
+
+      const cachedData = localStorage.getItem('cachedData');
+      const choice = localStorage.getItem('choice');
+let x = JSON.parse(cachedData);
+
+let c = JSON.parse(choice);
+
+
+console.log(c);
+
+for (var i = 0; i < c.length; i++) {
+ this.deletechoice.push(c[i].ec_id)
+     this.choicelist.push({ id:i+1, ec_id: c[i].ec_id, ec_image: c[i].ec_image, ec_index:c[i].ec_index, ec_name:c[i].ec_name, em_id:c[i].em_id,eq_id:c[i].eq_id });
+}
+
+
+this.formEditExamq = {
+  eq_name: x[0].eq_name,
+  eq_image: x[0].eq_image,
+  eq_answer: x[0].eq_answer,
+  em_id: x[0].em_id,
+  id: x[0].id,
+};
+this.image = x[0].eq_image;
+
+
+
+
+
+      // try {
+      //   const data = await ApiService.post('/exam/question/' + this.em_id + '/list', this.formsearchexamquestion).then(response => {
+      //     this.examqlist = response.data.data
+      //     this.examqlisttotal = response.data.data.length
+
+      //     const examdata = ApiService.post('/exam/main/list', this.formsearchexam).then(exam => {  /////////////ดึง หลักสูตร
+      //       this.examlist = exam.data.data
+      //       this.exam = this.examlist.filter(item => item.em_id == this.em_id);
+      //       this.formExamq.em_id = this.exam[0].em_id
+      //     });
+      //     this.questionlist();
+      //   });
+
+      // } catch (error) {
+      //   console.log('error');
+      //   return false;
+      // } finally {
+
+      // }
+
+
+    },
     async UpdateExamq() {
 
+
+for (var i = 0; i < this.choicelist.length; i++) {
+  const x = i + 1;
+  this.formChoice.ec_index = x;
+  this.formChoice.ec_name = this.choicelist[i].ec_name
+  this.formChoice.ec_image = this.choicelist[i].ec_image
+  this.formChoice.eq_id = this.formEditExamq.id
+  await this.delay(500);
+  {
+  }
+}
     },
 
 
 
     async deleteExamq(item) {
 
-
+      try {
+        const del = await ApiService.delete('/exam/question/delete/' + item[0].id);
+        this.eq = [];
+        return true;
+      } catch (error) {
+        return false;
+      }
     },
 
     async deleteImage(image) {
@@ -210,9 +306,10 @@ export const ExamquestionStore = defineStore('examquestion', {
         ec_index: null,
         ec_name: "-",
         ec_image: "",
-        eq_id: null,
+        eq_id: "",
       }
       this.choicelist.push(daa);
+      console.log(this.choicelist.length);
     },
 
     async deleteChoice(x) {
@@ -238,8 +335,6 @@ export const ExamquestionStore = defineStore('examquestion', {
       this.isOpenEdit = false;
 
     },
-
-
 
     async UploadfileExamq() {
       let formData = new FormData();
@@ -267,6 +362,14 @@ export const ExamquestionStore = defineStore('examquestion', {
 
 
     },
+    async ClearLocal() {
+  localStorage.clear();
+
+  return true;
+
+
+    },
+
   },
 
 
