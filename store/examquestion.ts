@@ -97,9 +97,6 @@ export const ExamquestionStore = defineStore('examquestion', {
 
     async questionlist() {
       this.eq = [];
-
-
-
       if (this.quest_Id > this.examqlist.length) {
         let numx = this.examqlist.length - 1
         this.eq.eq_answer = this.examqlist[numx]?.eq_answer
