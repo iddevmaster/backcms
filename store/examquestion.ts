@@ -252,17 +252,18 @@ this.image = x[0].eq_image;
     },
     async UpdateExamq() {
 
+     await this.deleteChoiceCall();
 
-for (var i = 0; i < this.choicelist.length; i++) {
-  const x = i + 1;
-  this.formChoice.ec_index = x;
-  this.formChoice.ec_name = this.choicelist[i].ec_name
-  this.formChoice.ec_image = this.choicelist[i].ec_image
-  this.formChoice.eq_id = this.formEditExamq.id
-  await this.delay(500);
-  {
-  }
-}
+// for (var i = 0; i < this.choicelist.length; i++) {
+//   const x = i + 1;
+//   this.formChoice.ec_index = x;
+//   this.formChoice.ec_name = this.choicelist[i].ec_name
+//   this.formChoice.ec_image = this.choicelist[i].ec_image
+//   this.formChoice.eq_id = this.formEditExamq.id
+//   await this.delay(500);
+//   {
+//   }
+// }
     },
 
 
@@ -318,6 +319,16 @@ for (var i = 0; i < this.choicelist.length; i++) {
       if (index !== -1) {
         this.choicelist.splice(index, 1)
       }
+    },
+
+    async deleteChoiceCall() {
+    
+      for (var i = 0; i < this.deletechoice.length; i++) {
+        console.log(this.deletechoice);
+      const del = await ApiService.delete('/exam/choice/delete/' + this.deletechoice[i]);
+      {
+  }
+}
     },
 
 
