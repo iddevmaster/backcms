@@ -121,7 +121,7 @@ const toast = useToast()
 const router = useRouter();
 const store = ExamquestionStore()
 const { FormEditExamq } = storeToRefs(store);
-const { UpdateExamq } = ExamquestionStore();//Action
+const { UpdateExa } = ExamquestionStore();//Action
 const { AdChoice } = ExamquestionStore();//Action
 const { deleteChoice } = ExamquestionStore();//Action
 const { UploadfileExamq } = ExamquestionStore();//Action
@@ -179,10 +179,16 @@ store.imageReq = true;
 return false;
 }
   if (!v$.value.$error) {
-
    // let upload = await UploadfileExamq();
-    let save = await UpdateExamq();  ///////////save 
-    await toast.success('Save Data')
+    try {
+      let save = await UpdateExa();  ///////////save 
+      if(save == true){
+      toast.success('Save Data')
+      }
+  
+    } catch (error) {
+      toast.error('Fail Save Data')
+    }
 
   }
 }

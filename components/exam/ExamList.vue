@@ -72,9 +72,9 @@
                 </td> -->
                 <td align="center">
              <div class="btn-group-vertical">
-            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" @click="edit(item)">แก้ไข</button>
-            <button type="button" class="btn btn-success" style="background-color:#3F2C73;"  @click="goToAddEx(item)">เพิ่มข้อสอบ</button>
-            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" @click="del(item)">ลบ</button>
+            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" @click="edit(item)">Edit</button>
+            <button type="button" class="btn btn-success" style="background-color:#3F2C73;"  @click="goToAddEx(item)">Add Examn</button>
+            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" @click="del(item)">Delete</button>
             </div>
           </td>
             </tr>

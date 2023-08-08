@@ -160,7 +160,7 @@ function image(i) {
 
                                                                 <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4 align-self-center"
                                                                     v-for="(exams, x) in store.exam" :key="x">
-                                                                    <p class="inv-to">ข้อสอบหลักสูตร : {{ exams.em_name }}
+                                                                    <p class="inv-to">Exam Main : {{ exams.em_name }}
                                                                     </p>
                                                                 </div>
 
@@ -174,9 +174,9 @@ function image(i) {
                                                                 <table class="table">
                                                                     <thead class="">
                                                                         <tr>
-                                                                            <th scope="col">ลำดับ</th>
-                                                                            <th scope="col">คำตอบ</th>
-                                                                            <th class="text-end" scope="col">รูปภาพ</th>
+                                                                            <th scope="col">Index</th>
+                                                                            <th scope="col">Answer</th>
+                                                                            <th class="text-end" scope="col">Image Choice</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -195,7 +195,7 @@ function image(i) {
                                                                 </table>
                                                             </div>
                                                             <div class="no-d" v-else>
-                                                                ไม่มีข้อมูล
+                                                                No data
                                                             </div>
                                                         </div>
 
@@ -222,17 +222,17 @@ function image(i) {
                                             <div class="row">
                                                 <div class="col-xl-12 col-md-3 col-sm-6">
                                                     <a class="btn btn-success btn-send"
-                                                        @click="goToExmPage()">กลับหน้าหลักสูตร</a>
+                                                        @click="goToExmPage()">BackExam</a>
                                                 </div>
                                                 <div class="col-xl-12 col-md-3 col-sm-6">
                                                     <a class="btn btn-primary btn-print"
-                                                        @click="goToCreatePage()">แบบฟอร์มเพิ่มข้อสอบ</a>
+                                                        @click="goToCreatePage()">Add Foam Exam</a>
                                                 </div>
                                                 <div class="col-xl-12 col-md-3 col-sm-6">
-                                                    <a class="btn btn-dark btn-download" @click="goToEditPage()">แก้ไข</a>
+                                                    <a class="btn btn-dark btn-download" @click="goToEditPage()">Edit</a>
                                                 </div>
                                                 <div class="col-xl-12 col-md-3 col-sm-6">
-                                                    <a class="btn btn-danger btn-edit" @click="deleteItem()">ลบ</a>
+                                                    <a class="btn btn-danger btn-edit" @click="deleteItem()">Delete</a>
                                                 </div>
 
                                             </div>

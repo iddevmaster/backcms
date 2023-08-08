@@ -198,16 +198,16 @@ export const ExamquestionStore = defineStore('examquestion', {
     },
 
     async edit() {
-      console.log('edit');
+      this.choicelist = [];
+      this.deletechoice = [];
 
       const cachedData = localStorage.getItem('cachedData');
       const choice = localStorage.getItem('choice');
 let x = JSON.parse(cachedData);
-
 let c = JSON.parse(choice);
 
 
-console.log(c);
+
 
 for (var i = 0; i < c.length; i++) {
  this.deletechoice.push(c[i].ec_id)
@@ -250,9 +250,23 @@ this.image = x[0].eq_image;
 
 
     },
-    async UpdateExamq() {
+    async UpdateExa() {
+      await this.UploadfileExamq();
+      await this.deleteChoiceCall();
+      await this.UpdateExamq()
+      return true;
+      // try {
+        
 
-     await this.deleteChoiceCall();
+      //   await Promise.all([this.deleteChoiceCall(), this.UpdateExamq2()]);
+
+      // } catch (error) {
+      //   console.log('error');
+      //   return false;
+      // } finally {
+
+      // }
+   //  await this.deleteChoiceCall();
 
 // for (var i = 0; i < this.choicelist.length; i++) {
 //   const x = i + 1;
@@ -264,6 +278,13 @@ this.image = x[0].eq_image;
 //   {
 //   }
 // }
+    },
+
+    async UpdateExamq() {
+      console.log('UpdateExamq2');
+const data = await ApiService.put('/exam/question/update/' + this.formEditExamq.id, this.formEditExamq).then(response => {
+return true;
+});
     },
 
 
@@ -322,7 +343,7 @@ this.image = x[0].eq_image;
     },
 
     async deleteChoiceCall() {
-    
+   //   console.log('1');
       for (var i = 0; i < this.deletechoice.length; i++) {
         console.log(this.deletechoice);
       const del = await ApiService.delete('/exam/choice/delete/' + this.deletechoice[i]);
@@ -350,11 +371,13 @@ this.image = x[0].eq_image;
     async UploadfileExamq() {
       let formData = new FormData();
       formData.append('files', this.imagelist);
+      console.log(this.imagelist);
       if (this.imagelist) {
         try {
           const data = await ApiService.upload('/media_file/upload/file', formData);
           //  this.path = data.data[0].path
           this.formExamq.eq_image = data.data[0].path
+          this.formEditExamq.eq_image = data.data[0].path
           return true;
         } catch (error) {
           return false;

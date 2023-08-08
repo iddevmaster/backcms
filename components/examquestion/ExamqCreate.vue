@@ -7,7 +7,7 @@
     </div>
     <div id="form_grid_layouts" class="col-lg-9">
       <div class="seperator-header">
-        <h4 class="">หลักสูตร : {{ name  }}</h4>
+        <h4 class="">Exam Main : {{ name  }}</h4>
       </div>
     </div>
     <div id="form_grid_layouts" class="col-lg-1">
@@ -102,7 +102,7 @@
     </div>
   </div>
   <div class="col-xl-12 col-md-12">
-    <button type="button" class="btn btn-success" @click="save()">บันทึก</button>
+    <button type="button" class="btn btn-success" @click="save()">Save</button>
   </div>
 </template>
 <script setup lang="ts">
