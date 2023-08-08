@@ -6,16 +6,16 @@
 // import DataTablesCore from 'datatables.net-bs5';
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-import { usersStore } from '@/store/users'
-import UserList from '@/components/users/UserList.vue'
+import { newCivilStore } from '@/store/newcivil'
+import CivilList from '@/components/newscivil/CivilList.vue'
 import { useModalStore } from '@/store/modal';
 import Loading from '@/components/layout/Success.vue';
 import Alert from '@/components/layout/Alert.vue';
-const store = usersStore()
-const { posts } = storeToRefs(usersStore())
-  const { deleteItem } = usersStore();//Action
-  const { selectall } = usersStore(); //Action
-  const { selectone } = usersStore();//Action
+const store = newCivilStore()
+const { posts } = storeToRefs(newTransportStore())
+  const { deleteItem } = newCivilStore();//Action
+  const { selectall } = newCivilStore(); //Action
+  const { selectone } = newCivilStore();//Action
   const { getSelect } = storeToRefs(store); //Get Getter
   const { getSelectALL } = storeToRefs(store); //Get Getter
   const modalStore = useModalStore();
@@ -31,7 +31,7 @@ const { posts } = storeToRefs(usersStore())
 
 const delete_userid = async (id) => {
   await store.deleteItem_id(id);
-  await store.fetchUsers()
+  await store.fetchNewTransport()
   };
   
 </script>
@@ -43,8 +43,8 @@ const delete_userid = async (id) => {
               <div class="page-meta">
                         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">Users</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">User List</li>
+                                <li class="breadcrumb-item"><a href="#">News </a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Civil List</li>
                             </ol>
                         </nav>
                     </div>
@@ -56,8 +56,8 @@ const delete_userid = async (id) => {
                         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                             <div class="widget-content widget-content-area br-8 p-3">
                            
-                              <UserList></UserList>
-                                {{ getSelectALL }}
+                              <CivilList></CivilList>
+                               
                               </div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@ const delete_userid = async (id) => {
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal" >Cancel</button>
-                                    <button type="button" class="btn btn-danger" data-remove="task" @click="delete_userid(GetopenModal_ID)">Delete {{ GetopenModal_ID }}</button>
+                                    <button type="button" class="btn btn-danger" data-remove="task" @click="delete_userid(GetopenModal_ID)">Delete</button>
                                 </div>
                             </div>
   </div>

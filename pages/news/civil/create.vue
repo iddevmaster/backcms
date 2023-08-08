@@ -2,17 +2,14 @@
 
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-import { usersStore } from '@/store/users'
 import  NewsCreate from '@/components/Newstransport/TransportCreate.vue'
-
 import Alert from '@/components/layout/Alert.vue';
 
 
-const store = usersStore()
+const store = newCivilStore()
 const { posts } = storeToRefs(usersStore())
-  const { PendingForm } = storeToRefs(store); //Get Getter
-
-  const { AlertTextForm } = storeToRefs(store); //Get Getter
+const { PendingForm } = storeToRefs(store); //Get Getter
+const { AlertTextForm } = storeToRefs(store); //Get Getter
 </script>
 
 <template>
@@ -21,12 +18,12 @@ const { posts } = storeToRefs(usersStore())
               <div class="page-meta">
                         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">News</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Add News</li>
+                                <li class="breadcrumb-item"><a href="#">News </a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Add News Civil</li>
                             </ol>
                         </nav>
                     </div>
-<Alert v-if="PendingForm"></Alert>
+<Alert></Alert>
                 <div class="middle-content container-xxl p-0">
                     <div class="row layout-top-spacing">
                         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
