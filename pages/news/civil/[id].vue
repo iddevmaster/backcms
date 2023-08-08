@@ -2,7 +2,7 @@
 
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-import  NewsEdit from '@/components/Newstransport/TransportEdit.vue'
+import  CivilEdit from '@/components/newscivil/CivilEdit.vue'
 
 import Alert from '@/components/layout/Alert.vue';
 
@@ -30,7 +30,7 @@ const { posts } = storeToRefs(usersStore())
                         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
           
                             <div class="widget-content widget-content-area br-8 p-3">
-           <NewsEdit></NewsEdit>
+           <CivilEdit></CivilEdit>
                                </div>
                               </div>
                               

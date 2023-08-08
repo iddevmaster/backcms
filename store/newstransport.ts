@@ -180,32 +180,6 @@ export const newTransportStore = defineStore('newstransport', {
       }
     },
 
-    //   async Update(id) {
-    //   try {
-    //     this.pending = true
-    //     const { pending , error, data } = await useFetch('/news/update/' + id, {
-    //       method: 'PUT',
-    //       baseURL:useEnvStore().apidev,
-    //       headers: new Headers({
-    //         'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-    //         'Content-Type': 'application/json'
-    //     }), 
-    //     body:this.formDataEdit,
-    //     });
-
-    //     if(data.value){
-    //       this.AlertText = 'success';
-    //     }else {
-    //       this.AlertText = 'danger';
-    //     }
-    //     this.pending_form = true;
-    //   } catch (error) {
-    //     this.AlertText = 'danger';
-    //   } finally {
-    //     this.pending = false;
-    //   }
-
-    // },
 
     async GetPathImage(id) {
 
@@ -658,6 +632,9 @@ export const newTransportStore = defineStore('newstransport', {
 
       const data = await ApiService.put('/news/update/' + this.news_id, this.formDataNewsEdit)
 
+
+      
+
       //  const savedata = await ApiService.post('/news/image/create', this.formDataNews).then(response => {
 
       // });
@@ -748,8 +725,6 @@ export const newTransportStore = defineStore('newstransport', {
         news_type: "1",
         user_id: user_id.value,
       };
-
-
 
       const UploadStorage = UploadStore();
 

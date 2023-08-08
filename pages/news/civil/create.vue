@@ -2,7 +2,7 @@
 
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-import  NewsCreate from '@/components/Newstransport/TransportCreate.vue'
+import  CivilCreate from '@/components/newscivil/CivilCreate.vue'
 import Alert from '@/components/layout/Alert.vue';
 
 
@@ -29,7 +29,7 @@ const { AlertTextForm } = storeToRefs(store); //Get Getter
                         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
           
                             <div class="widget-content widget-content-area br-8 p-3">
-           <NewsCreate></NewsCreate>
+           <CivilCreate></CivilCreate>
                                </div>
                               </div>
                               

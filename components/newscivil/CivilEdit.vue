@@ -56,7 +56,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-import { newTransportStore } from '@/store/newstransport'; // import the auth store we just created
+import { newCivilStore } from '@/store/newcivil'; // import the auth store we just created
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
 import { UploadStore } from '@/store/upload'; // import the auth store we just created
@@ -67,21 +67,20 @@ import { useToast } from 'vue-toastification'
 
 const toast = useToast()
 const router = useRouter();
-const store = newTransportStore()
+const store = newCivilStore()
 const storeupload = UploadStore()
-const storealert = AlertStore()
 
 
 
-const { Clear } = AlertStore(); // use  action
-const { UpdateFormNews } = newTransportStore(); // use  action
-const { getFormEditNews } = newTransportStore();
+
+const { UpdateFormNews } = newCivilStore(); // use  action
+const { getFormEditNews } = newCivilStore();
 const { getAlertFile } = storeToRefs(store);
 const { Saveimages } = UploadStore(); // use authenticateUser action from  auth store
 
 
 
-storealert.Clear()
+
 
 await store.fetchNewsId(router.currentRoute.value.params.id)
 
@@ -95,8 +94,6 @@ const rules = computed(() => {
       required: helpers.withMessage('The News Description is required', required),
       minLength: minLength(6),
     },
-
-
 
   };
 });
@@ -140,7 +137,7 @@ const edit = async () => {
       await toast.success('Save Data')
 
       setTimeout(() => {
-      router.push('/news/transport');
+      router.push('/news/civil');
     }, 2000);
     } catch (e) {
       await toast.error('Fall Save Data')

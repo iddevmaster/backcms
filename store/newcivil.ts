@@ -34,7 +34,7 @@ export const newCivilStore = defineStore('newscivil', {
       news_cover: "",
       news_title: "",
       news_description: "",
-      news_type: "1",
+      news_type: "2",
       images_list: [],
       user_id: user_id.value
     },
@@ -42,7 +42,7 @@ export const newCivilStore = defineStore('newscivil', {
       news_cover: "",
       news_title: "",
       news_description: "",
-      news_type: "1",
+      news_type: "2",
       images_list: [],
       user_id: user_id.value
     },
@@ -175,32 +175,7 @@ export const newCivilStore = defineStore('newscivil', {
       }
     },
 
-    //   async Update(id) {
-    //   try {
-    //     this.pending = true
-    //     const { pending , error, data } = await useFetch('/news/update/' + id, {
-    //       method: 'PUT',
-    //       baseURL:useEnvStore().apidev,
-    //       headers: new Headers({
-    //         'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p', 
-    //         'Content-Type': 'application/json'
-    //     }), 
-    //     body:this.formDataEdit,
-    //     });
 
-    //     if(data.value){
-    //       this.AlertText = 'success';
-    //     }else {
-    //       this.AlertText = 'danger';
-    //     }
-    //     this.pending_form = true;
-    //   } catch (error) {
-    //     this.AlertText = 'danger';
-    //   } finally {
-    //     this.pending = false;
-    //   }
-
-    // },
 
     async GetPathImage(id) {
 
@@ -347,67 +322,45 @@ export const newCivilStore = defineStore('newscivil', {
       const counterStorage = UploadStore();
       counterStorage.formi
       if (counterStorage.formi.length === 0) {
-        // File is empty
-        console.log("File is empty");
-
-        const TransportStorage = newTransportStore();
-        await TransportStorage.SaveDataNew();
+        const saveNewsCivil = await ApiService.post('/news/create', this.formDataNews).then(response => {
+          this.news_id = response.data.insertId;
+        });
       } else {
-        // File has content
 
-
-        try {
-
-          const formData = new FormData();
-          for (const i of Object.keys(counterStorage.formi)) {
-            formData.append('files', counterStorage.formi[i])
-            console.log("File has content", counterStorage.formi[i]);
-          }
-
-          axios.post('https://oasapi.iddriver.com/media_file/upload/file',
-            formData, {
-            headers: {
-              'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p',
-              'Content-Type': 'multipart/form-data'
-            }
-          }
-          ).then(function (response) {
-            console.log(response.data);
-            const TransportStorage = newTransportStore();
-            TransportStorage.SaveData(response.data);
-            //  TransportStorage.SaveImageData(x);
-
-            // this.$nextTick(this.ResetForm);
-
-
-            const Alert = AlertStore();
-            Alert.AlertSuccess();
-
-
-            TransportStorage.ResetForm();
-
-            //  TransportStorage.ResetForm();
-          })
-            .catch(function () {
-              const Alert = AlertStore();
-              Alert.AlertError();
-            });
-        } catch (error) {
-          const Alert = AlertStore();
-          Alert.AlertError();
+        /////////////////////////////////// Upload ไปก่อนแล้วจัดเข้า object
+        const arrimage = [];
+        const formData = new FormData();
+        for (const i of Object.keys(counterStorage.formi)) {
+          formData.append('files', counterStorage.formi[i])
+          const data = await ApiService.upload('media_file/upload/file', formData).then(response => {
+            let obj2 = { ni_name_file: response.data[i].filename, ni_path_file: response.data[i].path, ni_id: 0, news_id: 0 };
+            arrimage.push(obj2);
+          });
+          await this.delay(2000);
+        }
+        //////////////////////จัด Data ก่อน Insert//////////////////////
+        this.formDataNews.news_cover = arrimage[0].ni_path_file
+        /////////////////////// Insert New //////////////////////////////
+        const saveNewsCivil = await ApiService.post('/news/create', this.formDataNews).then(response => {
+          this.news_id = response.data.insertId;
+        });
+        /////////////////////// Insert New Images //////////////////////////////
+        for (var x = 0; x < arrimage.length; x++) {
+          this.formNewsImage.news_id = this.news_id
+          this.formNewsImage.ni_name_file = arrimage[x].ni_name_file
+          this.formNewsImage.ni_path_file = arrimage[x].ni_path_file
+          const SaveImage = await ApiService.post('/news/image/create', this.formNewsImage)
         }
 
-
-
-
+        await this.ResetForm();
+        await this.ClearData()
       }
+
 
     },
 
     async fetchNewsId(id) {
-
       this.news_id = id;
-
       try {
         const dat = await ApiService.get('/news/get/' + id);
 
@@ -436,15 +389,11 @@ export const newCivilStore = defineStore('newscivil', {
 
 
     async UpdateFormNews() {
-
-
       const counterStorage = UploadStore();
       counterStorage.formi
-
       if (counterStorage.formi.length === 0) {
         // File is empty
         await this.UpdateFormNewsNoUpload();
-
       } else {
         const ar = [];
         //////////////////////////////////////// ลบ ////////////////// อันเก่าออก
@@ -452,35 +401,27 @@ export const newCivilStore = defineStore('newscivil', {
           for (var i = 0; i < counterStorage.data_list_image_same.length; i++) {
             const item_image = counterStorage.data_list_image_same[i].ni_id;
             const response = await ApiService.delete('/news/image/delete/' + item_image)
-
           }
         }
-
-
+        //////////////////////////////////////// Upload File /////////////////////////
         const formData = new FormData();
         for (const i of Object.keys(counterStorage.formi)) {
           formData.append('files', counterStorage.formi[i])
-
           const data = await ApiService.upload('media_file/upload/file', formData).then(response => {
             let obj2 = { ni_name_file: response.data[i].filename, ni_path_file: response.data[i].path, ni_id: 0, news_id: 5 };
             ar.push(obj2);
           });
-          await this.delay(2000);
+          await this.delay(1000);
         }
 
+        //////////////////////////////////////// จัดไฟล์ object /////////////////////////
         const d = [];
-
         for (var j = 0; j < counterStorage.data_list_image.length; j++) {
-
           let result = counterStorage.data_list_image[j].ni_path_file.slice(0, 6);
           if (result === 'static') {
             let obj2 = { ni_name_file: counterStorage.data_list_image[j].ni_name_file, ni_path_file: counterStorage.data_list_image[j].ni_path_file, ni_id: 0, news_id: 5 };
             d.push(obj2);
           } else {
-
-
-
-
 
           }
 
@@ -491,126 +432,24 @@ export const newCivilStore = defineStore('newscivil', {
 
 
         ////////////////////////////////// Inser อันไหม//////////////////////////////
-        console.log(mergedArray.length);
-
-
+     
         if (mergedArray) {
           for (var i = 0; i < mergedArray.length; i++) {
             this.formNewsImage.news_id = this.news_id
             this.formNewsImage.ni_name_file = mergedArray[i].ni_name_file
             this.formNewsImage.ni_path_file = mergedArray[i].ni_path_file
             const savedata = await ApiService.post('/news/image/create', this.formNewsImage);
-
           }
           this.formDataNewsEdit.news_cover = mergedArray[0].ni_path_file
         }
-
         //////////////////////////Update////////////// New
-
-
         const data = await ApiService.put('/news/update/' + this.news_id, this.formDataNewsEdit)
-
-
-        // await axios.post('https://oasapi.iddriver.com/media_file/upload/file',
-        //   formData, {
-        //   headers: {
-        //     'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p',
-        //     'Content-Type': 'multipart/form-data'
-        //   }
-        // }
-        // ).then(function (response) {
-        //   const counterStorage = UploadStore();
-        //   const TransportStorage = newTransportStore();
-        //   //////////////////////////////////////check array/////////////
-        //   let obj1 = [];
-        //   let obj2 = [];
-
-        //   for (var i = 0; i < counterStorage.data_list_image.length; i++) {
-
-        //     let result = counterStorage.data_list_image[i].ni_path_file.slice(0, 6);
-
-        //     //  obj1.push(counterStorage.data_list_image_same[i])
-        //     if (result === 'static') {
-
-        //       let a = { ni_name_file: counterStorage.data_list_image[i].ni_name_file, ni_path_file: counterStorage.data_list_image[i].ni_path_file, news_id: Number(TransportStorage.news_id) }
-        //       obj1.push(a)
-        //     }
-        //   }
-
-        //   for (var x = 0; x < response.data.length; x++) {
-        //     let a = { ni_name_file: response.data[x].filename, ni_path_file: response.data[x].path, news_id: Number(TransportStorage.news_id) }
-        //     obj2.push(a);
-        //   }
-
-
-
-        //   for (const element of obj2) {
-        //     obj1.push(element);
-        //   }
-
-
-        //   const a = TransportStorage.CheckData(obj1[0].ni_path_file)
-
-        //   for (var x = 0; x < obj1.length; x++) {
-        //     const b = TransportStorage.InsertImageNews(obj1[x])
-
-
-
-        //   }
-
-
-        // })
-
-
-        //   this.UpdateFormNewsUpload();
       }
 
-
-
-    },
-    async CheckData(data) {
-      this.formDataNewsEdit.news_cover = data;
-      //////////////////////////////// update News
-      const response = ApiService.put('/news/update/' + this.news_id, this.formDataNewsEdit).then(response => {
-        if (response.status == 200) {
-          ////next function
-
-          const Alert = AlertStore();
-          Alert.AlertSuccess();
-          console.log('ok');
-          ////////////// delete new Image เดิม
-          const Upload = UploadStore();
-          console.log('data ลบ', Upload.data_list_image_same);
-
-          for (var j = 0; j < Upload.data_list_image_same.length; j++) {
-
-            ApiService.delete('/news/image/delete/' + Upload.data_list_image_same[j].ni_id).then(response => {
-              /////Insert ใหม่
-              if (response.status == 200) {
-                console.log('ลบ ok');
-              }
-            });
-          }
-
-          // ApiService.delete('/news/image/delete/'+this.news_id).then(response => {
-          // /////Insert ใหม่
-          // if(response.status == 200){
-          //   console.log('ลบ ok');
-          // }
-          // });
-
-          /////////////
-        } else {
-          console.log('error');
-        }
-
-
-      });
-
-      ////////////////////////////////
+      await this.ClearData()
 
     },
-
+ 
     async InsertImageNews(obj1) {
       setTimeout(function () {
         console.log(obj1);
@@ -623,10 +462,7 @@ export const newCivilStore = defineStore('newscivil', {
       }, 3000);
     },
     async UpdateFormNewsNoUpload() {
-
-
       ////////////////ลบ อันเดิมก่อนน/////////////////////////
-
       const UploadImage = UploadStore();
       console.log(UploadImage.data_list_image_same)
       if (UploadImage.data_list_image_same) {
@@ -653,84 +489,56 @@ export const newCivilStore = defineStore('newscivil', {
 
       const data = await ApiService.put('/news/update/' + this.news_id, this.formDataNewsEdit)
 
-      //  const savedata = await ApiService.post('/news/image/create', this.formDataNews).then(response => {
-
-      // });
-
-
-      // try {
-      //   const { pending, error, data } = await useFetch('/news/update/' + this.news_id, {
-      //     method: 'PUT',
-      //     baseURL: useEnvStore().apidev,
-      //     headers: new Headers({
-      //       'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p',
-      //       'Content-Type': 'application/json'
-      //     }),
-      //     body: this.formDataNewsEdit,
-      //   });
-      //   const TransportStorage = newTransportStore();
-
-
-      //   const Alert = AlertStore();
-      //   await Alert.AlertSuccess();
-
-
-      //   this.pending_form = true;
-      // } catch (error) {
-      //   const Alert = AlertStore();
-      //   Alert.AlertError();
-      // } finally {
-      //   this.pending = false;
-      // }
+      await this.ClearData()
 
 
     },
-    async UpdateFormNewsUpload() {
+    // async UpdateFormNewsUpload() {
 
-      const counterStorage = UploadStore();
-      counterStorage.formi
+    //   const counterStorage = UploadStore();
+    //   counterStorage.formi
 
-      const formData = new FormData();
-      for (const i of Object.keys(counterStorage.formi)) {
-        formData.append('files', counterStorage.formi[i])
-      }
+    //   const formData = new FormData();
+    //   for (const i of Object.keys(counterStorage.formi)) {
+    //     formData.append('files', counterStorage.formi[i])
+    //   }
 
-      axios.post('https://oasapi.iddriver.com/media_file/upload/file',
-        formData, {
-        headers: {
-          'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p',
-          'Content-Type': 'multipart/form-data'
-        }
-      }
-      ).then(function (response) {
-
-
-        const counterStorage = UploadStore();
-        counterStorage.preview_list.length
+    //   axios.post('https://oasapi.iddriver.com/media_file/upload/file',
+    //     formData, {
+    //     headers: {
+    //       'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p',
+    //       'Content-Type': 'multipart/form-data'
+    //     }
+    //   }
+    //   ).then(function (response) {
 
 
-        for (var i = 0; i < counterStorage.preview_list.length; i++) {
-          console.log(counterStorage.preview_list[i]);
-          //Do something
-        }
-      })
-        .catch(function () {
-          console.log('FAILURE!!');
-        });
-
-    },
-    async UpdateFormNewsDataUpload(data) {
-      this.formDataNewsEdit.news_cover
-      const x = this.formDataNewsEdit.news_cover.split(',');
-      for (var i = 0; i < data.length; i++) {
-
-      }
-      const string = x.join(',');
-      this.formDataNewsEdit.news_cover = string;
+    //     const counterStorage = UploadStore();
+    //     counterStorage.preview_list.length
 
 
+    //     for (var i = 0; i < counterStorage.preview_list.length; i++) {
+    //       console.log(counterStorage.preview_list[i]);
+    //       //Do something
+    //     }
+    //   })
+    //     .catch(function () {
+    //       console.log('FAILURE!!');
+    //     });
 
-    },
+    // },
+    // async UpdateFormNewsDataUpload(data) {
+    //   this.formDataNewsEdit.news_cover
+    //   const x = this.formDataNewsEdit.news_cover.split(',');
+    //   for (var i = 0; i < data.length; i++) {
+
+    //   }
+    //   const string = x.join(',');
+    //   this.formDataNewsEdit.news_cover = string;
+
+
+
+    // },
 
 
 

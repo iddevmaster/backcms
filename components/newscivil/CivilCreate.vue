@@ -67,7 +67,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-import { newTransportStore } from '@/store/newstransport'; // import the auth store we just created
+import { newCivilStore } from '@/store/newcivil'; // import the auth store we just created
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
 import { UploadStore } from '@/store/upload'; // import the auth store we just created
@@ -78,16 +78,16 @@ import { ref } from "vue";
 
 const toast = useToast()
 const router = useRouter();
-const store = newTransportStore()
+const store = newCivilStore()
 const storeupload = UploadStore()
 const storealert = AlertStore()
 
 
 
 const { Clear } = AlertStore(); // use  action
-const { SaveDataNew } = newTransportStore(); // use  action
-const { SaveSubmitForm } = newTransportStore(); // use  action from   store
-const { SaveDataNewImage } = newTransportStore(); // use  action from   store
+const { SaveDataNew } = newCivilStore(); // use  action
+const { SaveSubmitForm } = newCivilStore(); // use  action from   store
+const { SaveDataNewImage } = newCivilStore(); // use  action from   store
 const { getFormNews } = storeToRefs(store);
 const { Saveimages } = UploadStore(); // use authenticateUser action from  auth store
 
@@ -116,10 +116,11 @@ const rules = computed(() => {
 const v$ = useVuelidate(rules, getFormNews);
 
 const save = async () => {
- 
     v$.value.$validate();
     if (!v$.value.$error) {
-
+      await toast.warning("Wait Save Data", {
+        timeout: 2000,
+      });
     try {
     await  SaveSubmitForm(); //save form  ส่งไป Store User
     await toast.success('Save Data')
@@ -164,8 +165,6 @@ const onFileChange = async (event) => {
            
           }
           
-
-// Saveimages(formData);
 
       if (input.files) {
         while(count --) {

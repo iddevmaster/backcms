@@ -12,7 +12,6 @@ import { useModalStore } from '@/store/modal';
 import Loading from '@/components/layout/Success.vue';
 import Alert from '@/components/layout/Alert.vue';
 const store = newCivilStore()
-const { posts } = storeToRefs(newTransportStore())
   const { deleteItem } = newCivilStore();//Action
   const { selectall } = newCivilStore(); //Action
   const { selectone } = newCivilStore();//Action

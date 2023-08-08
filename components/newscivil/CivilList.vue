@@ -40,7 +40,8 @@
         
             <td>{{ datanew.news_title }}</td>
             <td>{{ datanew.news_description }}</td>
-            <td>{{ datanew.news_type }}</td>
+             <td v-if="datanew.news_type == 2"> Civil</td>
+            <td v-else> Transport</td>
             <td>{{ coverttime(datanew.udp_date) }}</td>
                                                 <td>
                                                   <NuxtLink :to="'/news/civil/' + datanew.news_id">
