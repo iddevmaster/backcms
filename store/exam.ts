@@ -28,7 +28,7 @@ export const ExamStore = defineStore('exam', {
       em_name: "",
       em_cover: "",
       em_description: "",
-      em_random_amount: null,
+      em_random_amount: 50,
       em_time: ref({
         hours: '00',
         minutes: '59',
@@ -145,7 +145,6 @@ export const ExamStore = defineStore('exam', {
     async UpdateExam() {
       this.isOpenEdit = false;
       await this.ChangeFormateTime('edit');
-      console.log(this.formexamedit);
       try {
         const updateexam = await ApiService.put('/exam/main/update/' + this.formexamedit.em_id, this.formexamedit);
         return true;
@@ -183,7 +182,7 @@ export const ExamStore = defineStore('exam', {
         em_name: '',
         em_cover: '',
         em_description: '',
-        em_random_amount: null,
+        em_random_amount: 50,
         em_time: ref({
           hours: '00',
           minutes: '59',

@@ -109,7 +109,7 @@
         
         </div>
         </div>
-    <button type="button" class="btn btn-primary" @click="save()">แก้ไข</button>      
+    <button type="button" class="btn btn-primary" @click="save()">Edit Save</button>      
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';

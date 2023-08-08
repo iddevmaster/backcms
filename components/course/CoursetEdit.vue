@@ -78,7 +78,7 @@
       />
     </div>
     <div class="border p-2 mt-3">
-      <p>Preview Here: {{store.image}}</p>
+      <p>Preview Here:</p>
 
          <template v-if="store.image">
                <div class="row">
@@ -185,7 +185,7 @@
   </div>
   <div class="col-xl-12 col-md-12">
     <button type="button" class="btn btn-success" @click="save()">
-      แก้ไข้
+      Edit Save
     </button>
   </div>
 </template>
@@ -301,11 +301,6 @@ const handleFiles = async (event, x) => {
 
   index[x].cs_cover = image.data[0].path;
 
-  //  this.events.splice(index, 1);
-  //  if (index !== -1) {
-  //   // แทนค่า name ใน object ที่มี id เป็น 2 เป็น 'Alice'
-  //  store.lessonlist[index].cs_cover = image.data[0].path;
-  // }
 };
 
 const handleFilesVideo = async (event, x) => {

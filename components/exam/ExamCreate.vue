@@ -9,7 +9,7 @@
                                 </div>
                                 <div class="modal-body">
         <form>
-        
+        {{store.formexam}}
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Exam code:</label>  <span class="text-xs text-red-500" style="color:red" v-if="v$.em_code.$error">{{
             v$.em_code.$errors[0].$message

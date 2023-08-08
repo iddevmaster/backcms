@@ -61,7 +61,7 @@
      </div>
     
     
-     <button type="button" class="btn btn-primary" @click="edit()">แก้ไข</button>      
+     <button type="button" class="btn btn-primary" @click="edit()">Edit Save</button>      
  </template>
  <script setup lang="ts">
  import { storeToRefs } from 'pinia';

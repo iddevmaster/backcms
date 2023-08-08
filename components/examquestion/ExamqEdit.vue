@@ -105,7 +105,7 @@
     </div>
   </div>
   <div class="col-xl-12 col-md-12">
-    <button type="button" class="btn btn-success" @click="save()">แก้ไข</button>
+    <button type="button" class="btn btn-success" @click="save()">Edit Save</button>
   </div>
 </template>
 <script setup lang="ts">
