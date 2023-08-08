@@ -25,7 +25,7 @@
                                             <th @click="sortList('user_email')">News Description</th>
                                             <th @click="sortList('user_phone')">News Type</th>
                                             <th>Update</th>
-                                            <th class="no-content">จัดการ</th>
+                                            <th class="no-content">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>

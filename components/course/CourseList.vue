@@ -113,9 +113,14 @@ const { Courselist } = storeToRefs(store);
 
 
 const courselist = await store.fetchCourslist();
+
 if (courselist === false) {
-  console.log("false");
+  await toast.error("Error Show Data", {
+        timeout: 30000,
+  });
 }
+
+
 
 const del = async (id) => {
  const delecourse =  await deleteItem(id);
@@ -145,7 +150,6 @@ function goToPage(page) {
 
 
 const setCurrentPageclick = async (page) => {
-
  await setCurrentPage (page)
  await store.fetchCourslist()
 };

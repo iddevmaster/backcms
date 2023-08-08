@@ -107,7 +107,7 @@ export const CourseStore = defineStore('course', {
         });
 
       } catch (error) {
-        console.log('error');
+      
         return false;
       } finally {
         this.loading = false
