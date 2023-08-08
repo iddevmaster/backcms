@@ -30,10 +30,14 @@
                                     </thead>
                                     <tbody>
                                       <tr v-for="datanew in datanewstransport.data" :key="datanew.news_id">
-                                        <td><input type="checkbox" v-model="store.selected" :value="datanew" number></td>
+                                        <!-- <td><input type="checkbox" v-model="store.selected" :value="datanew" number></td> -->
+                                        <td>
+             {{ datanew.news_id }}
+            </td>
             <td>
                  <img :src="image(datanew.news_cover)" class="img-fluid" width="80" height="80" />
             </td>
+        
             <td>{{ datanew.news_title }}</td>
             <td>{{ datanew.news_description }}</td>
             <td>{{ datanew.news_type }}</td>

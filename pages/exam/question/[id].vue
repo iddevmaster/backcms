@@ -27,8 +27,6 @@ const router = useRouter();
 
 store.em_id = route.params.id;
 
-
-
 const goToCreatePage = async () => {
     localStorage.setItem('em_id', store.exam[0].em_id);
     localStorage.setItem('em_name', store.exam[0].em_name);

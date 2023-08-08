@@ -10,6 +10,7 @@ export const UploadStore = defineStore('upload', {
     preview: null,
     image: null,
     preview_list: [],
+    samefile:[],
     image_list: [],
     formi:[],
     preview_list_same:[],
@@ -52,18 +53,18 @@ alert('SaveData');
     },
     imagedisplay(data)  {
  
- 
-  
+      this.preview_list = [];
+      this.data_list_image = [];
+      this.samefile = [];
       if(data.length > 0){
         for (var i = 0; i < data.length; i++) {
           this.preview_list.push(data[i].ni_path_file);
           let obj2 = { ni_name_file: data[i].ni_name_file, ni_path_file: data[i].ni_path_file,ni_id: data[i].ni_id,news_id:data[i].news_id };
           this.data_list_image.push(obj2);
           this.data_list_image_same.push(obj2);
+       
         }
     }
-
-
     this.preview_list_same = this.preview_list;
 
     },
