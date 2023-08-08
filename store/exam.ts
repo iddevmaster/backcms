@@ -99,6 +99,8 @@ export const ExamStore = defineStore('exam', {
           this.total = response.data.total
         });
 
+        return true
+
       } catch (error) {
         console.log('error');
         return false;

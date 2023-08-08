@@ -106,8 +106,9 @@ export const CourseStore = defineStore('course', {
           this.total = response.data.total
         });
 
+        return true;
       } catch (error) {
-      
+       
         return false;
       } finally {
         this.loading = false

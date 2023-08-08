@@ -127,7 +127,7 @@ export const newTransportStore = defineStore('newstransport', {
 
       try {
         this.pending = true
-        const response = await ApiService.post('/news/list', this.form).then(response => {
+        const response = await ApiService.post('/news/list?news_type=1', this.form).then(response => {
           if (response) {
             this.datanewstransport = response.data
             this.total_page = response.data.total_page
@@ -136,10 +136,12 @@ export const newTransportStore = defineStore('newstransport', {
             this.total_filter = response.data.total_filter
             this.total = response.data.total
           }
+        
         });
-
+        return true;
       } catch (error) {
         this.error = error
+        return false;
       } finally {
         this.loading = false
         this.pending = false

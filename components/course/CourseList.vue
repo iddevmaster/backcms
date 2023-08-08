@@ -115,7 +115,7 @@ const { Courselist } = storeToRefs(store);
 const courselist = await store.fetchCourslist();
 
 if (courselist === false) {
-  await toast.error("Error Show Data", {
+  await toast.error("Error Data Contact Admin", {
         timeout: 30000,
   });
 }

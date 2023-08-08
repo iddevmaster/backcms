@@ -122,12 +122,9 @@ export const newCivilStore = defineStore('newscivil', {
       this.form.per_page = this.per_page;
       this.form.search = "";
 
-
-
-
       try {
         this.pending = true
-        const response = await ApiService.post('/news/list', this.form).then(response => {
+        const response = await ApiService.post('/news/list?news_type=2', this.form).then(response => {
           if (response) {
             this.datanewstransport = response.data
             this.total_page = response.data.total_page

@@ -40,7 +40,8 @@
         
             <td>{{ datanew.news_title }}</td>
             <td>{{ datanew.news_description }}</td>
-            <td>{{ datanew.news_type }}</td>
+            <td v-if="datanew.news_type == 1"> Transport</td>
+            <td v-else> Civil</td>
             <td>{{ coverttime(datanew.udp_date) }}</td>
                                                 <td>
                                                   <NuxtLink :to="'/news/transport/' + datanew.news_id">
@@ -89,8 +90,10 @@ import "datatables.net-dt/js/dataTables.dataTables"
 import "datatables.net-dt/css/jquery.dataTables.min.css"
  import $ from 'jquery'
  import Paginate from "vuejs-paginate-next";
+ import { useToast } from "vue-toastification";
 
 const store = newTransportStore()
+const toast = useToast();
 const { datanewstransport } = storeToRefs(newTransportStore())
   const { deleteItem } = newTransportStore();//Action
   const { selectall } = newTransportStore(); //Action
@@ -104,8 +107,19 @@ const { datanewstransport } = storeToRefs(newTransportStore())
   const { getSelectALL } = storeToRefs(store); //Get Getter
   const { getPaginate } = storeToRefs(store); //Get Getter
   
-store.fetchNewTransport()
 
+
+
+
+
+
+
+const dataTransport = await store.fetchNewTransport();
+if (dataTransport === false) {
+  await toast.error("Error Data Contact Admin", {
+        timeout: 30000,
+  });
+}
 
 
 

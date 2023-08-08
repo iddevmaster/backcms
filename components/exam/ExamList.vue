@@ -120,6 +120,11 @@ const store = ExamStore();
  const { GetopenModalEdit } = storeToRefs(store); //Get Getter
 
 const Examlist = await store.fetchExamlist();
+if (Examlist === false) {
+  await toast.error("Error Data Contact Admin", {
+        timeout: 30000,
+  });
+}
 
 const del = async (item) => {
 const deleExam =  await Openmodaldelete(item);
