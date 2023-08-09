@@ -3,6 +3,9 @@
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import ExamqEdit from '@/components/examquestion/ExamqEdit.vue'
+definePageMeta({
+    middleware: 'auth' // this should match the name of the file inside the middleware directory 
+})
 
 
 </script>

@@ -23,6 +23,10 @@ const store = newCivilStore()
 
   const { Pending } = storeToRefs(store); //Get Getter
 
+definePageMeta({
+    middleware: 'auth' // this should match the name of the file inside the middleware directory 
+})
+
   const closeModal = () => {
     store.closeModal();
   };

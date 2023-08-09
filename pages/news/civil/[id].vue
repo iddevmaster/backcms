@@ -6,6 +6,10 @@ import  CivilEdit from '@/components/newscivil/CivilEdit.vue'
 
 import Alert from '@/components/layout/Alert.vue';
 
+definePageMeta({
+    middleware: 'auth' // this should match the name of the file inside the middleware directory 
+})
+
 const store = newCivilStore()
 const { posts } = storeToRefs(usersStore())
   const { PendingForm } = storeToRefs(store); //Get Getter

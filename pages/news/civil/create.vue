@@ -5,6 +5,9 @@ import { defineComponent } from 'vue';
 import  CivilCreate from '@/components/newscivil/CivilCreate.vue'
 import Alert from '@/components/layout/Alert.vue';
 
+definePageMeta({
+    middleware: 'auth' // this should match the name of the file inside the middleware directory 
+})
 
 const store = newCivilStore()
 const { posts } = storeToRefs(usersStore())

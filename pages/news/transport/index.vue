@@ -11,6 +11,10 @@ import TransportList from '@/components/Newstransport/TransportList.vue'
 import { useModalStore } from '@/store/modal';
 import Loading from '@/components/layout/Success.vue';
 import Alert from '@/components/layout/Alert.vue';
+definePageMeta({
+    middleware: 'auth' // this should match the name of the file inside the middleware directory 
+})
+
 const store = newTransportStore()
 const { posts } = storeToRefs(newTransportStore())
   const { deleteItem } = newTransportStore();//Action

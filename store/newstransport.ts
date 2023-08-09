@@ -51,6 +51,11 @@ export const newTransportStore = defineStore('newstransport', {
       ni_name_file: "",
       news_id: "",
     },
+    formsearchnews: {
+      page: 1,
+      per_page: 10,
+      search: '',
+    },
     imageedit: null,
 
 

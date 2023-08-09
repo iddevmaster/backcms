@@ -19,6 +19,10 @@ import {
 import { useRoute } from "vue-router";
 import Loading from "@/components/layout/Success.vue";
 
+definePageMeta({
+    middleware: 'auth' // this should match the name of the file inside the middleware directory 
+})
+
 const toast = useToast();
 const store = ExamquestionStore();
 

@@ -4,6 +4,9 @@ import { defineComponent } from "vue";
 import { CourseStore } from "@/store/course";
 import CourseCreate from "@/components/course/CourseCreate.vue";
 import Loading from "@/components/layout/Success.vue";
+definePageMeta({
+    middleware: 'auth' // this should match the name of the file inside the middleware directory 
+})
 
 const store = CourseStore();
 const { Pending } = storeToRefs(store); //Get Getter
