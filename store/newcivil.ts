@@ -123,13 +123,12 @@ export const newCivilStore = defineStore('newscivil', {
     async fetchNewTransport() {
       this.selected = [];
       this.isAllSelected = false;
-      this.form.page = this.page;
-      this.form.per_page = this.per_page;
-      this.form.search = "";
+      this.formsearchnews.page = this.page;
+      this.formsearchnews.per_page = this.per_page;
 
       try {
         this.pending = true
-        const response = await ApiService.post('/news/list?news_type=2', this.form).then(response => {
+        const response = await ApiService.post('/news/list?news_type=2', this.formsearchnews).then(response => {
           if (response) {
             this.datanewstransport = response.data
             this.total_page = response.data.total_page

@@ -39,7 +39,7 @@
             <img src="/img/profile-30.png" alt="avatar" />
           </div>
           <div class="profile-content">
-            <h6 class="">Shaun Park</h6>
+            <h6 class="">{{ user.user_name }}</h6>
             <p class="">Project Leader</p>
           </div>
         </div>
@@ -366,5 +366,17 @@
 </template>
 
   
+
+<script setup lang="ts">
+// import DataTable from 'datatables.net-vue3';
+// import DataTablesCore from 'datatables.net-bs5';
+import { storeToRefs } from 'pinia';
+import { defineComponent } from 'vue';
+
+const data = localStorage.getItem('user');
+let user = JSON.parse(data);
+
+  
+</script>
   
   
