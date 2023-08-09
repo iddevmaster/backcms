@@ -51,7 +51,7 @@
              <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChange" ref="fileupload">
           </div>
                                                   <div class="border p-2 mt-3">
-            <p>Preview Here:{{store.image}}</p>
+            <p>Preview Here:</p>
 
             <template v-if="store.image">
               <div class="row">

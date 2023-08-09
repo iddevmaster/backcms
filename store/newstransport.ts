@@ -8,6 +8,7 @@ export const newTransportStore = defineStore('newstransport', {
     locale: true,
     load: true,
     isOpen: false,
+    imageReq:false,
     AlertNewsTransport: null,
     datanewstransport: {},
     pending: false,

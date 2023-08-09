@@ -35,12 +35,12 @@
           }}</span>
           </div> 
           <div class="form-group mb-4 mt-3">
-                                            <label for="exampleFormControlFile1">Example file input</label>
+                                            <label for="exampleFormControlFile1">Image file input</label> <span class="text-xs text-red-500" style="color:red" v-if="store.imageReq == true"> Invalid file selected</span>
                                             <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple @change="onFileChange" ref="fileupload">
                                         </div>
                                         <div class="border p-2 mt-3">
-            <p>Preview Here:</p>
-            <template v-if="storeupload.preview_list.length">
+            <p>Preview Here: {{ storeupload.preview_list }}</p>
+            <template v-if="storeupload.preview_list.length" >
               <div class="row">
               <div class="col-3" v-for="item, index in storeupload.preview_list" :key="index">
               <img :src="item" class="img-fluid" />
@@ -117,6 +117,11 @@ const v$ = useVuelidate(rules, getFormNews);
 
 const save = async () => {
     v$.value.$validate();
+
+if(storeupload.preview_list.length == 0){/////////////////// req image  ใช้ rules ไม่ได้ 
+store.imageReq = true;
+return false;
+}
     if (!v$.value.$error) {
       await toast.warning("Wait Save Data", {
         timeout: 2000,
