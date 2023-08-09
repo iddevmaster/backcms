@@ -5,7 +5,7 @@ import { CourseStore } from "@/store/course";
 import CourseCreate from "@/components/course/CourseCreate.vue";
 import Loading from "@/components/layout/Success.vue";
 definePageMeta({
-    middleware: 'auth' // this should match the name of the file inside the middleware directory 
+  middleware: 'auth' // this should match the name of the file inside the middleware directory 
 })
 
 const store = CourseStore();
@@ -28,13 +28,6 @@ const { Pending } = storeToRefs(store); //Get Getter
       <Loading v-if="Pending"></Loading>
       <div class="middle-content container-xxl p-0">
         <div class="row layout-top-spacing">
-          <!-- <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-                            <div class="widget-content widget-content-area br-8 p-3">
-           <CourseCreate></CourseCreate>
-                               </div>
-                              </div>
-                               -->
-
           <div class="doc-container">
             <div class="row">
               <div class="col-xl-12">
@@ -50,5 +43,4 @@ const { Pending } = storeToRefs(store); //Get Getter
   </div>
 </template>
 
-<style>
-</style>
+<style></style>

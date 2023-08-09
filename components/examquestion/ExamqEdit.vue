@@ -163,16 +163,11 @@ const validatePNumber = async (evt) => {
     }
   }
 
-
-
-  
-
 const backToquestion = async () => {
   router.go(-1);
 }  
 
 const v$ = useVuelidate(rules, FormEditExamq);
-
 const save = async () => {
   v$.value.$validate();
 if(!store.image){/////////////////// req image  ใช้ rules ไม่ได้ 
@@ -206,7 +201,6 @@ const removeImage = async () => {
   const input = document.querySelector('input[type="file"]');
   input.value = '';
 }
-
 
 const onFileChange = async (event) => {
   var input = event.target;
@@ -250,11 +244,6 @@ if (result === 'static') {
   return i;
 }
  }
-
-
-
-
-
 
 </script>
 <style>

@@ -2,52 +2,40 @@
 
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-import  CivilEdit from '@/components/newscivil/CivilEdit.vue'
-
+import CivilEdit from '@/components/newscivil/CivilEdit.vue'
 import Alert from '@/components/layout/Alert.vue';
-
 definePageMeta({
     middleware: 'auth' // this should match the name of the file inside the middleware directory 
 })
-
 const store = newCivilStore()
 const { posts } = storeToRefs(usersStore())
-  const { PendingForm } = storeToRefs(store); //Get Getter
-
-  const { AlertTextForm } = storeToRefs(store); //Get Getter
+const { PendingForm } = storeToRefs(store); //Get Getter
+const { AlertTextForm } = storeToRefs(store); //Get Getter
 </script>
 
 <template>
-  <div id="content" class="main-content">
-            <div class="layout-px-spacing">
-              <div class="page-meta">
-                        <nav class="breadcrumb-style-one" aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">News </a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Edit News Civil</li>
-                            </ol>
-                        </nav>
-                    </div>
-<Alert></Alert>
-                <div class="middle-content container-xxl p-0">
-                    <div class="row layout-top-spacing">
-                        <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-          
-                            <div class="widget-content widget-content-area br-8 p-3">
-           <CivilEdit></CivilEdit>
-                               </div>
-                              </div>
-                              
- </div>
-
-                </div>
-
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+            <div class="page-meta">
+                <nav class="breadcrumb-style-one" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">News </a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit News Civil</li>
+                    </ol>
+                </nav>
             </div>
-          </div>
- 
-       
+            <Alert></Alert>
+            <div class="middle-content container-xxl p-0">
+                <div class="row layout-top-spacing">
+                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                        <div class="widget-content widget-content-area br-8 p-3">
+                            <CivilEdit></CivilEdit>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
-<style>
-
-</style>
+<style></style>

@@ -11,9 +11,8 @@
           </li>
           <li>
             <div class="col-xs-1">
-              <input id="ex1" type="number" style="width:50px" v-model="store.quest_Id" 
-     
-                min="1" @input="validatePNumber($event)">
+              <input id="ex1" type="number" style="width:50px" v-model="store.quest_Id" min="1"
+                @input="validatePNumber($event)">
             </div>
           </li>
           <li><a href="javascript:void(0);">/</a></li>
@@ -101,35 +100,26 @@ const validatePNumber = async (evt) => {
     evt.preventDefault()
   }
 
-
-
-  if(store.quest_Id == ''){
+  if (store.quest_Id == '') {
     console.log('if')
     store.pending = true;
     store.quest_Id = 1;
     await questionlist();
     await toast.info("Loadding Data", {
-        timeout: 50,
+      timeout: 50,
     });
-  }else {
+  } else {
     store.pending = true;
     await questionlist();
     await toast.info("Loadding Data", {
-        timeout: 50,
+      timeout: 50,
     });
 
   }
 
 
 
- // await questionlist();
-
-  // setTimeout(() => {
-  //   store.pending = false;
-  // }, 200);
-
 }
-
 
 
 function coverttime(date) {
@@ -183,4 +173,5 @@ function image(i) {
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   position: relative;
-}</style>
+}
+</style>

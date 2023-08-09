@@ -7,12 +7,13 @@
     </div>
     <div id="form_grid_layouts" class="col-lg-8">
       <div class="seperator-header">
-        <h4 class="">Exam Main : {{ name  }}</h4>
+        <h4 class="">Exam Main : {{ name }}</h4>
       </div>
     </div>
     <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header" style="text-align: center;">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light" @click="backToquestion()">Back To Question</button>
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light" @click="backToquestion()">Back To
+          Question</button>
       </div>
     </div>
     <div class="col-md-12">
@@ -158,7 +159,7 @@ const validatePNumber = async (evt) => {
 
 const backToquestion = async () => {
   router.go(-1);
-}  
+}
 
 const v$ = useVuelidate(rules, FormExamq);
 
@@ -182,27 +183,10 @@ const save = async () => {
     const input = document.querySelector('input[type="file"]');
     input.value = '';
     v$.value.$reset();
-
     setTimeout(() => {
       router.go(-1);
     }, 500);
-
-
-
   }
-}
-
-const Clear = async () => {
-
-
-  // localStorage.clear();
-  //  setTimeout(() => {
-  //    router.go(-1);
-  //  }, 500);
-
-  //  const input = document.querySelector('input[type="file"]');
-  //       input.value = '';
-  //  v$.value.$reset();
 }
 
 const addChoice = async () => {
@@ -210,15 +194,12 @@ const addChoice = async () => {
 }
 const removeChoice = async (x) => {
   await deleteChoice(x);
-
 }
 const removeImage = async () => {
-
   store.image = null;
   const input = document.querySelector('input[type="file"]');
   input.value = '';
 }
-
 
 const onFileChange = async (event) => {
   var input = event.target;
@@ -234,14 +215,12 @@ const onFileChange = async (event) => {
 }
 
 const handleFiles = async (event, x) => {
-
   let formData = new FormData();
   formData.append('files', event.target.files[0]);
   const image = await uploadfileexam(formData);
   const index = store.choicelist;
   index[x].ec_image = image.data[0].path;
 }
-
 
 function image(i) {
   var x = null;

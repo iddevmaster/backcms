@@ -64,23 +64,14 @@ import { AlertStore } from '@/store/alert'; // import the auth store we just cre
 import { ref } from "vue";
 import { useToast } from 'vue-toastification'
 
-
 const toast = useToast()
 const router = useRouter();
 const store = newCivilStore()
 const storeupload = UploadStore()
-
-
-
-
 const { UpdateFormNews } = newCivilStore(); // use  action
 const { getFormEditNews } = newCivilStore();
 const { getAlertFile } = storeToRefs(store);
 const { Saveimages } = UploadStore(); // use authenticateUser action from  auth store
-
-
-
-
 
 await store.fetchNewsId(router.currentRoute.value.params.id)
 
@@ -97,11 +88,6 @@ const rules = computed(() => {
 
   };
 });
-
-
-
-
-
 
 ////////////////ใส่ Url///////////
 
@@ -124,21 +110,20 @@ const removeImage = async (remove) => {
 }
 
 
-
 const edit = async () => {
 
   v$.value.$validate();
   if (!v$.value.$error) {
-    await toast.warning("Wait Save Data",{
-  timeout: 2000,
+    await toast.warning("Wait Save Data", {
+      timeout: 2000,
     });
     try {
       await UpdateFormNews();
       await toast.success('Save Data')
 
       setTimeout(() => {
-      router.push('/news/civil');
-    }, 2000);
+        router.push('/news/civil');
+      }, 2000);
     } catch (e) {
       await toast.error('Fall Save Data')
     }
@@ -146,8 +131,6 @@ const edit = async () => {
 }
 
 const onFileChange = async (event) => {
-
-
 
   var input = event.target;
   var count = input.files.length;
@@ -180,26 +163,25 @@ const onFileChange = async (event) => {
 
   // await Saveimages();
 
-  
+
   if (input.files) {
-    console.log(input.files)
+
     while (count--) {
       var reader = new FileReader();
-      console.log(reader)
-      
+  
       reader.onload = (e) => {
-        
+
         storeupload.preview_list.push(e.target.result); ///////////////////////จับ Data ใส่ array ///////////
         let a = { ni_name_file: e.target.result, ni_path_file: e.target.result }
         storeupload.data_list_image.push(a);
-       
+
       }
       storeupload.image_list.push(input.files[index]); ///////////////////////จับ Data ใส่ array ///////////
       reader.readAsDataURL(input.files[index]); ///////////////////////อ่านไฟล์ภาพ ///////////
       index++;
     }
   }
-  
+
 }
 
 

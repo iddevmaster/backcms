@@ -7,96 +7,54 @@
     </div>
     <div class="col-md-6">
       <label for="inputEmail4" class="form-label">Course code</label>
-      <input
-        type="text"
-        class="form-control"
-        id="inputEmail4"
-        v-model="store.formDataEditCourse.course_code"
-        :class="{
-          'border-red-500 focus:border-red-500': v$.course_code.$error,
-          'border-[#42d392] ': !v$.course_code.$invalid,
-        }"
-        @change="v$.course_code.$touch"
-      />
-      <span
-        class="text-xs text-red-500"
-        style="color: red"
-        v-if="v$.course_code.$error"
-        >{{ v$.course_code.$errors[0].$message }}</span
-      >
+      <input type="text" class="form-control" id="inputEmail4" v-model="store.formDataEditCourse.course_code" :class="{
+        'border-red-500 focus:border-red-500': v$.course_code.$error,
+        'border-[#42d392] ': !v$.course_code.$invalid,
+      }" @change="v$.course_code.$touch" />
+      <span class="text-xs text-red-500" style="color: red" v-if="v$.course_code.$error">{{
+        v$.course_code.$errors[0].$message }}</span>
     </div>
     <div class="col-md-6">
       <label for="inputPassword4" class="form-label">Course Name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="inputPassword4"
-        v-model="store.formDataEditCourse.course_name"
-        :class="{
-          'border-red-500 focus:border-red-500': v$.course_name.$error,
-          'border-[#42d392] ': !v$.course_name.$invalid,
-        }"
-        @change="v$.course_name.$touch"
-      />
-      <span
-        class="text-xs text-red-500"
-        style="color: red"
-        v-if="v$.course_name.$error"
-        >{{ v$.course_name.$errors[0].$message }}</span
-      >
+      <input type="text" class="form-control" id="inputPassword4" v-model="store.formDataEditCourse.course_name" :class="{
+        'border-red-500 focus:border-red-500': v$.course_name.$error,
+        'border-[#42d392] ': !v$.course_name.$invalid,
+      }" @change="v$.course_name.$touch" />
+      <span class="text-xs text-red-500" style="color: red" v-if="v$.course_name.$error">{{
+        v$.course_name.$errors[0].$message }}</span>
     </div>
     <div class="col-12">
       <label for="inputAddress" class="form-label">Course Description</label>
-      <textarea
-        class="form-control"
-        id="exampleFormControlTextarea1"
-        rows="3"
-        :class="{
-          'border-red-500 focus:border-red-500': v$.course_description.$error,
-          'border-[#42d392] ': !v$.course_description.$invalid,
-        }"
-        @change="v$.course_description.$touch"
-        v-model="store.formDataEditCourse.course_description"
-      >
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" :class="{
+        'border-red-500 focus:border-red-500': v$.course_description.$error,
+        'border-[#42d392] ': !v$.course_description.$invalid,
+      }" @change="v$.course_description.$touch" v-model="store.formDataEditCourse.course_description">
       </textarea>
-      <span
-        class="text-xs text-red-500"
-        style="color: red"
-        v-if="v$.course_description.$error"
-        >{{ v$.course_description.$errors[0].$message }}</span
-      >
+      <span class="text-xs text-red-500" style="color: red" v-if="v$.course_description.$error">{{
+        v$.course_description.$errors[0].$message }}</span>
     </div>
 
     <div class="form-group mb-4 mt-3">
       <label for="exampleFormControlFile1">Course cover</label>
-      <input
-        type="file"
-        class="form-control-file"
-        id="exampleFormControlFile1"
-        @change="onFileChange"
-        ref="fileupload"
-      />
+      <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChange" ref="fileupload" />
     </div>
     <div class="border p-2 mt-3">
       <p>Preview Here:</p>
 
-         <template v-if="store.image">
-               <div class="row">
-               <div class="col-3">
-               <img  :src="coverimage(store.image)"  class="img-fluid" />
-               <button @click="removeImage()">Remove image</button>
-             </div>
-              </div>
-        </template>  
+      <template v-if="store.image">
+        <div class="row">
+          <div class="col-3">
+            <img :src="coverimage(store.image)" class="img-fluid" />
+            <button @click="removeImage()">Remove image</button>
+          </div>
+        </div>
+      </template>
     </div>
 
     <div></div>
   </div>
 
-  <button
-    class="btn btn-dark additem _effect--ripple waves-effect waves-light"
-    @click="addlesson()"
-  >
+  <button class="btn btn-dark additem _effect--ripple waves-effect waves-light" @click="addlesson()">
     Add Lesson
   </button>
   <div class="invoice-detail-items">
@@ -117,66 +75,30 @@
             <td class="delete-item-row">
               <ul class="table-controls">
                 <li>
-                  <a
-                    href="javascript:void(0);"
-                    @click="removelesson(item.cs_id)"
-                    class="delete-item"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title=""
-                    data-original-title="Delete"
-                    ><svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="feather feather-x-circle"
-                    >
+                  <a href="javascript:void(0);" @click="removelesson(item.cs_id)" class="delete-item"
+                    data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><svg
+                      xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                      class="feather feather-x-circle">
                       <circle cx="12" cy="12" r="10"></circle>
                       <line x1="15" y1="9" x2="9" y2="15"></line>
-                      <line x1="9" y1="9" x2="15" y2="15"></line></svg
-                  ></a>
+                      <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </svg></a>
                 </li>
               </ul>
             </td>
             <td class="description">
-              <input
-                type="text"
-                class="form-control form-control-sm"
-                placeholder="Item Description"
-                v-model="item.cs_name"
-              />
-              <textarea
-                class="form-control"
-                placeholder="cs_Description"
-                v-model="item.cs_description"
-                >{{ item.cs_description }}</textarea
-              >
+              <input type="text" class="form-control form-control-sm" placeholder="Item Description"
+                v-model="item.cs_name" />
+              <textarea class="form-control" placeholder="cs_Description"
+                v-model="item.cs_description">{{ item.cs_description }}</textarea>
             </td>
             <td class="rate">
-              <input
-                type="file"
-                id="input"
-                @change="handleFiles($event, index)"
-              />
-              <img
-                :src="image(item.cs_cover)"
-                class="img-fluid"
-                width="40"
-                height="40"
-              />
+              <input type="file" id="input" @change="handleFiles($event, index)" />
+              <img :src="image(item.cs_cover)" class="img-fluid" width="40" height="40" />
             </td>
             <td class="text-right qty">
-              <input
-                type="file"
-                id="input"
-                @change="handleFiles($event, index)"
-              />
+              <input type="file" id="input" @change="handleFiles($event, index)" />
             </td>
           </tr>
         </tbody>
@@ -189,7 +111,7 @@
     </button>
   </div>
 </template>
- <script setup lang="ts">
+<script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
 import { CourseStore } from "@/store/course"; // import the auth store we just created
@@ -258,26 +180,26 @@ const v$ = useVuelidate(rules, FormDataEditCourse);
 const save = async () => {
   v$.value.$validate();
   if (!v$.value.$error) {
-     await toast.warning("Wait Save Data",{
-  timeout: 2000,
-});
-   
+    await toast.warning("Wait Save Data", {
+      timeout: 2000,
+    });
+
     try {
-     let updatefile = await UploadfileCourse()
-    let updatedata = await UpdateCourse();
-    await store.fetchCourslist()
-   await setTimeout(() => {
-       store.fetchCourseId(router.currentRoute.value.params.id);
-    }, 500);
-     
+      let updatefile = await UploadfileCourse()
+      let updatedata = await UpdateCourse();
+      await store.fetchCourslist()
+      await setTimeout(() => {
+        store.fetchCourseId(router.currentRoute.value.params.id);
+      }, 500);
+
       await setTimeout(() => {
         toast.success("Save Data");
       }, 500);
-     
+
     } catch (error) {
       await toast.error("Fail Save Data");
     }
-    
+
   }
 };
 
@@ -337,14 +259,14 @@ function image(i) {
 
 function coverimage(i) {
   let result = i.slice(0, 6);
-if (result === 'static') {
-  return "http://oasapi.iddriver.com/media_file/file/?f="+i;
-}else {
-  return i;
+  if (result === 'static') {
+    return "http://oasapi.iddriver.com/media_file/file/?f=" + i;
+  } else {
+    return i;
+  }
 }
- }
 </script>
- <style>
+<style>
 .preview {
   display: flex;
   justify-content: center;
@@ -356,7 +278,8 @@ if (result === 'static') {
 .video-container {
   position: relative;
   width: 100%;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio (change this value as per your video's aspect ratio) */
+  padding-bottom: 56.25%;
+  /* 16:9 aspect ratio (change this value as per your video's aspect ratio) */
 }
 
 video {
