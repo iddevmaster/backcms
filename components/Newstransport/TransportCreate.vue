@@ -1,8 +1,13 @@
 <template>
   <div class="row mb-4">
-    <div id="form_grid_layouts" class="col-lg-12">
+    <div id="form_grid_layouts" class="col-lg-10">
       <div class="seperator-header">
         <h4 class="">Form Add News</h4>
+      </div>
+    </div>
+    <div id="form_grid_layouts" class="col-lg-2">
+      <div class="seperator-header" style="text-align: center;"  @click="backToNews()">
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">Back To News Civil</button>
       </div>
     </div>
     <div class="form-group mb-4">
@@ -100,6 +105,10 @@ const rules = computed(() => {
 
   };
 });
+
+const backToNews = async () => {
+  router.go(-1);
+}
 
 const v$ = useVuelidate(rules, getFormNews);
 
