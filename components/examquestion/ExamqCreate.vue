@@ -5,14 +5,14 @@
         <h4 class="">Form Add Exam Question</h4>
       </div>
     </div>
-    <div id="form_grid_layouts" class="col-lg-9">
+    <div id="form_grid_layouts" class="col-lg-8">
       <div class="seperator-header">
         <h4 class="">Exam Main : {{ name  }}</h4>
       </div>
     </div>
-    <div id="form_grid_layouts" class="col-lg-1">
-      <div class="seperator-header">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">Back</button>
+    <div id="form_grid_layouts" class="col-lg-2">
+      <div class="seperator-header" style="text-align: center;">
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light" @click="backToquestion()">Back To Question</button>
       </div>
     </div>
     <div class="col-md-12">
@@ -73,7 +73,6 @@
 
         <tbody>
           <tr v-for="(item, index) in store.choicelist" :key="index">
-            {{ item }}
             <td class="delete-item-row">
               <ul class="table-controls">
                 <li><a href="javascript:void(0);" @click="removeChoice(item.id)" class="delete-item" data-toggle="tooltip"
@@ -157,7 +156,9 @@ const validatePNumber = async (evt) => {
 
 
 
-
+const backToquestion = async () => {
+  router.go(-1);
+}  
 
 const v$ = useVuelidate(rules, FormExamq);
 

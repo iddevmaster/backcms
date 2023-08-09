@@ -5,19 +5,17 @@
         <h4 class="">Form Add Exam Question</h4>
       </div>
     </div>
-    <div id="form_grid_layouts" class="col-lg-9">
+    <div id="form_grid_layouts" class="col-lg-8">
       <div class="seperator-header">
         <h4 class="">หลักสูตร : {{ name  }}</h4>
       </div>
     </div>
-    <div id="form_grid_layouts" class="col-lg-1">
-      <div class="seperator-header">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">Back</button>
+    <div id="form_grid_layouts" class="col-lg-2">
+      <div class="seperator-header" style="text-align: center;"  @click="backToquestion()">
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">Back To Question</button>
       </div>
     </div>
     <div class="col-md-12">
-
-       {{ store.formEditExamq }}
       <label for="inputEmail4" class="form-label">Question</label>
       <input type="text" class="form-control" id="inputEmail4" v-model="store.formEditExamq.eq_name" :class="{
         'border-red-500 focus:border-red-500': v$.eq_name.$error,
@@ -74,8 +72,7 @@
 
         <tbody>
           <tr v-for="(item, index) in store.choicelist" :key="index">
-        {{ item }}
-        {{ store.deletechoice }}
+    
             <td class="delete-item-row">
               <ul class="table-controls">
                 <li><a href="javascript:void(0);" @click="removeChoice(item.id)" class="delete-item"
@@ -168,7 +165,11 @@ const validatePNumber = async (evt) => {
 
 
 
+  
 
+const backToquestion = async () => {
+  router.go(-1);
+}  
 
 const v$ = useVuelidate(rules, FormEditExamq);
 

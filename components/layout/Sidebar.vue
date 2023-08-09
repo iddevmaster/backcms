@@ -2,14 +2,14 @@
   <div class="sidebar-wrapper sidebar-theme">
     <nav id="sidebar">
       <div class="navbar-nav theme-brand flex-row text-center">
-        <div class="nav-logo">
+        <div class="nav-logo" @click="GotoPage()">
           <div class="nav-item theme-logo">
-            <a href="./index.html">
+            <a >
               <img src="/img/logo.svg" class="navbar-logo" alt="logo" />
             </a>
           </div>
           <div class="nav-item theme-text">
-            <a href="./index.html" class="nav-link"> CORK </a>
+            <a class="nav-link"> CMS </a>
           </div>
         </div>
         <div class="nav-item sidebar-toggle">
@@ -375,8 +375,11 @@ import { defineComponent } from 'vue';
 
 const data = localStorage.getItem('user');
 let user = JSON.parse(data);
+const router = useRouter();
 
-  
+const GotoPage = async () => {
+  router.push('/');
+}
 </script>
   
   

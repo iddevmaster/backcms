@@ -43,22 +43,13 @@ export const useAuthStore = defineStore('auth', {
 
         
         if (data.value) {
-          console.log(data.value);
+        
           const token = useCookie('token'); // useCookie new hook in nuxt 3
           const user_id = useCookie('user_id'); // useCookie new hook in nuxt 3
           token.value = "ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p"; // set token to cookie
           user_id.value = data.value.user_id; // set token to cookie
-     
-
           localStorage.setItem('user', JSON.stringify(data.value))
-       
-
-          
-//       const cachedData = localStorage.getItem('firstname');
-//       const choice = localStorage.getItem('lastname');
-// let x = JSON.parse(cachedData);
-// let c = JSON.parse(choice);
-// console.log(x);
+      
   
           // token.value = data?.value?.token; // set token to cookie
           this.authenticated = true; // set authenticated  state value to true
@@ -75,7 +66,6 @@ export const useAuthStore = defineStore('auth', {
       
 
       } catch (error) {
-       console.log('error');
        this.status_login = false;
       } finally {
      
