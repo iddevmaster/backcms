@@ -77,8 +77,6 @@ const store = newTransportStore()
 const storeupload = UploadStore()
 const storealert = AlertStore()
 
-
-
 const { Clear } = AlertStore(); // use  action
 const { SaveDataNew } = newTransportStore(); // use  action
 const { SaveSubmitForm } = newTransportStore(); // use  action from   store
@@ -103,8 +101,6 @@ const rules = computed(() => {
   };
 });
 
-
-
 const v$ = useVuelidate(rules, getFormNews);
 
 const save = async () => {
@@ -128,12 +124,6 @@ const save = async () => {
 
     const input = document.querySelector('input[type="file"]');
     input.value = '';
-
-
-
-
-    //  const input = document.querySelector('input[type="file"]');
-    //     input.value = '';
 
   }
 }
