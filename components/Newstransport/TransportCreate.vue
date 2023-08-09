@@ -105,9 +105,6 @@ const rules = computed(() => {
 
 
 
-
-
-
 const v$ = useVuelidate(rules, getFormNews);
 
 const save = async () => {
@@ -160,7 +157,6 @@ const onFileChange = async (event) => {
   for (const i of Object.keys(storeupload.formi)) {
     const aaaa = storeupload.formi[i];
     formData.append('files', storeupload.formi[i])
-
   }
 
 
