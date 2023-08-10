@@ -107,6 +107,7 @@ import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
 import { ExamStore } from "@/store/exam";
 import { useToast } from "vue-toastification";
+import ApiService from '../../services/api.service';
 const router = useRouter();
 
 const toast = useToast();
@@ -193,14 +194,8 @@ function coverttime(date) {
 }
 
 function image(i) {
-  var x = null;
-  if (i) {
-    const usingSplit = i.split(",");
-    var x = usingSplit[0];
-  } else {
-    var x = "static/upload/2023/7/files-1689561047889.jpg";
-  }
-  return "https://oasapi.iddriver.com/media_file/file/?f=" + x;
+  let im =  ApiService.image(i);
+  return im;
 }
 </script>
 <style>

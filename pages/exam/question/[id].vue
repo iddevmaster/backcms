@@ -9,6 +9,7 @@ import { defineComponent } from "vue";
 import { ExamquestionStore } from "@/store/examquestion";
 import { useToast } from "vue-toastification";
 import ExamqList from "@/components/examquestion/ExamqList.vue";
+import ApiService from '../../../services/api.service';
 import {
   required,
   email,
@@ -66,13 +67,8 @@ const DeleteEq = async (item) => {
 };
 
 function image(i) {
-  var x = null;
-  if (i) {
-    var x = i;
-  } else {
-    var x = "static/upload/2023/8/files-fr6OgVPaz0.jpg";
-  }
-  return "http://oasapi.iddriver.com/media_file/file/?f=" + x;
+  let im =  ApiService.image(i);
+  return im;
 }
 </script>
 

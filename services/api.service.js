@@ -22,6 +22,8 @@ const apiUpload = axios.create({
 });
 
 
+const ViewImage = 'https://oasapi.iddriver.com/media_file/file/?f=';
+
 export default {
   get(resource) {
     return apiClient.get(resource);
@@ -37,5 +39,12 @@ export default {
   },
   delete(resource) {
     return apiClient.delete(resource);
-  }
+  },
+  image(img) {
+    const imag = ViewImage+img;
+    if(!img){
+      console.log('ไม่มีรูป');
+    }
+    return imag;
+  },
 };
