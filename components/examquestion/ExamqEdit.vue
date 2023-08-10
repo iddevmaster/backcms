@@ -58,6 +58,7 @@
 
 
   <button class="btn btn-dark additem _effect--ripple waves-effect waves-light" @click="addChoice()">Add Choice</button>
+  {{ store.choicelist }}
   <div class="invoice-detail-items">
     <div class="table-responsive">
       <table class="table item-table">
@@ -69,8 +70,9 @@
           </tr>
           <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
         </thead>
-
+       
         <tbody>
+       
           <tr v-for="(item, index) in store.choicelist" :key="index">
     
             <td class="delete-item-row">
@@ -124,6 +126,7 @@ const { deleteChoice } = ExamquestionStore();//Action
 const { UploadfileExamq } = ExamquestionStore();//Action
 const { uploadfileexam } = ExamquestionStore();//Action
 const { ResetForm } = ExamquestionStore();//Action
+const { ClearLocal } = ExamquestionStore();//Action
 
 
 store.formExamq.em_id = localStorage.getItem('em_id');
@@ -178,9 +181,13 @@ return false;
    // let upload = await UploadfileExamq();
     try {
       let save = await UpdateExa();  ///////////save 
+      let clear = await ClearLocal();  ///////////save 
       if(save == true){
       toast.success('Save Data')
       }
+      setTimeout(() => {
+      router.go(-1);
+    }, 500);
   
     } catch (error) {
       toast.error('Fail Save Data')

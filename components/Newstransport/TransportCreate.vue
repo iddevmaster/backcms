@@ -7,7 +7,7 @@
     </div>
     <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header" style="text-align: center;"  @click="backToNews()">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">Back To News Civil</button>
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">Back To News</button>
       </div>
     </div>
     <div class="form-group mb-4">

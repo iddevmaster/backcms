@@ -190,8 +190,6 @@ function coverttime(date) {
 }
 
  function image(i) {
-
-  
   let im =  ApiService.image(i);
   return im;
 }

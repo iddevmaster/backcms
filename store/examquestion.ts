@@ -183,7 +183,7 @@ export const ExamquestionStore = defineStore('examquestion', {
         this.formChoice.ec_image = this.choicelist[i].ec_image
         this.formChoice.eq_id = id
         await this.delay(500);
-        console.log(i);
+       
         const data = await ApiService.post('/exam/choice/create', this.formChoice);
         {
         }
@@ -254,30 +254,9 @@ this.image = x[0].eq_image;
       await this.UploadfileExamq();
       await this.deleteChoiceCall();
       await this.UpdateExamq()
+      await this.UpdateChoice()
       return true;
-      // try {
-        
 
-      //   await Promise.all([this.deleteChoiceCall(), this.UpdateExamq2()]);
-
-      // } catch (error) {
-      //   console.log('error');
-      //   return false;
-      // } finally {
-
-      // }
-   //  await this.deleteChoiceCall();
-
-// for (var i = 0; i < this.choicelist.length; i++) {
-//   const x = i + 1;
-//   this.formChoice.ec_index = x;
-//   this.formChoice.ec_name = this.choicelist[i].ec_name
-//   this.formChoice.ec_image = this.choicelist[i].ec_image
-//   this.formChoice.eq_id = this.formEditExamq.id
-//   await this.delay(500);
-//   {
-//   }
-// }
     },
 
     async UpdateExamq() {
@@ -287,10 +266,24 @@ return true;
 });
     },
 
+    async UpdateChoice() {
+      for (var i = 0; i < this.choicelist.length; i++) {
+        const x = i + 1;
+        this.formChoice.ec_index = x;
+        this.formChoice.ec_name = this.choicelist[i].ec_name
+        this.formChoice.ec_image = this.choicelist[i].ec_image
+        this.formChoice.eq_id = this.formEditExamq.id
+        const data = await ApiService.post('/exam/choice/create', this.formChoice);
+      }
+    //  await this.ResetForm();
+
+
+      return true;
+    },
+
 
 
     async deleteExamq(item) {
-
       try {
         const del = await ApiService.delete('/exam/question/delete/' + item[0].id);
         this.eq = [];

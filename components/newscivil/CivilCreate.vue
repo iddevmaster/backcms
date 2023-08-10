@@ -7,7 +7,7 @@
     </div>
     <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header" style="text-align: center;"  @click="backToNews()">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">Back To News Civil</button>
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">Back To News</button>
       </div>
     </div>
     <div class="form-group mb-4">
@@ -23,10 +23,10 @@
     </div>
     <div class="form-group mb-4">
       <label for="exampleFormControlTextarea1">News Description</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" :class="{
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  :class="{
         'border-red-500 focus:border-red-500': v$.news_description.$error,
         'border-[#42d392] ': !v$.news_description.$invalid,
-      }" @change="v$.news_description.$touch" v-model="store.formDataNews.news_description">
+      }" @change="v$.news_description.$touch" v-model="store.formDataNews.news_description" >
               </textarea>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.news_description.$error">{{
         v$.news_description.$errors[0].$message
@@ -132,13 +132,9 @@ const save = async () => {
     } catch (e) {
       await toast.error('Fall Save Data')
     }
-
     v$.value.$reset();
-
     const input = document.querySelector('input[type="file"]');
     input.value = '';
-
-
   }
 }
 
