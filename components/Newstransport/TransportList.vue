@@ -116,8 +116,7 @@ const { datanewstransport } = storeToRefs(newTransportStore())
   const { setCurrentPage } = newTransportStore();//Action
   const { sortLists } = newTransportStore();//Action
   const { selectentires } = newTransportStore();//Action
-  
-  
+  const { fetchNewTransport } = newTransportStore();//Action
   const { getSelect } = storeToRefs(store); //Get Getter
   const { getSelectALL } = storeToRefs(store); //Get Getter
   const { getPaginate } = storeToRefs(store); //Get Getter
@@ -130,6 +129,7 @@ const { datanewstransport } = storeToRefs(newTransportStore())
 
 
 const dataTransport = await store.fetchNewTransport();
+
 if (dataTransport === false) {
   await toast.error("Error Data Contact Admin", {
         timeout: 30000,

@@ -39,7 +39,7 @@
         ref="fileupload">
     </div>
     <div class="border p-2 mt-3">
-      <p>Preview Here: {{ storeupload.preview_list }}</p>
+      <p>Preview Here:</p>
       <template v-if="storeupload.preview_list.length">
         <div class="row">
           <div class="col-3" v-for="item, index in storeupload.preview_list" :key="index">

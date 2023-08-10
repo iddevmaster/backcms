@@ -65,7 +65,6 @@ const DeleteEq = async (item) => {
   store.modaldelete = false;
   await store.fetchExamquestionlist();
 };
-
 function image(i) {
   let im =  ApiService.image(i);
   return im;
@@ -127,7 +126,7 @@ function image(i) {
 
                             <div class="inv--detail-section inv--customer-detail-section">
                               <div class="row">
-                                <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4 align-self-center"
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 align-self-center"
                                   v-for="(exams, x) in store.exam" :key="x">
                                   <p class="inv-to">
                                     Exam Main : {{ exams.em_name }}

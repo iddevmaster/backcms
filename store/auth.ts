@@ -46,6 +46,8 @@ export const useAuthStore = defineStore('auth', {
         
           const token = useCookie('token'); // useCookie new hook in nuxt 3
           const user_id = useCookie('user_id'); // useCookie new hook in nuxt 3
+          const firstname = useCookie('firstname'); // useCookie new hook in nuxt 3
+          const lastname = useCookie('firstname'); // useCookie new hook in nuxt 3
           token.value = "ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p"; // set token to cookie
           user_id.value = data.value.user_id; // set token to cookie
           localStorage.setItem('user', JSON.stringify(data.value))

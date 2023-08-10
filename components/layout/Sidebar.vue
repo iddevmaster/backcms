@@ -39,7 +39,7 @@
             <img src="/img/profile-30.png" alt="avatar" />
           </div>
           <div class="profile-content">
-            <h6 class="">{{ user.user_name }}</h6>
+            <h6 class="" v-if="user">{{ user.user_name }}</h6>
             <p class="">Project Leader</p>
           </div>
         </div>
@@ -374,6 +374,7 @@ import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 
 const data = localStorage.getItem('user');
+
 let user = JSON.parse(data);
 const router = useRouter();
 

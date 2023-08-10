@@ -41,14 +41,11 @@
     <div class="border p-2 mt-3">
       <p>Preview Here:</p>
       <template v-if="storeupload.preview_list.length">
-
         <div class="row">
-
           <div class="col-3" v-for="item, index in storeupload.preview_list" :key="index">
             <img :src="CoverImage(item)" class="img-fluid" />
             <button @click="removeImage(index)">Remove image</button>
           </div>
-
         </div>
       </template>
     </div>
