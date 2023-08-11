@@ -1,11 +1,11 @@
 <template>
   <div class="row mb-4 g-3">
-    <div id="form_grid_layouts" class="col-lg-2">
+    <div id="form_grid_layouts" class="col-lg-3">
       <div class="seperator-header">
         <h4 class="">Form Add Exam Question</h4>
       </div>
     </div>
-    <div id="form_grid_layouts" class="col-lg-8">
+    <div id="form_grid_layouts" class="col-lg-7">
       <div class="seperator-header">
         <h4 class="">หลักสูตร : {{ name  }}</h4>
       </div>
@@ -58,7 +58,6 @@
 
 
   <button class="btn btn-dark additem _effect--ripple waves-effect waves-light" @click="addChoice()">Add Choice</button>
-  {{ store.choicelist }}
   <div class="invoice-detail-items">
     <div class="table-responsive">
       <table class="table item-table">
@@ -129,7 +128,7 @@ const { ResetForm } = ExamquestionStore();//Action
 const { ClearLocal } = ExamquestionStore();//Action
 
 
-store.formExamq.em_id = localStorage.getItem('em_id');
+let em_id = localStorage.getItem('em_id');
 let name = localStorage.getItem('em_name');
 
 

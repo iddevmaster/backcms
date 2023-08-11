@@ -203,6 +203,8 @@ export const ExamquestionStore = defineStore('examquestion', {
 
       const cachedData = localStorage.getItem('cachedData');
       const choice = localStorage.getItem('choice');
+      const emid = localStorage.getItem('em_id');
+      
 let x = JSON.parse(cachedData);
 let c = JSON.parse(choice);
 
@@ -219,9 +221,10 @@ this.formEditExamq = {
   eq_name: x[0].eq_name,
   eq_image: x[0].eq_image,
   eq_answer: x[0].eq_answer,
-  em_id: x[0].em_id,
+  em_id: emid,
   id: x[0].id,
 };
+
 this.image = x[0].eq_image;
 
 
@@ -260,7 +263,7 @@ this.image = x[0].eq_image;
     },
 
     async UpdateExamq() {
-      console.log('UpdateExamq2');
+      console.log('UpdateExamq2',this.formEditExamq);
 const data = await ApiService.put('/exam/question/update/' + this.formEditExamq.id, this.formEditExamq).then(response => {
 return true;
 });
@@ -324,7 +327,7 @@ return true;
         eq_id: "",
       }
       this.choicelist.push(daa);
-      console.log(this.choicelist.length);
+
     },
 
     async deleteChoice(x) {
@@ -364,11 +367,11 @@ return true;
     async UploadfileExamq() {
       let formData = new FormData();
       formData.append('files', this.imagelist);
-      console.log(this.imagelist);
       if (this.imagelist) {
         try {
           const data = await ApiService.upload('/media_file/upload/file', formData);
           //  this.path = data.data[0].path
+          console.log(data.data[0].path);
           this.formExamq.eq_image = data.data[0].path
           this.formEditExamq.eq_image = data.data[0].path
           return true;

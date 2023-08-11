@@ -128,6 +128,7 @@ const { ClearLocal } = ExamquestionStore();//Action
 
 
 store.choicelist = [];
+store.image = null;
 store.formExamq.em_id = localStorage.getItem('em_id');
 let name = localStorage.getItem('em_name');
 
