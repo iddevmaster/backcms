@@ -2,7 +2,7 @@
   <div class="row mb-4 g-3">
     <div id="form_grid_layouts" class="col-lg-3">
       <div class="seperator-header">
-        <h4 class="">Form Add Exam Question</h4>
+        <h4 class="">แก้ไข้ข้อสอบ</h4>
       </div>
     </div>
     <div id="form_grid_layouts" class="col-lg-7">
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="col-md-12">
-      <label for="inputEmail4" class="form-label">Question</label>
+      <label for="inputEmail4" class="form-label">คำถาม - โจทย์</label>
       <input type="text" class="form-control" id="inputEmail4" v-model="store.formEditExamq.eq_name" :class="{
         'border-red-500 focus:border-red-500': v$.eq_name.$error,
         'border-[#42d392] ': !v$.eq_name.$invalid,
@@ -26,7 +26,7 @@
       }}</span>
     </div>
     <div class="col-md-12">
-      <label for="inputPassword4" class="form-label">Answer</label>
+      <label for="inputPassword4" class="form-label">คำตอบ</label>
       <input type="text" class="form-control" id="inputPassword4" v-model="store.formEditExamq.eq_answer" :class="{
         'border-red-500 focus:border-red-500': v$.eq_answer.$error,
         'border-[#42d392] ': !v$.eq_answer.$invalid,
@@ -38,16 +38,16 @@
 
 
     <div class="form-group mb-4 mt-3">
-      <label for="exampleFormControlFile1">Image</label> <span class="text-xs text-red-500" style="color:red" v-if="store.imageReq == true"> Invalid file selected</span>
+      <label for="exampleFormControlFile1">รูปภาพข้อสอบ</label> <span class="text-xs text-red-500" style="color:red" v-if="store.imageReq == true"> Invalid file selected</span>
       <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChange" ref="fileupload">
     </div>
     <div class="border p-2 mt-3">
-      <p>Preview Here:</p>
+      <p>แสดงรูปตรงนี้:</p>
       <template v-if="store.image">
         <div class="row">
           <div class="col-3">
             <img  :src="coverimage(store.image)" class="img-fluid" />
-            <button @click="removeImage()">Remove image</button>
+            <button @click="removeImage()">ลบรูปภาพ</button>
           </div>
         </div>
       </template>
@@ -57,15 +57,15 @@
   </div>
 
 
-  <button class="btn btn-dark additem _effect--ripple waves-effect waves-light" @click="addChoice()">Add Choice</button>
+  <button class="btn btn-dark additem _effect--ripple waves-effect waves-light" @click="addChoice()">เพิ่มคำตอบ</button>
   <div class="invoice-detail-items">
     <div class="table-responsive">
       <table class="table item-table">
         <thead>
           <tr>
-            <th class=""></th>
-            <th>Name</th>
-            <th class="">Image</th>
+            <th class="">ลำดับ</th>
+            <th>ชื่อ</th>
+            <th class="">รูปภาพ</th>
           </tr>
           <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
         </thead>
@@ -103,7 +103,7 @@
     </div>
   </div>
   <div class="col-xl-12 col-md-12">
-    <button type="button" class="btn btn-success" @click="save()">Edit Save</button>
+    <button type="button" class="btn btn-success" @click="save()">แก้ไข้ข้อสอบ</button>
   </div>
 </template>
 <script setup lang="ts">
