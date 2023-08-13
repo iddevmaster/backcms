@@ -42,8 +42,8 @@ const Deleteexam = async (item) => {
             <div class="page-meta">
                 <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Exam </a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Exam List</li>
+                        <li class="breadcrumb-item"><a href="#">หลักสูตร </a></li>
+                        <li class="breadcrumb-item active" aria-current="page">หลักสูตรทั้งหมด</li>
                     </ol>
                 </nav>
             </div>
@@ -56,8 +56,7 @@ const Deleteexam = async (item) => {
                             <div class="widget-header">
                                 <div class="row">
                                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                        <button class="btn btn-primary mb-2 me-4" @click="OpenFormInsert()">Add Exam
-                                            Main</button>
+                                        <button class="btn btn-primary mb-2 me-4" @click="OpenFormInsert()">เพิ่มหลักสูตร</button>
                                     </div>
                                 </div>
                             </div>
@@ -83,13 +82,13 @@ const Deleteexam = async (item) => {
                         <line x1="14" y1="11" x2="14" y2="17"></line>
                     </svg>
                 </div>
-                <h5 class="modal-title" id="exampleModalLabel">Delete the task?</h5>
+                <h5 class="modal-title" id="exampleModalLabel">ต้องการลบรายการนี้?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p class="">If you delete the task it will be gone forever. Are you sure you want to proceed?</p>
+                <p class="">หากคุณลบรายกานนี้ รายการนั้นจะหายไปตลอดกาล คุณแน่ใจหรือไม่ว่าต้องการดำเนินการต่อ?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal">Cancel</button>

@@ -5,7 +5,7 @@
         id="t-text"
         type="text"
         name="txt"
-        placeholder="Search"
+        placeholder="ค้นหา"
         class="form-control"
         required=""   v-model="store.formsearchexam.search" @keyup="searchData"
       />
@@ -31,14 +31,14 @@
         <thead>
             <tr>
        
-                <th scope="col" @click="sortList('em_code')">Exam Code &#8597;</th>
-                <th scope="col" @click="sortList('em_name')">Exam Name &#8597;</th>
-                <th class="text-center" scope="col">Exam Cover</th>
-                <th class="text-center" scope="col">Exam Description</th>
-                <th class="text-center" scope="col" @click="sortList('em_random_amount')">Exam Random &#8597;</th>
-                 <th class="text-center" scope="col" @click="sortList('total_question')">Total Question &#8597;</th>
+                <th scope="col" @click="sortList('em_code')">รหัสหลักสูตร &#8597;</th>
+                <th scope="col" @click="sortList('em_name')">ชื่อหลักสูตร &#8597;</th>
+                <th class="text-center" scope="col">รูปหน้าปก</th>
+                <th class="text-center" scope="col">รายละเอียด</th>
+                <th class="text-center" scope="col" @click="sortList('em_random_amount')">จำนวนที่สุ่ม &#8597;</th>
+                 <th class="text-center" scope="col" @click="sortList('total_question')">ข้อสอบทั้งหมด &#8597;</th>
             
-                <th class="text-center" scope="col">Action</th>
+                <th class="text-center" scope="col">จัดการ</th>
             </tr>
         </thead>
 
@@ -72,9 +72,9 @@
                 </td> -->
                 <td align="center">
              <div class="btn-group-vertical">
-            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" @click="edit(item)">Edit</button>
-            <button type="button" class="btn btn-success" style="background-color:#3F2C73;"  @click="goToAddEx(item)">Add Examn</button>
-            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" @click="del(item)">Delete</button>
+            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" @click="edit(item)">แก้ไขหลักสูตร</button>
+            <button type="button" class="btn btn-success" style="background-color:#3F2C73;"  @click="goToAddEx(item)">เพิ่มข้อสอบ</button>
+            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" @click="del(item)">ลบหลักสูตร</button>
             </div>
           </td>
             </tr>

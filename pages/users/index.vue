@@ -77,13 +77,13 @@ const delete_userid = async (id) => {
             <line x1="14" y1="11" x2="14" y2="17"></line>
           </svg>
         </div>
-        <h5 class="modal-title" id="exampleModalLabel">Delete the task?</h5>
+        <h5 class="modal-title" id="exampleModalLabel">ต้องการลบรายการนี้?</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p class="">If you delete the task it will be gone forever. Are you sure you want to proceed?</p>
+        <p class="">หากคุณลบรายกานนี้ รายการนั้นจะหายไปตลอดกาล คุณแน่ใจหรือไม่ว่าต้องการดำเนินการต่อ?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal">Cancel</button>
