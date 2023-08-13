@@ -5,7 +5,7 @@
         id="t-text"
         type="text"
         name="txt"
-        placeholder="Search"
+        placeholder="ค้นหา"
         class="form-control"
         required=""
         v-model="store.formsearchcourse.search" @keyup="searchData"
