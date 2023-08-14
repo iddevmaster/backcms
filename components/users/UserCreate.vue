@@ -87,6 +87,18 @@
         v$.user_phone.$errors[0].$message
       }}</span>
     </div>
+
+    
+  </div>
+  <div class="row mb-4">
+    <div class="col-sm-6">
+      <label for="exampleFormControlInput1">ประเภท</label>
+      <select class="form-control" v-model="store.formDataregister.user_type">
+    <option value="1">ผู้ดูแลระบบ</option>
+    <option value="2">ผู้เจ้าหน้าที่กรม</option>
+    <option value="3">ผู้เจ้าหน้าที่ทั่วไป</option>
+    </select>
+    </div>
   </div>
   <button type="button" class="btn btn-primary" @click="save()">บันทึก</button>
 </template>

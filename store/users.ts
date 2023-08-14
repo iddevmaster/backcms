@@ -41,7 +41,7 @@ export const usersStore = defineStore('users', {
       user_lastname: null,
       user_email: null,
       user_phone: null,
-      user_type: 3,
+      user_type: null,
     },
     formDataEdit: {
       user_name: null,
@@ -50,7 +50,7 @@ export const usersStore = defineStore('users', {
       user_lastname: null,
       user_email: null,
       user_phone: null,
-      user_type: 3,
+      user_type: null,
     }
   }
 
@@ -116,7 +116,7 @@ export const usersStore = defineStore('users', {
       this.formsearch.search = this.searchDa;
       try {
         this.pending = true
-        const data = await ApiService.post('/user/list?user_type=3', this.formsearch).then(response => {
+        const data = await ApiService.post('/user/list?', this.formsearch).then(response => {
           this.posts = response.data
           this.total_page = response.data.total_page
           this.limit_page = response.data.limit_page
@@ -163,10 +163,12 @@ export const usersStore = defineStore('users', {
 
     async Update(user_id) {
       try {
+        console.log(this.formDataEdit);
+        console.log(user_id);
         const response = await ApiService.put('/user/update/' + user_id, this.formDataEdit);
         return response.data
       } catch (error) {
-        return [];
+       return false;
       }
     },
 
@@ -198,6 +200,7 @@ export const usersStore = defineStore('users', {
     },
     async SaveForm() {
       this.pending = true;
+   
       try {
         const { pending, error, data } = await ApiService.post('/user/create', this.formDataregister).then(response => {
           if (response.value) {
@@ -206,16 +209,14 @@ export const usersStore = defineStore('users', {
           if (response.value == '') {
             return response.value;
           }
+          return true;
           //  this.pending_form = true;
         });
       } catch (error) {
-
-        return [];
-
+        return false;
       } finally {
         this.pending = false;
       }
-
 
     },
 

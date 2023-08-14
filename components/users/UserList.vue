@@ -17,7 +17,7 @@
 
     <div class="col-6 col-sm-2 d-flex">
       <div id="zero-config_filter" class="dataTables_filter"><label><input type="search" class="form-control"
-            placeholder="Search..." aria-controls="zero-config" v-model="store.searchDa" @keyup="searchData"></label>
+            placeholder="ค้นหา" aria-controls="zero-config" v-model="store.searchDa" @keyup="searchData"></label>
       </div>
 
     </div>
