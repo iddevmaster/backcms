@@ -16,8 +16,8 @@ definePageMeta({
             <div class="page-meta">
                 <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Exam Question </a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Edit Exam Question</li>
+                        <li class="breadcrumb-item"><a href="#">หลักสูตร </a></li>
+                        <li class="breadcrumb-item active" aria-current="page">แก้ไข้ข้อสอบ</li>
                     </ol>
                 </nav>
             </div>

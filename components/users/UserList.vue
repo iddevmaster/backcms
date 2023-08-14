@@ -31,12 +31,12 @@
             #
             <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
           </th>
-          <th @click="sortList('id')">FirstName - LastName &#8597;</th>
-          <th @click="sortList('user_name')">Username &#8597;</th>
-          <th @click="sortList('user_email')">Email &#8597;</th>
-          <th @click="sortList('user_phone')">Tel &#8597;</th>
-          <th>Last Update</th>
-          <th class="no-content">Action</th>
+          <th @click="sortList('id')">ชื่อ - นามสกุล &#8597;</th>
+          <th @click="sortList('user_name')">ยูสเซอร &#8597;</th>
+          <th @click="sortList('user_email')">อีเมล &#8597;</th>
+          <th @click="sortList('user_phone')">เบอรโทร &#8597;</th>
+          <th>อัพเดทล่าสุด</th>
+          <th class="no-content">จัดการ</th>
         </tr>
       </thead>
       <tbody>

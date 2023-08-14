@@ -13,8 +13,8 @@ import ExamqCreate from '@/components/examquestion/ExamqCreate.vue'
             <div class="page-meta">
                 <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Exam Question </a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Add Exam Question</li>
+                        <li class="breadcrumb-item"><a href="#">หลักสูตร </a></li>
+                        <li class="breadcrumb-item active" aria-current="page">เพิ่มข้อสอบ</li>
                     </ol>
                 </nav>
             </div>

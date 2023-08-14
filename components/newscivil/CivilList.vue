@@ -1,7 +1,7 @@
 <template>
   <div class="row layout-top-spacing">
     <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
-      <input id="t-text" type="text" name="txt" placeholder="Search" class="form-control" required=""
+      <input id="t-text" type="text" name="txt" placeholder="ค้นหา" class="form-control" required=""
         v-model="store.formsearchnews.search" @keyup="searchData" />
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
@@ -22,12 +22,12 @@
         <tr>
           <th>#</th>
           <!-- <th><input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"></th> -->
-          <th @click="sortList('id')">News Cover</th>
-          <th @click="sortList('user_name')">News Title</th>
+          <th @click="sortList('id')">รูปหน้าปก</th>
+          <th @click="sortList('user_name')">หัวข้อข่าว</th>
           <!-- <th @click="sortList('user_email')">News Description</th> -->
-          <th @click="sortList('user_phone')">News Type</th>
-          <th>Update</th>
-          <th class="no-content">Action</th>
+          <th @click="sortList('user_phone')">ประเภทข่าว</th>
+          <th>อัพเดทล่าสุด</th>
+          <th class="no-content">จัดการ</th>
         </tr>
       </thead>
       <tbody>
@@ -42,8 +42,8 @@
 
           <td>{{ datanew.news_title }}</td>
           <!-- <td>{{ datanew.news_description }}</td> -->
-          <td v-if="datanew.news_type == 2"> Civil</td>
-          <td v-else> Transport</td>
+          <td v-if="datanew.news_type == 2"> กรมโยธา</td>
+          <td v-else> กรมข่นส่ง</td>
           <td>{{ coverttime(datanew.udp_date) }}</td>
           <td>
             <NuxtLink :to="'/news/civil/' + datanew.news_id">

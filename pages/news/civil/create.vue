@@ -21,8 +21,8 @@ const { AlertTextForm } = storeToRefs(store); //Get Getter
             <div class="page-meta">
                 <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">News </a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Add News Civil</li>
+                        <li class="breadcrumb-item"><a href="#">ข่าวสารกรมโยธา </a></li>
+                        <li class="breadcrumb-item active" aria-current="page">เพิ่มข่าวสารกรมโยธา</li>
                     </ol>
                 </nav>
             </div>

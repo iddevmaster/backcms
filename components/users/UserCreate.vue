@@ -2,17 +2,17 @@
   <div class="row mb-4">
     <div id="form_grid_layouts" class="col-lg-10">
       <div class="seperator-header">
-        <h4 class="">Form Add User</h4>
+        <h4 class="">ฟอร์ม เพิ่มผู้ใช้งาน</h4>
       </div>
     </div>
     <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header" style="text-align: center;" @click="backToUser()">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">Back To Users</button>
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">กลับหน้าผู้ใช้งาน</button>
       </div>
     </div>
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">First Name</label>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="First Name *"
+      <label for="exampleFormControlInput1">ชื่อ</label>
+      <input type="text" class="form-control" id="inputEmail3" placeholder="ชื่อ *"
         v-model="store.formDataregister.user_firstname" :class="{
           'border-red-500 focus:border-red-500': v$.user_firstname.$error,
           'border-[#42d392] ': !v$.user_firstname.$invalid,
@@ -25,8 +25,8 @@
 
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">Last Name</label>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="Last Name *"
+      <label for="exampleFormControlInput1">นามสกุล</label>
+      <input type="text" class="form-control" id="inputEmail3" placeholder="นามสกุล *"
         v-model="store.formDataregister.user_lastname" :class="{
           'border-red-500 focus:border-red-500': v$.user_lastname.$error,
           'border-[#42d392] ': !v$.user_lastname.$invalid,
@@ -41,8 +41,8 @@
   <div class="row mb-4">
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">Username</label>
-      <input type="text" class="form-control" id="inputPassword3" placeholder="Username *"
+      <label for="exampleFormControlInput1">ยูสเซอร</label>
+      <input type="text" class="form-control" id="inputPassword3" placeholder="ยูสเซอร *"
         v-model="store.formDataregister.user_name" :class="{
           'border-red-500 focus:border-red-500': v$.user_name.$error,
           'border-[#42d392] ': !v$.user_name.$invalid,
@@ -53,8 +53,8 @@
     </div>
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">Password</label>
-      <input type="text" class="form-control" id="inputPassword3" placeholder="Password *"
+      <label for="exampleFormControlInput1">รหัสผ่าน</label>
+      <input type="text" class="form-control" id="inputPassword3" placeholder="รหัสผ่าน *"
         v-model="store.formDataregister.user_password" :class="{
           'border-red-500 focus:border-red-500': v$.user_password.$error,
           'border-[#42d392] ': !v$.user_password.$invalid,
@@ -66,8 +66,8 @@
   </div>
   <div class="row mb-4">
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">Email</label>
-      <input type="text" class="form-control" id="inputPassword3" placeholder="Email *"
+      <label for="exampleFormControlInput1">อีเมล</label>
+      <input type="text" class="form-control" id="inputPassword3" placeholder="อีเมล *"
         v-model="store.formDataregister.user_email" :class="{
           'border-red-500 focus:border-red-500': v$.user_email.$error,
           'border-[#42d392] ': !v$.user_email.$invalid,
@@ -77,8 +77,8 @@
       }}</span>
     </div>
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">Phone</label>
-      <input type="text" class="form-control" id="inputPassword3" placeholder="Tel *"
+      <label for="exampleFormControlInput1">เบอรโทร</label>
+      <input type="text" class="form-control" id="inputPassword3" placeholder="เบอรโทร *"
         v-model="store.formDataregister.user_phone" :class="{
           'border-red-500 focus:border-red-500': v$.user_phone.$error,
           'border-[#42d392] ': !v$.user_phone.$invalid,

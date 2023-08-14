@@ -18,9 +18,9 @@ const { Pending } = storeToRefs(store); //Get Getter
       <div class="page-meta">
         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Course </a></li>
+            <li class="breadcrumb-item"><a href="#">คอร์ส </a></li>
             <li class="breadcrumb-item active" aria-current="page">
-              Add Course
+              เพิ่มคอร์ส
             </li>
           </ol>
         </nav>

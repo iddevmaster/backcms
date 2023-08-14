@@ -2,17 +2,17 @@
   <div class="row mb-4">
     <div id="form_grid_layouts" class="col-lg-10">
       <div class="seperator-header">
-        <h4 class="">Form Add News</h4>
+        <h4 class="">ฟอร์ม เพิ่มข่าวสารกรมข่นส่ง</h4>
       </div>
     </div>
     <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header" style="text-align: center;"  @click="backToNews()">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">Back To News</button>
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">กลับหน้าข่าวสาร</button>
       </div>
     </div>
     <div class="form-group mb-4">
-      <label for="formGroupExampleInput">News Title</label>
-      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="News Title *"
+      <label for="formGroupExampleInput">หัวข้อข่าว</label>
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="หัวข้อข่าว *"
         v-model="store.formDataNews.news_title" :class="{
           'border-red-500 focus:border-red-500': v$.news_title.$error,
           'border-[#42d392] ': !v$.news_title.$invalid,
@@ -22,7 +22,7 @@
       }}</span>
     </div>
     <div class="form-group mb-4">
-      <label for="exampleFormControlTextarea1">News Description</label>
+      <label for="exampleFormControlTextarea1">รายละเอียดข่าว</label>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" :class="{
         'border-red-500 focus:border-red-500': v$.news_description.$error,
         'border-[#42d392] ': !v$.news_description.$invalid,
@@ -33,18 +33,18 @@
       }}</span>
     </div>
     <div class="form-group mb-4 mt-3">
-      <label for="exampleFormControlFile1">Image file input</label> <span class="text-xs text-red-500" style="color:red"
+      <label for="exampleFormControlFile1">รูปภาพหน้าข่าว</label> <span class="text-xs text-red-500" style="color:red"
         v-if="store.imageReq == true"> Invalid file selected</span>
       <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple @change="onFileChange"
         ref="fileupload">
     </div>
     <div class="border p-2 mt-3">
-      <p>Preview Here:</p>
+      <p>แสดงรูปตรงนี้:</p>
       <template v-if="storeupload.preview_list.length">
         <div class="row">
           <div class="col-3" v-for="item, index in storeupload.preview_list" :key="index">
             <img :src="item" class="img-fluid" />
-            <button @click="removeImage(index)">Remove image</button>
+            <button @click="removeImage(index)">ลบรูปภาพ</button>
           </div>
         </div>
 

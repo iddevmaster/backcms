@@ -2,11 +2,11 @@
   <div class="row mb-4 g-3">
     <div id="form_grid_layouts" class="col-lg-9">
       <div class="seperator-header">
-        <h4 class="">Form Add News</h4>
+        <h4 class="">ฟอร์ม เพิ่มคอร์ส</h4>
       </div>
     </div>
     <div class="col-md-6">
-      <label for="inputEmail4" class="form-label">Course Code</label>
+      <label for="inputEmail4" class="form-label"> รหัสคอร์ส</label>
       <input
         type="text"
         class="form-control"
@@ -26,7 +26,7 @@
       >
     </div>
     <div class="col-md-6">
-      <label for="inputPassword4" class="form-label">Course Name</label>
+      <label for="inputPassword4" class="form-label">ชื่อคอร์ส</label>
       <input
         type="text"
         class="form-control"
@@ -46,7 +46,7 @@
       >
     </div>
     <div class="col-12">
-      <label for="inputAddress" class="form-label">Course Description</label>
+      <label for="inputAddress" class="form-label">รายละเอียดคอร์ส</label>
       <textarea
         class="form-control"
         id="exampleFormControlTextarea1"
@@ -68,7 +68,7 @@
     </div>
 
     <div class="form-group mb-4 mt-3">
-      <label for="exampleFormControlFile1">Course cover</label>
+      <label for="exampleFormControlFile1">รูปภาพคอร์ส</label>
       <input
         type="file"
         class="form-control-file"
@@ -78,13 +78,13 @@
       />
     </div>
     <div class="border p-2 mt-3">
-      <p>Preview Here:</p>
+      <p>แสดงรูปตรงนี้:</p>
 
       <template v-if="store.image">
         <div class="row">
           <div class="col-3">
             <img :src="store.image" class="img-fluid" />
-            <button @click="removeImage()">Remove image</button>
+            <button @click="removeImage()">ลบรูปภาพ</button>
           </div>
         </div>
       </template>
@@ -97,7 +97,7 @@
     class="btn btn-dark additem _effect--ripple waves-effect waves-light"
     @click="addlesson()"
   >
-    Add Lesson
+    เพิ่มบทเรียน
   </button>
   <div class="invoice-detail-items">
     <div class="table-responsive">
@@ -105,9 +105,9 @@
         <thead>
           <tr>
             <th class=""></th>
-            <th>Name && Description</th>
-            <th class="">Image</th>
-            <th class="">Video</th>
+            <th>ชื่อ && รายละเอียดบทเรียน</th>
+            <th class="">รูปภาพ</th>
+            <th class="">วีดีโอ</th>
           </tr>
           <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
         </thead>

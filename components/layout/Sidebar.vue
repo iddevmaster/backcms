@@ -96,7 +96,7 @@
                 ></polygon>
               </svg>
 
-              <span>Course Manage</span>
+              <span>คอร์ส</span>
             </div>
             <div>
               <svg
@@ -121,10 +121,10 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/course">Course List</nuxt-link>
+              <nuxt-link to="/course">คอร์สทั้งหมด</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/course/create">Add Course</nuxt-link>
+              <nuxt-link to="/course/create">เพิ่มคอร์ส</nuxt-link>
             </li>
           </ul>
         </li>
@@ -153,7 +153,7 @@
                 <polyline points="2 17 12 22 22 17"></polyline>
                 <polyline points="2 12 12 17 22 12"></polyline>
               </svg>
-              <span>Exam Manage</span>
+              <span>หลักสูตร</span>
             </div>
             <div>
               <svg
@@ -178,7 +178,7 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/exam">Exam List</nuxt-link>
+              <nuxt-link to="/exam">หลักสูตรทั้งหมด</nuxt-link>
             </li>
           </ul>
         </li>
@@ -210,7 +210,7 @@
                 <line x1="12" y1="22.08" x2="12" y2="12"></line>
               </svg>
 
-              <span>News Transport</span>
+              <span>ข่าวสารกรมข่นส่ง</span>
             </div>
             <div>
               <svg
@@ -235,11 +235,11 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/news/transport">News Transport Manage</nuxt-link>
+              <nuxt-link to="/news/transport">ข่าวสารกรมข่นส่ง</nuxt-link>
             </li>
             <li>
               <nuxt-link to="/news/transport/create"
-                >Add News Transport</nuxt-link
+                >เพิ่มข่าวสารกรมข่นส่ง</nuxt-link
               >
             </li>
           </ul>
@@ -270,7 +270,7 @@
                 <polygon points="12 15 17 21 7 21 12 15"></polygon>
               </svg>
 
-              <span>News Civil</span>
+              <span>ข่าวสารกรมโยธา</span>
             </div>
             <div>
               <svg
@@ -295,10 +295,10 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/news/civil">News Civil Manage</nuxt-link>
+              <nuxt-link to="/news/civil">ข่าวสารกรมโยธา</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/news/civil/create">Add News Civil</nuxt-link>
+              <nuxt-link to="/news/civil/create">เพิ่มข่าวสารกรมโยธา</nuxt-link>
             </li>
           </ul>
         </li>
@@ -328,7 +328,7 @@
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
               </svg>
 
-              <span>User Manage</span>
+              <span>จัดการผู้ใช้งาน</span>
             </div>
             <div>
               <svg
@@ -353,10 +353,10 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/users">User Manage</nuxt-link>
+              <nuxt-link to="/users">ผู้ใช้งานทั้งหมด</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/users/create">Add Users</nuxt-link>
+              <nuxt-link to="/users/create">เพิ่มผู้ใช้งาน</nuxt-link>
             </li>
           </ul>
         </li>

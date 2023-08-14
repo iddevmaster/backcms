@@ -1,18 +1,18 @@
 <template>
   <div class="row mb-4 g-3">
-    <div id="form_grid_layouts" class="col-lg-3">
+    <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header">
         <h4 class="">แก้ไข้ข้อสอบ</h4>
       </div>
     </div>
-    <div id="form_grid_layouts" class="col-lg-7">
+    <div id="form_grid_layouts" class="col-lg-8">
       <div class="seperator-header">
         <h4 class="">หลักสูตร : {{ name  }}</h4>
       </div>
     </div>
     <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header" style="text-align: center;"  @click="backToquestion()">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">Back To Question</button>
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">กลับหน้าข้อสอบ</button>
       </div>
     </div>
     <div class="col-md-12">

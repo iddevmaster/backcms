@@ -2,11 +2,11 @@
   <div class="row mb-4 g-3">
     <div id="form_grid_layouts" class="col-lg-9">
       <div class="seperator-header">
-        <h4 class="">Form Edit Course</h4>
+        <h4 class="">ฟอร์ม แก้ไขคอร์ส</h4>
       </div>
     </div>
     <div class="col-md-6">
-      <label for="inputEmail4" class="form-label">Course code</label>
+      <label for="inputEmail4" class="form-label">รหัสคอร์ส</label>
       <input type="text" class="form-control" id="inputEmail4" v-model="store.formDataEditCourse.course_code" :class="{
         'border-red-500 focus:border-red-500': v$.course_code.$error,
         'border-[#42d392] ': !v$.course_code.$invalid,
@@ -15,7 +15,7 @@
         v$.course_code.$errors[0].$message }}</span>
     </div>
     <div class="col-md-6">
-      <label for="inputPassword4" class="form-label">Course Name</label>
+      <label for="inputPassword4" class="form-label">ชื่อคอร์ส</label>
       <input type="text" class="form-control" id="inputPassword4" v-model="store.formDataEditCourse.course_name" :class="{
         'border-red-500 focus:border-red-500': v$.course_name.$error,
         'border-[#42d392] ': !v$.course_name.$invalid,
@@ -24,7 +24,7 @@
         v$.course_name.$errors[0].$message }}</span>
     </div>
     <div class="col-12">
-      <label for="inputAddress" class="form-label">Course Description</label>
+      <label for="inputAddress" class="form-label">รายละเอียดคอร์ส</label>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" :class="{
         'border-red-500 focus:border-red-500': v$.course_description.$error,
         'border-[#42d392] ': !v$.course_description.$invalid,
@@ -35,17 +35,16 @@
     </div>
 
     <div class="form-group mb-4 mt-3">
-      <label for="exampleFormControlFile1">Course cover</label>
+      <label for="exampleFormControlFile1">รูปภาพคอร์ส</label>
       <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChange" ref="fileupload" />
     </div>
     <div class="border p-2 mt-3">
-      <p>Preview Here:</p>
-
+      <p>แสดงรูปตรงนี้:</p>
       <template v-if="store.image">
         <div class="row">
           <div class="col-3">
             <img :src="coverimage(store.image)" class="img-fluid" />
-            <button @click="removeImage()">Remove image</button>
+            <button @click="removeImage()">ลบรูปภาพ</button>
           </div>
         </div>
       </template>
@@ -55,7 +54,7 @@
   </div>
 
   <button class="btn btn-dark additem _effect--ripple waves-effect waves-light" @click="addlesson()">
-    Add Lesson
+    เพิ่มบทเรียน
   </button>
   <div class="invoice-detail-items">
     <div class="table-responsive">
@@ -63,9 +62,9 @@
         <thead>
           <tr>
             <th class=""></th>
-            <th>Name && Description</th>
-            <th class="">Cover</th>
-            <th class="">Video</th>
+            <th>ชื่อ && รายละเอียดคอร์ส</th>
+            <th class="">รูปภาพ</th>
+            <th class="">วีดีโอ</th>
           </tr>
           <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
         </thead>
@@ -107,7 +106,7 @@
   </div>
   <div class="col-xl-12 col-md-12">
     <button type="button" class="btn btn-success" @click="save()">
-      Edit Save
+      บันทึก
     </button>
   </div>
 </template>
