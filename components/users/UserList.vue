@@ -12,21 +12,17 @@
           </select>
         </label>
       </div>
-
     </div>
-
     <div class="col-6 col-sm-2 d-flex">
       <div id="zero-config_filter" class="dataTables_filter"><label><input type="search" class="form-control"
             placeholder="ค้นหา" aria-controls="zero-config" v-model="store.searchDa" @keyup="searchData"></label>
       </div>
-
     </div>
   </div>
   <div class="table-responsive">
     <table id="example" class="table table-bordered" style="width:100%">
       <thead>
         <tr>
-
           <th>
             #
             <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
