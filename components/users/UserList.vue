@@ -1,22 +1,20 @@
 <template>
-  <div class="row">
-    <div class="col-6 col-sm-10 d-flex">
-      <div class="dataTables_length" id="zero-config_length">
-        <label>Results :
-          <select name="zero-config_length" aria-controls="zero-config" @change="selectshowdata($event)">
-            <option value="2">2</option>
-            <option value="7">7</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="50">50</option>
-          </select>
-        </label>
-      </div>
+
+  <div class="row layout-top-spacing">
+    <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
+      <input id="t-text" type="text" name="txt" placeholder="ค้นหา" class="form-control" required=""
+      v-model="store.searchDa" @keyup="searchData" />
     </div>
-    <div class="col-6 col-sm-2 d-flex">
-      <div id="zero-config_filter" class="dataTables_filter"><label><input type="search" class="form-control"
-            placeholder="ค้นหา" aria-controls="zero-config" v-model="store.searchDa" @keyup="searchData"></label>
-      </div>
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
+
+    </div>
+
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
+      <select class="form-select form-select" aria-label="Default select example" @change="selectshowdata($event)">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+      </select>
     </div>
   </div>
   <div class="table-responsive">

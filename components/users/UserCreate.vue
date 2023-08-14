@@ -77,7 +77,7 @@
       }}</span>
     </div>
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">เบอรโทร</label>
+      <label for="exampleFormControlInput1">เบอร์โทร</label>
       <input type="text" class="form-control" id="inputPassword3" placeholder="เบอรโทร *"
         v-model="store.formDataregister.user_phone" :class="{
           'border-red-500 focus:border-red-500': v$.user_phone.$error,
