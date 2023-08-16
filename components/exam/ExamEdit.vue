@@ -97,7 +97,7 @@
  import VueDatePicker from '@vuepic/vue-datepicker';
  import '@vuepic/vue-datepicker/dist/main.css'
  import { ref } from 'vue';
- 
+ import ApiService  from "../../services/api.service";
  
  
  
@@ -208,7 +208,8 @@ return false;
 function coverimage(i) {
   let result = i.slice(0, 6);
 if (result === 'static') {
-  return "http://oasapi.iddriver.com/media_file/file/?f="+i;
+  let im =  ApiService.image(i);
+  return im;
 }else {
   return i;
 }

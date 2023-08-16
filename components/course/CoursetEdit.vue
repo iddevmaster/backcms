@@ -123,7 +123,7 @@ import {
   helpers,
 } from "@vuelidate/validators";
 import { useToast } from "vue-toastification";
-
+import ApiService  from "../../services/api.service";
 const toast = useToast();
 const router = useRouter();
 const store = CourseStore();
@@ -253,13 +253,15 @@ function image(i) {
   } else {
     var x = "static/upload/2023/7/files-1689561047889.jpg";
   }
-  return "http://oasapi.iddriver.com/media_file/file/?f=" + x;
+  let im =  ApiService.image(x);
+  return im;
 }
 
 function coverimage(i) {
   let result = i.slice(0, 6);
   if (result === 'static') {
-    return "http://oasapi.iddriver.com/media_file/file/?f=" + i;
+    let im =  ApiService.image(i);
+    return im;
   } else {
     return i;
   }

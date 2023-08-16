@@ -101,6 +101,7 @@ import "datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from "jquery";
 import Paginate from "vuejs-paginate-next";
 import { useToast } from "vue-toastification";
+import ApiService  from "../../services/api.service";
 
 const toast = useToast();
 const store = CourseStore();
@@ -175,19 +176,22 @@ function coverttime(date) {
   return formattedDatetime;
 }
 
-
-
 function image(i) {
-  var x = null;
-  if (i) {
-    console.log("if");
-    const usingSplit = i.split(",");
-    var x = usingSplit[0];
-  } else {
-    var x = "static/upload/2023/7/files-1689561047889.jpg";
-  }
-  return "http://oasapi.iddriver.com/media_file/file/?f=" + x;
+  let im =  ApiService.image(i);
+  return im;
 }
+
+// function image(i) {
+//   var x = null;
+//   if (i) {
+//     console.log("if");
+//     const usingSplit = i.split(",");
+//     var x = usingSplit[0];
+//   } else {
+//     var x = "static/upload/2023/7/files-1689561047889.jpg";
+//   }
+//   return "http://oasapi.iddriver.com/media_file/file/?f=" + x;
+// }
 
 
 </script>

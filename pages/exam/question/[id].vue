@@ -108,14 +108,14 @@ function image(i) {
                                   <div class="d-flex">
                                     <img class="company-logo" :src="image(quest.eq_image)" alt="company" />
                                     <h3 class="in-heading align-self-center">
-                                      Question ? {{ quest.eq_name }}
+                                      คำถาม - โจทย์ ? {{ quest.eq_name }}
                                     </h3>
                                   </div>
                                 </div>
 
                                 <div class="col-sm-6 text-sm-end">
                                   <p class="inv-list-number mt-sm-3 pb-sm-2 mt-4">
-                                    <span class="inv-title">Answer : </span>
+                                    <span class="inv-title">คำตอบ : </span>
                                     <span class="inv-number">{{
                                       quest.eq_answer
                                     }}</span>
@@ -129,7 +129,7 @@ function image(i) {
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 align-self-center"
                                   v-for="(exams, x) in store.exam" :key="x">
                                   <p class="inv-to">
-                                    Exam Main : {{ exams.em_name }}
+                                    หลักสูตร : {{ exams.em_name }}
                                   </p>
                                 </div>
                               </div>
@@ -140,10 +140,10 @@ function image(i) {
                                 <table class="table">
                                   <thead class="">
                                     <tr>
-                                      <th scope="col">Index</th>
-                                      <th scope="col">Answer</th>
+                                      <th scope="col">ลำดับ</th>
+                                      <th scope="col">เนื้อหา</th>
                                       <th class="text-end" scope="col">
-                                        Image Choice
+                                        รูป
                                       </th>
                                     </tr>
                                   </thead>
@@ -172,16 +172,16 @@ function image(i) {
                     <div class="invoice-action-btn">
                       <div class="row">
                         <div class="col-xl-12 col-md-3 col-sm-6">
-                          <a class="btn btn-success btn-send" @click="goToExmPage()">BackExam</a>
+                          <a class="btn btn-success btn-send" @click="goToExmPage()">กลับสู่หน้าหลักสูตร</a>
                         </div>
                         <div class="col-xl-12 col-md-3 col-sm-6">
-                          <a class="btn btn-primary btn-print" @click="goToCreatePage()">Add Foam Exam</a>
+                          <a class="btn btn-primary btn-print" @click="goToCreatePage()">เพิ่มข้อสอบ</a>
                         </div>
                         <div class="col-xl-12 col-md-3 col-sm-6">
-                          <a class="btn btn-dark btn-download" @click="goToEditPage()">Edit</a>
+                          <a class="btn btn-dark btn-download" @click="goToEditPage()">แก้ข้อสอบ</a>
                         </div>
                         <div class="col-xl-12 col-md-3 col-sm-6">
-                          <a class="btn btn-danger btn-edit" @click="deleteItem()">Delete</a>
+                          <a class="btn btn-danger btn-edit" @click="deleteItem()">ลบข้อสอบ</a>
                         </div>
                       </div>
                     </div>
