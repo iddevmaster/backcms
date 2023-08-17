@@ -188,7 +188,6 @@ const onFileChange = async (event) => {
   width: 100px;
 }
 #image-container img{
-  background-color: aqua;
   width: 250px;
   height: 250px;
   object-fit: cover;
