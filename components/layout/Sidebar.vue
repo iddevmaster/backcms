@@ -210,7 +210,7 @@
                 <line x1="12" y1="22.08" x2="12" y2="12"></line>
               </svg>
 
-              <span>ข่าวสารกรมข่นส่ง</span>
+              <span>ข่าวสารกรมขนส่ง</span>
             </div>
             <div>
               <svg
@@ -235,11 +235,11 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/news/transport">ข่าวสารกรมข่นส่ง</nuxt-link>
+              <nuxt-link to="/news/transport">ข่าวสารกรมขนส่ง</nuxt-link>
             </li>
             <li>
               <nuxt-link to="/news/transport/create"
-                >เพิ่มข่าวสารกรมข่นส่ง</nuxt-link
+                >เพิ่มข่าวสารกรมขนส่ง</nuxt-link
               >
             </li>
           </ul>

@@ -10,7 +10,7 @@ export const newCivilStore = defineStore('newscivil', {
     isOpen: false,
     imageReq:false,
     AlertNewsTransport: null,
-    datanewstransport: {},
+    datanewscivil: {},
     pending: false,
     AlertText: '',
     pending_form: false,
@@ -121,7 +121,7 @@ export const newCivilStore = defineStore('newscivil', {
 
 
 
-    async fetchNewTransport() {
+    async fetchNewCivil() {
       this.selected = [];
       this.isAllSelected = false;
       this.formsearchnews.page = this.page;
@@ -131,7 +131,7 @@ export const newCivilStore = defineStore('newscivil', {
         this.pending = true
         const response = await ApiService.post('/news/list?news_type=2', this.formsearchnews).then(response => {
           if (response) {
-            this.datanewstransport = response.data
+            this.datanewscivil = response.data
             this.total_page = response.data.total_page
             this.limit_page = response.data.limit_page
             this.current_page = response.data.current_page
@@ -151,9 +151,9 @@ export const newCivilStore = defineStore('newscivil', {
 
 
     async deleteItem_id(id) {
-      const index = this.datanewstransport.data.findIndex(item => item.id === id.news_id)
+      const index = this.datanewscivil.data.findIndex(item => item.id === id.news_id)
       if (index !== -1) {
-        this.datanewstransport.data.splice(index, 1)
+        this.datanewscivil.data.splice(index, 1)
       }
       //  this.GetPathImage(id.news_id);
       await this.DelImage(id.news_id);
@@ -579,10 +579,10 @@ export const newCivilStore = defineStore('newscivil', {
 
     sortLists(sortBy) {
       if (this.sortedbyASC) {
-        this.posts.data.sort((x, y) => (x[sortBy] > y[sortBy] ? -1 : 1));
+        this.datanewscivil.data.sort((x, y) => (x[sortBy] > y[sortBy] ? -1 : 1));
         this.sortedbyASC = false;
       } else {
-        this.posts.data.sort((x, y) => (x[sortBy] < y[sortBy] ? -1 : 1));
+        this.datanewscivil.data.sort((x, y) => (x[sortBy] < y[sortBy] ? -1 : 1));
         this.sortedbyASC = true;
       }
     },

@@ -2,7 +2,7 @@
   <div class="row mb-4">
     <div id="form_grid_layouts" class="col-lg-10">
       <div class="seperator-header">
-        <h4 class="">ฟอร์ม เพิ่มข่าวสารกรมข่นส่ง</h4>
+        <h4 class="">ฟอร์ม เพิ่มข่าวสารกรมขนส่ง</h4>
       </div>
     </div>
     <div id="form_grid_layouts" class="col-lg-2">

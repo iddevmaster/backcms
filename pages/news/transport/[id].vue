@@ -23,7 +23,7 @@ const { posts } = storeToRefs(usersStore())
                         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="#">ข่าวสาร </a></li>
-                                <li class="breadcrumb-item active" aria-current="page">แก้ข่าวสารกรมข่นส่ง</li>
+                                <li class="breadcrumb-item active" aria-current="page">แก้ข่าวสารกรมขนส่ง</li>
                             </ol>
                         </nav>
                     </div>

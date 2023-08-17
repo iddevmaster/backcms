@@ -752,10 +752,10 @@ export const newTransportStore = defineStore('newstransport', {
 
     sortLists(sortBy) {
       if (this.sortedbyASC) {
-        this.posts.data.sort((x, y) => (x[sortBy] > y[sortBy] ? -1 : 1));
+        this.datanewstransport.data.sort((x, y) => (x[sortBy] > y[sortBy] ? -1 : 1));
         this.sortedbyASC = false;
       } else {
-        this.posts.data.sort((x, y) => (x[sortBy] < y[sortBy] ? -1 : 1));
+        this.datanewstransport.data.sort((x, y) => (x[sortBy] < y[sortBy] ? -1 : 1));
         this.sortedbyASC = true;
       }
     },

@@ -2,7 +2,7 @@
   <div class="row mb-4">
     <div id="form_grid_layouts" class="col-lg-10">
       <div class="seperator-header">
-        <h4 class="">ฟอร์ม แก้ข่าวสารกรมข่นส่ง</h4>
+        <h4 class="">ฟอร์ม แก้ข่าวสารกรมขนส่ง</h4>
       </div>
     </div>
     <div id="form_grid_layouts" class="col-lg-2">
@@ -32,7 +32,7 @@
                }}</span>
     </div>
     <div class="form-group mb-4 mt-3">
-      <label for="exampleFormControlFile1">รูปภาพหน้าข่าว</label>
+      <label for="exampleFormControlFile1">รูปภาพหน้าข่าว</label><span class="text-xs text-red-500" style="color:red" v-if="store.imageReq == true"> Image field is required</span>
       <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple @change="onFileChange"
         ref="fileupload">
     </div>
@@ -43,13 +43,13 @@
       <template v-if="storeupload.preview_list.length">
 
         <div class="row">
-
-          <div class="col-3" v-for="item, index in storeupload.preview_list" :key="index">
-            <img :src="CoverImage(item)" class="img-fluid" />
+          <div class="col-2" v-for="item, index in storeupload.preview_list" :key="index">
+            <div class="row">
+            <img :src="CoverImage(item)" class="img-fluid" style="width: 250px;height:120px ;"/>
             <button @click="removeImage(index)">ลบรูปภาพ</button>
           </div>
-
         </div>
+      </div>
       </template>
     </div>
     <div>
@@ -87,6 +87,7 @@ const { Saveimages } = UploadStore(); // use authenticateUser action from  auth 
 
 
 storealert.Clear()
+store.imageReq = false;
 
 await store.fetchNewsId(router.currentRoute.value.params.id)
 
@@ -136,6 +137,11 @@ const removeImage = async (remove) => {
 const edit = async () => {
 
   v$.value.$validate();
+
+  if(storeupload.preview_list.length == 0){
+    store.imageReq = true;
+    return false;
+  }
   if (!v$.value.$error) {
     await toast.warning("Wait Save Data",{
   timeout: 2000,

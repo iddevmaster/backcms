@@ -20,18 +20,18 @@
     <table id="example" class="table table-bordered" style="width:100%">
       <thead>
         <tr>
-          <th>#</th>
+          <th @click="sortList('news_id')" >ลำดับ &#8597;</th>
           <!-- <th><input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"></th> -->
-          <th @click="sortList('id')">รูปหน้าปก</th>
-          <th @click="sortList('user_name')">หัวข้อข่าว</th>
+          <th @click="sortList('news_id')">รูปภาพหน้าปก &#8597;</th>
+          <th @click="sortList('news_title')">หัวข้อข่าว &#8597;</th>
           <!-- <th @click="sortList('user_email')">News Description</th> -->
-          <th @click="sortList('user_phone')">ประเภทข่าว</th>
+          <th @click="sortList('news_type')">ประเภทข่าว &#8597;</th>
           <th>อัพเดทล่าสุด</th>
           <th class="no-content">จัดการ</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="datanew, index in datanewstransport.data" :key="datanew.news_id">
+        <tr v-for="datanew, index in datanewscivil.data" :key="datanew.news_id">
           <!-- <td><input type="checkbox" v-model="store.selected" :value="datanew" number></td> -->
           <td>
             {{ datanew.news_id }}
@@ -43,7 +43,7 @@
           <td>{{ datanew.news_title }}</td>
           <!-- <td>{{ datanew.news_description }}</td> -->
           <td v-if="datanew.news_type == 2"> กรมโยธา</td>
-          <td v-else> กรมข่นส่ง</td>
+          <td v-else> กรมขนส่ง</td>
           <td>{{ coverttime(datanew.udp_date) }}</td>
           <td>
             <NuxtLink :to="'/news/civil/' + datanew.news_id">
@@ -70,7 +70,7 @@
 
     <div>
 
-      <div class="dt--pagination" v-if="datanewstransport.total_page > 1">
+      <div class="dt--pagination" v-if="datanewscivil.total_page > 1">
         <div class="dataTables_paginate paging_simple_numbers" id="zero-config_paginate">
           <ul class="pagination">
             <li class="paginate_button page-item previous" id="zero-config_previous">
@@ -82,7 +82,7 @@
                   <polyline points="12 19 5 12 12 5"></polyline>
                 </svg></a>
             </li>
-            <li class="paginate_button page-item " v-for="page in datanewstransport.total_page" :key="page">
+            <li class="paginate_button page-item " v-for="page in datanewscivil.total_page" :key="page">
               <a href="#" aria-controls="zero-config" data-dt-idx="1" tabindex="0" class="page-link"
                 @click="setCurrentPageclick(page)">
                 {{ page }}</a>
@@ -119,7 +119,7 @@ import $ from 'jquery'
 import Paginate from "vuejs-paginate-next";
 
 const store = newCivilStore()
-const { datanewstransport } = storeToRefs(newCivilStore())
+const { datanewscivil } = storeToRefs(newCivilStore())
 const { deleteItem } = newCivilStore();//Action
 const { selectall } = newTransportStore(); //Action
 const { selectone } = newCivilStore();//Action
@@ -132,7 +132,7 @@ const { getSelect } = storeToRefs(store); //Get Getter
 const { getSelectALL } = storeToRefs(store); //Get Getter
 const { getPaginate } = storeToRefs(store); //Get Getter
 
-store.fetchNewTransport()
+store.fetchNewCivil()
 
 
 
@@ -140,11 +140,11 @@ store.fetchNewTransport()
 const del = async (id) => {
 
   await deleteItem(id);
-  await store.fetchNewTransport()
+  await store.fetchNewCivil()
 };
 
 const searchData = async () => {
-  await store.fetchNewTransport()
+  await store.fetchNewCivil()
 };
 
 
@@ -165,13 +165,13 @@ function goToPage(page) {
 
 const setCurrentPageclick = async (page) => {
   await setCurrentPage(page)
-  await store.fetchNewTransport()
+  await store.fetchNewCivil()
 };
 
 const selectshowdata = async (x) => {
 
   await selectentires(x.target.value);
-  await store.fetchNewTransport()
+  await store.fetchNewCivil()
 };
 
 const sortList = async (sortBy) => {

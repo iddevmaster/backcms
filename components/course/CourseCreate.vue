@@ -83,7 +83,11 @@
       <template v-if="store.image">
         <div class="row">
           <div class="col-3">
-            <img :src="store.image" class="img-fluid" />
+            <img :src="store.image" class="img-fluid"  width="120" height="120"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-3">
             <button @click="removeImage()">ลบรูปภาพ</button>
           </div>
         </div>
