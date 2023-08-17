@@ -36,18 +36,19 @@
       <label for="exampleFormControlFile1">รูปภาพหน้าข่าว</label> <span class="text-xs text-red-500" style="color:red"
         v-if="store.imageReq == true"> Invalid file selected</span>
       <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple @change="onFileChange"
-        ref="fileupload">
+        ref="fileupload" accept="image/*">
     </div>
     <div class="border p-2 mt-3">
       <p>แสดงรูปตรงนี้:</p>
       <template v-if="storeupload.preview_list.length">
         <div class="row">
-          <div class="col-3" v-for="item, index in storeupload.preview_list" :key="index">
-            <img :src="item" class="img-fluid" />
-            <button @click="removeImage(index)">ลบรูปภาพ</button>
+          <div id="image-container" class="col-md-3 col-sm-4 col-6" v-for="item, index in storeupload.preview_list" :key="index">
+            <div class="image-wrapper">
+              <img :src="item" class="img-fluid" />
+              <button @click="removeImage(index)" class="delete-button"><i class="bi bi-x-lg"></i></button>
+            </div>
           </div>
         </div>
-
       </template>
     </div>
 
@@ -178,11 +179,41 @@ const onFileChange = async (event) => {
 
 </script>
 <style>
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
 .preview {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100px;
   width: 100px;
+}
+#image-container img{
+  background-color: aqua;
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+#image-container .delete-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red; /* Example button color */
+  color: white; /* Example button text color */
+  border: none;
+  padding: 2.5px 5px;
+  cursor: pointer;
+}
+#image-container .image-wrapper {
+  position: relative; /* Needed for absolute positioning */
+  display: inline-block; /* To prevent block-level behavior */
+  margin: 10px; /* Adjust as needed */
+  border: 1px solid;
+}
+#image-container {
+  width: fit-content;
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 300px;
+  max-height: 300px;
 }
 </style>
