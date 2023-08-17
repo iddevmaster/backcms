@@ -20,7 +20,7 @@ export const usersStore = defineStore('users', {
     isAllSelected: false,
     count: 0,
     page: 1,
-    per_page: 25,
+    per_page: 10,
     searchDa: '',
     total_page: null,
     limit_page: null,

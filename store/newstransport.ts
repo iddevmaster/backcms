@@ -8,7 +8,7 @@ export const newTransportStore = defineStore('newstransport', {
     locale: true,
     load: true,
     isOpen: false,
-    imageReq:false,
+    imageReq: false,
     AlertNewsTransport: null,
     datanewstransport: {},
     pending: false,
@@ -124,16 +124,11 @@ export const newTransportStore = defineStore('newstransport', {
     async fetchNewTransport() {
       this.selected = [];
       this.isAllSelected = false;
-      this.form.page = this.page;
-      this.form.per_page = this.per_page;
-      this.form.search = "";
-
-
-
-
+      this.formsearchnews.page = this.page;
+      this.formsearchnews.per_page = this.per_page;
       try {
         this.pending = true
-        const response = await ApiService.post('/news/list?news_type=1', this.form).then(response => {
+        const response = await ApiService.post('/news/list?news_type=1', this.formsearchnews).then(response => {
           if (response) {
             this.datanewstransport = response.data
             this.total_page = response.data.total_page
@@ -142,7 +137,6 @@ export const newTransportStore = defineStore('newstransport', {
             this.total_filter = response.data.total_filter
             this.total = response.data.total
           }
-        
         });
         return true;
       } catch (error) {
@@ -168,14 +162,11 @@ export const newTransportStore = defineStore('newstransport', {
         const response = await ApiService.delete('/news/delete/' + id.news_id).then(response => {
           this.isOpen = false;
           if (response.status == 200) {
-
             return response;
           } else {
             console.log('error');
             return response;
           }
-
-
         });
 
       } catch (error) {
@@ -188,8 +179,6 @@ export const newTransportStore = defineStore('newstransport', {
 
 
     async GetPathImage(id) {
-
-
       await ApiService.get('/news/get/' + id).then(response => {
         if (response.data.images_list?.length > 0) {
           ///////////// วนลูป ลบรูปภาพก่อน 
@@ -217,8 +206,6 @@ export const newTransportStore = defineStore('newstransport', {
     },
 
     async deleteImage(path) {
-
-
       if (path) {
         try {
           this.pending = true
@@ -639,7 +626,7 @@ export const newTransportStore = defineStore('newstransport', {
       const data = await ApiService.put('/news/update/' + this.news_id, this.formDataNewsEdit)
 
 
-      
+
 
       //  const savedata = await ApiService.post('/news/image/create', this.formDataNews).then(response => {
 

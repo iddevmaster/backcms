@@ -92,7 +92,7 @@
   </div>
   <div class="row mb-4">
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">ประเภท</label>
+      <label for="exampleFormControlInput1">ประเภทผู้ใช้งาน</label>
       <select class="form-control" v-model="store.formDataregister.user_type">
     <option value="1">ผู้ดูแลระบบ</option>
     <option value="2">ผู้เจ้าหน้าที่กรม</option>
