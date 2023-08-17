@@ -38,20 +38,22 @@
     </div>
 
     <p style="color: red;" v-if="store.getFile === true">File size exceeds the limit 2 MB. </p>
-    <div class="border p-2 mt-3">
-      <p>Preview Here:</p>
-      <template v-if="storeupload.preview_list.length">
 
+    <div class="border p-2 mt-3">
+      <p>แสดงรูปตรงนี้:</p>
+      <template v-if="storeupload.preview_list.length">
         <div class="row">
-          <div class="col-2" v-for="item, index in storeupload.preview_list" :key="index">
-            <div class="row">
-            <img :src="CoverImage(item)" class="img-fluid" style="width: 250px;height:120px ;"/>
-            <button @click="removeImage(index)">ลบรูปภาพ</button>
+          <div id="image-container" class="col-md-3 col-sm-4 col-6" v-for="item, index in storeupload.preview_list" :key="index">
+            <div class="image-wrapper">
+              <img :src="CoverImage(item)" class="img-fluid" />
+              <button @click="removeImage(index)" class="delete-button"><i class="bi bi-x-lg"></i></button>
+            </div>
           </div>
         </div>
-      </div>
       </template>
     </div>
+
+
     <div>
 
     </div>
@@ -221,7 +223,10 @@ const onFileChange = async (event) => {
 
 
 </script>
+
+
 <style>
+
 .preview {
   display: flex;
   justify-content: center;
@@ -229,12 +234,32 @@ const onFileChange = async (event) => {
   height: 100px;
   width: 100px;
 }
-
-.img {
-  width: 30%;
-  margin: auto;
-  display: block;
-  margin-bottom: 10px;
+#image-container img{
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+#image-container .delete-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 2.5px 5px;
+  cursor: pointer;
+}
+#image-container .image-wrapper {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+  border: 1px solid;
+}
+#image-container {
+  width: fit-content;
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 300px;
+  max-height: 300px;
 }
 </style>
- 

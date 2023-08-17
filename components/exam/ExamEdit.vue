@@ -68,7 +68,7 @@
        </div>
        <div class="modal-footer">
                  <button class="btn btn btn-light-dark" data-bs-dismiss="modal"  @click="closeModal">
-                   <i class="flaticon-cancel-12"></i> Cancel</button>
+                   <i class="flaticon-cancel-12"></i> ปิด</button>
                  <button type="button" class="btn btn-primary" @click="Updatedata()">บันทึก</button>
              </div>
                             

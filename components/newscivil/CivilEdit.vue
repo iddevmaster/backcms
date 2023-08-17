@@ -192,6 +192,7 @@ const onFileChange = async (event) => {
 
 </script>
 <style>
+
 .preview {
   display: flex;
   justify-content: center;
@@ -199,12 +200,34 @@ const onFileChange = async (event) => {
   height: 100px;
   width: 100px;
 }
-
-.img {
-  width: 30%;
-  margin: auto;
-  display: block;
-  margin-bottom: 10px;
+#image-container img{
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+#image-container .delete-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 2.5px 5px;
+  cursor: pointer;
+}
+#image-container .image-wrapper {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+  border: 1px solid;
+}
+#image-container {
+  width: fit-content;
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 300px;
+  max-height: 300px;
 }
 </style>
+
  

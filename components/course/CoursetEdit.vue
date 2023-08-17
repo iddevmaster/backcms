@@ -38,13 +38,17 @@
       <label for="exampleFormControlFile1">รูปภาพคอร์ส</label>
       <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChange" ref="fileupload" />
     </div>
+
+
     <div class="border p-2 mt-3">
       <p>แสดงรูปตรงนี้:</p>
       <template v-if="store.image">
         <div class="row">
-          <div class="col-3">
-            <img :src="coverimage(store.image)" class="img-fluid" />
-            <button @click="removeImage()">ลบรูปภาพ</button>
+          <div id="image-container" class="col-md-3 col-sm-4 col-6" >
+            <div class="image-wrapper">
+              <img :src="coverimage(store.image)" class="img-fluid" />
+              <button @click="removeImage()" class="delete-button"><i class="bi bi-x-lg"></i></button>
+            </div>
           </div>
         </div>
       </template>
@@ -274,6 +278,34 @@ function coverimage(i) {
   align-items: center;
   height: 100px;
   width: 100px;
+}
+#image-container img{
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+#image-container .delete-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 2.5px 5px;
+  cursor: pointer;
+}
+#image-container .image-wrapper {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+  border: 1px solid;
+}
+#image-container {
+  width: fit-content;
+  min-width: 200px;
+  min-height: 200px;
+  max-width: 300px;
+  max-height: 300px;
 }
 
 .video-container {
