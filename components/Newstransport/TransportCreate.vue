@@ -196,16 +196,16 @@ const onFileChange = async (event) => {
   position: absolute;
   top: 0;
   right: 0;
-  background-color: red; /* Example button color */
-  color: white; /* Example button text color */
+  background-color: red;
+  color: white;
   border: none;
   padding: 2.5px 5px;
   cursor: pointer;
 }
 #image-container .image-wrapper {
-  position: relative; /* Needed for absolute positioning */
-  display: inline-block; /* To prevent block-level behavior */
-  margin: 10px; /* Adjust as needed */
+  position: relative;
+  display: inline-block;
+  margin: 10px;
   border: 1px solid;
 }
 #image-container {
