@@ -14,7 +14,10 @@ import Alert from '@/components/layout/Alert.vue';
 import { useToast } from 'vue-toastification';
 
 definePageMeta({
-    middleware: 'auth' // this should match the name of the file inside the middleware directory 
+  middleware: ['auth','roles'],
+  meta: {
+    allowedRoles: ['admin', 'user'],
+  },
 })
 
 const toast = useToast()

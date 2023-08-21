@@ -41,18 +41,18 @@ export const useAuthStore = defineStore('auth', {
         },
         });
 
-        
         if (data.value) {
         
           const token = useCookie('token'); // useCookie new hook in nuxt 3
           const user_id = useCookie('user_id'); // useCookie new hook in nuxt 3
           const firstname = useCookie('firstname'); // useCookie new hook in nuxt 3
           const lastname = useCookie('firstname'); // useCookie new hook in nuxt 3
+          const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
           token.value = "ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p"; // set token to cookie
           user_id.value = data.value.user_id; // set token to cookie
-          localStorage.setItem('user', JSON.stringify(data.value))
-      
-  
+          user_type.value = data.value.user_type; // set token to cookie
+        
+    
           // token.value = data?.value?.token; // set token to cookie
           this.authenticated = true; // set authenticated  state value to true
           this.status_login = true;
@@ -60,12 +60,6 @@ export const useAuthStore = defineStore('auth', {
           this.status_login = false;
         }
 
-        // if (response.error.value.statusCode) {
-        //   console.log('if 2');
-        //   this.status_login = false;
-
-        // }
-      
 
       } catch (error) {
        this.status_login = false;
@@ -73,20 +67,17 @@ export const useAuthStore = defineStore('auth', {
      
       }
 
-
-    
-      
-      
-
-
     },
     logUserOut() {
       const token = useCookie('token'); // useCookie new hook in nuxt 3
       const user_id = useCookie('user_id');
+      const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
       this.authenticated = false; // set authenticated  state value to false
       token.value = null; // clear the token cookie
       user_id.value = null;
+      user_type.value = null;
       this.loading = false;
+      localStorage.clear();
       return navigateTo('/auth/login');
     },
   },
