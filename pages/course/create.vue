@@ -5,7 +5,10 @@ import { CourseStore } from "@/store/course";
 import CourseCreate from "@/components/course/CourseCreate.vue";
 import Loading from "@/components/layout/Success.vue";
 definePageMeta({
-  middleware: 'auth' // this should match the name of the file inside the middleware directory 
+  middleware: ['auth','roles'],
+  meta: {
+    allowedRoles: ['admin'],
+  },
 })
 
 const store = CourseStore();

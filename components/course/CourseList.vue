@@ -112,7 +112,6 @@ const { Courselist } = storeToRefs(store);
 
 
 
-
 const courselist = await store.fetchCourslist();
 
 if (courselist === false) {
