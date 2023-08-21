@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+// import { route } from "./services/seo.router";
+
 export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: false,
@@ -20,6 +22,18 @@ export default defineNuxtConfig({
   '~/assets/src/assets/css/light/apps/invoice-preview.css',
 ],
 
+
+// hooks: {
+//   'pages:extend': (pages) => {
+//     pages.map((page) => {
+//       route.forEach(seoRoute => {
+//         if (seoRoute.name === page.name) {
+//           Object.assign(page, {path: seoRoute.path,allowedRoles:seoRoute.allowedRoles});
+//         }
+//       })
+//     })
+//   }
+// },
 
 // css: ['~/assets/styles/main.scss'],
 

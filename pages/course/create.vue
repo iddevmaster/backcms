@@ -4,11 +4,10 @@ import { defineComponent } from "vue";
 import { CourseStore } from "@/store/course";
 import CourseCreate from "@/components/course/CourseCreate.vue";
 import Loading from "@/components/layout/Success.vue";
+
 definePageMeta({
   middleware: ['auth','roles'],
-  meta: {
-    allowedRoles: ['admin'],
-  },
+  allowedRoles: ['admin'],
 })
 
 const store = CourseStore();

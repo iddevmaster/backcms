@@ -12,13 +12,15 @@ import { useModalStore } from '@/store/modal';
 import Loading from '@/components/layout/Success.vue';
 import Alert from '@/components/layout/Alert.vue';
 import { useToast } from 'vue-toastification';
+import { ref } from 'vue';
 
 definePageMeta({
   middleware: ['auth','roles'],
-  meta: {
-    allowedRoles: ['admin', 'user'],
-  },
+  allowedRoles: ['admin', 'user'],
 })
+
+
+
 
 const toast = useToast()
 const store = CourseStore()
