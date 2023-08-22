@@ -16,7 +16,7 @@ import { ref } from 'vue';
 
 definePageMeta({
   middleware: ['auth','roles'],
-  allowedRoles: ['admin', 'user'],
+  allowedRoles: [1,2,3],
 })
 
 

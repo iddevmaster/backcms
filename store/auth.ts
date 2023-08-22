@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { useEnvStore } from '@/store/env'
+import ApiService from '../services/api.service';
 
 interface UserPayloadInterface {
   username: string;
@@ -15,8 +16,19 @@ export const useAuthStore = defineStore('auth', {
     isActiveSide: false,
     loading: false,
     status_login: true,
-    count:11
+    count:11,
+    users: {
+      user_id: null,
+      user_name: null,
+      user_firstname: null,
+      user_lastname: null,
+      user_email: null,
+      user_phone: null,
+      user_type: null,
+    }
   }),
+
+  
   getters: {
     load(state) {
       return state.loading;
@@ -42,6 +54,7 @@ export const useAuthStore = defineStore('auth', {
             "user_password": password
         },
         });
+
 
         if (data.value) {
         
@@ -82,6 +95,31 @@ export const useAuthStore = defineStore('auth', {
       localStorage.clear();
       return navigateTo('/auth/login');
     },
+
+    async fetchUsersProfile(){
+      const token = useCookie('token'); // useCookie new hook in nuxt 3
+      const user_id = useCookie('user_id');
+
+
+      try {
+        const data = await ApiService.get('/user/get/'+user_id.value).then(response => {
+   this.users.user_id  = response.data.user_id
+   this.users.user_name = response.data.user_name
+   this.users.user_firstname = response.data.user_firstname
+   this.users.user_lastname = response.data.user_lastname
+   this.users.user_email = response.data.user_email
+   this.users.user_phone = response.data.user_phone
+   this.users.user_type = response.data.user_type
+
+        });
+
+        return true;
+      } catch (error) {
+        return false;
+      }
+
+      
+    }
   },
 });
 

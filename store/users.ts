@@ -51,7 +51,7 @@ export const usersStore = defineStore('users', {
       user_email: null,
       user_phone: null,
       user_type: null,
-    }
+    },
   }
 
   ),
@@ -93,8 +93,6 @@ export const usersStore = defineStore('users', {
     getSelectALL(state) {
       return state.isAllSelected;
     },
-
-
   },
 
   actions: {

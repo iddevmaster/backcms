@@ -4,8 +4,10 @@ import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import CoursetEdit from '@/components/course/CoursetEdit.vue'
 definePageMeta({
-    middleware: 'auth' // this should match the name of the file inside the middleware directory 
+  middleware: ['auth','roles'],
+  allowedRoles: [1,2,3],
 })
+
 
 
 </script>

@@ -9,15 +9,13 @@
 
 
 export default defineNuxtRouteMiddleware((to, from) => {
-  const allowedRoles = from.meta.allowedRoles;
-  var user_type = "admin"; // get token from cookies
 
-//    if (!allowedRoles.includes(user_type)) {
-//     // User doesn't have the required role for this route
-// console.log('unauthorized');
-//    // return navigateTo('/unauthorized');
-//   }
-
+  const allowedRoles = to.meta.allowedRoles;
+  const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
+   if (!allowedRoles.includes(user_type.value)) {
+    // User doesn't have the required role for this route
+  return navigateTo('/unauthorized');
+  }
   });
 // export default defineNuxtRouteMiddleware((store, route) => {
 

@@ -7,7 +7,7 @@ import Loading from "@/components/layout/Success.vue";
 
 definePageMeta({
   middleware: ['auth','roles'],
-  allowedRoles: ['admin'],
+  allowedRoles: [1,2,3],
 })
 
 const store = CourseStore();
