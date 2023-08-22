@@ -11,6 +11,8 @@ interface UserPayloadInterface {
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     authenticated: false,
+    isActiveBar: false,
+    isActiveSide: false,
     loading: false,
     status_login: true,
     count:11

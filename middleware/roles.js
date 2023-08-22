@@ -9,20 +9,15 @@
 
 
 export default defineNuxtRouteMiddleware((to, from) => {
-  console.log('to',to);
   const allowedRoles = from.meta.allowedRoles;
-  console.log('from',allowedRoles);
-  var user_type = "IT"; // get token from cookies
+  var user_type = "admin"; // get token from cookies
 
+//    if (!allowedRoles.includes(user_type)) {
+//     // User doesn't have the required role for this route
+// console.log('unauthorized');
+//    // return navigateTo('/unauthorized');
+//   }
 
-
-    if (!allowedRoles.includes(user_type)) {
-    // User doesn't have the required role for this route
-console.log('unauthorized');
-   // return navigateTo('/unauthorized');
-  }
- // const allowedRoles = route.meta.allowedRoles;
- // console.log('allowedRoles',allowedRoles);
   });
 // export default defineNuxtRouteMiddleware((store, route) => {
 

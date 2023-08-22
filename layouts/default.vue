@@ -6,14 +6,12 @@ import { defineComponent } from 'vue';
 definePageMeta({
   middleware: 'auth' // this should match the name of the file inside the middleware directory 
 })
+import { useAuthStore } from '@/store/auth';
 
 
+const store = useAuthStore();
 </script>
 <template>
-
-   
-
-
 
 
 
@@ -21,7 +19,7 @@ definePageMeta({
     <!--  END NAVBAR  -->
 
     <!--  BEGIN MAIN CONTAINER  -->
-    <div class="main-container" id="container">
+    <div class="main-container" :class="{ 'sbar-open': store.isActiveBar,'sidebar-closed':store.isActiveSide }"  id="container">
         <!--  BEGIN SIDEBAR  -->
         <Sidebar></Sidebar>
         <!--  END SIDEBAR  -->

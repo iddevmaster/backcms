@@ -3,7 +3,7 @@
 <template>
     <div class="header-container container-xxl">
         <header class="header navbar navbar-expand-sm expand-header">
-            <a href="javascript:void(0);" class="sidebarCollapse">
+            <a href="javascript:void(0);" class="sidebarCollapse" @click="ShowNav()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                     class="feather feather-menu">
@@ -267,6 +267,12 @@ import { useAuthStore } from '@/store/auth';
 
 const authStore = useAuthStore();
 
+
+
+const ShowNav = async () => {
+    authStore.isActiveBar = !authStore.isActiveBar
+    console.log('authStore.isActiveBar',authStore.isActiveBar);
+};
 
 </script>
 

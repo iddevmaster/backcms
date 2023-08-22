@@ -12,7 +12,7 @@
             <a class="nav-link"> CMS </a>
           </div>
         </div>
-        <div class="nav-item sidebar-toggle">
+        <div class="nav-item sidebar-toggle" @click="ShowColl()">
           <div class="btn-toggle sidebarCollapse">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -372,15 +372,24 @@
 // import DataTablesCore from 'datatables.net-bs5';
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
+import { useAuthStore } from '@/store/auth';
 
 const data = localStorage.getItem('user');
 
 let user = JSON.parse(data);
 const router = useRouter();
+const store = useAuthStore();
 
 const GotoPage = async () => {
   router.push('/');
 }
+
+const ShowColl = async () => {
+  store.isActiveSide = !store.isActiveSide
+  store.isActiveBar = false;
+}
+
+
 </script>
   
   
