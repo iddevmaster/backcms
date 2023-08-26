@@ -172,10 +172,10 @@ const backToquestion = async () => {
 const v$ = useVuelidate(rules, FormEditExamq);
 const save = async () => {
   v$.value.$validate();
-if(!store.image){/////////////////// req image  ใช้ rules ไม่ได้ 
-store.imageReq = true;
-return false;
-}
+// if(!store.image){/////////////////// req image  ใช้ rules ไม่ได้ 
+// store.imageReq = true;
+// return false;
+// }
   if (!v$.value.$error) {
    // let upload = await UploadfileExamq();
     try {

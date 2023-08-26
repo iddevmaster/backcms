@@ -167,10 +167,10 @@ const v$ = useVuelidate(rules, FormExamq);
 const save = async () => {
   v$.value.$validate();
 
-  if (!store.image) {/////////////////// req image  ใช้ rules ไม่ได้ 
-    store.imageReq = true;
-    return false;
-  }
+  // if (!store.image) {/////////////////// req image  ใช้ rules ไม่ได้ 
+  //   store.imageReq = true;
+  //   return false;
+  // }
   if (!v$.value.$error) {
     await toast.warning("Wait Save Data", {
       timeout: 2000,
