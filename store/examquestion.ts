@@ -263,7 +263,11 @@ this.image = x[0].eq_image;
     },
 
     async UpdateExamq() {
-      console.log('UpdateExamq2',this.formEditExamq);
+   
+  
+      if(this.image == null){
+        this.formEditExamq.eq_image = "";
+      }/////////////clear image 
 const data = await ApiService.put('/exam/question/update/' + this.formEditExamq.id, this.formEditExamq).then(response => {
 return true;
 });
