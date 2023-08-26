@@ -106,7 +106,7 @@ function image(i) {
                               <div class="row" v-for="(quest, indexs) in store.eq" :key="indexs">
                                 <div class="col-sm-6 col-12 mr-auto">
                                   <div class="d-flex">
-                                    <img class="company-logo" :src="image(quest.eq_image)" alt="company" />
+                                    <img class="company-logo"  v-if="quest.eq_image" :src="image(quest.eq_image)" alt="company" />
                                     <h3 class="in-heading align-self-center">
                                       คำถาม - โจทย์ ? {{ quest.eq_name }}
                                     </h3>
