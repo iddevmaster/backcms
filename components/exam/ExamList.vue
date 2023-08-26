@@ -36,7 +36,7 @@
                 <th class="text-center" scope="col">รูปหลักสูตร</th>
                 <th class="text-center" scope="col">รายละเอียด</th>
                 <th class="text-center" scope="col" @click="sortList('em_random_amount')">จำนวนที่สุ่ม &#8597;</th>
-                 <th class="text-center" scope="col" @click="sortList('total_question')">ข้อสอบทั้งหมด &#8597;</th>
+                 <th class="text-center" scope="col" @click="sortList('total_question')">จำนวนข้อสอบ &#8597;</th>
             
                 <th class="text-center" scope="col">จัดการ</th>
             </tr>
