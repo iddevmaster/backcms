@@ -36,7 +36,7 @@
       }}</span>
     </div>
 
-
+{{ store.image }}
     <div class="form-group mb-4 mt-3">
       <label for="exampleFormControlFile1">รูปภาพข้อสอบ</label> <span class="text-xs text-red-500" style="color:red" v-if="store.imageReq == true"> Invalid file selected</span>
       <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChange" ref="fileupload">
