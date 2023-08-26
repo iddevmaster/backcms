@@ -33,8 +33,8 @@
        
                 <th scope="col" @click="sortList('em_code')">รหัสหลักสูตร &#8597;</th>
                 <th scope="col" @click="sortList('em_name')">ชื่อหลักสูตร &#8597;</th>
-                <th class="text-center" scope="col">รูปหน้าปก</th>
-                <!-- <th class="text-center" scope="col">รายละเอียด</th> -->
+                <th class="text-center" scope="col">รูปหลักสูตร</th>
+                <th class="text-center" scope="col">รายละเอียด</th>
                 <th class="text-center" scope="col" @click="sortList('em_random_amount')">จำนวนที่สุ่ม &#8597;</th>
                  <th class="text-center" scope="col" @click="sortList('total_question')">ข้อสอบทั้งหมด &#8597;</th>
             
@@ -54,9 +54,9 @@
                 <td class="text-center">
   <img :src="image(item.em_cover)" class="img-fluid" width="80" height="80" />
                 </td>
-                <!-- <td class="text-center">
+                <td class="text-center">
                   {{item.em_description}}
-                </td> -->
+                </td>
                 <td class="text-center">
                     <span class="badge badge-light-secondary">{{item.em_random_amount}}</span>
                 </td>
