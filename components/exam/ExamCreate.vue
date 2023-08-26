@@ -132,7 +132,7 @@ await store.closeModal()
     },
     em_description: {
       required: helpers.withMessage('Exam Description field is required', required),
-      minLength: minLength(6),
+      minLength: minLength(1),
     },
     em_random_amount: {
       required: helpers.withMessage('Exam Amount field is required', required),
