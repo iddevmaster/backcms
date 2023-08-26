@@ -134,11 +134,11 @@
    return {
      em_code: {
        required: helpers.withMessage('Exam code field is required', required),
-       minLength: minLength(6),
+       minLength: minLength(1),
      },
      em_name: {
        required: helpers.withMessage('Exam Name field is required', required),
-       minLength: minLength(6),
+       minLength: minLength(1),
      },
      em_description: {
        required: helpers.withMessage('Exam Description field is required', required),
