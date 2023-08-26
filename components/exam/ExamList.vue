@@ -32,8 +32,8 @@
             <tr>
        
                 <th scope="col" @click="sortList('em_code')">รหัสหลักสูตร &#8597;</th>
-                <th scope="col" @click="sortList('em_name')">ชื่อหลักสูตร &#8597;</th>
                 <th class="text-center" scope="col">รูปหลักสูตร</th>
+                <th scope="col" @click="sortList('em_name')">ชื่อหลักสูตร &#8597;</th>
                 <th class="text-center" scope="col">รายละเอียด</th>
                 <th class="text-center" scope="col" @click="sortList('em_random_amount')">จำนวนที่สุ่ม &#8597;</th>
                  <th class="text-center" scope="col" @click="sortList('total_question')">จำนวนข้อสอบ &#8597;</th>
@@ -46,14 +46,15 @@
         <tbody>
             <tr  v-for="item in store.examlist" :key="item.em_id">
                 <td>{{item.em_code}}</td>
+                <td class="text-center">
+  <img :src="image(item.em_cover)" class="img-fluid" width="80" height="80" />
+                </td>
                 <td>
                   <span class="table-inner-text">
                     {{item.em_name}}
                   </span>
                 </td>
-                <td class="text-center">
-  <img :src="image(item.em_cover)" class="img-fluid" width="80" height="80" />
-                </td>
+              
                 <td class="text-center">
                   {{item.em_description}}
                 </td>
