@@ -241,7 +241,6 @@ export const ExamStore = defineStore('exam', {
     },
 
     async UploadfileExam() {
-
       let formData = new FormData();
       formData.append('files', this.imagelist);
       if (this.imagelist) {

@@ -20,6 +20,8 @@ export default defineNuxtConfig({
   '~/assets/src/plugins/css/light/flatpickr/custom-flatpickr.css',
   '~/assets/src/assets/css/light/apps/invoice-add.css',
   '~/assets/src/assets/css/light/apps/invoice-preview.css',
+  '~/assets/src/assets/css/light/scrollspyNav.css',
+  '~/assets/src/assets/css/light/components/tabs.css',
 ],
 
 

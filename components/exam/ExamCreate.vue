@@ -69,9 +69,6 @@
                   <i class="flaticon-cancel-12"></i> ปิด</button>
                 <button type="button" class="btn btn-primary" @click="save()">บันทึก</button>
             </div>
-                           
-          
-          
           </div>
   </div>
 

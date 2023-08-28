@@ -16,6 +16,7 @@ export const usersStore = defineStore('users', {
     pending_form: false,
     sortedbyASC: true,
     selected: [],
+    imagelist: null,
     checkboxes: [], // Array to store checkbox values
     isAllSelected: false,
     count: 0,
@@ -29,10 +30,17 @@ export const usersStore = defineStore('users', {
     total: null,
     itemsPerPage: 3,
     user_id_del: null,
+    location_id:1,
+    country_id:1,
     formsearch: {
       page: 1,
       per_page: 20,
       searchDa: '',
+    },
+    formszipcode: {
+      page: 1,
+      per_page: 200,
+      search: '',
     },
     formDataregister: {
       user_name: null,
@@ -42,6 +50,13 @@ export const usersStore = defineStore('users', {
       user_email: null,
       user_phone: null,
       user_type: null,
+      user_address: null,
+      user_birthday: null,
+      user_img: null,
+      location_id: 1,
+      country_id: 1,
+      verify_account:"n",
+      active:1
     },
     formDataEdit: {
       user_name: null,
@@ -52,6 +67,9 @@ export const usersStore = defineStore('users', {
       user_phone: null,
       user_type: null,
     },
+    zipcode:null,
+    country:null,
+    user_img:null,
   }
 
   ),
@@ -103,12 +121,9 @@ export const usersStore = defineStore('users', {
       this.isOpen = false;
     },
 
-
-
     async fetchUsers() {
       this.selected = [];
       this.isAllSelected = false;
-
       this.formsearch.page = this.page;
       this.formsearch.per_page = this.per_page;
       this.formsearch.search = this.searchDa;
@@ -135,6 +150,16 @@ export const usersStore = defineStore('users', {
       try {
         const data = await ApiService.get('/user/get/' + user_id).then(response => {
           this.formDataEdit = response.data;
+        
+        
+          if(Object.keys(response.data.detail).length === 0){
+            this.country_id = 1
+            this.location_id = 1
+          }else {
+            this.country_id = this.formDataEdit.detail.country_id
+            this.location_id = this.formDataEdit.detail.location_id
+          }
+        
         });
       } catch (error) {
         this.error = error
@@ -198,18 +223,21 @@ export const usersStore = defineStore('users', {
     },
     async SaveForm() {
       this.pending = true;
-   
+      this.formDataregister.active = 1;
+      // console.log(this.formDataregister);
+      // this.SaveFoamdetails();
       try {
-        const { pending, error, data } = await ApiService.post('/user/create', this.formDataregister).then(response => {
-          if (response.value) {
-            return response.value;
-          }
-          if (response.value == '') {
-            return response.value;
-          }
-          return true;
+        const register = await ApiService.post('/user/create', this.formDataregister).then(response => {
+       if(response.data == ""){
+        return false;
+       }else {
+   //  this.SaveDetails();
+return true;
+       }
           //  this.pending_form = true;
         });
+  
+     return register;
       } catch (error) {
         return false;
       } finally {
@@ -217,6 +245,18 @@ export const usersStore = defineStore('users', {
       }
 
     },
+
+   async SaveFoamdetails() {
+ await this.UploadfileProfile()
+ await this.SaveDetails()
+  return true;
+    },
+
+    async SaveDetails() {
+      console.log('SaveDetails',this.formDataregister);
+    
+      return true;
+        },
 
     setCurrentPage(page) {
       this.page = page
@@ -252,11 +292,48 @@ export const usersStore = defineStore('users', {
         user_email: '',
         user_phone: '',
         user_type: 3,
+        user_address: null,
+        user_birthday: null,
+        user_img: null,
+        location_id: 1,
+        country_id: 1,
+        verify_account:"n",
+        active:1
       };
     },
 
+    async Zipcode() {
+      const zipcode = await ApiService.post('/master_data/zipcode', this.formszipcode)
+      if(zipcode.data.data){
+this.zipcode = zipcode.data.data
+      }else {
+        this.zipcode = []
+      }
+    },
+    async Country() {
+      const country = await ApiService.post('/master_data/contry', this.formszipcode)
+      if(country.data.data){
+this.country = country.data.data
+      }else {
+        this.country = []
+      }
+    },
 
+    async UploadfileProfile() {
+      let formData = new FormData();
+      formData.append('files', this.imagelist);
+      if (this.imagelist) {
+        try {
+          const data = await ApiService.upload('/media_file/upload/file', formData);
+          this.formDataregister.user_img = data.data[0].path
+          return true;
+        } catch (error) {
+          return false;
+        }
+      }
+    },
 
-
+ 
   },
+
 });

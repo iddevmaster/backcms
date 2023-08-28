@@ -30,10 +30,32 @@ const { AlertTextForm } = storeToRefs(store); //Get Getter
                 <div class="row layout-top-spacing">
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                         <div class="widget-content widget-content-area br-8 p-3">
-                            <UserEdit></UserEdit>
+                            <!-- <UserEdit></UserEdit> -->
+
+                            <nav class="nav">
+  <a class="nav-link active" aria-current="page" href="#">Active</a>
+  <a class="nav-link" href="#">Link</a>
+  <a class="nav-link" href="#">Link</a>
+  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+</nav>
+
+<div id="navSection" data-bs-spy="affix" class="nav  sidenav">
+                        <div class="sidenav-content">
+                            <a href="#simpleTabs" class="active nav-link">Simple Tabs</a>
+                            <a href="#withIcons" class="nav-link">With Icons</a>
+                            <a href="#pill" class="nav-link">Pill</a>
+                            <a href="#pillWithIcons" class="nav-link">Pill with Icons</a>
+                            <a href="#verticalPill" class="nav-link">Vertical Pill</a>
+                            <a href="#verticalPilliwthIcons" class="nav-link">Vertical Pill with Icons</a>
+                        </div>
+                    </div>
                         </div>
                     </div>
                 </div>
+
+                
+
+                
             </div>
         </div>
     </div>

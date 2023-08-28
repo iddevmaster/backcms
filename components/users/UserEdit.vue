@@ -98,9 +98,9 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">ประเภทผู้ใช้งาน</label>
       <select class="form-control" v-model="store.formDataEdit.user_type">
-    <option value="1">ผู้ดูแลระบบ</option>
-    <option value="2">ผู้เจ้าหน้าที่กรม</option>
-    <option value="3">ผู้เจ้าหน้าที่ทั่วไป</option>
+        <option value="1">ผู้ดูแลระบบ</option>
+    <option value="2">เจ้าหน้าที่</option>
+    <option value="3">ประชาชน</option>
     </select>
     </div>
   </div>

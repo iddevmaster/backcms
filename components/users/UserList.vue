@@ -28,7 +28,8 @@
           <th @click="sortList('id')">ชื่อ - นามสกุล &#8597;</th>
           <th @click="sortList('user_name')">ยูสเซอร &#8597;</th>
           <th @click="sortList('user_email')">อีเมล &#8597;</th>
-          <th @click="sortList('user_phone')">เบอรโทร &#8597;</th>
+          <th @click="sortList('user_phone')">ประเภทผู้ใช้งาน</th>
+          <th >เบอรโทร &#8597;</th>
           <th>อัพเดทล่าสุด</th>
           <th class="no-content">จัดการ</th>
         </tr>
@@ -40,6 +41,9 @@
           <td>{{ user.user_firstname }} {{ user.user_lastname }}</td>
           <td>{{ user.user_name }}</td>
           <td>{{ user.user_email }}</td>
+          <td v-if="user.user_type == 1">ผู้ดูแลระบบ</td>
+          <td v-else-if="user.user_type == 2">เจ้าหน้าที่</td>
+          <td v-else>ประชาชน</td>
           <td>{{ user.user_phone }}</td>
           <td>{{ coverttime(user.udp_date) }}</td>
           <td>
