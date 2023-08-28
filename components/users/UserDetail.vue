@@ -5,6 +5,21 @@
         <h4 class="">รายละเอียด</h4>
       </div>
     </div>
+
+    <!-- <div class="row mb-4">
+    <div class="col-sm-12">
+      <label for="exampleFormControlInput1">เลขบัตรประชาชน</label>
+      <input type="text" class="form-control" id="add" placeholder="ที่อยู่ *"  v-model="store.formDetailEdit.user_address"
+      :class="{
+          'border-red-500 focus:border-red-500': v$.user_address.$error,
+          'border-[#42d392] ': !v$.user_address.$invalid,
+        }" @change="v$.user_address.$touch" autocomplete="off"
+      >
+      <span class="text-xs text-red-500" style="color:red" v-if="v$.user_address.$error">{{
+        v$.user_address.$errors[0].$message
+      }}</span>
+    </div>
+  </div> -->
      <div class="row mb-4">
     <div class="col-sm-12">
       <label for="exampleFormControlInput1">ที่อยู่</label>
