@@ -5,7 +5,6 @@
         <h4 class="">รายละเอียด</h4>
       </div>
     </div>
-{{store.FormEditDetail}}
     <div class="row mb-4">
     <div class="col-sm-12">
       <label for="exampleFormControlInput1">เลขบัตรประชาชน</label>
@@ -37,7 +36,7 @@
   <div class="row mb-4">
     <div class="col-sm-12">
       <label for="exampleFormControlInput1">วันเกิด</label>
-      <input type="text" class="form-control" id="birthday" placeholder="วันเกิด *"   v-model="store.formDetailEdit.user_birthday" 
+      <input type="date" class="form-control" id="birthday" placeholder="วันเกิด *" format="YYYY-MM-dd"   v-model="store.formDetailEdit.user_birthday" 
       :class="{
           'border-red-500 focus:border-red-500': v$.user_birthday.$error,
           'border-[#42d392] ': !v$.user_birthday.$invalid,
@@ -66,6 +65,17 @@
     </div>
   </div>
 
+
+    <div class="row mb-4">
+    <div class="col-sm-6">
+      <label for="exampleFormControlInput1">สถานะตัวตน</label>
+      <select class="form-control" v-model="store.formDetailEdit.verify_account">
+    <option value="n">ยังไม่ยืนยันตัวตน</option>
+    <option value="y">ยืนยันตัวตนแล้ว</option>
+    </select>
+    </div>
+  </div>
+
     <div class="form-group mb-4 mt-3">
       <label for="exampleFormControlFile1">รูปภาพ</label> <span class="text-xs text-red-500" style="color:red"
         v-if="store.imageReq == true"> Invalid file selected</span>
@@ -73,7 +83,7 @@
         ref="fileupload" accept="image/*">
     </div>
     <div class="border p-2 mt-3">
-      <p>แสดงรูปตรงนี้: {{store.image}}</p>
+      <p>แสดงรูปตรงนี้:</p>
       <template  v-if="store.image">
         <div class="row">
           <div id="image-container" class="col-md-3 col-sm-4 col-6" >
@@ -99,6 +109,11 @@
   import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
   import { useToast } from 'vue-toastification'
   import ApiService  from "../../services/api.service";
+  import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+import { ref } from 'vue';
+
+
   const toast = useToast()
   
   const router = useRouter();
@@ -162,6 +177,16 @@ return false;
 }
   if (!v$.value.$error) {
     const data = await UpdateDetails();
+      if(data === true){
+      await toast.success('Save Data')
+
+      router.push('/users');
+      }else {
+       await toast.error('Fall Save Data')
+   
+
+    
+      }
   
   }
 }

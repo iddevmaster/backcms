@@ -69,7 +69,7 @@ export const usersStore = defineStore('users', {
     },
     formDetailEdit: {
       identification_number:null,
-      verify_account:"n",
+      verify_account:"",
       user_img: null,
       user_birthday: "1993-03-19",
       user_address: null,
@@ -169,6 +169,7 @@ export const usersStore = defineStore('users', {
             this.formDetailEdit.user_birthday = ""
             this.formDetailEdit.user_address = ""
             this.formDataEdit.detail.user_img = ""
+            this.formDataEdit.detail.verify_account = "n"
             this.image = null
             this.formDetailEdit.location_id = 1
             this.formDetailEdit.country_id = 1
@@ -181,6 +182,7 @@ export const usersStore = defineStore('users', {
             this.formDetailEdit.country_id = this.formDataEdit.detail.country_id
             this.image = this.formDataEdit.detail.user_img
             this.formDetailEdit.user_img = this.formDataEdit.detail.user_img
+            this.formDetailEdit.verify_account = this.formDataEdit.detail.verify_account
             this.formDetailEdit.user_id = parseInt(user_id)
           }
         
@@ -219,7 +221,9 @@ export const usersStore = defineStore('users', {
 
     async UpdateDetails() {
       await this.UploadfileProfile()
-      await this.SaveDetails()
+     const savedetail = await this.SaveDetails()
+  
+      return savedetail;
     },
 
   
@@ -259,7 +263,6 @@ export const usersStore = defineStore('users', {
        if(response.data == ""){
         return false;
        }else {
-   //  this.SaveDetails();
 return true;
        }
           //  this.pending_form = true;
@@ -282,25 +285,27 @@ return true;
 
     async SaveDetails() {
 
-const a = {verify_account:"n",identification_number:this.formDetailEdit.identification_number,
-user_img:this.formDetailEdit.user_img,user_birthday:"1993-03-19",
+const a = {verify_account:this.formDetailEdit.verify_account,identification_number:this.formDetailEdit.identification_number,
+user_img:this.formDetailEdit.user_img,user_birthday:this.formDetailEdit.user_birthday,
 user_address:this.formDetailEdit.user_address,
 location_id:this.formDetailEdit.location_id,
 country_id:this.formDetailEdit.country_id,
 user_id:this.formDetailEdit.user_id};
-      // "verify_account":"n",
-      // "identification_number":"1101800590279",
-      // "user_img": "static/upload/2023/8/files-3SlfXaDmwL.png",
-      // "user_birthday": "1993-03-19",
-      // "user_address": "365",
-      // "location_id": 2,
-      // "country_id":1,
-      // "user_id": 85
-      console.log('formDetailEdit',a);
-      const updatedetails = await ApiService.post('/user/detail/create', a).then(response => {
-console.log(response);
-      })
-      return true;
+
+  
+
+      try {
+        const updatedetails = await ApiService.post('/user/detail/create', a).then(response => {
+
+          //  this.pending_form = true;
+        });
+     
+  
+        return true;
+      } catch (error) {
+        return false;
+      }
+      
     },
 
     setCurrentPage(page) {
