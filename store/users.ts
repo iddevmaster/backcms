@@ -68,14 +68,14 @@ export const usersStore = defineStore('users', {
       user_type: null,
     },
     formDetailEdit: {
-      identification_number:"1101800590299",
+      identification_number:null,
       verify_account:"n",
-      user_img: "static/upload/2023/8/files-W5kbRgqkMH.png",
+      user_img: null,
       user_birthday: "1993-03-19",
-      user_address: "365",
-      location_id: 1,
-      country_id: 1,
-      user_id: 86,
+      user_address: null,
+      location_id: null,
+      country_id: null,
+      user_id: null,
     },
     zipcode:null,
     country:null,
@@ -163,19 +163,25 @@ export const usersStore = defineStore('users', {
       try {
         const data = await ApiService.get('/user/get/' + user_id).then(response => {
           this.formDataEdit = response.data;
+          console.log(response.data);
           if(Object.keys(response.data.detail).length === 0){
+            this.formDetailEdit.identification_number = ""
             this.formDetailEdit.user_birthday = ""
             this.formDetailEdit.user_address = ""
+            this.formDataEdit.detail.user_img = ""
+            this.image = null
             this.formDetailEdit.location_id = 1
             this.formDetailEdit.country_id = 1
             this.formDetailEdit.user_id = user_id
           }else {
+            this.formDetailEdit.identification_number = this.formDataEdit.detail.identification_number
             this.formDetailEdit.user_birthday = this.formDataEdit.detail.user_birthday
             this.formDetailEdit.user_address = this.formDataEdit.detail.user_address
             this.formDetailEdit.location_id = this.formDataEdit.detail.location_id
             this.formDetailEdit.country_id = this.formDataEdit.detail.country_id
-            this.formDetailEdit.user_id = 86
-            console.log(this.formDetailEdit);
+            this.image = this.formDataEdit.detail.user_img
+            this.formDetailEdit.user_img = this.formDataEdit.detail.user_img
+            this.formDetailEdit.user_id = parseInt(user_id)
           }
         
         });
@@ -204,8 +210,6 @@ export const usersStore = defineStore('users', {
 
     async Update(user_id) {
       try {
-        console.log(this.formDataEdit);
-        console.log(user_id);
         const response = await ApiService.put('/user/update/' + user_id, this.formDataEdit);
         return response.data
       } catch (error) {
@@ -214,8 +218,6 @@ export const usersStore = defineStore('users', {
     },
 
     async UpdateDetails() {
-      console.log('UpdateDetails')
-
       await this.UploadfileProfile()
       await this.SaveDetails()
     },
@@ -279,9 +281,23 @@ return true;
     },
 
     async SaveDetails() {
-      console.log('formDetailEdit',this.formDetailEdit);
 
-      const updatedetails = await ApiService.post('/user/detail/create', this.formDetailEdit).then(response => {
+const a = {verify_account:"n",identification_number:this.formDetailEdit.identification_number,
+user_img:this.formDetailEdit.user_img,user_birthday:"1993-03-19",
+user_address:this.formDetailEdit.user_address,
+location_id:this.formDetailEdit.location_id,
+country_id:this.formDetailEdit.country_id,
+user_id:this.formDetailEdit.user_id};
+      // "verify_account":"n",
+      // "identification_number":"1101800590279",
+      // "user_img": "static/upload/2023/8/files-3SlfXaDmwL.png",
+      // "user_birthday": "1993-03-19",
+      // "user_address": "365",
+      // "location_id": 2,
+      // "country_id":1,
+      // "user_id": 85
+      console.log('formDetailEdit',a);
+      const updatedetails = await ApiService.post('/user/detail/create', a).then(response => {
 console.log(response);
       })
       return true;
@@ -321,12 +337,6 @@ console.log(response);
         user_email: '',
         user_phone: '',
         user_type: 3,
-        user_address: null,
-        user_birthday: null,
-        user_img: null,
-        location_id: 1,
-        country_id: 1,
-        verify_account:"n",
         active:1
       };
     },

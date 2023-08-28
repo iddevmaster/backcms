@@ -5,21 +5,21 @@
         <h4 class="">รายละเอียด</h4>
       </div>
     </div>
-
-    <!-- <div class="row mb-4">
+{{store.FormEditDetail}}
+    <div class="row mb-4">
     <div class="col-sm-12">
       <label for="exampleFormControlInput1">เลขบัตรประชาชน</label>
-      <input type="text" class="form-control" id="add" placeholder="ที่อยู่ *"  v-model="store.formDetailEdit.user_address"
+      <input type="text" class="form-control" id="add" placeholder="ที่อยู่ *"  v-model="store.formDetailEdit.identification_number"
       :class="{
-          'border-red-500 focus:border-red-500': v$.user_address.$error,
-          'border-[#42d392] ': !v$.user_address.$invalid,
-        }" @change="v$.user_address.$touch" autocomplete="off"
+          'border-red-500 focus:border-red-500': v$.identification_number.$error,
+          'border-[#42d392] ': !v$.identification_number.$invalid,
+        }" @change="v$.identification_number.$touch" autocomplete="off" maxlength="13"
       >
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.user_address.$error">{{
-        v$.user_address.$errors[0].$message
+      <span class="text-xs text-red-500" style="color:red" v-if="v$.identification_number.$error">{{
+        v$.identification_number.$errors[0].$message
       }}</span>
     </div>
-  </div> -->
+  </div>
      <div class="row mb-4">
     <div class="col-sm-12">
       <label for="exampleFormControlInput1">ที่อยู่</label>
@@ -73,12 +73,12 @@
         ref="fileupload" accept="image/*">
     </div>
     <div class="border p-2 mt-3">
-      <p>แสดงรูปตรงนี้:</p>
+      <p>แสดงรูปตรงนี้: {{store.image}}</p>
       <template  v-if="store.image">
         <div class="row">
           <div id="image-container" class="col-md-3 col-sm-4 col-6" >
             <div class="image-wrapper">
-              <img :src="store.image" class="img-fluid" />
+              <img :src="coverimage(store.image)" class="img-fluid" />
               <button @click="removeImage()" class="delete-button"><i class="bi bi-x-lg"></i></button>
             </div>
           </div>
@@ -98,6 +98,7 @@
   import { useVuelidate } from '@vuelidate/core';
   import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
   import { useToast } from 'vue-toastification'
+  import ApiService  from "../../services/api.service";
   const toast = useToast()
   
   const router = useRouter();
@@ -135,6 +136,13 @@ await store.Country();
         required: helpers.withMessage('The Birthday field is required', required),
         minLength: minLength(1),
       },
+      identification_number: {
+        required: helpers.withMessage('The identification_number field is required', required),
+        minLength: minLength(13),
+      },
+
+
+      
     };
   });
   
@@ -177,6 +185,16 @@ const input = document.querySelector('input[type="file"]');
   input.value = '';
 }
 
+
+function coverimage(i) {
+  let result = i.slice(0, 6);
+if (result === 'static') {
+  let im =  ApiService.image(i);
+  return im;
+}else {
+  return i;
+}
+ }
   
   
   </script>
