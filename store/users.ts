@@ -67,6 +67,15 @@ export const usersStore = defineStore('users', {
       user_phone: null,
       user_type: null,
     },
+    formDetailEdit: {
+      verify_account: "n",
+      user_img: null,
+      user_birthday: null,
+      user_address: null,
+      location_id: null,
+      country_id: null,
+      user_id: null,
+    },
     zipcode:null,
     country:null,
     user_img:null,
@@ -111,6 +120,9 @@ export const usersStore = defineStore('users', {
     getSelectALL(state) {
       return state.isAllSelected;
     },
+    FormEditDetail(state) {
+      return state.formDetailEdit;
+    },
   },
 
   actions: {
@@ -150,14 +162,19 @@ export const usersStore = defineStore('users', {
       try {
         const data = await ApiService.get('/user/get/' + user_id).then(response => {
           this.formDataEdit = response.data;
-        
-        
           if(Object.keys(response.data.detail).length === 0){
-            this.country_id = 1
-            this.location_id = 1
+            this.formDetailEdit.user_birthday = ""
+            this.formDetailEdit.user_address = ""
+            this.formDetailEdit.location_id = 1
+            this.formDetailEdit.country_id = 1
+            this.formDetailEdit.user_id = user_id
           }else {
-            this.country_id = this.formDataEdit.detail.country_id
-            this.location_id = this.formDataEdit.detail.location_id
+            this.formDetailEdit.user_birthday = this.formDataEdit.detail.user_birthday
+            this.formDetailEdit.user_address = this.formDataEdit.detail.user_address
+            this.formDetailEdit.location_id = this.formDataEdit.detail.location_id
+            this.formDetailEdit.country_id = this.formDataEdit.detail.country_id
+            this.formDetailEdit.user_id = 86
+            console.log(this.formDetailEdit);
           }
         
         });
@@ -195,6 +212,14 @@ export const usersStore = defineStore('users', {
       }
     },
 
+    async UpdateDetails() {
+      console.log('UpdateDetails')
+
+      await this.UploadfileProfile()
+      await this.SaveDetails()
+    },
+
+  
     async deleteItem(user_id) {
       this.isOpen = true;
       this.user_id_del = user_id;
@@ -253,10 +278,13 @@ return true;
     },
 
     async SaveDetails() {
-      console.log('SaveDetails',this.formDataregister);
-    
+      console.log('formDetailEdit',this.formDetailEdit);
+
+      const updatedetails = await ApiService.post('/user/detail/create', this.formDetailEdit).then(response => {
+console.log(response);
+      })
       return true;
-        },
+    },
 
     setCurrentPage(page) {
       this.page = page
@@ -325,7 +353,7 @@ this.country = country.data.data
       if (this.imagelist) {
         try {
           const data = await ApiService.upload('/media_file/upload/file', formData);
-          this.formDataregister.user_img = data.data[0].path
+          this.formDetailEdit.user_img = data.data[0].path
           return true;
         } catch (error) {
           return false;

@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import { usersStore } from '@/store/users'
 import UserEdit from '@/components/users/UserEdit.vue'
+import UserDetail from '@/components/users/UserDetail.vue'
 import Alert from '@/components/layout/Alert.vue';
 definePageMeta({
     middleware: 'auth' // this should match the name of the file inside the middleware directory 
@@ -42,7 +43,7 @@ const { AlertTextForm } = storeToRefs(store); //Get Getter
                                     <UserEdit></UserEdit>
                                 </div>
                                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                                    <UserEdit></UserEdit>
+                                    <UserDetail></UserDetail>
                                 </div>
                             </div>
 
