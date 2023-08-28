@@ -29,26 +29,26 @@ const { AlertTextForm } = storeToRefs(store); //Get Getter
             <div class="middle-content container-xxl p-0">
                 <div class="row layout-top-spacing">
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-                        <div class="widget-content widget-content-area br-8 p-3">
-                            <!-- <UserEdit></UserEdit> -->
 
-                            <nav class="nav">
-  <a class="nav-link active" aria-current="page" href="#">Active</a>
-  <a class="nav-link" href="#">Link</a>
-  <a class="nav-link" href="#">Link</a>
-  <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-</nav>
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">บัญชี</button>
+                                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">รายละเอียด</button>
+                            </div>
+                        </nav>
+                        <div class="widget-content widget-content-area br-8 p-3 border-top-0">
+                            <div class="tab-content mt-4" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                                    <UserEdit></UserEdit>
+                                </div>
+                                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                                    <UserEdit></UserEdit>
+                                </div>
+                            </div>
 
-<div id="navSection" data-bs-spy="affix" class="nav  sidenav">
-                        <div class="sidenav-content">
-                            <a href="#simpleTabs" class="active nav-link">Simple Tabs</a>
-                            <a href="#withIcons" class="nav-link">With Icons</a>
-                            <a href="#pill" class="nav-link">Pill</a>
-                            <a href="#pillWithIcons" class="nav-link">Pill with Icons</a>
-                            <a href="#verticalPill" class="nav-link">Vertical Pill</a>
-                            <a href="#verticalPilliwthIcons" class="nav-link">Vertical Pill with Icons</a>
-                        </div>
-                    </div>
+
+
+                            
                         </div>
                     </div>
                 </div>
