@@ -103,6 +103,15 @@
     <option value="3">ประชาชน</option>
     </select>
     </div>
+
+
+       <div class="col-sm-6">
+      <label for="exampleFormControlInput1">สถานะ</label>
+      <select class="form-control" v-model="store.formDataEdit.active">
+    <option value="1">ใช้งาน</option>
+    <option value="0">ไม่ใช้งาน</option>
+    </select>
+    </div>
   </div>
   <button type="button" class="btn btn-primary" @click="save()">บันทึก</button>
 </template>

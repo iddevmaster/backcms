@@ -5,6 +5,7 @@
         <h4 class="">ฟอร์ม เพิ่มผู้ใช้งาน</h4>
       </div>
     </div>
+    {{store.formDataregister}}
     <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header" style="text-align: center;" @click="backToUser()">
         <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">กลับหน้าผู้ใช้งาน</button>
@@ -95,6 +96,15 @@
     <option value="1">ผู้ดูแลระบบ</option>
     <option value="2">เจ้าหน้าที่</option>
     <option value="3">ประชาชน</option>
+    </select>
+    </div>
+
+
+    <div class="col-sm-6">
+      <label for="exampleFormControlInput1">สถานะ</label>
+      <select class="form-control" v-model="store.formDataregister.active">
+    <option value="1">ใช้งาน</option>
+    <option value="0">ไม่ใช้งาน</option>
     </select>
     </div>
   </div>

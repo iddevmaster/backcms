@@ -56,7 +56,7 @@ export const usersStore = defineStore('users', {
       location_id: 1,
       country_id: 1,
       verify_account:"n",
-      active:1
+      active:null
     },
     formDataEdit: {
       user_name: null,
@@ -66,6 +66,7 @@ export const usersStore = defineStore('users', {
       user_email: null,
       user_phone: null,
       user_type: null,
+      active:null
     },
     formDetailEdit: {
       identification_number:null,
@@ -163,7 +164,7 @@ export const usersStore = defineStore('users', {
       try {
         const data = await ApiService.get('/user/get/' + user_id).then(response => {
           this.formDataEdit = response.data;
-          console.log(response.data);
+    
           if(Object.keys(response.data.detail).length === 0){
             this.formDetailEdit.identification_number = ""
             this.formDetailEdit.user_birthday = ""
@@ -184,6 +185,8 @@ export const usersStore = defineStore('users', {
             this.formDetailEdit.user_img = this.formDataEdit.detail.user_img
             this.formDetailEdit.verify_account = this.formDataEdit.detail.verify_account
             this.formDetailEdit.user_id = parseInt(user_id)
+          
+            
           }
         
         });
@@ -255,9 +258,7 @@ export const usersStore = defineStore('users', {
     },
     async SaveForm() {
       this.pending = true;
-      this.formDataregister.active = 1;
-      // console.log(this.formDataregister);
-      // this.SaveFoamdetails();
+
       try {
         const register = await ApiService.post('/user/create', this.formDataregister).then(response => {
        if(response.data == ""){
