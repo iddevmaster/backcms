@@ -39,6 +39,7 @@
             <img src="/img/profile-30.png" alt="avatar" />
           </div>
           <div class="profile-content">
+            {{store}}
             <h6 class="" v-if="store.users">{{ store.users.user_name }}</h6>
             <p class="">Project Leader</p>
           </div>

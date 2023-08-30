@@ -17,6 +17,7 @@ export const useAuthStore = defineStore('auth', {
     loading: false,
     status_login: true,
     count:11,
+    user_id:null,
     users: {
       user_id: null,
       user_name: null,
@@ -68,6 +69,7 @@ export const useAuthStore = defineStore('auth', {
         
           // token.value = data?.value?.token; // set token to cookie
           this.authenticated = true; // set authenticated  state value to true
+          this.user_id = data.value.user_id; // set authenticated  state value to true
           this.status_login = true;
         }else{
           this.status_login = false;
@@ -98,9 +100,8 @@ export const useAuthStore = defineStore('auth', {
       const token = useCookie('token'); // useCookie new hook in nuxt 3
       const user_id = useCookie('user_id');
 
-
       try {
-        const data = await ApiService.get('/user/get/'+user_id.value).then(response => {
+        const data = await ApiService.get('/user/get/'+this.user_id).then(response => {
    this.users.user_id  = response.data.user_id
    this.users.user_name = response.data.user_name
    this.users.user_firstname = response.data.user_firstname
