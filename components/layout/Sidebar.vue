@@ -36,10 +36,10 @@
       <div class="profile-info">
         <div class="user-info">
           <div class="profile-img">
-            <img src="/img/profile-30.png" alt="avatar" />
+            <img :src="image(store.detail.user_img)" alt="avatar" />
           </div>
           <div class="profile-content">
-           {{ store.users.user_type }}
+          
             <h6 class="" v-if="store.users">{{ store.users.user_name }}</h6>
             <p class="">Project Leader</p>
           </div>
@@ -374,6 +374,7 @@
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import { useAuthStore } from '@/store/auth';
+import ApiService  from "../../services/api.service";
 
 
 const data = localStorage.getItem('user');
@@ -393,7 +394,10 @@ const ShowColl = async () => {
   store.isActiveSide = !store.isActiveSide
   store.isActiveBar = false;
 }
-
+function image(i) {
+  let im =  ApiService.image(i);
+  return im;
+}
 
 </script>
   

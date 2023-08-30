@@ -126,7 +126,7 @@ export const CourseStore = defineStore('course', {
       this.formDataEditCourse.course_description = item[0].course_description
       this.formDataEditCourse.user_id = this.user_id
       this.image = item[0].course_cover
-
+console.log(this.formDataEditCourse);
       const data = await ApiService.post('/course/lesson/list/' + id, this.formsearchcourse).then(response => {
         if (response.data.data) {
           this.lessonlist = [];

@@ -2,7 +2,7 @@
   <div class="row mb-4 g-3">
     <div id="form_grid_layouts" class="col-lg-9">
       <div class="seperator-header">
-        <h4 class="">ฟอร์ม แก้ไขคอร์ส</h4>
+        <h4 class="">ฟอร์ม แก้ไขคอร์ส </h4>
       </div>
     </div>
     <div class="col-md-6">
