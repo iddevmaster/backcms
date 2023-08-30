@@ -9,6 +9,7 @@ import { defineComponent } from "vue";
 import { ExamquestionStore } from "@/store/examquestion";
 import { useToast } from "vue-toastification";
 import ExamqList from "@/components/examquestion/ExamqList.vue";
+import { useAuthStore } from '@/store/auth'
 import ApiService from '../../../services/api.service';
 import {
   required,
@@ -21,11 +22,15 @@ import { useRoute } from "vue-router";
 import Loading from "@/components/layout/Success.vue";
 
 definePageMeta({
-  middleware: 'auth' // this should match the name of the file inside the middleware directory 
+  middleware: ['auth','roles'],
+  allowedRoles: [1,2,3],
 })
 
 const toast = useToast();
 const store = ExamquestionStore();
+const auth = useAuthStore()
+store.user_id = auth.user_id
+
 
 const { GetopenModalDelete } = storeToRefs(store); //Get Getter
 const { deleteExamq } = ExamquestionStore(); //Action
@@ -33,6 +38,7 @@ const { Pending } = storeToRefs(store); //Get Getter
 
 const route = useRoute();
 const router = useRouter();
+
 
 store.em_id = route.params.id;
 

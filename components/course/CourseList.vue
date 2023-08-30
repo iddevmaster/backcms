@@ -12,7 +12,6 @@
       />
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
-
     </div>
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
@@ -42,7 +41,7 @@
           <h5 class="card-title mb-3">{{ item.course_name }}</h5>
           <div class="media mt-4 mb-0 pt-1">
             <img
-              src="https://oasapi.iddriver.com/media_file/file/?f=static/upload/2023/8/files-nokBVoCxZy.png"
+              :src="image(item.course_cover)"
               class="card-media-image me-3"
               alt=""
             />
@@ -90,6 +89,7 @@
 import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
 import { CourseStore } from "@/store/course";
+import { useAuthStore } from '@/store/auth'
 import "jquery/dist/jquery.min.js";
 //Datatable Modules
 import "datatables.net-dt/js/dataTables.dataTables";
@@ -106,6 +106,7 @@ const { Courselist } = storeToRefs(store);
  const { selectentires } = CourseStore();//Action
  const { setCurrentPage } = CourseStore();//Action
 
+const auth = useAuthStore()
 
 
 const courselist = await store.fetchCourslist();

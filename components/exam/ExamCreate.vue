@@ -5,7 +5,7 @@
 
 <div class="modal-content modal-dialog modal-xl" id="deleteConformationLabel">
                                 <div class="modal-header">                 
-                                    <h5 class="modal-title" id="exampleModalLabel">สร้างหลักสูตร </h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">สร้างหลักสูตร {{store.formexam.dlt_code}} </h5>
                                 </div>
                                 <div class="modal-body">
         <form>

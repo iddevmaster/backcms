@@ -7,6 +7,7 @@
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import { CourseStore } from '@/store/course'
+import { useAuthStore } from '@/store/auth'
 import CourseList from '@/components/course/CourseList.vue'
 import { useModalStore } from '@/store/modal';
 import Loading from '@/components/layout/Success.vue';
@@ -20,12 +21,20 @@ definePageMeta({
 })
 
 
-
+const auth = useAuthStore()
+const store = CourseStore()
+store.formDataCourse.user_id = auth.user_id
+store.formDataEditCourse.user_id = auth.user_id
+store.formDatalesson.user_id = auth.user_id
+store.formDataeditlesson.user_id = auth.user_id
 
 const toast = useToast()
-const store = CourseStore()
+
   const { deleteItem_id } = CourseStore();//Action
   const { fetchCourslist } = CourseStore();//Action
+
+
+
   
   const modalStore = useModalStore();
   const { GetopenModal } = storeToRefs(store); //Get Getter

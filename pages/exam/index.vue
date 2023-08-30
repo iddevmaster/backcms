@@ -6,14 +6,27 @@
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import { ExamStore } from '@/store/exam'
+import { useAuthStore } from '@/store/auth'
 import ExamList from '@/components/exam/ExamList.vue'
 import ExamCreate from '@/components/exam/ExamCreate.vue'
 import ExamEdit from '@/components/exam/ExamEdit.vue'
 import { useToast } from 'vue-toastification';
 import { required, email, sameAs, minLength, helpers, } from '@vuelidate/validators';
 
+definePageMeta({
+  middleware: ['auth','roles'],
+  allowedRoles: [1,2,3],
+})
+
 const toast = useToast()
 const store = ExamStore()
+const auth = useAuthStore()
+const profile = await auth.getProfile();
+
+store.formexam.user_id = auth.user_id
+store.formexamedit.user_id = auth.user_id
+store.user_id = auth.user_id
+
 const { GetopenModal } = storeToRefs(store); //Get Getter
 const { GetopenModalCreate } = storeToRefs(store); //Get Getter
 const { OpenFormInser } = ExamStore();//Action

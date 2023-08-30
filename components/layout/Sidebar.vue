@@ -39,7 +39,7 @@
             <img src="/img/profile-30.png" alt="avatar" />
           </div>
           <div class="profile-content">
-            {{store}}
+           {{ store.users.user_type }}
             <h6 class="" v-if="store.users">{{ store.users.user_name }}</h6>
             <p class="">Project Leader</p>
           </div>
@@ -383,7 +383,7 @@ const router = useRouter();
 const store = useAuthStore();
 
 
-const users = await store.fetchUsersProfile();
+const users = await store.getProfile();
 
 const GotoPage = async () => {
   router.push('/');

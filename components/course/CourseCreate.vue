@@ -231,7 +231,7 @@ const { deletelesson } = CourseStore();
 const { Adlesson } = CourseStore();
 const { uploadfilecourse } = CourseStore();
 
-store.ResetForm();
+//store.ResetForm();
 // storealert.Clear()
 
 const rules = computed(() => {
@@ -277,6 +277,7 @@ const save = async () => {
       }, 500);
       const input = document.querySelector('input[type="file"]');
       input.value = "";
+      store.ResetForm();
       v$.value.$reset();
     } catch (error) {
       await toast.error("Fail Save Data");

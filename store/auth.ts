@@ -26,6 +26,9 @@ export const useAuthStore = defineStore('auth', {
       user_email: null,
       user_phone: null,
       user_type: null,
+    },
+    detail: {
+      user_img: null,
     }
   }),
 
@@ -96,9 +99,10 @@ export const useAuthStore = defineStore('auth', {
       return navigateTo('/auth/login');
     },
 
-    async fetchUsersProfile(){
+
+
+    async getProfile(){
       const token = useCookie('token'); // useCookie new hook in nuxt 3
-      const user_id = useCookie('user_id');
 
       try {
         const data = await ApiService.get('/user/get/'+this.user_id).then(response => {
@@ -109,6 +113,8 @@ export const useAuthStore = defineStore('auth', {
    this.users.user_email = response.data.user_email
    this.users.user_phone = response.data.user_phone
    this.users.user_type = response.data.user_type
+   this.detail.user_img = response.data.detail.user_img
+   
 
         });
 

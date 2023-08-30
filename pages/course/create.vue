@@ -2,6 +2,7 @@
 import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
 import { CourseStore } from "@/store/course";
+import { useAuthStore } from '@/store/auth';
 import CourseCreate from "@/components/course/CourseCreate.vue";
 import Loading from "@/components/layout/Success.vue";
 
@@ -10,7 +11,17 @@ definePageMeta({
   allowedRoles: [1,2,3],
 })
 
+const auth = useAuthStore()
 const store = CourseStore();
+
+store.formDataCourse.user_id = auth.user_id
+
+store.user_id = auth.user_id
+store.formDataEditCourse.user_id = auth.user_id
+store.formDatalesson.user_id = auth.user_id
+store.formDataeditlesson.user_id = auth.user_id
+
+
 const { Pending } = storeToRefs(store); //Get Getter
 </script>
 

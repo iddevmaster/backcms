@@ -16,6 +16,7 @@ export const ExamquestionStore = defineStore('examquestion', {
     isOpenEdit: false,
     image: null,
     examqlist: [],
+    user_id:null,
     deletechoice:[],
     em_id: 0,
     examqlisttotal: null,

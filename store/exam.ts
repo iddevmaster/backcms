@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import ApiService from '../services/api.service';
 import axios from "axios";
 import { ref } from 'vue';
-const user_id = useCookie('user_id');
+
 
 
 
@@ -13,6 +13,7 @@ export const ExamStore = defineStore('exam', {
     isOpenEdit: false,
     image: null,
     sortedbyASC: true,
+    user_id:null,
     imageReq: false,
     imagelist: null,
     total_page: null,
@@ -29,12 +30,13 @@ export const ExamStore = defineStore('exam', {
       em_cover: "",
       em_description: "",
       em_random_amount: 50,
+      dlt_code:"B",
       em_time: ref({
         hours: '00',
         minutes: '59',
         seconds: '00'
       }),
-      user_id: user_id.value
+      user_id: null
     },
     formexamedit: {
       em_id: "",
@@ -43,12 +45,13 @@ export const ExamStore = defineStore('exam', {
       em_cover: "",
       em_description: "",
       em_random_amount: null,
+      dlt_code:"B",
       em_time: ref({
         hours: '00',
         minutes: '59',
         seconds: '00'
       }),
-      user_id: user_id.value
+      user_id: null
     },
     formsearchexam: {
       page: 1,
@@ -129,8 +132,8 @@ export const ExamStore = defineStore('exam', {
       this.formsearchexam.page = page
     },
     async SaveExam() {
-
       this.ChangeFormateTime('add');
+
       try {
         const data = await ApiService.post('/exam/main/create', this.formexam).then(response => {
           return true;
@@ -185,12 +188,13 @@ export const ExamStore = defineStore('exam', {
         em_cover: '',
         em_description: '',
         em_random_amount: 50,
+        dlt_code: 'B',
         em_time: ref({
           hours: '00',
           minutes: '59',
           seconds: '00'
         }),
-        user_id: user_id.value,
+        user_id:this.user_id
       };
 
     },
@@ -211,7 +215,8 @@ export const ExamStore = defineStore('exam', {
       this.formexamedit.em_cover = item.em_cover
       this.formexamedit.em_time = timeedit
       this.formexamedit.em_random_amount = item.em_random_amount
-      this.formexamedit.user_id = user_id.value,
+      this.formexamedit.dlt_code = 'B',
+      this.formexamedit.user_id = this.user_id,
         this.image = item.em_cover
       this.isOpenEdit = true;
     },

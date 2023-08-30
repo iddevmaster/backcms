@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import ApiService from '../services/api.service';
 import axios from "axios";
-const user_id = useCookie('user_id');
+
 
 
 export const CourseStore = defineStore('course', {
@@ -14,6 +14,7 @@ export const CourseStore = defineStore('course', {
     pending: false,
     isOpen: false,
     lessonlist: [],
+    user_id:null,
     del_lesson: [],
     get_lesson_id: [],
     lessoneditlist: [],
@@ -27,14 +28,14 @@ export const CourseStore = defineStore('course', {
       course_code: "",
       course_name: "",
       course_description: "",
-      user_id: user_id.value
+      user_id: null
     },
     formDataEditCourse: {
       course_cover: "",
       course_code: "",
       course_name: "",
       course_description: "",
-      user_id: user_id.value
+      user_id: null
     },
     formDatalesson: {
       cs_cover: "",
@@ -42,7 +43,7 @@ export const CourseStore = defineStore('course', {
       cs_video: "",
       cs_description: "",
       course_id: null,
-      user_id: user_id.value
+      user_id: null
     },
     formDataeditlesson: {
       cs_cover: "",
@@ -50,7 +51,7 @@ export const CourseStore = defineStore('course', {
       cs_video: "",
       cs_description: "",
       course_id: null,
-      user_id: user_id.value
+      user_id: null
     },
     formsearchcourse: {
       page: 1,
@@ -123,7 +124,7 @@ export const CourseStore = defineStore('course', {
       this.formDataEditCourse.course_code = item[0].course_code
       this.formDataEditCourse.course_name = item[0].course_name
       this.formDataEditCourse.course_description = item[0].course_description
-      this.formDataEditCourse.user_id = user_id.value
+      this.formDataEditCourse.user_id = this.user_id
       this.image = item[0].course_cover
 
       const data = await ApiService.post('/course/lesson/list/' + id, this.formsearchcourse).then(response => {
@@ -147,6 +148,7 @@ export const CourseStore = defineStore('course', {
     },
 
     async SaveCourse() {
+      console.log('this.formDataCourse',this.formDataCourse);
       try {
         const data = await ApiService.post('/course/create', this.formDataCourse).then(response => {
           this.SaveLesson(response.data.insertId)
@@ -175,8 +177,7 @@ export const CourseStore = defineStore('course', {
         this.formDatalesson.cs_video = this.lessonlist[i].cs_video
         this.formDatalesson.cs_description = this.lessonlist[i].cs_description
         this.formDatalesson.course_id = id
-        this.formDatalesson.user_id = user_id.value
-        console.log('SaveLesson Form', this.formDatalesson);
+        this.formDatalesson.user_id = this.user_id
         await this.delay(1000);
         const data = ApiService.post('/course/lesson/create', this.formDatalesson)
 
@@ -231,7 +232,7 @@ export const CourseStore = defineStore('course', {
         course_code: '',
         course_name: '',
         course_description: '',
-        user_id: user_id.value,
+        user_id:this.user_id
       };
       this.image = ""
       this.imagelist = ""
