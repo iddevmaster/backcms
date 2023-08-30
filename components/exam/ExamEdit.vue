@@ -46,6 +46,22 @@
            }}</span>
              <VueDatePicker v-model="store.formexamedit.em_time" time-picker  enable-seconds  placeholder="Select Time" />
            </div>
+
+
+           
+             <div class="mb-3">
+            <label for="message-text" class="col-form-label">DTL</label>  
+              <div class="col-sm-12">
+  
+    <select class="form-control" v-if="store.dtl" v-model="store.formexamedit.dlt_code">
+       
+    <option   v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code" >{{item.dlt_description}}</option>
+    </select>
+    <p>Selected Option: {{ store.formexamedit.dlt_code }}</p>
+    </div>
+          
+          </div>
+         
           
   
            <div class="mb-3">

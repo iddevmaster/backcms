@@ -5,7 +5,7 @@
 
 <div class="modal-content modal-dialog modal-xl" id="deleteConformationLabel">
                                 <div class="modal-header">                 
-                                    <h5 class="modal-title" id="exampleModalLabel">สร้างหลักสูตร {{store.formexam.dlt_code}} </h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">สร้างหลักสูตร {{store.formexam}} </h5>
                                 </div>
                                 <div class="modal-body">
         <form>
@@ -44,6 +44,20 @@
           }}</span>
             <VueDatePicker v-model="store.formexam.em_time" time-picker  enable-seconds  placeholder="Select Time" />
           </div>
+
+             <div class="mb-3">
+            <label for="message-text" class="col-form-label">DTL</label>  
+              <div class="col-sm-12">
+  
+    <select class="form-control" v-if="store.dtl" v-model="store.formexam.dlt_code">
+       
+    <option   v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code" >{{item.dlt_description}}</option>
+    </select>
+    <p>Selected Option: {{ store.formexam.dlt_code }}</p>
+    </div>
+          
+          </div>
+         
          
  
           <div class="mb-3">
