@@ -6,7 +6,12 @@
       v-model="store.searchDa" @keyup="searchData" />
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
-
+      <select class="form-select form-select" aria-label="Default select example" @change="selecttype($event)">
+        <option value="">ทั้งหมด</option>
+        <option value="1">ผู้ดูแลระบบ</option>
+        <option value="2">เจ้าหน้าที่</option>
+        <option value="3">ประชาชน</option>
+      </select>
     </div>
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
@@ -27,7 +32,7 @@
           </th>
           <th @click="sortList('id')">ชื่อ - นามสกุล &#8597;</th>
           <th @click="sortList('user_name')">ยูสเซอร &#8597;</th>
-          <th @click="sortList('user_email')">อีเมล &#8597;</th>
+          <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
           <th @click="sortList('user_phone')">ประเภทผู้ใช้งาน</th>
           <th >เบอรโทร &#8597;</th>
           <th>อัพเดทล่าสุด</th>
@@ -40,7 +45,7 @@
           <td>{{ user.user_id }}</td>
           <td>{{ user.user_firstname }} {{ user.user_lastname }}</td>
           <td>{{ user.user_name }}</td>
-          <td>{{ user.user_email }}</td>
+          <!-- <td>{{ user.user_email }}</td> -->
           <td v-if="user.user_type == 1">ผู้ดูแลระบบ</td>
           <td v-else-if="user.user_type == 2">เจ้าหน้าที่</td>
           <td v-else>ประชาชน</td>
@@ -126,7 +131,7 @@ const { selectone } = usersStore();//Action
 const { setCurrentPage } = usersStore();//Action
 const { sortLists } = usersStore();//Action
 const { selectentires } = usersStore();//Action
-
+const { selecttypes } = usersStore();//Action
 
 const { getSelect } = storeToRefs(store); //Get Getter
 const { getSelectALL } = storeToRefs(store); //Get Getter
@@ -163,6 +168,11 @@ const setCurrentPageclick = async (page) => {
 
 const selectshowdata = async (x) => {
   await selectentires(x.target.value);
+  await store.fetchUsers()
+};
+
+const selecttype = async (item) => {
+  await selecttypes(item.target.value);
   await store.fetchUsers()
 };
 

@@ -19,6 +19,7 @@ export const usersStore = defineStore('users', {
     imagelist: null,
     checkboxes: [], // Array to store checkbox values
     isAllSelected: false,
+    type:null,
     count: 0,
     page: 1,
     per_page: 10,
@@ -141,9 +142,11 @@ export const usersStore = defineStore('users', {
       this.formsearch.page = this.page;
       this.formsearch.per_page = this.per_page;
       this.formsearch.search = this.searchDa;
+
+      
       try {
         this.pending = true
-        const data = await ApiService.post('/user/list?', this.formsearch).then(response => {
+        const data = await ApiService.post('/user/list?'+this.type, this.formsearch).then(response => {
           this.posts = response.data
           this.total_page = response.data.total_page
           this.limit_page = response.data.limit_page
@@ -330,6 +333,18 @@ user_id:this.formDetailEdit.user_id};
       this.page = 1;
     },
 
+    selecttypes(item) {
+
+      // const a = 'user_type=' + this.type
+      if(item){
+        this.type = 'user_type=' + item
+      }else{
+        this.type = null
+      }
+     
+    },
+
+  
     async search() {
       this.fetchUsers();
     },
