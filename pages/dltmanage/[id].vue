@@ -92,16 +92,25 @@ const removeImage = async (item) => {
 
               <div class="row">
                 <div class="col-xl-9">
-
                   <div class="invoice-content">
-
                     <div class="invoice-detail-body">
+                      
+                      <div class="invoice-detail mb-5" style="padding: 0 48px;">
+                        <h2 class="text-center">เพิ่มใบขับขี่</h2>
+                        <label for="type" class="fw-bold">ประเภทใบขับขี่</label>
+                        <select class="form-select " aria-label="Default select example" id="type">
+                          <option selected disabled>โปรดเลือกประเภทใบขับขี่</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                      </div>
 
-                      <div class="invoice-detail" style="padding: 0 48px;">
+                      <div class="invoice-detail mb-5" style="padding: 0 48px;">
 
-                        <div class="form-group mb-4 mt-3">
-                          <label for="exampleFormControlFile1">รูปหน้าบัตร</label>
-                          <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChangeFront"
+                        <div class="form-group mt-3 d-flex">
+                          <label for="exampleFormControlFile1" class="fw-bold text-nowrap">รูปหน้าบัตร</label>
+                          <input type="file" class="form-control-file ms-4" id="exampleFormControlFile1" @change="onFileChangeFront"
                             ref="fileupload" />
                         </div>
                         <div class="border p-2 mt-3">
@@ -122,9 +131,9 @@ const removeImage = async (item) => {
 
                       <div class="invoice-detail" style="padding: 0 48px;">
 
-                        <div class="form-group mb-4 mt-3">
-                          <label for="exampleFormControlFile1">รูปหลังบัตร</label>
-                          <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChangeBack"
+                        <div class="form-group mb-4 mt-3 d-flex">
+                          <label for="exampleFormControlFile1" class="fw-bold text-nowrap">รูปหลังบัตร</label>
+                          <input type="file" class="form-control-file ms-4" id="exampleFormControlFile1" @change="onFileChangeBack"
                             ref="fileupload" />
                         </div>
                         <div class="border p-2 mt-3">
@@ -142,6 +151,11 @@ const removeImage = async (item) => {
                         </div>
                       </div>
 
+                      <div class="invoice-detail d-flex justify-content-center gap-2" style="padding: 0 48px;">
+                        <button class="btn btn-primary mt-4">Submit</button>
+                        <button class="btn btn-danger mt-4">Delete</button>
+                        <button class="btn btn-success mt-4">Update</button>
+                      </div>
                     </div>
 
                   </div>
@@ -151,7 +165,14 @@ const removeImage = async (item) => {
                 <div class="col-xl-3">
 
                   <div class="invoice-actions-btn">
-
+                    <div class="d-flex mb-4">
+                      <div class="card" style="height: 100px; width: 100px;"></div>
+                      <h5 class="ms-2">MeaNIe kurumi</h5>
+                    </div>
+                    <div class="d-flex justify-content-between pb-2 mb-2 border-bottom">
+                      <p class="fw-bold fs-4">ใบขับขี่ทั้งหมด</p>
+                      <button class="btn btn-success mt-0"><i class="bi bi-plus-circle"></i></button>
+                    </div>
                     <div class="invoice-action-btn">
                       <div class="row">
                         <div class="col-xl-12 col-md-4">
