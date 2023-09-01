@@ -31,8 +31,10 @@ const store = DltStore()
 
 
 let finddtl = await store.fetchDlt(route.params.id);
-if(false){
-   toast.error('Can not Data')
+if (finddtl == true) {
+
+} else {
+  toast.error('Can not Data')
 }
 
 
@@ -68,6 +70,9 @@ const removeImage = async (item) => {
   input.value = "";
 };
 
+const SelectDtl = async (item) => {
+await store.SelectgetDLT(item);
+};
 
 </script>
 
@@ -91,18 +96,17 @@ const removeImage = async (item) => {
             <div class="doc-container">
 
               <div class="row">
-                <div class="col-xl-9">
+                <div class="col-xl-7">
                   <div class="invoice-content">
                     <div class="invoice-detail-body">
-                      
+
                       <div class="invoice-detail mb-5" style="padding: 0 48px;">
                         <h2 class="text-center">เพิ่มใบขับขี่</h2>
                         <label for="type" class="fw-bold">ประเภทใบขับขี่</label>
-                        <select class="form-select " aria-label="Default select example" id="type">
+                        <select class="form-select " aria-label="Default select example" id="type" v-model="store.formdtl.dlt_code" >
                           <option selected disabled>โปรดเลือกประเภทใบขับขี่</option>
-                          <option value="1">One</option>
-                          <option value="2">Two</option>
-                          <option value="3">Three</option>
+                          <option  v-for="(item, index) in store.dtla" :key="index"  v-bind:value="item.dlt_code" > {{item.dlt_code  }}</option>
+               
                         </select>
                       </div>
 
@@ -110,8 +114,8 @@ const removeImage = async (item) => {
 
                         <div class="form-group mt-3 d-flex">
                           <label for="exampleFormControlFile1" class="fw-bold text-nowrap">รูปหน้าบัตร</label>
-                          <input type="file" class="form-control-file ms-4" id="exampleFormControlFile1" @change="onFileChangeFront"
-                            ref="fileupload" />
+                          <input type="file" class="form-control-file ms-4" id="exampleFormControlFile1"
+                            @change="onFileChangeFront" ref="fileupload" />
                         </div>
                         <div class="border p-2 mt-3">
                           <p>แสดงหน้าบัตร: </p>
@@ -120,7 +124,8 @@ const removeImage = async (item) => {
                               <div id="image-container" class="col-md-12 col-sm-12 col-12">
                                 <div class="image-wrapper">
                                   <img :src="store.front_img" class="img-fluid" />
-                                  <button @click="removeImage('front_img')" class="delete-button"><i class="bi bi-x-lg"></i></button>
+                                  <button @click="removeImage('front_img')" class="delete-button"><i
+                                      class="bi bi-x-lg"></i></button>
                                 </div>
                               </div>
                             </div>
@@ -133,8 +138,8 @@ const removeImage = async (item) => {
 
                         <div class="form-group mb-4 mt-3 d-flex">
                           <label for="exampleFormControlFile1" class="fw-bold text-nowrap">รูปหลังบัตร</label>
-                          <input type="file" class="form-control-file ms-4" id="exampleFormControlFile1" @change="onFileChangeBack"
-                            ref="fileupload" />
+                          <input type="file" class="form-control-file ms-4" id="exampleFormControlFile1"
+                            @change="onFileChangeBack" ref="fileupload" />
                         </div>
                         <div class="border p-2 mt-3">
                           <p>แสดงรูปหลังบัตร: </p>
@@ -143,7 +148,8 @@ const removeImage = async (item) => {
                               <div id="image-container" class="col-md-9 col-sm-9 col-">
                                 <div class="image-wrapper">
                                   <img :src="store.back_img" class="img-fluid" />
-                                  <button @click="removeImage('back_img')" class="delete-button"><i class="bi bi-x-lg"></i></button>
+                                  <button @click="removeImage('back_img')" class="delete-button"><i
+                                      class="bi bi-x-lg"></i></button>
                                 </div>
                               </div>
                             </div>
@@ -162,12 +168,12 @@ const removeImage = async (item) => {
 
                 </div>
 
-                <div class="col-xl-3">
+                <div class="col-xl-5">
 
                   <div class="invoice-actions-btn">
                     <div class="d-flex mb-4">
                       <div class="card" style="height: 100px; width: 100px;"></div>
-                      <h5 class="ms-2">MeaNIe kurumi</h5>
+                      <h5 class="ms-2">{{ store.name }}</h5>
                     </div>
                     <div class="d-flex justify-content-between pb-2 mb-2 border-bottom">
                       <p class="fw-bold fs-4">ใบขับขี่ทั้งหมด</p>
@@ -175,22 +181,11 @@ const removeImage = async (item) => {
                     </div>
                     <div class="invoice-action-btn">
                       <div class="row">
-                        <div class="col-xl-12 col-md-4">
+                        <div class="col-xl-12 col-md-4" v-for="(item, index) in store.mydtla" :key="item.dlt_code" @click="SelectDtl(index)">
                           <a href="javascript:void(0);"
-                            class="btn btn-primary btn-send _effect--ripple waves-effect waves-light">Send Invoice</a>
+                            class="btn btn-primary btn-send _effect--ripple waves-effect waves-light">{{ item.dlt_description }}</a>
                         </div>
-                        <div class="col-xl-12 col-md-4">
-                          <a href="javascript:void(0);"
-                            class="btn btn-primary btn-send _effect--ripple waves-effect waves-light">Send Invoice</a>
-                        </div>
-                        <div class="col-xl-12 col-md-4">
-                          <a href="./app-invoice-preview.html"
-                            class="btn btn-secondary btn-preview _effect--ripple waves-effect waves-light">Preview</a>
-                        </div>
-                        <div class="col-xl-12 col-md-4">
-                          <a href="javascript:void(0);"
-                            class="btn btn-success btn-download _effect--ripple waves-effect waves-light">Save</a>
-                        </div>
+
                       </div>
                     </div>
 
@@ -223,11 +218,13 @@ const removeImage = async (item) => {
   height: 100px;
   width: 100px;
 }
-#image-container img{
+
+#image-container img {
   width: 250px;
   height: 250px;
   object-fit: cover;
 }
+
 #image-container .delete-button {
   position: absolute;
   top: 0;
@@ -238,12 +235,14 @@ const removeImage = async (item) => {
   padding: 2.5px 5px;
   cursor: pointer;
 }
+
 #image-container .image-wrapper {
   position: relative;
   display: inline-block;
   margin: 10px;
   border: 1px solid;
 }
+
 #image-container {
   width: fit-content;
   min-width: 200px;
