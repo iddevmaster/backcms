@@ -212,7 +212,7 @@ await store.CheckForm();
                       <div class="invoice-detail d-flex justify-content-center gap-2" style="padding: 0 48px;">
                     
                         <button class="btn btn-danger mt-4">Delete</button>
-                        <button class="btn btn-success mt-4" @click="UpdateDlT()">Update</button>
+                        <button class="btn btn-success mt-4" @click="UpdateDlT()">แก้ไข</button>
                       </div>
                     </div>
 

@@ -117,7 +117,7 @@
           class="invoice-detail d-flex justify-content-center gap-2"
           style="padding: 0 48px"
         >
-          <button class="btn btn-primary mt-4" @click="Add()">Save</button>
+          <button class="btn btn-primary mt-4" @click="Add()">เพิ่มใบขับขี่</button>
         </div>
       </div>
     </div>
