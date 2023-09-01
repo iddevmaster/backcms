@@ -22,6 +22,8 @@ export default defineNuxtConfig({
   '~/assets/src/assets/css/light/apps/invoice-preview.css',
   '~/assets/src/assets/css/light/scrollspyNav.css',
   '~/assets/src/assets/css/light/components/tabs.css',
+  '~/assets/src/plugins/src/filepond/filepond.min.css',
+  '~/assets/src/plugins/src/filepond/FilePondPluginImagePreview.min.css',
 ],
 
 

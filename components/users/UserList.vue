@@ -31,11 +31,12 @@
             <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
           </th>
           <th @click="sortList('id')">ชื่อ - นามสกุล &#8597;</th>
-          <th @click="sortList('user_name')">ยูสเซอร &#8597;</th>
+          <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
           <th @click="sortList('user_phone')">ประเภทผู้ใช้งาน</th>
           <th >เบอรโทร &#8597;</th>
-          <th>อัพเดทล่าสุด</th>
+          <th>DLT</th>
+          <th>ล่าสุด</th>
           <th class="no-content">จัดการ</th>
         </tr>
       </thead>
@@ -44,12 +45,13 @@
           <!-- <td><input type="checkbox" v-model="store.selected" :value="user" number></td> -->
           <td>{{ user.user_id }}</td>
           <td>{{ user.user_firstname }} {{ user.user_lastname }}</td>
-          <td>{{ user.user_name }}</td>
+          <!-- <td>{{ user.user_name }}</td> -->
           <!-- <td>{{ user.user_email }}</td> -->
           <td v-if="user.user_type == 1">ผู้ดูแลระบบ</td>
           <td v-else-if="user.user_type == 2">เจ้าหน้าที่</td>
           <td v-else>ประชาชน</td>
           <td>{{ user.user_phone }}</td>
+          <td><button type="button" class="btn btn-primary btn-sm" @click="choose(user.user_id)">จัดการ DLT</button> </td>
           <td>{{ coverttime(user.udp_date) }}</td>
           <td>
             <NuxtLink :to="'/users/' + user.user_id">
@@ -121,7 +123,7 @@ import $ from 'jquery'
 import Paginate from "vuejs-paginate-next";
 import { useToast } from 'vue-toastification'
 
-
+const router = useRouter();
 const toast = useToast()
 const store = usersStore()
 const { posts } = storeToRefs(usersStore())
@@ -140,13 +142,14 @@ const { search } = storeToRefs(store); //Get Getter
 
 store.fetchUsers()
 
-
 const del = async (id) => {
   await deleteItem(id);
   await store.fetchUsers()
 };
 
-
+const choose = async (id) => {
+  router.push({ path: 'dltmanage/'+id})
+};
 
 const searchData = async () => {
   await store.fetchUsers()

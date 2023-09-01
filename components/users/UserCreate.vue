@@ -216,24 +216,24 @@ const rules = computed(() => {
   return {
     user_name: {
       required: helpers.withMessage('The User name field is required', required),
-      minLength: minLength(6),
+      minLength: minLength(1),
     },
     user_password: {
       required: helpers.withMessage('The Password field is required', required),
-      minLength: minLength(6),
+      minLength: minLength(1),
     },
     user_firstname: {
       required: helpers.withMessage('The First Name field is required', required),
-      minLength: minLength(6),
+      minLength: minLength(1),
     },
     user_lastname: {
       required: helpers.withMessage('The Last Name field is required', required),
-      minLength: minLength(6),
+      minLength: minLength(1),
     },
 
     user_phone: {
       required: helpers.withMessage('The tel field is required', required),
-      minLength: minLength(6),
+      minLength: minLength(1),
     },
 
     user_email: {
