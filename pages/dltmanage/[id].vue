@@ -18,6 +18,9 @@ import Loading from "@/components/layout/Success.vue";
 import { DltStore } from '@/store/dlt'; // import the auth store we just created
 import { useToast } from 'vue-toastification'
 import { useRoute } from "vue-router";
+import { useAuthStore } from '@/store/auth'
+import ApiService  from "../../services/api.service";
+import DltCreate from '@/components/dlt/DltCreate.vue'
 
 
 definePageMeta({
@@ -28,7 +31,9 @@ definePageMeta({
 const toast = useToast()
 const route = useRoute();
 const store = DltStore()
-
+const auth = useAuthStore()
+const profile = await auth.getProfile();
+store.formadddtl.user_id = auth.user_id
 
 let finddtl = await store.fetchDlt(route.params.id);
 if (finddtl == true) {
@@ -43,7 +48,7 @@ const onFileChangeFront = async (event) => {
   if (input.files) {
     var reader = new FileReader();
     reader.onload = (e) => {
-      store.front_img = e.target.result;
+      store.formdtl.front_img = e.target.result;
     };
     store.imagelistFront = input.files[0];
     reader.readAsDataURL(input.files[0]);
@@ -57,7 +62,7 @@ const onFileChangeBack = async (event) => {
   if (input.files) {
     var reader = new FileReader();
     reader.onload = (e) => {
-      store.back_img = e.target.result;
+      store.formdtl.back_img = e.target.result;
     };
     store.imagelistBack = input.files[0];
     reader.readAsDataURL(input.files[0]);
@@ -70,8 +75,54 @@ const removeImage = async (item) => {
   input.value = "";
 };
 
+function coverimage(i) {
+  let result = i.slice(0, 6);
+if (result === 'static') {
+  let im =  ApiService.image(i);
+  return im;
+}else {
+  return i;
+}
+ }
+
 const SelectDtl = async (item) => {
+  store.isEdit = true;
+  store.isAdd = false;
+  //   const input1 = document.querySelector('#exampleFormControlFile1');
+  // input1.value = "";
+
+  //    const input2 = document.querySelector('#exampleFormControlFile2');
+  // input2.value = "";
 await store.SelectgetDLT(item);
+};
+
+const UpdateDlT = async () => {
+let update =await store.Updatedtl();
+console.log(update)
+if(update == true){
+toast.success('Save Success');
+}else {
+toast.error('Failed  Save Data')
+}
+};
+
+
+const Add = async () => {
+
+toast.success('Save Success');
+};
+
+const AddDLT = async () => {
+
+  //    const input1 = document.querySelector('#exampleFormControlFile1');
+  // input1.value = "";
+  
+
+  //    const input2 = document.querySelector('#exampleFormControlFile2');
+  // input2.value = "";
+  
+
+await store.CheckForm();
 };
 
 </script>
@@ -96,12 +147,13 @@ await store.SelectgetDLT(item);
             <div class="doc-container">
 
               <div class="row">
-                <div class="col-xl-7">
+              <DltCreate v-if="store.isAdd"></DltCreate>
+                 <div class="col-xl-7" v-if="store.isEdit">
                   <div class="invoice-content">
                     <div class="invoice-detail-body">
 
                       <div class="invoice-detail mb-5" style="padding: 0 48px;">
-                        <h2 class="text-center">เพิ่มใบขับขี่</h2>
+                        <h2 class="text-center">แก้ไข</h2>
                         <label for="type" class="fw-bold">ประเภทใบขับขี่</label>
                         <select class="form-select " aria-label="Default select example" id="type" v-model="store.formdtl.dlt_code" >
                           <option selected disabled>โปรดเลือกประเภทใบขับขี่</option>
@@ -119,11 +171,11 @@ await store.SelectgetDLT(item);
                         </div>
                         <div class="border p-2 mt-3">
                           <p>แสดงหน้าบัตร: </p>
-                          <template v-if="store.front_img">
+                          <template v-if="store.formdtl.front_img">
                             <div class="row">
                               <div id="image-container" class="col-md-12 col-sm-12 col-12">
                                 <div class="image-wrapper">
-                                  <img :src="store.front_img" class="img-fluid" />
+                                  <img :src="coverimage(store.formdtl.front_img)" class="img-fluid" />
                                   <button @click="removeImage('front_img')" class="delete-button"><i
                                       class="bi bi-x-lg"></i></button>
                                 </div>
@@ -142,12 +194,12 @@ await store.SelectgetDLT(item);
                             @change="onFileChangeBack" ref="fileupload" />
                         </div>
                         <div class="border p-2 mt-3">
-                          <p>แสดงรูปหลังบัตร: </p>
-                          <template v-if="store.back_img">
+                          <p>แสดงรูปหลังบัตร:  </p>
+                          <template v-if="store.formdtl.back_img">
                             <div class="row">
                               <div id="image-container" class="col-md-9 col-sm-9 col-">
                                 <div class="image-wrapper">
-                                  <img :src="store.back_img" class="img-fluid" />
+                                  <img :src="coverimage(store.formdtl.back_img)" class="img-fluid" />
                                   <button @click="removeImage('back_img')" class="delete-button"><i
                                       class="bi bi-x-lg"></i></button>
                                 </div>
@@ -158,9 +210,9 @@ await store.SelectgetDLT(item);
                       </div>
 
                       <div class="invoice-detail d-flex justify-content-center gap-2" style="padding: 0 48px;">
-                        <button class="btn btn-primary mt-4">Submit</button>
+                    
                         <button class="btn btn-danger mt-4">Delete</button>
-                        <button class="btn btn-success mt-4">Update</button>
+                        <button class="btn btn-success mt-4" @click="UpdateDlT()">Update</button>
                       </div>
                     </div>
 
@@ -177,7 +229,7 @@ await store.SelectgetDLT(item);
                     </div>
                     <div class="d-flex justify-content-between pb-2 mb-2 border-bottom">
                       <p class="fw-bold fs-4">ใบขับขี่ทั้งหมด</p>
-                      <button class="btn btn-success mt-0"><i class="bi bi-plus-circle"></i></button>
+                      <button class="btn btn-success mt-0" @click="AddDLT()"><i class="bi bi-plus-circle"></i></button>
                     </div>
                     <div class="invoice-action-btn">
                       <div class="row">
@@ -188,13 +240,9 @@ await store.SelectgetDLT(item);
 
                       </div>
                     </div>
-
                   </div>
-
                 </div>
               </div>
-
-
             </div>
           </div>
         </div>

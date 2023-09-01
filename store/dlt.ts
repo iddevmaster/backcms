@@ -5,7 +5,9 @@ import axios from "axios";
 export const DltStore = defineStore('dlt', {
   state: () => ({
     user_id: null,
-    dlt_code:"",
+    dlt_code: "",
+    isAdd:true,
+    isEdit:false,
     front_img: null,
     back_img: null,
     image: null,
@@ -13,13 +15,21 @@ export const DltStore = defineStore('dlt', {
     imagelistFront: null,
     imagelistBack: null,
     name: null,
+    id: null,
     formdtl: {
       front_img: "",
       back_img: "",
       dlt_code: 'A1',
       user_id: null
     },
-    dtlall:[],
+
+    formadddtl: {
+      front_img: "",
+      back_img: "",
+      dlt_code: 'A1',
+      user_id: null
+    },
+    dtlall: [],
     mydtla: [],
     dtla: [
       {
@@ -75,6 +85,10 @@ export const DltStore = defineStore('dlt', {
     FormDlt(state) {
       return state.formdtl;
     },
+    FormDLTadd(state) {
+      return state.formadddtl;
+    },
+
   },
 
   actions: {
@@ -96,6 +110,7 @@ export const DltStore = defineStore('dlt', {
     },
     async fetchDlt(id) {
       this.user_id = id
+      this.formdtl.user_id = id
       try {
         const data = await ApiService.get('/user/get/' + id).then(response => {
           if (response.data) {
@@ -114,7 +129,7 @@ export const DltStore = defineStore('dlt', {
 
         return false;
       }
-      return true
+
     },
 
     async getDLT() {
@@ -122,7 +137,7 @@ export const DltStore = defineStore('dlt', {
       try {
         const data = await ApiService.get('/dlt_card/list/?user_id=' + this.user_id).then(response => {
           this.dtlall = response.data;
-  
+
           if (response.data.length > 0) {
             for (let i = 0; i < response.data.length; i++) {
               let a = this.dtla.find(x => x.dlt_code === response.data[i].dlt_code)
@@ -139,26 +154,99 @@ export const DltStore = defineStore('dlt', {
 
     },
     async SelectgetDLT(item) {
-     let a = this.dtlall[item];
-     this.formdtl.front_img = a.front_img
-     this.formdtl.back_img = a.back_img
-     this.formdtl.dlt_code = a.dlt_code
-     this.formdtl.user_id = this.user_id;
-console.log(this.formdtl);
-   
+
+      this.imagelistFront = null
+      this.imagelistBack = null
+
+      let a = this.dtlall[item];
+      this.formdtl.front_img = a.front_img
+      this.formdtl.back_img = a.back_img
+      this.formdtl.dlt_code = a.dlt_code
+      this.formdtl.user_id = this.user_id;
+      this.id = a.id;
+
+
+      this.formadddtl.front_img = ""
+      this.formadddtl.back_img = ""
+      this.formadddtl.dlt_code = 'A1'
+      this.formadddtl.user_id = this.user_id;
+
+     
     },
 
     async SaveFormDlt() {
+      let upload = await this.UploadfileAddImage();
+      try {
+        const data = await ApiService.post('/dlt_card/create/', this.formadddtl).then(response => {
+          console.log(response);
+        });
+
+        return true
+
+      } catch (error) {
+        return false;
+      }
+
 
     },
     async fetchDltid() {
 
     },
     async Updatedtl() {
+      let upload = await this.UploadfileImage();
+      //  const data = await ApiService.put('/dlt_card/update/' + this.user_id,this.formdtl).then(response => {
+      // });
+      try {
+        const data = await ApiService.put('/dlt_card/update/' + this.id, this.formdtl).then(response => {
+          console.log(response.data)
+        });
+
+        return true;
+      } catch (error) {
+        return false
+      }
+
 
     },
     async Delete() {
 
+    },
+
+    async CheckForm() {
+this.isAdd = true;
+this.isEdit = false;
+    },
+
+    async UploadfileImage() {
+      if (this.imagelistFront) {
+        let formData = new FormData();
+        formData.append('files', this.imagelistFront);
+        const data = await ApiService.upload('/media_file/upload/file', formData);
+        this.formdtl.front_img = data.data[0].path
+      }
+      if (this.imagelistBack) {
+        let formData = new FormData();
+        formData.append('files', this.imagelistBack);
+        const data = await ApiService.upload('/media_file/upload/file', formData);
+        this.formdtl.back_img = data.data[0].path
+        return true
+      }
+    },
+
+    async UploadfileAddImage() {
+      if (this.imagelistFront) {
+        let formData = new FormData();
+        formData.append('files', this.imagelistFront);
+        const data = await ApiService.upload('/media_file/upload/file', formData);
+        this.formadddtl.front_img = data.data[0].path
+      }
+      if (this.imagelistBack) {
+        let formData = new FormData();
+        formData.append('files', this.imagelistBack);
+        const data = await ApiService.upload('/media_file/upload/file', formData);
+        this.formadddtl.back_img = data.data[0].path
+        return true
+      }
     },
 
     delay(ms) {

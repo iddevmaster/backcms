@@ -180,7 +180,6 @@ export const ExamStore = defineStore('exam', {
     },
     async SaveExam() {
       this.ChangeFormateTime('add');
-
       try {
         const data = await ApiService.post('/exam/main/create', this.formexam).then(response => {
           return true;
@@ -190,8 +189,6 @@ export const ExamStore = defineStore('exam', {
       } finally {
         this.closeModal();
       }
-
-
     },
 
     async UpdateExam() {
