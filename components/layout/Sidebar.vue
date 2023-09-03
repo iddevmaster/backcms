@@ -72,7 +72,7 @@
                         <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>APPLICATIONS</span></div>
                     </li> -->
 
-        <li class="menu">
+        <li class="menu" v-if="user_type == 1">
           <a
             href="#course"
             data-bs-toggle="collapse"
@@ -130,7 +130,7 @@
           </ul>
         </li>
 
-        <li class="menu">
+        <li class="menu" v-if="user_type == 1">
           <a
             href="#exam"
             data-bs-toggle="collapse"
@@ -184,7 +184,7 @@
           </ul>
         </li>
 
-        <li class="menu">
+        <li class="menu" v-if="user_type == 1 || 2">
           <a
             href="#transport"
             data-bs-toggle="collapse"
@@ -245,7 +245,7 @@
             </li>
           </ul>
         </li>
-        <li class="menu">
+        <li class="menu" v-if="user_type == 1 || 2">
           <a
             href="#civil"
             data-bs-toggle="collapse"
@@ -295,7 +295,7 @@
             id="civil"
             data-bs-parent="#accordionExample"
           >
-            <li>
+            <li v-if="user_type == 1">
               <nuxt-link to="/news/civil">ข่าวสารกรมโยธา</nuxt-link>
             </li>
             <li>
@@ -303,7 +303,7 @@
             </li>
           </ul>
         </li>
-        <li class="menu">
+        <li class="menu" v-if="user_type == 1">
           <a
             href="#users"
             data-bs-toggle="collapse"
@@ -378,6 +378,8 @@ import ApiService  from "../../services/api.service";
 
 
 const data = localStorage.getItem('user');
+ const user_type = useCookie('user_type').value;
+
 
 let user = JSON.parse(data);
 const router = useRouter();
