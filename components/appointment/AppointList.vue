@@ -3,11 +3,11 @@
   <div class="row layout-top-spacing">
     <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
       <input id="t-text" type="date" name="txt" placeholder="ค้นหา" class="form-control" required=""
-      v-model="store.searchDa" @keyup="searchData" />
+      v-model="store.dtl" />
     </div>
     <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
       <input id="t-text" type="date" name="txt" placeholder="ค้นหา" class="form-control" required=""
-      v-model="store.searchDa" @keyup="searchData" />
+      v-model="store.end_date"/>
     </div>
        <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
       <select class="form-select form-select" aria-label="Default select example" @change="selecttype($event)">

@@ -11,6 +11,9 @@ export const AppointStore = defineStore('appoint', {
     load: true,
     isOpen: false,
     searchData:"",
+    start_date:null,
+    end_date:null,
+    dtl_code:null,
     dtl:[
       {
         dlt_code: "A",
