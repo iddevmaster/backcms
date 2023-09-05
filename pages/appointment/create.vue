@@ -2,10 +2,10 @@
 
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-import { usersStore } from '@/store/users'
+import { AppointStore } from '@/store/appoint'
+import { useAuthStore } from '@/store/auth';
 import AppointCreate from '@/components/appointment/AppointCreate.vue'
 
-import Alert from '@/components/layout/Alert.vue';
 import { AlertStore } from '@/store/alert'; // import the auth store we just created
 definePageMeta({
     middleware: 'auth' // this should match the name of the file inside the middleware directory 
@@ -13,16 +13,11 @@ definePageMeta({
 
 
 
-const storealert = AlertStore()
-const { Clear } = AlertStore(); // use  action
+const store = AppointStore()
+const auth = useAuthStore()
+store.user_id = auth.user_id
+store.forminsert.user_id = auth.user_id
 
-const store = usersStore()
-const { posts } = storeToRefs(usersStore())
-const { PendingForm } = storeToRefs(store); //Get Getter
-
-const { AlertTextForm } = storeToRefs(store); //Get Getter
-
-storealert.Clear()
 </script>
 
 <template>
@@ -31,12 +26,11 @@ storealert.Clear()
             <div class="page-meta">
                 <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Users</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Add User</li>
+                     <li class="breadcrumb-item"><a href="#">Appointment</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Appointment Create</li>
                     </ol>
                 </nav>
             </div>
-            <Alert></Alert>
             <div class="middle-content container-xxl p-0">
                 <div class="row layout-top-spacing">
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">

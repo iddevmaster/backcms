@@ -1,18 +1,18 @@
 <template>
 
-<div id="tableSimple" class="col-lg-12 col-12 layout-spacing"  v-for="(item, index) in store.group" >
+<div id="tableSimple" class="col-lg-12 col-12 layout-spacing" >
                             <div class="statbox widget box box-shadow">
                                 <div class="widget-header">
                                     <div class="row">
                                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                            <h4>Date group {{ item.date_group }} </h4>
+                                            <h4>Date group </h4>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="widget-content widget-content-area">
 
                                     <div class="table-responsive">
-                                        <table class="table table-bordered" v-if="item.events">
+                                        <table class="table table-bordered" v-if="store.group">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">ap_remark</th>
@@ -27,7 +27,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr  v-for="(event, index) in item.events">
+                                                <tr  v-for="(event, index) in store.group">
                                                     <td>{{ event.ap_remark }}</td>
                                                     <td>
                                                       {{ event.dlt_code }}

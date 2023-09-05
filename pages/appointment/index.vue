@@ -23,15 +23,10 @@ const closeModal = () => {
   store.closeModal();
 };
 
-const delete_userid = async (id) => {
-  const deleitem = await store.deleteItem_id(id);
-  if (deleitem) {
-    toast.success('Save Data');
-    await store.fetchUsers()
-  } else {
-    toast.error('Fall Save Data')
-  }
-  // await store.fetchUsers()
+const deletel = async () => {
+let del = await store.deleteApp();
+console.log(del);
+
 };
 
 </script>
@@ -56,13 +51,13 @@ const delete_userid = async (id) => {
             </div>
           </div>
           <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.group">
-<AppointListByGroup></AppointListByGroup>
+<!-- <AppointListByGroup></AppointListByGroup> -->
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div v-if="GetopenModal" class="modal">
+  <div v-if="store.isShowModal" class="modal">
     <div class="modal-content" id="deleteConformationLabel">
       <div class="modal-header">
         <div class="icon">
@@ -85,8 +80,7 @@ const delete_userid = async (id) => {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal">Cancel</button>
-        <button type="button" class="btn btn-danger" data-remove="task" @click="delete_userid(GetopenModal_ID)">Delete {{
-          GetopenModal_ID }}</button>
+        <button type="button" class="btn btn-danger" data-remove="task" @click="deletel()">Delete</button>
       </div>
     </div>
   </div>

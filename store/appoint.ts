@@ -8,17 +8,30 @@ import moment from 'moment';
 
 export const AppointStore = defineStore('appoint', {
   state: () => ({
-    locale: true,
-    load: true,
     isOpen: false,
     searchData:"",
     start_date:'',
     end_date:'',
     dtl_code:'A',
+    user_id:null,
+    ap_id:null,
+    isShowModal:false,
     form:{
-      start_date:"",
-      end_date:"",
-      dtl_code:"A2",
+      ap_learn_type:"1",
+      date_event:"",
+      dtl_code:"A1",
+    },
+    selectedTimeZone: 'Asia/Bangkok',
+    locale: 'en',
+    dateFormat: 'yyyy-MM-dd HH:mm:ss',
+    forminsert:{
+      ap_learn_type:1,
+      ap_quota:"",
+      ap_date_start:null,
+      ap_date_end:null,
+      ap_remark:"",
+      user_id:"",
+      dtl_code:"A1",
     },
     group:[],
     // end_date:moment(String(null)).format('YYYY-mm-dd'),
@@ -79,6 +92,10 @@ export const AppointStore = defineStore('appoint', {
     Ismodal(state) {
       return state.isOpen;
     },
+  
+    FormInsert(state) {
+      return state.forminsert;
+    },
   },
 
   actions: {
@@ -86,7 +103,7 @@ export const AppointStore = defineStore('appoint', {
       this.isOpen = true;
     },
     closeModal() {
-      this.isOpen = false;
+      this.isShowModal = false;
     },
 
   
@@ -114,15 +131,14 @@ export const AppointStore = defineStore('appoint', {
     async fetchAppointment() {
 
       const a = {
-        start_date:this.form.start_date,
-        end_date:this.form.end_date,
+        date_event:this.form.date_event,
+        ap_learn_type:this.form.ap_learn_type,
         dlt_code:this.form.dtl_code
       }
-      
+   
       try {
         const data = await ApiService.post('/appointment/list',a).then(response => {
-          console.log(response.data)
-          this.group = response.data
+       this.group = response.data
         });
         return true
 
@@ -132,9 +148,38 @@ export const AppointStore = defineStore('appoint', {
       }
 
     },
+
+
+
+    async SaveFormAPP() {
+     this.forminsert.ap_date_start = await this.changeFormate(this.forminsert.ap_date_start);
+     this.forminsert.ap_date_end = await this.changeFormate(this.forminsert.ap_date_end);
+     const savet = {ap_learn_type:this.forminsert.ap_learn_type,ap_quota:this.forminsert.ap_quota,ap_date_start:this.forminsert.ap_date_start,ap_date_end:this.forminsert.ap_date_end,ap_remark:"Test",
+     dlt_code:this.forminsert.dtl_code,user_id:this.forminsert.user_id
+    }
+
+      try {
+        const data = await ApiService.post('/appointment/create',savet).then(response => {
+        });
+        return true
+      } catch (error) {
+        return false;
+      }
+
+     
+    },
   
     async search() {
       
+    },
+    async deleteItem(item) {
+      this.ap_id = item.ap_id
+      this.isShowModal = true;
+    },
+    async deleteApp() {
+      this.isShowModal = false;
+      return true;
+   
     },
 
     async ResetForm() {   ////reset Form
@@ -152,6 +197,9 @@ export const AppointStore = defineStore('appoint', {
      
  
     },
+    async changeFormate(a) {
+      return a.toISOString().slice(0, -5);
+    }
 
  
   },
