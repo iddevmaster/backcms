@@ -2,17 +2,20 @@
 
   <div class="row layout-top-spacing">
     <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
-      <input id="t-text" type="text" name="txt" placeholder="ค้นหา" class="form-control" required=""
+      <input id="t-text" type="date" name="txt" placeholder="ค้นหา" class="form-control" required=""
       v-model="store.searchDa" @keyup="searchData" />
     </div>
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
+    <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
+      <input id="t-text" type="date" name="txt" placeholder="ค้นหา" class="form-control" required=""
+      v-model="store.searchDa" @keyup="searchData" />
+    </div>
+       <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
       <select class="form-select form-select" aria-label="Default select example" @change="selecttype($event)">
-        <option value="">ทั้งหมด</option>
-        <option value="1">ผู้ดูแลระบบ</option>
-        <option value="2">เจ้าหน้าที่</option>
-        <option value="3">ประชาชน</option>
+         <option   v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code" >{{item.dlt_description}}</option>
       </select>
     </div>
+ 
+   
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <select class="form-select form-select" aria-label="Default select example" @change="selectshowdata($event)">
@@ -48,7 +51,7 @@
         </tr>
       </tbody>
     </table>
-    <div>
+    <!-- <div>
       <div class="dt--pagination" v-if="posts.total_page > 1">
         <div class="dataTables_paginate paging_simple_numbers" id="zero-config_paginate">
           <ul class="pagination">
@@ -77,7 +80,7 @@
         </div>
       </div>
 
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -88,7 +91,7 @@
 // import DataTablesCore from 'datatables.net-bs5';
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-import { usersStore } from '@/store/users'
+import { AppointStore } from '@/store/appoint'
 import 'jquery/dist/jquery.min.js';
 //Datatable Modules
 import "datatables.net-dt/js/dataTables.dataTables"
@@ -99,15 +102,10 @@ import { useToast } from 'vue-toastification'
 
 const router = useRouter();
 const toast = useToast()
-const store = usersStore()
-const { posts } = storeToRefs(usersStore())
-const { deleteItem } = usersStore();//Action
-const { selectall } = usersStore(); //Action
-const { selectone } = usersStore();//Action
-const { setCurrentPage } = usersStore();//Action
-const { sortLists } = usersStore();//Action
-const { selectentires } = usersStore();//Action
-const { selecttypes } = usersStore();//Action
+const store = AppointStore()
+
+const { deleteItem } = AppointStore();//Action
+
 
 
 
