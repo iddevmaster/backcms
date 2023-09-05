@@ -12,60 +12,50 @@
                                 <div class="widget-content widget-content-area">
 
                                     <div class="table-responsive">
-                                        <table class="table table-bordered">
+                                        <table class="table table-bordered" v-if="item.events">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Date</th>
-                                                    <th class="text-center" scope="col">Sales</th>
-                                                    <th class="text-center" scope="col">Status</th>
+                                                    <th scope="col">ap_remark</th>
+                                                    <th scope="col">dlt_code</th>
+                                                    <th class="text-center" scope="col">ap_learn_type</th>
+                                                    <th class="text-center" scope="col">ap_quota</th>
+                                                    
+                                                    <th class="text-center" scope="col">total_reserv</th>
+                                                    <th class="text-center" scope="col">ap_date_start</th>
+                                                    <th class="text-center" scope="col">ap_date_end</th>
+                                                    <th class="text-center" scope="col">จัดการ</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Shaun Park</td>
+                                                <tr  v-for="(event, index) in item.events">
+                                                    <td>{{ event.ap_remark }}</td>
                                                     <td>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                                        <span class="table-inner-text">25 Apr</span>
+                                                      {{ event.dlt_code }}
                                                     </td>
-                                                    <td class="text-center">320</td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-light-success">Approved</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Alma Clarke</td>
                                                     <td>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                                        <span class="table-inner-text">26 Apr</span>
+                                                      {{ event.ap_learn_type }}
                                                     </td>
-                                                    <td class="text-center">110</td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-light-secondary">Pending</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Vincent Carpenter</td>
                                                     <td>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                                        <span class="table-inner-text">05 May</span>
+                                                      {{ event.ap_quota }}
                                                     </td>
-                                                    <td class="text-center">210</td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-light-danger">Rejected</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Xavier</td>
                                                     <td>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                                                        <span class="table-inner-text">18 May</span>
+                                                      {{ event.total_reserv }}
                                                     </td>
-                                                    <td class="text-center">784</td>
-                                                    <td class="text-center">
-                                                        <span class="badge badge-light-info">In Progress</span>
+                                                    <td>
+                                                      {{ event.ap_date_start }}
                                                     </td>
+                                                    <td>
+                                                      {{ event.ap_date_end }}
+                                                    </td>
+                                                    <td align="center">
+             <div class="btn-group-vertical">
+            <button type="button" class="btn btn-success" style="background-color:#3F2C73;">แก้ไขนัดหมาย</button>
+            <!-- <button type="button" class="btn btn-success" style="background-color:#3F2C73;"  >ดูราย</button> -->
+            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" >ลบนัดหมาย</button>
+            </div>
+          </td>
                                                 </tr>
+                                              
                                             </tbody>
                                         </table>
                                     </div>
