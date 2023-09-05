@@ -2,85 +2,21 @@
 
   <div class="row layout-top-spacing">
     <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
-      <input id="t-text" type="date" name="txt" placeholder="ค้นหา" class="form-control" required=""
-      v-model="store.dtl" />
+      <!-- <VueDatePicker v-model="store.form.start_date"></VueDatePicker> -->
+      <Datepicker v-model="store.form.start_date" :format="format_start"/>
     </div>
     <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
-      <input id="t-text" type="date" name="txt" placeholder="ค้นหา" class="form-control" required=""
-      v-model="store.end_date"/>
+      <Datepicker v-model="store.form.end_date" :format="format_end" />
+      <!-- <VueDatePicker v-model="store.form.end_date" :format="format"></VueDatePicker> -->
     </div>
        <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
-      <select class="form-select form-select" aria-label="Default select example" @change="selecttype($event)">
+      <select class="form-select form-select" aria-label="Default select example" v-model="store.form.dtl_code">
          <option   v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code" >{{item.dlt_description}}</option>
       </select>
     </div>
- 
-   
-
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
-      <select class="form-select form-select" aria-label="Default select example" @change="selectshowdata($event)">
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="50">50</option>
-      </select>
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
+      <button class="btn btn-primary" @click="Search()">ค้นหา</button>
     </div>
-  </div>
-  <div class="table-responsive">
-    <table id="example" class="table table-bordered" style="width:100%">
-      <thead>
-        <tr>
-          <th>
-            #
-            <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
-          </th>
-          <th @click="sortList('id')">ชื่อ - นามสกุล &#8597;</th>
-          <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
-          <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
-          <th @click="sortList('user_phone')">ประเภทผู้ใช้งาน</th>
-          <th >เบอรโทร &#8597;</th>
-          <th>DLT</th>
-          <th>ล่าสุด</th>
-          <th class="no-content">จัดการ</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr >
-          <!-- <td><input type="checkbox" v-model="store.selected" :value="user" number></td> -->
-          
-
-        </tr>
-      </tbody>
-    </table>
-    <!-- <div>
-      <div class="dt--pagination" v-if="posts.total_page > 1">
-        <div class="dataTables_paginate paging_simple_numbers" id="zero-config_paginate">
-          <ul class="pagination">
-            <li class="paginate_button page-item previous" id="zero-config_previous">
-              <a href="#" aria-controls="zero-config" data-dt-idx="0" tabindex="0" class="page-link">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                  class="feather feather-arrow-left">
-                  <line x1="19" y1="12" x2="5" y2="12"></line>
-                  <polyline points="12 19 5 12 12 5"></polyline>
-                </svg></a>
-            </li>
-            <li class="paginate_button page-item " v-for="page in posts.total_page" :key="page">
-              <a href="#" aria-controls="zero-config" data-dt-idx="1" tabindex="0" class="page-link"
-                @click="setCurrentPageclick(page)">
-                {{ page }}</a>
-            </li>
-            <li class="paginate_button page-item next" id="zero-config_next"><a href="#" aria-controls="zero-config"
-                data-dt-idx="4" tabindex="0" class="page-link"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                  height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg></a></li>
-          </ul>
-        </div>
-      </div>
-
-    </div> -->
   </div>
 </template>
 
@@ -89,6 +25,8 @@
 <script setup lang="ts">
 // import DataTable from 'datatables.net-vue3';
 // import DataTablesCore from 'datatables.net-bs5';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import { AppointStore } from '@/store/appoint'
@@ -99,6 +37,10 @@ import "datatables.net-dt/css/jquery.dataTables.min.css"
 import $ from 'jquery'
 import Paginate from "vuejs-paginate-next";
 import { useToast } from 'vue-toastification'
+import Datepicker from 'vuejs3-datepicker';
+import moment from 'moment';
+import { ref } from 'vue'
+const picked = ref(new Date())
 
 const router = useRouter();
 const toast = useToast()
@@ -107,13 +49,31 @@ const store = AppointStore()
 const { deleteItem } = AppointStore();//Action
 
 
+const date = ref(new Date());
+// In case of a range picker, you'll receive [Date, Date]
+const format_start = (date) => {
+store.form.start_date = moment(date).format('YYYY-MM-DD')
+ return moment(date).format('YYYY-MM-DD')
+}
 
-
+const format_end = (date) => {
+store.form.end_date = moment(date).format('YYYY-MM-DD')
+ return moment(date).format('YYYY-MM-DD')
+}
+// store.fetchAppointment()
 
 const del = async (id) => {
   await deleteItem(id);
 
 };
+
+
+const Search = async () => {
+  store.fetchAppointment()
+
+};
+
+
 
 const choose = async (id) => {
   router.push({ path: 'dltmanage/'+id})
@@ -160,7 +120,6 @@ function coverttime(date) {
   return formattedDatetime;
 
 }
-
 
 
 

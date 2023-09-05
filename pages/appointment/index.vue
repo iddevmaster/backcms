@@ -8,14 +8,15 @@ import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import { AppointStore } from '@/store/appoint'
 import AppointList from '@/components/appointment/AppointList.vue'
+import AppointListByGroup from '@/components/appointment/AppointListByGroup.vue'
+
 import { useModalStore } from '@/store/modal';
 import { useToast } from 'vue-toastification'
 definePageMeta({
   middleware: 'auth' // this should match the name of the file inside the middleware directory 
 })
 const toast = useToast()
-const store = usersStore()
-
+const store = AppointStore()
 
 
 const closeModal = () => {
@@ -53,6 +54,9 @@ const delete_userid = async (id) => {
             <div class="widget-content widget-content-area br-8 p-3">
               <AppointList></AppointList>
             </div>
+          </div>
+          <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.group">
+<AppointListByGroup></AppointListByGroup>
           </div>
         </div>
       </div>

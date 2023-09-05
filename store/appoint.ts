@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import apiClient from '~/services/api.service';
 import ApiService from '../services/api.service';
+import moment from 'moment';
 
 
 
@@ -11,9 +12,16 @@ export const AppointStore = defineStore('appoint', {
     load: true,
     isOpen: false,
     searchData:"",
-    start_date:null,
-    end_date:null,
-    dtl_code:null,
+    start_date:'',
+    end_date:'',
+    dtl_code:'A',
+    form:{
+      start_date:"",
+      end_date:"",
+      dtl_code:"A2",
+    },
+    group:[],
+    // end_date:moment(String(null)).format('YYYY-mm-dd'),
     dtl:[
       {
         dlt_code: "A",
@@ -103,7 +111,27 @@ export const AppointStore = defineStore('appoint', {
       this.page = 1;
     },
 
-  
+    async fetchAppointment() {
+
+      const a = {
+        start_date:this.form.start_date,
+        end_date:this.form.end_date,
+        dlt_code:this.form.dtl_code
+      }
+      
+      try {
+        const data = await ApiService.post('/appointment/list',a).then(response => {
+          console.log(response.data)
+          this.group = response.data
+        });
+        return true
+
+      } catch (error) {
+        console.log('error');
+        return false;
+      }
+
+    },
   
     async search() {
       
