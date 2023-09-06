@@ -5,15 +5,17 @@
         <h4 class="">ฟอร์ม เพิ่มนัดหมาย</h4>
       </div>
     </div>
+
     <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header" style="text-align: center;" @click="backToUser()">
         <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">กลับหน้าผู้ใช้งาน</button>
       </div>
     </div>
+    {{ store.formedit }}
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">Quota</label>
       <input type="text" class="form-control" id="inputEmail3" placeholder="จำนวนที่สามารถจองได้ *" maxlength="3"
-        v-model="store.forminsert.ap_quota" :class="{
+        v-model="store.formedit.ap_quota" :class="{
           'border-red-500 focus:border-red-500': v$.ap_quota.$error,
           'border-[#42d392] ': !v$.ap_quota.$invalid,
         }" @change="v$.ap_quota.$touch" autocomplete="off" @input="onInput">
@@ -23,11 +25,10 @@
     </div>
 
 
-
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">Remark</label>
       <input type="text" class="form-control" id="inputEmail3" placeholder="หมายเหตุ *"
-        v-model="store.forminsert.ap_remark" :class="{
+        v-model="store.formedit.ap_remark" :class="{
           'border-red-500 focus:border-red-500': v$.ap_remark.$error,
           'border-[#42d392] ': !v$.ap_remark.$invalid,
         }" @change="v$.ap_remark.$touch" autocomplete="off">
@@ -41,7 +42,7 @@
   <div class="row mb-4">
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">ap_date_start</label>
-            <VueDatePicker v-model="store.forminsert.ap_date_start"   :format="format_start"   required></VueDatePicker>
+            <VueDatePicker v-model="store.formedit.ap_date_start"   :format="format_start"    required></VueDatePicker>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_date_start.$error">{{
         v$.ap_date_start.$errors[0].$message
       }}</span>
@@ -50,7 +51,7 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">ap_date_end</label>
  
-          <VueDatePicker v-model="store.forminsert.ap_date_end" required  :format="format_end"></VueDatePicker>
+          <VueDatePicker v-model="store.formedit.ap_date_end"  :format="format_end"  required></VueDatePicker>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_date_end.$error">{{
         v$.ap_date_end.$errors[0].$message
       }}</span>
@@ -60,7 +61,7 @@
   <div class="row mb-4">
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">ประเภทผู้ใช้งาน</label>
-      <select class="form-control" v-model="store.forminsert.ap_learn_type">
+      <select class="form-control" v-model="store.formedit.ap_learn_type">
     <option value="1">ทฤษฎี</option>
     <option value="2">ปฏิบัติ</option>
     </select>
@@ -69,9 +70,8 @@
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">สถานะ</label>
- 
 
-     <select class="form-select form-select" aria-label="Default select example" v-model="store.forminsert.dtl_code">
+     <select class="form-select form-select" aria-label="Default select example" v-model="store.formedit.dtl_code">
          <option   v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code" >{{item.dlt_description}}</option>
       </select>
     </div>
@@ -79,7 +79,7 @@
 
 
 
-  <button type="button" class="btn btn-primary" @click="save()">บันทึก</button>
+  <button type="button" class="btn btn-primary" @click="update()">บันทึก</button>
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
@@ -93,7 +93,6 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import moment from 'moment-timezone';
 
 
-
 const toast = useToast()
 const router = useRouter();
 const store = AppointStore();
@@ -105,18 +104,27 @@ const date = ref(new Date());
 
 // In case of a range picker, you'll receive [Date, Date]
 const format_start = (date) => {
-const isoFormatInUTC = date.toISOString();
+  return store.formedit.ap_date_start;
 
-store.forminsert.ap_date_start = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
- return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
 }
 
 const format_end = (date) => {
-const isoFormatInUTC = date.toISOString();
 
-store.forminsert.ap_date_end = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
- return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
+  const Date = moment(store.formedit.ap_date_end).format('YYYY-MM-DD HH:mm:ss');
+
+ const x = moment.utc(store.formedit.ap_date_end).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
+ console.log(x);
+  return Date;
 }
+
+
+const update = async () => {
+await store.Update();
+}
+
+      //     :locale="store.locale"
+      // :timezone="store.selectedTimeZone"
+      //  :format="store.dateFormat"
 
 const rules = computed(() => {
   return {

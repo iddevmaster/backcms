@@ -73,7 +73,9 @@
             {{ event.ap_date_end }}
           </td>
           <td align="center">
+        
             <div class="btn-group-vertical">
+              <NuxtLink :to="'/appointment/' + event.ap_id">
               <button
                 type="button"
                 class="btn btn-success"
@@ -81,6 +83,9 @@
               >
                 แก้ไขนัดหมาย
               </button>
+            </NuxtLink>
+
+
               <!-- <button type="button" class="btn btn-success" style="background-color:#3F2C73;"  >ดูราย</button> -->
               <button
                 type="button"
@@ -140,8 +145,8 @@ const format_end = (date) => {
 // store.fetchAppointment()
 
 const del = async (id) => {
-  
   store.deleteItem(id);
+  
 };
 
 const Search = async () => {

@@ -24,9 +24,13 @@ const closeModal = () => {
 };
 
 const deletel = async () => {
-let del = await store.deleteApp();
-console.log(del);
-
+  let del = await store.deleteApp();
+  if (del == true) {
+    toast.success('Delete Data');
+    store.fetchAppointment();
+  } else {
+    toast.error('Failed Delete Data')
+  }
 };
 
 </script>
@@ -51,7 +55,7 @@ console.log(del);
             </div>
           </div>
           <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.group">
-<!-- <AppointListByGroup></AppointListByGroup> -->
+            <!-- <AppointListByGroup></AppointListByGroup> -->
           </div>
         </div>
       </div>

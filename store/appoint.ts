@@ -9,33 +9,36 @@ import moment from 'moment';
 export const AppointStore = defineStore('appoint', {
   state: () => ({
     isOpen: false,
-    searchData:"",
-    start_date:'',
-    end_date:'',
-    dtl_code:'A',
-    user_id:null,
-    ap_id:null,
-    isShowModal:false,
-    form:{
-      ap_learn_type:"1",
-      date_event:"",
-      dtl_code:"A1",
+    searchData: "",
+    start_date: '',
+    end_date: '',
+    dtl_code: 'A',
+    user_id: null,
+    ap_id: null,
+    isShowModal: false,
+    form: {
+      ap_learn_type: "1",
+      date_event: "",
+      dtl_code: "A1",
+    },
+    formedit: {
+  
     },
     selectedTimeZone: 'Asia/Bangkok',
     locale: 'en',
     dateFormat: 'yyyy-MM-dd HH:mm:ss',
-    forminsert:{
-      ap_learn_type:1,
-      ap_quota:"",
-      ap_date_start:null,
-      ap_date_end:null,
-      ap_remark:"",
-      user_id:"",
-      dtl_code:"A1",
+    forminsert: {
+      ap_learn_type: 1,
+      ap_quota: "",
+      ap_date_start: null,
+      ap_date_end: null,
+      ap_remark: "",
+      user_id: "",
+      dtl_code: "A1",
     },
-    group:[],
+    group: [],
     // end_date:moment(String(null)).format('YYYY-mm-dd'),
-    dtl:[
+    dtl: [
       {
         dlt_code: "A",
         dlt_description:
@@ -92,7 +95,7 @@ export const AppointStore = defineStore('appoint', {
     Ismodal(state) {
       return state.isOpen;
     },
-  
+
     FormInsert(state) {
       return state.forminsert;
     },
@@ -106,7 +109,7 @@ export const AppointStore = defineStore('appoint', {
       this.isShowModal = false;
     },
 
-  
+
     setCurrentPage(page) {
       this.page = page
       this.selected = [];
@@ -129,16 +132,15 @@ export const AppointStore = defineStore('appoint', {
     },
 
     async fetchAppointment() {
-
-      const a = {
-        date_event:this.form.date_event,
-        ap_learn_type:this.form.ap_learn_type,
-        dlt_code:this.form.dtl_code
+      const appdata = {
+        date_event: this.form.date_event,
+        ap_learn_type: this.form.ap_learn_type,
+        dlt_code: this.form.dtl_code
       }
-   
+
       try {
-        const data = await ApiService.post('/appointment/list',a).then(response => {
-       this.group = response.data
+        const data = await ApiService.post('/appointment/list', appdata).then(response => {
+          this.group = response.data
         });
         return true
 
@@ -146,62 +148,115 @@ export const AppointStore = defineStore('appoint', {
         console.log('error');
         return false;
       }
-
     },
 
 
 
+    async fetchAppointmentId() {
+      try {
+        const data = await ApiService.get('/appointment/get/' + this.ap_id).then(response => {
+          if (response.data) {
+            this.formedit.ap_quota = response.data.ap_quota
+            this.formedit.ap_remark = response.data.ap_remark
+            this.formedit.ap_learn_type = response.data.ap_learn_type
+            this.formedit.ap_date_start = response.data.ap_date_start
+            this.formedit.ap_date_end = response.data.ap_date_end
+            this.formedit.dlt_code = response.data.dlt_code
+        console.log(this.formedit);
+            return true
+          } else {
+            return false;
+          }
+        });
+        return data
+      } catch (error) {
+        return false;
+      }
+    },
+
+
+
+
     async SaveFormAPP() {
-     this.forminsert.ap_date_start = await this.changeFormate(this.forminsert.ap_date_start);
-     this.forminsert.ap_date_end = await this.changeFormate(this.forminsert.ap_date_end);
-     const savet = {ap_learn_type:this.forminsert.ap_learn_type,ap_quota:this.forminsert.ap_quota,ap_date_start:this.forminsert.ap_date_start,ap_date_end:this.forminsert.ap_date_end,ap_remark:"Test",
-     dlt_code:this.forminsert.dtl_code,user_id:this.forminsert.user_id
-    }
+      // console.log('before',this.forminsert);
+      // this.forminsert.ap_date_start = await this.changeFormate(this.forminsert.ap_date_start);
+      // this.forminsert.ap_date_end = await this.changeFormate(this.forminsert.ap_date_end);
+      const savet = {
+        ap_learn_type: this.forminsert.ap_learn_type, ap_quota: this.forminsert.ap_quota, ap_date_start: this.forminsert.ap_date_start, ap_date_end: this.forminsert.ap_date_end, ap_remark: "Test",
+        dlt_code: this.forminsert.dtl_code, user_id: this.forminsert.user_id
+      }
 
       try {
-        const data = await ApiService.post('/appointment/create',savet).then(response => {
+        const data = await ApiService.post('/appointment/create', savet).then(response => {
+          console.log(response);
         });
         return true
       } catch (error) {
         return false;
       }
 
-     
+
     },
-  
+
+    async Update() {
+      console.log(this.formedit);
+       this.formedit.ap_date_start = await this.changeFormate(this.formedit.ap_date_start);
+       console.log(this.formedit);
+      // this.formedit.ap_date_end = await this.changeFormate(this.formedit.ap_date_end);
+      // const savet = {
+      //   ap_learn_type: this.forminsert.ap_learn_type, ap_quota: this.forminsert.ap_quota, ap_date_start: this.forminsert.ap_date_start, ap_date_end: this.forminsert.ap_date_end, ap_remark: "Test",
+      //   dlt_code: this.forminsert.dtl_code, user_id: this.forminsert.user_id
+      // }
+
+      // try {
+      //   const data = await ApiService.post('/appointment/create', savet).then(response => {
+      //   });
+      //   return true
+      // } catch (error) {
+      //   return false;
+      // }
+
+return true;
+    },
+
     async search() {
-      
+
     },
     async deleteItem(item) {
       this.ap_id = item.ap_id
       this.isShowModal = true;
     },
     async deleteApp() {
-      this.isShowModal = false;
-      return true;
-   
+      try {
+        const del = await ApiService.delete('/appointment/delete/' + this.ap_id);
+        this.isShowModal = false;
+        return true;
+      } catch (error) {
+        return false;
+      }
     },
 
     async ResetForm() {   ////reset Form
-    
+
     },
 
     async Zipcode() {
-    
+
     },
     async Country() {
-    
+
     },
 
     async UploadfileProfile() {
-     
- 
+
+
     },
     async changeFormate(a) {
+      console.log(a)
       return a.toISOString().slice(0, -5);
     }
 
- 
+
   },
 
 });

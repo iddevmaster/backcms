@@ -140,7 +140,7 @@ const selectAll = async () => {
 
 const setCurrentPageclick = async (page) => {
   await setCurrentPage(page)
-  await store.fetchUsers()
+
 };
 
 
