@@ -112,7 +112,9 @@ store.forminsert.ap_date_start = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').f
 }
 
 const format_end = (date) => {
+  console.log(date)
 const isoFormatInUTC = date.toISOString();
+
 
 store.forminsert.ap_date_end = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
  return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');

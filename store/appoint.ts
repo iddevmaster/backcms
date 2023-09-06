@@ -162,7 +162,8 @@ export const AppointStore = defineStore('appoint', {
             this.formedit.ap_date_start = response.data.ap_date_start
             this.formedit.ap_date_end = response.data.ap_date_end
             this.formedit.dlt_code = response.data.dlt_code
-        console.log(this.formedit);
+            console.log(this.formedit);
+    
             return true
           } else {
             return false;

@@ -42,7 +42,8 @@
   <div class="row mb-4">
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">ap_date_start</label>
-            <VueDatePicker v-model="store.formedit.ap_date_start"   :format="format_start"    required></VueDatePicker>
+            <VueDatePicker v-model="store.formedit.ap_date_start"  timezone="Asia/Bangkok"    locale="de"  required></VueDatePicker>
+            
       <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_date_start.$error">{{
         v$.ap_date_start.$errors[0].$message
       }}</span>
@@ -51,7 +52,7 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">ap_date_end</label>
  
-          <VueDatePicker v-model="store.formedit.ap_date_end"  :format="format_end"  required></VueDatePicker>
+          <VueDatePicker  v-model="store.formedit.ap_date_end"   required></VueDatePicker>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_date_end.$error">{{
         v$.ap_date_end.$errors[0].$message
       }}</span>
@@ -103,20 +104,6 @@ const { FormInsert } = storeToRefs(store);
 const date = ref(new Date());
 
 // In case of a range picker, you'll receive [Date, Date]
-const format_start = (date) => {
-  return store.formedit.ap_date_start;
-
-}
-
-const format_end = (date) => {
-
-  const Date = moment(store.formedit.ap_date_end).format('YYYY-MM-DD HH:mm:ss');
-
- const x = moment.utc(store.formedit.ap_date_end).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
- console.log(x);
-  return Date;
-}
-
 
 const update = async () => {
 await store.Update();
@@ -149,6 +136,31 @@ const rules = computed(() => {
 
 const backToUser = async () => {
   router.go(-1);
+}
+const format_start = () => {
+
+  let a = moment.utc(store.formedit.ap_date_start).format('YYYY-MM-DDTHH:mm:ss')
+
+  return store.formedit.ap_date_start;
+}
+
+
+// const format_end = (date) => {
+//   console.log(date)
+// const isoFormatInUTC = date.toISOString();
+
+
+// store.forminsert.ap_date_end = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
+//  return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
+// }
+
+const format_end = () => {
+
+  console.log(store.formedit.ap_date_end);
+ const date = ref(new Date(store.formedit.ap_date_end).toISOString());
+  console.log('date',date.value);
+  
+  return store.formedit.ap_date_end;
 }
 
 
