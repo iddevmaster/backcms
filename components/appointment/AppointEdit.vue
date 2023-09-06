@@ -42,8 +42,8 @@
   <div class="row mb-4">
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">ap_date_start</label>
-            <VueDatePicker v-model="store.formedit.ap_date_start"  timezone="Asia/Bangkok"    locale="de"  required></VueDatePicker>
             
+            <vue-date-picker  v-model="t" ></vue-date-picker>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_date_start.$error">{{
         v$.ap_date_start.$errors[0].$message
       }}</span>
@@ -102,7 +102,13 @@ const { FormInsert } = storeToRefs(store);
 
 
 const date = ref(new Date());
+// const t = moment.utc('2016-01-01T10:00:00+07:00').format()
 
+const a = store.formedit.ap_date_start.slice(0, -5) + '+07:00';
+const t = moment.utc(a).format()
+
+console.log(t);
+// 2023-09-05T15:00:00.000Z
 // In case of a range picker, you'll receive [Date, Date]
 
 const update = async () => {
@@ -138,12 +144,17 @@ const backToUser = async () => {
   router.go(-1);
 }
 const format_start = () => {
+  
 
-  let a = moment.utc(store.formedit.ap_date_start).format('YYYY-MM-DDTHH:mm:ss')
+  const a = store.formedit.ap_date_start.slice(0, -5) + '+07:00';
+const t = moment.utc(a).format()
 
-  return store.formedit.ap_date_start;
+  // const x = moment.utc(store.formedit.ap_date_start);
+  // console.log(date);
+  
+ return t;
 }
-
+// 400Z
 
 // const format_end = (date) => {
 //   console.log(date)
