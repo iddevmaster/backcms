@@ -8,10 +8,9 @@
 
     <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header" style="text-align: center;" @click="backToUser()">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">กลับหน้าผู้ใช้งาน</button>
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">กลับหน้านัดหมาย</button>
       </div>
     </div>
-    {{ store.formedit }}
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">Quota</label>
       <input type="text" class="form-control" id="inputEmail3" placeholder="จำนวนที่สามารถจองได้ *" maxlength="3"
@@ -43,7 +42,7 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">ap_date_start</label>
             
-            <vue-date-picker  v-model="t" ></vue-date-picker>
+            <vue-date-picker  v-model="store.formedit.ap_date_start"  type="datetime" ></vue-date-picker>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_date_start.$error">{{
         v$.ap_date_start.$errors[0].$message
       }}</span>
@@ -98,26 +97,20 @@ const toast = useToast()
 const router = useRouter();
 const store = AppointStore();
 
-const { FormInsert } = storeToRefs(store);
+const { FormEdit } = storeToRefs(store);
 
 
 const date = ref(new Date());
-// const t = moment.utc('2016-01-01T10:00:00+07:00').format()
-
-const a = store.formedit.ap_date_start.slice(0, -5) + '+07:00';
-const t = moment.utc(a).format()
-
-console.log(t);
-// 2023-09-05T15:00:00.000Z
-// In case of a range picker, you'll receive [Date, Date]
 
 const update = async () => {
-await store.Update();
+let data = await store.Update();
+ if (data == true) {
+      toast.success('Update Data');
+    } else {
+      toast.error('Fall Update Data')
+    }
 }
 
-      //     :locale="store.locale"
-      // :timezone="store.selectedTimeZone"
-      //  :format="store.dateFormat"
 
 const rules = computed(() => {
   return {
@@ -143,17 +136,18 @@ const rules = computed(() => {
 const backToUser = async () => {
   router.go(-1);
 }
-const format_start = () => {
-  
 
-  const a = store.formedit.ap_date_start.slice(0, -5) + '+07:00';
-const t = moment.utc(a).format()
+const format_start = (xd) => {
+  const day = xd.getDate();
+  const month = xd.getMonth() + 1;
+  const year = xd.getFullYear();
 
-  // const x = moment.utc(store.formedit.ap_date_start);
-  // console.log(date);
-  
- return t;
+const isoFormatInUTC = xd.toISOString();
+ return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
+
+//  return `Selected date is ${day}/${month}/${year}`;
 }
+
 // 400Z
 
 // const format_end = (date) => {
@@ -167,15 +161,15 @@ const t = moment.utc(a).format()
 
 const format_end = () => {
 
-  console.log(store.formedit.ap_date_end);
+
  const date = ref(new Date(store.formedit.ap_date_end).toISOString());
-  console.log('date',date.value);
+
   
   return store.formedit.ap_date_end;
 }
 
 
-const v$ = useVuelidate(rules, FormInsert);
+const v$ = useVuelidate(rules, FormEdit);
 
 const save = async () => {
   v$.value.$validate();

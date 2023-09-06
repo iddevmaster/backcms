@@ -7,7 +7,7 @@
     </div>
     <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header" style="text-align: center;" @click="backToUser()">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">กลับหน้าผู้ใช้งาน</button>
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">กลับหน้านัดหมาย</button>
       </div>
     </div>
     <div class="col-sm-6">
@@ -102,6 +102,9 @@ const { FormInsert } = storeToRefs(store);
 
 
 const date = ref(new Date());
+
+
+
 
 // In case of a range picker, you'll receive [Date, Date]
 const format_start = (date) => {

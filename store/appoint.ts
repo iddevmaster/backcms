@@ -22,7 +22,13 @@ export const AppointStore = defineStore('appoint', {
       dtl_code: "A1",
     },
     formedit: {
-  
+      ap_learn_type:null,
+      ap_quota: null,
+      ap_date_start: null,
+      ap_date_end: null,
+      ap_remark: null,
+      user_id: null,
+      dtl_code: null,
     },
     selectedTimeZone: 'Asia/Bangkok',
     locale: 'en',
@@ -99,6 +105,9 @@ export const AppointStore = defineStore('appoint', {
     FormInsert(state) {
       return state.forminsert;
     },
+    FormEdit(state) {
+      return state.formedit;
+    },
   },
 
   actions: {
@@ -159,11 +168,15 @@ export const AppointStore = defineStore('appoint', {
             this.formedit.ap_quota = response.data.ap_quota
             this.formedit.ap_remark = response.data.ap_remark
             this.formedit.ap_learn_type = response.data.ap_learn_type
-            this.formedit.ap_date_start = response.data.ap_date_start
-            this.formedit.ap_date_end = response.data.ap_date_end
-            this.formedit.dlt_code = response.data.dlt_code
-            console.log(this.formedit);
-    
+            this.formedit.dtl_code = response.data.dlt_code
+
+     
+           const date_start =  this.changeTypeTimeZonebefore(response.data.ap_date_start);
+           const date_end =  this.changeTypeTimeZonebefore(response.data.ap_date_end);
+
+           this.formedit.ap_date_start = date_start;
+           this.formedit.ap_date_end = date_end
+        
             return true
           } else {
             return false;
@@ -179,11 +192,8 @@ export const AppointStore = defineStore('appoint', {
 
 
     async SaveFormAPP() {
-      // console.log('before',this.forminsert);
-      // this.forminsert.ap_date_start = await this.changeFormate(this.forminsert.ap_date_start);
-      // this.forminsert.ap_date_end = await this.changeFormate(this.forminsert.ap_date_end);
       const savet = {
-        ap_learn_type: this.forminsert.ap_learn_type, ap_quota: this.forminsert.ap_quota, ap_date_start: this.forminsert.ap_date_start, ap_date_end: this.forminsert.ap_date_end, ap_remark: "Test",
+        ap_learn_type: parseInt(this.forminsert.ap_learn_type), ap_quota: this.forminsert.ap_quota, ap_date_start: this.forminsert.ap_date_start, ap_date_end: this.forminsert.ap_date_end, ap_remark: "Test",
         dlt_code: this.forminsert.dtl_code, user_id: this.forminsert.user_id
       }
 
@@ -200,22 +210,30 @@ export const AppointStore = defineStore('appoint', {
     },
 
     async Update() {
-      console.log(this.formedit);
-       this.formedit.ap_date_start = await this.changeFormate(this.formedit.ap_date_start);
-       console.log(this.formedit);
-      // this.formedit.ap_date_end = await this.changeFormate(this.formedit.ap_date_end);
-      // const savet = {
-      //   ap_learn_type: this.forminsert.ap_learn_type, ap_quota: this.forminsert.ap_quota, ap_date_start: this.forminsert.ap_date_start, ap_date_end: this.forminsert.ap_date_end, ap_remark: "Test",
-      //   dlt_code: this.forminsert.dtl_code, user_id: this.forminsert.user_id
-      // }
+   
+      // this.formedit.ap_date_start = await this.changeFormate(this.formedit.ap_date_start);
 
-      // try {
-      //   const data = await ApiService.post('/appointment/create', savet).then(response => {
-      //   });
-      //   return true
-      // } catch (error) {
-      //   return false;
-      // }
+
+     const date_start =  await this.changeTypeTimeZoneafter(this.formedit.ap_date_start);
+     const date_end =  await this.changeTypeTimeZoneafter(this.formedit.ap_date_end);
+   //  const date_end =  await this.changeTypeTimeZone(this.formedit.ap_date_end);
+    
+      // this.formedit.ap_date_end = await this.changeFormate(this.formedit.ap_date_end);
+      const upd = {
+        ap_learn_type: this.formedit.ap_learn_type, ap_quota: this.formedit.ap_quota, ap_date_start: date_start, ap_date_end: date_end, ap_remark:this.formedit.ap_remark,
+        dlt_code: this.formedit.dtl_code, user_id: this.formedit.user_id
+      }
+
+      try {
+        const data = await ApiService.put('/appointment/update/' + this.ap_id,upd).then(response => {
+          console.log(response);
+        });
+
+    
+        return true
+      } catch (error) {
+        return false;
+      }
 
 return true;
     },
@@ -253,9 +271,24 @@ return true;
 
     },
     async changeFormate(a) {
-      console.log(a)
       return a.toISOString().slice(0, -5);
+    },
+    async changeTypeTimeZoneafter(item) {
+      const date = ref(new Date(item));
+      const startdate = item.toISOString().slice(0, -5) + '-07:00';
+      const aa = moment.utc(startdate).format().slice(0, -1)
+      return aa;
+    },
+    changeTypeTimeZonebefore(time) {
+
+      let a = time.slice(0, -5) + '+07:00';
+      let b = moment.utc(a)
+      const c = new Date(b);
+  
+      return c;
     }
+
+
 
 
   },

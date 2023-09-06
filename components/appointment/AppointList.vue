@@ -1,6 +1,6 @@
 <template>
   <div class="row layout-top-spacing">
-    <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
+    <div class="col-lg-2 col-md-2 col-sm-2">
       <!-- <VueDatePicker v-model="store.form.start_date"></VueDatePicker> -->
       <Datepicker v-model="store.form.date_event" :format="format_start" />
     </div>
@@ -15,7 +15,7 @@
       </select>
     </div>
 
-    <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
+    <div class="col-lg-6 col-md-6 col-sm-3 mb-4">
       <select
         class="form-select form-select"
         aria-label="Default select example"
@@ -64,7 +64,7 @@
             {{ event.ap_quota }}
           </td>
           <td>
-            {{ event.total_reserv }}
+            {{ event.total_reserve }}
           </td>
           <td>
             {{ event.ap_date_start }}
