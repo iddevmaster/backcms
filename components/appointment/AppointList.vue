@@ -2,7 +2,7 @@
   <div class="row layout-top-spacing">
     <div class="col-lg-2 col-md-2 col-sm-12">
       <!-- <VueDatePicker v-model="store.form.start_date"></VueDatePicker> -->
-      <Datepicker v-model="store.form.date_event" :format="format_start" />
+      <Datepicker v-model="store.form.date_event" :format="format_start"  />
     </div>
     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mb-4">
       <select
