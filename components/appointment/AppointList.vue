@@ -1,23 +1,8 @@
 <template>
-  <div class="row layout-top-spacing">
-    <div class="col-lg-2 col-md-2 col-sm-12">
-      <!-- <VueDatePicker v-model="store.form.start_date"></VueDatePicker> -->
-      <Datepicker v-model="store.form.date_event" :format="format_start"  />
-    </div>
-    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 mb-4">
+  <div class="row mb-2 justify-content-center">
+    <div class="type">
       <select
-        class="form-select form-select"
-        aria-label="Default select example"
-        v-model="store.form.ap_learn_type"
-      >
-        <option value="1">ทฤษฎี</option>
-        <option value="2">ปฏิบัติ</option>
-      </select>
-    </div>
-
-    <div class="col-lg-6 col-md-6 col-sm-3 mb-4">
-      <select
-        class="form-select form-select"
+        class="form-select form-select border-0  cateSelect"
         aria-label="Default select example"
         v-model="store.form.dtl_code"
       >
@@ -30,13 +15,28 @@
         </option>
       </select>
     </div>
+  </div>
+  <div class="row ps-4 mb-5 gap-2 justify-content-center">
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12 picker">
+      <!-- <VueDatePicker v-model="store.form.start_date"></VueDatePicker> -->
+      <Datepicker v-model="store.form.date_event" :format="format_start"/>
+    </div>
+    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+      <select
+        class="form-select typeSelect h-100"
+        aria-label="Default select example"
+        v-model="store.form.ap_learn_type">
+        <option value="1">ทฤษฎี</option>
+        <option value="2">ปฏิบัติ</option>
+      </select>
+    </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
-      <button class="btn btn-primary" @click="Search()">ค้นหา</button>
+      <button class="btn btn-primary mt-0 w-100" @click="Search()"><i class="bi bi-search me-2"></i>ค้นหา</button>
     </div>
   </div>
 
   <div class="table-responsive">
-    <table class="table table-bordered" v-if="store.group.length > 0">
+    <table class="table " v-if="store.group.length > 0">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -51,7 +51,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(event, index) in store.group">
+        <tr v-for="(event, index) in store.group" >
           <td>{{ index + 1 }}</td>
           <td>{{ event.ap_remark }}</td>
           <td>
@@ -74,26 +74,25 @@
           </td>
           <td align="center">
         
-            <div class="btn-group-vertical">
+            <div class="d-flex gap-2">
               <NuxtLink :to="'/appointment/' + event.ap_id">
-              <button
-                type="button"
-                class="btn btn-success"
-                style="background-color: #3f2c73"
-              >
-                แก้ไขนัดหมาย
-              </button>
-            </NuxtLink>
+                <button
+                  type="button"
+                  class="btn btn-success mt-0"
+                  style="background-color: #3f2c73"
+                >
+                <i class="bi bi-gear"></i>
+                </button>
+              </NuxtLink>
 
 
               <!-- <button type="button" class="btn btn-success" style="background-color:#3F2C73;"  >ดูราย</button> -->
               <button
                 type="button"
-                class="btn btn-success"
-                style="background-color: #3f2c73"
+                class="btn btn-success mt-0"
+                style="background-color: #ce0000"
                 @click="del(event)"
-              >
-                ลบนัดหมาย
+              ><i class="bi bi-trash"></i>
               </button>
             </div>
           </td>
@@ -200,5 +199,33 @@ function coverttime(date) {
 <style>
 .dt--pagination {
   float: right;
+}
+.cateSelect {
+  font-size: 20px;
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+  --bs-form-select-bg-img:'';
+  background-image:none;
+}
+.type {
+  width: fit-content;
+}
+.typeSelect {
+  padding: 5px;
+}
+.vuejs3-datepicker__value {
+  padding: 5px !important;
+  height: 100% !important;
+  width: 100%;
+}
+table {
+  border-collapse: collapse !important;
+}
+.vuejs3-datepicker {
+  width: 100%;
+}
+.picker {
+  min-width: fit-content;
 }
 </style>
