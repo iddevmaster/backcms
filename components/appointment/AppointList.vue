@@ -2,7 +2,7 @@
   <div class="row mb-2 justify-content-center">
     <div class="type">
       <select
-        class="form-select form-select border-0  cateSelect"
+        class="form-select form-select border-0 cateSelect"
         aria-label="Default select example"
         v-model="store.form.dtl_code"
       >
@@ -19,24 +19,27 @@
   <div class="row ps-4 mb-5 gap-2 justify-content-center">
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12 picker">
       <!-- <VueDatePicker v-model="store.form.start_date"></VueDatePicker> -->
-      <Datepicker v-model="store.form.date_event" :format="format_start"/>
+      <Datepicker v-model="store.form.date_event" :format="format_start" />
     </div>
     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
       <select
         class="form-select typeSelect h-100"
         aria-label="Default select example"
-        v-model="store.form.ap_learn_type">
+        v-model="store.form.ap_learn_type"
+      >
         <option value="1">ทฤษฎี</option>
         <option value="2">ปฏิบัติ</option>
       </select>
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
-      <button class="btn btn-primary mt-0 w-100" @click="Search()"><i class="bi bi-search me-2"></i>ค้นหา</button>
+      <button class="btn btn-primary mt-0 w-100" @click="Search()">
+        <i class="bi bi-search me-2"></i>ค้นหา
+      </button>
     </div>
   </div>
 
   <div class="table-responsive">
-    <table class="table " v-if="store.group.length > 0">
+    <table class="table" v-if="store.group.length > 0">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -51,14 +54,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(event, index) in store.group" >
+        <tr v-for="(event, index) in store.group">
           <td>{{ index + 1 }}</td>
           <td>{{ event.ap_remark }}</td>
           <td>
             {{ event.dlt_code }}
           </td>
           <td>
-            {{ event.ap_learn_type }}
+            <span v-if="event.ap_learn_type == 1"> ทฤษฎี </span>
+            <span v-else> ปฏิบัติ </span>
           </td>
           <td>
             {{ event.ap_quota }}
@@ -67,32 +71,39 @@
             {{ event.total_reserve }}
           </td>
           <td>
-            {{ event.ap_date_start }}
+            {{ format(event.ap_date_start) }}
           </td>
           <td>
-            {{ event.ap_date_end }}
+            {{ format(event.ap_date_end) }}
           </td>
           <td align="center">
-        
             <div class="d-flex gap-2">
+              <NuxtLink :to="'/appointment/view/' + event.ap_id">
+                <button  type="button"
+                  class="btn btn-success mt-0"
+                  style="background-color: #92a8d1"
+                >
+                  <i class="bbi bi-door-open-fill"></i>
+                </button>
+              </NuxtLink>
+
               <NuxtLink :to="'/appointment/' + event.ap_id">
                 <button
                   type="button"
                   class="btn btn-success mt-0"
                   style="background-color: #3f2c73"
                 >
-                <i class="bi bi-gear"></i>
+                  <i class="bi bi-gear"></i>
                 </button>
               </NuxtLink>
-
-
               <!-- <button type="button" class="btn btn-success" style="background-color:#3F2C73;"  >ดูราย</button> -->
               <button
                 type="button"
                 class="btn btn-success mt-0"
                 style="background-color: #ce0000"
                 @click="del(event)"
-              ><i class="bi bi-trash"></i>
+              >
+                <i class="bi bi-trash"></i>
               </button>
             </div>
           </td>
@@ -141,11 +152,14 @@ const format_end = (date) => {
   store.form.end_date = moment(date).format("YYYY-MM-DD");
   return moment(date).format("YYYY-MM-DD");
 };
+
+const format = (time) => {
+  return moment(time).format("YYYY-MM-DD HH:ss");
+};
 // store.fetchAppointment()
 
 const del = async (id) => {
   store.deleteItem(id);
-  
 };
 
 const Search = async () => {
@@ -205,8 +219,8 @@ function coverttime(date) {
   width: 100%;
   font-weight: bold;
   text-align: center;
-  --bs-form-select-bg-img:'';
-  background-image:none;
+  --bs-form-select-bg-img: "";
+  background-image: none;
 }
 .type {
   width: fit-content;
