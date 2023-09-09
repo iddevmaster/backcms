@@ -2,7 +2,7 @@
   <div class="row mb-2 justify-content-center">
     <div class="type">
       <select
-        class="form-select form-select border-0 cateSelect"
+        class="form-select form-select cateSelect"
         aria-label="Default select example"
         v-model="store.form.dtl_code"
       >
@@ -82,8 +82,11 @@
                 <button  type="button"
                   class="btn btn-success mt-0"
                   style="background-color: #92a8d1"
+                  data-bs-toggle="tooltip" 
+                  data-bs-placement="top" 
+                  title="รายละเอียดเพิ่มเติม"
                 >
-                  <i class="bbi bi-door-open-fill"></i>
+                  <i class="bi bi-clipboard"></i>
                 </button>
               </NuxtLink>
 
@@ -220,7 +223,11 @@ function coverttime(date) {
   font-weight: bold;
   text-align: center;
   --bs-form-select-bg-img: "";
-  background-image: none;
+  border: 1px solid rgb(199, 199, 199);
+  
+}
+.cateSelect:hover {
+  
 }
 .type {
   width: fit-content;
