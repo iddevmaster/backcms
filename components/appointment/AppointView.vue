@@ -40,13 +40,13 @@
 
   <div class="row p-3">
       <div class="row d-flex justify-content-end mb-2  gap-2 filter">
-        <div class="col-xl-2 col-lg-2 col-sm-2 searchBar">
+        <div class="col-xl-2 col-lg-4 col-sm-4">
           <div class="input-group input-group-sm">
-            <input type="search" class="form-control form-control-sm" >
+            <input type="search" id="searchBar" class="form-control form-control-sm" >
             <span class="input-group-text"><i class="bi bi-search"></i></span>
           </div>
         </div>
-        <div class="col-xl-2 col-lg-2 col-sm-2">
+        <div class="col-xl-2 col-lg-4 col-sm-4">
           <select class="form-select form-select-sm" aria-label="Default select example">
             <option selected disabled>select menu</option>
             <option value="1">One</option>
