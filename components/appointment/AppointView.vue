@@ -1,5 +1,5 @@
 <template>
-  <div class="row mb-4">
+  <div class="row mb-4 p-3">
     <div id="form_grid_layouts" class="col-lg-10">
       <div class="seperator-header">
         <h4 class="">ฟอร์ม เพิ่มนัดหมาย</h4>
@@ -12,7 +12,6 @@
     </div>
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">Quota</label>
-    
     </div>
 
 
@@ -26,7 +25,7 @@
   </div>
 
 
-  <div class="row mb-4">
+  <div class="row mb-4 p-3">
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">ประเภทผู้ใช้งาน</label>
   
@@ -37,6 +36,43 @@
       <label for="exampleFormControlInput1">สถานะ</label>
   
     </div>
+  </div>
+
+  <div class="row p-3">
+      <div class="row d-flex justify-content-end mb-2  gap-2 filter">
+        <div class="col-xl-2 col-lg-2 col-sm-2 searchBar">
+          <div class="input-group input-group-sm">
+            <input type="search" class="form-control form-control-sm" >
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+          </div>
+        </div>
+        <div class="col-xl-2 col-lg-2 col-sm-2">
+          <select class="form-select form-select-sm" aria-label="Default select example">
+            <option selected disabled>select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>ชื่อ-นามสกุล</th>
+            <th>วันที่ทำการจอง</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>01</td>
+            <td>Meanie</td>
+            <td>{{ new Date().getDate() }} / {{ new Date().getMonth() }} / {{ new Date().getFullYear() }}</td>
+          </tr>
+        </tbody>
+      </table>
   </div>
 
 
@@ -115,5 +151,14 @@ const backToUser = async () => {
   min-height: 200px;
   max-width: 300px;
   max-height: 300px;
+}
+.selectFilter {
+
+}
+.searchBar {
+
+}
+.filter {
+  flex-wrap: wrap;
 }
 </style>
