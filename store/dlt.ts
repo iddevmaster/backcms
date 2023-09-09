@@ -6,6 +6,7 @@ export const DltStore = defineStore('dlt', {
   state: () => ({
     user_id: null,
     dlt_code: "",
+    isDelete:false,
     isAdd:true,
     isEdit:false,
     front_img: null,
@@ -134,10 +135,10 @@ export const DltStore = defineStore('dlt', {
 
     async getDLT() {
       const mydlt = [];
+   
       try {
         const data = await ApiService.get('/dlt_card/list/?user_id=' + this.user_id).then(response => {
           this.dtlall = response.data;
-
           if (response.data.length > 0) {
             for (let i = 0; i < response.data.length; i++) {
               let a = this.dtla.find(x => x.dlt_code === response.data[i].dlt_code)
@@ -176,6 +177,8 @@ export const DltStore = defineStore('dlt', {
 
     async SaveFormDlt() {
       let upload = await this.UploadfileAddImage();
+      
+      console.log(this.formadddtl);
       try {
         const data = await ApiService.post('/dlt_card/create/', this.formadddtl).then(response => {
           console.log(response);
@@ -215,6 +218,7 @@ export const DltStore = defineStore('dlt', {
     async CheckForm() {
 this.isAdd = true;
 this.isEdit = false;
+this.isDelete = false;
     },
 
     async UploadfileImage() {
@@ -252,6 +256,21 @@ this.isEdit = false;
     delay(ms) {
       return new Promise((resolve) => setTimeout(resolve, ms));
     },
+   async delete(){
+
+  
+      try {
+        const data = await ApiService.delete('/dlt_card/delete/' + this.id).then(response => {
+          this.isAdd = false;
+          this.isEdit = false;
+          this.isDelete = true;
+          return true;
+        });
+        return data;
+      } catch (error) {
+        return false
+      }
+    }
   },
 
 });

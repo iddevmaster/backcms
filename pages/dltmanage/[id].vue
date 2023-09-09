@@ -21,7 +21,7 @@ import { useRoute } from "vue-router";
 import { useAuthStore } from '@/store/auth'
 import ApiService  from "../../services/api.service";
 import DltCreate from '@/components/dlt/DltCreate.vue'
-
+import DltDelet from '@/components/dlt/DltDelet.vue'
 
 definePageMeta({
   middleware: ['auth', 'roles'],
@@ -33,7 +33,7 @@ const route = useRoute();
 const store = DltStore()
 const auth = useAuthStore()
 const profile = await auth.getProfile();
-store.formadddtl.user_id = auth.user_id
+store.formadddtl.user_id = route.params.id
 
 let finddtl = await store.fetchDlt(route.params.id);
 if (finddtl == true) {
@@ -88,19 +88,23 @@ if (result === 'static') {
 const SelectDtl = async (item) => {
   store.isEdit = true;
   store.isAdd = false;
+  store.isDelete = false;
   //   const input1 = document.querySelector('#exampleFormControlFile1');
   // input1.value = "";
 
   //    const input2 = document.querySelector('#exampleFormControlFile2');
   // input2.value = "";
 await store.SelectgetDLT(item);
+
 };
 
 const UpdateDlT = async () => {
+  store.isDelete = false;
 let update =await store.Updatedtl();
-console.log(update)
 if(update == true){
 toast.success('Save Success');
+store.getDLT()
+
 }else {
 toast.error('Failed  Save Data')
 }
@@ -113,16 +117,18 @@ toast.success('Save Success');
 };
 
 const AddDLT = async () => {
-
-  //    const input1 = document.querySelector('#exampleFormControlFile1');
-  // input1.value = "";
-  
-
-  //    const input2 = document.querySelector('#exampleFormControlFile2');
-  // input2.value = "";
-  
-
 await store.CheckForm();
+};
+
+const DelDlT = async () => {
+let  del = await store.delete();
+
+if(del == true){
+toast.success('Delete Success');
+store.getDLT()
+}else {
+toast.error('Failed  Save Data')
+}
 };
 
 </script>
@@ -147,11 +153,11 @@ await store.CheckForm();
             <div class="doc-container">
 
               <div class="row">
+              <DltDelet v-if="store.isDelete"></DltDelet>
               <DltCreate v-if="store.isAdd"></DltCreate>
                  <div class="col-xl-7" v-if="store.isEdit">
                   <div class="invoice-content">
                     <div class="invoice-detail-body">
-
                       <div class="invoice-detail mb-5" style="padding: 0 48px;">
                         <h2 class="text-center">แก้ไข</h2>
                         <label for="type" class="fw-bold">ประเภทใบขับขี่</label>
@@ -210,8 +216,7 @@ await store.CheckForm();
                       </div>
 
                       <div class="invoice-detail d-flex justify-content-center gap-2" style="padding: 0 48px;">
-                    
-                        <button class="btn btn-danger mt-4">Delete</button>
+                        <button class="btn btn-danger mt-4" @click="DelDlT()">ลบ</button>
                         <button class="btn btn-success mt-4" @click="UpdateDlT()">แก้ไข</button>
                       </div>
                     </div>
@@ -233,11 +238,12 @@ await store.CheckForm();
                     </div>
                     <div class="invoice-action-btn">
                       <div class="row">
+                        
                         <div class="col-xl-12 col-md-4" v-for="(item, index) in store.mydtla" :key="item.dlt_code" @click="SelectDtl(index)">
+                        
                           <a href="javascript:void(0);"
                             class="btn btn-primary btn-send _effect--ripple waves-effect waves-light">{{ item.dlt_description }}</a>
                         </div>
-
                       </div>
                     </div>
                   </div>
