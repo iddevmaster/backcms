@@ -17,6 +17,7 @@ export const DltStore = defineStore('dlt', {
     imagelistBack: null,
     name: null,
     id: null,
+    ap_id:null,
     formdtl: {
       front_img: "",
       back_img: "",
@@ -135,7 +136,6 @@ export const DltStore = defineStore('dlt', {
 
     async getDLT() {
       const mydlt = [];
-   
       try {
         const data = await ApiService.get('/dlt_card/list/?user_id=' + this.user_id).then(response => {
           this.dtlall = response.data;
@@ -257,8 +257,6 @@ this.isDelete = false;
       return new Promise((resolve) => setTimeout(resolve, ms));
     },
    async delete(){
-
-  
       try {
         const data = await ApiService.delete('/dlt_card/delete/' + this.id).then(response => {
           this.isAdd = false;
@@ -270,7 +268,8 @@ this.isDelete = false;
       } catch (error) {
         return false
       }
-    }
+    },
+
   },
 
 });

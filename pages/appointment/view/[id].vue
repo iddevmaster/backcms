@@ -13,14 +13,13 @@ definePageMeta({
 })
 
 const route = useRoute();
-
 const store = AppointStore()
 const auth = useAuthStore()
 const toast = useToast()
 store.user_id = auth.user_id
 store.formedit.user_id = auth.user_id
 store.ap_id = route.params.id;
-
+store.FetchAP();
 
 
 let fetchapp = await store.fetchAppointmentId();

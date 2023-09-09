@@ -11,6 +11,7 @@ export const AppointStore = defineStore('appoint', {
     isOpen: false,
     searchData: "",
     start_date: '',
+    reservebyap:[],
     end_date: '',
     dtl_code: 'A',
     user_id: null,
@@ -41,6 +42,11 @@ export const AppointStore = defineStore('appoint', {
       ap_remark: "",
       user_id: "",
       dtl_code: "A1",
+    },
+    formserchrreserve:{
+      page:1,
+      per_per:3,
+      search:""
     },
     group: [],
     // end_date:moment(String(null)).format('YYYY-mm-dd'),
@@ -286,6 +292,25 @@ return true;
       const c = new Date(b);
   
       return c;
+    },
+
+    async FetchAP(){
+      try {
+        const data = await ApiService.post('/appointment/reserve/get/' + this.ap_id,this.formserchrreserve).then(response => {
+          console.log(response.data);
+          if(response.data){
+this.reservebyap = response.data.data
+            return true;
+
+          }else{
+            return false;
+          }
+       
+        });
+        return data;
+      } catch (error) {
+        return false
+      }
     }
 
 

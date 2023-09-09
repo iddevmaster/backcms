@@ -65,8 +65,8 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
+          <tr v-for="(item,index) in store.reservebyap">
+            <td>{{index}}</td>
             <td>01</td>
             <td>Meanie</td>
             <td>{{ new Date().getDate() }} / {{ new Date().getMonth() }} / {{ new Date().getFullYear() }}</td>
