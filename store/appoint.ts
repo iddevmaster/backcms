@@ -290,7 +290,6 @@ export const AppointStore = defineStore('appoint', {
       let a = time.slice(0, -5) + '+07:00';
       let b = moment.utc(a)
       const c = new Date(b);
-
       return c;
     },
 
