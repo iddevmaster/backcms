@@ -11,7 +11,7 @@ export const AppointStore = defineStore('appoint', {
     isOpen: false,
     searchData: "",
     start_date: '',
-    reservebyap:[],
+    reservebyap: [],
     end_date: '',
     dtl_code: 'A',
     user_id: null,
@@ -23,7 +23,7 @@ export const AppointStore = defineStore('appoint', {
       dtl_code: "A1",
     },
     formedit: {
-      ap_learn_type:null,
+      ap_learn_type: null,
       ap_quota: null,
       ap_date_start: null,
       ap_date_end: null,
@@ -43,10 +43,10 @@ export const AppointStore = defineStore('appoint', {
       user_id: "",
       dtl_code: "A1",
     },
-    formserchrreserve:{
-      page:1,
-      per_per:3,
-      search:""
+    formserchrreserve: {
+      page: 1,
+      per_per: 3,
+      search: ""
     },
     group: [],
     // end_date:moment(String(null)).format('YYYY-mm-dd'),
@@ -176,13 +176,13 @@ export const AppointStore = defineStore('appoint', {
             this.formedit.ap_learn_type = response.data.ap_learn_type
             this.formedit.dtl_code = response.data.dlt_code
 
-     
-           const date_start =  this.changeTypeTimeZonebefore(response.data.ap_date_start);
-           const date_end =  this.changeTypeTimeZonebefore(response.data.ap_date_end);
 
-           this.formedit.ap_date_start = date_start;
-           this.formedit.ap_date_end = date_end
-        
+            const date_start = this.changeTypeTimeZonebefore(response.data.ap_date_start);
+            const date_end = this.changeTypeTimeZonebefore(response.data.ap_date_end);
+
+            this.formedit.ap_date_start = date_start;
+            this.formedit.ap_date_end = date_end
+
             return true
           } else {
             return false;
@@ -216,32 +216,32 @@ export const AppointStore = defineStore('appoint', {
     },
 
     async Update() {
-   
+
       // this.formedit.ap_date_start = await this.changeFormate(this.formedit.ap_date_start);
 
 
-     const date_start =  await this.changeTypeTimeZoneafter(this.formedit.ap_date_start);
-     const date_end =  await this.changeTypeTimeZoneafter(this.formedit.ap_date_end);
-   //  const date_end =  await this.changeTypeTimeZone(this.formedit.ap_date_end);
-    
+      const date_start = await this.changeTypeTimeZoneafter(this.formedit.ap_date_start);
+      const date_end = await this.changeTypeTimeZoneafter(this.formedit.ap_date_end);
+      //  const date_end =  await this.changeTypeTimeZone(this.formedit.ap_date_end);
+
       // this.formedit.ap_date_end = await this.changeFormate(this.formedit.ap_date_end);
       const upd = {
-        ap_learn_type: this.formedit.ap_learn_type, ap_quota: this.formedit.ap_quota, ap_date_start: date_start, ap_date_end: date_end, ap_remark:this.formedit.ap_remark,
+        ap_learn_type: this.formedit.ap_learn_type, ap_quota: this.formedit.ap_quota, ap_date_start: date_start, ap_date_end: date_end, ap_remark: this.formedit.ap_remark,
         dlt_code: this.formedit.dtl_code, user_id: this.formedit.user_id
       }
 
       try {
-        const data = await ApiService.put('/appointment/update/' + this.ap_id,upd).then(response => {
+        const data = await ApiService.put('/appointment/update/' + this.ap_id, upd).then(response => {
           console.log(response);
         });
 
-    
+
         return true
       } catch (error) {
         return false;
       }
 
-return true;
+      return true;
     },
 
     async search() {
@@ -290,28 +290,33 @@ return true;
       let a = time.slice(0, -5) + '+07:00';
       let b = moment.utc(a)
       const c = new Date(b);
-  
+
       return c;
     },
 
-    async FetchAP(){
+    async FetchAP() {
+      this.reservebyap = [];
       try {
-        const data = await ApiService.post('/appointment/reserve/get/' + this.ap_id,this.formserchrreserve).then(response => {
-          console.log(response.data);
-          if(response.data){
-this.reservebyap = response.data.data
+        const data = await ApiService.post('/appointment/reserve/get/' + this.ap_id, this.formserchrreserve).then(response => {
+          if (response.data) {
+            this.reservebyap = response.data.data
             return true;
 
-          }else{
+          } else {
             return false;
           }
-       
+
         });
         return data;
       } catch (error) {
         return false
       }
-    }
+    },
+
+    selectentiresap(data_entires) {
+      this.formserchrreserve.per_page = data_entires;
+      this.formserchrreserve.page = 1;
+    },
 
 
 
