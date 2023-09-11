@@ -17,6 +17,12 @@ export const AppointStore = defineStore('appoint', {
     user_id: null,
     ap_id: null,
     isShowModal: false,
+    total_page: null,
+    limit_page: null,
+    current_page: null,
+    total_filter: null,
+    total: null,
+    itemsPerPage: 3,
     form: {
       ap_learn_type: "1",
       date_event: "",
@@ -298,7 +304,13 @@ export const AppointStore = defineStore('appoint', {
       try {
         const data = await ApiService.post('/appointment/reserve/get/' + this.ap_id, this.formserchrreserve).then(response => {
           if (response.data) {
+            console.log(response.data);
             this.reservebyap = response.data.data
+            this.total_page = response.data.total_page
+            this.limit_page = response.data.limit_page
+            this.current_page = response.data.current_page
+            this.total_filter = response.data.total_filter
+            this.total = response.data.total
             return true;
 
           } else {
