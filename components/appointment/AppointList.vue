@@ -31,6 +31,15 @@
         <option value="2">ปฏิบัติ</option>
       </select>
     </div>
+
+    
+  <!-- <div class="row mb-4">
+    <div class="col-sm-6">
+      <label for="exampleFormControlInput1">User</label>
+      <Select2 v-model="store.form.user_id" :options="myOptionsUser" :settings="{ settingOption: value, settingOption: value }"  @change="myChangeEvent($event)" @select="mySelectEvent($event)"/>
+    </div>
+   
+  </div> -->
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
       <button class="btn btn-primary mt-0 w-100" @click="Search()">
         <i class="bi bi-search me-2"></i>ค้นหา
@@ -142,6 +151,11 @@ const router = useRouter();
 const toast = useToast();
 const store = AppointStore();
 
+
+await store.fetchUser()
+const myOptionsUser = JSON.parse(JSON.stringify(store.users));
+const myUser = ref();
+
 const { deleteItem } = AppointStore(); //Action
 
 const date = ref(new Date());
@@ -212,6 +226,14 @@ function coverttime(date) {
 
   return formattedDatetime;
 }
+
+
+const myChangeEvent = (event) => {
+    console.log("myChangeEvent: ", event.value);
+  }
+  const mySelectEvent = (e) => {
+    console.log("mySelectEvent: ", e.value);
+  }
 </script>
 <style>
 .dt--pagination {

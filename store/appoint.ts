@@ -12,9 +12,10 @@ export const AppointStore = defineStore('appoint', {
     searchData: "",
     start_date: '',
     reservebyap: [],
+    users: [],
+    user_id:null,
     end_date: '',
     dtl_code: 'A',
-    user_id: null,
     ap_id: null,
     isShowModal: false,
     total_page: null,
@@ -27,6 +28,11 @@ export const AppointStore = defineStore('appoint', {
       ap_learn_type: "1",
       date_event: "",
       dtl_code: "A1",
+    },
+    formuser: {
+      page: 1,
+      per_page: 250,
+      search: ""
     },
     formedit: {
       ap_learn_type: null,
@@ -156,7 +162,8 @@ export const AppointStore = defineStore('appoint', {
       const appdata = {
         date_event: this.form.date_event,
         ap_learn_type: this.form.ap_learn_type,
-        dlt_code: this.form.dtl_code
+        dlt_code: this.form.dtl_code,
+        user_id: parseInt(this.form.user_id)
       }
 
       try {
@@ -327,6 +334,25 @@ export const AppointStore = defineStore('appoint', {
     selectentiresap(data_entires) {
       this.formserchrreserve.per_page = data_entires;
       this.formserchrreserve.page = 1;
+    },
+
+    async fetchUser() {
+      try {
+        const data = await ApiService.post('/user/list?', this.formuser).then(response => {
+          const user = [];
+          for (var i = 0; i < response.data.data.length; i++) {
+            const lt = { id: response.data.data[i].user_id, text: response.data.data[i].user_firstname + '-' + response.data.data[i].user_lastname }
+            user.push(lt)
+          }
+          this.users = user;
+
+        });
+        return data;
+      } catch (error) {
+       
+        return false
+      }
+
     },
 
 
