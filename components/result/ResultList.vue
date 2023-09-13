@@ -1,0 +1,176 @@
+<template>
+  <div class="row mb-2 justify-content-center">
+    <div class="type">
+      <select
+        class="form-select form-select cateSelect"
+        aria-label="Default select example"
+        v-model="store.dtl_code"
+      >
+        <option
+          v-for="(item, index) in store.dlt"
+          :key="item.dlt_code"
+          :value="item.dlt_code"
+        >
+          {{ item.dlt_description }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="row ps-4 mb-5 gap-2 justify-content-center">
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12 picker">
+      <!-- <VueDatePicker v-model="store.form.start_date"></VueDatePicker> -->
+      <Datepicker v-model="store.date_event" :format="format_start" />
+    </div>
+    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+      <select
+        class="form-select typeSelect h-100"
+        aria-label="Default select example"
+        v-model="store.ap_learn_type"
+      >
+        <option value="1">ทฤษฎี</option>
+        <option value="2">ปฏิบัติ</option>
+      </select>
+    </div>
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
+      <button class="btn btn-primary mt-0 w-100" @click="Search()">
+        <i class="bi bi-search me-2"></i>ค้นหา
+      </button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+  
+  </div>
+</template>
+
+
+
+<script setup lang="ts">
+// import DataTable from 'datatables.net-vue3';
+// import DataTablesCore from 'datatables.net-bs5';
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+import { storeToRefs } from "pinia";
+import { defineComponent } from "vue";
+import { ResultStore } from "@/store/result";
+
+import { useToast } from "vue-toastification";
+import Datepicker from "vuejs3-datepicker";
+import moment from "moment";
+import { ref } from "vue";
+const picked = ref(new Date());
+
+const router = useRouter();
+const toast = useToast();
+const store = ResultStore();
+
+await store.fetchDlt()
+await store.fetchResult()
+const { deleteItem } = ResultStore(); //Action
+
+const date = ref(new Date());
+
+const format_start = (date) => {
+  store.date_event = moment(date).format("YYYY-MM-DD");
+  return moment(date).format("YYYY-MM-DD");
+};
+
+const format_end = (date) => {
+  store.end_date = moment(date).format("YYYY-MM-DD");
+  return moment(date).format("YYYY-MM-DD");
+};
+
+const format = (time) => {
+  return moment(time).format("YYYY-MM-DD HH:ss");
+};
+// store.fetchAppointment()
+
+const del = async (id) => {
+  store.deleteItem(id);
+};
+
+const Search = async () => {
+  store.fetchResult();
+};
+
+const choose = async (id) => {
+  router.push({ path: "dltmanage/" + id });
+};
+
+const searchData = async () => {};
+
+const selchk = async (x) => {};
+
+const selectAll = async () => {
+  await selectall();
+};
+
+const setCurrentPageclick = async (page) => {
+  await setCurrentPage(page);
+  await store.fetchUsers();
+};
+
+const selectshowdata = async (x) => {
+  await selectentires(x.target.value);
+};
+
+const selecttype = async (item) => {
+  await selecttypes(item.target.value);
+};
+
+const sortList = async (sortBy) => {
+  await sortLists(sortBy);
+};
+
+function coverttime(date) {
+  const datetime = new Date(date);
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+  };
+  const formattedDatetime = datetime.toLocaleString(undefined, options);
+
+  return formattedDatetime;
+}
+</script>
+<style>
+.dt--pagination {
+  float: right;
+}
+.cateSelect {
+  font-size: 20px;
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+  --bs-form-select-bg-img: "";
+  border: 1px solid rgb(199, 199, 199);
+  
+}
+.cateSelect:hover {
+  
+}
+.type {
+  width: fit-content;
+}
+.typeSelect {
+  padding: 5px;
+}
+.vuejs3-datepicker__value {
+  padding: 5px !important;
+  height: 100% !important;
+  width: 100%;
+}
+table {
+  border-collapse: collapse !important;
+}
+.vuejs3-datepicker {
+  width: 100%;
+}
+.picker {
+  min-width: fit-content;
+}
+</style>
