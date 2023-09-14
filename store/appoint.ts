@@ -9,13 +9,16 @@ import moment from 'moment';
 export const AppointStore = defineStore('appoint', {
   state: () => ({
     isOpen: false,
+    isDelAP: false,
     searchData: "",
     start_date: '',
     reservebyap: [],
     users: [],
+    usersall:[],
     user_id:null,
     end_date: '',
     dtl_code: 'A',
+    myChoose:null,
     ap_id: null,
     isShowModal: false,
     total_page: null,
@@ -24,14 +27,23 @@ export const AppointStore = defineStore('appoint', {
     total_filter: null,
     total: null,
     itemsPerPage: 3,
+    del_ap:null,
+    deluser_id:null,
+    ardel_id:null,
     form: {
       ap_learn_type: "1",
       date_event: "",
       dtl_code: "A1",
     },
+    myValue:null,
     formuser: {
       page: 1,
       per_page: 250,
+      search: ""
+    },
+    formsearch: {
+      page: 1,
+      per_page: 5,
       search: ""
     },
     formedit: {
@@ -134,6 +146,7 @@ export const AppointStore = defineStore('appoint', {
     },
     closeModal() {
       this.isShowModal = false;
+      this.isDelAP = false;
     },
 
 
@@ -229,8 +242,6 @@ export const AppointStore = defineStore('appoint', {
     },
 
     async Update() {
-
-      // this.formedit.ap_date_start = await this.changeFormate(this.formedit.ap_date_start);
 
 
       const date_start = await this.changeTypeTimeZoneafter(this.formedit.ap_date_start);
@@ -338,7 +349,7 @@ export const AppointStore = defineStore('appoint', {
 
     async fetchUser() {
       try {
-        const data = await ApiService.post('/user/list?', this.formuser).then(response => {
+        const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
           const user = [];
           for (var i = 0; i < response.data.data.length; i++) {
             const lt = { id: response.data.data[i].user_id, text: response.data.data[i].user_firstname + '-' + response.data.data[i].user_lastname }
@@ -354,6 +365,39 @@ export const AppointStore = defineStore('appoint', {
       }
 
     },
+
+    async fetchUsers() {
+
+      try {
+        const data = await ApiService.post('/user/list?user_type=3', this.formsearch).then(response => {
+
+          this.usersall = response.data.data;
+        
+        });
+  
+      } catch (error) {
+        return false;
+      }
+ 
+
+    },
+
+
+
+    async deleteRerve() {
+const del = {user_id:this.deluser_id,ap_id:this.del_ap}
+try {
+  const data = await ApiService.delete('appointment/reserve/delete/'+this.ardel_id, del).then(response => {
+return true
+  });
+  return data;
+} catch (error) {
+ 
+  return false
+}
+    },
+
+
 
 
 
