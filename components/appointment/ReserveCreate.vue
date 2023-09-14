@@ -19,7 +19,7 @@
 {{store.myChoose}}
 
   <div class="table-responsive">
-    <table id="example" class="table table-bordered" style="width: 100%">
+    <table id="example" class="table table-bordered table-hover" style="width: 100%">
       <thead>
         <tr>
           <th>
@@ -31,16 +31,16 @@
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
           <th @click="sortList('user_phone')">เบอรโทร</th>
           <th>อีเมล์ &#8597;</th>
-          <th class="no-content">จัดการ</th>
+          <!-- <th class="no-content">จัดการ</th> -->
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(user, index) in store.usersall" :key="user.user_id">
-          <td>{{ index + 1 }}</td>
+        <tr v-for="(user, index) in store.usersall" :key="user.user_id" @click="choose(user)" :class="{ 'table-success': store.myChoose === user }">
+          <td id="clickTest">{{ index + 1 }}</td>
           <td>{{ user.user_firstname }} - {{ user.user_lastname }}</td>
           <td>{{ user.user_phone }}</td>
           <td>{{ user.user_email }}</td>
-          <td>
+          <!-- <td>
             <button
               type="button"
               class="btn btn-success mt-0"
@@ -48,16 +48,16 @@
             >
               เลือก
             </button>
-          </td>
+          </td> -->
         </tr>
       </tbody>
     </table>
   </div>
 
-  <div v-if="store.myChoose" class="alert alert-light-primary alert-dismissible fade show border-0 mb-4" role="alert"> 
+  <!-- <div v-if="store.myChoose" class="alert alert-light-primary alert-dismissible fade show border-0 mb-4" role="alert"> 
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"  @click="close()"> 
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-bs-dismiss="alert"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button> 
-      <strong>Choose User Complete</strong> Lorem Ipsum is simply dummy text of the printing. </div>
+      <strong>Choose User Complete</strong> Lorem Ipsum is simply dummy text of the printing. </div> -->
 
   <!-- <div class="row mb-4">
     <div class="col-sm-6">
