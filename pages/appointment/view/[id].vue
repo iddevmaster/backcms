@@ -38,6 +38,7 @@ await store.deleteRerve()
 store.isDelAP = false;
 await store.FetchAP();
 await store.fetchAppointment();
+await store.fetchUsers();
  };
 </script>
 

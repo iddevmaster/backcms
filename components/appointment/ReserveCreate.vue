@@ -15,8 +15,6 @@
     </div>
   </div>
 
-  
-{{store.myChoose}}
 
   <div class="table-responsive">
     <table id="example" class="table table-bordered table-hover" style="width: 100%">
@@ -81,6 +79,7 @@ import {
   helpers,
 } from "@vuelidate/validators";
 import { useToast } from "vue-toastification";
+import Swal from 'sweetalert2';
 
 const toast = useToast();
 const router = useRouter();
@@ -96,11 +95,48 @@ const backToUser = async () => {
 };
 
 const save = async () => {
-  console.log("save");
+
+
+if(store.myChoose == null){
+     Swal.fire({
+  position: 'top-end',
+  icon: 'error',
+  title: 'กรุณาเลือก',
+  showConfirmButton: false,
+  timer: 1500
+})
+
+return false;
+}else {
+   let savere =  await store.SaveFormreserve()
+       if (savere == true) {
+      toast.success('Save Data');
+     await store.fetchUsers();
+     await store.FetchAP();
+    } else {
+      toast.error('Fall Save Data')
+    }
+
+}
 };
 
 const choose = async (item) => {
- store.myChoose = item;
+ let check = await store.CheckVerify(item)
+ console.log(check);
+ if(check == true){
+store.myChoose = item;
+ }else {
+  Swal.fire({
+  position: 'center',
+  icon: 'error',
+  title: 'User นี้ยังไม่ยืนยันตัวตน',
+  showConfirmButton: false,
+  timer: 1500
+})
+
+ }
+// store.myChoose = item;
+
 };
 
 
@@ -116,7 +152,7 @@ const mySelectEvent = (e) => {
 };
 
 const searchData = async () => {
-
+ store.myChoose = null;
   await store.fetchUsers()
 };
 </script>

@@ -38,8 +38,40 @@
     </div>
   </div>
 
-  <div class="table-responsive">
-  
+<div class="table-responsive">
+    <table class="table" v-if="store.result.length > 0">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Score</th>
+          <th scope="col">Learn</th>
+          <th class="text-center" scope="col">Status</th>
+          <th class="text-center" scope="col">Firstname Lastname</th>
+          <th class="text-center" scope="col">User Phone</th>
+          <th class="text-center" scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(event, index) in store.result">
+          <td>{{ index + 1 }}</td>
+          <td>{{ event.mr_score }}</td>
+          <td>{{ event.mr_learn_type }}</td>
+          <td>{{ event.mr_status }}</td>
+          <td>{{ event.user_detail.user_firstname }} {{ event.user_detail.user_lastname }}</td>
+          <td>{{ event.user_detail.user_phone }}</td>
+           <td>
+            <button
+              type="button"
+              class="btn btn-success mt-0"
+              style="background-color: #ce0000"
+            >
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 

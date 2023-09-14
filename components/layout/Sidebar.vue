@@ -364,7 +364,7 @@
         </li>
 
         
-        <!-- <li class="menu" v-if="user_type == 1">
+        <li class="menu" v-if="user_type == 1">
           <a
             href="#result"
             data-bs-toggle="collapse"
@@ -418,11 +418,11 @@
             <li>
               <nuxt-link to="/result">ผลสอบทั้งหมด</nuxt-link>
             </li>
-            <li>
+            <!-- <li>
               <nuxt-link to="/result/create">เพิ่มผลสอบ</nuxt-link>
-            </li>
+            </li> -->
           </ul>
-        </li> -->
+        </li>
 
         <li class="menu" v-if="user_type == 1">
           <a

@@ -322,7 +322,6 @@ export const AppointStore = defineStore('appoint', {
       try {
         const data = await ApiService.post('/appointment/reserve/get/' + this.ap_id, this.formserchrreserve).then(response => {
           if (response.data) {
-            console.log(response.data);
             this.reservebyap = response.data.data
             this.total_page = response.data.total_page
             this.limit_page = response.data.limit_page
@@ -367,7 +366,6 @@ export const AppointStore = defineStore('appoint', {
     },
 
     async fetchUsers() {
-
       try {
         const data = await ApiService.post('/user/list?user_type=3', this.formsearch).then(response => {
 
@@ -396,6 +394,47 @@ return true
   return false
 }
     },
+
+    async SaveFormreserve() {
+const savereser = {user_id:this.myChoose.user_id,ap_id:this.ap_id}
+try {
+  const data = await ApiService.post('/appointment/reserve/create', savereser).then(response => {
+console.log(response);
+return true;
+  
+  });
+  return data;
+} catch (error) {
+  return false;
+}
+
+    },
+
+    async CheckVerify(item) {
+      try {
+        const data = await ApiService.get('/user/get/' + item.user_id).then(response => {
+          console.log(response);
+        
+    
+          if(Object.keys(response.data.detail).length === 0){
+
+            return false;
+         
+          }else {
+          
+            return true;
+            
+          }
+        
+        });
+        return data;
+      } catch (error) {
+     
+      } finally {
+   
+      }
+
+    }
 
 
 
