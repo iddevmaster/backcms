@@ -4,7 +4,7 @@
       <select
         class="form-select form-select cateSelect"
         aria-label="Default select example"
-        v-model="store.dtl_code"
+        v-model="store.dlt_code"
       >
         <option
           v-for="(item, index) in store.dlt"

@@ -16,7 +16,7 @@ export const ResultStore = defineStore('result', {
     },
     ap_learn_type: "1",
     date_event: "",
-    dtl_code: "A1",
+    dlt_code: "A1",
     formresult: {
       mr_score: null,
       mr_learn_type: null,
@@ -87,8 +87,13 @@ export const ResultStore = defineStore('result', {
 
     
     async fetchResult() {
+
+console.log(this.date_event);
+console.log(this.ap_learn_type);
+console.log(this.dlt_code);
+      
       try {
-        const data = await ApiService.get('/main_result/list/option/?dlt_code=A1&mr_learn_type=2&present_day=2023-09-05').then(response => {
+        const data = await ApiService.get('/main_result/list/option/?dlt_code='+this.dlt_code+'&mr_learn_type='+ this.ap_learn_type +'&present_day='+this.date_event+'').then(response => {
           this.result = response.data;
           console.log(this.result);
         });
