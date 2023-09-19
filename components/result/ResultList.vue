@@ -97,10 +97,13 @@ const toast = useToast();
 const store = ResultStore();
 
 await store.fetchDlt()
-await store.fetchResult()
+
 const { deleteItem } = ResultStore(); //Action
 
 const date = ref(new Date());
+store.date_event = moment(date).format("YYYY-MM-DD");
+
+await store.fetchResult()
 
 const format_start = (date) => {
   store.date_event = moment(date).format("YYYY-MM-DD");

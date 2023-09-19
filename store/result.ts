@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import ApiService from '../services/api.service';
 import axios from "axios";
+import moment from "moment";
 
 export const ResultStore = defineStore('result', {
   state: () => ({
@@ -14,9 +15,9 @@ export const ResultStore = defineStore('result', {
       per_page: 100,
       search: ""
     },
-    ap_learn_type: "1",
+    ap_learn_type: "2",
     date_event: "",
-    dlt_code: "A1",
+    dlt_code: "A2",
     formresult: {
       mr_score: null,
       mr_learn_type: null,
@@ -88,10 +89,6 @@ export const ResultStore = defineStore('result', {
     
     async fetchResult() {
 
-console.log(this.date_event);
-console.log(this.ap_learn_type);
-console.log(this.dlt_code);
-      
       try {
         const data = await ApiService.get('/main_result/list/option/?dlt_code='+this.dlt_code+'&mr_learn_type='+ this.ap_learn_type +'&present_day='+this.date_event+'').then(response => {
           this.result = response.data;
@@ -140,10 +137,9 @@ console.log(this.dlt_code);
 this.formresult.user_id = parseInt(this.formresult.user_id);
 this.formresult.mr_score = parseInt(this.formresult.mr_score);
 this.formresult.mr_learn_type = parseInt(this.formresult.mr_learn_type);
-console.log(this.formresult);
       try {
         const data = await ApiService.post('/main_result/create',this.formresult).then(response => {
-      console.log(response);
+    
 return true;
         });
         return true;
