@@ -181,6 +181,9 @@
             <li>
               <nuxt-link to="/exam">หลักสูตรทั้งหมด</nuxt-link>
             </li>
+            <li>
+              <nuxt-link to="/examhistory">ประวัติการสอบ</nuxt-link>
+            </li>
           </ul>
         </li>
 
