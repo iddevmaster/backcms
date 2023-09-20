@@ -7,7 +7,7 @@ import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import { ExamStore } from '@/store/exam'
 import { useAuthStore } from '@/store/auth'
-import ExamHistory from '@/components/examhistory/ExamHistory.vue'
+import ExamHistoryDetails from '@/components/examhistory/ExamHistoryDetails.vue'
 
 import { useToast } from 'vue-toastification';
 import { required, email, sameAs, minLength, helpers, } from '@vuelidate/validators';
@@ -54,8 +54,8 @@ const Deleteexam = async (item) => {
             <div class="page-meta">
                 <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">หลักสูตร </a></li>
-                        <li class="breadcrumb-item active" aria-current="page">หลักสูตรทั้งหมด</li>
+                                <li class="breadcrumb-item"><a href="#">ประวัติ </a></li>
+                        <li class="breadcrumb-item active" aria-current="page">ประวัติผู้เข้าทดสอบในหลักสูตร</li>
                     </ol>
                 </nav>
             </div>
@@ -64,9 +64,8 @@ const Deleteexam = async (item) => {
             <div class="middle-content container-xxl p-0">
                 <div class="row layout-top-spacing">
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-                        <div class="widget-content widget-content-area br-8 p-3">
-                        
-                            <ExamHistory></ExamHistory>
+                        <div class="widget-content widget-content-area br-8 p-3"> 
+                            <ExamHistoryDetails></ExamHistoryDetails>
                         </div>
                     </div>
                 </div>
