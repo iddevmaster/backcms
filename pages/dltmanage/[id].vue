@@ -22,6 +22,8 @@ import { useAuthStore } from '@/store/auth'
 import ApiService  from "../../services/api.service";
 import DltCreate from '@/components/dlt/DltCreate.vue'
 import DltDelet from '@/components/dlt/DltDelet.vue'
+import moment from "moment";
+import Datepicker from "vuejs3-datepicker";
 
 definePageMeta({
   middleware: ['auth', 'roles'],
@@ -98,6 +100,17 @@ await store.SelectgetDLT(item);
 
 };
 
+const format_start = (date) => {
+  store.formadddtl.issue_date = moment(date).format("YYYY-MM-DD");
+  return moment(date).format("YYYY-MM-DD");
+};
+
+const format_end = (date) => {
+  store.formadddtl.expiry_date = moment(date).format("YYYY-MM-DD");
+  return moment(date).format("YYYY-MM-DD");
+};
+
+
 const UpdateDlT = async () => {
   store.isDelete = false;
 let update =await store.Updatedtl();
@@ -160,6 +173,7 @@ toast.error('Failed  Save Data')
                     <div class="invoice-detail-body">
                       <div class="invoice-detail mb-5" style="padding: 0 48px;">
                         <h2 class="text-center">แก้ไข</h2>
+                        {{store.formdtl}}
                         <label for="type" class="fw-bold">ประเภทใบขับขี่</label>
                         <select class="form-select " aria-label="Default select example" id="type" v-model="store.formdtl.dlt_code" >
                           <option selected disabled>โปรดเลือกประเภทใบขับขี่</option>
@@ -167,6 +181,19 @@ toast.error('Failed  Save Data')
                
                         </select>
                       </div>
+
+                           <div class="mb-5" style="padding: 0 48px">
+          <label for="type" class="fw-bold">วันที่ออกใบ</label>
+          <Datepicker v-model="store.formdtl.issue_date" :format="format_start" />
+          
+        </div>
+
+
+        <div class="mb-5" style="padding: 0 48px">
+          <label for="type" class="fw-bold">วันหมดอายุ</label>
+          <Datepicker v-model="store.formdtl.expiry_date" :format="format_end" />
+       
+        </div>
 
                       <div class="invoice-detail mb-5" style="padding: 0 48px;">
 

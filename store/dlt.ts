@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia';
 import ApiService from '../services/api.service';
 import axios from "axios";
+import moment from 'moment';
 
 export const DltStore = defineStore('dlt', {
   state: () => ({
@@ -31,6 +32,8 @@ export const DltStore = defineStore('dlt', {
       front_img: "",
       back_img: "",
       dlt_code: 'A1',
+      issue_date: "",
+      expiry_date: "",
       user_id: null
     },
     dtlall: [],
@@ -165,6 +168,10 @@ export const DltStore = defineStore('dlt', {
       this.formdtl.front_img = a.front_img
       this.formdtl.back_img = a.back_img
       this.formdtl.dlt_code = a.dlt_code
+      this.formdtl.issue_date = moment(a.issue_date).format("YYYY-MM-DD");
+      this.formdtl.expiry_date = moment(a.expiry_date).format("YYYY-MM-DD");
+
+
       this.formdtl.user_id = this.user_id;
       this.id = a.id;
 
@@ -198,6 +205,7 @@ export const DltStore = defineStore('dlt', {
 
     },
     async Updatedtl() {
+      console.log(this.formdtl)
       let upload = await this.UploadfileImage();
       //  const data = await ApiService.put('/dlt_card/update/' + this.user_id,this.formdtl).then(response => {
       // });

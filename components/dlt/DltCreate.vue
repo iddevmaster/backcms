@@ -5,6 +5,7 @@
         <div class="invoice-detail mb-5" style="padding: 0 48px">
           <h2 class="text-center">เพิ่มใบขับขี่</h2>
           <label for="type" class="fw-bold">ประเภทใบขับขี่</label>
+          {{store.formadddtl}}
           <select
             class="form-select"
             aria-label="Default select example"
@@ -24,7 +25,7 @@
 
         <div class="mb-5" style="padding: 0 48px">
           <label for="type" class="fw-bold">วันที่ออกใบ</label>
-          <Datepicker v-model="store.formdtl.issue_date" :format="format_start" />
+          <Datepicker v-model="store.formadddtl.issue_date" :format="format_start" />
           <span
             class="text-xs text-red-500"
             style="color: red"
@@ -35,7 +36,7 @@
 
         <div class="mb-5" style="padding: 0 48px">
           <label for="type" class="fw-bold">วันหมดอายุ</label>
-          <Datepicker v-model="store.formdtl.expiry_date" :format="format_start" />
+          <Datepicker v-model="store.formadddtl.expiry_date" :format="format_end" />
           <span
             class="text-xs text-red-500"
             style="color: red"
@@ -185,17 +186,16 @@ const rules = computed(() => {
     },
     issue_date: {
       required: helpers.withMessage(
-        "The Back Image Profile field is required",
+        "The Issue date field is required",
         required
       ),
-      minLength: minLength(1),
     },
     expiry_date: {
       required: helpers.withMessage(
-        "The Back Image Profile field is required",
+          "The Expiry date field is required",
         required
       ),
-      minLength: minLength(1),
+  
     },
 
   
@@ -250,10 +250,14 @@ const onFileChangeFront = async (event) => {
 };
 
 const format_start = (date) => {
-  store.date_event = moment(date).format("YYYY-MM-DD");
+  store.formadddtl.issue_date = moment(date).format("YYYY-MM-DD");
   return moment(date).format("YYYY-MM-DD");
 };
 
+const format_end = (date) => {
+  store.formadddtl.expiry_date = moment(date).format("YYYY-MM-DD");
+  return moment(date).format("YYYY-MM-DD");
+};
 
 const onFileChangeBack = async (event) => {
   var input = event.target;
