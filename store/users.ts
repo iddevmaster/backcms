@@ -8,6 +8,8 @@ import ApiService from '../services/api.service';
 export const usersStore = defineStore('users', {
   state: () => ({
     locale: true,
+    loc:0,
+    lng:'static/upload/2023/9/files-6TWLyr9FMJ.png',
     load: true,
     isOpen: false,
     AlertText: null,
@@ -82,6 +84,9 @@ export const usersStore = defineStore('users', {
     zipcode:null,
     country:null,
     user_img:null,
+    lan:[
+      'static/upload/2023/9/files-JWOxjtiwsQ.png','static/upload/2023/9/files-6TWLyr9FMJ.png','static/upload/2023/9/files-3Nc4g8DjNj.png'
+    ]
   }
 
   ),
@@ -365,7 +370,7 @@ user_id:this.formDetailEdit.user_id};
     async Zipcode() {
       const zipcode = await ApiService.post('/master_data/zipcode', this.formszipcode)
       if(zipcode.data.data){
-this.zipcode = zipcode.data.data
+      this.zipcode = zipcode.data.data
       }else {
         this.zipcode = []
       }
@@ -393,7 +398,9 @@ this.country = country.data.data
       }
     },
 
- 
+    async selectLan() {
+      this.lng = this.lan[this.loc]
+    }
   },
 
 });

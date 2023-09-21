@@ -21,6 +21,27 @@
             </option>
           </select>
         </div>
+
+        <div class="mb-5" style="padding: 0 48px">
+          <label for="type" class="fw-bold">วันที่ออกใบ</label>
+          <Datepicker v-model="store.formdtl.issue_date" :format="format_start" />
+          <span
+            class="text-xs text-red-500"
+            style="color: red"
+            v-if="v$.issue_date.$error"
+            >{{ v$.issue_date.$errors[0].$message }}</span>
+        </div>
+
+
+        <div class="mb-5" style="padding: 0 48px">
+          <label for="type" class="fw-bold">วันหมดอายุ</label>
+          <Datepicker v-model="store.formdtl.expiry_date" :format="format_start" />
+          <span
+            class="text-xs text-red-500"
+            style="color: red"
+            v-if="v$.expiry_date.$error"
+            >{{ v$.expiry_date.$errors[0].$message }}</span>
+        </div>
         <div>
           <span
             class="text-xs text-red-500"
@@ -120,6 +141,7 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script setup lang="ts">
@@ -136,6 +158,8 @@ import {
 } from "@vuelidate/validators";
 import { useToast } from "vue-toastification";
 import ApiService from "../../services/api.service";
+import Datepicker from "vuejs3-datepicker";
+import moment from "moment";
 const toast = useToast();
 
 const store = DltStore();
@@ -159,6 +183,22 @@ const rules = computed(() => {
       ),
       minLength: minLength(1),
     },
+    issue_date: {
+      required: helpers.withMessage(
+        "The Back Image Profile field is required",
+        required
+      ),
+      minLength: minLength(1),
+    },
+    expiry_date: {
+      required: helpers.withMessage(
+        "The Back Image Profile field is required",
+        required
+      ),
+      minLength: minLength(1),
+    },
+
+  
   };
 });
 ;
@@ -208,6 +248,12 @@ const onFileChangeFront = async (event) => {
     reader.readAsDataURL(input.files[0]);
   }
 };
+
+const format_start = (date) => {
+  store.date_event = moment(date).format("YYYY-MM-DD");
+  return moment(date).format("YYYY-MM-DD");
+};
+
 
 const onFileChangeBack = async (event) => {
   var input = event.target;

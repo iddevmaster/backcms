@@ -39,7 +39,7 @@
             <img :src="image(store.detail.user_img)" alt="avatar" />
           </div>
           <div class="profile-content">
-          
+
             <h6 class="" v-if="store.users">{{ store.users.user_name }}</h6>
             <p class="">Project Leader</p>
           </div>
@@ -97,7 +97,7 @@
                 ></polygon>
               </svg>
 
-              <span>คอร์ส</span>
+              <span>{{ $t("home") }}</span>
             </div>
             <div>
               <svg
@@ -122,7 +122,7 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/course">คอร์สทั้งหมด</nuxt-link>
+              <nuxt-link to="/course">{{ $t("menu_couse") }}</nuxt-link>
             </li>
             <li>
               <nuxt-link to="/course/create">เพิ่มคอร์ส</nuxt-link>
@@ -154,7 +154,7 @@
                 <polyline points="2 17 12 22 22 17"></polyline>
                 <polyline points="2 12 12 17 22 12"></polyline>
               </svg>
-              <span>หลักสูตร</span>
+              <span>{{ $t("menu_exam") }}</span>
             </div>
             <div>
               <svg
@@ -214,7 +214,7 @@
                 <line x1="12" y1="22.08" x2="12" y2="12"></line>
               </svg>
 
-              <span>ข่าวสารกรมขนส่ง</span>
+              <span>{{ $t("menu_new_tra") }}</span>
             </div>
             <div>
               <svg
@@ -239,7 +239,7 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/news/transport">ข่าวสารกรมขนส่ง</nuxt-link>
+              <nuxt-link to="/news/transport">{{ $t("menu_new_ci") }}</nuxt-link>
             </li>
             <li>
               <nuxt-link to="/news/transport/create"
@@ -274,7 +274,7 @@
                 <polygon points="12 15 17 21 7 21 12 15"></polygon>
               </svg>
 
-              <span>ข่าวสารกรมโยธา</span>
+              <span>{{ $t("menu_new_ci") }}</span>
             </div>
             <div>
               <svg
@@ -299,7 +299,7 @@
             data-bs-parent="#accordionExample"
           >
             <li v-if="user_type == 1">
-              <nuxt-link to="/news/civil">ข่าวสารกรมโยธา</nuxt-link>
+              <nuxt-link to="/news/civil">{{ $t("menu_new_ci") }}</nuxt-link>
             </li>
             <li>
               <nuxt-link to="/news/civil/create">เพิ่มข่าวสารกรมโยธา</nuxt-link>
@@ -333,7 +333,7 @@
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
               </svg>
 
-              <span>นัดหมาย</span>
+              <span>{{ $t("menu_new_app") }}</span>
             </div>
             <div>
               <svg
@@ -393,7 +393,7 @@
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
               </svg>
 
-              <span>จัดการผลสอบ</span>
+              <span>{{ $t("menu_new_resul") }}</span>
             </div>
             <div>
               <svg
@@ -453,7 +453,7 @@
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
               </svg>
 
-              <span>จัดการผู้ใช้งาน</span>
+              <span>{{ $t("menu_new_user") }}</span>
             </div>
             <div>
               <svg

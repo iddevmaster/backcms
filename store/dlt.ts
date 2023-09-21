@@ -22,6 +22,8 @@ export const DltStore = defineStore('dlt', {
       front_img: "",
       back_img: "",
       dlt_code: 'A1',
+      issue_date: "",
+      expiry_date: "",
       user_id: null
     },
 

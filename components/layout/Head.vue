@@ -1,5 +1,4 @@
 
-
 <template>
     <div class="header-container container-xxl">
         <header class="header navbar navbar-expand-sm expand-header">
@@ -12,16 +11,18 @@
                     <line x1="3" y1="18" x2="21" y2="18"></line>
                 </svg>
             </a>
-
-
-
-            <ul class="navbar-item flex-row ms-lg-auto ms-0">
-
+            
+            <ul class="navbar-item flex-row ms-lg-auto ms-0"> 
                 <li class="nav-item dropdown language-dropdown">
-
+                    <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="language-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img :src="image(users.lng)" class="flag-width" alt="flag">
+                    </a>
+                    <div class="dropdown-menu position-absolute" aria-labelledby="language-dropdown">
+                        <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(0)"><img :src="image(users.lan[0])" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;Thai</span></a>
+                        <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(1)"><img :src="image(users.lan[1])" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;Loas</span></a>
+                        <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(2)"><img :src="image(users.lan[2])" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;English</span></a>
+                    </div>
                 </li>
-
-
 
                 <li class="nav-item dropdown notification-dropdown">
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="notificationDropdown"
@@ -255,23 +256,50 @@
 
 
 
-
-<script setup>
+<script setup lang="ts">
 
 
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import { useAuthStore } from '@/store/auth';
-
-
+import { usersStore } from '@/store/users';
+import ApiService from '../../services/api.service';
+import { useI18n } from "vue-i18n";
 
 const authStore = useAuthStore();
+const users = usersStore();
 
 
 
 const ShowNav = async () => {
     authStore.isActiveBar = !authStore.isActiveBar
     console.log('authStore.isActiveBar',authStore.isActiveBar);
+};
+
+const lan = async (item) => {
+    users.loc = item;
+    await users.selectLan();
+};
+
+function image(i) {
+  let im =  ApiService.image(i);
+  return im;
+}
+
+// const { locale, setLocale } = useI18n();
+
+// const changeLocale = (newLocale) => {
+//   locale.value = newLocale;
+// };
+
+const { locale, setLocale } = useI18n();
+
+const changeLocale = (newLocale) => {
+   
+const le = ['th','en','la']
+locale.value = le[newLocale];
+users.loc = newLocale;
+users.selectLan();
 };
 
 </script>
