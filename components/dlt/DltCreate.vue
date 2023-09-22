@@ -111,7 +111,7 @@
           </div>
 
           <div class="border p-2 mt-3">
-            <p>แสดงรูปหลังบัตร: {{ store.formadddtl.back_img }}</p>
+            <p>แสดงรูปหลังบัตร:</p>
             <template v-if="store.formadddtl.back_img">
               <div class="row">
                 <div id="image-container" class="col-md-9 col-sm-9 col-">
