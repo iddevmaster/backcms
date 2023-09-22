@@ -2,73 +2,13 @@
   <div class="row mb-4">
     <div id="form_grid_layouts" class="col-lg-10">
       <div class="seperator-header">
-        <h4 class="">ฟอร์ม เพิ่มผลสอบ</h4>
+        <h4 class="">No Data</h4>
       </div>
-    </div>
-  
-    <div id="form_grid_layouts" class="col-lg-2">
-      <div class="seperator-header" style="text-align: center;" @click="backToUser()">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">กลับหน้านัดหมาย</button>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <label for="exampleFormControlInput1">Mr Score</label>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="ใส่ตัวเลข *" maxlength="10"
-      v-model="store.formresult.mr_score" :class="{
-          'border-red-500 focus:border-red-500': v$.mr_score.$error,
-          'border-[#42d392] ': !v$.mr_score.$invalid,
-        }" @change="v$.mr_score.$touch" autocomplete="off" 
-      >
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.mr_score.$error">{{
-        v$.mr_score.$errors[0].$message
-      }}</span>
-
-    </div>
-
-
-
-    <div class="col-sm-6">
-      <label for="exampleFormControlInput1">Mr learn</label>
-      <select class="form-control" v-model="store.formresult.mr_learn_type" >
-        <option value="1">ทฤษฎี</option>
-        <option value="2">ปฏิบัติ</option>
-      </select>
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.mr_learn_type.$error">{{
-        v$.mr_learn_type.$errors[0].$message
-      }}</span>
-    </div>
-
-
-  </div>
-  <div class="row mb-4">
-
-    <div class="col-sm-6">
-      <label for="exampleFormControlInput1">Dlt</label>
-      <select class="form-control"  v-model="store.formresult.dlt_code">
-        <option v-for="(itemd,i) in store.dlt" :value="itemd.dlt_code">{{itemd.dlt_description}}</option>
-      </select>
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.dlt_code.$error">{{
-        v$.dlt_code.$errors[0].$message
-      }}</span>
-    </div>
-
-
-    <div class="col-sm-6">
-      <label for="exampleFormControlInput1">Mr Status</label>
-      <select class="form-control" v-model="store.formresult.mr_status">
-        <option value="pass">ผ่าน</option>
-        <option value="fail">ไม่ผ่าน</option>
-      </select>
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.mr_status.$error">{{
-        v$.mr_status.$errors[0].$message
-      }}</span>
     </div>
   </div>
 
 
 
-
-  <button type="button" class="btn btn-primary" @click="save()">บันทึก</button>
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
@@ -113,7 +53,10 @@ const rules = computed(() => {
       required: helpers.withMessage('The mr_status field is required', required),
       minLength: minLength(1),
     },
-
+    user_id: {
+      required: helpers.withMessage('The user_id field is required', required),
+      minLength: minLength(1),
+    },
 
   };
 });

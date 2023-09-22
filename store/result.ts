@@ -8,11 +8,15 @@ export const ResultStore = defineStore('result', {
     user_id: null,
     dlt: [],
     users: [],
+    user:[],
+    ss:[],
     result:[],
+    IsCardInsert:false,
+    IsCardNoInsert:false,
     selectedValue: null,
     formuser: {
       page: 1,
-      per_page: 100,
+      per_page: 5,
       search: ""
     },
     ap_learn_type: "2",
@@ -23,7 +27,7 @@ export const ResultStore = defineStore('result', {
       mr_learn_type: null,
       mr_status: null,
       dlt_code: null,
-      user_id: null
+      identification_number: null
     },
     myValue: '',
 
@@ -86,6 +90,44 @@ export const ResultStore = defineStore('result', {
 
   actions: {
 
+    async fetchUsers() {
+
+  
+    
+        const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
+          this.user = response.data.data;
+        });
+
+      let a =  await this.checkuser();
+      console.log(a);
+
+        
+    
+        
+  
+  
+
+    },
+    delay(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    },
+   async checkuser() {
+     this.ss = [];
+      for (var i = 0; i < this.user.length; i++) {
+        const data = ApiService.get('/user/get/'+this.user[i].user_id).then(response => {
+       //   this.result = response.data;
+
+       const b = {user_id:response.data.user_id,user_firstname:response.data.user_firstname,user_lastname:response.data.user_lastname,user_phone:response.data.user_phone,detail:response.data.detail?.verify_account,identification_number:response.data.detail?.identification_number}
+      
+          this.ss.push(b)
+        });
+      }
+
+      return this.ss;
+  
+   
+    },
+
     
     async fetchResult() {
 
@@ -133,7 +175,6 @@ export const ResultStore = defineStore('result', {
 
     },
     async saveResult() {
-
 this.formresult.user_id = parseInt(this.formresult.user_id);
 this.formresult.mr_score = parseInt(this.formresult.mr_score);
 this.formresult.mr_learn_type = parseInt(this.formresult.mr_learn_type);

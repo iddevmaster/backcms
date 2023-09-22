@@ -421,9 +421,9 @@
             <li>
               <nuxt-link to="/result">ผลสอบทั้งหมด</nuxt-link>
             </li>
-            <!-- <li>
+            <li>
               <nuxt-link to="/result/create">เพิ่มผลสอบ</nuxt-link>
-            </li> -->
+            </li>
           </ul>
         </li>
 
