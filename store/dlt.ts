@@ -205,10 +205,13 @@ export const DltStore = defineStore('dlt', {
 
     },
     async Updatedtl() {
-      console.log(this.formdtl)
+     
       let upload = await this.UploadfileImage();
       //  const data = await ApiService.put('/dlt_card/update/' + this.user_id,this.formdtl).then(response => {
       // });
+      this.formdtl.expiry_date = moment(this.formdtl.expiry_date).format("YYYY-MM-DD");
+      this.formdtl.issue_date = moment(this.formdtl.issue_date).format("YYYY-MM-DD");
+     
       try {
         const data = await ApiService.put('/dlt_card/update/' + this.id, this.formdtl).then(response => {
           console.log(response.data)
