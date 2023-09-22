@@ -43,7 +43,9 @@ if (finddtl == true) {
 } else {
   toast.error('Can not Data')
 }
-
+store.mydtla = [];
+store.isAdd = true;
+store.isEdit = false;
 
 const onFileChangeFront = async (event) => {
   var input = event.target;
@@ -159,7 +161,7 @@ toast.error('Failed  Save Data')
           </ol>
         </nav>
       </div>
-
+{{store.formdtl}}
       <div class="middle-content container-xxl p-0">
         <div class="row invoice layout-top-spacing layout-spacing">
           <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
@@ -173,7 +175,7 @@ toast.error('Failed  Save Data')
                     <div class="invoice-detail-body">
                       <div class="invoice-detail mb-5" style="padding: 0 48px;">
                         <h2 class="text-center">แก้ไข</h2>
-                        {{store.formdtl}}
+                       
                         <label for="type" class="fw-bold">ประเภทใบขับขี่</label>
                         <select class="form-select " aria-label="Default select example" id="type" v-model="store.formdtl.dlt_code" >
                           <option selected disabled>โปรดเลือกประเภทใบขับขี่</option>
@@ -301,7 +303,7 @@ toast.error('Failed  Save Data')
 }
 
 #image-container img {
-  width: 250px;
+  width: 400px;
   height: 250px;
   object-fit: cover;
 }
@@ -328,7 +330,7 @@ toast.error('Failed  Save Data')
   width: fit-content;
   min-width: 200px;
   min-height: 200px;
-  max-width: 300px;
+  max-width: 500px;
   max-height: 300px;
 }
 

@@ -5,7 +5,7 @@
         <div class="invoice-detail mb-5" style="padding: 0 48px">
           <h2 class="text-center">เพิ่มใบขับขี่</h2>
           <label for="type" class="fw-bold">ประเภทใบขับขี่</label>
-          {{store.formadddtl}}
+         
           <select
             class="form-select"
             aria-label="Default select example"
