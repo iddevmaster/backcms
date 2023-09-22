@@ -72,7 +72,7 @@
                         <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>APPLICATIONS</span></div>
                     </li> -->
 
-        <li class="menu" v-if="user_type == 1">
+        <li class="menu" >
           <a
             href="#course"
             data-bs-toggle="collapse"
@@ -130,7 +130,7 @@
           </ul>
         </li>
 
-        <li class="menu" v-if="user_type == 1">
+        <li class="menu">
           <a
             href="#exam"
             data-bs-toggle="collapse"
@@ -364,7 +364,7 @@
           </ul>
         </li>
 
-           <li class="menu" v-if="user_type == 1">
+           <li class="menu">
           <a
             href="#appointment"
             data-bs-toggle="collapse"
@@ -424,7 +424,7 @@
         </li>
 
         
-        <li class="menu" v-if="user_type == 1">
+        <li class="menu">
           <a
             href="#result"
             data-bs-toggle="collapse"

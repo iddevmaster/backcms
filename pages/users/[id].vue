@@ -7,7 +7,8 @@ import UserEdit from '@/components/users/UserEdit.vue'
 import UserDetail from '@/components/users/UserDetail.vue'
 import Alert from '@/components/layout/Alert.vue';
 definePageMeta({
-    middleware: 'auth' // this should match the name of the file inside the middleware directory 
+  middleware: ['auth','roles'],
+  allowedRoles: [1]
 })
 const store = usersStore()
 const { posts } = storeToRefs(usersStore())

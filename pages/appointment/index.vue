@@ -13,7 +13,8 @@ import AppointListByGroup from '@/components/appointment/AppointListByGroup.vue'
 import { useModalStore } from '@/store/modal';
 import { useToast } from 'vue-toastification'
 definePageMeta({
-  middleware: 'auth' // this should match the name of the file inside the middleware directory 
+  middleware: ['auth','roles'],
+  allowedRoles: [1,2]
 })
 const toast = useToast()
 const store = AppointStore()
