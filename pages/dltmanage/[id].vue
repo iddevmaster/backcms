@@ -161,7 +161,7 @@ toast.error('Failed  Save Data')
           </ol>
         </nav>
       </div>
-{{store.formdtl}}
+
       <div class="middle-content container-xxl p-0">
         <div class="row invoice layout-top-spacing layout-spacing">
           <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
