@@ -6,12 +6,17 @@ import moment from "moment";
 export const ResultStore = defineStore('result', {
   state: () => ({
     user_id: null,
+    modaldelete:false,
+    mr_id:null,
+    identification_number:null,
     dlt: [],
     users: [],
     user:[],
     ss:[],
     result:[],
+    resultUser:[],
     IsCardInsert:false,
+    IsCardEdit:false,
     IsCardNoInsert:false,
     selectedValue: null,
     formuser: {
@@ -23,6 +28,13 @@ export const ResultStore = defineStore('result', {
     date_event: "",
     dlt_code: "A2",
     formresult: {
+      mr_score: null,
+      mr_learn_type: null,
+      mr_status: null,
+      dlt_code: null,
+      identification_number: null
+    },
+    formeditresult: {
       mr_score: null,
       mr_learn_type: null,
       mr_status: null,
@@ -92,21 +104,12 @@ export const ResultStore = defineStore('result', {
 
     async fetchUsers() {
 
-  
-    
         const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
           this.user = response.data.data;
         });
 
       let a =  await this.checkuser();
-      console.log(a);
-
-        
-    
-        
-  
-  
-
+     
     },
     delay(ms) {
       return new Promise((resolve) => setTimeout(resolve, ms));
@@ -127,6 +130,23 @@ export const ResultStore = defineStore('result', {
   
    
     },
+    async fetchResultByUser() {
+      try {
+        const data = await ApiService.get('/main_result/list/?user_id='+this.user_id).then(response => {
+     
+          if(response.data.length > 0){
+            this.resultUser = response.data;
+
+            console.log(this.resultUser);
+          }
+        });
+        return data;
+      } catch (error) {
+        return false
+      }
+   
+
+  },
 
     
     async fetchResult() {
@@ -134,7 +154,6 @@ export const ResultStore = defineStore('result', {
       try {
         const data = await ApiService.get('/main_result/list/option/?dlt_code='+this.dlt_code+'&mr_learn_type='+ this.ap_learn_type +'&present_day='+this.date_event+'').then(response => {
           this.result = response.data;
-          console.log(this.result);
         });
         return data;
       } catch (error) {
@@ -187,6 +206,21 @@ return true;
       } catch (error) {
         console.log('error');
         return false
+      }
+
+    },
+
+    async DeleteResult() {
+
+      console.log('del',this.mr_id);
+
+      try {
+        const del = await ApiService.delete('/main_result/delete/' + this.mr_id);
+
+        return true;
+      
+      } catch (error) {
+        return error;
       }
 
     }

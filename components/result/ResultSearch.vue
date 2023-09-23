@@ -1,13 +1,16 @@
 <template>
-  <div class="row mb-4">
-    <div class="col-sm-6">
-      <label for="exampleFormControlInput1">ค้นหาชื่อ</label>
-      {{ store.formuser }}
+
+
+  <div class="row layout-top-spacing">
+    <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
       <input type="text" class="form-control" id="inputEmail3" placeholder="ค้นหา User *" maxlength="10"
       v-model="store.formuser.search" @keyup="searchData"
       >
     </div>
 
+  </div>
+{{ store.user_id }}
+    <div class="col-sm-12">
     <div class="table-responsive">
     <table id="example" class="table table-bordered" style="width:100%">
       <thead>
@@ -27,15 +30,13 @@
       </thead>
       <tbody>
         <tr v-for="(users,index) in store.ss" :key="users.user_id">
-      
-          <!-- <td><input type="checkbox" v-model="store.selected" :value="user" number></td> -->
           <td>{{ users.user_id }}</td>
            <td>{{ users.user_firstname }} - {{ users.user_lastname }}</td>
           <td>{{ users.user_phone }}</td>
           <td v-if="users.detail == 'y'">ผ่านการยืนยัน</td>
           <td v-else>ไม่ผ่านการยืนยัน</td>
           <td>
-            <button type="button" class="btn btn-danger" @click="Sel(users.detail,users.identification_number)" >เลือก</button>
+            <button type="button" class="btn btn-danger" @click="Sel(users.detail,users.identification_number,users.user_id)" >เลือก</button>
           </td>
           <!-- <td>{{ user.user_email }}</td> -->
     
@@ -60,6 +61,7 @@ import { ResultStore } from '@/store/result'; // import the auth store we just c
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
 import { useToast } from 'vue-toastification';
+import { doesNotReject } from 'assert';
 import { ref, onMounted, onUnmounted } from 'vue';
 
  
@@ -101,13 +103,16 @@ const searchData = async () => {
   await store.fetchUsers()
 };
 
-const Sel = async (item,identification_number) => {
+const Sel = async (item,identification_number,id) => {
 
-
+store.user_id = id;
+await store.fetchResultByUser()
  if(item == 'y'){
   store.IsCardInsert = true;
   store.IsCardNoInsert = false;
   store.formresult.identification_number = identification_number;
+
+  store.identification_number = identification_number
  }else {
   store.IsCardInsert = false;
   store.IsCardNoInsert = true;

@@ -298,7 +298,7 @@
             id="civil"
             data-bs-parent="#accordionExample"
           >
-            <li v-if="user_type == 1">
+            <li>
               <nuxt-link to="/news/civil">{{ $t("menu_new_ci") }}</nuxt-link>
             </li>
             <li>
@@ -307,7 +307,7 @@
           </ul>
         </li>
 
-                <li class="menu" v-if="user_type == 1">
+                <li class="menu">
           <a
             href="#menu_dlt"
             data-bs-toggle="collapse"
@@ -481,10 +481,13 @@
             <li>
               <nuxt-link to="/result/create">เพิ่มผลสอบ</nuxt-link>
             </li>
+            <li>
+              <nuxt-link to="/result/edit">แก้ไขผลสอบ</nuxt-link>
+            </li>
           </ul>
         </li>
 
-        <li class="menu" v-if="user_type == 1">
+        <li class="menu">
           <a
             href="#users"
             data-bs-toggle="collapse"

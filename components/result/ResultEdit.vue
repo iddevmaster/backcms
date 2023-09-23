@@ -2,7 +2,7 @@
   <div class="row mb-4">
     <div id="form_grid_layouts" class="col-lg-10">
       <div class="seperator-header">
-        <h4 class="">ฟอร์ม เพิ่มผลสอบ</h4>
+        <h4 class="">ฟอร์ม แก้ผลสอบ</h4>
       </div>
     </div>
   
@@ -10,7 +10,7 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">คะแนน</label>
       <input type="text" class="form-control" id="inputEmail3" placeholder="ใส่ตัวเลข *" maxlength="10"
-      v-model="store.formresult.mr_score" :class="{
+      v-model="store.formeditresult.mr_score" :class="{
           'border-red-500 focus:border-red-500': v$.mr_score.$error,
           'border-[#42d392] ': !v$.mr_score.$invalid,
         }" @change="v$.mr_score.$touch" autocomplete="off" @input="onInput"
@@ -25,7 +25,7 @@
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">ประเภทสอบ</label>
-      <select class="form-control" v-model="store.formresult.mr_learn_type" >
+      <select class="form-control" v-model="store.formeditresult.mr_learn_type" >
         <option value="1">ทฤษฎี</option>
         <option value="2">ปฏิบัติ</option>
       </select>
@@ -40,7 +40,7 @@
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">ประเภทรถที่สอบ</label>
-      <select class="form-control"  v-model="store.formresult.dlt_code">
+      <select class="form-control"  v-model="store.formeditresult.dlt_code">
         <option v-for="(itemd,i) in store.dlt" :value="itemd.dlt_code">{{itemd.dlt_description}}</option>
       </select>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.dlt_code.$error">{{
@@ -51,7 +51,7 @@
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">สถานะ</label>
-      <select class="form-control" v-model="store.formresult.mr_status">
+      <select class="form-control" v-model="store.formeditresult.mr_status">
         <option value="pass">ผ่าน</option>
         <option value="fail">ไม่ผ่าน</option>
       </select>
@@ -61,10 +61,7 @@
     </div>
   </div>
 
-
-
-
-  <button type="button" class="btn btn-primary" @click="save()">บันทึก</button>
+  <button type="button" class="btn btn-primary" @click="save()">แก้ไข</button>
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
