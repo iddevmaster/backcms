@@ -78,8 +78,9 @@ const del = async (item) => {
 
 
 const edit = async (item) => {
-  console.log(item);
+
   store.IsCardEdit = true;
+  store.mr_id = item.mr_id;
   store.formeditresult.mr_score = item.mr_score 
   store.formeditresult.dlt_code = item.dlt_code 
   store.formeditresult.mr_status = item.mr_status 

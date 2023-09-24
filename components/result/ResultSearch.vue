@@ -106,6 +106,7 @@ const searchData = async () => {
 const Sel = async (item,identification_number,id) => {
 
 store.user_id = id;
+store.formeditresult.identification_number = identification_number;
 await store.fetchResultByUser()
  if(item == 'y'){
   store.IsCardInsert = true;

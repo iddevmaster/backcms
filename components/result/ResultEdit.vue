@@ -61,7 +61,7 @@
     </div>
   </div>
 
-  <button type="button" class="btn btn-primary" @click="save()">แก้ไข</button>
+  <button type="button" class="btn btn-primary" @click="update()">แก้ไข</button>
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
@@ -81,7 +81,7 @@ const store = ResultStore();
 await store.fetchDlt()
 await store.fetchUser()
 
-const { FormResult } = ResultStore();
+const { FormUpdateResult } = ResultStore();
 const myOptions = JSON.parse(JSON.stringify(store.dlt));
 const myValue = ref();
 
@@ -126,13 +126,13 @@ const onInput = async (event) => {
 }
 
 
-const v$ = useVuelidate(rules, FormResult);
+const v$ = useVuelidate(rules, FormUpdateResult);
 
-const save = async () => {
+const update = async () => {
   v$.value.$validate();
 
   if (!v$.value.$error) {
-  let data = await store.saveResult();
+  let data = await store.updateResult();
       
     if (data == true) {
       toast.success('Save Data');

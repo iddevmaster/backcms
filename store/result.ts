@@ -97,7 +97,9 @@ export const ResultStore = defineStore('result', {
     FormResult(state) {
       return state.formresult;
     },
-
+    FormUpdateResult(state){
+      return state.formeditresult;
+    }
   },
 
   actions: {
@@ -199,6 +201,28 @@ this.formresult.mr_score = parseInt(this.formresult.mr_score);
 this.formresult.mr_learn_type = parseInt(this.formresult.mr_learn_type);
       try {
         const data = await ApiService.post('/main_result/create',this.formresult).then(response => {
+    
+return true;
+        });
+        return true;
+      } catch (error) {
+        console.log('error');
+        return false
+      }
+
+    },
+
+    async updateResult(){
+    
+      const upd = {dlt_code:this.formeditresult.dlt_code,mr_learn_type:parseInt(this.formeditresult.mr_learn_type),mr_score:this.formeditresult.mr_score
+        ,mr_status:this.formeditresult.mr_status,identification_number:this.formeditresult.identification_number}
+
+
+      // return true;
+
+
+      try {
+        const data = await ApiService.put('/main_result/update/'+this.mr_id,upd).then(response => {
     
 return true;
         });
