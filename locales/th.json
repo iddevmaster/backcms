@@ -22,6 +22,9 @@
   "menu_lesson_f_title_picture": "รูปภาพแสดงหน้าปก",
   "menu_lesson_f_video": "วีดีโอ",
 
+  "menu_page_course": "คอร์ส",
+  "menu_page_course_page": "คอร์สทั้งหมด",
+
   "menu_exam_all": "หลักสูตรทั้งหมด",
   "menu_exam_create": "สร้างหลักสูตร",
   "menu_exam_add": "เพิ่มหลักสูตร",
@@ -42,6 +45,10 @@
   "menu_exam_display_del": "ลบภาพ",
   "menu_exam_modal_close": "ปิด",
   "menu_exam_modal_save": "บันทึก",
+
+  "menu_page_exam": "หลักสูตร",
+  "menu_page_exam_all": "หลักสูตรทั้งหมด",
+ 
 
   "menu_exam_back": "กลับสู่หน้าหลักสูตร",
   "menu_exam_add_ex_form": "แบบฟอร์มเพิ่มข้อสอบ",
@@ -76,6 +83,13 @@
   "menu_new_form_civic": "ฟอร์ม เพิ่มข่าวสารกรมโยธา",
   "menu_new_form_edit_civic": "ฟอร์ม แก้ไขข่าวสารกรมโยธา",
   "menu_new_image_del": "ลบรูปภาพ",
+
+  "menu_page_new_tra": "ข่าวสารกรมขนส่ง",
+  "menu_page_new_tra_all": "ข่าวสารกรมขนส่งทั้งหมด",
+  "menu_page_new_civil": "ข่าวสารกรมโยธา",
+  "menu_page_new_edit_tra": "แก้ไขข่าวสารกรมขนส่ง",
+  "menu_page_new_edit_civil": "แก้ไขข่าวสารกรมโยธา",
+  "menu_page_new_civil_all": "ข่าวสารกรมโยธาทั้งหมด",
 
   "menu_user_index": "#",
   "menu_user_name": "ชื่อ - นามสกุล",

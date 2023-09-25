@@ -21,7 +21,7 @@ const { AlertTextForm } = storeToRefs(store); //Get Getter
               <div class="page-meta">
                         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">ข่าวสารกรมขนส่ง </a></li>
+                                <li class="breadcrumb-item"><a href="#">{{ $t("menu_page_new_tra") }} </a></li>
                                 <li class="breadcrumb-item active" aria-current="page">เพิ่มข่าวสารกรมขนส่ง</li>
                             </ol>
                         </nav>
