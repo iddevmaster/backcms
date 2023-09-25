@@ -34,8 +34,8 @@ const { AlertTextForm } = storeToRefs(store); //Get Getter
 
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">บัญชี</button>
-                                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">รายละเอียด</button>
+                                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">{{ $t("menu_user_account") }}</button>
+                                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">{{ $t("menu_user_detail") }}</button>
                             </div>
                         </nav>
                         <div class="widget-content widget-content-area br-8 p-3 border-top-0">
@@ -47,10 +47,6 @@ const { AlertTextForm } = storeToRefs(store); //Get Getter
                                     <UserDetail></UserDetail>
                                 </div>
                             </div>
-
-
-
-                            
                         </div>
                     </div>
                 </div>

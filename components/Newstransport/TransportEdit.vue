@@ -2,16 +2,16 @@
   <div class="row mb-4">
     <div id="form_grid_layouts" class="col-lg-10">
       <div class="seperator-header">
-        <h4 class="">ฟอร์ม แก้ข่าวสารกรมขนส่ง</h4>
+        <h4 class="">{{ $t("menu_new_form_edit") }}</h4>
       </div>
     </div>
     <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header" style="text-align: center;"  @click="backToNews()">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">กลับหน้าข่าวสาร</button>
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">{{ $t("menu_new_back") }}</button>
       </div>
     </div>
     <div class="form-group mb-4">
-      <label for="formGroupExampleInput">หัวข้อข่าว</label>
+      <label for="formGroupExampleInput">{{ $t("menu_new_title") }}</label>
       <input type="text" class="form-control" id="formGroupExampleInput" placeholder="หัวข้อข่าว *"
         v-model="store.formDataNewsEdit.news_title" :class="{
           'border-red-500 focus:border-red-500': v$.news_title.$error,
@@ -22,7 +22,7 @@
       }}</span>
     </div>
     <div class="form-group mb-4">
-      <label for="exampleFormControlTextarea1">รายละเอียดข่าว</label>
+      <label for="exampleFormControlTextarea1">{{ $t("menu_new_detail") }}</label>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" :class="{
         'border-red-500 focus:border-red-500': v$.news_description.$error,
         'border-[#42d392] ': !v$.news_description.$invalid,
@@ -32,7 +32,7 @@
                }}</span>
     </div>
     <div class="form-group mb-4 mt-3">
-      <label for="exampleFormControlFile1">รูปภาพหน้าข่าว</label><span class="text-xs text-red-500" style="color:red" v-if="store.imageReq == true"> Image field is required</span>
+      <label for="exampleFormControlFile1">{{ $t("menu_new_image") }}</label><span class="text-xs text-red-500" style="color:red" v-if="store.imageReq == true"> Image field is required</span>
       <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple @change="onFileChange"
         ref="fileupload">
     </div>
@@ -40,7 +40,7 @@
     <p style="color: red;" v-if="store.getFile === true">File size exceeds the limit 2 MB. </p>
 
     <div class="border p-2 mt-3">
-      <p>แสดงรูปตรงนี้:</p>
+      <p>{{ $t("menu_new_display_img") }}:</p>
       <template v-if="storeupload.preview_list.length">
         <div class="row">
           <div id="image-container" class="col-md-3 col-sm-4 col-6" v-for="item, index in storeupload.preview_list" :key="index">
@@ -58,7 +58,7 @@
 
     </div>
   </div>
-  <button type="button" class="btn btn-primary" @click="edit()">บันทึก</button>
+  <button type="button" class="btn btn-primary" @click="edit()">{{ $t("menu_new_save") }}</button>
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
@@ -103,9 +103,6 @@ const rules = computed(() => {
       required: helpers.withMessage('The News Description is required', required),
       minLength: minLength(6),
     },
-
-
-
   };
 });
 

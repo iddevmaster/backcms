@@ -114,14 +114,14 @@ function image(i) {
                                   <div class="d-flex">
                                     <img class="company-logo"  v-if="quest.eq_image" :src="image(quest.eq_image)" alt="company" />
                                     <h3 class="in-heading align-self-center">
-                                      คำถาม - โจทย์ ? {{ quest.eq_name }}
+                                      {{ $t("menu_exam_proposition") }} {{ quest.eq_name }}
                                     </h3>
                                   </div>
                                 </div>
 
                                 <div class="col-sm-6 text-sm-end">
                                   <p class="inv-list-number mt-sm-3 pb-sm-2 mt-4">
-                                    <span class="inv-title">คำตอบ : </span>
+                                    <span class="inv-title">{{ $t("menu_exam_answer") }}  : </span>
                                     <span class="inv-number">{{
                                       quest.eq_answer
                                     }}</span>
@@ -146,10 +146,10 @@ function image(i) {
                                 <table class="table">
                                   <thead class="">
                                     <tr>
-                                      <th scope="col">ลำดับ</th>
-                                      <th scope="col">เนื้อหา</th>
+                                      <th scope="col">{{ $t("menu_exam_index") }}</th>
+                                      <th scope="col">{{ $t("menu_exam_content") }}</th>
                                       <th class="text-end" scope="col">
-                                        รูป
+                                        {{ $t("menu_exam_picture") }}
                                       </th>
                                     </tr>
                                   </thead>
@@ -178,16 +178,16 @@ function image(i) {
                     <div class="invoice-action-btn">
                       <div class="row">
                         <div class="col-xl-12 col-md-3 col-sm-6">
-                          <a class="btn btn-success btn-send" @click="goToExmPage()">กลับสู่หน้าหลักสูตร</a>
+                          <a class="btn btn-success btn-send" @click="goToExmPage()">{{ $t("menu_exam_back") }}</a>
                         </div>
                         <div class="col-xl-12 col-md-3 col-sm-6">
-                          <a class="btn btn-primary btn-print" @click="goToCreatePage()">เพิ่มข้อสอบ</a>
+                          <a class="btn btn-primary btn-print" @click="goToCreatePage()">{{ $t("menu_exam_add_ex") }}</a>
                         </div>
                         <div class="col-xl-12 col-md-3 col-sm-6">
-                          <a class="btn btn-dark btn-download" @click="goToEditPage()">แก้ข้อสอบ</a>
+                          <a class="btn btn-dark btn-download" @click="goToEditPage()">{{ $t("menu_exam_edit") }}</a>
                         </div>
                         <div class="col-xl-12 col-md-3 col-sm-6">
-                          <a class="btn btn-danger btn-edit" @click="deleteItem()">ลบข้อสอบ</a>
+                          <a class="btn btn-danger btn-edit" @click="deleteItem()">{{ $t("menu_exam_del") }}</a>
                         </div>
                       </div>
                     </div>
@@ -200,10 +200,10 @@ function image(i) {
                       <div class="row">
                         <div class="col-xl-12 col-md-3 col-sm-6">
                           <a href="javascript:void(0);" class="btn btn-danger btn-send"
-                            @click="goToExmPage()">กลับสู่หน้าหลักสูตร</a>
+                            @click="goToExmPage()">{{ $t("menu_exam_back") }}</a>
                         </div>
                         <div class="col-xl-12 col-md-3 col-sm-6">
-                          <a class="btn btn-primary btn-print" @click="goToCreatePage()">แบบฟอร์มเพิ่มข้อสอบ</a>
+                          <a class="btn btn-primary btn-print" @click="goToCreatePage()">{{ $t("menu_exam_add_ex_form") }}</a>
                         </div>
                       </div>
                     </div>

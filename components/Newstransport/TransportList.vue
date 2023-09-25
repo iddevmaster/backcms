@@ -20,14 +20,14 @@
     <table id="example" class="table table-bordered" style="width:100%">
       <thead>
         <tr>
-          <th @click="sortList('news_id')" >ลำดับ &#8597;</th>
+          <th @click="sortList('news_id')" >{{ $t("menu_new_index") }} &#8597;</th>
           <!-- <th><input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"></th> -->
-          <th @click="sortList('news_id')">รูปภาพหน้าปก  &#8597; </th>
-          <th @click="sortList('news_title')">หัวข้อข่าว &#8597;</th>
+          <th @click="sortList('news_id')">{{ $t("menu_new_image") }}  &#8597; </th>
+          <th @click="sortList('news_title')">{{ $t("menu_new_title") }} &#8597;</th>
           <!-- <th @click="sortList('user_email')">News Description</th> -->
-          <th @click="sortList('news_type')">ประเภท &#8597;</th>
-          <th>อัพเดทล่าสุด</th>
-          <th class="no-content">จัดการ</th>
+          <th @click="sortList('news_type')">{{ $t("menu_new_type") }} &#8597;</th>
+          <th>{{ $t("menu_new_update") }}</th>
+          <th class="no-content">{{ $t("menu_new_action") }}</th>
         </tr>
       </thead>
       <tbody>

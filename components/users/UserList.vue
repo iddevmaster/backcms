@@ -27,17 +27,17 @@
       <thead>
         <tr>
           <th>
-            #
+            {{ $t("menu_user_index") }}
             <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
           </th>
-          <th @click="sortList('id')">ชื่อ - นามสกุล &#8597;</th>
+          <th @click="sortList('id')">{{ $t("menu_user_name") }} &#8597;</th>
           <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
-          <th @click="sortList('user_phone')">ประเภทผู้ใช้งาน</th>
-          <th >เบอรโทร &#8597;</th>
-          <th>DLT</th>
-          <th>ล่าสุด</th>
-          <th class="no-content">จัดการ</th>
+          <th @click="sortList('user_phone')">{{ $t("menu_user_type") }}</th>
+          <th >{{ $t("menu_user_tel") }} &#8597;</th>
+          <th>{{ $t("menu_user_dlt") }}</th>
+          <th>{{ $t("menu_user_time") }}</th>
+          <th class="no-content">{{ $t("menu_user_c_action") }}</th>
         </tr>
       </thead>
       <tbody>

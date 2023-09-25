@@ -2,17 +2,17 @@
   <div class="row mb-4">
     <div id="form_grid_layouts" class="col-lg-10">
       <div class="seperator-header">
-        <h4 class="">ฟอร์ม แก้ไขผู้ใช้งาน</h4>
+        <h4 class="">{{ $t("menu_user_form_edit") }}</h4>
       </div>
     </div>
     <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header" style="text-align: center;" @click="backToUser()">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">กลับหน้าผู้ใช้งาน</button>
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">{{ $t("menu_user_c_back") }}</button>
       </div>
     </div>
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">ชื่อ</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_name") }}</label>
       <input type="text" class="form-control" id="inputEmail3" placeholder="ชื่อ *"
         v-model="store.formDataEdit.user_firstname" :class="{
           'border-red-500 focus:border-red-500': v$.user_firstname.$error,
@@ -26,7 +26,7 @@
 
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">นามสกุล</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_lname") }}</label>
       <input type="text" class="form-control" id="inputEmail3" placeholder="นามสกุล *"
         v-model="store.formDataEdit.user_lastname" :class="{
           'border-red-500 focus:border-red-500': v$.user_lastname.$error,
@@ -42,7 +42,7 @@
   <div class="row mb-4">
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">ยูสเซอร</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_username") }}</label>
       <input type="text" class="form-control" id="inputPassword3" placeholder="ยูสเซอร *"
         v-model="store.formDataEdit.user_name" :class="{
           'border-red-500 focus:border-red-500': v$.user_name.$error,
@@ -56,7 +56,7 @@
     </div>
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">รหัสผ่าน</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_pass") }}</label>
       <input type="text" class="form-control" id="inputPassword3" placeholder="รหัสผ่าน *"
         v-model="store.formDataEdit.user_password" :class="{
           'border-red-500 focus:border-red-500': v$.user_password.$error,
@@ -70,7 +70,7 @@
   </div>
   <div class="row mb-4">
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">อีเมล</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_email") }}</label>
       <input type="text" class="form-control" id="inputPassword3" placeholder="อีเมล *"
         v-model="store.formDataEdit.user_email" :class="{
           'border-red-500 focus:border-red-500': v$.user_email.$error,
@@ -82,7 +82,7 @@
 
     </div>
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">เบอรโทร</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_tel") }}</label>
       <input type="text" class="form-control" id="inputPassword3" placeholder="เบอรโทร *"
         v-model="store.formDataEdit.user_phone" :class="{
           'border-red-500 focus:border-red-500': v$.user_phone.$error,
@@ -96,24 +96,24 @@
   </div>
   <div class="row mb-4">
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">ประเภทผู้ใช้งาน</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_type") }}</label>
       <select class="form-control" v-model="store.formDataEdit.user_type">
-        <option value="1">ผู้ดูแลระบบ</option>
-    <option value="2">เจ้าหน้าที่</option>
-    <option value="3">ประชาชน</option>
+        <option value="1">{{ $t("menu_user_c_type_user_superadmin") }}</option>
+    <option value="2">{{ $t("menu_user_c_type_user_admin") }}</option>
+    <option value="3">{{ $t("menu_user_c_type_user_user") }}</option>
     </select>
     </div>
 
 
        <div class="col-sm-6">
-      <label for="exampleFormControlInput1">สถานะ</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_status") }}</label>
       <select class="form-control" v-model="store.formDataEdit.active">
     <option value="1">ใช้งาน</option>
     <option value="0">ไม่ใช้งาน</option>
     </select>
     </div>
   </div>
-  <button type="button" class="btn btn-primary" @click="save()">บันทึก</button>
+  <button type="button" class="btn btn-primary" @click="save()">{{ $t("menu_user_c_save") }}</button>
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';

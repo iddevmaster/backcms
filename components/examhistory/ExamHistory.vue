@@ -31,14 +31,14 @@
         <thead>
             <tr>
        
-                <th scope="col" @click="sortList('em_code')">รหัสหลักสูตร &#8597;</th>
-                <th class="text-center" scope="col">รูปหลักสูตร</th>
-                <th scope="col" @click="sortList('em_name')">ชื่อหลักสูตร &#8597;</th>
-                <th class="text-center" scope="col">รายละเอียด</th>
-                <th class="text-center" scope="col" @click="sortList('em_random_amount')">จำนวนที่สุ่ม &#8597;</th>
-                 <th class="text-center" scope="col" @click="sortList('total_question')">จำนวนข้อสอบ &#8597;</th>
+                <th scope="col" @click="sortList('em_code')">{{ $t("menu_exam_all_code") }} &#8597;</th>
+                <th class="text-center" scope="col">{{ $t("menu_exam_all_pic") }}</th>
+                <th scope="col" @click="sortList('em_name')">{{ $t("menu_exam_all_name") }} &#8597;</th>
+                <th class="text-center" scope="col">{{ $t("menu_exam_all_detail") }}</th>
+                <th class="text-center" scope="col" @click="sortList('em_random_amount')">{{ $t("menu_exam_all_total_random") }} &#8597;</th>
+                 <th class="text-center" scope="col" @click="sortList('total_question')">{{ $t("menu_exam_all_total_exam") }} &#8597;</th>
             
-                <th class="text-center" scope="col">จัดการ</th>
+                <th class="text-center" scope="col">{{ $t("menu_exam_all_total_action") }}</th>
             </tr>
         </thead>
 
@@ -73,7 +73,7 @@
                 </td> -->
                 <td align="center">
              <div class="btn-group-vertical">
-            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" @click="details(item)">ดูรายละเอียด</button>
+            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" @click="details(item.em_id)">{{ $t("menu_exam_history_detail") }}</button>
         
             </div>
           </td>
@@ -154,6 +154,10 @@ const setCurrentPageclick = async (page) => {
  await store.fetchExamlist()
 };
 
+
+const details = async (item) => {
+  router.push({ path: "examhistory/" + item });
+};
 
 
 function image(i) {

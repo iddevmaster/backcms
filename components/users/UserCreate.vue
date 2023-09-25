@@ -2,16 +2,16 @@
   <div class="row mb-4">
     <div id="form_grid_layouts" class="col-lg-10">
       <div class="seperator-header">
-        <h4 class="">ฟอร์ม เพิ่มผู้ใช้งาน</h4>
+        <h4 class="">{{ $t("menu_user_form_add") }}</h4>
       </div>
     </div>
     <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header" style="text-align: center;" @click="backToUser()">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">กลับหน้าผู้ใช้งาน</button>
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">{{ $t("menu_user_c_back") }}</button>
       </div>
     </div>
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">ชื่อ</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_name") }}</label>
       <input type="text" class="form-control" id="inputEmail3" placeholder="ชื่อ *"
         v-model="store.formDataregister.user_firstname" :class="{
           'border-red-500 focus:border-red-500': v$.user_firstname.$error,
@@ -25,7 +25,7 @@
 
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">นามสกุล</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_lname") }}</label>
       <input type="text" class="form-control" id="inputEmail3" placeholder="นามสกุล *"
         v-model="store.formDataregister.user_lastname" :class="{
           'border-red-500 focus:border-red-500': v$.user_lastname.$error,
@@ -41,7 +41,7 @@
   <div class="row mb-4">
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">ยูสเซอร</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_username") }}</label>
       <input type="text" class="form-control" id="inputPassword3" placeholder="ยูสเซอร *"
         v-model="store.formDataregister.user_name" :class="{
           'border-red-500 focus:border-red-500': v$.user_name.$error,
@@ -53,7 +53,7 @@
     </div>
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">รหัสผ่าน</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_pass") }}</label>
       <input type="text" class="form-control" id="inputPassword3" placeholder="รหัสผ่าน *"
         v-model="store.formDataregister.user_password" :class="{
           'border-red-500 focus:border-red-500': v$.user_password.$error,
@@ -66,7 +66,7 @@
   </div>
   <div class="row mb-4">
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">อีเมล</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_email") }}</label>
       <input type="text" class="form-control" id="inputPassword3" placeholder="อีเมล *"
         v-model="store.formDataregister.user_email" :class="{
           'border-red-500 focus:border-red-500': v$.user_email.$error,
@@ -77,7 +77,7 @@
       }}</span>
     </div>
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">เบอร์โทร</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_tel") }}</label>
       <input type="text" class="form-control" id="inputPassword3" placeholder="เบอรโทร *"
         v-model="store.formDataregister.user_phone" :class="{
           'border-red-500 focus:border-red-500': v$.user_phone.$error,
@@ -90,17 +90,17 @@
   </div>
   <div class="row mb-4">
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">ประเภทผู้ใช้งาน</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_type") }}</label>
       <select class="form-control" v-model="store.formDataregister.user_type">
-    <option value="1">ผู้ดูแลระบบ</option>
-    <option value="2">เจ้าหน้าที่</option>
-    <option value="3">ประชาชน</option>
+    <option value="1">{{ $t("menu_user_c_type_user_superadmin") }}</option>
+    <option value="2">{{ $t("menu_user_c_type_user_admin") }}</option>
+    <option value="3">{{ $t("menu_user_c_type_user_user") }}</option>
     </select>
     </div>
 
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">สถานะ</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_status") }}</label>
       <select class="form-control" v-model="store.formDataregister.active">
     <option value="1">ใช้งาน</option>
     <option value="0">ไม่ใช้งาน</option>
@@ -108,64 +108,8 @@
     </div>
   </div>
 
-  <!-- <div class="row mb-4">
-    <div class="col-sm-12">
-      <label for="exampleFormControlInput1">ที่อยู่</label>
-      <input type="text" class="form-control" id="add" placeholder="ที่อยู่ *"  v-model="store.formDataregister.user_address"> 
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.user_address.$error">{{
-        v$.user_address.$errors[0].$message
-      }}</span> 
-    </div>
-  </div>
-  <div class="row mb-4">
-    <div class="col-sm-12">
-      <label for="exampleFormControlInput1">วันเกิด</label>
-      <input type="text" class="form-control" id="birthday" placeholder="วันเกิด *"  v-model="store.formDataregister.user_birthday"> 
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.user_birthday.$error">{{
-        v$.user_birthday.$errors[0].$message
-      }}</span> 
-    </div>
-  </div> -->
 
-  <!-- <div class="row mb-4">
-    <div class="col-sm-6">
-      <label for="exampleFormControlInput1">Zipcode</label>
-    <select class="form-control" v-if="store.zipcode" v-model="store.formDataregister.location_id">
-    <option   v-for="(zipcode, index) in store.zipcode" :key="zipcode.id" :value="zipcode.id">{{zipcode.zipcode_name}}</option>
-    </select>
-    <p>Selected Option: {{ store.formDataregister.location_id }}</p>
-    </div>
-    <div class="col-sm-6">
-      <label for="exampleFormControlInput1">Country</label>
-      <select class="form-control" v-if="store.country" v-model="store.formDataregister.country_id">
-    <option   v-for="(country, x) in store.country" :key="country.country_id" :value="country.country_id">{{country.country_name_eng}}</option>
-    </select>
-    <p>Selected Option: {{ store.formDataregister.country_id }}</p>
-    </div>
-  </div> -->
-
-  <!-- <div class="form-group mb-4 mt-3">
-      <label for="exampleFormControlFile1">รูปภาพหน้าข่าว</label> <span class="text-xs text-red-500" style="color:red"
-        v-if="store.imageReq == true"> Invalid file selected</span>
-      <input type="file" class="form-control-file" id="exampleFormControlFile1"  @change="onFileChange"
-        ref="fileupload" accept="image/*">
-    </div>
-    <div class="border p-2 mt-3">
-      <p>แสดงรูปตรงนี้:</p>
-      <template  v-if="store.image">
-        <div class="row">
-          <div id="image-container" class="col-md-3 col-sm-4 col-6" >
-            <div class="image-wrapper">
-              <img :src="store.image" class="img-fluid" />
-              <button @click="removeImage()" class="delete-button"><i class="bi bi-x-lg"></i></button>
-            </div>
-          </div>
-        </div>
-      </template>
-    </div> -->
-
-
-  <button type="button" class="btn btn-primary" @click="save()">บันทึก</button>
+  <button type="button" class="btn btn-primary" @click="save()">{{ $t("menu_user_c_save") }}</button>
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';

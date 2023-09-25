@@ -2,12 +2,12 @@
 
 <div id="form_grid_layouts" class="col-lg-10">
       <div class="seperator-header">
-        <h4 class="">รายละเอียด</h4>
+        <h4 class="">{{ $t("menu_user_detail") }}</h4>
       </div>
     </div>
     <div class="row mb-4">
     <div class="col-sm-12">
-      <label for="exampleFormControlInput1">เลขบัตรประชาชน</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_iden") }}</label>
       <input type="text" class="form-control" id="add" placeholder="ที่อยู่ *"  v-model="store.formDetailEdit.identification_number"
       :class="{
           'border-red-500 focus:border-red-500': v$.identification_number.$error,
@@ -21,7 +21,7 @@
   </div>
      <div class="row mb-4">
     <div class="col-sm-12">
-      <label for="exampleFormControlInput1">ที่อยู่</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_address") }}</label>
       <input type="text" class="form-control" id="add" placeholder="ที่อยู่ *"  v-model="store.formDetailEdit.user_address"
       :class="{
           'border-red-500 focus:border-red-500': v$.user_address.$error,
@@ -35,7 +35,7 @@
   </div>
   <div class="row mb-4">
     <div class="col-sm-12">
-      <label for="exampleFormControlInput1">วันเกิด</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_birdday") }}</label>
       <input type="date" class="form-control" id="birthday" placeholder="วันเกิด *" format="YYYY-MM-dd"   v-model="store.formDetailEdit.user_birthday" 
       :class="{
           'border-red-500 focus:border-red-500': v$.user_birthday.$error,
@@ -50,14 +50,14 @@
   </div> 
     <div class="row mb-4">
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">Zipcode</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_zipcode") }}</label>
     <select class="form-control" v-if="store.zipcode" v-model="store.formDetailEdit.location_id">
     <option   v-for="(zipcode, index) in store.zipcode" :key="zipcode.id" :value="zipcode.id">{{zipcode.zipcode_name}}</option>
     </select>
     <p>Selected Option: {{ store.formDetailEdit.location_id }}</p>
     </div>
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">Country</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_country") }}</label>
       <select class="form-control" v-if="store.country" v-model="store.formDetailEdit.country_id">
     <option   v-for="(country, x) in store.country" :key="country.country_id" :value="country.country_id">{{country.country_name_eng}}</option>
     </select>
@@ -68,7 +68,7 @@
 
     <div class="row mb-4">
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">สถานะตัวตน</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_verify") }}</label>
       <select class="form-control" v-model="store.formDetailEdit.verify_account">
     <option value="n">ยังไม่ยืนยันตัวตน</option>
     <option value="y">ยืนยันตัวตนแล้ว</option>
@@ -77,7 +77,7 @@
   </div>
 
     <div class="form-group mb-4 mt-3">
-      <label for="exampleFormControlFile1">รูปภาพ</label> <span class="text-xs text-red-500" style="color:red"
+      <label for="exampleFormControlFile1">{{ $t("menu_user_image") }}</label> <span class="text-xs text-red-500" style="color:red"
         v-if="store.imageReq == true"> Invalid file selected</span>
       <input type="file" class="form-control-file" id="exampleFormControlFile1"  @change="onFileChange"
         ref="fileupload" accept="image/*">
@@ -96,7 +96,7 @@
       </template>
     </div>
     <div class="form-group mb-4 mt-3">
-      <button type="button" class="btn btn-primary" @click="savedetail()">บันทึก</button>
+      <button type="button" class="btn btn-primary" @click="savedetail()">{{ $t("menu_user_bt_save") }}</button>
     </div>
     
 </template>
