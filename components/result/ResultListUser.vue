@@ -2,14 +2,14 @@
 
 
 <div class="widget-header">
-                                    <div class="row">
-                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                            <h4>ผลการสอบ</h4>
-                                        </div>
-                                    </div>
-                                </div>
+  <div class="row">
+      <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+          <h4>ผลการสอบ</h4>
+      </div>
+  </div>
+</div>
 <div class="table-responsive">
-    <table class="table" v-if="store.resultUser.length > 0">
+    <table class="table text-center" v-if="store.resultUser.length > 0">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -22,17 +22,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(event, index) in store.resultUser">
+        <tr v-for="(event, index) in store.resultUser" >
           <td>{{ index + 1 }}</td>
           <td>{{ event.mr_score }}</td>
           <td>{{ event.mr_learn_type }}</td>
           <td>{{ event.dlt_code }}</td>
           <td>{{ event.mr_status }}</td>
           <td>{{ event.crt_date }}</td>
-           <td>
+          <td>
             <button
               type="button"
-              class="btn btn-success mt-0"
+              class="btn btn-success mt-0 mx-1"
               style="background-color: #bfe20b"
               @click="edit(event)" >
               <i class="bi bi-gear"></i>
@@ -40,7 +40,7 @@
 
             <button
               type="button"
-              class="btn btn-success mt-0"
+              class="btn btn-success mt-0 mx-1"
               style="background-color: #ce0000"
               @click="del(event.mr_id)" >
               <i class="bi bi-trash"></i>

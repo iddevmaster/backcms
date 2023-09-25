@@ -29,12 +29,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(users,index) in store.userall" :key="users.user_id"  @click="Sel(users,users.detail,users.identification_number,users.user_id)" :class="{ 'table-success': store.myChoose === users }">
+        <tr v-for="(users,index) in store.userall" :key="users.user_id"  @click="Sel(users,users.detail,users.identification_number,users.user_id)" :class="{ 'table-success': store.myChoose === users && users.detail == 'y' , 'table-danger': store.myChoose === users && users.detail != 'y' }">
           <td>{{ users.user_id }}</td>
            <td>{{ users.user_firstname }} - {{ users.user_lastname }}</td>
           <td>{{ users.user_phone }}</td>
-          <td v-if="users.detail == 'y'">ผ่านการยืนยัน</td>
-          <td v-else>ไม่ผ่านการยืนยัน</td>
+          <td v-if="users.detail == 'y'"><p class="mb-0 text-success">ผ่านการยืนยัน</p></td>
+          <td v-else><p class="mb-0 text-danger">ไม่ผ่านการยืนยัน</p></td>
           <!-- <td>
             <button type="button" class="btn btn-danger">เลือก</button>
           </td> -->

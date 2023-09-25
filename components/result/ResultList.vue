@@ -39,16 +39,16 @@
   </div>
 
 <div class="table-responsive">
-    <table class="table" v-if="store.result.length > 0">
+    <table class="table text-center" v-if="store.result.length > 0">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Score</th>
-          <th scope="col">Learn</th>
-          <th class="text-center" scope="col">Status</th>
-          <th class="text-center" scope="col">Firstname Lastname</th>
-          <th class="text-center" scope="col">User Phone</th>
-          <th class="text-center" scope="col">Action</th>
+          <th scope="col">ลำดับที่</th>
+          <th scope="col">คะแนนที่ได้</th>
+          <th scope="col">ประเภทการสอบ</th>
+          <th class="text-center" scope="col">สถานะ</th>
+          <th class="text-center" scope="col">ชื่อ - นามสกุล</th>
+          <th class="text-center" scope="col">หมายเลขโทรศัพท์</th>
+          <th class="text-center" scope="col">จัดการผลสอบ</th>
         </tr>
       </thead>
       <tbody>

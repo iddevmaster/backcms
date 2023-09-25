@@ -315,24 +315,7 @@
             class="dropdown-toggle"
           >
             <div class="">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-users"
-              >
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-
+              <i class="bi bi-person-vcard menu-icon"></i>
               <span>{{ $t("menu_dlt") }}</span>
             </div>
             <div>
@@ -372,24 +355,7 @@
             class="dropdown-toggle"
           >
             <div class="">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-users"
-              >
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-
+              <i class="bi bi-calendar-plus menu-icon"></i>
               <span>{{ $t("menu_new_app") }}</span>
             </div>
             <div>
@@ -432,24 +398,7 @@
             class="dropdown-toggle"
           >
             <div class="">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-users"
-              >
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-
+              <i class="bi bi-pencil-square menu-icon"></i>
               <span>{{ $t("menu_new_resul") }}</span>
             </div>
             <div>
@@ -495,24 +444,7 @@
             class="dropdown-toggle"
           >
             <div class="">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-users"
-              >
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-
+              <i class="bi bi-person-gear menu-icon"></i>
               <span>{{ $t("menu_new_user") }}</span>
             </div>
             <div>
@@ -589,5 +521,15 @@ function image(i) {
 }
 
 </script>
+
+<style>
+  .menu-icon {
+    font-size: 20px;
+    margin-right: 5px;
+  }
+  #sidebar ul.menu-categories li.menu > .dropdown-toggle[aria-expanded=true] .menu-icon {
+    color: white;
+  }
+</style>
   
   

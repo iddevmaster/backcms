@@ -1,14 +1,5 @@
 <template>
-  <div class="row mb-4">
-    <div id="form_grid_layouts" class="col-lg-10">
-      <div class="seperator-header">
-        <h4 class="">No Data</h4>
-      </div>
-    </div>
-  </div>
-
-
-
+  <div class="text-center"><h5 class="text-danger">#ผู้ใช้งาน {{ store.myChoose.user_firstname + ' ' + store.myChoose.user_lastname }} ยังไม่ผ่านการยืนยันตัวตน</h5></div>
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
@@ -134,5 +125,10 @@ const save = async () => {
   min-height: 200px;
   max-width: 300px;
   max-height: 300px;
+}
+.notpass h4 {
+  background-color: rgba(255, 0, 0, 0.623);
+  color: white;
+  border-radius: 10px;
 }
 </style>

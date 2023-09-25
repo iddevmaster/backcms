@@ -77,6 +77,17 @@ const closeModal = () => {
                             <ResultEdit></ResultEdit>
                         </div>
                     </div>
+                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="!(store.resultUser.length > 0) && !(store.IsCardEdit)">
+                        <div class="widget-content widget-content-area br-8 p-3 text-danger">
+                            #กรุณาเลือกผู้ใช้ที่ต้องการแก้ไขผลสอบ หากผู้ใช้ที่เลือกยังไม่ผ่านการ <b><u>"ยืนยันตัวตน"</u></b> จะไม่สามารถแก้ไขผลสอบได้
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.resultUser.length > 0 && !(store.IsCardEdit)">
+                        <div class="widget-content widget-content-area br-8 p-3 text-danger">
+                            #กรุณาเลือกผลการสอบที่ต้องการแก้ไข
+                        </div>
+                    </div>
+
 
                     <!-- <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.IsCardNoInsert">
                         <div class="widget-content widget-content-area br-8 p-3">
