@@ -12,13 +12,13 @@
     <table class="table text-center" v-if="store.resultUser.length > 0">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Score</th>
-          <th scope="col">Learn</th>
-          <th scope="col">DLT</th>
-          <th class="text-center" scope="col">Status</th>
-          <th class="text-center" scope="col">Create</th>
-          <th class="text-center" scope="col">Action</th>
+          <th scope="col">ลำดับที่</th>
+          <th scope="col">คะแนนที่ได้</th>
+          <th scope="col">ประเภทการสอบ</th>
+          <th scope="col">ประเภท DLT</th>
+          <th class="text-center" scope="col">สถานะ</th>
+          <th class="text-center" scope="col">วันที่สร้าง</th>
+          <th class="text-center" scope="col">จัดการผลสอบ</th>
         </tr>
       </thead>
       <tbody>
