@@ -179,10 +179,10 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/exam">หลักสูตรทั้งหมด</nuxt-link>
+              <nuxt-link to="/exam"> {{ $t("menu_exam_all") }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/examhistory">ประวัติการสอบ</nuxt-link>
+              <nuxt-link to="/examhistory"> {{ $t("menu_exam_all_history") }}</nuxt-link>
             </li>
           </ul>
         </li>
@@ -239,11 +239,11 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/news/transport">{{ $t("menu_new_ci") }}</nuxt-link>
+              <nuxt-link to="/news/transport">{{ $t("menu_new_tra") }}</nuxt-link>
             </li>
             <li>
               <nuxt-link to="/news/transport/create"
-                >เพิ่มข่าวสารกรมขนส่ง</nuxt-link
+                >{{ $t("menu_new_tra_add") }}</nuxt-link
               >
             </li>
           </ul>
@@ -302,7 +302,7 @@
               <nuxt-link to="/news/civil">{{ $t("menu_new_ci") }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/news/civil/create">เพิ่มข่าวสารกรมโยธา</nuxt-link>
+              <nuxt-link to="/news/civil/create">{{ $t("menu_new_ci_add") }}</nuxt-link>
             </li>
           </ul>
         </li>
@@ -381,10 +381,10 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/appointment">นัดหมายทั้งหมด</nuxt-link>
+              <nuxt-link to="/appointment">{{ $t("menu_app_manage_all") }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/appointment/create">เพิ่มนัดหมาย</nuxt-link>
+              <nuxt-link to="/appointment/create">{{ $t("menu_app_app_create") }}</nuxt-link>
             </li>
           </ul>
         </li>
