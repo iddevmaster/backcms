@@ -42,8 +42,8 @@ const deletel = async () => {
       <div class="page-meta">
         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Appointment</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Appointment List</li>
+            <li class="breadcrumb-item"><a href="#">{{ $t("menu_app_manage") }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ $t("menu_app_manage_all") }}</li>
           </ol>
         </nav>
       </div>

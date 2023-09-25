@@ -2,7 +2,7 @@
   <div class="row p-3">
     <div id="form_grid_layouts" class="col-lg-10">
       <div class="seperator-header">
-        <h4 class="">นัดหมาย</h4>
+        <h4 class="">{{ $t("menu_app_view") }}</h4>
       </div>
     </div>
     <div id="form_grid_layouts" class="col-lg-2">
@@ -14,7 +14,7 @@
         <button
           class="btn btn-primary additem _effect--ripple waves-effect waves-light"
         >
-          กลับหน้านัดหมาย
+          {{ $t("menu_app_view_back") }}
         </button>
       </div>
     </div>
@@ -51,12 +51,12 @@
     <table class="table">
       <thead>
         <tr>
-          <th>#</th>
-          <th>user_email</th>
-          <th>user_firstname</th>
-          <th>user_phone</th>
-          <th>Identification Number</th>
-          <th>จัดการ</th>
+          <th>{{ $t("menu_app_view_list_index") }}</th>
+          <th>{{ $t("menu_app_view_list_email") }}</th>
+          <th>{{ $t("menu_app_view_list_name") }}</th>
+          <th>{{ $t("menu_app_view_list_phone") }}</th>
+          <th>{{ $t("menu_app_view_iden") }}</th>
+          <th>{{ $t("menu_app_view_action") }}</th>
         </tr>
       </thead>
       <tbody>

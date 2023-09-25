@@ -28,17 +28,17 @@
       <thead>
         <tr>
           <th>
-            #
+            {{ $t("menu_dlt_title_manage_index") }}
             <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
           </th>
-          <th @click="sortList('id')">ชื่อ - นามสกุล &#8597;</th>
+          <th @click="sortList('id')">{{ $t("menu_dlt_title_manage_name") }} &#8597;</th>
           <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
-          <th @click="sortList('user_phone')">ประเภทผู้ใช้งาน</th>
-          <th >เบอรโทร &#8597;</th>
+          <th @click="sortList('user_phone')">{{ $t("menu_dlt_title_manage_type") }}</th>
+          <th >{{ $t("menu_dlt_title_manage_phone") }} &#8597;</th>
          
-          <th>ล่าสุด</th>
-          <th class="no-content">จัดการใบขับขี่</th>
+          <th>{{ $t("menu_dlt_title_manage_update") }}</th>
+          <th class="no-content">{{ $t("menu_dlt_title_manage_action") }}</th>
         </tr>
       </thead>
       <tbody>
@@ -48,9 +48,9 @@
           <td>{{ user.user_firstname }} {{ user.user_lastname }}</td>
           <!-- <td>{{ user.user_name }}</td> -->
           <!-- <td>{{ user.user_email }}</td> -->
-          <td v-if="user.user_type == 1">ผู้ดูแลระบบ</td>
-          <td v-else-if="user.user_type == 2">เจ้าหน้าที่</td>
-          <td v-else>ประชาชน</td>
+          <td v-if="user.user_type == 1"> {{ $t("menu_user_c_type_user_superadmin") }}</td>
+          <td v-else-if="user.user_type == 2">  {{ $t("menu_user_c_type_user_admin") }}</td>
+          <td v-else>{{ $t("menu_user_c_type_user_user") }}</td>
           <td>{{ user.user_phone }}</td>
        
           <td>{{ coverttime(user.udp_date) }}</td>

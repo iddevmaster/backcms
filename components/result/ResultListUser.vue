@@ -4,7 +4,7 @@
 <div class="widget-header">
   <div class="row">
       <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-          <h4>ผลการสอบ</h4>
+          <h4>{{ $t("menu_result_form") }}</h4>
       </div>
   </div>
 </div>
@@ -12,13 +12,13 @@
     <table class="table text-center" v-if="store.resultUser.length > 0">
       <thead>
         <tr>
-          <th scope="col">ลำดับที่</th>
-          <th scope="col">คะแนนที่ได้</th>
-          <th scope="col">ประเภทการสอบ</th>
-          <th scope="col">ประเภท DLT</th>
-          <th class="text-center" scope="col">สถานะ</th>
-          <th class="text-center" scope="col">วันที่สร้าง</th>
-          <th class="text-center" scope="col">จัดการผลสอบ</th>
+          <th scope="col">{{ $t("menu_result_index") }}</th>
+          <th scope="col">{{ $t("menu_result_score") }}</th>
+          <th scope="col">{{ $t("menu_result_type") }}</th>
+          <th scope="col">{{ $t("menu_result_form_type_dlt") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_result_status") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_result_create") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_result_action") }}</th>
         </tr>
       </thead>
       <tbody>

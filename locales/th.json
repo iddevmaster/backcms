@@ -21,6 +21,7 @@
   "menu_lesson_name_and_detail": "ชื่อ && รายละเอียดบทเรียน",
   "menu_lesson_f_title_picture": "รูปภาพแสดงหน้าปก",
   "menu_lesson_f_video": "วีดีโอ",
+  
 
   "menu_page_course": "คอร์ส",
   "menu_page_course_page": "คอร์สทั้งหมด",
@@ -66,6 +67,16 @@
   "menu_exam_dis_image": "แสดงรูปตรงนี้",
   "menu_exam_history_detail": "ดูรายละเอียด",
 
+  "menu_exam_history": "ประวัติการสอบ",
+  "menu_exam_history_all": "ประวัติการสอบทั้งหมด",
+  "menu_exam_historyin_exam": "ประวัติผู้เข้าทดสอบในหลักสูตร",
+
+  "menu_exam_history_index": "ลำดับ",
+  "menu_exam_history_score": "คะแนน",
+  "menu_exam_history_total": "จำนวนคำถาม",
+  "menu_exam_history_email": "อีเมล",
+  "menu_exam_history_phone": "เบอร์โทร",
+  
   
   "menu_new_index": "ลำดับ",
   "menu_new_image": "รูปภาพ",
@@ -115,6 +126,9 @@
   "menu_user_form_edit": "ฟอร์ม แก้ไขผู้ใช้งาน",
   "menu_user_form_add": "ฟอร์ม เพิ่มผู้ใช้งาน",
 
+
+
+
   "menu_user_iden": "เลขบัตรประชาชน",
   "menu_user_address": "ที่อยู่",
   "menu_user_birdday": "วันเกิด",
@@ -125,9 +139,92 @@
   "menu_user_bt_save": "บันทึก",
 
   "menu_user_detail": "รายละเอียด",
-  "menu_user_account": "บัญชี"
+  "menu_user_account": "บัญชี",
 
+  "menu_dlt_title_manage": "จัดการใบขับขี่",
+  "menu_dlt_title_manage_all": "จัดการใบขับขี่ทั้งหมด",
+  "menu_dlt_title_manage_index": "#",
+  "menu_dlt_title_manage_name": "ชื่อ - นามสกุล",
+  "menu_dlt_title_manage_type": "ประเภทผู้ใช้งาน",
+  "menu_dlt_title_manage_phone": "เบอรโทร",
+  "menu_dlt_title_manage_update": "ล่าสุด",
+  "menu_dlt_title_manage_action": "จัดการ",
+  "menu_dlt_form_type": "ประเภทใบขับขี่",
+  "menu_dlt_form_issue_date": "วันที่ออกใบ",
+  "menu_dlt_form_expiry_date": "วันที่หมดอายุ",
+  "menu_dlt_form_front_img": "รูปหน้าบัตร",
+  "menu_dlt_form_back_img": "รูปหลังบัตร",
+  "menu_dlt_bt_save": "เพิ่มใบขับขี่",
+  "menu_dlt_image_display": "แสดงรูปหลังบัตร",
+  "menu_dlt_all": "ใบขับขี่ทั้งหมด",
+  "menu_dlt_del": "ลบ",
+  "menu_dlt_update": "แก้ไข",
+  "menu_dlt_form_update": "แก้ไขใบขับขี่",
+  "menu_dlt_form_add": "เพิ่มใบขับขี่",
+  "menu_dlt_manage_title": "จัดการใบขับขี่",
+  "menu_dlt_title_user": "จัดการใบขับขี่ของผู้ใช้งาน",
+
+  "menu_app_manage": "นัดหมาย",
+  "menu_app_manage_all": "นัดหมายทั้งหมด",
+  "menu_app_manage_search": "ค้นหา",
+  "menu_app_manage_index": "#",
+  "menu_app_manage_remark": "หมายุเหตุ",
+  "menu_app_manage_dlt": "ประเภทใบขับขี่",
+  "menu_app_manage_leantype": "ประเภทสอบ",
+  "menu_app_manage_quota": "จำนวนจำกัด",
+  "menu_app_manage_total_reserve": "จำนวนนัดหมาย",
+  "menu_app_manage_date_start": "ช่วงเวลาเริ่ม",
+  "menu_app_manage_date_end": "ช่วงเวลาหมดเขต",
+  "menu_app_manage_action": "จัดการ",
+  "menu_app_app_edit": "แก้ไขนัดหมาย",
+  "menu_app_app_create": "สร้างนัดหมาย",
+  "menu_app_form_app": "ฟอร์ม เพิ่มนัดหมาย",
+  "menu_app_app_back": "กลับหน้านัดหมาย",
+  "menu_app_app_quota": "จำนวนกำจัดการจอง",
+  "menu_app_app_remark": "หมายุเหตุ",
+  "menu_app_app_start": "ช่วงเวลาเริ่ม",
+  "menu_app_app_end": "ช่วงเวลาหมดเขต",
+  "menu_app_app_type": "ประเภทสอบ",
+  "menu_app_app_status": "สถานะ",
+  "menu_app_app_save": "บันทึก",
+
+  "menu_app_view": "นัดหมาย",
+  "menu_app_view_list": "รายละเอียดการจอง",
+  "menu_app_view_list_index": "#",
+  "menu_app_view_list_name": "ชื่อ - นามสกุล",
+  "menu_app_view_list_phone": "เบอร์โทร",
+  "menu_app_view_list_email": "อีเมล",
+  "menu_app_view_save": "บันทึก",
+  "menu_app_view_back": "กลับหน้านัดหมาย",
+  "menu_app_view_iden": "เลขบัตรประชาชน",
+  "menu_app_view_action": "จัดการ",
+
+
+  "menu_result": "ผลสอบ",
+  "menu_result_list": "ผลสอบทั้งหมด",
+  "menu_result_search": "ค้นหา",
+  "menu_result_index": "ลำดับ",
+  "menu_result_score": "คะแนนที่ได้",
+  "menu_result_type": "ประเภทการสอบ",
+  "menu_result_status": "สถานะ",
+  "menu_result_name": "ชื่อ - นามสกุล",
+  "menu_result_phone": "เบอรโทร",
+  "menu_result_action": "จัดการ",
+
+
+  "menu_result_form_create": "ฟอร์ม - เพิ่มการสอบ",
+  "menu_result_form": "ผลสอบ",
+  "menu_result_form_score": "คะแนน",
+  "menu_result_form_type": "ประเภทการสอบ",
+  "menu_result_form_type_dlt": "ประเภทใบขับขี่",
+  "menu_result_form_type_status": "สถานะ",
+  "menu_result_save": "บันทึก",
+  "menu_result_pass": "ผ่าน",
+  "menu_result_fall": "ไม่ผ่าน",
+  "menu_result_create": "วันที่สร้าง",
+
+
+  "menu_result_form_edit": "ฟอร์ม - แก้ไขผลการสอบ"
 }
-
 
 

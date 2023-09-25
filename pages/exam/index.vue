@@ -69,7 +69,7 @@ const Deleteexam = async (item) => {
                             <div class="widget-header">
                                 <div class="row">
                                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                        <button class="btn btn-primary mb-2 me-4" @click="OpenFormInsert()">เพิ่มหลักสูตร</button>
+                                        <button class="btn btn-primary mb-2 me-4" @click="OpenFormInsert()">{{ $t("menu_exam_add") }}</button>
                                     </div>
                                 </div>
                             </div>

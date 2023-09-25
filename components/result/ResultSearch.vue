@@ -16,14 +16,14 @@
       <thead>
         <tr>
           <th>
-            #
+            {{ $t("menu_result_index") }}
             <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
           </th>
-          <th>ชื่อ - นามสกุล &#8597;</th>
+          <th>{{ $t("menu_result_name") }} &#8597;</th>
           <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
-          <th >เบอรโทร &#8597;</th>
-          <th>สถานะ</th>
+          <th >{{ $t("menu_result_phone") }} &#8597;</th>
+          <th>{{ $t("menu_result_status") }}</th>
       
           <!-- <th class="no-content">จัดการ</th> -->
         </tr>

@@ -53,8 +53,8 @@ const closeModal = () => {
             <div class="page-meta">
                 <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                     <li class="breadcrumb-item"><a href="#">Result</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Result Edit</li>
+                     <li class="breadcrumb-item"><a href="#">{{ $t("menu_result") }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ $t("menu_result_form_edit") }}</li>
                     </ol>
                 </nav>
             </div>

@@ -2,16 +2,16 @@
   <div class="row mb-4">
     <div id="form_grid_layouts" class="col-lg-10">
       <div class="seperator-header">
-        <h4 class="">ฟอร์ม เพิ่มนัดหมาย</h4>
+        <h4 class="">{{ $t("menu_app_form_app") }}</h4>
       </div>
     </div>
     <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header" style="text-align: center;" @click="backToUser()">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">กลับหน้านัดหมาย</button>
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">{{ $t("menu_app_app_back") }}</button>
       </div>
     </div>
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">Quota</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_app_app_quota") }}</label>
       <input type="text" class="form-control" id="inputEmail3" placeholder="จำนวนที่สามารถจองได้ *" maxlength="3"
         v-model="store.forminsert.ap_quota" :class="{
           'border-red-500 focus:border-red-500': v$.ap_quota.$error,
@@ -25,7 +25,7 @@
 
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">Remark</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_app_app_remark") }}</label>
       <input type="text" class="form-control" id="inputEmail3" placeholder="หมายเหตุ *"
         v-model="store.forminsert.ap_remark" :class="{
           'border-red-500 focus:border-red-500': v$.ap_remark.$error,
@@ -40,7 +40,7 @@
   </div>
   <div class="row mb-4">
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">ap_date_start</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_app_app_start") }}</label>
             <VueDatePicker v-model="store.forminsert.ap_date_start"   :format="format_start"   required></VueDatePicker>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_date_start.$error">{{
         v$.ap_date_start.$errors[0].$message
@@ -48,7 +48,7 @@
     </div>
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">ap_date_end</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_app_app_end") }}</label>
  
           <VueDatePicker v-model="store.forminsert.ap_date_end" required  :format="format_end"></VueDatePicker>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_date_end.$error">{{
@@ -59,7 +59,7 @@
 
   <div class="row mb-4">
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">ประเภทผู้ใช้งาน</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_app_app_type") }}</label>
       <select class="form-control" v-model="store.forminsert.ap_learn_type">
     <option value="1">ทฤษฎี</option>
     <option value="2">ปฏิบัติ</option>
@@ -68,7 +68,7 @@
 
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">สถานะ</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_app_app_status") }}</label>
  
 
      <select class="form-select form-select" aria-label="Default select example" v-model="store.forminsert.dtl_code">
@@ -79,7 +79,7 @@
 
 
 
-  <button type="button" class="btn btn-primary" @click="save()">บันทึก</button>
+  <button type="button" class="btn btn-primary" @click="save()">{{ $t("menu_app_app_save") }}</button>
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';

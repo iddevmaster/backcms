@@ -33,7 +33,7 @@
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
       <button class="btn btn-primary mt-0 w-100" @click="Search()">
-        <i class="bi bi-search me-2"></i>ค้นหา
+        <i class="bi bi-search me-2"></i>{{ $t("menu_result_search") }}
       </button>
     </div>
   </div>
@@ -42,13 +42,13 @@
     <table class="table text-center" v-if="store.result.length > 0">
       <thead>
         <tr>
-          <th scope="col">ลำดับที่</th>
-          <th scope="col">คะแนนที่ได้</th>
-          <th scope="col">ประเภทการสอบ</th>
-          <th class="text-center" scope="col">สถานะ</th>
-          <th class="text-center" scope="col">ชื่อ - นามสกุล</th>
-          <th class="text-center" scope="col">หมายเลขโทรศัพท์</th>
-          <th class="text-center" scope="col">จัดการผลสอบ</th>
+          <th scope="col">{{ $t("menu_result_index") }}</th>
+          <th scope="col">{{ $t("menu_result_score") }}</th>
+          <th scope="col">{{ $t("menu_result_type") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_result_status") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_result_name") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_result_phone") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_result_action") }}</th>
         </tr>
       </thead>
       <tbody>

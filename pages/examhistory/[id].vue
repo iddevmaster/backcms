@@ -54,8 +54,8 @@ const Deleteexam = async (item) => {
             <div class="page-meta">
                 <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">ประวัติ </a></li>
-                        <li class="breadcrumb-item active" aria-current="page">ประวัติผู้เข้าทดสอบในหลักสูตร</li>
+                                <li class="breadcrumb-item"><a href="#">{{ $t("menu_exam_history") }} </a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ $t("menu_exam_historyin_exam") }}</li>
                     </ol>
                 </nav>
             </div>

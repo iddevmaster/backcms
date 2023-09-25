@@ -3,8 +3,8 @@
     <div class="invoice-content">
       <div class="invoice-detail-body">
         <div class="invoice-detail mb-5" style="padding: 0 48px">
-          <h2 class="text-center">เพิ่มใบขับขี่</h2>
-          <label for="type" class="fw-bold">ประเภทใบขับขี่</label>
+          <h2 class="text-center">{{ $t("menu_dlt_form_add") }}</h2>
+          <label for="type" class="fw-bold">{{ $t("menu_dlt_form_type") }}</label>
          
           <select
             class="form-select"
@@ -24,7 +24,7 @@
         </div>
 
         <div class="mb-5" style="padding: 0 48px">
-          <label for="type" class="fw-bold">วันที่ออกใบ</label>
+          <label for="type" class="fw-bold">{{ $t("menu_dlt_form_issue_date") }}</label>
           <Datepicker v-model="store.formadddtl.issue_date" :format="format_start" />
           <span
             class="text-xs text-red-500"
@@ -35,7 +35,7 @@
 
 
         <div class="mb-5" style="padding: 0 48px">
-          <label for="type" class="fw-bold">วันหมดอายุ</label>
+          <label for="type" class="fw-bold">{{ $t("menu_dlt_form_expiry_date") }}</label>
           <Datepicker v-model="store.formadddtl.expiry_date" :format="format_end" />
           <span
             class="text-xs text-red-500"
@@ -54,7 +54,7 @@
         <div class="invoice-detail mb-5" style="padding: 0 48px">
           <div class="form-group mt-3 d-flex">
             <label for="exampleFormControlFile1" class="fw-bold text-nowrap"
-              >รูปหน้าบัตร</label
+              >{{ $t("menu_dlt_form_front_img") }}</label
             >
 
             <input
@@ -66,7 +66,7 @@
             />
           </div>
           <div class="border p-2 mt-3">
-            <p>แสดงหน้าบัตร: </p>
+            <p>{{ $t("menu_dlt_image_display") }}: </p>
             <template v-if="store.formadddtl.front_img">
               <div class="row">
                 <div id="image-container" class="col-md-12 col-sm-12 col-12">
@@ -99,7 +99,7 @@
         <div class="invoice-detail" style="padding: 0 48px">
           <div class="form-group mb-4 mt-3 d-flex">
             <label for="exampleFormControlFile1" class="fw-bold text-nowrap"
-              >รูปหลังบัตร</label
+              >{{ $t("menu_dlt_form_back_img") }}</label
             >
             <input
               type="file"
@@ -111,7 +111,7 @@
           </div>
 
           <div class="border p-2 mt-3">
-            <p>แสดงรูปหลังบัตร:</p>
+            <p>{{ $t("menu_dlt_image_display") }}:</p>
             <template v-if="store.formadddtl.back_img">
               <div class="row">
                 <div id="image-container" class="col-md-9 col-sm-9 col-">
@@ -137,7 +137,7 @@
           class="invoice-detail d-flex justify-content-center gap-2"
           style="padding: 0 48px"
         >
-          <button class="btn btn-primary mt-4" @click="Add()">เพิ่มใบขับขี่</button>
+          <button class="btn btn-primary mt-4" @click="Add()">{{ $t("menu_dlt_bt_save") }}</button>
         </div>
       </div>
     </div>

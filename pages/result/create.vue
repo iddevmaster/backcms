@@ -36,8 +36,8 @@ store.userall = [];
             <div class="page-meta">
                 <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                     <li class="breadcrumb-item"><a href="#">Result</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Result Create</li>
+                     <li class="breadcrumb-item"><a href="#">{{ $t("menu_result_form") }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ $t("menu_result_form_create") }}</li>
                     </ol>
                 </nav>
             </div>

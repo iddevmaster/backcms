@@ -2,13 +2,13 @@
   <div class="row mb-4">
     <div id="form_grid_layouts" class="col-lg-10">
       <div class="seperator-header">
-        <h4 class="">ฟอร์ม เพิ่มผลสอบ</h4>
+        <h4 class="">{{ $t("menu_result_form_create") }}</h4>
       </div>
     </div>
   
   
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">คะแนน</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_result_form_score") }}</label>
       <input type="text" class="form-control" id="inputEmail3" placeholder="ใส่ตัวเลข *" maxlength="10"
       v-model="store.formresult.mr_score" :class="{
           'border-red-500 focus:border-red-500': v$.mr_score.$error,
@@ -21,10 +21,8 @@
 
     </div>
 
-
-
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">ประเภทสอบ</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_result_form_type") }}</label>
       <select class="form-control" v-model="store.formresult.mr_learn_type" >
         <option value="1">ทฤษฎี</option>
         <option value="2">ปฏิบัติ</option>
@@ -39,7 +37,7 @@
   <div class="row mb-4">
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">ประเภทรถที่สอบ</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_result_form_type_dlt") }}</label>
       <select class="form-control"  v-model="store.formresult.dlt_code">
         <option v-for="(itemd,i) in store.dlt" :value="itemd.dlt_code">{{itemd.dlt_description}}</option>
       </select>
@@ -50,10 +48,10 @@
 
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">สถานะ</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_result_form_type_status") }}</label>
       <select class="form-control" v-model="store.formresult.mr_status">
-        <option value="pass">ผ่าน</option>
-        <option value="fail">ไม่ผ่าน</option>
+        <option value="pass">{{ $t("menu_result_pass") }}</option>
+        <option value="fail">{{ $t("menu_result_fall") }}</option>
       </select>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.mr_status.$error">{{
         v$.mr_status.$errors[0].$message
@@ -64,7 +62,7 @@
 
 
 
-  <button type="button" class="btn btn-primary" @click="save()">บันทึก</button>
+  <button type="button" class="btn btn-primary" @click="save()">{{ $t("menu_result_save") }}</button>
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
@@ -74,7 +72,6 @@ import { useVuelidate } from '@vuelidate/core';
 import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
 import { useToast } from 'vue-toastification';
 import { ref, onMounted, onUnmounted } from 'vue';
-
 
 
 const toast = useToast()

@@ -42,7 +42,7 @@
   </div> -->
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
       <button class="btn btn-primary mt-0 w-100" @click="Search()">
-        <i class="bi bi-search me-2"></i>ค้นหา
+        <i class="bi bi-search me-2"></i>{{ $t("menu_app_manage_search") }}
       </button>
     </div>
   </div>
@@ -51,15 +51,15 @@
     <table class="table" v-if="store.group.length > 0">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Remark</th>
-          <th scope="col">DLT</th>
-          <th class="text-center" scope="col">Learn Type</th>
-          <th class="text-center" scope="col">Quota</th>
-          <th class="text-center" scope="col">Total Reserv</th>
-          <th class="text-center" scope="col">Date Start</th>
-          <th class="text-center" scope="col">Date End</th>
-          <th class="text-center" scope="col">จัดการ</th>
+          <th scope="col">{{ $t("menu_app_manage_index") }}</th>
+          <th scope="col">{{ $t("menu_app_manage_remark") }}</th>
+          <th scope="col">{{ $t("menu_app_manage_dlt") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_app_manage_leantype") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_app_manage_quota") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_app_manage_total_reserve") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_app_manage_date_start") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_app_manage_date_end") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_app_view_action") }}</th>
         </tr>
       </thead>
       <tbody>

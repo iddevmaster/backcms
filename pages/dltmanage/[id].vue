@@ -154,9 +154,9 @@ toast.error('Failed  Save Data')
       <div class="page-meta">
         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">จัดการ DLT </a></li>
+            <li class="breadcrumb-item"><a href="#">{{ $t("menu_dlt_title_manage") }}</a></li>
             <li class="breadcrumb-item active" aria-current="page">
-              DLT User
+ {{ $t("menu_dlt_title_user") }}
             </li>
           </ol>
         </nav>
@@ -174,9 +174,9 @@ toast.error('Failed  Save Data')
                   <div class="invoice-content">
                     <div class="invoice-detail-body">
                       <div class="invoice-detail mb-5" style="padding: 0 48px;">
-                        <h2 class="text-center">แก้ไข</h2>
+                        <h2 class="text-center">{{ $t("menu_dlt_form_update") }}</h2>
                        
-                        <label for="type" class="fw-bold">ประเภทใบขับขี่</label>
+                        <label for="type" class="fw-bold">{{ $t("menu_dlt_form_type") }}</label>
                         <select class="form-select " aria-label="Default select example" id="type" v-model="store.formdtl.dlt_code" >
                           <option selected disabled>โปรดเลือกประเภทใบขับขี่</option>
                           <option  v-for="(item, index) in store.dtla" :key="index"  v-bind:value="item.dlt_code" > {{item.dlt_code  }}</option>
@@ -185,14 +185,14 @@ toast.error('Failed  Save Data')
                       </div>
 
                            <div class="mb-5" style="padding: 0 48px">
-          <label for="type" class="fw-bold">วันที่ออกใบ</label>
+          <label for="type" class="fw-bold">{{ $t("menu_dlt_form_issue_date") }}</label>
           <Datepicker v-model="store.formdtl.issue_date" :format="format_start" />
           
         </div>
 
 
         <div class="mb-5" style="padding: 0 48px">
-          <label for="type" class="fw-bold">วันหมดอายุ</label>
+          <label for="type" class="fw-bold">{{ $t("menu_dlt_form_expiry_date") }}</label>
           <Datepicker v-model="store.formdtl.expiry_date" :format="format_end" />
        
         </div>
@@ -200,12 +200,12 @@ toast.error('Failed  Save Data')
                       <div class="invoice-detail mb-5" style="padding: 0 48px;">
 
                         <div class="form-group mt-3 d-flex">
-                          <label for="exampleFormControlFile1" class="fw-bold text-nowrap">รูปหน้าบัตร</label>
+                          <label for="exampleFormControlFile1" class="fw-bold text-nowrap">{{ $t("menu_dlt_form_front_img") }}</label>
                           <input type="file" class="form-control-file ms-4" id="exampleFormControlFile1"
                             @change="onFileChangeFront" ref="fileupload" />
                         </div>
                         <div class="border p-2 mt-3">
-                          <p>แสดงหน้าบัตร: </p>
+                          <p>{{ $t("menu_dlt_image_display") }}: </p>
                           <template v-if="store.formdtl.front_img">
                             <div class="row">
                               <div id="image-container" class="col-md-12 col-sm-12 col-12">
@@ -224,12 +224,12 @@ toast.error('Failed  Save Data')
                       <div class="invoice-detail" style="padding: 0 48px;">
 
                         <div class="form-group mb-4 mt-3 d-flex">
-                          <label for="exampleFormControlFile1" class="fw-bold text-nowrap">รูปหลังบัตร</label>
+                          <label for="exampleFormControlFile1" class="fw-bold text-nowrap">{{ $t("menu_dlt_form_back_img") }}</label>
                           <input type="file" class="form-control-file ms-4" id="exampleFormControlFile1"
                             @change="onFileChangeBack" ref="fileupload" />
                         </div>
                         <div class="border p-2 mt-3">
-                          <p>แสดงรูปหลังบัตร:  </p>
+                          <p>{{ $t("menu_dlt_image_display") }}:  </p>
                           <template v-if="store.formdtl.back_img">
                             <div class="row">
                               <div id="image-container" class="col-md-9 col-sm-9 col-">
@@ -245,8 +245,8 @@ toast.error('Failed  Save Data')
                       </div>
 
                       <div class="invoice-detail d-flex justify-content-center gap-2" style="padding: 0 48px;">
-                        <button class="btn btn-danger mt-4" @click="DelDlT()">ลบ</button>
-                        <button class="btn btn-success mt-4" @click="UpdateDlT()">แก้ไข</button>
+                        <button class="btn btn-danger mt-4" @click="DelDlT()">{{ $t("menu_dlt_del") }}</button>
+                        <button class="btn btn-success mt-4" @click="UpdateDlT()">{{ $t("menu_dlt_update") }}</button>
                       </div>
                     </div>
 
@@ -262,7 +262,7 @@ toast.error('Failed  Save Data')
                       <h5 class="ms-2">{{ store.name }}</h5>
                     </div>
                     <div class="d-flex justify-content-between pb-2 mb-2 border-bottom">
-                      <p class="fw-bold fs-4">ใบขับขี่ทั้งหมด</p>
+                      <p class="fw-bold fs-4">{{ $t("menu_dlt_all") }}</p>
                       <button class="btn btn-success mt-0" @click="AddDLT()"><i class="bi bi-plus-circle"></i></button>
                     </div>
                     <div class="invoice-action-btn">

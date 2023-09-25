@@ -25,8 +25,8 @@ const store = ResultStore()
       <div class="page-meta">
         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Users</a></li>
-            <li class="breadcrumb-item active" aria-current="page">User List</li>
+            <li class="breadcrumb-item"><a href="#">{{ $t("menu_result") }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ $t("menu_result_list") }}</li>
           </ol>
         </nav>
       </div>
@@ -35,8 +35,6 @@ const store = ResultStore()
           <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
             <div class="widget-content widget-content-area br-8 p-3">
               <ResultList></ResultList>
-
-            
             </div>
           </div>
         </div>

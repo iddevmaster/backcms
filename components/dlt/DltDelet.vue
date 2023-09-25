@@ -27,11 +27,8 @@ import {
 import { useToast } from "vue-toastification";
 import ApiService from "../../services/api.service";
 const toast = useToast();
-
 const store = DltStore();
 const route = useRoute();
-
-
 </script>
 
  

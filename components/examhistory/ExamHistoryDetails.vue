@@ -30,11 +30,11 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-            <th scope="col" @click="sortList('em_code')">ลำดับ &#8597;</th>
-                <th scope="col" @click="sortList('em_code')">คะแนน &#8597;</th>
-                <th class="text-center" scope="col">คำถามทั้งหมด</th>
-                <th scope="col" @click="sortList('em_name')">อีเมล &#8597;</th>
-                <th class="text-center" scope="col">เบอร์โทร</th>
+            <th scope="col" @click="sortList('em_code')">{{ $t("menu_exam_history_index") }} &#8597;</th>
+                <th scope="col" @click="sortList('em_code')"> {{ $t("menu_exam_history_score") }} &#8597;</th>
+                <th class="text-center" scope="col"> {{ $t("menu_exam_history_total") }}</th>
+                <th scope="col" @click="sortList('em_name')"> {{ $t("menu_exam_history_email") }} &#8597;</th>
+                <th class="text-center" scope="col"> {{ $t("menu_exam_history_phone") }}</th>
             </tr>
         </thead>
 

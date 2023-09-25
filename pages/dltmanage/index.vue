@@ -49,8 +49,8 @@ const delete_userid = async (id) => {
       <div class="page-meta">
         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">DLT Management</a></li>
-            <li class="breadcrumb-item active" aria-current="page">DLT List</li>
+            <li class="breadcrumb-item"><a href="#">  {{ $t("menu_dlt_title_manage") }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> {{ $t("menu_dlt_title_manage_all") }}</li>
           </ol>
         </nav>
       </div>
