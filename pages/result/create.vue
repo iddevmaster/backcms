@@ -22,6 +22,12 @@ const auth = useAuthStore()
 const store = ResultStore()
 
 
+store.myChoose = [];
+store.IsCardInsert = false
+store.IsCardEdit = false;
+store.IsCardNoInsert = false;
+store.userall = [];
+
 </script>
 
 <template>

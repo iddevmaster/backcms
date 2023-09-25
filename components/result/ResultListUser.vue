@@ -1,9 +1,14 @@
 <template>
 
 
-
+<div class="widget-header">
+                                    <div class="row">
+                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                            <h4>ผลการสอบ</h4>
+                                        </div>
+                                    </div>
+                                </div>
 <div class="table-responsive">
-  {{ store.resultUser }}
     <table class="table" v-if="store.resultUser.length > 0">
       <thead>
         <tr>

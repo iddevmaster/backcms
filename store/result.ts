@@ -9,14 +9,16 @@ export const ResultStore = defineStore('result', {
     modaldelete:false,
     mr_id:null,
     identification_number:null,
+    myChoose:[],
     dlt: [],
     users: [],
     user:[],
-    ss:[],
+    userall:[],
     result:[],
     resultUser:[],
     IsCardInsert:false,
     IsCardEdit:false,
+    IsCardListByUser:false,
     IsCardNoInsert:false,
     selectedValue: null,
     formuser: {
@@ -106,8 +108,11 @@ export const ResultStore = defineStore('result', {
 
     async fetchUsers() {
 
+      console.log('fetchUsers',this.formuser);
+
         const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
           this.user = response.data.data;
+       
         });
 
       let a =  await this.checkuser();
@@ -117,29 +122,29 @@ export const ResultStore = defineStore('result', {
       return new Promise((resolve) => setTimeout(resolve, ms));
     },
    async checkuser() {
-     this.ss = [];
+     this.userall = [];
       for (var i = 0; i < this.user.length; i++) {
         const data = ApiService.get('/user/get/'+this.user[i].user_id).then(response => {
        //   this.result = response.data;
 
        const b = {user_id:response.data.user_id,user_firstname:response.data.user_firstname,user_lastname:response.data.user_lastname,user_phone:response.data.user_phone,detail:response.data.detail?.verify_account,identification_number:response.data.detail?.identification_number}
       
-          this.ss.push(b)
+          this.userall.push(b)
         });
       }
-
-      return this.ss;
+  
+      return this.userall;
   
    
     },
     async fetchResultByUser() {
+      this.resultUser = [];
       try {
         const data = await ApiService.get('/main_result/list/?user_id='+this.user_id).then(response => {
      
           if(response.data.length > 0){
             this.resultUser = response.data;
-
-            console.log(this.resultUser);
+            this.IsCardListByUser = true;
           }
         });
         return data;

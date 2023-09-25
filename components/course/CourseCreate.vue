@@ -2,12 +2,12 @@
   <div class="row mb-4 g-3">
     <div id="form_grid_layouts" class="col-lg-9">
       <div class="seperator-header">
-        <h4 class="">ฟอร์ม เพิ่มคอร์ส</h4>
+        <h4 class="">{{ $t("menu_couse_p_title") }}</h4>
       </div>
     </div>
   
     <div class="col-md-6">
-      <label for="inputEmail4" class="form-label"> รหัสคอร์ส</label>
+      <label for="inputEmail4" class="form-label"> {{ $t("menu_couse_f_title_code") }}</label>
       <input
         type="text"
         class="form-control"
@@ -27,7 +27,7 @@
       >
     </div>
     <div class="col-md-6">
-      <label for="inputPassword4" class="form-label">ชื่อคอร์ส</label>
+      <label for="inputPassword4" class="form-label">{{ $t("menu_couse_f_title_name") }}</label>
       <input
         type="text"
         class="form-control"
@@ -47,7 +47,7 @@
       >
     </div>
     <div class="col-12">
-      <label for="inputAddress" class="form-label">รายละเอียดคอร์ส</label>
+      <label for="inputAddress" class="form-label">{{ $t("menu_couse_f_title_detail") }}</label>
       <textarea
         class="form-control"
         id="exampleFormControlTextarea1"
@@ -69,7 +69,7 @@
     </div>
 
     <div class="form-group mb-4 mt-3">
-      <label for="exampleFormControlFile1">รูปภาพคอร์ส</label>
+      <label for="exampleFormControlFile1">{{ $t("menu_couse_f_title_picture") }}</label>
       <input
         type="file"
         class="form-control-file"
@@ -80,7 +80,7 @@
     </div>
 
     <div class="border p-2 mt-3">
-      <p>แสดงรูปตรงนี้:</p>
+      <p>{{ $t("menu_couse_f_title_display_picture") }}:</p>
       <template v-if="store.image">
         <div class="row">
           <div id="image-container" class="col-md-3 col-sm-4 col-6">
@@ -100,7 +100,7 @@
     class="btn btn-dark additem _effect--ripple waves-effect waves-light"
     @click="addlesson()"
   >
-    เพิ่มบทเรียน
+  {{ $t("menu_couse_f_add_lesson") }}
   </button>
   <div class="invoice-detail-items">
     <div class="table-responsive">
@@ -108,9 +108,9 @@
         <thead>
           <tr>
             <th class=""></th>
-            <th>ชื่อ && รายละเอียดบทเรียน</th>
-            <th class="">รูปภาพ</th>
-            <th class="">วีดีโอ</th>
+            <th>{{ $t("menu_lesson_name_and_detail") }}</th>
+            <th class="">{{ $t("menu_lesson_f_title_picture") }}</th>
+            <th class="">{{ $t("menu_lesson_f_video") }}</th>
           </tr>
           <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
         </thead>
@@ -198,7 +198,7 @@
 
   <div class="col-xl-12 col-md-12">
     <button type="button" class="btn btn-success" @click="save()">
-      บันทึก
+      {{ $t("menu_couse_f_save") }}
     </button>
   </div>
 </template>

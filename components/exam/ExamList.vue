@@ -31,14 +31,14 @@
         <thead>
             <tr>
        
-                <th scope="col" @click="sortList('em_code')">รหัสหลักสูตร &#8597;</th>
-                <th class="text-center" scope="col">รูปหลักสูตร</th>
-                <th scope="col" @click="sortList('em_name')">ชื่อหลักสูตร &#8597;</th>
-                <th class="text-center" scope="col">รายละเอียด</th>
-                <th class="text-center" scope="col" @click="sortList('em_random_amount')">จำนวนที่สุ่ม &#8597;</th>
-                 <th class="text-center" scope="col" @click="sortList('total_question')">จำนวนข้อสอบ &#8597;</th>
+                <th scope="col" @click="sortList('em_code')">{{ $t("menu_exam_all_code") }} &#8597;</th>
+                <th class="text-center" scope="col">{{ $t("menu_exam_all_pic") }}</th>
+                <th scope="col" @click="sortList('em_name')">{{ $t("menu_exam_all_name") }} &#8597;</th>
+                <th class="text-center" scope="col">{{ $t("menu_exam_all_detail") }}</th>
+                <th class="text-center" scope="col" @click="sortList('em_random_amount')">{{ $t("menu_exam_all_total_random") }} &#8597;</th>
+                 <th class="text-center" scope="col" @click="sortList('total_question')">{{ $t("menu_exam_all_total_exam") }} &#8597;</th>
             
-                <th class="text-center" scope="col">จัดการ</th>
+                <th class="text-center" scope="col">{{ $t("menu_exam_all_total_action") }}</th>
             </tr>
         </thead>
 
@@ -73,9 +73,9 @@
                 </td> -->
                 <td align="center">
              <div class="btn-group-vertical">
-            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" @click="edit(item)">แก้ไขหลักสูตร</button>
-            <button type="button" class="btn btn-success" style="background-color:#3F2C73;"  @click="goToAddEx(item)">เพิ่มข้อสอบ</button>
-            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" @click="del(item)">ลบหลักสูตร</button>
+            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" @click="edit(item)">{{ $t("menu_exam_all_bt_edit_exam") }}</button>
+            <button type="button" class="btn btn-success" style="background-color:#3F2C73;"  @click="goToAddEx(item)">{{ $t("menu_exam_all_bt_add_exam") }}</button>
+            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" @click="del(item)">{{ $t("menu_exam_all_bt_del_exam") }}</button>
             </div>
           </td>
             </tr>

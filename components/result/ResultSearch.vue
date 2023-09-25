@@ -9,10 +9,10 @@
     </div>
 
   </div>
-{{ store.user_id }}
+
     <div class="col-sm-12">
     <div class="table-responsive">
-    <table id="example" class="table table-bordered" style="width:100%">
+    <table id="example" class="table table-bordered" style="width:100%" >
       <thead>
         <tr>
           <th>
@@ -25,25 +25,25 @@
           <th >เบอรโทร &#8597;</th>
           <th>สถานะ</th>
       
-          <th class="no-content">จัดการ</th>
+          <!-- <th class="no-content">จัดการ</th> -->
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(users,index) in store.ss" :key="users.user_id">
+        <tr v-for="(users,index) in store.userall" :key="users.user_id"  @click="Sel(users,users.detail,users.identification_number,users.user_id)" :class="{ 'table-success': store.myChoose === users }">
           <td>{{ users.user_id }}</td>
            <td>{{ users.user_firstname }} - {{ users.user_lastname }}</td>
           <td>{{ users.user_phone }}</td>
           <td v-if="users.detail == 'y'">ผ่านการยืนยัน</td>
           <td v-else>ไม่ผ่านการยืนยัน</td>
-          <td>
-            <button type="button" class="btn btn-danger" @click="Sel(users.detail,users.identification_number,users.user_id)" >เลือก</button>
-          </td>
+          <!-- <td>
+            <button type="button" class="btn btn-danger">เลือก</button>
+          </td> -->
           <!-- <td>{{ user.user_email }}</td> -->
-    
-         
         </tr>
       </tbody>
     </table>
+
+    
 
   </div>
   </div>
@@ -100,34 +100,35 @@ const rules = computed(() => {
 });
 
 const searchData = async () => {
+  store.myChoose = [];
+  store.IsCardInsert = false;
+  store.IsCardEdit = false;
+  store.IsCardListByUser = false;
+
   await store.fetchUsers()
 };
 
-const Sel = async (item,identification_number,id) => {
-
+const Sel = async (users,item,identification_number,id) => {
 store.user_id = id;
+store.myChoose = users;
 store.formeditresult.identification_number = identification_number;
 await store.fetchResultByUser()
  if(item == 'y'){
   store.IsCardInsert = true;
+  store.IsCardEdit = false;
   store.IsCardNoInsert = false;
   store.formresult.identification_number = identification_number;
-
   store.identification_number = identification_number
  }else {
   store.IsCardInsert = false;
+  store.IsCardEdit = false;
   store.IsCardNoInsert = true;
  }
 };
 
-
 const backToUser = async () => {
   router.go(-1);
 }
-
-
-
-
 
 </script>
 

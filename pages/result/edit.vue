@@ -22,12 +22,16 @@ const auth = useAuthStore()
 
 const store = ResultStore()
 
-
+store.myChoose = [];
+store.IsCardInsert = false
+store.IsCardEdit = false;
+store.IsCardNoInsert = false;
+store.userall = [];
+store.IsCardListByUser = false;
 
 const closeModal = () => {
     store.modaldelete = false;
-  };
-
+};
 
   const dele = async (id) => {
     let delel = await store.DeleteResult();
@@ -63,23 +67,25 @@ const closeModal = () => {
                     </div>
                 </div>
                 <div class="row layout-top-spacing">
-                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing"  v-if="store.resultUser.length > 0" >
                         <div class="widget-content widget-content-area br-8 p-3">
                             <ResultListUser></ResultListUser>
                         </div>
                     </div>
-                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.IsCardEdit">
                         <div class="widget-content widget-content-area br-8 p-3">
-                            <ResultEdit v-if="store.IsCardEdit"></ResultEdit>
+                            <ResultEdit></ResultEdit>
                         </div>
                     </div>
 
-                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.IsCardNoInsert">
+                    <!-- <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.IsCardNoInsert">
                         <div class="widget-content widget-content-area br-8 p-3">
                             <ResultNodata></ResultNodata>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
+
+
             </div>
 
         </div>

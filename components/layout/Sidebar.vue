@@ -97,7 +97,7 @@
                 ></polygon>
               </svg>
 
-              <span>{{ $t("home") }}</span>
+              <span>{{ $t("menu_couse") }}</span>
             </div>
             <div>
               <svg
@@ -122,10 +122,10 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/course">{{ $t("menu_couse") }}</nuxt-link>
+              <nuxt-link to="/course">{{ $t("menu_couse_all") }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/course/create">เพิ่มคอร์ส</nuxt-link>
+              <nuxt-link to="/course/create">{{ $t("menu_couse_add") }}</nuxt-link>
             </li>
           </ul>
         </li>
