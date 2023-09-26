@@ -5,7 +5,7 @@
         <h4 class="">{{ $t("menu_app_form_app") }}</h4>
       </div>
     </div>
-    {{ store.forminsert }}
+   
     <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header" style="text-align: center;" @click="backToUser()">
         <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">{{ $t("menu_app_app_back") }}</button>

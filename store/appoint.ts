@@ -236,7 +236,7 @@ console.log(response.data.ap_date_start);
 
 const currentDate = new Date(this.forminsert.ap_date_start);
 const currentDateEnd = new Date(this.forminsert.ap_date_end);
-// Add 2 hours to the current date and time
+
 currentDate.setHours(currentDate.getHours() + 14);
 currentDateEnd.setHours(currentDateEnd.getHours() + 14);
 const date_start = await this.changeFormate(currentDate)
@@ -275,18 +275,18 @@ const date_end = await this.changeFormate(currentDateEnd)
         ap_learn_type: learn_type, ap_quota: this.formedit.ap_quota, ap_date_start: date_start, ap_date_end: date_end, ap_remark: this.formedit.ap_remark,
         dlt_code: this.formedit.dtl_code, user_id: this.formedit.user_id
       }
-console.log(upd);
-
-      // try {
-      //   const data = await ApiService.put('/appointment/update/' + this.ap_id, upd).then(response => {
-      //     console.log(response);
-      //   });
 
 
-      //   return true
-      // } catch (error) {
-      //   return false;
-      // }
+      try {
+        const data = await ApiService.put('/appointment/update/' + this.ap_id, upd).then(response => {
+          console.log(response);
+        });
+
+
+        return true
+      } catch (error) {
+        return false;
+      }
 
       return true;
     },
