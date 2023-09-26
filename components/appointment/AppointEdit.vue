@@ -71,7 +71,7 @@
 
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">{{ $t("menu_app_manage_dlt") }}</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_app_app_status") }}</label>
 
      <select class="form-select form-select" aria-label="Default select example" v-model="store.formedit.dtl_code">
          <option   v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code" >{{item.dlt_description}}</option>
@@ -149,7 +149,6 @@ const isoFormatInUTC = xd.toISOString();
 
 //  return `Selected date is ${day}/${month}/${year}`;
 }
-
 
 const format_end = (ie) => {
   const day = ie.getDate();

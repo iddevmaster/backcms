@@ -5,6 +5,7 @@
         <h4 class="">{{ $t("menu_app_form_app") }}</h4>
       </div>
     </div>
+    {{ store.forminsert }}
     <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header" style="text-align: center;" @click="backToUser()">
         <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">{{ $t("menu_app_app_back") }}</button>
@@ -108,14 +109,14 @@ const date = ref(new Date());
 
 // In case of a range picker, you'll receive [Date, Date]
 const format_start = (date) => {
-const isoFormatInUTC = date.toISOString();
+// const isoFormatInUTC = date.toISOString();
 
-store.forminsert.ap_date_start = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
- return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
+// store.forminsert.ap_date_start = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
+//  return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
+return date
 }
 
 const format_end = (date) => {
-  console.log(date)
 const isoFormatInUTC = date.toISOString();
 
 

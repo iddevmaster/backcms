@@ -202,7 +202,7 @@ export const AppointStore = defineStore('appoint', {
             this.formedit.ap_learn_type = response.data.ap_learn_type
             this.formedit.dtl_code = response.data.dlt_code
 
-
+console.log(response.data.ap_date_start);
             const date_start = this.changeTypeTimeZonebefore(response.data.ap_date_start);
             const date_end = this.changeTypeTimeZonebefore(response.data.ap_date_end);
 
@@ -226,19 +226,22 @@ export const AppointStore = defineStore('appoint', {
 
 
     async SaveFormAPP() {
+const date_start = await this.changeTypeTimeZonebefore(this.forminsert.ap_date_start);
+console.log(date_start)
+      
       const savet = {
         ap_learn_type: parseInt(this.forminsert.ap_learn_type), ap_quota: this.forminsert.ap_quota, ap_date_start: this.forminsert.ap_date_start, ap_date_end: this.forminsert.ap_date_end, ap_remark: this.forminsert.ap_remark,
         dlt_code: this.forminsert.dtl_code, user_id: this.forminsert.user_id
       }
 
-      try {
-        const data = await ApiService.post('/appointment/create', savet).then(response => {
-          console.log(response);
-        });
-        return true
-      } catch (error) {
-        return false;
-      }
+      // try {
+      //   const data = await ApiService.post('/appointment/create', savet).then(response => {
+      //     console.log(response);
+      //   });
+      //   return true
+      // } catch (error) {
+      //   return false;
+      // }
 
 
     },
@@ -256,8 +259,7 @@ export const AppointStore = defineStore('appoint', {
         ap_learn_type: learn_type, ap_quota: this.formedit.ap_quota, ap_date_start: date_start, ap_date_end: date_end, ap_remark: this.formedit.ap_remark,
         dlt_code: this.formedit.dtl_code, user_id: this.formedit.user_id
       }
-
-      console.log(upd);
+console.log(upd);
 
       try {
         const data = await ApiService.put('/appointment/update/' + this.ap_id, upd).then(response => {
@@ -310,7 +312,7 @@ export const AppointStore = defineStore('appoint', {
     },
     async changeTypeTimeZoneafter(item) {
       const date = ref(new Date(item));
-      const startdate = item.toISOString().slice(0, -5) + '-07:00';
+      const startdate = item.toISOString().slice(0, -5) + '-14:00';  /////แปลงเวลา
       const aa = moment.utc(startdate).format().slice(0, -1)
       return aa;
     },
