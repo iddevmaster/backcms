@@ -171,9 +171,6 @@ const format_end = (date) => {
 };
 
 const format = (time) => {
-  console.log(time);
-
- 
   return moment(time).utc().format("DD/MM/YYYY HH:ss");
 };
 // store.fetchAppointment()
