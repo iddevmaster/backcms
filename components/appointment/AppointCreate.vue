@@ -26,7 +26,7 @@
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_remark") }}</label>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="หมายเหตุ *"
+      <input type="text" class="form-control" id="inputEmail3" placeholder="หมายเหตุ *"  maxlength="20" 
         v-model="store.forminsert.ap_remark" :class="{
           'border-red-500 focus:border-red-500': v$.ap_remark.$error,
           'border-[#42d392] ': !v$.ap_remark.$invalid,
