@@ -226,22 +226,38 @@ console.log(response.data.ap_date_start);
 
 
     async SaveFormAPP() {
-const date_start = await this.changeTypeTimeZonebefore(this.forminsert.ap_date_start);
-console.log(date_start)
+// const date_start = await this.changeTypeTimeZonebefore(this.forminsert.ap_date_start);
+// console.log(date_start)
+// console.log(this.forminsert.ap_date_start)
+
+// const date = ref(new Date(this.forminsert.ap_date_start).toString());
+
+
+
+const currentDate = new Date(this.forminsert.ap_date_start);
+const currentDateEnd = new Date(this.forminsert.ap_date_end);
+// Add 2 hours to the current date and time
+currentDate.setHours(currentDate.getHours() + 14);
+currentDateEnd.setHours(currentDateEnd.getHours() + 14);
+const date_start = await this.changeFormate(currentDate)
+const date_end = await this.changeFormate(currentDateEnd)
+
+
+      
       
       const savet = {
-        ap_learn_type: parseInt(this.forminsert.ap_learn_type), ap_quota: this.forminsert.ap_quota, ap_date_start: this.forminsert.ap_date_start, ap_date_end: this.forminsert.ap_date_end, ap_remark: this.forminsert.ap_remark,
+        ap_learn_type: parseInt(this.forminsert.ap_learn_type), ap_quota: this.forminsert.ap_quota, ap_date_start: date_start, ap_date_end: date_end, ap_remark: this.forminsert.ap_remark,
         dlt_code: this.forminsert.dtl_code, user_id: this.forminsert.user_id
       }
 
-      // try {
-      //   const data = await ApiService.post('/appointment/create', savet).then(response => {
-      //     console.log(response);
-      //   });
-      //   return true
-      // } catch (error) {
-      //   return false;
-      // }
+      try {
+        const data = await ApiService.post('/appointment/create', savet).then(response => {
+          console.log(response);
+        });
+        return true
+      } catch (error) {
+        return false;
+      }
 
 
     },
@@ -261,16 +277,16 @@ console.log(date_start)
       }
 console.log(upd);
 
-      try {
-        const data = await ApiService.put('/appointment/update/' + this.ap_id, upd).then(response => {
-          console.log(response);
-        });
+      // try {
+      //   const data = await ApiService.put('/appointment/update/' + this.ap_id, upd).then(response => {
+      //     console.log(response);
+      //   });
 
 
-        return true
-      } catch (error) {
-        return false;
-      }
+      //   return true
+      // } catch (error) {
+      //   return false;
+      // }
 
       return true;
     },
@@ -311,7 +327,9 @@ console.log(upd);
       return a.toISOString().slice(0, -5);
     },
     async changeTypeTimeZoneafter(item) {
+
       const date = ref(new Date(item));
+  console.log(item);
       const startdate = item.toISOString().slice(0, -5) + '-14:00';  /////แปลงเวลา
       const aa = moment.utc(startdate).format().slice(0, -1)
       return aa;

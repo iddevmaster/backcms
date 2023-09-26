@@ -109,10 +109,10 @@ const date = ref(new Date());
 
 // In case of a range picker, you'll receive [Date, Date]
 const format_start = (date) => {
-// const isoFormatInUTC = date.toISOString();
+const isoFormatInUTC = date.toISOString();
 
-// store.forminsert.ap_date_start = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
-//  return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
+store.forminsert.ap_date_start = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
+ return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
 return date
 }
 
