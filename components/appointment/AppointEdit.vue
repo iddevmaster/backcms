@@ -42,7 +42,9 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_start") }}</label>
             
-            <vue-date-picker  v-model="store.formedit.ap_date_start"  type="datetime" ></vue-date-picker>
+            <!-- <vue-date-picker  v-model="store.formedit.ap_date_start"   type="datetime"  ></vue-date-picker> -->
+
+            <VueDatePicker v-model="store.formedit.ap_date_start"   :format="format_start"   required></VueDatePicker>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_date_start.$error">{{
         v$.ap_date_start.$errors[0].$message
       }}</span>
@@ -51,7 +53,7 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_end") }}</label>
  
-          <VueDatePicker  v-model="store.formedit.ap_date_end"   required></VueDatePicker>
+          <VueDatePicker  v-model="store.formedit.ap_date_end" :format="format_end"  required></VueDatePicker>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_date_end.$error">{{
         v$.ap_date_end.$errors[0].$message
       }}</span>
@@ -148,6 +150,17 @@ const isoFormatInUTC = xd.toISOString();
 //  return `Selected date is ${day}/${month}/${year}`;
 }
 
+
+const format_end = (ie) => {
+  const day = ie.getDate();
+  const month = ie.getMonth() + 1;
+  const year = ie.getFullYear();
+
+const isoFormatInUTC = ie.toISOString();
+ return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
+
+}
+
 // 400Z
 
 // const format_end = (date) => {
@@ -159,14 +172,14 @@ const isoFormatInUTC = xd.toISOString();
 //  return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
 // }
 
-const format_end = () => {
+// const format_end = () => {
 
 
- const date = ref(new Date(store.formedit.ap_date_end).toISOString());
+//  const date = ref(new Date(store.formedit.ap_date_end).toISOString());
 
   
-  return store.formedit.ap_date_end;
-}
+//   return store.formedit.ap_date_end;
+// }
 
 
 const v$ = useVuelidate(rules, FormEdit);
@@ -188,7 +201,7 @@ const save = async () => {
 
 
 const onInput = async (event) => {
-    store.forminsert.ap_quota = event.target.value.replace(/\D/g, '');
+    store.formedit.ap_quota = event.target.value.replace(/\D/g, '');
 }
 
 </script>

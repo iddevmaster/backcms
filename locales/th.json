@@ -104,6 +104,11 @@
   "menu_page_new_edit_civil": "แก้ไขข่าวสารกรมโยธา",
   "menu_page_new_civil_all": "ข่าวสารกรมโยธาทั้งหมด",
 
+
+  "menu_user_page": "ผู้ใช้งาน",
+  "menu_user_page_all": "ผู้ใช้งานทั้งหมด",
+  "menu_user_page_create": "เพิ่มผู้ใช้งาน",
+  "menu_user_page_edit": "แก้ไขผู้ใช้งาน",
   "menu_user_index": "#",
   "menu_user_name": "ชื่อ - นามสกุล",
   "menu_user_type": "ประเภทผู้ใช้งาน",
@@ -182,7 +187,7 @@
   "menu_app_app_create": "สร้างนัดหมาย",
   "menu_app_form_app": "ฟอร์ม เพิ่มนัดหมาย",
   "menu_app_app_back": "กลับหน้านัดหมาย",
-  "menu_app_app_quota": "จำนวนกำจัดการจอง",
+  "menu_app_app_quota": "จำนวนจำกัดการจอง",
   "menu_app_app_remark": "หมายุเหตุ",
   "menu_app_app_start": "ช่วงเวลาเริ่ม",
   "menu_app_app_end": "ช่วงเวลาหมดเขต",

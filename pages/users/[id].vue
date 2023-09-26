@@ -22,8 +22,8 @@ const { AlertTextForm } = storeToRefs(store); //Get Getter
             <div class="page-meta">
                 <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Users</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Edit User</li>
+                        <li class="breadcrumb-item"><a href="#">{{ $t("menu_user_page") }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ $t("menu_user_page_edit") }}</li>
                     </ol>
                 </nav>
             </div>

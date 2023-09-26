@@ -24,11 +24,17 @@ import DltCreate from '@/components/dlt/DltCreate.vue'
 import DltDelet from '@/components/dlt/DltDelet.vue'
 import moment from "moment";
 import Datepicker from "vuejs3-datepicker";
+import { useVuelidate } from "@vuelidate/core";
+
 
 definePageMeta({
   middleware: ['auth', 'roles'],
   allowedRoles: [1],
 })
+
+
+
+
 
 const toast = useToast()
 const route = useRoute();
@@ -46,6 +52,45 @@ if (finddtl == true) {
 store.mydtla = [];
 store.isAdd = true;
 store.isEdit = false;
+
+
+const { FormDlt } = storeToRefs(store);
+
+const rules = computed(() => {
+  return {
+    front_img: {
+      required: helpers.withMessage(
+        "The Front Image DLT field is required",
+        required
+      ),
+      minLength: minLength(1),
+    },
+    back_img: {
+      required: helpers.withMessage(
+        "The Back Image DLT field is required",
+        required
+      ),
+      minLength: minLength(1),
+    },
+    issue_date: {
+      required: helpers.withMessage(
+        "The Issue date field is required",
+        required
+      ),
+    },
+    expiry_date: {
+      required: helpers.withMessage(
+          "The Expiry date field is required",
+        required
+      ),
+  
+    },
+
+  
+  };
+});
+;
+const v$ = useVuelidate(rules, FormDlt);
 
 const onFileChangeFront = async (event) => {
   var input = event.target;
@@ -75,8 +120,19 @@ const onFileChangeBack = async (event) => {
 
 const removeImage = async (item) => {
   store.image = null;
-  const input = document.querySelector('input[type="file"]');
+
+  if (item == "front_img") {
+    store.formdtl.front_img = null;
+     const input = document.querySelector('#exampleFormControlFile1');
   input.value = "";
+  }
+  if (item == "back_img") {
+   store.formdtl.back_img = null
+     const input = document.querySelector('#exampleFormControlFile2');
+  input.value = "";
+  }
+
+
 };
 
 function coverimage(i) {
@@ -112,9 +168,14 @@ const format_end = (date) => {
   return moment(date).format("YYYY-MM-DD");
 };
 
-
 const UpdateDlT = async () => {
-  store.isDelete = false;
+
+
+
+  v$.value.$validate();
+   if (!v$.value.$error) {
+
+    store.isDelete = false;
 let update =await store.Updatedtl();
 if(update == true){
 toast.success('Save Success');
@@ -123,6 +184,10 @@ store.getDLT()
 }else {
 toast.error('Failed  Save Data')
 }
+
+ 
+  }
+
 };
 
 
@@ -196,7 +261,14 @@ toast.error('Failed  Save Data')
           <Datepicker v-model="store.formdtl.expiry_date" :format="format_end" />
        
         </div>
-
+        <div>
+          <span
+            class="text-xs text-red-500"
+            style="color: red"
+            v-if="v$.front_img.$error"
+            >{{ v$.front_img.$errors[0].$message }}</span
+          >
+        </div>
                       <div class="invoice-detail mb-5" style="padding: 0 48px;">
 
                         <div class="form-group mt-3 d-flex">
@@ -220,12 +292,19 @@ toast.error('Failed  Save Data')
                         </div>
                       </div>
 
-
+                      <div>
+          <span
+            class="text-xs text-red-500"
+            style="color: red"
+            v-if="v$.back_img.$error"
+            >{{ v$.back_img.$errors[0].$message }}</span
+          >
+        </div>
                       <div class="invoice-detail" style="padding: 0 48px;">
 
                         <div class="form-group mb-4 mt-3 d-flex">
-                          <label for="exampleFormControlFile1" class="fw-bold text-nowrap">{{ $t("menu_dlt_form_back_img") }}</label>
-                          <input type="file" class="form-control-file ms-4" id="exampleFormControlFile1"
+                          <label for="exampleFormControlFile2" class="fw-bold text-nowrap">{{ $t("menu_dlt_form_back_img") }}</label>
+                          <input type="file" class="form-control-file ms-4" id="exampleFormControlFile2"
                             @change="onFileChangeBack" ref="fileupload" />
                         </div>
                         <div class="border p-2 mt-3">

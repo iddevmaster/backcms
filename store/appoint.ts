@@ -206,6 +206,8 @@ export const AppointStore = defineStore('appoint', {
             const date_start = this.changeTypeTimeZonebefore(response.data.ap_date_start);
             const date_end = this.changeTypeTimeZonebefore(response.data.ap_date_end);
 
+          
+
             this.formedit.ap_date_start = date_start;
             this.formedit.ap_date_end = date_end
 
@@ -246,13 +248,16 @@ export const AppointStore = defineStore('appoint', {
 
       const date_start = await this.changeTypeTimeZoneafter(this.formedit.ap_date_start);
       const date_end = await this.changeTypeTimeZoneafter(this.formedit.ap_date_end);
+      const learn_type = parseInt(this.formedit.ap_learn_type);
       //  const date_end =  await this.changeTypeTimeZone(this.formedit.ap_date_end);
 
       // this.formedit.ap_date_end = await this.changeFormate(this.formedit.ap_date_end);
       const upd = {
-        ap_learn_type: this.formedit.ap_learn_type, ap_quota: this.formedit.ap_quota, ap_date_start: date_start, ap_date_end: date_end, ap_remark: this.formedit.ap_remark,
+        ap_learn_type: learn_type, ap_quota: this.formedit.ap_quota, ap_date_start: date_start, ap_date_end: date_end, ap_remark: this.formedit.ap_remark,
         dlt_code: this.formedit.dtl_code, user_id: this.formedit.user_id
       }
+
+      console.log(upd);
 
       try {
         const data = await ApiService.put('/appointment/update/' + this.ap_id, upd).then(response => {
