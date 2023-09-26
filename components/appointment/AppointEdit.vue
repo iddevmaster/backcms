@@ -26,7 +26,7 @@
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_remark") }}</label>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="หมายเหตุ *"
+      <input type="text" class="form-control" id="inputEmail3" placeholder="หมายเหตุ *"  maxlength="20"
         v-model="store.formedit.ap_remark" :class="{
           'border-red-500 focus:border-red-500': v$.ap_remark.$error,
           'border-[#42d392] ': !v$.ap_remark.$invalid,
@@ -71,7 +71,7 @@
 
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">{{ $t("menu_app_app_status") }}</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_app_manage_dlt") }}</label>
 
      <select class="form-select form-select" aria-label="Default select example" v-model="store.formedit.dtl_code">
          <option   v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code" >{{item.dlt_description}}</option>
