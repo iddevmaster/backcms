@@ -227,7 +227,7 @@ export const AppointStore = defineStore('appoint', {
 
     async SaveFormAPP() {
       const savet = {
-        ap_learn_type: parseInt(this.forminsert.ap_learn_type), ap_quota: this.forminsert.ap_quota, ap_date_start: this.forminsert.ap_date_start, ap_date_end: this.forminsert.ap_date_end, ap_remark: "Test",
+        ap_learn_type: parseInt(this.forminsert.ap_learn_type), ap_quota: this.forminsert.ap_quota, ap_date_start: this.forminsert.ap_date_start, ap_date_end: this.forminsert.ap_date_end, ap_remark: this.forminsert.ap_remark,
         dlt_code: this.forminsert.dtl_code, user_id: this.forminsert.user_id
       }
 
