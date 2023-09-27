@@ -329,7 +329,7 @@ const date_end = await this.changeFormate(currentDateEnd)
     async changeTypeTimeZoneafter(item) {
 
       const date = ref(new Date(item));
-  console.log(item);
+ 
       const startdate = item.toISOString().slice(0, -5) + '-14:00';  /////แปลงเวลา
       const aa = moment.utc(startdate).format().slice(0, -1)
       return aa;

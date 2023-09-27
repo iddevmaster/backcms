@@ -122,7 +122,7 @@ const backToUser = async () => {
   router.go(-1);
 }
 const onInput = async (event) => {
-    store.formedit.mr_score = event.target.value.replace(/\D/g, '');
+    store.formeditresult.mr_score = event.target.value.replace(/\D/g, '');
 }
 
 
