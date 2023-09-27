@@ -53,7 +53,7 @@
        
     <option   v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code" >{{item.dlt_description}}</option>
     </select>
-    <p>Selected Option: {{ store.formexam.dlt_code }}</p>
+    
     </div>
           
           </div>

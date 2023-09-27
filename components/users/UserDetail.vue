@@ -54,14 +54,14 @@
     <select class="form-control" v-if="store.zipcode" v-model="store.formDetailEdit.location_id">
     <option   v-for="(zipcode, index) in store.zipcode" :key="zipcode.id" :value="zipcode.id">{{zipcode.zipcode_name}}</option>
     </select>
-    <p>Selected Option: {{ store.formDetailEdit.location_id }}</p>
+
     </div>
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_country") }}</label>
       <select class="form-control" v-if="store.country" v-model="store.formDetailEdit.country_id">
     <option   v-for="(country, x) in store.country" :key="country.country_id" :value="country.country_id">{{country.country_name_eng}}</option>
     </select>
-    <p>Selected Option: {{ store.formDetailEdit.country_id }}</p>
+
     </div>
   </div>
 
