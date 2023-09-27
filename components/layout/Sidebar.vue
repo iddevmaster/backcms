@@ -43,7 +43,6 @@
             <img src="../../assets/images/team__1.png" alt="avatar" />
           </div>
           <div class="profile-content">
-
             <h6 class="" v-if="store.users">{{ store.users.user_name }}</h6>
             <p class="">{{ store.users.user_email }}</p>
           </div>

@@ -9,7 +9,7 @@ export const usersStore = defineStore('users', {
   state: () => ({
     locale: true,
     loc:0,
-    lng:'static/upload/2023/9/files-6TWLyr9FMJ.png',
+    lng:'static/upload/2023/9/files-JWOxjtiwsQ.png',
     load: true,
     isOpen: false,
     AlertText: null,

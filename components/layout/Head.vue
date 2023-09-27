@@ -204,7 +204,7 @@
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="avatar-container">
                             <div class="avatar avatar-sm avatar-indicators avatar-online">
-                                <img alt="avatar" src="/img/profile-1.jpeg" class="rounded-circle">
+                                <img alt="avatar" :src="image(store.detail.user_img)" class="rounded-circle">
                             </div>
                         </div>
                     </a>
@@ -268,12 +268,11 @@ import { useI18n } from "vue-i18n";
 
 const authStore = useAuthStore();
 const users = usersStore();
-
+const store = useAuthStore();
 
 
 const ShowNav = async () => {
     authStore.isActiveBar = !authStore.isActiveBar
-    console.log('authStore.isActiveBar',authStore.isActiveBar);
 };
 
 const lan = async (item) => {
