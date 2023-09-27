@@ -9,8 +9,10 @@ import { useToast } from 'vue-toastification';
 
 import { AlertStore } from '@/store/alert'; // import the auth store we just created
 definePageMeta({
-    middleware: 'auth' // this should match the name of the file inside the middleware directory 
+  middleware: ['auth','roles'],
+  allowedRoles: [1,2],
 })
+
 
 const route = useRoute();
 

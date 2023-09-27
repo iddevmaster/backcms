@@ -6,7 +6,8 @@ import  NewsCreate from '@/components/Newstransport/TransportCreate.vue'
 import Alert from '@/components/layout/Alert.vue';
 
 definePageMeta({
-    middleware: 'auth' // this should match the name of the file inside the middleware directory 
+  middleware: ['auth','roles'],
+  allowedRoles: [1,2],
 })
 
 const store = newTransportStore()

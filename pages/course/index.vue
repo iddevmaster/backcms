@@ -17,9 +17,8 @@ import { ref } from 'vue';
 
 definePageMeta({
   middleware: ['auth','roles'],
-  allowedRoles: [1],
+  allowedRoles: [1,2]
 })
-
 
 const auth = useAuthStore()
 const store = CourseStore()

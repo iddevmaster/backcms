@@ -8,7 +8,7 @@ import Loading from "@/components/layout/Success.vue";
 
 definePageMeta({
   middleware: ['auth','roles'],
-  allowedRoles: [1,2,3],
+  allowedRoles: [1,2],
 })
 
 const auth = useAuthStore()

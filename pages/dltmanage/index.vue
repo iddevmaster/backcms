@@ -13,8 +13,10 @@ import Loading from '@/components/layout/Success.vue';
 import Alert from '@/components/layout/Alert.vue';
 import { useToast } from 'vue-toastification'
 definePageMeta({
-  middleware: 'auth' // this should match the name of the file inside the middleware directory 
+  middleware: ['auth','roles'],
+  allowedRoles: [1,2],
 })
+
 const toast = useToast()
 const store = usersStore()
 

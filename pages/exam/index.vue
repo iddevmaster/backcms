@@ -15,8 +15,9 @@ import { required, email, sameAs, minLength, helpers, } from '@vuelidate/validat
 
 definePageMeta({
   middleware: ['auth','roles'],
-  allowedRoles: [1,2,3],
+  allowedRoles: [1,2],
 })
+
 
 const toast = useToast()
 const store = ExamStore()

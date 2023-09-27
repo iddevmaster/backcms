@@ -8,9 +8,9 @@ import UserCreate from '@/components/users/UserCreate.vue'
 import Alert from '@/components/layout/Alert.vue';
 import { AlertStore } from '@/store/alert'; // import the auth store we just created
 definePageMeta({
-    middleware: 'auth' // this should match the name of the file inside the middleware directory 
+  middleware: ['auth','roles'],
+  allowedRoles: [1]
 })
-
 
 
 const storealert = AlertStore()

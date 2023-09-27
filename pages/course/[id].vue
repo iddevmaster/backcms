@@ -7,7 +7,7 @@ import { useAuthStore } from '@/store/auth'
 import { CourseStore } from '@/store/course'
 definePageMeta({
   middleware: ['auth','roles'],
-  allowedRoles: [1,2,3],
+  allowedRoles: [1,2],
 })
 
 const auth = useAuthStore()

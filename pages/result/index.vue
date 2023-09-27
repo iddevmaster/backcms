@@ -11,8 +11,10 @@ import { ResultStore } from '@/store/result';
 
 import { useToast } from 'vue-toastification'
 definePageMeta({
-  middleware: 'auth' // this should match the name of the file inside the middleware directory 
+  middleware: ['auth','roles'],
+  allowedRoles: [1,2],
 })
+
 const toast = useToast()
 const store = ResultStore()
 

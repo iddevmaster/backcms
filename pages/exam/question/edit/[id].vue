@@ -5,6 +5,12 @@ import { defineComponent } from 'vue';
 import ExamqCreate from '@/components/examquestion/ExamqCreate.vue'
 import ExamqEdit from '@/components/examquestion/ExamqEdit.vue'
 
+definePageMeta({
+  middleware: ['auth','roles'],
+  allowedRoles: [1,2],
+})
+
+
 </script>
 
 <template>

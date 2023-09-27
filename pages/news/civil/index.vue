@@ -24,8 +24,10 @@ const { GetopenModal_ID } = storeToRefs(store); //Get Getter
 const { Pending } = storeToRefs(store); //Get Getter
 
 definePageMeta({
-  middleware: 'auth' // this should match the name of the file inside the middleware directory 
+  middleware: ['auth','roles'],
+  allowedRoles: [1,2],
 })
+
 
 const closeModal = () => {
   store.closeModal();

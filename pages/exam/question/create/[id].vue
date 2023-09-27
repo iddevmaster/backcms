@@ -4,6 +4,10 @@ import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import ExamqCreate from '@/components/examquestion/ExamqCreate.vue'
 
+definePageMeta({
+  middleware: ['auth','roles'],
+  allowedRoles: [1,2],
+})
 
 </script>
 

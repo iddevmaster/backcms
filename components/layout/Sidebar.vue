@@ -35,13 +35,17 @@
 
       <div class="profile-info">
         <div class="user-info">
-          <div class="profile-img">
+          <div class="profile-img" v-if="store.detail.user_img">
             <img :src="image(store.detail.user_img)" alt="avatar" />
+          </div>
+
+          <div class="profile-img" v-else>
+            <img src="../../assets/images/team__1.png" alt="avatar" />
           </div>
           <div class="profile-content">
 
             <h6 class="" v-if="store.users">{{ store.users.user_name }}</h6>
-            <p class="">Project Leader</p>
+            <p class="">{{ store.users.user_email }}</p>
           </div>
         </div>
       </div>
