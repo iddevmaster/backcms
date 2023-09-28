@@ -16,6 +16,7 @@ export const ResultStore = defineStore('result', {
     userall:[],
     result:[],
     resultUser:[],
+    PopupDelete:false,
     IsCardInsert:false,
     IsCardEdit:false,
     IsCardListByUser:false,
@@ -43,6 +44,7 @@ export const ResultStore = defineStore('result', {
       dlt_code: null,
       identification_number: null
     },
+
     myValue: '',
 
     dtla: [
@@ -151,13 +153,10 @@ export const ResultStore = defineStore('result', {
       } catch (error) {
         return false
       }
-   
-
   },
 
     
     async fetchResult() {
-
       try {
         const data = await ApiService.get('/main_result/list/option/?dlt_code='+this.dlt_code+'&mr_learn_type='+ this.ap_learn_type +'&present_day='+this.date_event+'').then(response => {
           this.result = response.data;
@@ -218,10 +217,8 @@ return true;
     },
 
     async updateResult(){
-    
       const upd = {dlt_code:this.formeditresult.dlt_code,mr_learn_type:parseInt(this.formeditresult.mr_learn_type),mr_score:this.formeditresult.mr_score
         ,mr_status:this.formeditresult.mr_status,identification_number:this.formeditresult.identification_number}
-
 
       // return true;
 
@@ -240,9 +237,6 @@ return true;
     },
 
     async DeleteResult() {
-
-      console.log('del',this.mr_id);
-
       try {
         const del = await ApiService.delete('/main_result/delete/' + this.mr_id);
 
