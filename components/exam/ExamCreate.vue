@@ -169,7 +169,7 @@ return false;
     let save = await SaveExam();  ///////////save 
     await store.fetchExamlist();
        if(save === false){
-         await toast.error('Fall Save Data')
+         await toast.error('Fail Save Data')
       }else {
       await toast.success('Save Data')
       await ResetForm();

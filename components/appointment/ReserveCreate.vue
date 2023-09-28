@@ -114,7 +114,7 @@ return false;
      await store.fetchUsers();
      await store.FetchAP();
     } else {
-      toast.error('Fall Save Data')
+      toast.error('Fail Save Data')
     }
 
 }

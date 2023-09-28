@@ -37,7 +37,7 @@ const delete_userid = async (id) => {
     toast.success('Save Data');
     await store.fetchUsers()
   } else {
-    toast.error('Fall Save Data')
+    toast.error('Fail Save Data')
   }
   // await store.fetchUsers()
 };

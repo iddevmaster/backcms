@@ -10,12 +10,16 @@ export const ExamHistoryStore = defineStore('examhistory', {
   state: () => ({
     em_id:null,
     history:[],
-    formsearchexam: {
+    formsearchexamhistory: {
       page: 1,
-      per_page: 10,
+      per_page: 5,
       search: '',
     },
-
+    total_page:null,
+    limit_page:null,
+    current_page:null,
+    total_filter:null,
+    total:null
   }
 
   ),
@@ -31,14 +35,18 @@ export const ExamHistoryStore = defineStore('examhistory', {
 
   actions: {
     async fetchExamlistByEm() {
-
-      const getid = await ApiService.post('/exam/history/' + this.em_id, this.formsearchexam).then(response => {
-  
-        console.log(response);
+      const getid = await ApiService.post('/exam/history/' + this.em_id, this.formsearchexamhistory).then(response => {
+        console.log(response.data);
         this.history = response.data.data;
-      });
+        this.total_page = response.data.total_page
+        this.limit_page = response.data.limit_page
+        this.current_page = response.data.current_page
+        this.total_filter = response.data.total_filter
+        this.total = response.data.total
 
-    
+     
+        
+      });
 
     },
 
@@ -53,13 +61,14 @@ export const ExamHistoryStore = defineStore('examhistory', {
     },
 
     async selectentires(data_entires) {
-
-      this.formsearchexam.per_page = data_entires;
-      this.formsearchexam.page = 1;
+      this.formsearchexamhistory.per_page = data_entires;
+      this.formsearchexamhistory.page = 1;
     },
     setCurrentPage(page) {
-      this.formsearchexam.page = page
+      this.formsearchexamhistory.page = page
     },
+
+    
 
 
 

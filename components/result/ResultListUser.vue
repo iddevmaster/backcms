@@ -35,7 +35,9 @@
          
           <td v-if="event.mr_status == 'fail'">{{ $t("menu_fail") }}</td>
           <td v-else>{{ $t("menu_pass") }}</td>
-          <td>{{ event.crt_date }}</td>
+          <td>{{ format(event.crt_date) }}</td>
+
+          
           <td>
             <button
               type="button"
@@ -70,6 +72,7 @@ import { defineComponent } from "vue";
 import { ResultStore } from "@/store/result";
 
 import { useToast } from "vue-toastification";
+import moment from "moment-timezone";
 
 
 const router = useRouter();
@@ -106,7 +109,9 @@ const format_dlt = (evnet_dlt) => {
 let obj = store.dtla.find(o => o.dlt_code === evnet_dlt);
 return obj.dlt_description;
 };
-
+const format = (time) => {
+  return moment(time).utc().format("DD/MM/YYYY HH:mm");
+};
 
 
 </script>

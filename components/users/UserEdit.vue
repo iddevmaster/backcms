@@ -188,7 +188,7 @@ const save = async () => {
     if (updatedata) {
       toast.success('Save Data');
     } else {
-      toast.error('Fall Save Data')
+      toast.error('Fail Save Data')
     }
 
   }

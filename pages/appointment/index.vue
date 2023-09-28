@@ -19,7 +19,7 @@ definePageMeta({
 const toast = useToast()
 const store = AppointStore()
 
-
+store.group = []; 
 const closeModal = () => {
   store.closeModal();
 };

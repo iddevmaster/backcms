@@ -7,7 +7,7 @@
         name="txt"
         placeholder="ค้นหา"
         class="form-control"
-        required=""   v-model="store.formsearchexam.search" @keyup="searchData"
+        required=""   v-model="store.formsearchexamhistory.search" @keyup="searchData"
       />
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
@@ -17,11 +17,11 @@
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <select
         class="form-select form-select"
-        aria-label="Default select example"   @change="selectshowdata($event)" 
+        aria-label="Default select example"   @change="selectshowdata($event)"  
       >
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="50">50</option>
+        <option value="5">5</option>
+        <option value="15">15</option>
+        <option value="30">30</option>
       </select>
     </div>
   </div>
@@ -50,6 +50,37 @@
             </tr>
         </tbody>
     </table>
+
+        <div>
+      <div class="dt--pagination" v-if="store.total_page > 1">
+        <div class="dataTables_paginate paging_simple_numbers" id="zero-config_paginate">
+          <ul class="pagination">
+            <li class="paginate_button page-item previous" id="zero-config_previous">
+              <a href="#" aria-controls="zero-config" data-dt-idx="0" tabindex="0" class="page-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="feather feather-arrow-left">
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline>
+                </svg></a>
+            </li>
+            <li class="paginate_button page-item " v-for="page in store.total_page" :key="page">
+              <a href="#" aria-controls="zero-config" data-dt-idx="1" tabindex="0" class="page-link"
+                @click="setCurrentPageclick(page)">
+                {{ page }}</a>
+            </li>
+            <li class="paginate_button page-item next" id="zero-config_next"><a href="#" aria-controls="zero-config"
+                data-dt-idx="4" tabindex="0" class="page-link"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                  height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg></a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
 </div>
 </template>
 
@@ -66,12 +97,29 @@ const route = useRoute();
 
 const toast = useToast();
 const store = ExamHistoryStore();
+const { setCurrentPage } = ExamHistoryStore();//Action
 
 store.em_id = route.params.id;
 
 await store.fetchExamlistByEm()
 
 
+
+const searchData = async () => {
+  await store.fetchExamlistByEm()
+ 
+};
+
+const selectshowdata = async (x) => {
+  await store.selectentires(x.target.value);
+   await store.fetchExamlistByEm()
+
+};
+
+const setCurrentPageclick = async (page) => {
+  await setCurrentPage(page)
+  await store.fetchExamlistByEm()
+};
 </script>
 <style>
 .dt--pagination {

@@ -251,7 +251,7 @@
             </li>
           </ul>
         </li>
-        <li class="menu" v-if="user_type == 1 || 2">
+        <!-- <li class="menu" v-if="user_type == 1 || 2">
           <a
             href="#civil"
             data-bs-toggle="collapse"
@@ -308,7 +308,7 @@
               <nuxt-link to="/news/civil/create">{{ $t("menu_new_ci_add") }}</nuxt-link>
             </li>
           </ul>
-        </li>
+        </li> -->
 
                 <li class="menu">
           <a

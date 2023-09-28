@@ -175,8 +175,7 @@ export const AppointStore = defineStore('appoint', {
       const appdata = {
         date_event: this.form.date_event,
         ap_learn_type: this.form.ap_learn_type,
-        dlt_code: this.form.dtl_code,
-        user_id: parseInt(this.form.user_id)
+        dlt_code: this.form.dtl_code
       }
 
       try {
@@ -279,7 +278,7 @@ const date_end = await this.changeFormate(currentDateEnd)
 
       try {
         const data = await ApiService.put('/appointment/update/' + this.ap_id, upd).then(response => {
-          console.log(response);
+       
         });
 
 
@@ -309,6 +308,12 @@ const date_end = await this.changeFormate(currentDateEnd)
     },
 
     async ResetForm() {   ////reset Form
+
+      this.forminsert.ap_quota = "";
+      this.forminsert.ap_remark = "";
+      this.forminsert.ap_date_start = null;
+      this.forminsert.ap_date_end = null;
+
 
     },
 
@@ -341,6 +346,8 @@ const date_end = await this.changeFormate(currentDateEnd)
       const c = new Date(b);
       return c;
     },
+
+    
 
     async FetchAP() {
       this.reservebyap = [];

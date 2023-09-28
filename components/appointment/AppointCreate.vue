@@ -98,7 +98,7 @@ const router = useRouter();
 const store = AppointStore();
 
 const { FormInsert } = storeToRefs(store);
-
+const { ResetForm } = AppointStore();
 
 const date = ref(new Date());
 
@@ -157,8 +157,10 @@ const save = async () => {
       
     if (data == true) {
       toast.success('Save Data');
+         store.ResetForm();
+          
     } else {
-      toast.error('Fall Save Data')
+      toast.error('Fail Save Data')
     }
   
   }

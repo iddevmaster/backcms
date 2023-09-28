@@ -182,7 +182,7 @@ return false;
 
       router.push('/users');
       }else {
-       await toast.error('Fall Save Data')
+       await toast.error('Fail Save Data')
    
 
     

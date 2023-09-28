@@ -52,7 +52,7 @@
           <td v-else>ประชาชน</td>
           <td>{{ user.user_phone }}</td>
           <td><button type="button" class="btn btn-primary btn-sm" @click="choose(user.user_id)">{{ $t("menu_user_c_action") }}</button> </td>
-          <td>{{ coverttime(user.udp_date) }}</td>
+          <td>{{ format(user.udp_date) }}</td>
           <td>
             <NuxtLink :to="'/users/' + user.user_id">
               <a class="badge badge-light-primary text-start me-2 action-edit"> <svg xmlns="http://www.w3.org/2000/svg"
@@ -122,6 +122,7 @@ import "datatables.net-dt/css/jquery.dataTables.min.css"
 import $ from 'jquery'
 import Paginate from "vuejs-paginate-next";
 import { useToast } from 'vue-toastification'
+import moment from "moment-timezone";
 
 const router = useRouter();
 const toast = useToast()
@@ -167,7 +168,9 @@ const setCurrentPageclick = async (page) => {
   await setCurrentPage(page)
   await store.fetchUsers()
 };
-
+const format = (time) => {
+  return moment(time).utc().format("DD/MM/YYYY HH:mm");
+};
 
 const selectshowdata = async (x) => {
   await selectentires(x.target.value);

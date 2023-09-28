@@ -127,7 +127,7 @@ const save = async () => {
       await SaveSubmitForm(); //save form  ส่งไป Store User
       await toast.success('Save Data')
     } catch (e) {
-      await toast.error('Fall Save Data')
+      await toast.error('Fail Save Data')
     }
 
     v$.value.$reset();

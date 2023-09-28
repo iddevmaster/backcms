@@ -153,7 +153,7 @@ const edit = async () => {
       router.push('/news/transport');
     }, 2000);
     } catch (e) {
-      await toast.error('Fall Save Data')
+      await toast.error('Fail Save Data')
     }
   }
 }

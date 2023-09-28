@@ -214,7 +214,7 @@ const save = async () => {
       v$.value.$reset();
       router.push('/users');
     } else {
-      toast.error('Fall Save Data')
+      toast.error('Fail Save Data')
     }
   }
 }
