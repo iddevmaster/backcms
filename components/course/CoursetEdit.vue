@@ -2,11 +2,11 @@
   <div class="row mb-4 g-3">
     <div id="form_grid_layouts" class="col-lg-9">
       <div class="seperator-header">
-        <h4 class="">ฟอร์ม แก้ไขคอร์ส </h4>
+        <h4 class=""> {{ $t("menu_couse_p_edit_title") }} </h4>
       </div>
     </div>
     <div class="col-md-6">
-      <label for="inputEmail4" class="form-label">รหัสคอร์ส</label>
+      <label for="inputEmail4" class="form-label">  {{ $t("menu_couse_f_title_code") }}</label>
       <input type="text" class="form-control" id="inputEmail4" v-model="store.formDataEditCourse.course_code" :class="{
         'border-red-500 focus:border-red-500': v$.course_code.$error,
         'border-[#42d392] ': !v$.course_code.$invalid,
@@ -15,7 +15,7 @@
         v$.course_code.$errors[0].$message }}</span>
     </div>
     <div class="col-md-6">
-      <label for="inputPassword4" class="form-label">ชื่อคอร์ส</label>
+      <label for="inputPassword4" class="form-label">  {{ $t("menu_couse_f_title_name") }}</label>
       <input type="text" class="form-control" id="inputPassword4" v-model="store.formDataEditCourse.course_name" :class="{
         'border-red-500 focus:border-red-500': v$.course_name.$error,
         'border-[#42d392] ': !v$.course_name.$invalid,
@@ -24,7 +24,7 @@
         v$.course_name.$errors[0].$message }}</span>
     </div>
     <div class="col-12">
-      <label for="inputAddress" class="form-label">รายละเอียดคอร์ส</label>
+      <label for="inputAddress" class="form-label">  {{ $t("menu_couse_f_title_detail") }}</label>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" :class="{
         'border-red-500 focus:border-red-500': v$.course_description.$error,
         'border-[#42d392] ': !v$.course_description.$invalid,
@@ -35,18 +35,22 @@
     </div>
 
     <div class="form-group mb-4 mt-3">
-      <label for="exampleFormControlFile1">รูปภาพคอร์ส</label>
-      <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChange" ref="fileupload" />
+      <label for="exampleFormControlFile1">  {{ $t("menu_couse_f_title_picture") }}</label>
+      <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChangeBack" ref="fileupload" />
     </div>
-
+    <span
+            class="text-xs text-red-500"
+            style="color: red"
+            v-if="v$.course_cover.$error"
+            >{{ v$.course_cover.$errors[0].$message }}</span>
 
     <div class="border p-2 mt-3">
-      <p>แสดงรูปตรงนี้:</p>
-      <template v-if="store.image">
+      <p>  {{ $t("menu_couse_f_title_display_picture") }}:</p>
+     <template v-if="store.formDataEditCourse.course_cover">
         <div class="row">
           <div id="image-container" class="col-md-3 col-sm-4 col-6" >
             <div class="image-wrapper">
-              <img :src="coverimage(store.image)" class="img-fluid" />
+              <img :src="coverimage(store.formDataEditCourse.course_cover)" class="img-fluid" />
               <button @click="removeImage()" class="delete-button"><i class="bi bi-x-lg"></i></button>
             </div>
           </div>
@@ -58,7 +62,7 @@
   </div>
 
   <button class="btn btn-dark additem _effect--ripple waves-effect waves-light" @click="addlesson()">
-    เพิ่มบทเรียน
+   {{ $t("menu_couse_f_add_lesson") }}
   </button>
   <div class="invoice-detail-items">
     <div class="table-responsive">
@@ -66,9 +70,9 @@
         <thead>
           <tr>
             <th class=""></th>
-            <th>ชื่อ && รายละเอียดคอร์ส</th>
-            <th class="">รูปภาพ</th>
-            <th class="">วีดีโอ</th>
+                <th>{{ $t("menu_lesson_name_and_detail") }}</th>
+            <th class="">{{ $t("menu_lesson_f_title_picture") }}</th>
+            <th class="">{{ $t("menu_lesson_f_video") }}</th>
           </tr>
           <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
         </thead>
@@ -78,6 +82,7 @@
             <td class="delete-item-row">
               <ul class="table-controls">
                 <li>
+                  
                   <a href="javascript:void(0);" @click="removelesson(item.cs_id)" class="delete-item"
                     data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><svg
                       xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -96,12 +101,19 @@
               <textarea class="form-control" placeholder="cs_Description"
                 v-model="item.cs_description">{{ item.cs_description }}</textarea>
             </td>
-            <td class="rate">
+            <td>
               <input type="file" id="input" @change="handleFiles($event, index)" />
               <img :src="image(item.cs_cover)" class="img-fluid" width="40" height="40" />
             </td>
-            <td class="text-right qty">
-              <input type="file" id="input" @change="handleFiles($event, index)" />
+            <td>
+
+               <input
+                type="text"
+                class="form-control form-control-sm"
+                placeholder="Item Description"
+                v-model="item.cs_video"
+              />
+            
             </td>
           </tr>
         </tbody>
@@ -110,7 +122,7 @@
   </div>
   <div class="col-xl-12 col-md-12">
     <button type="button" class="btn btn-success" @click="save()">
-      บันทึก
+    {{ $t("menu_couse_f_save") }}
     </button>
   </div>
 </template>
@@ -167,6 +179,13 @@ const rules = computed(() => {
       ),
       minLength: minLength(6),
     },
+    course_cover: {
+      required: helpers.withMessage(
+        "Course Image is required",
+        required
+      ),
+      minLength: minLength(6),
+    },
 
     course_description: {
       required: helpers.withMessage(
@@ -213,7 +232,8 @@ const removelesson = async (x) => {
   await deletelesson(x);
 };
 const removeImage = async () => {
-  store.image = null;
+ 
+    store.formDataEditCourse.course_cover = null
   const input = document.querySelector('input[type="file"]');
   input.value = "";
 };
@@ -255,18 +275,36 @@ function image(i) {
     const usingSplit = i.split(",");
     var x = usingSplit[0];
   } else {
-    var x = "static/upload/2023/7/files-1689561047889.jpg";
+    var x = "static/upload/2023/9/files-riRE6hEnHI.jpg";
   }
   let im =  ApiService.image(x);
   return im;
 }
 
+
+const onFileChangeBack = async (event) => {
+  var input = event.target;
+  if (input.files) {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      store.formDataEditCourse.course_cover = e.target.result;
+    };
+    store.imagelist = input.files[0];
+    reader.readAsDataURL(input.files[0]);
+  }
+};
+
+
+
+
 function coverimage(i) {
+     console.log('i',i)
   let result = i.slice(0, 6);
   if (result === 'static') {
     let im =  ApiService.image(i);
     return im;
   } else {
+ 
     return i;
   }
 }
@@ -308,19 +346,6 @@ function coverimage(i) {
   max-height: 300px;
 }
 
-.video-container {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-  /* 16:9 aspect ratio (change this value as per your video's aspect ratio) */
-}
 
-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
 </style>
  

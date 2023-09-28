@@ -74,18 +74,22 @@
         type="file"
         class="form-control-file"
         id="exampleFormControlFile1"
-        @change="onFileChange"
+        @change="onFileChangeBack"
         ref="fileupload"
       />
     </div>
-
+    <span
+            class="text-xs text-red-500"
+            style="color: red"
+            v-if="v$.course_cover.$error"
+            >{{ v$.course_cover.$errors[0].$message }}</span>
     <div class="border p-2 mt-3">
       <p>{{ $t("menu_couse_f_title_display_picture") }}:</p>
-      <template v-if="store.image">
+      <template v-if="store.formDataCourse.course_cover">
         <div class="row">
           <div id="image-container" class="col-md-3 col-sm-4 col-6">
             <div class="image-wrapper">
-              <img :src="store.image" class="img-fluid" />
+              <img  :src="coverimage(store.formDataCourse.course_cover)" class="img-fluid" />
               <button @click="removeImage()" class="delete-button"><i class="bi bi-x-lg"></i></button>
             </div>
           </div>
@@ -176,19 +180,15 @@
                 />
               </div>
             </td>
-            <td class="text-right qty">
-              <input
-                type="file"
-                id="input"
-                @change="handleFilesVideo($event, item.cs_id)"
+            <td>
+                 <input
+                type="text"
+                class="form-control form-control-sm"
+                placeholder="Item Description"
+                v-model="item.cs_id"
               />
 
-              <div class="video-container">
-                <video controls>
-                  <source src="@/assets/images/sample-5.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
+           
             </td>
           </tr>
         </tbody>
@@ -251,6 +251,13 @@ const rules = computed(() => {
       ),
       minLength: minLength(6),
     },
+     course_cover: {
+      required: helpers.withMessage(
+        "The  Image  field is required",
+        required
+      ),
+      minLength: minLength(1),
+    },
 
     course_description: {
       required: helpers.withMessage(
@@ -293,7 +300,7 @@ const removelesson = async (x) => {
   await deletelesson(x);
 };
 const removeImage = async () => {
-  store.image = null;
+  store.formDataCourse.course_cover = null
   const input = document.querySelector('input[type="file"]');
   input.value = "";
 };
@@ -331,13 +338,37 @@ const onFileChange = async (event) => {
   }
 };
 
+
+const onFileChangeBack = async (event) => {
+  var input = event.target;
+  if (input.files) {
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      store.formDataCourse.course_cover = e.target.result;
+    };
+    store.imagelist = input.files[0];
+    reader.readAsDataURL(input.files[0]);
+  }
+};
+
+
+function coverimage(i) {
+  let result = i.slice(0, 6);
+  if (result === "static") {
+    let im = ApiService.image(i);
+    return im;
+  } else {
+    return i;
+  }
+}
+
 function image(i) {
   var x = null;
   if (i) {
     const usingSplit = i.split(",");
     var x = usingSplit[0];
   } else {
-    var x = "static/upload/2023/7/files-1689561047889.jpg";
+    var x = "static/upload/2023/9/files-riRE6hEnHI.jpg";
   }
   let im =  ApiService.image(x);
   return im;

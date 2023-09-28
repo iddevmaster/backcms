@@ -23,6 +23,15 @@
   "menu_lesson_name_and_detail": "ชื่อ && รายละเอียดบทเรียน",
   "menu_lesson_f_title_picture": "รูปภาพแสดงหน้าปก",
   "menu_lesson_f_video": "วีดีโอ",
+ 
+  "menu_couse_edit": "แก้ไขคอร์ส",
+  "menu_couse_p_edit_title": "ฟอร์ม แก้ไขคอร์ส",
+  "menu_couse_f_edit_title_code": "รหัสคอร์ส",
+  "menu_couse_f_edit_title_name": "ชื่อคอร์ส",
+  "menu_couse_f_edit_title_detail": "รายละเอียดคอร์ส",
+  "menu_couse_f_edit_title_picture": "รูปภาพแสดงหน้าปก",
+  "menu_couse_f_edit_title_display_picture": "แสดงภาพตรงนี้",
+
   
 
   "menu_page_course": "คอร์ส",
