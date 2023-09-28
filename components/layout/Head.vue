@@ -23,7 +23,7 @@
                         <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(2)"><img :src="image(users.lan[2])" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;English</span></a>
                     </div>
                 </li>
-
+<!-- 
                 <li class="nav-item dropdown notification-dropdown">
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="notificationDropdown"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -197,7 +197,7 @@
                         </div>
                     </div>
 
-                </li>
+                </li> -->
 
                 <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown"
