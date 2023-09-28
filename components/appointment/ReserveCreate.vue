@@ -35,7 +35,7 @@
       <tbody>
         <tr v-for="(user, index) in store.usersall" :key="user.user_id" @click="choose(user)" :class="{ 'table-success': store.myChoose === user }">
           <td id="clickTest">{{ index + 1 }}</td>
-          <td>{{ user.user_firstname }} - {{ user.user_lastname }}</td>
+          <td>{{ user.user_firstname }}  {{ user.user_lastname }}</td>
           <td>{{ user.user_phone }}</td>
           <td>{{ user.user_email }}</td>
           <!-- <td>

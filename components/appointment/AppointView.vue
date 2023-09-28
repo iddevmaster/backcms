@@ -64,7 +64,7 @@
           <td>{{ index + 1 }}</td>
           <td>{{ item.user_reserve.user_email }}</td>
           <td>
-            {{ item.user_reserve.user_firstname }} -
+            {{ item.user_reserve.user_firstname }} 
             {{ item.user_reserve.user_lastname }}
           </td>
           <td>{{ item.user_reserve.user_phone }}</td>
