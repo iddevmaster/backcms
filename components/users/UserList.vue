@@ -51,7 +51,7 @@
           <td v-else-if="user.user_type == 2">เจ้าหน้าที่</td>
           <td v-else>ประชาชน</td>
           <td>{{ user.user_phone }}</td>
-          <td><button type="button" class="btn btn-primary btn-sm" @click="choose(user.user_id)">จัดการ DLT</button> </td>
+          <td><button type="button" class="btn btn-primary btn-sm" @click="choose(user.user_id)">{{ $t("menu_user_c_action") }}</button> </td>
           <td>{{ coverttime(user.udp_date) }}</td>
           <td>
             <NuxtLink :to="'/users/' + user.user_id">

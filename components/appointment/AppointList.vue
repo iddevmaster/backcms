@@ -52,7 +52,7 @@
       <thead>
         <tr>
           <th scope="col">{{ $t("menu_app_manage_index") }}</th>
-          <th scope="col">{{ $t("menu_app_manage_remark") }}</th>
+    
           <th scope="col">{{ $t("menu_app_manage_dlt") }}</th>
           <th class="text-center" scope="col">{{ $t("menu_app_manage_leantype") }}</th>
           <th class="text-center" scope="col">{{ $t("menu_app_manage_quota") }}</th>
@@ -65,13 +65,13 @@
       <tbody>
         <tr v-for="(event, index) in store.group">
           <td>{{ index + 1 }}</td>
-          <td>{{ event.ap_remark }}</td>
           <td>
-            {{ event.dlt_code }}
+          
+            {{ format_dlt(event.dlt_code) }}
           </td>
           <td>
-            <span v-if="event.ap_learn_type == 1"> ทฤษฎี </span>
-            <span v-else> ปฏิบัติ </span>
+            <span v-if="event.ap_learn_type == 1"> {{ $t("menu_learn_theory") }} </span>
+            <span v-else> {{ $t("menu_learn_practice") }} </span>
           </td>
           <td>
             {{ event.ap_quota }}
@@ -168,6 +168,12 @@ const format_start = (date) => {
 const format_end = (date) => {
   store.form.end_date = moment(date).format("YYYY-MM-DD");
   return moment(date).format("YYYY-MM-DD");
+};
+
+const format_dlt = (evnet_dlt) => {
+
+  let obj = store.dtl.find(o => o.dlt_code === evnet_dlt);
+  return obj.dlt_description;
 };
 
 const format = (time) => {

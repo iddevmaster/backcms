@@ -25,9 +25,16 @@
         <tr v-for="(event, index) in store.resultUser" >
           <td>{{ index + 1 }}</td>
           <td>{{ event.mr_score }}</td>
-          <td>{{ event.mr_learn_type }}</td>
-          <td>{{ event.dlt_code }}</td>
-          <td>{{ event.mr_status }}</td>
+          <td>
+            <span v-if="event.mr_learn_type == 1"> {{ $t("menu_learn_theory") }} </span>
+            <span v-else> {{ $t("menu_learn_practice") }} </span>
+          </td>
+          <td>
+            {{ format_dlt(event.dlt_code) }}
+          </td>
+         
+          <td v-if="event.mr_status == 'fail'">{{ $t("menu_fail") }}</td>
+          <td v-else>{{ $t("menu_pass") }}</td>
           <td>{{ event.crt_date }}</td>
           <td>
             <button
@@ -92,6 +99,12 @@ const edit = async (item) => {
   store.formeditresult.mr_learn_type = item.mr_learn_type 
   //store.identification_number = item.identification_number
  //
+};
+
+const format_dlt = (evnet_dlt) => {
+
+let obj = store.dtla.find(o => o.dlt_code === evnet_dlt);
+return obj.dlt_description;
 };
 
 

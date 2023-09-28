@@ -54,7 +54,7 @@
           <td>{{ user.user_phone }}</td>
        
           <td>{{ coverttime(user.udp_date) }}</td>
-             <td><button type="button" class="btn btn-primary btn-sm" @click="choose(user.user_id)">จัดการ DLT</button> </td>
+             <td><button type="button" class="btn btn-primary btn-sm" @click="choose(user.user_id)">{{ $t("menu_dlt_title_manage_action") }}</button> </td>
       
         </tr>
       </tbody>

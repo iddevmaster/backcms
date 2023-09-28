@@ -231,7 +231,12 @@
   "menu_result_create": "วันที่สร้าง",
 
 
-  "menu_result_form_edit": "ฟอร์ม - แก้ไขผลการสอบ"
+  "menu_result_form_edit": "ฟอร์ม - แก้ไขผลการสอบ",
+
+  "menu_learn_theory": "ทฤษฎี",
+  "menu_learn_practice": "ปฏิบัติ",
+  "menu_fail": "ไม่ผ่าน",
+  "menu_pass": "ผ่าน"
 }
 
 

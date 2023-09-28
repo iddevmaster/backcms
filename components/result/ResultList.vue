@@ -55,8 +55,11 @@
         <tr v-for="(event, index) in store.result">
           <td>{{ index + 1 }}</td>
           <td>{{ event.mr_score }}</td>
-          <td>{{ event.mr_learn_type }}</td>
-          <td>{{ event.mr_status }}</td>
+          <td v-if="event.mr_learn_type == 1">{{ $t("menu_learn_theory") }}</td>
+          <td v-else>{{ $t("menu_learn_practice") }}</td>
+       
+          <td v-if="event.mr_status == 'fail'">{{ $t("menu_fail") }}</td>
+          <td v-else>{{ $t("menu_pass") }}</td>
           <td>{{ event.user_detail.user_firstname }} {{ event.user_detail.user_lastname }}</td>
           <td>{{ event.user_detail.user_phone }}</td>
            <td>

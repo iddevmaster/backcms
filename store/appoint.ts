@@ -202,7 +202,7 @@ export const AppointStore = defineStore('appoint', {
             this.formedit.ap_learn_type = response.data.ap_learn_type
             this.formedit.dtl_code = response.data.dlt_code
 
-console.log(response.data.ap_date_start);
+
             const date_start = this.changeTypeTimeZonebefore(response.data.ap_date_start);
             const date_end = this.changeTypeTimeZonebefore(response.data.ap_date_end);
 
