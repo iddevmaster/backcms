@@ -140,22 +140,26 @@ const backToUser = async () => {
 }
 
 const format_start = (xd) => {
-  const day = xd.getDate();
-  const month = xd.getMonth() + 1;
-  const year = xd.getFullYear();
+
 
 const isoFormatInUTC = xd.toISOString();
+ //return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
+
+ store.formedit.ap_date_start = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
  return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
 
 //  return `Selected date is ${day}/${month}/${year}`;
 }
 
+
+
 const format_end = (ie) => {
-  const day = ie.getDate();
-  const month = ie.getMonth() + 1;
-  const year = ie.getFullYear();
+
 
 const isoFormatInUTC = ie.toISOString();
+
+
+  store.formedit.ap_date_end = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
  return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
 
 }

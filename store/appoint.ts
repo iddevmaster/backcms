@@ -13,6 +13,7 @@ export const AppointStore = defineStore('appoint', {
     searchData: "",
     start_date: '',
     reservebyap: [],
+    app_present:[],
     users: [],
     usersall:[],
     user_id:null,
@@ -46,6 +47,13 @@ export const AppointStore = defineStore('appoint', {
       per_page: 5,
       search: ""
     },
+    formreserve: {
+      dlt_code: 'A1',
+      ap_learn_type:1,
+      present_day:''
+    },
+
+
     formedit: {
       ap_learn_type: null,
       ap_quota: null,
@@ -202,13 +210,13 @@ export const AppointStore = defineStore('appoint', {
             this.formedit.dtl_code = response.data.dlt_code
 
 
-            const date_start = this.changeTypeTimeZonebefore(response.data.ap_date_start);
-            const date_end = this.changeTypeTimeZonebefore(response.data.ap_date_end);
+            // const date_start = this.changeTypeTimeZonebefore(response.data.ap_date_start);
+            // const date_end = this.changeTypeTimeZonebefore(response.data.ap_date_end);
 
           
 
-            this.formedit.ap_date_start = date_start;
-            this.formedit.ap_date_end = date_end
+            this.formedit.ap_date_start = response.data.ap_date_start;
+            this.formedit.ap_date_end = response.data.ap_date_end
 
             return true
           } else {
@@ -236,8 +244,8 @@ export const AppointStore = defineStore('appoint', {
 const currentDate = new Date(this.forminsert.ap_date_start);
 const currentDateEnd = new Date(this.forminsert.ap_date_end);
 
-currentDate.setHours(currentDate.getHours() + 14);
-currentDateEnd.setHours(currentDateEnd.getHours() + 14);
+currentDate.setHours(currentDate.getHours() + 7);
+currentDateEnd.setHours(currentDateEnd.getHours() + 7);
 const date_start = await this.changeFormate(currentDate)
 const date_end = await this.changeFormate(currentDateEnd)
 
@@ -248,6 +256,8 @@ const date_end = await this.changeFormate(currentDateEnd)
         ap_learn_type: parseInt(this.forminsert.ap_learn_type), ap_quota: this.forminsert.ap_quota, ap_date_start: date_start, ap_date_end: date_end, ap_remark: this.forminsert.ap_remark,
         dlt_code: this.forminsert.dtl_code, user_id: this.forminsert.user_id
       }
+
+   
 
       try {
         const data = await ApiService.post('/appointment/create', savet).then(response => {
@@ -264,30 +274,30 @@ const date_end = await this.changeFormate(currentDateEnd)
     async Update() {
 
 
-      const date_start = await this.changeTypeTimeZoneafter(this.formedit.ap_date_start);
-      const date_end = await this.changeTypeTimeZoneafter(this.formedit.ap_date_end);
+   //   const date_start = await this.changeTypeTimeZoneafter(this.formedit.ap_date_start);
+   //   const date_end = await this.changeTypeTimeZoneafter(this.formedit.ap_date_end);
       const learn_type = parseInt(this.formedit.ap_learn_type);
       //  const date_end =  await this.changeTypeTimeZone(this.formedit.ap_date_end);
 
       // this.formedit.ap_date_end = await this.changeFormate(this.formedit.ap_date_end);
       const upd = {
-        ap_learn_type: learn_type, ap_quota: this.formedit.ap_quota, ap_date_start: date_start, ap_date_end: date_end, ap_remark: this.formedit.ap_remark,
+        ap_learn_type: learn_type, ap_quota: this.formedit.ap_quota, ap_date_start: this.formedit.ap_date_start, ap_date_end: this.formedit.ap_date_end, ap_remark: this.formedit.ap_remark,
         dlt_code: this.formedit.dtl_code, user_id: this.formedit.user_id
       }
-
-
       try {
         const data = await ApiService.put('/appointment/update/' + this.ap_id, upd).then(response => {
-       
+         
+       if(response.data == ''){
+        return false;
+       }
+          return true;
         });
-
-
-        return true
+        return data
       } catch (error) {
         return false;
       }
 
-      return true;
+   //   return true;
     },
 
     async search() {
@@ -445,25 +455,34 @@ return true;
     async CheckVerify(item) {
       try {
         const data = await ApiService.get('/user/get/' + item.user_id).then(response => {
-          console.log(response);
-        
-    
           if(Object.keys(response.data.detail).length === 0){
-
             return false;
-         
           }else {
-          
             return true;
-            
           }
-        
         });
         return data;
       } catch (error) {
      
       } finally {
    
+      }
+
+    },
+
+    async fetchAppPresent() {
+
+
+  console.log(this.formreserve);
+      try {
+        const data = await ApiService.get('/appointment/reserve/list/?dlt_code='+this.formreserve.dlt_code+'&ap_learn_type='+this.formreserve.ap_learn_type +'&present_day='+this.formreserve.present_day+'').then(response => {
+          this.app_present = response.data
+        });
+        return true
+
+      } catch (error) {
+        console.log('error');
+        return false;
       }
 
     }
