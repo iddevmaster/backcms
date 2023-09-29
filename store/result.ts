@@ -32,9 +32,9 @@ export const ResultStore = defineStore('result', {
     dlt_code: "A2",
     formresult: {
       mr_score: null,
-      mr_learn_type: null,
-      mr_status: null,
-      dlt_code: null,
+      mr_learn_type: 1,
+      mr_status: 'pass',
+      dlt_code: "A1",
       identification_number: null
     },
     formeditresult: {

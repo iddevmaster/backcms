@@ -114,7 +114,7 @@ export const useAuthStore = defineStore('auth', {
    this.users.user_phone = response.data.user_phone
    this.users.user_type = response.data.user_type
    this.detail.user_img = response.data.detail.user_img
-   
+
 
         });
 

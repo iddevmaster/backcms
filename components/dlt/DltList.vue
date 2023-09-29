@@ -53,7 +53,8 @@
           <td v-else>{{ $t("menu_user_c_type_user_user") }}</td>
           <td>{{ user.user_phone }}</td>
        
-          <td>{{ coverttime(user.udp_date) }}</td>
+          <!-- <td>{{ coverttime(user.udp_date) }}</td> -->
+          <td>{{ format(user.udp_date) }}</td>
              <td><button type="button" class="btn btn-primary btn-sm" @click="choose(user.user_id)">{{ $t("menu_dlt_title_manage_action") }}</button> </td>
       
         </tr>
@@ -107,6 +108,8 @@ import "datatables.net-dt/css/jquery.dataTables.min.css"
 import $ from 'jquery'
 import Paginate from "vuejs-paginate-next";
 import { useToast } from 'vue-toastification'
+import moment from "moment-timezone";
+
 
 const router = useRouter();
 const toast = useToast()
@@ -178,7 +181,9 @@ function coverttime(date) {
 
 }
 
-
+const format = (time) => {
+  return moment(time).utc().format("DD/MM/YYYY HH:mm");
+};
 
 
 </script>

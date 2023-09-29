@@ -33,13 +33,6 @@
     </div>
 
     
-  <!-- <div class="row mb-4">
-    <div class="col-sm-6">
-      <label for="exampleFormControlInput1">User</label>
-      <Select2 v-model="store.form.user_id" :options="myOptionsUser" :settings="{ settingOption: value, settingOption: value }"  @change="myChangeEvent($event)" @select="mySelectEvent($event)"/>
-    </div>
-   
-  </div> -->
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
       <button class="btn btn-primary mt-0 w-100" @click="Search()">
         <i class="bi bi-search me-2"></i>{{ $t("menu_app_manage_search") }}
@@ -53,7 +46,7 @@
         <tr>
           <th scope="col">{{ $t("menu_app_manage_index") }}</th>
     
-          <th scope="col">{{ $t("menu_app_manage_dlt") }}</th>
+          <!-- <th scope="col">{{ $t("menu_app_manage_dlt") }}</th> -->
           <th class="text-center" scope="col">{{ $t("menu_app_manage_leantype") }}</th>
           <th class="text-center" scope="col">{{ $t("menu_app_manage_quota") }}</th>
           <th class="text-center" scope="col">{{ $t("menu_app_manage_total_reserve") }}</th>
@@ -65,10 +58,9 @@
       <tbody>
         <tr v-for="(event, index) in store.group">
           <td>{{ index + 1 }}</td>
-          <td>
-          
+          <!-- <td>
             {{ format_dlt(event.dlt_code) }}
-          </td>
+          </td> -->
           <td>
             <span v-if="event.ap_learn_type == 1"> {{ $t("menu_learn_theory") }} </span>
             <span v-else> {{ $t("menu_learn_practice") }} </span>

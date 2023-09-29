@@ -172,7 +172,6 @@ export const usersStore = defineStore('users', {
       try {
         const data = await ApiService.get('/user/get/' + user_id).then(response => {
           this.formDataEdit = response.data;
-    
           if(Object.keys(response.data.detail).length === 0){
             this.formDetailEdit.identification_number = ""
             this.formDetailEdit.user_birthday = ""
