@@ -1,541 +1,272 @@
 <template>
-  <div class="sidebar-wrapper sidebar-theme">
-    <nav id="sidebar">
-      <div class="navbar-nav theme-brand flex-row text-center">
-        <div class="nav-logo" @click="GotoPage()">
-          <div class="nav-item theme-logo">
-            <a >
-              <img src="/img/logo.svg" class="navbar-logo" alt="logo" />
-            </a>
-          </div>
-          <div class="nav-item theme-text">
-            <a class="nav-link"> CMS </a>
-          </div>
-        </div>
-        <div class="nav-item sidebar-toggle" @click="ShowColl()">
-          <div class="btn-toggle sidebarCollapse">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-chevrons-left"
-            >
-              <polyline points="11 17 6 12 11 7"></polyline>
-              <polyline points="18 17 13 12 18 7"></polyline>
-            </svg>
-          </div>
-        </div>
-      </div>
+  <div class="row mb-2 justify-content-center">
+    <div class="type">
+      <select
+        class="form-select form-select cateSelect"
+        aria-label="Default select example"
+        v-model="store.form.dtl_code"
+      >
+        <option
+          v-for="(item, index) in store.dtl"
+          :key="item.dlt_code"
+          :value="item.dlt_code"
+        >
+          {{ item.dlt_description }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="row ps-4 mb-5 gap-2 justify-content-center">
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12 picker">
+      <!-- <VueDatePicker v-model="store.form.start_date"></VueDatePicker> -->
+      <Datepicker v-model="store.form.date_event" :format="format_start" />
+    </div>
+    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+      <select
+        class="form-select typeSelect h-100"
+        aria-label="Default select example"
+        v-model="store.form.ap_learn_type"
+      >
+        <option value="1">ทฤษฎี</option>
+        <option value="2">ปฏิบัติ</option>
+      </select>
+    </div>
 
-      <div class="profile-info">
-        <div class="user-info">
-          <div class="profile-img" v-if="store.detail.user_img">
-            <img :src="image(store.detail.user_img)" alt="avatar" />
-          </div>
+    
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
+      <button class="btn btn-primary mt-0 w-100" @click="Search()">
+        <i class="bi bi-search me-2"></i>{{ $t("menu_app_manage_search") }}
+      </button>
+    </div>
+  </div>
 
-          <div class="profile-img" v-else>
-            <img src="../../assets/images/team__1.png" alt="avatar" />
-          </div>
-          <div class="profile-content">
-            <h6 class="" v-if="store.users">{{ store.users.user_name }}</h6>
-            <p class="">{{ store.users.user_email }}</p>
-          </div>
-        </div>
-      </div>
+  <div class="table-responsive">
+    <table class="table" v-if="store.group.length > 0">
+      <thead>
+        <tr>
+          <th scope="col">{{ $t("menu_app_manage_index") }}</th>
+    
+          <!-- <th scope="col">{{ $t("menu_app_manage_dlt") }}</th> -->
+          <th class="text-center" scope="col">{{ $t("menu_app_manage_leantype") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_app_manage_quota") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_app_manage_total_reserve") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_app_manage_date_start") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_app_manage_date_end") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_app_view_action") }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(event, index) in store.group">
+          <td>{{ index + 1 }}</td>
+          <!-- <td>
+            {{ format_dlt(event.dlt_code) }}
+          </td> -->
+          <td>
+            <span v-if="event.ap_learn_type == 1"> {{ $t("menu_learn_theory") }} </span>
+            <span v-else> {{ $t("menu_learn_practice") }} </span>
+          </td>
+          <td>
+            {{ event.ap_quota }}
+          </td>
+          <td>
+            {{ event.total_reserve }}
+          </td>
+          <td>
+            {{ format(event.ap_date_start) }}
+          </td>
+          <td>
+            {{ format(event.ap_date_end) }}
+          </td>
+          <td align="center">
+            <div class="d-flex gap-2">
+              <NuxtLink :to="'/appointment/view/' + event.ap_id">
+                <button  type="button"
+                  class="btn btn-success mt-0"
+                  style="background-color: #92a8d1"
+                  data-bs-toggle="tooltip" 
+                  data-bs-placement="top" 
+                  title="รายละเอียดเพิ่มเติม"
+                >
+                  <i class="bi bi-clipboard"></i>
+                </button>
+              </NuxtLink>
 
-      <div class="shadow-bottom"></div>
-      <ul class="list-unstyled menu-categories" id="accordionExample">
-        <!-- <li class="menu active">
-                        <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                                <span>Dashboard</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                        <ul class="collapse submenu list-unstyled show" id="dashboard" data-bs-parent="#accordionExample">
-                            <li class="active">
-                                <a href="./index.html"> Analytics </a>
-                            </li>
-                            <li>
-                                <a href="./index2.html"> Sales </a>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li class="menu menu-heading">
-                        <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>APPLICATIONS</span></div>
-                    </li> -->
-
-        <li class="menu" >
-          <a
-            href="#course"
-            data-bs-toggle="collapse"
-            aria-expanded="false"
-            class="dropdown-toggle"
-          >
-            <div class="">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-zap"
+              <NuxtLink :to="'/appointment/' + event.ap_id">
+                <button
+                  type="button"
+                  class="btn btn-success mt-0"
+                  style="background-color: #3f2c73"
+                >
+                  <i class="bi bi-gear"></i>
+                </button>
+              </NuxtLink>
+              <!-- <button type="button" class="btn btn-success" style="background-color:#3F2C73;"  >ดูราย</button> -->
+              <button
+                type="button"
+                class="btn btn-success mt-0"
+                style="background-color: #ce0000"
+                @click="del(event)"
               >
-                <polygon
-                  points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
-                ></polygon>
-              </svg>
-
-              <span>{{ $t("menu_couse") }}</span>
+                <i class="bi bi-trash"></i>
+              </button>
             </div>
-            <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div>
-          </a>
-          <ul
-            class="collapse submenu list-unstyled"
-            id="course"
-            data-bs-parent="#accordionExample"
-          >
-            <li>
-              <nuxt-link to="/course">{{ $t("menu_couse_all") }}</nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/course/create">{{ $t("menu_couse_add") }}</nuxt-link>
-            </li>
-          </ul>
-        </li>
-
-        <li class="menu">
-          <a
-            href="#exam"
-            data-bs-toggle="collapse"
-            aria-expanded="false"
-            class="dropdown-toggle"
-          >
-            <div class="">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-layers"
-              >
-                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                <polyline points="2 17 12 22 22 17"></polyline>
-                <polyline points="2 12 12 17 22 12"></polyline>
-              </svg>
-              <span>{{ $t("menu_exam") }}</span>
-            </div>
-            <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div>
-          </a>
-          <ul
-            class="collapse submenu list-unstyled"
-            id="exam"
-            data-bs-parent="#accordionExample"
-          >
-            <li>
-              <nuxt-link to="/exam"> {{ $t("menu_exam_all") }}</nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/examhistory"> {{ $t("menu_exam_all_history") }}</nuxt-link>
-            </li>
-          </ul>
-        </li>
-
-        <li class="menu" v-if="user_type == 1 || 2">
-          <a
-            href="#transport"
-            data-bs-toggle="collapse"
-            aria-expanded="false"
-            class="dropdown-toggle"
-          >
-            <div class="">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-box"
-              >
-                <path
-                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
-                ></path>
-                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                <line x1="12" y1="22.08" x2="12" y2="12"></line>
-              </svg>
-
-              <span>{{ $t("menu_new_tra") }}</span>
-            </div>
-            <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div>
-          </a>
-          <ul
-            class="collapse submenu list-unstyled"
-            id="transport"
-            data-bs-parent="#accordionExample"
-          >
-            <li>
-              <nuxt-link to="/news/transport">{{ $t("menu_new_tra") }}</nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/news/transport/create"
-                >{{ $t("menu_new_tra_add") }}</nuxt-link
-              >
-            </li>
-          </ul>
-        </li>
-        <!-- <li class="menu" v-if="user_type == 1 || 2">
-          <a
-            href="#civil"
-            data-bs-toggle="collapse"
-            aria-expanded="false"
-            class="dropdown-toggle"
-          >
-            <div class="">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-airplay"
-              >
-                <path
-                  d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"
-                ></path>
-                <polygon points="12 15 17 21 7 21 12 15"></polygon>
-              </svg>
-
-              <span>{{ $t("menu_new_ci") }}</span>
-            </div>
-            <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div>
-          </a>
-          <ul
-            class="collapse submenu list-unstyled"
-            id="civil"
-            data-bs-parent="#accordionExample"
-          >
-            <li>
-              <nuxt-link to="/news/civil">{{ $t("menu_new_ci") }}</nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/news/civil/create">{{ $t("menu_new_ci_add") }}</nuxt-link>
-            </li>
-          </ul>
-        </li> -->
-
-                <li class="menu">
-          <a
-            href="#menu_dlt"
-            data-bs-toggle="collapse"
-            aria-expanded="false"
-            class="dropdown-toggle"
-          >
-            <div class="">
-              <i class="bi bi-person-vcard menu-icon"></i>
-              <span>{{ $t("menu_dlt") }}</span>
-            </div>
-            <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div>
-          </a>
-          <ul
-            class="collapse submenu list-unstyled"
-            id="menu_dlt"
-            data-bs-parent="#accordionExample"
-          >
-            <li>
-              <nuxt-link to="/dltmanage">จัดการใบขับขี่</nuxt-link>
-            </li>
-          
-          </ul>
-        </li>
-
-           <li class="menu">
-          <a
-            href="#appointment"
-            data-bs-toggle="collapse"
-            aria-expanded="false"
-            class="dropdown-toggle"
-          >
-            <div class="">
-              <i class="bi bi-calendar-plus menu-icon"></i>
-              <span>{{ $t("menu_new_app") }}</span>
-            </div>
-            <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div>
-          </a>
-          <ul
-            class="collapse submenu list-unstyled"
-            id="appointment"
-            data-bs-parent="#accordionExample"
-          >
-            <li>
-              <nuxt-link to="/appointment">{{ $t("menu_app_manage_all") }}</nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/appointment/create">{{ $t("menu_app_app_create") }}</nuxt-link>
-            </li>
-             <li>
-              <nuxt-link to="/appointment/apppresent">{{ $t("menu_app_view_present") }}</nuxt-link>
-            </li>
-          </ul>
-        </li>
-
-        
-        <li class="menu">
-          <a
-            href="#result"
-            data-bs-toggle="collapse"
-            aria-expanded="false"
-            class="dropdown-toggle"
-          >
-            <div class="">
-              <i class="bi bi-pencil-square menu-icon"></i>
-              <span>{{ $t("menu_new_resul") }}</span>
-            </div>
-            <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div>
-          </a>
-          
-          <ul
-            class="collapse submenu list-unstyled"
-            id="result"
-            data-bs-parent="#accordionExample"
-          >
-            <li>
-              <nuxt-link to="/result">ผลสอบทั้งหมด</nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/result/create">เพิ่มผลสอบ</nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/result/edit">แก้ไขผลสอบ</nuxt-link>
-            </li>
-          </ul>
-        </li>
-
-        <li class="menu">
-          <a
-            href="#users"
-            data-bs-toggle="collapse"
-            aria-expanded="false"
-            class="dropdown-toggle"
-          >
-            <div class="">
-              <i class="bi bi-person-gear menu-icon"></i>
-              <span>{{ $t("menu_new_user") }}</span>
-            </div>
-            <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div>
-          </a>
-          
-          <ul
-            class="collapse submenu list-unstyled"
-            id="users"
-            data-bs-parent="#accordionExample"
-          >
-            <li>
-              <nuxt-link to="/users">ผู้ใช้งานทั้งหมด</nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/users/create">เพิ่มผู้ใช้งาน</nuxt-link>
-            </li>
-          </ul>
-        </li>
-
-
-      </ul>
-    </nav>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
-  
+
 
 <script setup lang="ts">
 // import DataTable from 'datatables.net-vue3';
 // import DataTablesCore from 'datatables.net-bs5';
-import { storeToRefs } from 'pinia';
-import { defineComponent } from 'vue';
-import { useAuthStore } from '@/store/auth';
-import ApiService  from "../../services/api.service";
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
+import { storeToRefs } from "pinia";
+import { defineComponent } from "vue";
+import { AppointStore } from "@/store/appoint";
+import "jquery/dist/jquery.min.js";
+//Datatable Modules
+import "datatables.net-dt/js/dataTables.dataTables";
+import "datatables.net-dt/css/jquery.dataTables.min.css";
+import $ from "jquery";
+import Paginate from "vuejs-paginate-next";
+import { useToast } from "vue-toastification";
+import Datepicker from "vuejs3-datepicker";
+import moment from "moment";
+import { ref } from "vue";
+const picked = ref(new Date());
 
-
-const data = localStorage.getItem('user');
- const user_type = useCookie('user_type').value;
-
-
-let user = JSON.parse(data);
 const router = useRouter();
-const store = useAuthStore();
+const toast = useToast();
+const store = AppointStore();
 
 
-const users = await store.getProfile();
+await store.fetchUser()
+const myOptionsUser = JSON.parse(JSON.stringify(store.users));
+const myUser = ref();
 
-const GotoPage = async () => {
-  router.push('/');
+const { deleteItem } = AppointStore(); //Action
+
+const date = ref(new Date());
+
+const format_start = (date) => {
+  store.form.date_event = moment(date).format("YYYY-MM-DD");
+  return moment(date).format("YYYY-MM-DD");
+};
+
+const format_end = (date) => {
+  store.form.end_date = moment(date).format("YYYY-MM-DD");
+  return moment(date).format("YYYY-MM-DD");
+};
+
+const format_dlt = (evnet_dlt) => {
+
+  let obj = store.dtl.find(o => o.dlt_code === evnet_dlt);
+  return obj.dlt_description;
+};
+
+const format = (time) => {
+  return moment(time).format("DD/MM/YYYY HH:mm");
+};
+// store.fetchAppointment()
+
+const del = async (id) => {
+  store.deleteItem(id);
+};
+
+const Search = async () => {
+  store.fetchAppointment();
+};
+
+const choose = async (id) => {
+  router.push({ path: "dltmanage/" + id });
+};
+
+const searchData = async () => {};
+
+const selchk = async (x) => {};
+
+const selectAll = async () => {
+  await selectall();
+};
+
+const setCurrentPageclick = async (page) => {
+  await setCurrentPage(page);
+  await store.fetchUsers();
+};
+
+const selectshowdata = async (x) => {
+  await selectentires(x.target.value);
+};
+
+const selecttype = async (item) => {
+  await selecttypes(item.target.value);
+};
+
+const sortList = async (sortBy) => {
+  await sortLists(sortBy);
+};
+
+function coverttime(date) {
+  const datetime = new Date(date);
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+  };
+  const formattedDatetime = datetime.toLocaleString(undefined, options);
+
+  return formattedDatetime;
 }
 
-const ShowColl = async () => {
-  store.isActiveSide = !store.isActiveSide
-  store.isActiveBar = false;
-}
-function image(i) {
-  let im =  ApiService.image(i);
-  return im;
-}
 
+const myChangeEvent = (event) => {
+    console.log("myChangeEvent: ", event.value);
+  }
+  const mySelectEvent = (e) => {
+    console.log("mySelectEvent: ", e.value);
+  }
 </script>
-
 <style>
-  .menu-icon {
-    font-size: 20px;
-    margin-right: 5px;
-  }
-  #sidebar ul.menu-categories li.menu > .dropdown-toggle[aria-expanded=true] .menu-icon {
-    color: white;
-  }
+.dt--pagination {
+  float: right;
+}
+.cateSelect {
+  font-size: 20px;
+  width: 100%;
+  font-weight: bold;
+  text-align: center;
+  --bs-form-select-bg-img: "";
+  border: 1px solid rgb(199, 199, 199);
+  
+}
+.cateSelect:hover {
+  
+}
+.type {
+  width: fit-content;
+}
+.typeSelect {
+  padding: 5px;
+}
+.vuejs3-datepicker__value {
+  padding: 5px !important;
+  height: 100% !important;
+  width: 100%;
+}
+table {
+  border-collapse: collapse !important;
+}
+.vuejs3-datepicker {
+  width: 100%;
+}
+.picker {
+  min-width: fit-content;
+}
 </style>
-  
-  

@@ -1,6 +1,6 @@
 <template>
   <div class="row mb-2 justify-content-center">
-    {{store.formreserve}}
+   
     <div class="type">
       <select
         class="form-select form-select cateSelect"
