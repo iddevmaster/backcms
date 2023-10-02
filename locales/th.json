@@ -221,6 +221,7 @@
   "menu_app_view_present": "นัดหมายรายวัน",
 
 
+
   "menu_result": "ผลสอบ",
   "menu_result_list": "ผลสอบทั้งหมด",
   "menu_result_search": "ค้นหา",
@@ -258,7 +259,11 @@
   "resultall": "ผลสอบทั้งหมด",
   "resultadd": "เพิ่มผลสอบ",
   "resultedit": "แก้ไขผลสอบ",
-  "logout":"ออกจากระบบ"
+  "logout":"ออกจากระบบ",
+  "app_round":"รอบ"
+
+  
+  
 }
 
 

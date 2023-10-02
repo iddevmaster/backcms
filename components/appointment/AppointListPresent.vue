@@ -28,8 +28,8 @@
         aria-label="Default select example"
         v-model="store.formreserve.ap_learn_type"
       >
-        <option :value="1">ทฤษฎี</option>
-        <option :value="2">ปฏิบัติ</option>
+        <option :value="1">{{ $t("menu_learn_theory") }}</option>
+        <option :value="2">{{ $t("menu_learn_practice") }}</option>
       </select>
     </div>
 
@@ -53,11 +53,11 @@
       <thead>
         <tr>
           <th scope="col">{{ $t("menu_app_manage_index") }}</th>
-          <th scope="col">รอบ</th>
-          <th scope="col">ชื่อ - นามสกุล</th>
-          <th scope="col">เบอร์โทร</th>
-          <th scope="col">เลขบัตรประชาชน</th>
-          <th scope="col">วันเกิด</th>
+          <th scope="col">{{ $t("app_round") }}</th>
+          <th scope="col"> {{ $t("menu_app_view_list_name") }}</th>
+          <th scope="col">{{ $t("menu_app_view_list_phone") }}</th>
+          <th scope="col">  {{ $t("menu_app_view_iden") }}</th>
+          <th scope="col">  {{ $t("menu_user_birdday") }}</th>
           
   
         </tr>

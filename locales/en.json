@@ -258,7 +258,8 @@
   "resultall": "ผลสอบทั้งหมด",
   "resultadd": "เพิ่มผลสอบ",
   "resultedit": "แก้ไขผลสอบ",
-  "logout":"Log Out"
+  "logout":"Log Out",
+  "app_round":"รอบ"
 }
 
 

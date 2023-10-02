@@ -46,12 +46,17 @@
           </div>
 
              <div class="mb-3">
-            <label for="message-text" class="col-form-label">DLT</label>  
+            <label for="message-text" class="col-form-label">DLT </label>  
               <div class="col-sm-12">
   
     <select class="form-control" v-if="store.dtl" v-model="store.formexam.dlt_code">
        
-    <option   v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code" >{{item.dlt_description}}</option>
+    <option   v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code" >
+  
+      <span v-if="locale == 'la'" >{{item.dlt_description_loas}}</span>
+      <span v-if="locale == 'en'" >{{item.dlt_description_english}}</span>
+      <span v-if="locale == 'th'" >{{item.dlt_description}}</span>
+      </option>
     </select>
     
     </div>
@@ -107,6 +112,9 @@ import { required, email, sameAs, minLength, helpers, } from '@vuelidate/validat
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ref } from 'vue';
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
+
 
 
 

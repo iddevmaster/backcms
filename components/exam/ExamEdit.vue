@@ -6,42 +6,42 @@
  <div class="modal-content modal-dialog modal-xl" id="deleteConformationLabel">
                                  <div class="modal-header">
                                  
-                                     <h5 class="modal-title" id="exampleModalLabel">แก้ไขหลักสูตร</h5>
+                                     <h5 class="modal-title" id="exampleModalLabel">{{ $t("menu_exam_all_bt_edit_exam") }}</h5>
                                    
                                  </div>
                                  <div class="modal-body">
          <form>
            
            <div class="mb-3">
-             <label for="recipient-name" class="col-form-label">รหัสหลักสูตร:</label>  <span class="text-xs text-red-500" style="color:red" v-if="v$.em_code.$error">{{
+             <label for="recipient-name" class="col-form-label">{{ $t("menu_exam_all_code") }}:</label>  <span class="text-xs text-red-500" style="color:red" v-if="v$.em_code.$error">{{
              v$.em_code.$errors[0].$message
            }}</span>
              <input type="text" class="form-control" id="recipient-name" v-model="store.formexamedit.em_code">
            </div>
           
            <div class="mb-3">
-             <label for="message-text" class="col-form-label">ชื่อหลักสูตร:</label> <span class="text-xs text-red-500" style="color:red" v-if="v$.em_name.$error">{{
+             <label for="message-text" class="col-form-label">{{ $t("menu_exam_all_name") }}::</label> <span class="text-xs text-red-500" style="color:red" v-if="v$.em_name.$error">{{
              v$.em_name.$errors[0].$message
            }}</span>
              <input type="text" class="form-control" id="recipient-name" v-model="store.formexamedit.em_name">
            </div>
           
            <div class="mb-3">
-             <label for="message-text" class="col-form-label">รายละเอียด:</label>  <span class="text-xs text-red-500" style="color:red" v-if="v$.em_description.$error">{{
+             <label for="message-text" class="col-form-label">{{ $t("menu_exam_all_detail") }}:</label>  <span class="text-xs text-red-500" style="color:red" v-if="v$.em_description.$error">{{
              v$.em_description.$errors[0].$message
            }}</span>
              <input type="text" class="form-control" id="recipient-name"  v-model="store.formexamedit.em_description">
            </div>
           
            <div class="mb-3">
-             <label for="message-text" class="col-form-label">จำนวนที่สุ่ม:</label> <span class="text-xs text-red-500" style="color:red" v-if="v$.em_random_amount.$error">{{
+             <label for="message-text" class="col-form-label">{{ $t("menu_exam_all_total_random") }}:</label> <span class="text-xs text-red-500" style="color:red" v-if="v$.em_random_amount.$error">{{
              v$.em_random_amount.$errors[0].$message
            }}</span>
              <input type="number" class="form-control" id="recipient-name" v-model="store.formexamedit.em_random_amount" min="50">
            </div>
            
            <div class="mb-3">
-             <label for="message-text" class="col-form-label">เวลาทำข้อสอบ</label>  <span class="text-xs text-red-500" style="color:red" v-if="v$.em_time.$error">{{
+             <label for="message-text" class="col-form-label">{{ $t("menu_exam_all_time_test") }}</label>  <span class="text-xs text-red-500" style="color:red" v-if="v$.em_time.$error">{{
              v$.em_time.$errors[0].$message
            }}</span>
              <VueDatePicker v-model="store.formexamedit.em_time" time-picker  enable-seconds  placeholder="Select Time" />
@@ -55,7 +55,13 @@
   
     <select class="form-control" v-if="store.dtl" v-model="store.formexamedit.dlt_code">
        
-    <option   v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code" >{{item.dlt_description}}</option>
+    <option   v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code" >
+      
+          <span v-if="locale == 'la'" >{{item.dlt_description_loas}}</span>
+      <span v-if="locale == 'en'" >{{item.dlt_description_english}}</span>
+      <span v-if="locale == 'th'" >{{item.dlt_description}}</span>
+      
+      </option>
     </select>
    
     </div>
@@ -65,17 +71,17 @@
           
   
            <div class="mb-3">
-             <label for="message-text" class="col-form-label">รูปหน้าปก:</label><span class="text-xs text-red-500" style="color:red" v-if="store.imageReq == true"> Invalid file selected</span>
+             <label for="message-text" class="col-form-label">{{ $t("menu_exam_all_pic") }}:</label><span class="text-xs text-red-500" style="color:red" v-if="store.imageReq == true"> Invalid file selected</span>
               <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChange" ref="fileupload">
            </div>
             <div class="border p-2 mt-3">
-             <p>แสดงรูปภาพ:</p>
+             <p>{{ $t("menu_exam_display_p") }}:</p>
 
              <template v-if="store.image">
                <div class="row">
                <div class="col-3">
                <img  :src="coverimage(store.image)"  class="img-fluid" />
-               <button @click="removeImage()">ลบรูปภาพ</button>
+               <button @click="removeImage()">{{ $t("menu_exam_display_del") }}</button>
              </div>
               </div>
              </template>   
@@ -84,8 +90,8 @@
        </div>
        <div class="modal-footer">
                  <button class="btn btn btn-light-dark" data-bs-dismiss="modal"  @click="closeModal">
-                   <i class="flaticon-cancel-12"></i> ปิด</button>
-                 <button type="button" class="btn btn-primary" @click="Updatedata()">บันทึก</button>
+                   <i class="flaticon-cancel-12"></i> {{ $t("menu_exam_modal_close") }}</button>
+                 <button type="button" class="btn btn-primary" @click="Updatedata()">{{ $t("menu_exam_modal_save") }}</button>
              </div>
                             
            
@@ -102,9 +108,8 @@
  
  
  <script setup lang="ts">
- // import DataTable from 'datatables.net-vue3';
- // import DataTablesCore from 'datatables.net-bs5';
- import { storeToRefs } from 'pinia';
+
+import { storeToRefs } from 'pinia';
  import { defineComponent } from 'vue';
  import { ExamStore } from '@/store/exam'
  import { useToast } from 'vue-toastification';
@@ -114,7 +119,8 @@
  import '@vuepic/vue-datepicker/dist/main.css'
  import { ref } from 'vue';
  import ApiService  from "../../services/api.service";
- 
+ import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
  
  
  const toast = useToast()

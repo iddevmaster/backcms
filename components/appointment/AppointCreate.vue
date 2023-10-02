@@ -62,8 +62,8 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_type") }}</label>
       <select class="form-control" v-model="store.forminsert.ap_learn_type">
-    <option value="1">ทฤษฎี</option>
-    <option value="2">ปฏิบัติ</option>
+    <option value="1">{{ $t("menu_learn_theory") }}</option>
+    <option value="2">{{ $t("menu_learn_practice") }}</option>
     </select>
     </div>
 

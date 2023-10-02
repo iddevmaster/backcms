@@ -12,7 +12,7 @@
   "menu_dlt": "ຈັດການໃບຂັບຂີ່ຂອງເຈົ້າ",
   "menu_couse_all": "ສື່​ການ​ຮຽນ​ຮູ້​ທັງໝົດ", 
   "menu_couse_add": "ເພີ່ມສື່​ການ​ຮຽນ​ຮູ້​",
-  "menu_couse_p_title": "ฟอร์ม ເພີ່ມສື່​ການ​ຮຽນ​ຮູ້​",
+  "menu_couse_p_title": "ເພີ່ມສື່​ການ​ຮຽນ​ຮູ້​",
   "menu_couse_f_title_code": "ລະຫັດສື່​ການ​ຮຽນ​ຮູ້​",
   "menu_couse_f_title_name": "ສື່​ການ​ຮຽນ​ຮູ້​",
   "menu_couse_f_title_detail": "ລາຍລະອຽດສື່​ການ​ຮຽນ​ຮູ້​",
@@ -24,8 +24,8 @@
   "menu_lesson_f_title_picture": "ຮູບພາບສະແດງໃຫ້ເຫັນການປົກຫຸ້ມຂອງ.",
   "menu_lesson_f_video": "ວິດີໂອ",
  
-  "menu_couse_edit": "ການແກ້ໄຂສື່​ການ​ຮຽນ​ຮູ້​",
-  "menu_couse_p_edit_title": "ฟอร์ม ການແກ້ໄຂສື່​ການ​ຮຽນ​ຮູ້​",
+  "menu_couse_edit": "ແກ້ໄຂສື່​ການ​ຮຽນ​ຮູ້​",
+  "menu_couse_p_edit_title": "ແກ້ໄຂສື່​ການ​ຮຽນ​ຮູ້​",
   "menu_couse_f_edit_title_code": "ລະຫັດສື່​ການ​ຮຽນ​ຮູ້​",
   "menu_couse_f_edit_title_name": "ຊື່ສື່​ການ​ຮຽນ​ຮູ້​",
   "menu_couse_f_edit_title_detail": "ລາຍລະອຽດສື່​ການ​ຮຽນ​ຮູ້​",
@@ -257,7 +257,8 @@
   "resultall": "ຜົນ​ການ​ທົດ​ສອບ​ທັງ​ຫມົດ​",
   "resultadd": "ເພີ່ມຜົນການສອບເສັງ",
   "resultedit": "ແກ້ໄຂຜົນການສອບເສັງ",
-  "logout":"ອອກ​ຈາກ​ລະ​ບົບ"
+  "logout":"ອອກ​ຈາກ​ລະ​ບົບ",
+  "app_round":"ຮອບ"
 }
 
 

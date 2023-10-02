@@ -27,8 +27,9 @@
         aria-label="Default select example"
         v-model="store.form.ap_learn_type"
       >
-        <option value="1">ทฤษฎี</option>
-        <option value="2">ปฏิบัติ</option>
+        <option value="1">{{ $t("menu_learn_theory") }}</option>
+        <option value="2">{{ $t("menu_learn_practice") }}</option>
+  
       </select>
     </div>
 

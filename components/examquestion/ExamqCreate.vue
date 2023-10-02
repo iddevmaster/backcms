@@ -7,7 +7,7 @@
     </div> -->
     <div id="form_grid_layouts" class="col-lg-10">
       <div class="seperator-header">
-        <h4 class="">หลักสูตร : {{ name }}</h4>
+        <h4 class="">{{ $t("menu_page_exam") }}: {{ name }}</h4>
       </div>
     </div>
     <div id="form_grid_layouts" class="col-lg-2">

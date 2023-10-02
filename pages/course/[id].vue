@@ -26,8 +26,8 @@ store.user_id = auth.user_id
             <div class="page-meta">
                 <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Course </a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Edit Course</li>
+                        <li class="breadcrumb-item"><a href="#">{{ $t("menu_couse") }}  </a></li>
+                        <li class="breadcrumb-item active" aria-current="page"> {{ $t("menu_couse_edit") }}</li>
                     </ol>
                 </nav>
             </div>

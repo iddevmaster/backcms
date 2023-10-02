@@ -17,8 +17,8 @@ definePageMeta({
             <div class="page-meta">
                 <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">หลักสูตร </a></li>
-                        <li class="breadcrumb-item active" aria-current="page">เพิ่มข้อสอบ</li>
+                        <li class="breadcrumb-item"><a href="#">{{ $t("menu_page_exam") }} </a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ $t("menu_exam_all_bt_add_exam") }}</li>
                     </ol>
                 </nav>
             </div>
