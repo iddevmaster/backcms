@@ -18,9 +18,9 @@
                         <img :src="image(users.lng)" class="flag-width" alt="flag">
                     </a>
                     <div class="dropdown-menu position-absolute" aria-labelledby="language-dropdown">
-                        <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(0)"><img :src="image(users.lan[0])" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;Thai</span></a>
-                        <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(1)"><img :src="image(users.lan[1])" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;Loas</span></a>
-                        <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(2)"><img :src="image(users.lan[2])" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;English</span></a>
+                        <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(0)"><img :src="image(users.lan[0])" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;{{ $t("l_loas") }}</span></a>
+                        <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(1)"><img :src="image(users.lan[1])" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;{{ $t("l_eng") }}</span></a>
+                        <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(2)"><img :src="image(users.lan[2])" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;{{ $t("l_thai") }}</span></a>
                     </div>
                 </li>
 <!-- 
@@ -244,7 +244,7 @@
                                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                                 <polyline points="16 17 21 12 16 7"></polyline>
                                 <line x1="21" y1="12" x2="9" y2="12"></line>
-                            </svg> <span>Log Out</span>
+                            </svg> <span>{{ $t("logout") }}</span>
                         </a>
                     </div>
                 </div>
@@ -295,7 +295,7 @@ const { locale, setLocale } = useI18n();
 
 const changeLocale = (newLocale) => {
    
-const le = ['th','en','la']
+const le = ['la','en','th']
 locale.value = le[newLocale];
 users.loc = newLocale;
 users.selectLan();

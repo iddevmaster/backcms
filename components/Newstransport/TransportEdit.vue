@@ -33,6 +33,7 @@
     </div>
     <div class="form-group mb-4 mt-3">
       <label for="exampleFormControlFile1">{{ $t("menu_new_image") }}</label><span class="text-xs text-red-500" style="color:red" v-if="store.imageReq == true"> Image field is required</span>
+      <span style="color: red;">{{ $t("menu_page_new_tra_recomend_size") }}</span>
       <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple @change="onFileChange"
         ref="fileupload">
     </div>

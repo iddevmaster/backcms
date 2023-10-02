@@ -344,7 +344,7 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/dltmanage">จัดการใบขับขี่</nuxt-link>
+              <nuxt-link to="/dltmanage">{{ $t("menu_user_dlt") }}</nuxt-link>
             </li>
           
           </ul>
@@ -431,13 +431,13 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/result">ผลสอบทั้งหมด</nuxt-link>
+              <nuxt-link to="/result">{{ $t("resultall") }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/result/create">เพิ่มผลสอบ</nuxt-link>
+              <nuxt-link to="/result/create">{{ $t("resultadd") }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/result/edit">แก้ไขผลสอบ</nuxt-link>
+              <nuxt-link to="/result/edit">{{ $t("resultedit") }}</nuxt-link>
             </li>
           </ul>
         </li>
@@ -477,10 +477,10 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/users">ผู้ใช้งานทั้งหมด</nuxt-link>
+              <nuxt-link to="/users">{{ $t("menu_user_page_all") }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/users/create">เพิ่มผู้ใช้งาน</nuxt-link>
+              <nuxt-link to="/users/create">{{ $t("menu_user_page_create") }}</nuxt-link>
             </li>
           </ul>
         </li>

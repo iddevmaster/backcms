@@ -109,6 +109,7 @@
 
   "menu_page_new_tra": "ข่าวประชาสัมพันธ์",
   "menu_page_new_tra_all": "ข่าวประชาสัมพันธ์ทั้งหมด",
+  "menu_page_new_tra_recomend_size": "แนะนำขนาดรูปภาพ 750 * 498",
   "menu_page_new_civil": "ข่าวสารกรมโยธา",
   "menu_page_new_add_tra": "เพิ่มข่าวประชาสัมพันธ์",
   "menu_page_new_edit_tra": "แก้ไขข่าวประชาสัมพันธ์",
@@ -249,7 +250,15 @@
   "menu_learn_theory": "ทฤษฎี",
   "menu_learn_practice": "ปฏิบัติ",
   "menu_fail": "ไม่ผ่าน",
-  "menu_pass": "ผ่าน"
+  "menu_pass": "ผ่าน",
+  "l_thai": "ไทย",
+  "l_loas": "ลาว",
+  "l_eng": "อังกฤษ",
+
+  "resultall": "ผลสอบทั้งหมด",
+  "resultadd": "เพิ่มผลสอบ",
+  "resultedit": "แก้ไขผลสอบ",
+  "logout":"ออกจากระบบ"
 }
 
 

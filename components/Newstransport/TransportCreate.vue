@@ -34,12 +34,12 @@
     </div>
     <div class="form-group mb-4 mt-3">
       <label for="exampleFormControlFile1">{{ $t("menu_new_image") }}</label> <span class="text-xs text-red-500" style="color:red"
-        v-if="store.imageReq == true"> Invalid file selected</span>
+        v-if="store.imageReq == true"> Invalid file selected</span> <span style="color: red;">{{ $t("menu_page_new_tra_recomend_size") }}</span>
       <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple @change="onFileChange"
         ref="fileupload" accept="image/*">
     </div>
     <div class="border p-2 mt-3">
-      <p>{{ $t("menu_new_display_img") }}:</p>
+      <p>{{ $t("menu_new_display_img") }}:</p> 
       <template v-if="storeupload.preview_list.length">
         <div class="row">
           <div id="image-container" class="col-md-3 col-sm-4 col-6" v-for="item, index in storeupload.preview_list" :key="index">

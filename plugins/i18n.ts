@@ -1,16 +1,18 @@
 import { createI18n } from 'vue-i18n'
 import en from '../locales/en.json'
 import th from '../locales/th.json'
+import la from '../locales/la.json'
 
 
  export default defineNuxtPlugin(({ vueApp }) => {
    const i18n = createI18n({
      legacy: false,
      globalInjection: true,
-     locale: 'th',
+     locale: 'la',
      messages: {
       en,
-      th
+      th,
+      la
      }
    })
 

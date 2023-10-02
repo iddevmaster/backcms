@@ -1,9 +1,11 @@
 {
-  "home": "หน้าหลัก",
-  "menu_couse": "คอร์ส",
+  "home": "Home", 
+  "menu_couse": "Course",
   "menu_exam": "หลักสูตร",
-  "menu_new_tra": "ข่าวสารกรมขนส่ง",
+  "menu_new_tra": "ข่าวประชาสัมพันธ์",
   "menu_new_ci": "ข่าวสารกรมโยธา",
+  "menu_new_tra_add": "เพิ่มข่าวประชาสัมพันธ์",
+  "menu_new_ci_add": "เพิ่มข่าวสารกรมโยธา",
   "menu_new_app": "นัดหมาย",
   "menu_new_resul": "ผลสอบ",
   "menu_new_user": "จัดการผู้ใช้งาน",
@@ -21,6 +23,15 @@
   "menu_lesson_name_and_detail": "ชื่อ && รายละเอียดบทเรียน",
   "menu_lesson_f_title_picture": "รูปภาพแสดงหน้าปก",
   "menu_lesson_f_video": "วีดีโอ",
+ 
+  "menu_couse_edit": "แก้ไขคอร์ส",
+  "menu_couse_p_edit_title": "ฟอร์ม แก้ไขคอร์ส",
+  "menu_couse_f_edit_title_code": "รหัสคอร์ส",
+  "menu_couse_f_edit_title_name": "ชื่อคอร์ส",
+  "menu_couse_f_edit_title_detail": "รายละเอียดคอร์ส",
+  "menu_couse_f_edit_title_picture": "รูปภาพแสดงหน้าปก",
+  "menu_couse_f_edit_title_display_picture": "แสดงภาพตรงนี้",
+
   
 
   "menu_page_course": "คอร์ส",
@@ -30,6 +41,7 @@
   "menu_exam_create": "สร้างหลักสูตร",
   "menu_exam_add": "เพิ่มหลักสูตร",
   "menu_exam_all_history": "ประวัติการสอบ",
+  "menu_menu_exam_dlt": "ประเภทใบขับขี่",
   "menu_exam_all_code": "รหัสหลักสูตร",
   "menu_exam_all_pic": "รูปหลักสูตร",
   "menu_exam_all_name": "ชื่อหลักสูตร",
@@ -87,21 +99,28 @@
   "menu_new_back": "กลับหน้าข่าวสาร",
   "menu_new_save": "บันทึก",
   "menu_new_detail": "รายละเอียดข่าว",
-  "menu_new_form_news": "ฟอร์ม เพิ่มข่าวสารกรมขนส่ง",
-  "menu_new_form_edit": "ฟอร์ม แก้ไขข่าวสารกรมขนส่ง",
+  "menu_new_form_news": "ฟอร์ม เพิ่มข่าวประชาสัมพันธ์",
+  "menu_new_form_edit": "ฟอร์ม แก้ไขข่าวประชาสัมพันธ์",
   "menu_new_display_img": "ฟอร์ม แสดงรูปตรงนี้",
 
   "menu_new_form_civic": "ฟอร์ม เพิ่มข่าวสารกรมโยธา",
   "menu_new_form_edit_civic": "ฟอร์ม แก้ไขข่าวสารกรมโยธา",
   "menu_new_image_del": "ลบรูปภาพ",
 
-  "menu_page_new_tra": "ข่าวสารกรมขนส่ง",
-  "menu_page_new_tra_all": "ข่าวสารกรมขนส่งทั้งหมด",
+  "menu_page_new_tra": "ข่าวประชาสัมพันธ์",
+  "menu_page_new_tra_all": "ข่าวประชาสัมพันธ์ทั้งหมด",
+  "menu_page_new_tra_recomend_size": "แนะนำขนาดรูปภาพ 750 * 498",
   "menu_page_new_civil": "ข่าวสารกรมโยธา",
-  "menu_page_new_edit_tra": "แก้ไขข่าวสารกรมขนส่ง",
+  "menu_page_new_add_tra": "เพิ่มข่าวประชาสัมพันธ์",
+  "menu_page_new_edit_tra": "แก้ไขข่าวประชาสัมพันธ์",
   "menu_page_new_edit_civil": "แก้ไขข่าวสารกรมโยธา",
   "menu_page_new_civil_all": "ข่าวสารกรมโยธาทั้งหมด",
 
+
+  "menu_user_page": "ผู้ใช้งาน",
+  "menu_user_page_all": "ผู้ใช้งานทั้งหมด",
+  "menu_user_page_create": "เพิ่มผู้ใช้งาน",
+  "menu_user_page_edit": "แก้ไขผู้ใช้งาน",
   "menu_user_index": "#",
   "menu_user_name": "ชื่อ - นามสกุล",
   "menu_user_type": "ประเภทผู้ใช้งาน",
@@ -180,7 +199,7 @@
   "menu_app_app_create": "สร้างนัดหมาย",
   "menu_app_form_app": "ฟอร์ม เพิ่มนัดหมาย",
   "menu_app_app_back": "กลับหน้านัดหมาย",
-  "menu_app_app_quota": "จำนวนกำจัดการจอง",
+  "menu_app_app_quota": "จำนวนจำกัดการจอง",
   "menu_app_app_remark": "หมายุเหตุ",
   "menu_app_app_start": "ช่วงเวลาเริ่ม",
   "menu_app_app_end": "ช่วงเวลาหมดเขต",
@@ -198,6 +217,8 @@
   "menu_app_view_back": "กลับหน้านัดหมาย",
   "menu_app_view_iden": "เลขบัตรประชาชน",
   "menu_app_view_action": "จัดการ",
+
+  "menu_app_view_present": "นัดหมายรายวัน",
 
 
   "menu_result": "ผลสอบ",
@@ -224,7 +245,20 @@
   "menu_result_create": "วันที่สร้าง",
 
 
-  "menu_result_form_edit": "ฟอร์ม - แก้ไขผลการสอบ"
+  "menu_result_form_edit": "ฟอร์ม - แก้ไขผลการสอบ",
+
+  "menu_learn_theory": "ทฤษฎี",
+  "menu_learn_practice": "ปฏิบัติ",
+  "menu_fail": "ไม่ผ่าน",
+  "menu_pass": "ผ่าน",
+  "l_thai": "Thai",
+  "l_loas": "Loas",
+  "l_eng": "English",
+
+  "resultall": "ผลสอบทั้งหมด",
+  "resultadd": "เพิ่มผลสอบ",
+  "resultedit": "แก้ไขผลสอบ",
+  "logout":"Log Out"
 }
 
 
