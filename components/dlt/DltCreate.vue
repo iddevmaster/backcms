@@ -18,7 +18,15 @@
               :key="index"
               v-bind:value="item.dlt_code"
             >
-              {{ item.dlt_code }}
+               <span v-if="locale == 'la'">{{
+                              item.dlt_description_loas
+                            }}</span>
+                            <span v-if="locale == 'en'">{{
+                              item.dlt_description_english
+                            }}</span>
+                            <span v-if="locale == 'th'">{{
+                              item.dlt_description
+                            }}</span>
             </option>
           </select>
         </div>
@@ -161,6 +169,8 @@ import { useToast } from "vue-toastification";
 import ApiService from "../../services/api.service";
 import Datepicker from "vuejs3-datepicker";
 import moment from "moment";
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
 const toast = useToast();
 
 const store = DltStore();
