@@ -5,7 +5,7 @@
         <div class="nav-logo" @click="GotoPage()">
           <div class="nav-item theme-logo">
             <a >
-              <img src="/img/logo.svg" class="navbar-logo" alt="logo" />
+              <img src="/img/l.png" class="navbar-logo" alt="logo" />
             </a>
           </div>
           <div class="nav-item theme-text">
