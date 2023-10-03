@@ -262,7 +262,9 @@
   "delete_record":"ຕ້ອງການລຶບລາຍການນີ້ບໍ?",
   "delete_record_t":"ຖ້າທ່ານລຶບລາຍການນີ້ ລາຍການຈະຫມົດໄປຕະຫຼອດການ. ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການສືບຕໍ່?",
   "delete_record_cancel":"ປິດ",
-  "delete_record_modal":"ລຶບ"
+  "delete_record_modal":"ລຶບ",
+  "verity_pass":"ຢັ້ງຢືນແລ້ວ",
+  "verity_fail":"ບໍ່​ມີ​ການ​ຍືນ​ຍັນ"
 }
 
 

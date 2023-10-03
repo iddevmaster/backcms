@@ -35,8 +35,16 @@
         aria-label="Default select example"
         v-model="store.ap_learn_type"
       >
-        <option value="1">ทฤษฎี</option>
-        <option value="2">ปฏิบัติ</option>
+      <option value="1">
+          <span v-if="locale == 'la'">{{ $t("menu_learn_theory") }}</span>
+          <span v-if="locale == 'en'">{{ $t("menu_learn_theory") }}</span>
+          <span v-if="locale == 'th'">{{ $t("menu_learn_theory") }}</span>
+        </option>
+        <option value="2">
+          <span v-if="locale == 'la'">{{ $t("menu_learn_practice") }}</span>
+          <span v-if="locale == 'en'">{{ $t("menu_learn_practice") }}</span>
+          <span v-if="locale == 'th'">{{ $t("menu_learn_practice") }}</span>
+        </option>
       </select>
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
@@ -104,7 +112,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p class="">{{ $T("DELETE_RECORD_T") }}</p>
+        <p class="">{{ $t("delete_record_t") }}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal">Cancel</button>

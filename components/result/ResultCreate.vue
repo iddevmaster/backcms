@@ -5,19 +5,18 @@
         <h4 class="">{{ $t("menu_result_form_create") }}</h4>
       </div>
     </div>
-  
-  
+
+
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_result_form_score") }}</label>
       <input type="text" class="form-control" id="inputEmail3" placeholder="ใส่ตัวเลข *" maxlength="10"
-      v-model="store.formresult.mr_score" :class="{
+        v-model="store.formresult.mr_score" :class="{
           'border-red-500 focus:border-red-500': v$.mr_score.$error,
           'border-[#42d392] ': !v$.mr_score.$invalid,
-        }" @change="v$.mr_score.$touch" autocomplete="off" @input="onInput"
-      >
+        }" @change="v$.mr_score.$touch" autocomplete="off" @input="onInput">
 
 
-<div v-if="locale == 'la'">
+      <div v-if="locale == 'la'">
         <span v-if="v$.mr_score.$error" class="text-xs text-red-500" style="color: red">
           ຕ້ອງລະບຸຊ່ອງຄະແນນ</span>
       </div>
@@ -36,9 +35,17 @@
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_result_form_type") }}</label>
-      <select class="form-control" v-model="store.formresult.mr_learn_type" >
-        <option value="1">ทฤษฎี</option>
-        <option value="2">ปฏิบัติ</option>
+      <select class="form-control" v-model="store.formresult.mr_learn_type">
+        <option value="1">
+          <span v-if="locale == 'la'">{{ $t("menu_learn_theory") }}</span>
+          <span v-if="locale == 'en'">{{ $t("menu_learn_theory") }}</span>
+          <span v-if="locale == 'th'">{{ $t("menu_learn_theory") }}</span>
+        </option>
+        <option value="2">
+          <span v-if="locale == 'la'">{{ $t("menu_learn_practice") }}</span>
+          <span v-if="locale == 'en'">{{ $t("menu_learn_practice") }}</span>
+          <span v-if="locale == 'th'">{{ $t("menu_learn_practice") }}</span>
+        </option>
       </select>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.mr_learn_type.$error">{{
         v$.mr_learn_type.$errors[0].$message
@@ -51,8 +58,13 @@
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_result_form_type_dlt") }}</label>
-      <select class="form-control"  v-model="store.formresult.dlt_code">
-        <option v-for="(itemd,i) in store.dlt" :value="itemd.dlt_code">{{itemd.dlt_description}}</option>
+      <select class="form-control" v-model="store.formresult.dlt_code">
+        <option v-for="(itemd, i) in store.dlt" :value="itemd.dlt_code">
+         
+          <span v-if="locale == 'la'" >{{itemd.dlt_description_loas}}</span>
+      <span v-if="locale == 'en'" >{{itemd.dlt_description_english}}</span>
+      <span v-if="locale == 'th'" >{{itemd.dlt_description}}</span>
+        </option>
       </select>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.dlt_code.$error">{{
         v$.dlt_code.$errors[0].$message
@@ -63,7 +75,9 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_result_form_type_status") }}</label>
       <select class="form-control" v-model="store.formresult.mr_status">
-        <option value="pass">{{ $t("menu_result_pass") }}</option>
+        <option value="pass">{{ $t("menu_result_pass") }}
+
+        </option>
         <option value="fail">{{ $t("menu_result_fall") }}</option>
       </select>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.mr_status.$error">{{
@@ -92,7 +106,7 @@ const toast = useToast()
 const router = useRouter();
 const store = ResultStore();
 
-await store.fetchDlt()
+// await store.fetchDlt()
 await store.fetchUser()
 
 const { FormResult } = ResultStore();
@@ -126,17 +140,17 @@ const rules = computed(() => {
 });
 
 const myChangeEvent = (event) => {
-    console.log("myChangeEvent: ", event.value);
-  }
-  const mySelectEvent = (e) => {
-    console.log("mySelectEvent: ", e.value);
-  }
+  console.log("myChangeEvent: ", event.value);
+}
+const mySelectEvent = (e) => {
+  console.log("mySelectEvent: ", e.value);
+}
 
 const backToUser = async () => {
   router.go(-1);
 }
 const onInput = async (event) => {
-    store.formresult.mr_score = event.target.value.replace(/\D/g, '');
+  store.formresult.mr_score = event.target.value.replace(/\D/g, '');
 }
 
 
@@ -146,14 +160,14 @@ const save = async () => {
   v$.value.$validate();
 
   if (!v$.value.$error) {
-  let data = await store.saveResult();
-      
+    let data = await store.saveResult();
+
     if (data == true) {
       toast.success('Save Data');
     } else {
       toast.error('Fail Save Data')
     }
-  
+
   }
 
 

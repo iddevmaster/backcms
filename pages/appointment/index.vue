@@ -81,7 +81,7 @@ const deletel = async () => {
         </button>
       </div>
       <div class="modal-body">
-        <p class="">{{ $T("DELETE_RECORD_T") }}</p>
+        <p class="">{{ $t("delete_record_t") }}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal">Cancel</button>

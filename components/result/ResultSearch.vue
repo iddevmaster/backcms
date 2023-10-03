@@ -33,8 +33,8 @@
           <td>{{ users.user_id }}</td>
            <td>{{ users.user_firstname }}  {{ users.user_lastname }}</td>
           <td>{{ users.user_phone }}</td>
-          <td v-if="users.detail == 'y'"><p class="mb-0 text-success">ผ่านการยืนยัน</p></td>
-          <td v-else><p class="mb-0 text-danger">ไม่ผ่านการยืนยัน</p></td>
+          <td v-if="users.detail == 'y'"><p class="mb-0 text-success">{{ $t("verity_pass") }}</p></td>
+          <td v-else><p class="mb-0 text-danger">{{ $t("verity_fail") }}</p></td>
           <!-- <td>
             <button type="button" class="btn btn-danger">เลือก</button>
           </td> -->

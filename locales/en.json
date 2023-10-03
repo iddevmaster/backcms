@@ -263,7 +263,9 @@
   "delete_record":"ต้องการลบรายการนี้?",
   "delete_record_t":"หากคุณลบรายกานนี้ รายการนั้นจะหายไปตลอดกาล คุณแน่ใจหรือไม่ว่าต้องการดำเนินการต่อ?",
   "delete_record_cancel":"ปิด",
-  "delete_record_modal":"ลบ"
+  "delete_record_modal":"ลบ",
+  "verity_pass":"ผ่านการยืนยัน",
+  "verity_fail":"ไม่ผ่านการยืนยัน"
 }
 
 

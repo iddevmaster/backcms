@@ -193,7 +193,7 @@ export const ResultStore = defineStore('result', {
 
     async fetchUsers() {
 
-      console.log('fetchUsers',this.formuser);
+     
 
         const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
           this.user = response.data.data;
@@ -254,7 +254,7 @@ export const ResultStore = defineStore('result', {
     async fetchDlt() {
       try {
         const data = await ApiService.get('/master_data/drivinglicense_type').then(response => {
-          this.dlt = response.data;
+        //  this.dlt = response.data;
         });
         return data;
       } catch (error) {

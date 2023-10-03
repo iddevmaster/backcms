@@ -37,9 +37,18 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_result_form_type") }}</label>
       <select class="form-control" v-model="store.formeditresult.mr_learn_type" >
-        <option value="1">ทฤษฎี</option>
-        <option value="2">ปฏิบัติ</option>
+        <option value="1">
+          <span v-if="locale == 'la'">{{ $t("menu_learn_theory") }}</span>
+          <span v-if="locale == 'en'">{{ $t("menu_learn_theory") }}</span>
+          <span v-if="locale == 'th'">{{ $t("menu_learn_theory") }}</span>
+        </option>
+        <option value="2">
+          <span v-if="locale == 'la'">{{ $t("menu_learn_practice") }}</span>
+          <span v-if="locale == 'en'">{{ $t("menu_learn_practice") }}</span>
+          <span v-if="locale == 'th'">{{ $t("menu_learn_practice") }}</span>
+        </option>
       </select>
+
       <span class="text-xs text-red-500" style="color:red" v-if="v$.mr_learn_type.$error">{{
         v$.mr_learn_type.$errors[0].$message
       }}</span>
@@ -52,7 +61,11 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_result_form_type_dlt") }}</label>
       <select class="form-control"  v-model="store.formeditresult.dlt_code">
-        <option v-for="(itemd,i) in store.dlt" :value="itemd.dlt_code">{{itemd.dlt_description}}</option>
+        <option v-for="(itemd,i) in store.dlt" :value="itemd.dlt_code">
+          <span v-if="locale == 'la'" >{{itemd.dlt_description_loas}}</span>
+      <span v-if="locale == 'en'" >{{itemd.dlt_description_english}}</span>
+      <span v-if="locale == 'th'" >{{itemd.dlt_description}}</span>
+        </option>
       </select>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.dlt_code.$error">{{
         v$.dlt_code.$errors[0].$message
