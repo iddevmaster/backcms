@@ -75,13 +75,13 @@ const deletel = async () => {
             <line x1="14" y1="11" x2="14" y2="17"></line>
           </svg>
         </div>
-        <h5 class="modal-title" id="exampleModalLabel">ต้องการลบรายการนี้?</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{ $t("delete_record") }}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p class="">หากคุณลบรายกานนี้ รายการนั้นจะหายไปตลอดกาล คุณแน่ใจหรือไม่ว่าต้องการดำเนินการต่อ?</p>
+        <p class="">{{ $T("DELETE_RECORD_T") }}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal">Cancel</button>

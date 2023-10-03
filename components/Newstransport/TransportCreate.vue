@@ -6,8 +6,9 @@
       </div>
     </div>
     <div id="form_grid_layouts" class="col-lg-2">
-      <div class="seperator-header" style="text-align: center;"  @click="backToNews()">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">{{ $t("menu_new_back") }}</button>
+      <div class="seperator-header" style="text-align: center;" @click="backToNews()">
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">{{ $t("menu_new_back")
+        }}</button>
       </div>
     </div>
     <div class="form-group mb-4">
@@ -17,9 +18,21 @@
           'border-red-500 focus:border-red-500': v$.news_title.$error,
           'border-[#42d392] ': !v$.news_title.$invalid,
         }" @change="v$.news_title.$touch">
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.news_title.$error">{{
-        v$.news_title.$errors[0].$message
-      }}</span>
+
+      <div v-if="locale == 'la'">
+        <span v-if="v$.news_title.$error" class="text-xs text-red-500" style="color: red">
+          ຕ້ອງໃສ່ຊ່ອງຫົວຂໍ້ຂ່າວ</span>
+      </div>
+
+      <div v-if="locale == 'en'">
+        <span v-if="v$.news_title.$error" class="text-xs text-red-500" style="color: red">
+          The News Title field is required</span>
+      </div>
+
+      <div v-if="locale == 'th'">
+        <span v-if="v$.news_title.$error" class="text-xs text-red-500" style="color: red">ต้องระบุฟิลด์หัวข้อ</span>
+      </div>
+
     </div>
     <div class="form-group mb-4">
       <label for="exampleFormControlTextarea1">{{ $t("menu_new_detail") }}</label>
@@ -28,21 +41,38 @@
         'border-[#42d392] ': !v$.news_description.$invalid,
       }" @change="v$.news_description.$touch" v-model="store.formDataNews.news_description">
               </textarea>
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.news_description.$error">{{
-        v$.news_description.$errors[0].$message
-      }}</span>
+
+
+      <div v-if="locale == 'la'">
+        <span v-if="v$.news_description.$error" class="text-xs text-red-500" style="color: red">
+          ຕ້ອງມີຊ່ອງລາຍລະອຽດຂ່າວ</span>
+      </div>
+
+      <div v-if="locale == 'en'">
+        <span v-if="v$.news_description.$error" class="text-xs text-red-500" style="color: red">
+          The News Description field is required</span>
+      </div>
+
+      <div v-if="locale == 'th'">
+        <span v-if="v$.news_description.$error" class="text-xs text-red-500"
+          style="color: red">ต้องระบุฟิลด์รายละเอียด</span>
+      </div>
+
+
     </div>
     <div class="form-group mb-4 mt-3">
-      <label for="exampleFormControlFile1">{{ $t("menu_new_image") }}</label> <span class="text-xs text-red-500" style="color:red"
-        v-if="store.imageReq == true"> Invalid file selected</span> <span style="color: red;">{{ $t("menu_page_new_tra_recomend_size") }}</span>
+      <label for="exampleFormControlFile1">{{ $t("menu_new_image") }}</label> <span class="text-xs text-red-500"
+        style="color:red" v-if="store.imageReq == true"> Invalid file selected</span> <span style="color: red;">{{
+          $t("menu_page_new_tra_recomend_size") }}</span>
       <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple @change="onFileChange"
         ref="fileupload" accept="image/*">
     </div>
     <div class="border p-2 mt-3">
-      <p>{{ $t("menu_new_display_img") }}:</p> 
+      <p>{{ $t("menu_new_display_img") }}:</p>
       <template v-if="storeupload.preview_list.length">
         <div class="row">
-          <div id="image-container" class="col-md-3 col-sm-4 col-6" v-for="item, index in storeupload.preview_list" :key="index">
+          <div id="image-container" class="col-md-3 col-sm-4 col-6" v-for="item, index in storeupload.preview_list"
+            :key="index">
             <div class="image-wrapper">
               <img :src="item" class="img-fluid" />
               <button @click="removeImage(index)" class="delete-button"><i class="bi bi-x-lg"></i></button>
@@ -75,6 +105,9 @@ import { UploadStore } from '@/store/upload'; // import the auth store we just c
 import { AlertStore } from '@/store/alert'; // import the auth store we just created
 import { ref } from "vue";
 import { useToast } from 'vue-toastification'
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
+
 
 
 const toast = useToast()
@@ -179,7 +212,6 @@ const onFileChange = async (event) => {
 
 </script>
 <style>
-
 .preview {
   display: flex;
   justify-content: center;
@@ -187,11 +219,13 @@ const onFileChange = async (event) => {
   height: 100px;
   width: 100px;
 }
-#image-container img{
+
+#image-container img {
   width: 250px;
   height: 250px;
   object-fit: cover;
 }
+
 #image-container .delete-button {
   position: absolute;
   top: 0;
@@ -202,12 +236,14 @@ const onFileChange = async (event) => {
   padding: 2.5px 5px;
   cursor: pointer;
 }
+
 #image-container .image-wrapper {
   position: relative;
   display: inline-block;
   margin: 10px;
   border: 1px solid;
 }
+
 #image-container {
   width: fit-content;
   min-width: 200px;

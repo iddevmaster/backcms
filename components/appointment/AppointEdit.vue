@@ -8,7 +8,8 @@
 
     <div id="form_grid_layouts" class="col-lg-2">
       <div class="seperator-header" style="text-align: center;" @click="backToUser()">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">{{ $t("menu_app_app_back") }}</button>
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">{{ $t("menu_app_app_back")
+        }}</button>
       </div>
     </div>
     <div class="col-sm-6">
@@ -18,22 +19,48 @@
           'border-red-500 focus:border-red-500': v$.ap_quota.$error,
           'border-[#42d392] ': !v$.ap_quota.$invalid,
         }" @change="v$.ap_quota.$touch" autocomplete="off" @input="onInput">
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_quota.$error">{{
-        v$.ap_quota.$errors[0].$message
-      }}</span>
+
+
+      <div v-if="locale == 'la'">
+        <span v-if="v$.ap_quota.$error" class="text-xs text-red-500" style="color: red">
+          ຕ້ອງລະບຸຊ່ອງຂໍ້ມູນໂຄຕ້າ.</span>
+      </div>
+
+      <div v-if="locale == 'en'">
+        <span v-if="v$.ap_quota.$error" class="text-xs text-red-500" style="color: red">
+          The Quota field is required</span>
+      </div>
+
+      <div v-if="locale == 'th'">
+        <span v-if="v$.ap_quota.$error" class="text-xs text-red-500" style="color: red">ต้องระบุช่องโควต้า</span>
+      </div>
+
     </div>
 
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_remark") }}</label>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="หมายเหตุ *"  maxlength="20"
+      <input type="text" class="form-control" id="inputEmail3" placeholder="หมายเหตุ *" maxlength="20"
         v-model="store.formedit.ap_remark" :class="{
           'border-red-500 focus:border-red-500': v$.ap_remark.$error,
           'border-[#42d392] ': !v$.ap_remark.$invalid,
         }" @change="v$.ap_remark.$touch" autocomplete="off">
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_remark.$error">{{
-        v$.ap_remark.$errors[0].$message
-      }}</span>
+
+
+      <div v-if="locale == 'la'">
+        <span v-if="v$.ap_remark.$error" class="text-xs text-red-500" style="color: red">
+          ຊ່ອງຂໍ້ສັງເກດແມ່ນຕ້ອງການ.</span>
+      </div>
+
+      <div v-if="locale == 'en'">
+        <span v-if="v$.ap_remark.$error" class="text-xs text-red-500" style="color: red">
+          The Remark field is required</span>
+      </div>
+
+      <div v-if="locale == 'th'">
+        <span v-if="v$.ap_remark.$error" class="text-xs text-red-500" style="color: red">ต้องระบุช่อง Remark</span>
+      </div>
+
     </div>
 
 
@@ -41,10 +68,10 @@
   <div class="row mb-4">
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_start") }}</label>
-            
-            <!-- <vue-date-picker  v-model="store.formedit.ap_date_start"   type="datetime"  ></vue-date-picker> -->
 
-            <VueDatePicker v-model="store.formedit.ap_date_start"   :format="format_start"   required></VueDatePicker>
+      <!-- <vue-date-picker  v-model="store.formedit.ap_date_start"   type="datetime"  ></vue-date-picker> -->
+
+      <VueDatePicker v-model="store.formedit.ap_date_start" :format="format_start" required></VueDatePicker>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_date_start.$error">{{
         v$.ap_date_start.$errors[0].$message
       }}</span>
@@ -52,8 +79,8 @@
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_end") }}</label>
- 
-          <VueDatePicker  v-model="store.formedit.ap_date_end" :format="format_end"  required></VueDatePicker>
+
+      <VueDatePicker v-model="store.formedit.ap_date_end" :format="format_end" required></VueDatePicker>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_date_end.$error">{{
         v$.ap_date_end.$errors[0].$message
       }}</span>
@@ -64,17 +91,18 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_type") }}</label>
       <select class="form-control" v-model="store.formedit.ap_learn_type">
-    <option value="1">{{ $t("menu_learn_theory") }}</option>
-    <option value="2">{{ $t("menu_learn_practice") }}</option>
-    </select>
+        <option value="1">{{ $t("menu_learn_theory") }}</option>
+        <option value="2">{{ $t("menu_learn_practice") }}</option>
+      </select>
     </div>
 
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_status") }}</label>
 
-     <select class="form-select form-select" aria-label="Default select example" v-model="store.formedit.dtl_code">
-         <option   v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code" >{{item.dlt_description}}</option>
+      <select class="form-select form-select" aria-label="Default select example" v-model="store.formedit.dtl_code">
+        <option v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code">{{ item.dlt_description }}
+        </option>
       </select>
     </div>
   </div>
@@ -93,7 +121,8 @@ import { useToast } from 'vue-toastification';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import moment from 'moment-timezone';
-
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
 
 const toast = useToast()
 const router = useRouter();
@@ -105,12 +134,12 @@ const { FormEdit } = storeToRefs(store);
 const date = ref(new Date());
 
 const update = async () => {
-let data = await store.Update();
- if (data == true) {
-      toast.success('Update Data');
-    } else {
-      toast.error('Fall Update Data')
-    }
+  let data = await store.Update();
+  if (data == true) {
+    toast.success('Update Data');
+  } else {
+    toast.error('Fall Update Data')
+  }
 }
 
 
@@ -124,11 +153,13 @@ const rules = computed(() => {
       required: helpers.withMessage('The Remark field is required', required),
       minLength: minLength(1),
     },
-    ap_date_start: { required
+    ap_date_start: {
+      required
     },
-    ap_date_end: { required 
+    ap_date_end: {
+      required
     },
-    
+
 
   };
 });
@@ -142,13 +173,13 @@ const backToUser = async () => {
 const format_start = (xd) => {
 
 
-const isoFormatInUTC = xd.toISOString();
- //return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
+  const isoFormatInUTC = xd.toISOString();
+  //return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
 
- store.formedit.ap_date_start = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
- return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
+  store.formedit.ap_date_start = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
+  return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
 
-//  return `Selected date is ${day}/${month}/${year}`;
+  //  return `Selected date is ${day}/${month}/${year}`;
 }
 
 
@@ -156,11 +187,11 @@ const isoFormatInUTC = xd.toISOString();
 const format_end = (ie) => {
 
 
-const isoFormatInUTC = ie.toISOString();
+  const isoFormatInUTC = ie.toISOString();
 
 
   store.formedit.ap_date_end = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
- return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
+  return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
 
 }
 
@@ -180,7 +211,7 @@ const isoFormatInUTC = ie.toISOString();
 
 //  const date = ref(new Date(store.formedit.ap_date_end).toISOString());
 
-  
+
 //   return store.formedit.ap_date_end;
 // }
 
@@ -189,28 +220,27 @@ const v$ = useVuelidate(rules, FormEdit);
 
 const save = async () => {
   v$.value.$validate();
-    if (!v$.value.$error) {
-       const data = await store.SaveFormAPP();
-      
+  if (!v$.value.$error) {
+    const data = await store.SaveFormAPP();
+
     if (data == true) {
       toast.success('Save Data');
     } else {
       toast.error('Fail Save Data')
     }
-  
+
   }
 
 }
 
 
 const onInput = async (event) => {
-    store.formedit.ap_quota = event.target.value.replace(/\D/g, '');
+  store.formedit.ap_quota = event.target.value.replace(/\D/g, '');
 }
 
 </script>
 
 <style>
-
 .preview {
   display: flex;
   justify-content: center;
@@ -218,11 +248,13 @@ const onInput = async (event) => {
   height: 100px;
   width: 100px;
 }
-#image-container img{
+
+#image-container img {
   width: 250px;
   height: 250px;
   object-fit: cover;
 }
+
 #image-container .delete-button {
   position: absolute;
   top: 0;
@@ -233,17 +265,18 @@ const onInput = async (event) => {
   padding: 2.5px 5px;
   cursor: pointer;
 }
+
 #image-container .image-wrapper {
   position: relative;
   display: inline-block;
   margin: 10px;
   border: 1px solid;
 }
+
 #image-container {
   width: fit-content;
   min-width: 200px;
   min-height: 200px;
   max-width: 300px;
   max-height: 300px;
-}
-</style>
+}</style>

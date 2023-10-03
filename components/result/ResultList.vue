@@ -11,7 +11,15 @@
           :key="item.dlt_code"
           :value="item.dlt_code"
         >
-          {{ item.dlt_description }}
+        <span v-if="locale == 'la'">{{
+                              item.dlt_description_loas
+                            }}</span>
+                            <span v-if="locale == 'en'">{{
+                              item.dlt_description_english
+                            }}</span>
+                            <span v-if="locale == 'th'">{{
+                              item.dlt_description
+                            }}</span>
         </option>
       </select>
     </div>
@@ -90,13 +98,13 @@
             <line x1="14" y1="11" x2="14" y2="17"></line>
           </svg>
         </div>
-        <h5 class="modal-title" id="exampleModalLabel">ต้องการลบรายการนี้?</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{ $t("delete_record") }}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p class="">หากคุณลบรายกานนี้ รายการนั้นจะหายไปตลอดกาล คุณแน่ใจหรือไม่ว่าต้องการดำเนินการต่อ?</p>
+        <p class="">{{ $T("DELETE_RECORD_T") }}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal">Cancel</button>
@@ -122,13 +130,15 @@ import { useToast } from "vue-toastification";
 import Datepicker from "vuejs3-datepicker";
 import moment from "moment";
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
 const picked = ref(new Date());
 
 const router = useRouter();
 const toast = useToast();
 const store = ResultStore();
 
-await store.fetchDlt()
+//await store.fetchDlt()
 
 const { deleteItem } = ResultStore(); //Action
 

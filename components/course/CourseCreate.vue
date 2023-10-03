@@ -19,12 +19,22 @@
         }"
         @change="v$.course_code.$touch"
       />
-      <span
-        class="text-xs text-red-500"
-        style="color: red"
-        v-if="v$.course_code.$error"
-        >{{ v$.course_code.$errors[0].$message }}</span
-      >
+
+  <div v-if="locale == 'la'" >
+      <span v-if="v$.course_code.$error" class="text-xs text-red-500"
+        style="color: red" >ຕ້ອງມີຊ່ອງຂໍ້ມູນລະຫັດຫຼັກສູດ</span>
+  </div>
+
+  <div v-if="locale == 'en'" >
+      <span v-if="v$.course_code.$error" class="text-xs text-red-500"
+        style="color: red" >The Course Code field is required</span>
+  </div>
+
+  <div v-if="locale == 'th'" >
+      <span v-if="v$.course_code.$error" class="text-xs text-red-500"
+        style="color: red" >ต้องระบุฟิลด์รหัสหลักสูตร</span>
+  </div>
+
     </div>
     <div class="col-md-6">
       <label for="inputPassword4" class="form-label">{{ $t("menu_couse_f_title_name") }}</label>
@@ -39,12 +49,24 @@
         }"
         @change="v$.course_name.$touch"
       />
-      <span
-        class="text-xs text-red-500"
-        style="color: red"
-        v-if="v$.course_name.$error"
-        >{{ v$.course_name.$errors[0].$message }}</span
-      >
+   <div v-if="locale == 'la'" >
+      <span v-if="v$.course_name.$error" class="text-xs text-red-500"
+        style="color: red" >ຕ້ອງມີຊ່ອງໃສ່ຊື່ຫຼັກສູດ.</span>
+  </div>
+
+  <div v-if="locale == 'en'" >
+      <span v-if="v$.course_name.$error" class="text-xs text-red-500"
+        style="color: red" >
+The Course Name field is required.</span>
+  </div>
+
+  <div v-if="locale == 'th'" >
+      <span v-if="v$.course_name.$error" class="text-xs text-red-500"
+        style="color: red" >ต้องระบุฟิลด์ชื่อหลักสูตร</span>
+  </div>
+
+  
+
     </div>
     <div class="col-12">
       <label for="inputAddress" class="form-label">{{ $t("menu_couse_f_title_detail") }}</label>
@@ -60,12 +82,24 @@
         v-model="store.formDataCourse.course_description"
       >
       </textarea>
-      <span
-        class="text-xs text-red-500"
-        style="color: red"
-        v-if="v$.course_description.$error"
-        >{{ v$.course_description.$errors[0].$message }}</span
-      >
+
+      <div v-if="locale == 'la'" >
+      <span v-if="v$.course_description.$error" class="text-xs text-red-500"
+        style="color: red" >
+ລາຍລະອຽດຂອງຫຼັກສູດແມ່ນຕ້ອງການ.</span>
+  </div>
+
+  <div v-if="locale == 'en'" >
+      <span v-if="v$.course_description.$error" class="text-xs text-red-500"
+        style="color: red" >
+        The Course Description is required.</span>
+  </div>
+
+  <div v-if="locale == 'th'" >
+      <span v-if="v$.course_description.$error" class="text-xs text-red-500"
+        style="color: red" >ต้องระบุฟิลด์รายละเอียด</span>
+  </div>
+
     </div>
 
     <div class="form-group mb-4 mt-3">
@@ -78,11 +112,25 @@
         ref="fileupload"
       />
     </div>
-    <span
-            class="text-xs text-red-500"
-            style="color: red"
-            v-if="v$.course_cover.$error"
-            >{{ v$.course_cover.$errors[0].$message }}</span>
+
+
+
+            <div v-if="locale == 'la'" >
+      <span v-if="v$.course_cover.$error" class="text-xs text-red-500"
+        style="color: red" >
+        ອັບໂຫຼດຮູບ.</span>
+  </div>
+
+  <div v-if="locale == 'en'" >
+      <span v-if="v$.course_cover.$error" class="text-xs text-red-500"
+        style="color: red" >
+        Upload photo.</span>
+  </div>
+
+  <div v-if="locale == 'th'" >
+      <span v-if="v$.course_cover.$error" class="text-xs text-red-500"
+        style="color: red" >อัพโหลดรูปภาพ</span>
+  </div>
     <div class="border p-2 mt-3">
       <p>{{ $t("menu_couse_f_title_display_picture") }}:</p>
       <template v-if="store.formDataCourse.course_cover">
@@ -97,7 +145,9 @@
       </template>
     </div>
 
-    <div></div>
+    <div>
+
+    </div>
   </div>
 
   <button
@@ -216,6 +266,8 @@ import {
   helpers,
 } from "@vuelidate/validators";
 import { useToast } from "vue-toastification";
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
 
 const toast = useToast();
 const router = useRouter();

@@ -15,9 +15,20 @@
           'border-[#42d392] ': !v$.mr_score.$invalid,
         }" @change="v$.mr_score.$touch" autocomplete="off" @input="onInput"
       >
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.mr_score.$error">{{
-        v$.mr_score.$errors[0].$message
-      }}</span>
+      <div v-if="locale == 'la'">
+        <span v-if="v$.mr_score.$error" class="text-xs text-red-500" style="color: red">
+          ຕ້ອງລະບຸຊ່ອງຄະແນນ</span>
+      </div>
+
+      <div v-if="locale == 'en'">
+        <span v-if="v$.mr_score.$error" class="text-xs text-red-500" style="color: red">
+          The Score field is required</span>
+      </div>
+
+      <div v-if="locale == 'th'">
+        <span v-if="v$.mr_score.$error" class="text-xs text-red-500" style="color: red">ต้องระบุช่องคะแนน</span>
+      </div>
+
 
     </div>
 
@@ -71,7 +82,8 @@ import { useVuelidate } from '@vuelidate/core';
 import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
 import { useToast } from 'vue-toastification';
 import { ref, onMounted, onUnmounted } from 'vue';
-
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
 
 
 const toast = useToast()

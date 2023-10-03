@@ -18,9 +18,23 @@
           'border-red-500 focus:border-red-500': v$.ap_quota.$error,
           'border-[#42d392] ': !v$.ap_quota.$invalid,
         }" @change="v$.ap_quota.$touch" autocomplete="off" @input="onInput">
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_quota.$error">{{
-        v$.ap_quota.$errors[0].$message
-      }}</span>
+ 
+
+
+            <div v-if="locale == 'la'">
+              <span v-if="v$.ap_quota.$error" class="text-xs text-red-500" style="color: red">
+                ຕ້ອງລະບຸຊ່ອງຂໍ້ມູນໂຄຕ້າ.</span>
+            </div>
+
+            <div v-if="locale == 'en'">
+              <span v-if="v$.ap_quota.$error" class="text-xs text-red-500" style="color: red">
+                The Quota field is required</span>
+            </div>
+
+            <div v-if="locale == 'th'">
+              <span v-if="v$.ap_quota.$error" class="text-xs text-red-500"
+                style="color: red">ต้องระบุช่องโควต้า</span>
+            </div>
     </div>
 
 
@@ -32,9 +46,23 @@
           'border-red-500 focus:border-red-500': v$.ap_remark.$error,
           'border-[#42d392] ': !v$.ap_remark.$invalid,
         }" @change="v$.ap_remark.$touch" autocomplete="off">
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_remark.$error">{{
-        v$.ap_remark.$errors[0].$message
-      }}</span>
+
+
+
+<div v-if="locale == 'la'">
+              <span v-if="v$.ap_remark.$error" class="text-xs text-red-500" style="color: red">
+                ຊ່ອງຂໍ້ສັງເກດແມ່ນຕ້ອງການ.</span>
+            </div>
+
+            <div v-if="locale == 'en'">
+              <span v-if="v$.ap_remark.$error" class="text-xs text-red-500" style="color: red">
+                The Remark field is required</span>
+            </div>
+
+            <div v-if="locale == 'th'">
+              <span v-if="v$.ap_remark.$error" class="text-xs text-red-500"
+                style="color: red">ต้องระบุช่อง Remark</span>
+            </div>
     </div>
 
 
@@ -43,18 +71,45 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_start") }}</label>
             <VueDatePicker v-model="store.forminsert.ap_date_start"   :format="format_start"   required></VueDatePicker>
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_date_start.$error">{{
-        v$.ap_date_start.$errors[0].$message
-      }}</span>
+  
+
+
+<div v-if="locale == 'la'">
+              <span v-if="v$.ap_date_start.$error" class="text-xs text-red-500" style="color: red">
+                ຊ່ອງເວລາເລີ່ມຕົ້ນແມ່ນຕ້ອງການ..</span>
+            </div>
+
+            <div v-if="locale == 'en'">
+              <span v-if="v$.ap_date_start.$error" class="text-xs text-red-500" style="color: red">
+                The Start time field is required</span>
+            </div>
+
+            <div v-if="locale == 'th'">
+              <span v-if="v$.ap_date_start.$error" class="text-xs text-red-500"
+                style="color: red">ต้องระบุช่องช่วงเวลาเริ่ม</span>
+            </div>
     </div>
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_end") }}</label>
  
           <VueDatePicker v-model="store.forminsert.ap_date_end" required  :format="format_end"></VueDatePicker>
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_date_end.$error">{{
-        v$.ap_date_end.$errors[0].$message
-      }}</span>
+     
+
+<div v-if="locale == 'la'">
+              <span v-if="v$.ap_date_end.$error" class="text-xs text-red-500" style="color: red">
+                ຕ້ອງລະບຸຊ່ອງຂໍ້ມູນໄລຍະເວລາໝົດ.</span>
+            </div>
+
+            <div v-if="locale == 'en'">
+              <span v-if="v$.ap_date_end.$error" class="text-xs text-red-500" style="color: red">
+                The End time field is required</span>
+            </div>
+
+            <div v-if="locale == 'th'">
+              <span v-if="v$.ap_date_end.$error" class="text-xs text-red-500"
+                style="color: red">ต้องระบุช่องช่วงเวลาหมด</span>
+            </div>
     </div>
   </div>
 
@@ -71,12 +126,15 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_result_form_type_dlt") }}</label>
      <select class="form-select form-select" aria-label="Default select example" v-model="store.forminsert.dtl_code">
-         <option   v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code" >{{item.dlt_description}}</option>
+         <option   v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code" >
+          <span v-if="locale == 'la'" >{{item.dlt_description_loas}}</span>
+      <span v-if="locale == 'en'" >{{item.dlt_description_english}}</span>
+      <span v-if="locale == 'th'" >{{item.dlt_description}}</span>
+        
+        </option>
       </select>
     </div>
   </div>
-
-
 
   <button type="button" class="btn btn-primary" @click="save()">{{ $t("menu_app_app_save") }}</button>
 </template>
@@ -90,7 +148,8 @@ import { useToast } from 'vue-toastification';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import moment from 'moment-timezone';
-
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
 
 
 const toast = useToast()

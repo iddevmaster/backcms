@@ -12,7 +12,10 @@
           :key="item.dlt_code"
           :value="item.dlt_code"
         >
-          {{ item.dlt_description }}
+        <span v-if="locale == 'la'" >{{item.dlt_description_loas}}</span>
+      <span v-if="locale == 'en'" >{{item.dlt_description_english}}</span>
+      <span v-if="locale == 'th'" >{{item.dlt_description}}</span>
+        
         </option>
       </select>
     </div>
@@ -99,6 +102,8 @@ import { useToast } from "vue-toastification";
 import Datepicker from "vuejs3-datepicker";
 import moment from "moment";
 import { ref } from "vue";
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
 const picked = ref(new Date());
 
 const router = useRouter();

@@ -224,7 +224,7 @@ export const DltStore = defineStore('dlt', {
     async SaveFormDlt() {
       let upload = await this.UploadfileAddImage();
       
-      console.log(this.formadddtl);
+
       try {
         const data = await ApiService.post('/dlt_card/create/', this.formadddtl).then(response => {
           console.log(response);

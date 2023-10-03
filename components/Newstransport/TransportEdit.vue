@@ -17,9 +17,20 @@
           'border-red-500 focus:border-red-500': v$.news_title.$error,
           'border-[#42d392] ': !v$.news_title.$invalid,
         }" @change="v$.news_title.$touch">
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.news_title.$error">{{
-        v$.news_title.$errors[0].$message
-      }}</span>
+     <div v-if="locale == 'la'">
+        <span v-if="v$.news_title.$error" class="text-xs text-red-500" style="color: red">
+          ຕ້ອງໃສ່ຊ່ອງຫົວຂໍ້ຂ່າວ</span>
+      </div>
+
+      <div v-if="locale == 'en'">
+        <span v-if="v$.news_title.$error" class="text-xs text-red-500" style="color: red">
+          The News Title field is required</span>
+      </div>
+
+      <div v-if="locale == 'th'">
+        <span v-if="v$.news_title.$error" class="text-xs text-red-500" style="color: red">ต้องระบุฟิลด์หัวข้อ</span>
+      </div>
+
     </div>
     <div class="form-group mb-4">
       <label for="exampleFormControlTextarea1">{{ $t("menu_new_detail") }}</label>
@@ -27,9 +38,26 @@
         'border-red-500 focus:border-red-500': v$.news_description.$error,
         'border-[#42d392] ': !v$.news_description.$invalid,
       }" @change="v$.news_description.$touch" v-model="store.formDataNewsEdit.news_description">
-               </textarea><span class="text-xs text-red-500" style="color:red" v-if="v$.news_description.$error">{{
+               </textarea>
+               
+               <span class="text-xs text-red-500" style="color:red" v-if="v$.news_description.$error">{{
                  v$.news_description.$errors[0].$message
                }}</span>
+
+<div v-if="locale == 'la'">
+        <span v-if="v$.news_description.$error" class="text-xs text-red-500" style="color: red">
+          ຕ້ອງມີຊ່ອງລາຍລະອຽດຂ່າວ</span>
+      </div>
+
+      <div v-if="locale == 'en'">
+        <span v-if="v$.news_description.$error" class="text-xs text-red-500" style="color: red">
+          The News Description field is required</span>
+      </div>
+
+      <div v-if="locale == 'th'">
+        <span v-if="v$.news_description.$error" class="text-xs text-red-500"
+          style="color: red">ต้องระบุฟิลด์รายละเอียด</span>
+      </div>
     </div>
     <div class="form-group mb-4 mt-3">
       <label for="exampleFormControlFile1">{{ $t("menu_new_image") }}</label><span class="text-xs text-red-500" style="color:red" v-if="store.imageReq == true"> Image field is required</span>
@@ -71,7 +99,8 @@ import { UploadStore } from '@/store/upload'; // import the auth store we just c
 import { AlertStore } from '@/store/alert'; // import the auth store we just created
 import { ref } from "vue";
 import { useToast } from 'vue-toastification'
-
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
 
 const toast = useToast()
 const router = useRouter();

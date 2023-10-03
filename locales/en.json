@@ -259,7 +259,11 @@
   "resultadd": "เพิ่มผลสอบ",
   "resultedit": "แก้ไขผลสอบ",
   "logout":"Log Out",
-  "app_round":"รอบ"
+  "app_round":"รอบ",
+  "delete_record":"ต้องการลบรายการนี้?",
+  "delete_record_t":"หากคุณลบรายกานนี้ รายการนั้นจะหายไปตลอดกาล คุณแน่ใจหรือไม่ว่าต้องการดำเนินการต่อ?",
+  "delete_record_cancel":"ปิด",
+  "delete_record_modal":"ลบ"
 }
 
 

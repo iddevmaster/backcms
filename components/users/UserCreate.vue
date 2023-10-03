@@ -12,7 +12,7 @@
     </div>
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_name") }}</label>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="ชื่อ *"
+      <input type="text" class="form-control" id="inputEmail3"
         v-model="store.formDataregister.user_firstname" :class="{
           'border-red-500 focus:border-red-500': v$.user_firstname.$error,
           'border-[#42d392] ': !v$.user_firstname.$invalid,
@@ -26,7 +26,7 @@
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_lname") }}</label>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="นามสกุล *"
+      <input type="text" class="form-control" id="inputEmail3" 
         v-model="store.formDataregister.user_lastname" :class="{
           'border-red-500 focus:border-red-500': v$.user_lastname.$error,
           'border-[#42d392] ': !v$.user_lastname.$invalid,
@@ -42,7 +42,7 @@
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_username") }}</label>
-      <input type="text" class="form-control" id="inputPassword3" placeholder="ยูสเซอร *"
+      <input type="text" class="form-control" id="inputPassword3" 
         v-model="store.formDataregister.user_name" :class="{
           'border-red-500 focus:border-red-500': v$.user_name.$error,
           'border-[#42d392] ': !v$.user_name.$invalid,
@@ -54,7 +54,7 @@
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_pass") }}</label>
-      <input type="text" class="form-control" id="inputPassword3" placeholder="รหัสผ่าน *"
+      <input type="text" class="form-control" id="inputPassword3"
         v-model="store.formDataregister.user_password" :class="{
           'border-red-500 focus:border-red-500': v$.user_password.$error,
           'border-[#42d392] ': !v$.user_password.$invalid,
@@ -67,7 +67,7 @@
   <div class="row mb-4">
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_email") }}</label>
-      <input type="text" class="form-control" id="inputPassword3" placeholder="อีเมล *"
+      <input type="text" class="form-control" id="inputPassword3"
         v-model="store.formDataregister.user_email" :class="{
           'border-red-500 focus:border-red-500': v$.user_email.$error,
           'border-[#42d392] ': !v$.user_email.$invalid,
@@ -78,7 +78,7 @@
     </div>
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_tel") }}</label>
-      <input type="text" class="form-control" id="inputPassword3" placeholder="เบอรโทร *"
+      <input type="text" class="form-control" id="inputPassword3"  @input="onInput"
         v-model="store.formDataregister.user_phone" :class="{
           'border-red-500 focus:border-red-500': v$.user_phone.$error,
           'border-[#42d392] ': !v$.user_phone.$invalid,
@@ -237,6 +237,11 @@ store.image = null;
 const input = document.querySelector('input[type="file"]');
   input.value = '';
 }
+
+const onInput = async (event) => {
+    store.formDataregister.user_phone = event.target.value.replace(/\D/g, '');
+}
+
 
 </script>
 

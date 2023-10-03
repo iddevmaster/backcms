@@ -269,12 +269,22 @@ const DelDlT = async () => {
                         />
                       </div>
                       <div>
-                        <span
-                          class="text-xs text-red-500"
-                          style="color: red"
-                          v-if="v$.front_img.$error"
-                          >{{ v$.front_img.$errors[0].$message }}</span
-                        >
+                        <div v-if="locale == 'la'">
+        <span v-if="v$.front_img.$error" class="text-xs text-red-500" style="color: red">
+          ອັບໂຫຼດຮູບໜ້າບັດ</span>
+      </div>
+
+      <div v-if="locale == 'en'">
+        <span v-if="v$.front_img.$error" class="text-xs text-red-500" style="color: red">
+          Upload photo of card face</span>
+      </div>
+
+      <div v-if="locale == 'th'">
+        <span v-if="v$.front_img.$error" class="text-xs text-red-500"
+          style="color: red">อัพโหลดรูปภาพหน้าบัตร</span>
+      </div>
+
+                        
                       </div>
                       <div class="invoice-detail mb-5" style="padding: 0 48px">
                         <div class="form-group mt-3 d-flex">
@@ -318,12 +328,22 @@ const DelDlT = async () => {
                       </div>
 
                       <div>
-                        <span
-                          class="text-xs text-red-500"
-                          style="color: red"
-                          v-if="v$.back_img.$error"
-                          >{{ v$.back_img.$errors[0].$message }}</span
-                        >
+             
+                                 
+          <div v-if="locale == 'la'">
+        <span v-if="v$.back_img.$error" class="text-xs text-red-500" style="color: red">
+          ອັບໂຫຼດຮູບຢູ່ດ້ານຫຼັງຂອງບັດ</span>
+      </div>
+
+      <div v-if="locale == 'en'">
+        <span v-if="v$.back_img.$error" class="text-xs text-red-500" style="color: red">
+          Upload photo of card of back</span>
+      </div>
+
+      <div v-if="locale == 'th'">
+        <span v-if="v$.back_img.$error" class="text-xs text-red-500"
+          style="color: red">อัพโหลดรูปภาพหลังบัตร</span>
+      </div>
                       </div>
                       <div class="invoice-detail" style="padding: 0 48px">
                         <div class="form-group mb-4 mt-3 d-flex">

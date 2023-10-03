@@ -1,99 +1,155 @@
 <template>
- 
-     
- <div v-if="GetopenModalCreate" class="modal">
+  <div v-if="GetopenModalCreate" class="modal">
 
-<div class="modal-content modal-dialog modal-xl" id="deleteConformationLabel">
-                                <div class="modal-header">                 
-                                    <h5 class="modal-title" id="exampleModalLabel">{{ $t("menu_exam_create") }}</h5>
-                                </div>
-                                <div class="modal-body">
+    <div class="modal-content modal-dialog modal-xl" id="deleteConformationLabel">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ $t("menu_exam_create") }}</h5>
+      </div>
+      <div class="modal-body">
         <form>
-       
+
           <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">{{ $t("menu_exam_all_code") }}:</label>  <span class="text-xs text-red-500" style="color:red" v-if="v$.em_code.$error">{{
-            v$.em_code.$errors[0].$message
-          }}</span>
+            <label for="recipient-name" class="col-form-label">{{ $t("menu_exam_all_code") }}:</label>
+
+
+            <div v-if="locale == 'la'">
+              <span v-if="v$.em_code.$error" class="text-xs text-red-500" style="color: red">
+                ຕ້ອງລະບຸລະຫັດຫຼັກສູດ.</span>
+            </div>
+
+            <div v-if="locale == 'en'">
+              <span v-if="v$.em_code.$error" class="text-xs text-red-500" style="color: red">
+                The Exam Code field is required.</span>
+            </div>
+
+            <div v-if="locale == 'th'">
+              <span v-if="v$.em_code.$error" class="text-xs text-red-500"
+                style="color: red">ต้องระบุฟิลด์รหัสหลักสูตร</span>
+            </div>
+
             <input type="text" class="form-control" id="recipient-name" v-model="store.formexam.em_code">
           </div>
-         
+
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">{{ $t("menu_exam_all_name") }}:</label> <span class="text-xs text-red-500" style="color:red" v-if="v$.em_name.$error">{{
-            v$.em_name.$errors[0].$message
-          }}</span>
+            <label for="message-text" class="col-form-label">{{ $t("menu_exam_all_name") }}:</label>
+
+
+            <div v-if="locale == 'la'">
+              <span v-if="v$.em_name.$error" class="text-xs text-red-500" style="color: red">
+                ຕ້ອງມີຊ່ອງໃສ່ຊື່ສອບເສັງ.</span>
+            </div>
+
+            <div v-if="locale == 'en'">
+              <span v-if="v$.em_name.$error" class="text-xs text-red-500" style="color: red">
+                The Exam Name field is required.</span>
+            </div>
+
+            <div v-if="locale == 'th'">
+              <span v-if="v$.em_name.$error" class="text-xs text-red-500" style="color: red">ต้องระบุฟิลด์ชื่อ</span>
+            </div>
             <input type="text" class="form-control" id="recipient-name" v-model="store.formexam.em_name">
           </div>
-         
+
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">{{ $t("menu_exam_all_detail") }}:</label>  <span class="text-xs text-red-500" style="color:red" v-if="v$.em_description.$error">{{
-            v$.em_description.$errors[0].$message
-          }}</span>
-            <input type="text" class="form-control" id="recipient-name"  v-model="store.formexam.em_description">
-          </div>
-         
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label">{{ $t("menu_exam_all_total_random") }}:</label> <span class="text-xs text-red-500" style="color:red" v-if="v$.em_random_amount.$error">{{
-            v$.em_random_amount.$errors[0].$message
-          }}</span>
-            <input type="number" class="form-control" id="recipient-name" v-model="store.formexam.em_random_amount" min="50">
-          </div>
-          
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label">{{ $t("menu_exam_all_time_test") }}</label>  <span class="text-xs text-red-500" style="color:red" v-if="v$.em_time.$error">{{
-            v$.em_time.$errors[0].$message
-          }}</span>
-            <VueDatePicker v-model="store.formexam.em_time" time-picker  enable-seconds  placeholder="Select Time" />
+            <label for="message-text" class="col-form-label">{{ $t("menu_exam_all_detail") }}:</label>
+
+            <div v-if="locale == 'la'">
+              <span v-if="v$.em_description.$error" class="text-xs text-red-500" style="color: red">
+                ຕ້ອງມີຊ່ອງລາຍລະອຽດການສອບເສັງ.</span>
+            </div>
+
+            <div v-if="locale == 'en'">
+              <span v-if="v$.em_description.$error" class="text-xs text-red-500" style="color: red">
+                The Exam Description field is required.</span>
+            </div>
+
+            <div v-if="locale == 'th'">
+              <span v-if="v$.em_description.$error" class="text-xs text-red-500"
+                style="color: red">ต้องระบุฟิลด์รายละเอียด</span>
+            </div>
+
+            <input type="text" class="form-control" id="recipient-name" v-model="store.formexam.em_description">
           </div>
 
-             <div class="mb-3">
-            <label for="message-text" class="col-form-label">DLT </label>  
-              <div class="col-sm-12">
-  
-    <select class="form-control" v-if="store.dtl" v-model="store.formexam.dlt_code">
-       
-    <option   v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code" >
-  
-      <span v-if="locale == 'la'" >{{item.dlt_description_loas}}</span>
-      <span v-if="locale == 'en'" >{{item.dlt_description_english}}</span>
-      <span v-if="locale == 'th'" >{{item.dlt_description}}</span>
-      </option>
-    </select>
-    
-    </div>
-          
-          </div>
-         
-         
- 
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">{{ $t("menu_exam_all_pic") }}:</label> <span class="text-xs text-red-500" style="color:red" v-if="store.imageReq == true">error</span>
-             <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChange" ref="fileupload">
+            <label for="message-text" class="col-form-label">{{ $t("menu_exam_all_total_random") }}:</label> <span
+              class="text-xs text-red-500" style="color:red" v-if="v$.em_random_amount.$error">{{
+                v$.em_random_amount.$errors[0].$message
+              }}</span>
+            <input type="number" class="form-control" id="recipient-name" v-model="store.formexam.em_random_amount"
+              min="50">
           </div>
-                                                  <div class="border p-2 mt-3">
+
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">{{ $t("menu_exam_all_time_test") }}</label> <span
+              class="text-xs text-red-500" style="color:red" v-if="v$.em_time.$error">{{
+                v$.em_time.$errors[0].$message
+              }}</span>
+            <VueDatePicker v-model="store.formexam.em_time" time-picker enable-seconds placeholder="Select Time" />
+          </div>
+
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">DLT </label>
+            <div class="col-sm-12">
+
+              <select class="form-control" v-if="store.dtl" v-model="store.formexam.dlt_code">
+
+                <option v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code">
+
+                  <span v-if="locale == 'la'">{{ item.dlt_description_loas }}</span>
+                  <span v-if="locale == 'en'">{{ item.dlt_description_english }}</span>
+                  <span v-if="locale == 'th'">{{ item.dlt_description }}</span>
+                </option>
+              </select>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">{{ $t("menu_exam_all_pic") }}:</label>
+
+
+            <div v-if="locale == 'la'">
+              <span v-if="v$.em_cover.$error" class="text-xs text-red-500" style="color: red">
+                ອັບໂຫຼດຮູບ.</span>
+            </div>
+
+            <div v-if="locale == 'en'">
+              <span v-if="v$.em_cover.$error" class="text-xs text-red-500" style="color: red">
+                Upload photo.</span>
+            </div>
+
+            <div v-if="locale == 'th'">
+              <span v-if="v$.em_cover.$error" class="text-xs text-red-500" style="color: red">อัพโหลดรูปภาพ</span>
+            </div>
+
+            <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChange"
+              ref="fileupload">
+          </div>
+          <div class="border p-2 mt-3">
             <p>{{ $t("menu_exam_display_p") }}:</p>
 
-            <template v-if="store.image">
+            <template v-if="store.formexam.em_cover">
               <div class="row">
-              <div class="col-3">
-              <img :src="store.image" class="img-fluid" />
-              <button @click="removeImage()">{{ $t("menu_exam_display_del") }}</button>
-            </div>
-             </div>
+                <div class="col-3">
+                  <img :src="store.formexam.em_cover" class="img-fluid" />
+                  <button @click="removeImage()">{{ $t("menu_exam_display_del") }}</button>
+                </div>
+              </div>
             </template>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-                <button class="btn btn btn-light-dark" data-bs-dismiss="modal"  @click="closeModal">
-                  <i class="flaticon-cancel-12"></i> {{ $t("menu_exam_modal_close") }}</button>
-                <button type="button" class="btn btn-primary" @click="save()">{{ $t("menu_exam_modal_save") }}</button>
-            </div>
-          </div>
+        <button class="btn btn btn-light-dark" data-bs-dismiss="modal" @click="closeModal">
+          <i class="flaticon-cancel-12"></i> {{ $t("menu_exam_modal_close") }}</button>
+        <button type="button" class="btn btn-primary" @click="save()">{{ $t("menu_exam_modal_save") }}</button>
+      </div>
+    </div>
   </div>
-
-
-                   
-    
 </template>
 
 
@@ -131,15 +187,15 @@ const { ResetForm } = ExamStore();//Action
 
 
 const OpenFormInsert = async () => {
-await store.OpenFormInser()
- };
+  await store.OpenFormInser()
+};
 
 const closeModal = async () => {
-await store.closeModal()
- };
+  await store.closeModal()
+};
 
 
- const rules = computed(() => {
+const rules = computed(() => {
   return {
     em_code: {
       required: helpers.withMessage('Exam code field is required', required),
@@ -161,67 +217,74 @@ await store.closeModal()
       pattern: /^(2[0-3]|[0-1]?[\d]):[0-5][\d]:[0-5][\d]$/,
       required: helpers.withMessage('em_time', required),
     },
-   
+    em_cover: {
+      required: helpers.withMessage(
+        "The  Image  field is required",
+        required
+      ),
+      minLength: minLength(1),
+    },
+
   };
 });
 const v$ = useVuelidate(rules, FormExam);
 const save = async () => {///////////// บันทึก
-if(!store.image){/////////////////// req image  ใช้ rules ไม่ได้ 
-store.imageReq = true;
-return false;
-}
+  // if(!store.image){/////////////////// req image  ใช้ rules ไม่ได้ 
+  // store.imageReq = true;
+  // return false;
+  // }
   v$.value.$validate();  ///////////ดัก req
-    if (!v$.value.$error) {
+  if (!v$.value.$error) {
     await removeImage();
     let uploadfile = await UploadfileExam();   ///////////upload รูป
     let save = await SaveExam();  ///////////save 
     await store.fetchExamlist();
-       if(save === false){
-         await toast.error('Fail Save Data')
-      }else {
+    if (save === false) {
+      await toast.error('Fail Save Data')
+    } else {
       await toast.success('Save Data')
       await ResetForm();
       v$.value.$reset();
-    
-      }
 
     }
- };
+
+  }
+};
 
 
 
 
- const onFileChange = async (event) => {
+const onFileChange = async (event) => {
   var input = event.target;
-      if (input.files) {
-        store.imageReq = false;
-        var reader = new FileReader();
-        reader.onload = (e) => {
-          store.image = e.target.result;
-        }
-        store.imagelist=input.files[0];
-        reader.readAsDataURL(input.files[0]);
-      }
+  if (input.files) {
+    store.imageReq = false;
+    var reader = new FileReader();
+    reader.onload = (e) => {
+      store.formexam.em_cover = e.target.result;
+    }
+    store.imagelist = input.files[0];
+    reader.readAsDataURL(input.files[0]);
+  }
 }
 
 const removeImage = async () => {
-store.image = null;
-store.imageReq = false;
-const input = document.querySelector('input[type="file"]');
+  store.formexam.em_cover = null;
+  store.imageReq = false;
+  const input = document.querySelector('input[type="file"]');
   input.value = '';
 }
 
 
 
-    const formatTime = async () => {
-        const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
-      
-      if (store.formexam.em_time && !timeRegex.test(store.formexam.em_time)) {
-        // If the entered time doesn't match the format, clear the input
-      //  this.time = '';
-      }
+const formatTime = async () => {
+  const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
 
- };
+  if (store.formexam.em_time && !timeRegex.test(store.formexam.em_time)) {
+    // If the entered time doesn't match the format, clear the input
+    //  this.time = '';
+  }
+
+};
 
 
 </script>

@@ -34,30 +34,64 @@
         <div class="mb-5" style="padding: 0 48px">
           <label for="type" class="fw-bold">{{ $t("menu_dlt_form_issue_date") }}</label>
           <Datepicker v-model="store.formadddtl.issue_date" :format="format_start" />
-          <span
-            class="text-xs text-red-500"
-            style="color: red"
-            v-if="v$.issue_date.$error"
-            >{{ v$.issue_date.$errors[0].$message }}</span>
+ 
+            <div v-if="locale == 'la'">
+        <span v-if="v$.issue_date.$error" class="text-xs text-red-500" style="color: red">
+          ຕ້ອງມີຊ່ອງຂໍ້ມູນວັນທີອອກ</span>
+      </div>
+
+      <div v-if="locale == 'en'">
+        <span v-if="v$.issue_date.$error" class="text-xs text-red-500" style="color: red">
+          The Issue Date field is required</span>
+      </div>
+
+      <div v-if="locale == 'th'">
+        <span v-if="v$.issue_date.$error" class="text-xs text-red-500"
+          style="color: red">ต้องระบุข้อมูลวันที่ออก</span>
+      </div>
         </div>
+
+
+
 
 
         <div class="mb-5" style="padding: 0 48px">
           <label for="type" class="fw-bold">{{ $t("menu_dlt_form_expiry_date") }}</label>
           <Datepicker v-model="store.formadddtl.expiry_date" :format="format_end" />
-          <span
-            class="text-xs text-red-500"
-            style="color: red"
-            v-if="v$.expiry_date.$error"
-            >{{ v$.expiry_date.$errors[0].$message }}</span>
+
+
+            <div v-if="locale == 'la'">
+        <span v-if="v$.expiry_date.$error" class="text-xs text-red-500" style="color: red">
+          ຕ້ອງໃສ່ຊ່ອງວັນທີອອກ</span>
+      </div>
+
+      <div v-if="locale == 'en'">
+        <span v-if="v$.expiry_date.$error" class="text-xs text-red-500" style="color: red">
+          The Expiry date field is required</span>
+      </div>
+
+      <div v-if="locale == 'th'">
+        <span v-if="v$.expiry_date.$error" class="text-xs text-red-500"
+          style="color: red">ต้องระบุข้อมูลวันที่หมดอายุ</span>
+      </div>
         </div>
         <div>
-          <span
-            class="text-xs text-red-500"
-            style="color: red"
-            v-if="v$.front_img.$error"
-            >{{ v$.front_img.$errors[0].$message }}</span
-          >
+   
+
+          <div v-if="locale == 'la'">
+        <span v-if="v$.front_img.$error" class="text-xs text-red-500" style="color: red">
+          ອັບໂຫຼດຮູບໜ້າບັດ</span>
+      </div>
+
+      <div v-if="locale == 'en'">
+        <span v-if="v$.front_img.$error" class="text-xs text-red-500" style="color: red">
+          Upload photo of card face</span>
+      </div>
+
+      <div v-if="locale == 'th'">
+        <span v-if="v$.front_img.$error" class="text-xs text-red-500"
+          style="color: red">อัพโหลดรูปภาพหน้าบัตร</span>
+      </div>
         </div>
         <div class="invoice-detail mb-5" style="padding: 0 48px">
           <div class="form-group mt-3 d-flex">
@@ -97,12 +131,22 @@
         </div>
 
         <div>
-          <span
-            class="text-xs text-red-500"
-            style="color: red"
-            v-if="v$.back_img.$error"
-            >{{ v$.back_img.$errors[0].$message }}</span
-          >
+    
+          
+          <div v-if="locale == 'la'">
+        <span v-if="v$.back_img.$error" class="text-xs text-red-500" style="color: red">
+          ອັບໂຫຼດຮູບຢູ່ດ້ານຫຼັງຂອງບັດ</span>
+      </div>
+
+      <div v-if="locale == 'en'">
+        <span v-if="v$.back_img.$error" class="text-xs text-red-500" style="color: red">
+          Upload photo of card of back</span>
+      </div>
+
+      <div v-if="locale == 'th'">
+        <span v-if="v$.back_img.$error" class="text-xs text-red-500"
+          style="color: red">อัพโหลดรูปภาพหลังบัตร</span>
+      </div>
         </div>
         <div class="invoice-detail" style="padding: 0 48px">
           <div class="form-group mb-4 mt-3 d-flex">
