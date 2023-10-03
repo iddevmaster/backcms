@@ -5,7 +5,7 @@
         id="t-text"
         type="text"
         name="txt"
-        placeholder="ค้นหา"
+        placeholder="Search"
         class="form-control"
         required=""
         v-model="store.formsearchcourse.search" @keyup="searchData"
@@ -40,17 +40,17 @@
         <div class="card-body px-0 pb-0">
           <h5 class="card-title mb-3">{{ item.course_name }}</h5>
           <div class="media mt-4 mb-0 pt-1">
-            <img
+            <!-- <img
               :src="image(item.course_cover)"
               class="card-media-image me-3"
               alt=""
-            />
+            /> -->
             <div class="media-body">
               <h4 class="media-heading mb-1">{{ item.user_create }}</h4>
               <p class="media-text">{{ coverttime(item.crt_date) }}</p>
             </div>
             <div class="action-btns">
-                                 <NuxtLink :to="'/course/' + item.course_id">
+                                 <NuxtLink :to="'/learning/' + item.course_id">
                                              
                                                             <a href="javascript:void(0);" class="action-btn btn-edit bs-tooltip me-2" @click="edit(item)" data-toggle="tooltip" data-placement="top" aria-label="Edit" data-bs-original-title="Edit">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>

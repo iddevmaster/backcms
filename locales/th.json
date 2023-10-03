@@ -266,7 +266,13 @@
   "delete_record_cancel":"ปิด",
   "delete_record_modal":"ลบ",
   "verity_pass":"ผ่านการยืนยัน",
-  "verity_fail":"ไม่ผ่านการยืนยัน"
+  "verity_fail":"ไม่ผ่านการยืนยัน",
+  "all":"ทั้งหมด",
+  "admin":"ผู้ดูแลระบบ",
+  "officer":"เจ้าหน้าที่",
+  "population":"ประชาชน",
+  "active":"ใช้งาน",
+  "notactive":"ไม่ใช้งาน"
 
   
   

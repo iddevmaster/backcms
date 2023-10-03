@@ -2,15 +2,34 @@
 
   <div class="row layout-top-spacing">
     <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
-      <input id="t-text" type="text" name="txt" placeholder="ค้นหา" class="form-control" required=""
+      <input id="t-text" type="text" name="txt" placeholder="Search" class="form-control" required=""
       v-model="store.searchDa" @keyup="searchData" />
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
       <select class="form-select form-select" aria-label="Default select example" @change="selecttype($event)">
-        <option value="">ทั้งหมด</option>
-        <option value="1">ผู้ดูแลระบบ</option>
-        <option value="2">เจ้าหน้าที่</option>
-        <option value="3">ประชาชน</option>
+        <option value="">
+
+      <span v-if="locale == 'la'" >{{ $t("all") }}</span>
+      <span v-if="locale == 'en'" >{{ $t("all") }}</span>
+      <span v-if="locale == 'th'" >{{ $t("all") }}</span>
+          <span></span>
+          </option>
+        <option value="1">
+      <span v-if="locale == 'la'" >{{ $t("admin") }}</span>
+      <span v-if="locale == 'en'" >{{ $t("admin") }}</span>
+      <span v-if="locale == 'th'" >{{ $t("admin") }}</span>
+        </option>
+        <option value="2">
+     <span v-if="locale == 'la'" >{{ $t("officer") }}</span>
+      <span v-if="locale == 'en'" >{{ $t("officer") }}</span>
+      <span v-if="locale == 'th'" >{{ $t("officer") }}</span>
+        </option>
+        <option value="3">
+  <span v-if="locale == 'la'" >{{ $t("population") }}</span>
+      <span v-if="locale == 'en'" >{{ $t("population") }}</span>
+      <span v-if="locale == 'th'" >{{ $t("population") }}</span>
+
+        </option>
       </select>
     </div>
 
@@ -109,6 +128,8 @@ import $ from 'jquery'
 import Paginate from "vuejs-paginate-next";
 import { useToast } from 'vue-toastification'
 import moment from "moment-timezone";
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
 
 
 const router = useRouter();

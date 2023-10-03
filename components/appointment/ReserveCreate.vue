@@ -21,14 +21,14 @@
       <thead>
         <tr>
           <th>
-            #
+            {{ $t("menu_app_view_list_index") }}
             <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
           </th>
-          <th @click="sortList('id')">ชื่อ - นามสกุล &#8597;</th>
+          <th @click="sortList('id')">{{ $t("menu_app_view_list_name") }} &#8597;</th>
           <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
-          <th @click="sortList('user_phone')">เบอรโทร</th>
-          <th>อีเมล์ &#8597;</th>
+          <th @click="sortList('user_phone')">{{ $t("menu_app_view_list_phone") }}</th>
+          <th>{{ $t("menu_app_view_list_email") }} &#8597;</th>
           <!-- <th class="no-content">จัดการ</th> -->
         </tr>
       </thead>

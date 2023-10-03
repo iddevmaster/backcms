@@ -102,8 +102,18 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_status") }}</label>
       <select class="form-control" v-model="store.formDataregister.active">
-    <option value="1">ใช้งาน</option>
-    <option value="0">ไม่ใช้งาน</option>
+    <option value="1">
+       <span v-if="locale == 'la'" >{{ $t("active") }}</span>
+      <span v-if="locale == 'en'" >{{ $t("active") }}</span>
+      <span v-if="locale == 'th'" >{{ $t("active") }}</span>
+
+    </option>
+    <option value="0">
+  <span v-if="locale == 'la'" >{{ $t("notactive") }}</span>
+      <span v-if="locale == 'en'" >{{ $t("notactive") }}</span>
+      <span v-if="locale == 'th'" >{{ $t("notactive") }}</span>
+
+    </option>
     </select>
     </div>
   </div>
@@ -118,7 +128,8 @@ import { usersStore } from '@/store/users'; // import the auth store we just cre
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
 import { useToast } from 'vue-toastification';
-
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
 
 
 const toast = useToast()
@@ -137,21 +148,6 @@ await store.Zipcode();
 await store.Country();
 
 
-// const formDataregister = reactive({
-//   user_name: store.formDataregister.user_name,
-//   user_password: store.formDataregister.user_password,
-//   user_firstname: store.formDataregister.user_firstname,
-//   user_lastname: store.formDataregister.user_lastname,
-//   user_email: store.formDataregister.user_email,
-//   user_phone: store.formDataregister.user_phone,
-//   user_address: store.formDataregister.user_address,
-//   user_birthday: store.formDataregister.user_birthday,
-//   verify_account: store.formDataregister.verify_account,
-//   user_type: 3,
-//   active:1,
-//   country_id: store.country_id,
-//   location_id: store.location_id,
-// });
 
 
 

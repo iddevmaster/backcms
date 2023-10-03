@@ -96,9 +96,9 @@
   "menu_new_type": "ປະເພດ",
   "menu_new_update": "ອັບເດດຫຼ້າສຸດ",
   "menu_new_action": "ຈັດການ",
-  "menu_new_back": "กลับหน้าข่าวสาร",
+  "menu_new_back": "ກັບໄປທີ່ໜ້າຂ່າວ",
   "menu_new_save": "ບັນທຶກ",
-  "menu_new_detail": "รายละเอียดข่าว",
+  "menu_new_detail": "ລາຍລະອຽດຂ່າວ",
   "menu_new_form_news": "ຕື່ມຖະແຫຼງຂ່າວ",
   "menu_new_form_edit": "ແກ້ໄຂຖະແຫຼງຂ່າວ",
   "menu_new_display_img": "ສະແດງຮູບທີ່ນີ້",
@@ -264,7 +264,13 @@
   "delete_record_cancel":"ປິດ",
   "delete_record_modal":"ລຶບ",
   "verity_pass":"ຢັ້ງຢືນແລ້ວ",
-  "verity_fail":"ບໍ່​ມີ​ການ​ຍືນ​ຍັນ"
+  "verity_fail":"ບໍ່​ມີ​ການ​ຍືນ​ຍັນ",
+  "all":"ທັງໝົດ",
+  "admin":"ຜູ້ເບິ່ງແຍງລະບົບ",
+  "officer":"ຜູ້​ບໍ​ລິ​ຫານ",
+  "population":"ປະຊາຊົນ",
+  "active":"ໃຊ້",
+  "notactive":"ບໍ່ໄດ້ໃຊ້"
 }
 
 

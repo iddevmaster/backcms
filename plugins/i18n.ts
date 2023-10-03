@@ -8,7 +8,7 @@ import la from '../locales/la.json'
    const i18n = createI18n({
      legacy: false,
      globalInjection: true,
-     locale: 'la',
+     locale: 'en',
      messages: {
       en,
       th,

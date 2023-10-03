@@ -77,7 +77,7 @@
 
         <li class="menu" >
           <a
-            href="#course"
+            href="#learning"
             data-bs-toggle="collapse"
             aria-expanded="false"
             class="dropdown-toggle"
@@ -121,14 +121,14 @@
           </a>
           <ul
             class="collapse submenu list-unstyled"
-            id="course"
+            id="learning"
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/course">{{ $t("menu_couse_all") }}</nuxt-link>
+              <nuxt-link to="/learning">{{ $t("menu_couse_all") }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/course/create">{{ $t("menu_couse_add") }}</nuxt-link>
+              <nuxt-link to="/learning/create">{{ $t("menu_couse_add") }}</nuxt-link>
             </li>
           </ul>
         </li>

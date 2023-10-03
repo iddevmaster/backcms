@@ -108,8 +108,18 @@
        <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_status") }}</label>
       <select class="form-control" v-model="store.formDataEdit.active">
-    <option value="1">ใช้งาน</option>
-    <option value="0">ไม่ใช้งาน</option>
+  <option value="1">
+       <span v-if="locale == 'la'" >{{ $t("active") }}</span>
+      <span v-if="locale == 'en'" >{{ $t("active") }}</span>
+      <span v-if="locale == 'th'" >{{ $t("active") }}</span>
+
+    </option>
+    <option value="0">
+  <span v-if="locale == 'la'" >{{ $t("notactive") }}</span>
+      <span v-if="locale == 'en'" >{{ $t("notactive") }}</span>
+      <span v-if="locale == 'th'" >{{ $t("notactive") }}</span>
+
+    </option>
     </select>
     </div>
   </div>
@@ -122,6 +132,8 @@ import { usersStore } from '@/store/users'; // import the auth store we just cre
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
 import { useToast } from 'vue-toastification'
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
 const toast = useToast()
 
 const router = useRouter();

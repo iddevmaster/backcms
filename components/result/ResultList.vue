@@ -82,9 +82,9 @@
             <button
               type="button"
               class="btn btn-success mt-0"
-              style="background-color: #ce0000"
+              style="background-color: #ce0000" @click="del(event.mr_id)"
             >
-              <i class="bi bi-trash" @click="del(event.mr_id)"></i>
+              <i class="bi bi-trash" ></i>
             </button>
           </td>
 
@@ -171,6 +171,7 @@ const format = (time) => {
 // store.fetchAppointment()
 
 const del = async (id) => {
+
   store.mr_id = id;
   store.PopupDelete = true;
   // store.deleteItem(id);
