@@ -270,7 +270,12 @@
   "officer":"ຜູ້​ບໍ​ລິ​ຫານ",
   "population":"ປະຊາຊົນ",
   "active":"ໃຊ້",
-  "notactive":"ບໍ່ໄດ້ໃຊ້"
+  "notactive":"ບໍ່ໄດ້ໃຊ້",
+  "unactive":"Unactive",
+  "phone_unactive":"Phone unactive",
+  "phone_active":"Phone active",
+  "system_unactive":"System unactive",
+  "system_active":"System active"
 }
 
 

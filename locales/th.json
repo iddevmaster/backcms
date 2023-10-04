@@ -272,7 +272,12 @@
   "officer":"เจ้าหน้าที่",
   "population":"ประชาชน",
   "active":"ใช้งาน",
-  "notactive":"ไม่ใช้งาน"
+  "notactive":"ไม่ใช้งาน",
+  "unactive":"Unactive",
+  "phone_unactive":"Phone unactive",
+  "phone_active":"Phone active",
+  "system_unactive":"System unactive",
+  "system_active":"System active"
 
   
   

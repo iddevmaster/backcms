@@ -7,6 +7,7 @@
     </div>
     <div class="row mb-4">
     <div class="col-sm-12">
+    
       <label for="exampleFormControlInput1">{{ $t("menu_user_iden") }}</label>
       <input type="text" class="form-control" id="add" placeholder="ที่อยู่ *"  v-model="store.formDetailEdit.identification_number"
       :class="{
@@ -70,8 +71,11 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_verify") }}</label>
       <select class="form-control" v-model="store.formDetailEdit.verify_account">
-    <option value="n">ยังไม่ยืนยันตัวตน</option>
-    <option value="y">ยืนยันตัวตนแล้ว</option>
+    <option value="unactive">{{ $t("unactive") }}</option>
+    <option value="phone_unactive">{{ $t("phone_unactive") }}</option>
+    <option value="phone_active">{{ $t("phone_active") }}</option>
+    <option value="system_unactive">{{ $t("system_unactive") }}</option>
+    <option value="system_active">{{ $t("system_active") }}</option>
     </select>
     </div>
   </div>

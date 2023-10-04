@@ -58,7 +58,7 @@ export const usersStore = defineStore('users', {
       user_img: null,
       location_id: 1,
       country_id: 1,
-      verify_account:"n",
+      verify_account:"unactive",
       active:null
     },
     formDataEdit: {

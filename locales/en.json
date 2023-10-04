@@ -271,7 +271,12 @@
   "officer":"Officer",
   "population":"Population",
   "active":"Active",
-  "notactive":"Not Active"
+  "notactive":"Not Active",
+  "unactive":"Unactive",
+  "phone_unactive":"Phone unactive",
+  "phone_active":"Phone active",
+  "system_unactive":"System unactive",
+  "system_active":"System active"
 }
 
 
