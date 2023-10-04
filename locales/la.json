@@ -63,7 +63,7 @@
   "menu_page_exam_all": "ຫຼັກສູດທັງໝົດ",
  
 
-  "menu_exam_back": "กลับสู่หน้าຫຼັກສູດ",
+  "menu_exam_back": "ກັບໄປທີ່ໜ້າຫຼັກສູດ",
   "menu_exam_add_ex_form": "ຕື່ມສອບເສັງ",
   "menu_exam_add_ex": "ຕື່ມສອບເສັງ",
   "menu_exam_edit": "ແກ້ໄຂສອບເສັງ",
@@ -71,7 +71,7 @@
   "menu_exam_index": "ເລກ",
   "menu_exam_content": "ເນື້ອໃນ",
   "menu_exam_picture": "ຮູບພາບສອບເສັງ",
-  "menu_exam_proposition": "คำถาม - โจทย์ ?",
+  "menu_exam_proposition": "ຄໍາຖາມ ?",
   "menu_exam_answer": "ຄໍາຕອບ",
   "menu_exam_add_answer": "ເພີ່ມຄໍາຕອບ",
   "menu_exam_save": "ບັນທຶກ",
