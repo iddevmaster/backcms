@@ -11,6 +11,7 @@ export const AppointStore = defineStore('appoint', {
     isOpen: false,
     isDelAP: false,
     searchData: "",
+    event:[],
     start_date: '',
     reservebyap: [],
     app_present:[],
@@ -18,7 +19,7 @@ export const AppointStore = defineStore('appoint', {
     usersall:[],
     user_id:null,
     end_date: '',
-    dtl_code: 'A',
+    dlt_code: 'A',
     myChoose:null,
     ap_id: null,
     isShowModal: false,
@@ -34,7 +35,7 @@ export const AppointStore = defineStore('appoint', {
     form: {
       ap_learn_type: "1",
       date_event: "",
-      dtl_code: "A1",
+      dlt_code: "A1",
     },
     myValue:null,
     formuser: {
@@ -61,7 +62,7 @@ export const AppointStore = defineStore('appoint', {
       ap_date_end: null,
       ap_remark: null,
       user_id: null,
-      dtl_code: null,
+      dlt_code: null,
     },
     selectedTimeZone: 'Asia/Bangkok',
     locale: 'en',
@@ -73,7 +74,7 @@ export const AppointStore = defineStore('appoint', {
       ap_date_end: null,
       ap_remark: "",
       user_id: "",
-      dtl_code: "A1",
+      dlt_code: "A1",
     },
     formserchrreserve: {
       page: 1,
@@ -217,10 +218,32 @@ export const AppointStore = defineStore('appoint', {
     },
 
     async fetchAppointment() {
+
+      const appdata = {
+        ap_learn_type: this.form.ap_learn_type,
+        dlt_code: this.form.dlt_code
+      }
+
+
+      try {
+        const data = await ApiService.get('/appointment/event/?ap_learn_type='+ parseInt(this.form.ap_learn_type)+'&dlt_code='+this.form.dlt_code+'').then(response => {
+          this.event = response.data
+          console.log(response.data);
+        });
+     
+
+      } catch (error) {
+        return false;
+      }
+
+    },
+
+
+    async fetchAppointmentEvent() {
       const appdata = {
         date_event: this.form.date_event,
         ap_learn_type: this.form.ap_learn_type,
-        dlt_code: this.form.dtl_code
+        dlt_code: this.form.dlt_code
       }
 
       try {
@@ -244,7 +267,7 @@ export const AppointStore = defineStore('appoint', {
             this.formedit.ap_quota = response.data.ap_quota
             this.formedit.ap_remark = response.data.ap_remark
             this.formedit.ap_learn_type = response.data.ap_learn_type
-            this.formedit.dtl_code = response.data.dlt_code
+            this.formedit.dlt_code = response.data.dlt_code
 
 
             // const date_start = this.changeTypeTimeZonebefore(response.data.ap_date_start);
@@ -291,7 +314,7 @@ const date_end = await this.changeFormate(currentDateEnd)
       
       const savet = {
         ap_learn_type: parseInt(this.forminsert.ap_learn_type), ap_quota: this.forminsert.ap_quota, ap_date_start: date_start, ap_date_end: date_end, ap_remark: this.forminsert.ap_remark,
-        dlt_code: this.forminsert.dtl_code, user_id: this.forminsert.user_id
+        dlt_code: this.forminsert.dlt_code, user_id: this.forminsert.user_id
       }
 
    
@@ -319,7 +342,7 @@ const date_end = await this.changeFormate(currentDateEnd)
       // this.formedit.ap_date_end = await this.changeFormate(this.formedit.ap_date_end);
       const upd = {
         ap_learn_type: learn_type, ap_quota: this.formedit.ap_quota, ap_date_start: this.formedit.ap_date_start, ap_date_end: this.formedit.ap_date_end, ap_remark: this.formedit.ap_remark,
-        dlt_code: this.formedit.dtl_code, user_id: this.formedit.user_id
+        dlt_code: this.formedit.dlt_code, user_id: this.formedit.user_id
       }
       try {
         const data = await ApiService.put('/appointment/update/' + this.ap_id, upd).then(response => {

@@ -100,7 +100,7 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_status") }}</label>
 
-      <select class="form-select form-select" aria-label="Default select example" v-model="store.formedit.dtl_code">
+      <select class="form-select form-select" aria-label="Default select example" v-model="store.formedit.dlt_code">
         <option v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code">{{ item.dlt_description }}
         </option>
       </select>

@@ -4,7 +4,7 @@
       <select
         class="form-select form-select cateSelect"
         aria-label="Default select example"
-        v-model="store.form.dtl_code"
+        v-model="store.form.dlt_code" @change="SearchApp()"
       >
         <option
           v-for="(item, index) in store.dtl"
@@ -27,13 +27,24 @@
       <select
         class="form-select typeSelect h-100"
         aria-label="Default select example"
-        v-model="store.form.ap_learn_type"
+        v-model="store.form.ap_learn_type" @change="SearchApp()"
       >
         <option value="1">{{ $t("menu_learn_theory") }}</option>
         <option value="2">{{ $t("menu_learn_practice") }}</option>
   
       </select>
     </div>
+
+    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+      <select
+        class="form-select typeSelect h-100"
+        aria-label="Default select example"
+      >
+        <option  v-for="(events, x) in store.event"
+         >{{events.event}}</option>
+      </select>
+    </div>
+
 
     
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
@@ -150,6 +161,7 @@ const store = AppointStore();
 
 
 await store.fetchUser()
+await store.fetchAppointment();
 const myOptionsUser = JSON.parse(JSON.stringify(store.users));
 const myUser = ref();
 
@@ -185,6 +197,11 @@ const del = async (id) => {
 const Search = async () => {
   store.fetchAppointment();
 };
+
+const SearchApp = async () => {
+  store.fetchAppointment();
+};
+
 
 const choose = async (id) => {
   router.push({ path: "dltmanage/" + id });
