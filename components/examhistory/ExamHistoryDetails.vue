@@ -5,7 +5,7 @@
         id="t-text"
         type="text"
         name="txt"
-        placeholder="ค้นหา"
+        placeholder="Search"
         class="form-control"
         required=""   v-model="store.formsearchexamhistory.search" @keyup="searchData"
       />
