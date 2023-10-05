@@ -482,6 +482,9 @@
             <li>
               <nuxt-link to="/users/create">{{ $t("menu_user_page_create") }}</nuxt-link>
             </li>
+            <li>
+              <nuxt-link to="/users/approve">approve</nuxt-link>
+            </li>
           </ul>
         </li>
 

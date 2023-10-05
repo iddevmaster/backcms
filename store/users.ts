@@ -19,8 +19,12 @@ export const usersStore = defineStore('users', {
     sortedbyASC: true,
     selected: [],
     imagelist: null,
+    Idcard:false,
     checkboxes: [], // Array to store checkbox values
     isAllSelected: false,
+    appr:[],
+    userapprove:null,
+    checkuserotp:null,
     type:null,
     count: 0,
     page: 1,
@@ -39,6 +43,11 @@ export const usersStore = defineStore('users', {
       page: 1,
       per_page: 20,
       searchDa: '',
+    },
+    formapprove: {
+      page: 1,
+      per_page: 1000,
+      search: '',
     },
     formszipcode: {
       page: 1,
@@ -399,7 +408,51 @@ this.country = country.data.data
 
     async selectLan() {
       this.lng = this.lan[this.loc]
-    }
+    },
+    async fetchUsersApprove() {
+    await this.fetchUsersforApprove();
+    await this.ManageUserApprove();
+    await this.FitterUserApprove();
+    
+    },
+    async fetchUsersforApprove() {
+      const data = await ApiService.post('/user/list?user_type=3', this.formapprove).then(response => {
+        this.appr = response.data.data
+      });
+    },
+    async ManageUserApprove() {
+      const user_app = [];
+      if(this.appr){
+        for (var i = 0; i < this.appr.length; i++) { 
+          const data = await ApiService.get('/user/only/detail/'+this.appr[i].user_email).then(response => {
+            if(response.status === 200){
+              console.log(response.data);
+              let obj2 = { identification_number: response.data[0].identification_number,verify_account:response.data[0].verify_account,
+                user_lastname:response.data[0].user_lastname,
+                user_firstname:response.data[0].user_firstname,
+                user_email:response.data[0].user_email,
+                user_phone:response.data[0].user_phone,
+                user_id:response.data[0].user_id,
+               };
+              user_app.push(obj2);
+            }
+          });
+        }
+      }
+      this.checkuserotp = user_app;
+    },
+    async FitterUserApprove() {
+   const filteredHomes = this.checkuserotp.filter(x => 
+    x.verify_account == 'y' 
+  );
+  
+  this.userapprove = filteredHomes;
+
+
+
+    },
+
+    
   },
 
 });
