@@ -39,7 +39,7 @@
           <td v-if="!users.detail">
             
           <p class="mb-0 text-danger">
-            <span v-if="locale == 'la'" >{{ $t("unactive") }}</span>
+      <span v-if="locale == 'la'" >{{ $t("unactive") }}</span>
       <span v-if="locale == 'en'" >{{ $t("unactive") }}</span>
       <span v-if="locale == 'th'" >{{ $t("unactive") }}</span>
           </p></td>
