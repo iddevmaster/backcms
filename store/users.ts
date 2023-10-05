@@ -54,6 +54,7 @@ export const usersStore = defineStore('users', {
       per_page: 200,
       search: '',
     },
+    display_user:null,
     formDataregister: {
       user_name: null,
       user_password: null,
@@ -479,7 +480,6 @@ const a = {verify_account:'system_active',identification_number:response.data[0]
     },
     async Notapprove(item) {
       const data = await ApiService.get('/user/only/detail/' + item).then(response => {
-
         const a = {verify_account:'system_unactive',identification_number:response.data[0].identification_number,
           user_img:response.data[0].user_img,user_birthday:response.data[0].user_birthday,
           user_address:response.data[0].user_address,
@@ -499,6 +499,16 @@ const a = {verify_account:'system_active',identification_number:response.data[0]
                 })
         
      
+    },
+
+    async fetchUsersIdDisplay(user_id) {
+      try {
+        const data = await ApiService.get('/user/get/' + user_id).then(response => {
+          this.display_user = response.data;
+        });
+      } catch (error) {
+        return false;
+      }
     },
 
     

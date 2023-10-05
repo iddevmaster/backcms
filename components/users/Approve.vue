@@ -204,6 +204,7 @@ const selectshowdata = async (x) => {
 };
 
 const view = async (x) => {
+  await store.fetchUsersIdDisplay(x)
   store.PopupIdcard = true;
 };
 
