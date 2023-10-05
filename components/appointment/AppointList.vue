@@ -19,11 +19,10 @@
     </div>
   </div>
   <div class="row ps-4 mb-5 gap-2 justify-content-center">
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12 picker">
-      <!-- <VueDatePicker v-model="store.form.start_date"></VueDatePicker> -->
+    <!-- <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12 picker">
       <Datepicker v-model="store.form.date_event" :format="format_start" />
-    </div>
-    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+    </div> -->
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
       <select
         class="form-select typeSelect h-100"
         aria-label="Default select example"
@@ -35,21 +34,23 @@
       </select>
     </div>
 
-    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
       <select
-        class="form-select typeSelect h-100"
+        class="form-select typeSelect h-100" :class="store.event.length < 1 && 'bg-warning'"
         aria-label="Default select example"
-      >
-        <option  v-for="(events, x) in store.event"
-         >{{events.event}}</option>
-      </select>
+
+        :disabled="store.event.length < 1 ? true : false"
+        >
+        <option v-if="store.event.length < 1" value="">event not found</option>
+        <option v-else  v-for="(events, x) in store.event">{{events.event}}</option>
+      </select> 
     </div>
 
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
+    <!-- <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
       <button class="btn btn-primary mt-0 w-100" @click="Search()">
         <i class="bi bi-search me-2"></i>{{ $t("menu_app_manage_search") }}
       </button>
-    </div>
+    </div> -->
   </div>
 
   <div class="table-responsive">
