@@ -45,8 +45,6 @@
       </select>
     </div>
 
-
-    
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
       <button class="btn btn-primary mt-0 w-100" @click="Search()">
         <i class="bi bi-search me-2"></i>{{ $t("menu_app_manage_search") }}

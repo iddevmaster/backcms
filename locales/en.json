@@ -272,11 +272,11 @@
   "population":"Population",
   "active":"Active",
   "notactive":"Not Active",
-  "unactive":"Unactive",
-  "phone_unactive":"Phone unactive",
-  "phone_active":"Phone active",
-  "system_unactive":"System unactive",
-  "system_active":"System active"
+  "unactive":"Not Verify",
+  "phone_unactive":"OTP failed",
+  "phone_active":"OTP success",
+  "system_unactive":"Information is incorrect",
+  "system_active":"Information is correct."
 }
 
 

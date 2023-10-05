@@ -29,12 +29,58 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(users,index) in store.userall" :key="users.user_id"  @click="Sel(users,users.detail,users.identification_number,users.user_id)" :class="{ 'table-success': store.myChoose === users && users.detail == 'y' , 'table-danger': store.myChoose === users && users.detail != 'y' }">
+        <tr v-for="(users,index) in store.userall" :key="users.user_id"  @click="Sel(users,users.detail,users.identification_number,users.user_id)" :class="{ 'table-success': store.myChoose === users && users.detail == 'system_active' , 'table-danger': store.myChoose === users && users.detail != 'system_active' }">
+
+
+          
           <td>{{ users.user_id }}</td>
            <td>{{ users.user_firstname }}  {{ users.user_lastname }}</td>
           <td>{{ users.user_phone }}</td>
-          <td v-if="users.detail == 'y'"><p class="mb-0 text-success">{{ $t("verity_pass") }}</p></td>
-          <td v-else><p class="mb-0 text-danger">{{ $t("verity_fail") }}</p></td>
+          <td v-if="!users.detail">
+            
+          <p class="mb-0 text-danger">
+            <span v-if="locale == 'la'" >{{ $t("unactive") }}</span>
+      <span v-if="locale == 'en'" >{{ $t("unactive") }}</span>
+      <span v-if="locale == 'th'" >{{ $t("unactive") }}</span>
+          </p></td>
+          <td v-if="users.detail == 'unactive'">
+            <p class="mb-0 text-danger">
+              <span v-if="locale == 'la'" >{{ $t("unactive") }}</span>
+      <span v-if="locale == 'en'" >{{ $t("unactive") }}</span>
+      <span v-if="locale == 'th'" >{{ $t("unactive") }}</span>
+          </p></td>
+          <td v-if="users.detail == 'phone_unactive'"><p class="mb-0 text-danger">
+        
+      <span v-if="locale == 'la'" >{{ $t("phone_unactive") }}</span>
+      <span v-if="locale == 'en'" >{{ $t("phone_unactive") }}</span>
+      <span v-if="locale == 'th'" >{{ $t("phone_unactive") }}</span>
+          </p>
+          </td>
+          <td v-if="users.detail == 'phone_active'">
+            <p class="mb-0 text-danger">
+         
+      <span v-if="locale == 'la'" >{{ $t("phone_active") }}</span>
+      <span v-if="locale == 'en'" >{{ $t("phone_active") }}</span>
+      <span v-if="locale == 'th'" >{{ $t("phone_active") }}</span>
+            </p>
+          </td>
+          <td v-if="users.detail == 'system_unactive'">
+            <p class="mb-0 text-danger">
+      <span v-if="locale == 'la'" >{{ $t("system_unactive") }}</span>
+      <span v-if="locale == 'en'" >{{ $t("system_unactive") }}</span>
+      <span v-if="locale == 'th'" >{{ $t("system_unactive") }}</span>       
+            </p>
+          </td>
+          <td v-if="users.detail == 'system_active'">
+            <p class="mb-0 text-success">
+       
+      <span v-if="locale == 'la'" >{{ $t("system_active") }}</span>
+      <span v-if="locale == 'en'" >{{ $t("system_active") }}</span>
+      <span v-if="locale == 'th'" >{{ $t("system_active") }}</span>
+            
+            </p>
+          </td>
+   
           <!-- <td>
             <button type="button" class="btn btn-danger">เลือก</button>
           </td> -->
@@ -63,6 +109,8 @@ import { required, email, sameAs, minLength, helpers } from '@vuelidate/validato
 import { useToast } from 'vue-toastification';
 import { doesNotReject } from 'assert';
 import { ref, onMounted, onUnmounted } from 'vue';
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
 
  
 
@@ -113,7 +161,7 @@ store.user_id = id;
 store.myChoose = users;
 store.formeditresult.identification_number = identification_number;
 await store.fetchResultByUser()
- if(item == 'y'){
+ if(item == 'system_active'){
   store.IsCardInsert = true;
   store.IsCardEdit = false;
   store.IsCardNoInsert = false;

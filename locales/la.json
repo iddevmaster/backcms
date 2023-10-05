@@ -271,11 +271,11 @@
   "population":"ປະຊາຊົນ",
   "active":"ໃຊ້",
   "notactive":"ບໍ່ໄດ້ໃຊ້",
-  "unactive":"Unactive",
-  "phone_unactive":"Phone unactive",
-  "phone_active":"Phone active",
-  "system_unactive":"System unactive",
-  "system_active":"System active"
+  "unactive":"ไม่ยืนยัน",
+  "phone_unactive":"ยืนยัน OTP ไม่สำเร็จ",
+  "phone_active":"ยืนยัน OTP สำเร็จ",
+  "system_unactive":"่ตรวจสอบข้อมูลไม่ถูกต้อง",
+  "system_active":"ตรวจสอบข้อมูลถูกต้อง"
 }
 
 
