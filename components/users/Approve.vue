@@ -43,7 +43,7 @@
       </select>
     </div>
   </div>
-  {{ store.userapprove }}
+
   <div class="table-responsive">
     <table id="example" class="table table-bordered" style="width:100%">
       <thead>
@@ -70,8 +70,8 @@
           <td>  {{ user.user_firstname }} {{ user.user_lastname }}</td>
           <td>  {{ user.user_phone }}</td>
           <td><button type="button" class="btn btn-primary btn-sm" @click="view(user.user_id)">ดูรายละเอียด</button> </td>
-          <td><button type="button" class="btn btn-success btn-sm">อนุมัติ</button>
-            <button type="button" class="btn btn-danger btn-sm">ไม่อนุมัติ</button>
+          <td><button type="button" class="btn btn-success btn-sm" @click="approve(user.user_email)">อนุมัติ</button>
+            <button type="button" class="btn btn-danger btn-sm"  @click="notapproved(user.user_email)">ไม่อนุมัติ</button>
            </td>
           
    
@@ -133,6 +133,7 @@ import Paginate from "vuejs-paginate-next";
 import { useToast } from 'vue-toastification'
 import moment from "moment-timezone";
 import { useI18n } from "vue-i18n";
+import { email } from '@vuelidate/validators';
 const { locale, setLocale } = useI18n();
 
 const router = useRouter();
@@ -162,6 +163,20 @@ const del = async (id) => {
 const choose = async (id) => {
   router.push({ path: 'dltmanage/'+id})
 };
+
+const approve = async (item) => {
+  await store.Approve(item);
+  await toast.success('Approve Success');
+  await store.fetchUsersApprove()
+};
+
+const notapproved = async (item) => {
+  await store.Notapprove(item);
+  await toast.success('NotApprove Success');
+  await store.fetchUsersApprove()
+};
+
+
 
 const searchData = async () => {
   await store.fetchUsers()

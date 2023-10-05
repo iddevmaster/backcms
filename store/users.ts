@@ -443,13 +443,62 @@ this.country = country.data.data
     },
     async FitterUserApprove() {
    const filteredHomes = this.checkuserotp.filter(x => 
-    x.verify_account == 'y' 
+    x.verify_account == 'phone_active' 
   );
-  
+
   this.userapprove = filteredHomes;
+    },
+
+    async Approve(item) {
+        const data = await ApiService.get('/user/only/detail/' + item).then(response => {
+
+const a = {verify_account:'system_active',identification_number:response.data[0].identification_number,
+  user_img:response.data[0].user_img,user_birthday:response.data[0].user_birthday,
+  user_address:response.data[0].user_address,
+  location_id:response.data[0].location_id,
+  country_id:response.data[0].country_id,
+  user_id:response.data[0].user_id};
+
+  try {
+    const updatedetails = ApiService.post('/user/detail/create', a).then(response => {
+
+      //  this.pending_form = true;
+      return true
+    });
+ 
+
+    return updatedetails;
+  } catch (error) {
+    return false;
+  }
+
+        })
 
 
+     
+    },
+    async Notapprove(item) {
+      const data = await ApiService.get('/user/only/detail/' + item).then(response => {
 
+        const a = {verify_account:'system_unactive',identification_number:response.data[0].identification_number,
+          user_img:response.data[0].user_img,user_birthday:response.data[0].user_birthday,
+          user_address:response.data[0].user_address,
+          location_id:response.data[0].location_id,
+          country_id:response.data[0].country_id,
+          user_id:response.data[0].user_id};
+  
+          try {
+            const updatedetails = ApiService.post('/user/detail/create', a).then(response => {
+              //  this.pending_form = true;
+              return true
+            });
+            return updatedetails;
+          } catch (error) {
+            return false;
+          }
+                })
+        
+     
     },
 
     
