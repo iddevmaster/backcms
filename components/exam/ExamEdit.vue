@@ -175,6 +175,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 import { ref } from 'vue';
 import ApiService from "../../services/api.service";
 import { useI18n } from "vue-i18n";
+import Swal from 'sweetalert2';
 const { locale, setLocale } = useI18n();
 
 
@@ -258,18 +259,32 @@ const Updatedata = async () => {
 
 
 
+
 const onFileChange = async (event) => {
   var input = event.target;
-  if (input.files) {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      store.formexamedit.em_cover = e.target.result;
-    }
-    store.imagelist = input.files[0];
-    reader.readAsDataURL(input.files[0]);
-  }
+  const file = event.target.files[0];
 
-}
+  if (file && file.type.startsWith('image/')) {
+    // Use FileReader to read the selected image and set it as the source for the <img> tag
+    store.imageReq = false;
+    const reader = new FileReader();
+    reader.onload = () => {
+      //  this.imageUrl = reader.result;
+      store.formexamedit.em_cover = reader.result;
+    };
+    store.imagelist = input.files[0];
+    reader.readAsDataURL(file);
+  } else {
+    // Reset the image URL if the selected file is not an image
+    //   this.imageUrl = null;
+    const input = document.querySelector('input[type="file"]');
+  input.value = "";
+    Swal.fire({
+      text: 'Upload File Image Only!',
+      icon: 'error',
+    });
+  }
+};
 
 const removeImage = async () => {
 

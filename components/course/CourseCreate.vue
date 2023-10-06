@@ -258,6 +258,7 @@ import { defineComponent } from "vue";
 import { CourseStore } from "@/store/course"; // import the auth store we just created
 import { useVuelidate } from "@vuelidate/core";
 import ApiService  from "../../services/api.service";
+import Swal from 'sweetalert2';
 import {
   required,
   email,
@@ -357,13 +358,24 @@ const removeImage = async () => {
   input.value = "";
 };
 const handleFiles = async (event, x) => {
-  let formData = new FormData();
+  const file = event.target.files[0];
+  if (file && file.type.startsWith('image/')) {
+    let formData = new FormData();
   formData.append("files", event.target.files[0]);
   const image = await uploadfilecourse(formData);
 
   const index = store.lessonlist;
 
   index[x].cs_cover = image.data[0].path;
+
+  }else {
+    Swal.fire({
+      text: 'Upload File Image Only!',
+      icon: 'error',
+    });
+
+  }
+
 };
 
 const handleFilesVideo = async (event, x) => {
@@ -391,15 +403,31 @@ const onFileChange = async (event) => {
 };
 
 
+
+
 const onFileChangeBack = async (event) => {
   var input = event.target;
-  if (input.files) {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      store.formDataCourse.course_cover = e.target.result;
+  const file = event.target.files[0];
+
+  if (file && file.type.startsWith('image/')) {
+    // Use FileReader to read the selected image and set it as the source for the <img> tag
+   
+    const reader = new FileReader();
+    reader.onload = () => {
+      //  this.imageUrl = reader.result;
+      store.formDataCourse.course_cover = reader.result;
     };
     store.imagelist = input.files[0];
-    reader.readAsDataURL(input.files[0]);
+    reader.readAsDataURL(file);
+  } else {
+    // Reset the image URL if the selected file is not an image
+    //   this.imageUrl = null;
+    const input = document.querySelector('input[type="file"]');
+  input.value = "";
+    Swal.fire({
+      text: 'Upload File Image Only!',
+      icon: 'error',
+    });
   }
 };
 
