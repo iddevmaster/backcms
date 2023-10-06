@@ -49,17 +49,17 @@
       <thead>
         <tr>
           <th>
-            {{ $t("menu_user_index") }}
+            {{ $t("approve_table_index") }}
             <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
           </th>
-          <th @click="sortList('id')">{{ $t("menu_user_name") }}</th>
+          <th @click="sortList('id')">{{ $t("approve_table_card") }}</th>
           <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
-          <th @click="sortList('user_phone')">{{ $t("menu_user_name") }}</th>
-          <th >{{ $t("menu_user_tel") }} &#8597;</th>
-          <th>รายละเอียด</th>
+          <th @click="sortList('user_phone')">{{ $t("approve_table_name") }}</th>
+          <th >{{ $t("approve_table_phone") }}&#8597;</th>
+          <th>{{ $t("approve_table_view") }}</th>
        
-          <th class="no-content">{{ $t("menu_user_c_action") }}</th>
+          <th class="no-content">{{ $t("approve_table_action") }}</th>
         </tr>
       </thead>
       <tbody>
@@ -69,9 +69,9 @@
           <td>  {{ user.identification_number }}</td>
           <td>  {{ user.user_firstname }} {{ user.user_lastname }}</td>
           <td>  {{ user.user_phone }}</td>
-          <td><button type="button" class="btn btn-primary btn-sm" @click="view(user.user_id)">ดูรายละเอียด</button> </td>
-          <td><button type="button" class="btn btn-success btn-sm" @click="approve(user.user_email)">อนุมัติ</button>
-            <button type="button" class="btn btn-danger btn-sm"  @click="notapproved(user.user_email)">ไม่อนุมัติ</button>
+          <td><button type="button" class="btn btn-primary btn-sm" @click="view(user.user_id)">{{ $t("approve_table_view_b") }}</button> </td>
+          <td><button type="button" class="btn btn-success btn-sm" @click="approve(user.user_email)">{{ $t("approve_table_view_ap") }}</button>
+            <button type="button" class="btn btn-danger btn-sm"  @click="notapproved(user.user_email)">{{ $t("approve_table_view_unapp") }}</button>
            </td>
           
    

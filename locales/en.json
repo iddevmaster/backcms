@@ -276,7 +276,22 @@
   "phone_unactive":"OTP failed",
   "phone_active":"OTP success",
   "system_unactive":"Information is incorrect",
-  "system_active":"Information is correct."
+  "system_active":"Information is correct.",
+  "menu_approve":"รายการอนุมัติ",
+  "page_menu_approve":"อนุมัติ",
+  "approve_table_index":"#",
+  "approve_table_card":"ID card",
+  "approve_table_name":"Name",
+  "approve_table_phone":"Phone",
+  "approve_table_view":"Detail",
+  "approve_table_action":"Manage",
+  "approve_table_view_b":"View",
+  "approve_table_view_ap":"Approve",
+  "approve_table_view_unapp":"Unapproval",
+  "approve_table_view_name":"Name",
+  "approve_table_view_address":"Address",
+  "approve_table_view_card":"ID card",
+  "approve_table_view_bday":"Birthday"
 }
 
 

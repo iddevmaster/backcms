@@ -277,7 +277,24 @@
   "phone_unactive":"ยืนยัน OTP ไม่สำเร็จ",
   "phone_active":"ยืนยัน OTP สำเร็จ",
   "system_unactive":"่ตรวจสอบข้อมูลไม่ถูกต้อง",
-  "system_active":"ตรวจสอบข้อมูลถูกต้อง"
+  "system_active":"ตรวจสอบข้อมูลถูกต้อง",
+  "menu_approve":"รายการอนุมัติ",
+  "page_menu_approve":"อนุมัติ",
+  "approve_table_index":"#",
+  "approve_table_card":"เลขบัตร",
+  "approve_table_name":"ชื่อ",
+  "approve_table_phone":"เบอร์โทร",
+  "approve_table_view":"รายละเอียด",
+  "approve_table_action":"จัดการ",
+  "approve_table_view_b":"ดูรายละเอียด",
+  "approve_table_view_ap":"อนุมัติ",
+  "approve_table_view_unapp":"ไม่อนุมัติ",
+  "approve_table_view_name":"ชื่อ",
+  "approve_table_view_address":"ที่อยู่",
+  "approve_table_view_card":"หมายเลขบัตร",
+  "approve_table_view_bday":"วันเกิด"
+
+  
 }
 
 

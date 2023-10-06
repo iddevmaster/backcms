@@ -275,7 +275,22 @@
   "phone_unactive":"ยืนยัน OTP ไม่สำเร็จ",
   "phone_active":"ยืนยัน OTP สำเร็จ",
   "system_unactive":"่ตรวจสอบข้อมูลไม่ถูกต้อง",
-  "system_active":"ตรวจสอบข้อมูลถูกต้อง"
+  "system_active":"ตรวจสอบข้อมูลถูกต้อง",
+  "menu_approve":"รายการอนุมัติ",
+  "page_menu_approve":"อนุมัติ",
+  "approve_table_index":"#",
+  "approve_table_card":"ໝາຍເລກບັດປະຈຳຕົວ",
+  "approve_table_name":"ຊື່",
+  "approve_table_phone":"ເບີ​ໂທລະ​ສັບ",
+  "approve_table_view":"ລາຍລະອຽດ",
+  "approve_table_action":"ຈັດການ",
+  "approve_table_view_b":"ເບິ່ງ​ລາຍ​ລະ​ອຽດ",
+  "approve_table_view_ap":"ອະນຸມັດ",
+  "approve_table_view_unapp":"ບໍ່ໄດ້ຮັບການອະນຸມັດ",
+  "approve_table_view_name":"ຊື່",
+  "approve_table_view_address":"ທີ່ຢູ່",
+  "approve_table_view_card":"ໝາຍເລກບັດປະຈຳຕົວ",
+  "approve_table_view_bday":"ວັນເດືອນປີເກີດ"
 }
 
 
