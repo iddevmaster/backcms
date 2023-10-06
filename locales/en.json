@@ -291,7 +291,8 @@
   "approve_table_view_name":"Name",
   "approve_table_view_address":"Address",
   "approve_table_view_card":"ID card",
-  "approve_table_view_bday":"Birthday"
+  "approve_table_view_bday":"Birthday",
+  "approve_table_email":"Email"
 }
 
 

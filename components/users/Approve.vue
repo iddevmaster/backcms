@@ -3,45 +3,11 @@
   <div class="row layout-top-spacing">
     <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
       <input id="t-text" type="text" name="txt" placeholder="Search" class="form-control" required=""
-      v-model="store.searchDa" @keyup="searchData" />
-    </div>
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
-      <select class="form-select form-select" aria-label="Default select example" @change="selecttype($event)">
-     
-
-                <option value="">
-
-      <span v-if="locale == 'la'" >{{ $t("all") }}</span>
-      <span v-if="locale == 'en'" >{{ $t("all") }}</span>
-      <span v-if="locale == 'th'" >{{ $t("all") }}</span>
-          <span></span>
-          </option>
-        <option value="1">
-      <span v-if="locale == 'la'" >{{ $t("admin") }}</span>
-      <span v-if="locale == 'en'" >{{ $t("admin") }}</span>
-      <span v-if="locale == 'th'" >{{ $t("admin") }}</span>
-        </option>
-        <option value="2">
-     <span v-if="locale == 'la'" >{{ $t("officer") }}</span>
-      <span v-if="locale == 'en'" >{{ $t("officer") }}</span>
-      <span v-if="locale == 'th'" >{{ $t("officer") }}</span>
-        </option>
-        <option value="3">
-  <span v-if="locale == 'la'" >{{ $t("population") }}</span>
-      <span v-if="locale == 'en'" >{{ $t("population") }}</span>
-      <span v-if="locale == 'th'" >{{ $t("population") }}</span>
-
-        </option>
-      </select>
+      v-model="store.formapprove.search" @keyup="searchData" />
     </div>
 
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
-      <select class="form-select form-select" aria-label="Default select example" @change="selectshowdata($event)">
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="50">50</option>
-      </select>
-    </div>
+
+
   </div>
 
   <div class="table-responsive">
@@ -52,7 +18,7 @@
             {{ $t("approve_table_index") }}
             <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
           </th>
-          <th @click="sortList('id')">{{ $t("approve_table_card") }}</th>
+          <th @click="sortList('id')">{{ $t("approve_table_email") }}</th>
           <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
           <th @click="sortList('user_phone')">{{ $t("approve_table_name") }}</th>
@@ -66,7 +32,7 @@
         <tr v-for="(user ,index) in store.userapprove" :key="user.identification_number">
           <!-- <td><input type="checkbox" v-model="store.selected" :value="user" number></td> -->
           <td>  {{ index+ 1 }}</td>
-          <td>  {{ user.identification_number }}</td>
+          <td>  {{ user.user_email }}</td>
           <td>  {{ user.user_firstname }} {{ user.user_lastname }}</td>
           <td>  {{ user.user_phone }}</td>
           <td><button type="button" class="btn btn-primary btn-sm" @click="view(user.user_id)">{{ $t("approve_table_view_b") }}</button> </td>
@@ -182,7 +148,7 @@ const notapproved = async (item) => {
 
 
 const searchData = async () => {
-  await store.fetchUsers()
+  await store.fetchUsersApprove()
 };
 
 const selchk = async (x) => {

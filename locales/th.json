@@ -292,7 +292,8 @@
   "approve_table_view_name":"ชื่อ",
   "approve_table_view_address":"ที่อยู่",
   "approve_table_view_card":"หมายเลขบัตร",
-  "approve_table_view_bday":"วันเกิด"
+  "approve_table_view_bday":"วันเกิด",
+  "approve_table_email":"อีเมล"
 
   
 }
