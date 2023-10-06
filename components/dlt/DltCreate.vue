@@ -214,6 +214,7 @@ import ApiService from "../../services/api.service";
 import Datepicker from "vuejs3-datepicker";
 import moment from "moment";
 import { useI18n } from "vue-i18n";
+import Swal from 'sweetalert2';
 const { locale, setLocale } = useI18n();
 const toast = useToast();
 
@@ -291,15 +292,31 @@ const removeImage = async (item) => {
 
 };
 
+
+
 const onFileChangeFront = async (event) => {
   var input = event.target;
-  if (input.files) {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      store.formadddtl.front_img = e.target.result;
+  const file = event.target.files[0];
+
+  if (file && file.type.startsWith('image/')) {
+    // Use FileReader to read the selected image and set it as the source for the <img> tag
+   
+    const reader = new FileReader();
+    reader.onload = () => {
+      //  this.imageUrl = reader.result;
+      store.formadddtl.front_img = reader.result;
     };
     store.imagelistFront = input.files[0];
-    reader.readAsDataURL(input.files[0]);
+    reader.readAsDataURL(file);
+  } else {
+    // Reset the image URL if the selected file is not an image
+    //   this.imageUrl = null;
+    const input = document.querySelector('input[type="file"]');
+  input.value = "";
+    Swal.fire({
+      text: 'Upload File Image Only!',
+      icon: 'error',
+    });
   }
 };
 
@@ -313,15 +330,32 @@ const format_end = (date) => {
   return moment(date).format("YYYY-MM-DD");
 };
 
+
+
+
 const onFileChangeBack = async (event) => {
   var input = event.target;
-  if (input.files) {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      store.formadddtl.back_img = e.target.result;
+  const file = event.target.files[0];
+
+  if (file && file.type.startsWith('image/')) {
+    // Use FileReader to read the selected image and set it as the source for the <img> tag
+   
+    const reader = new FileReader();
+    reader.onload = () => {
+      //  this.imageUrl = reader.result;
+      store.formadddtl.back_img = reader.result;
     };
     store.imagelistBack = input.files[0];
-    reader.readAsDataURL(input.files[0]);
+    reader.readAsDataURL(file);
+  } else {
+    // Reset the image URL if the selected file is not an image
+    //   this.imageUrl = null;
+    const input = document.querySelector('input[type="file"]');
+  input.value = "";
+    Swal.fire({
+      text: 'Upload File Image Only!',
+      icon: 'error',
+    });
   }
 };
 
