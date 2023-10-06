@@ -34,7 +34,7 @@ export const AppointStore = defineStore('appoint', {
     ardel_id:null,
     form: {
       ap_learn_type: "1",
-      date_event: "",
+      date_event: 0,
       dlt_code: "A1",
     },
     myValue:null,
@@ -218,17 +218,24 @@ export const AppointStore = defineStore('appoint', {
     },
 
     async fetchAppointment() {
-
+      this.form.date_event = 0; 
       const appdata = {
         ap_learn_type: this.form.ap_learn_type,
         dlt_code: this.form.dlt_code
       }
-
+      this.group = []
 
       try {
+        this.event = []
         const data = await ApiService.get('/appointment/event/?ap_learn_type='+ parseInt(this.form.ap_learn_type)+'&dlt_code='+this.form.dlt_code+'').then(response => {
-          this.event = response.data
-          console.log(response.data);
+  
+          if(response.data.length > 0){
+            this.event = response.data
+          //  this.form.date_event = response.data[0].event
+          }
+
+       
+          //this.form.date_event = response.data[0].event
         });
      
 
@@ -245,7 +252,8 @@ export const AppointStore = defineStore('appoint', {
         ap_learn_type: this.form.ap_learn_type,
         dlt_code: this.form.dlt_code
       }
-
+      this.group = []
+      
       try {
         const data = await ApiService.post('/appointment/list', appdata).then(response => {
           this.group = response.data

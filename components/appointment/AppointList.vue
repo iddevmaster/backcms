@@ -35,14 +35,15 @@
     </div>
 
     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-      <select
+      <select @change="Search($event)"
         class="form-select typeSelect h-100" :class="store.event.length < 1 && 'bg-warning'"
-        aria-label="Default select example"
+        aria-label="Default select example"   v-model="store.form.date_event" 
 
         :disabled="store.event.length < 1 ? true : false"
         >
-        <option v-if="store.event.length < 1" value="">event not found</option>
-        <option v-else  v-for="(events, x) in store.event">{{events.event}}</option>
+        <option disabled selected :value="0">เลือก</option>
+        
+        <option v-for="(events, x) in store.event">{{events.event}}</option>
       </select> 
     </div>
 
@@ -193,8 +194,8 @@ const del = async (id) => {
   store.deleteItem(id);
 };
 
-const Search = async () => {
-  store.fetchAppointment();
+const Search = async (event) => {
+  store.fetchAppointmentEvent();
 };
 
 const SearchApp = async () => {
