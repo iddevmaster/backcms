@@ -70,8 +70,11 @@
           <td>  {{ user.user_firstname }} {{ user.user_lastname }}</td>
           <td>  {{ user.user_phone }}</td>
           <td><button type="button" class="btn btn-primary btn-sm" @click="view(user.user_id)">{{ $t("approve_table_view_b") }}</button> </td>
-          <td><button type="button" class="btn btn-success btn-sm" @click="approve(user.user_email)">{{ $t("approve_table_view_ap") }}</button>
+          <td>
+            <div class="d-flex flex-row gap-2">
+              <button type="button" class="btn btn-success btn-sm" @click="approve(user.user_email)">{{ $t("approve_table_view_ap") }}</button>
             <button type="button" class="btn btn-danger btn-sm"  @click="notapproved(user.user_email)">{{ $t("approve_table_view_unapp") }}</button>
+            </div>
            </td>
           
    
