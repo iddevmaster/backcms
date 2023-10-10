@@ -425,9 +425,8 @@ this.country = country.data.data
       const user_app = [];
       if(this.appr){
         for (var i = 0; i < this.appr.length; i++) { 
-          const data = await ApiService.get('/user/only/detail/'+this.appr[i].user_email).then(response => {
+          const data = await ApiService.get('/user/only/detail/'+this.appr[i].user_id).then(response => {
             if(response.status === 200){
-              console.log(response.data);
               let obj2 = { identification_number: response.data[0].identification_number,verify_account:response.data[0].verify_account,
                 user_lastname:response.data[0].user_lastname,
                 user_firstname:response.data[0].user_firstname,

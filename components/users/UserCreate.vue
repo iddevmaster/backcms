@@ -68,13 +68,8 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_email") }}</label>
       <input type="text" class="form-control" id="inputPassword3"
-        v-model="store.formDataregister.user_email" :class="{
-          'border-red-500 focus:border-red-500': v$.user_email.$error,
-          'border-[#42d392] ': !v$.user_email.$invalid,
-        }" @change="v$.user_email.$touch" autocomplete="off">
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.user_email.$error">{{
-        v$.user_email.$errors[0].$message
-      }}</span>
+        v-model="store.formDataregister.user_email" >
+   
     </div>
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_tel") }}</label>
@@ -174,11 +169,6 @@ const rules = computed(() => {
       required: helpers.withMessage('The tel field is required', required),
       minLength: minLength(1),
     },
-
-    user_email: {
-      required: helpers.withMessage('The password confirmation field is required', required),
-      email: helpers.withMessage('Invalid email format', email),
-    },
     // user_address: {
     //   required: helpers.withMessage('The Address field is required', required),
     //   minLength: minLength(6),
@@ -203,7 +193,6 @@ const save = async () => {
   v$.value.$validate();
   if (!v$.value.$error) {
     const data = await SaveForm();
-    console.log(data);
     if (data == true) {
       toast.success('Save Data');
       await ResetForm();

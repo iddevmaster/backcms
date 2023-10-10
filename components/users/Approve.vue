@@ -122,7 +122,8 @@ const { getSelectALL } = storeToRefs(store); //Get Getter
 const { getPaginate } = storeToRefs(store); //Get Getter
 const { search } = storeToRefs(store); //Get Getter
 
-await store.fetchUsersApprove()
+let a  = await store.fetchUsersApprove()
+
 
 const del = async (id) => {
   await deleteItem(id);
