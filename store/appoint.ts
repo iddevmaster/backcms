@@ -12,6 +12,8 @@ export const AppointStore = defineStore('appoint', {
     isDelAP: false,
     searchData: "",
     event:[],
+    user:[],
+    userall:[],
     start_date: '',
     reservebyap: [],
     app_present:[],
@@ -40,7 +42,7 @@ export const AppointStore = defineStore('appoint', {
     myValue:null,
     formuser: {
       page: 1,
-      per_page: 250,
+      per_page: 5,
       search: ""
     },
     formsearch: {
@@ -475,20 +477,51 @@ const date_end = await this.changeFormate(currentDateEnd)
 
     },
 
-    async fetchUsers() {
-      try {
-        const data = await ApiService.post('/user/list?user_type=3', this.formsearch).then(response => {
-
-          this.usersall = response.data.data;
-        
-        });
+    // async fetchUsers() {
+    //   try {
+    //     const data = await ApiService.post('/user/list?user_type=3', this.formsearch).then(response => {
+    //       this.usersall = response.data.data;
+    //     });
   
-      } catch (error) {
-        return false;
-      }
- 
+    //   } catch (error) {
+    //     return false;
+    //   }
+    // },
 
-    },
+    async fetchUse() {
+
+await this.fetchUsers();
+await this.checkuser();
+  },
+
+
+    async fetchUsers() {
+      this.userall = [];
+      const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
+        this.user = response.data.data;
+        console.log(this.user);
+      });
+
+
+
+  },
+
+    async checkuser() {
+  
+       for (var i = 0; i < this.user.length; i++) {
+         const data = ApiService.get('/user/get/'+this.user[i].user_id).then(response => {
+
+       
+        //   this.result = response.data;
+ 
+        const b = {user_id:response.data.user_id,user_email:response.data.user_email,user_firstname:response.data.user_firstname,user_lastname:response.data.user_lastname,user_phone:response.data.user_phone,detail:response.data.detail?.verify_account,identification_number:response.data.detail?.identification_number}
+           this.userall.push(b)
+         });
+       }
+     
+   
+    
+     },
 
 
 
@@ -526,30 +559,27 @@ return true;
           if(Object.keys(response.data.detail).length === 0){
             return false;
           }else {
-            return true;
+            if(response.data.detail.verify_account == 'system_active'){
+              return true;
+            }else {
+              return false;
+            }
           }
         });
         return data;
       } catch (error) {
      
-      } finally {
-   
-      }
-
+      } 
     },
 
     async fetchAppPresent() {
-
-
-  console.log(this.formreserve);
       try {
         const data = await ApiService.get('/appointment/reserve/list/?dlt_code='+this.formreserve.dlt_code+'&ap_learn_type='+this.formreserve.ap_learn_type +'&present_day='+this.formreserve.present_day+'').then(response => {
           this.app_present = response.data
         });
         return true
-
       } catch (error) {
-        console.log('error');
+       
         return false;
       }
 

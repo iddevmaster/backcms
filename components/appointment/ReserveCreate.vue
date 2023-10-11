@@ -1,7 +1,5 @@
 <template>
   <div class="row layout-top-spacing">
-
-    
     <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
       <input
         id="t-text"
@@ -10,34 +8,93 @@
         placeholder="Search"
         class="form-control"
         required=""
-        v-model="store.formsearch.search" @keyup="searchData"
+        v-model="store.formuser.search"
+        @keyup="searchData"
       />
     </div>
   </div>
 
-
   <div class="table-responsive">
-    <table id="example" class="table table-bordered table-hover" style="width: 100%">
+    <table
+      id="example"
+      class="table table-bordered table-hover"
+      style="width: 100%"
+    >
       <thead>
         <tr>
           <th>
             {{ $t("menu_app_view_list_index") }}
             <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
           </th>
-          <th @click="sortList('id')">{{ $t("menu_app_view_list_name") }} &#8597;</th>
+          <th @click="sortList('id')">
+            {{ $t("menu_app_view_list_name") }} &#8597;
+          </th>
           <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
-          <th @click="sortList('user_phone')">{{ $t("menu_app_view_list_phone") }}</th>
+          <th @click="sortList('user_phone')">
+            {{ $t("menu_app_view_list_phone") }}
+          </th>
           <th>{{ $t("menu_app_view_list_email") }} &#8597;</th>
+          <th>สถานะ &#8597;</th>
           <!-- <th class="no-content">จัดการ</th> -->
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(user, index) in store.usersall" :key="user.user_id" @click="choose(user)" :class="{ 'table-success': store.myChoose === user }">
+        <tr
+          v-for="(users, index) in store.userall"
+          :key="users.user_id"
+          @click="choose(users)"
+          :class="{ 'table-success': store.myChoose === users }"
+        >
+         
           <td id="clickTest">{{ index + 1 }}</td>
-          <td>{{ user.user_firstname }}  {{ user.user_lastname }}</td>
-          <td>{{ user.user_phone }}</td>
-          <td>{{ user.user_email }}</td>
+          <td>{{ users.user_firstname }} {{ users.user_lastname }}</td>
+          <td>{{ users.user_phone }}</td>
+          <td>{{ users.user_email }}</td>
+
+
+          <td v-if="!users.detail">
+            <p class="mb-0 text-danger">
+              <span v-if="locale == 'la'">{{ $t("unactive") }}</span>
+              <span v-if="locale == 'en'">{{ $t("unactive") }}</span>
+              <span v-if="locale == 'th'">{{ $t("unactive") }}</span>
+            </p>
+          </td>
+          <td v-if="users.detail == 'unactive'">
+            <p class="mb-0 text-danger">
+              <span v-if="locale == 'la'">{{ $t("unactive") }}</span>
+              <span v-if="locale == 'en'">{{ $t("unactive") }}</span>
+              <span v-if="locale == 'th'">{{ $t("unactive") }}</span>
+            </p>
+          </td>
+          <td v-if="users.detail == 'phone_unactive'">
+            <p class="mb-0 text-danger">
+              <span v-if="locale == 'la'">{{ $t("phone_unactive") }}</span>
+              <span v-if="locale == 'en'">{{ $t("phone_unactive") }}</span>
+              <span v-if="locale == 'th'">{{ $t("phone_unactive") }}</span>
+            </p>
+          </td>
+          <td v-if="users.detail == 'phone_active'">
+            <p class="mb-0 text-danger">
+              <span v-if="locale == 'la'">{{ $t("phone_active") }}</span>
+              <span v-if="locale == 'en'">{{ $t("phone_active") }}</span>
+              <span v-if="locale == 'th'">{{ $t("phone_active") }}</span>
+            </p>
+          </td>
+          <td v-if="users.detail == 'system_unactive'">
+            <p class="mb-0 text-danger">
+              <span v-if="locale == 'la'">{{ $t("system_unactive") }}</span>
+              <span v-if="locale == 'en'">{{ $t("system_unactive") }}</span>
+              <span v-if="locale == 'th'">{{ $t("system_unactive") }}</span>
+            </p>
+          </td>
+          <td v-if="users.detail == 'system_active'">
+            <p class="mb-0 text-success">
+              <span v-if="locale == 'la'">{{ $t("system_active") }}</span>
+              <span v-if="locale == 'en'">{{ $t("system_active") }}</span>
+              <span v-if="locale == 'th'">{{ $t("system_active") }}</span>
+            </p>
+          </td>
           <!-- <td>
             <button
               type="button"
@@ -79,13 +136,15 @@ import {
   helpers,
 } from "@vuelidate/validators";
 import { useToast } from "vue-toastification";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
 
 const toast = useToast();
 const router = useRouter();
 const store = AppointStore();
 
-await store.fetchUsers();
+await store.fetchUse();
 
 const myOptionsUser = JSON.parse(JSON.stringify(store.users));
 const myUser = ref();
@@ -95,53 +154,46 @@ const backToUser = async () => {
 };
 
 const save = async () => {
+  if (store.myChoose == null) {
+    Swal.fire({
+      position: "top-end",
+      icon: "error",
+      title: "กรุณาเลือก",
+      showConfirmButton: false,
+      timer: 1500,
+    });
 
-
-if(store.myChoose == null){
-     Swal.fire({
-  position: 'top-end',
-  icon: 'error',
-  title: 'กรุณาเลือก',
-  showConfirmButton: false,
-  timer: 1500
-})
-
-return false;
-}else {
-   let savere =  await store.SaveFormreserve()
-       if (savere == true) {
-      toast.success('Save Data');
-     await store.fetchUsers();
-     await store.FetchAP();
+    return false;
+  } else {
+    let savere = await store.SaveFormreserve();
+    if (savere == true) {
+      toast.success("Save Data");
+    //  await store.fetchUsers();
+      await store.FetchAP();
     } else {
-      toast.error('Fail Save Data')
+      toast.error("Fail Save Data");
     }
-
-}
+  }
 };
 
 const choose = async (item) => {
- let check = await store.CheckVerify(item)
- console.log(check);
- if(check == true){
-store.myChoose = item;
- }else {
-  Swal.fire({
-  position: 'center',
-  icon: 'error',
-  title: 'User นี้ยังไม่ยืนยันตัวตน',
-  showConfirmButton: false,
-  timer: 1500
-})
-
- }
-// store.myChoose = item;
-
+  let check = await store.CheckVerify(item);
+  if (check == true) {
+    store.myChoose = item;
+  } else {
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: "This user has not yet successfully verified their identity.",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  }
+  // store.myChoose = item;
 };
 
-
 const close = async () => {
- store.myChoose = null;
+  store.myChoose = null;
 };
 const myChangeEvent = (event) => {
   console.log("myChangeEvent: ", event);
@@ -152,8 +204,8 @@ const mySelectEvent = (e) => {
 };
 
 const searchData = async () => {
- store.myChoose = null;
-  await store.fetchUsers()
+  store.myChoose = null;
+  await store.fetchUse();
 };
 </script>
 

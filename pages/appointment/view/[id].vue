@@ -40,7 +40,7 @@ await store.deleteRerve()
 store.isDelAP = false;
 await store.FetchAP();
 await store.fetchAppointment();
-await store.fetchUsers();
+//await store.fetchUse();
  };
 </script>
 
@@ -88,19 +88,41 @@ await store.fetchUsers();
           </svg>
         </div>
         <h5 class="modal-title" id="exampleModalLabel">{{ $t("delete_record") }}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="closeModal">
+       
         </button>
       </div>
       <div class="modal-body">
         <p class="">{{ $t("delete_record_t") }}</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal">Cancel</button>
-        <button type="button" class="btn btn-danger" data-remove="task" @click="deletel()">Delete</button>
+        <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal">{{ $t("delete_record_cancel") }}</button>
+        <button type="button" class="btn btn-danger" data-remove="task" @click="deletel()">{{ $t("delete_record_modal") }}</button>
       </div>
     </div>
   </div>
 </template>
 
-<style></style>
+<style>
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  width: 50%;
+}
+
+button {
+  margin-top: 10px;
+}
+</style>

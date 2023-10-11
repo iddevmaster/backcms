@@ -213,11 +213,9 @@ export const ResultStore = defineStore('result', {
        //   this.result = response.data;
 
        const b = {user_id:response.data.user_id,user_firstname:response.data.user_firstname,user_lastname:response.data.user_lastname,user_phone:response.data.user_phone,detail:response.data.detail?.verify_account,identification_number:response.data.detail?.identification_number}
-      
           this.userall.push(b)
         });
       }
-  
       return this.userall;
   
    

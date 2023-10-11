@@ -227,6 +227,7 @@ const selectshowdata = async (x) => {
 };
 
 const del = async (item) => {
+
     store.del_ap = item.ap_id
     store.deluser_id = item.user_id
     store.ardel_id = item.ar_id
