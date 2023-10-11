@@ -271,11 +271,11 @@
   "population":"ປະຊາຊົນ",
   "active":"ໃຊ້",
   "notactive":"ບໍ່ໄດ້ໃຊ້",
-  "unactive":"ไม่ยืนยัน",
-  "phone_unactive":"ยืนยัน OTP ไม่สำเร็จ",
-  "phone_active":"ยืนยัน OTP สำเร็จ",
-  "system_unactive":"่ตรวจสอบข้อมูลไม่ถูกต้อง",
-  "system_active":"ตรวจสอบข้อมูลถูกต้อง",
+  "unactive":"ບໍ່ໄດ້ຢືນຢັນ",
+  "phone_unactive":"ຢືນຢັນ OTP ບໍ່​ສໍາ​ເລັດ",
+  "phone_active":"ຢືນຢັນ OTP ສໍາເລັດ",
+  "system_unactive":"ຢືນຢັນຂໍ້ມູນທີ່ບໍ່ຖືກຕ້ອງ",
+  "system_active":"ກວດເບິ່ງຂໍ້ມູນຖືກຕ້ອງ",
   "menu_approve":"ບັນຊີລາຍຊື່ການອະນຸມັດ",
   "page_menu_approve":"ອະນຸມັດ",
   "approve_table_index":"#",
@@ -291,7 +291,7 @@
   "approve_table_view_address":"ທີ່ຢູ່",
   "approve_table_view_card":"ໝາຍເລກບັດປະຈຳຕົວ",
   "approve_table_view_bday":"ວັນເດືອນປີເກີດ",
-  "approve_table_email":"อีเมล"
+  "approve_table_email":"ອີເມວ"
 }
 
 
