@@ -94,7 +94,7 @@
 
 
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">DTL</label>
+            <label for="message-text" class="col-form-label">{{ $t("menu_menu_exam_dlt") }}</label>
             <div class="col-sm-12">
 
               <select class="form-control" v-if="store.dtl" v-model="store.formexamedit.dlt_code">
