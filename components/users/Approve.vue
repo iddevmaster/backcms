@@ -18,11 +18,12 @@
             {{ $t("approve_table_index") }}
             <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
           </th>
-          <th @click="sortList('id')">{{ $t("approve_table_email") }}</th>
+        
           <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
           <th @click="sortList('user_phone')">{{ $t("approve_table_name") }}</th>
           <th >{{ $t("approve_table_phone") }}&#8597;</th>
+          <th @click="sortList('id')">{{ $t("approve_table_email") }}</th>
           <th>{{ $t("approve_table_view") }}</th>
        
           <th class="no-content">{{ $t("approve_table_action") }}</th>
@@ -32,9 +33,10 @@
         <tr v-for="(user ,index) in store.userapprove" :key="user.identification_number">
           <!-- <td><input type="checkbox" v-model="store.selected" :value="user" number></td> -->
           <td>  {{ index+ 1 }}</td>
-          <td>  {{ user.user_email }}</td>
+        
           <td>  {{ user.user_firstname }} {{ user.user_lastname }}</td>
           <td>  {{ user.user_phone }}</td>
+          <td>  {{ user.user_email }}</td>
           <td><button type="button" class="btn btn-primary btn-sm" @click="view(user.user_id)">{{ $t("approve_table_view_b") }}</button> </td>
           <td>
             <div class="d-flex flex-row gap-2">
