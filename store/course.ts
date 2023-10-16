@@ -161,7 +161,6 @@ export const CourseStore = defineStore('course', {
     },
 
     async selectentires(data_entires) {
-      //  console.log('data_entires',data_entires);
       this.formsearchcourse.per_page = data_entires;
       this.formsearchcourse.page = 1;
     },

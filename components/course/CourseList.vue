@@ -67,7 +67,7 @@
     </div>
   </div>
 
-  <div class="paginating-container" v-if="store.total_page > 1">
+  <div class="paginating-container" v-if="store.total_filter > store.limit_page">
       <div class="dataTables_paginate paging_simple_numbers" id="zero-config_paginate">
         <ul class="pagination">
           <li class="paginate_button page-item previous" id="zero-config_previous">

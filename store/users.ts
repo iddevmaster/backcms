@@ -158,7 +158,7 @@ export const usersStore = defineStore('users', {
       this.formsearch.per_page = this.per_page;
       this.formsearch.search = this.searchDa;
 
-      
+      console.log(this.formsearch);
       try {
         this.pending = true
         const data = await ApiService.post('/user/list?'+this.type, this.formsearch).then(response => {
@@ -168,6 +168,7 @@ export const usersStore = defineStore('users', {
           this.current_page = response.data.current_page
           this.total_filter = response.data.total_filter
           this.total = response.data.total
+          console.log(response);
         });
 
       } catch (error) {
