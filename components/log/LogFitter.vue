@@ -17,12 +17,12 @@
     <div class="col-sm-12">
       <label for="exampleFormControlInput1">Year</label>
       <select class="form-control" v-model="store.formfitter.year">
-        <option value="2566">2566</option>
-        <option value="2567">2567</option>
-        <option value="2568">2568</option>
-        <option value="2568">2568</option>
-        <option value="2569">2569</option>
-        <option value="2570">2570</option>
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+        <option value="2028">2028</option>
       </select>
     </div>
 
@@ -105,7 +105,7 @@ const toast = useToast()
 const router = useRouter();
 const store = LogStore();
 
-const year = new Date().getFullYear() + 543;
+const year = new Date().getFullYear();
 store.formfitter.year = year;
 
 await store.fetchCourslist()

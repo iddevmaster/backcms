@@ -8,106 +8,16 @@
 
                             <div class="widget-heading">
 
-                                <a href="javascript:void(0)" class="task-info">
-
-                                    <div class="usr-avatar">
-                                        <span>FD</span>
-                                    </div>
-
-                                    <div class="w-title">
-
-                                        <h5>Figma Design</h5>
-                                        <span>Design Project</span>
-
-                                    </div>
-
-                            </a>
-
-                            <div class="task-action">
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle" href="#" role="button" id="pendingTask"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-more-horizontal">
-                                            <circle cx="12" cy="12" r="1"></circle>
-                                            <circle cx="19" cy="12" r="1"></circle>
-                                            <circle cx="5" cy="12" r="1"></circle>
-                                        </svg>
-                                    </a>
-
-                                    <div class="dropdown-menu left" aria-labelledby="pendingTask"
-                                        style="will-change: transform;">
-                                        <a class="dropdown-item" href="javascript:void(0);">View Project</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Edit Project</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Mark as Done</a>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
 
 
                         <div class="widget-content">
+<button @click="loadNewData">Load New Data</button>
+                    
 
-                            <p>Doloribus nisi vel suscipit modi, optio ex repudiandae voluptatibus officiis commodi.</p>
-
-                            <div class="progress-data">
-
-                                <div class="progress-info">
-                                    <div class="task-count"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-check-square">
-                                            <polyline points="9 11 12 14 22 4"></polyline>
-                                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                                        </svg>
-                                        <p>5 Tasks</p>
-                                    </div>
-                                    <div class="progress-stats">
-                                        <p>86.2%</p>
-                                    </div>
-                                </div>
-
-                                <div class="progress">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 65%"
-                                        aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-
-                            </div>
-
-                            <div class="meta-info">
-
-                                <div class="due-time">
-                                    <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-clock">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <polyline points="12 6 12 12 16 14"></polyline>
-                                        </svg> 3 Days Left</p>
-                                </div>
-
-
-                                <div class="avatar--group">
-
-                                    <div class="avatar translateY-axis more-group">
-                                        <span class="avatar-title">+6</span>
-                                    </div>
-                                    <div class="avatar translateY-axis">
-                                        <img alt="avatar" src="/img/profile-8.jpeg" />
-                                    </div>
-                                    <div class="avatar translateY-axis">
-                                        <img alt="avatar" src="/img/profile-12.jpeg" />
-                                    </div>
-                                    <div class="avatar translateY-axis">
-                                        <img alt="avatar" src="/img/profile-19.jpeg" />
-                                    </div>
-
-                                </div>
-
-                            </div>
+   <Bar :data="store.datacollection" />
+                          
 
 
                         </div>
@@ -119,7 +29,95 @@
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing">
                         <div class="widget widget-card-four">
                             <div class="widget-content">
-                         <LogFitter></LogFitter>
+                         <!-- <LogFitter></LogFitter> -->
+
+                           <div class="row mb-4">
+    <div id="form_grid_layouts" class="col-lg-10">
+      <div class="seperator-header">
+        <h4 class="">Fitter</h4>
+      </div>
+    </div>
+
+    <div class="col-sm-12">
+      <label for="exampleFormControlInput1">Fiiter Type</label>
+      <select class="form-control" v-model="store.formfitter.type">
+        <option value="1">Lesson</option>
+        <option value="2">Course</option>
+        <option value="3">Course && User</option>
+      </select>
+    </div>
+    <div class="col-sm-12">
+      <label for="exampleFormControlInput1">Year</label>
+      <select class="form-control" v-model="store.formfitter.year">
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+        <option value="2028">2028</option>
+      </select>
+    </div>
+
+
+    <div class="col-sm-12">
+      {{ store.formfitter }}
+      <label for="exampleFormControlInput1">Course ID</label>
+      <select class="form-control" v-model="store.formfitter.course_id" @change="onChange($event)">
+        <option disabled :value="null">
+          เลือก
+        </option>
+        <option v-for="(item, i) in store.courselist" :value="item.course_id">
+          {{ item.course_name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-sm-12" v-if="store.formfitter.type != '2' && store.formfitter.type != '3'">
+      <label for="exampleFormControlInput1">Lesson ID</label>
+      <select class="form-control" v-model="store.formfitter.cs_id">
+        <option disabled :value="null">
+          เลือก
+        </option>
+        <option v-for="(less, i) in store.lessonlist" :value="less.cs_id" v-if="store.lessonlist">
+          {{ less.cs_name }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="row layout-top-spacing" v-if="store.formfitter.type == '3'">
+    <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="ค้นหา User *" maxlength="10"
+        v-model="store.formuser.search" @keyup="searchData">
+    </div>
+  </div>
+
+  <div class="col-sm-12" v-if="store.formfitter.type == '3'">
+    <div class="table-responsive">
+      <table id="example" class="table table-bordered" style="width:100%">
+        <thead>
+          <tr>
+            <th>{{ $t("menu_result_name") }} &#8597;</th>
+            <th>{{ $t("menu_result_phone") }} &#8597;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(users, index) in store.userall" :key="users.user_id" @click="Sel(users.user_id)"
+            :class="{ 'table-success': store.myChoose === users.user_id }">
+            <td>{{ users.user_firstname }} {{ users.user_lastname }}</td>
+            <td>{{ users.user_phone }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+
+
+
+
+
+  <button type="button" class="btn btn-primary" @click="search()">ค้นหา</button>
                             </div>
                         </div>
                     </div>
@@ -132,14 +130,153 @@
     <!--  END FOOTER  -->
 </div></template>
 <script setup lang="ts">
-/*Call Components*/
-import { storeToRefs } from 'pinia';
-import { defineComponent } from 'vue';
-import LogFitter from '@/components/log/LogFitter.vue'
-
-definePageMeta({
+    definePageMeta({
     middleware: 'auth' // this should match the name of the file inside the middleware directory 
 })
+
+/*Call Components*/
+import { storeToRefs } from 'pinia';
+import { ref, watch } from 'vue';
+import { defineComponent } from 'vue';
+import LogFitter from '@/components/log/LogFitter.vue'
+import Swal from 'sweetalert2';
+import { Bar } from 'vue-chartjs';
+import { LogStore } from '@/store/log'; // import the auth store we just created
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from 'chart.js';
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale
+);
+const store = LogStore();
+
+
+
+const year = new Date().getFullYear();
+store.formfitter.year = year;
+
+await store.fetchCourslist()
+
+
+const searchData = async () => {
+  store.myChoose = [];
+  await store.fetchUsers()
+};
+
+const chartData = ref(store.datacollection);
+
+ watch(() => store.datacollection, (newValue) => {
+
+   if (chartData.value) {
+   console.log(chartData.value.datasets[0].data);
+   chartData.value.datasets[0].data = ['1111','124124','412412'];
+      }
+    
+    }, { deep: true });
+
+const loadNewData = async () => {
+
+
+
+     store.datacollection = {
+        labels: ['January', 'February', 'March'],
+        datasets: [{
+          label: 'New Data',
+          backgroundColor: ['#FAE043', '#2A9D8F', '#E63946'],
+          data: [
+            Math.floor(Math.random() * 50),
+            Math.floor(Math.random() * 50),
+            Math.floor(Math.random() * 50)
+          ]
+        }]
+      };
+
+
+};
+
+const search = async () => {
+
+
+
+  if (store.formfitter.type == '1') {
+    if(store.formfitter.cs_id == null){
+      Swal.fire({
+    text: 'กรุณาเลือก Lesson ที่มีบทเรียน !',
+    icon: 'error',
+  });
+
+    }else {
+  await store.fetchReport();
+
+
+      store.datacollection = {
+        labels: ['ມັງກອນ', 'ກຸມພາ', 'ມີເຄື່ອງໝາຍ.','ເດືອນເມສາ','ອາດ','ເດືອນມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'],
+        datasets: [{
+          label: 'New Data',
+          backgroundColor: ['#FAE043', '#2A9D8F', '#E63946'],
+          data: [store.reportlog[0],store.reportlog[1],store.reportlog[2],store.reportlog[3],store.reportlog[4],store.reportlog[5],store.reportlog[6],
+          store.reportlog[7],store.reportlog[8],store.reportlog[9],store.reportlog[10],store.reportlog[11]]
+        }]
+      };
+    }
+
+
+  }
+  if (store.formfitter.type == '2') {
+    Swal.fire({
+    text: 'Upload File Image Only2!',
+    icon: 'error',
+  });
+
+  if(store.formfitter.course_id == null){
+      Swal.fire({
+    text: 'กรุณาเลือก Course!',
+    icon: 'error',
+  });
+
+    }else {
+      store.fetchReport();
+    }
+
+  }
+  if (store.formfitter.type == '3') {
+
+    
+
+
+
+  }
+ 
+};
+
+const onChange = async (event) => {
+  store.formfitter.cs_id = null;
+  await store.fetchLesson();
+
+};
+
+
+
+const Sel = async (id) => {
+  store.formfitter.user_id = id;
+  store.myChoose = id;
+
+}
+
+const backToUser = async () => {
+  router.go(-1);
+}
 
 
 </script>

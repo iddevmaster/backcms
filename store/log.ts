@@ -5,6 +5,14 @@ import moment from "moment";
 
 export const LogStore = defineStore('result', {
   state: () => ({
+    datacollection: {
+      labels: ['ມັງກອນ', 'ກຸມພາ', 'ມີເຄື່ອງໝາຍ.','ເດືອນເມສາ','ອາດ','ເດືອນມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'],
+      datasets: [{
+        label: 'Data One',
+        backgroundColor: '#f87979',
+        data: [0, 0, 0,0,0,0,0,0,0,0,0,0]
+      }]
+    },
     user_id: null,
     modaldelete:false,
     mr_id:null,
@@ -94,11 +102,16 @@ export const LogStore = defineStore('result', {
     },
 
     async fetchReport() {
-     
+    //  this.datacollection.datasets[0].data = [Math.random() * 50, Math.random() * 50, Math.random() * 50];
       const data = await ApiService.get('/course/log/lesson/'+this.formfitter.cs_id+'/'+this.formfitter.year).then(response => {
-        this.reportlog = response.data.data
-        console.log(response.data);
-    
+        const report = [];
+        for (var i = 0; i < response.data.length; i++) {
+          report.push(response.data[i].total);
+        }
+        
+        this.reportlog = report
+   
+
       });
     }
     
