@@ -294,7 +294,12 @@
   "approve_table_view_bday":"Birthday",
   "approve_table_email":"Email",
   "menu_lo":"Log",
-  "menu_log":"Log E-learning"
+  "menu_log":"Log E-learning",
+  "appication":"APPLICATIONS",
+  "report":"Report",
+  "log":"Log E-learning",
+  "cms":"cms"
+  
 }
 
 
