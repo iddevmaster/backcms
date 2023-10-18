@@ -131,6 +131,7 @@ const { UpdateDetails } = usersStore();
 
 await store.Zipcode();
 await store.Country();
+store.imageReq = false;
 
   
   //  const formDataEdit = reactive({

@@ -84,7 +84,7 @@ export const usersStore = defineStore('users', {
     },
     formDetailEdit: {
       identification_number:null,
-      verify_account:"",
+      verify_account:"unactive",
       user_img: null,
       user_birthday: "1993-03-19",
       user_address: null,
@@ -178,20 +178,25 @@ export const usersStore = defineStore('users', {
     },
 
     async fetchUsersId(user_id) {
+  
       try {
         const data = await ApiService.get('/user/get/' + user_id).then(response => {
           this.formDataEdit = response.data;
+          this.formDetailEdit.verify_account = "unactive";
+          this.image = null;
           if(Object.keys(response.data.detail).length === 0){
             this.formDetailEdit.identification_number = ""
             this.formDetailEdit.user_birthday = ""
             this.formDetailEdit.user_address = ""
-            this.formDataEdit.detail.user_img = ""
-            this.formDataEdit.detail.verify_account = "n"
+            this.formDetailEdit.user_img = ""
+            this.formDetailEdit.verify_account = "unactive"
             this.image = null
             this.formDetailEdit.location_id = 1
             this.formDetailEdit.country_id = 1
             this.formDetailEdit.user_id = user_id
+           
           }else {
+       
             this.formDetailEdit.identification_number = this.formDataEdit.detail.identification_number
             this.formDetailEdit.user_birthday = this.formDataEdit.detail.user_birthday
             this.formDetailEdit.user_address = this.formDataEdit.detail.user_address
