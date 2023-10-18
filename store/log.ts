@@ -8,7 +8,7 @@ export const LogStore = defineStore('result', {
     datacollection: {
       labels: ['ມັງກອນ', 'ກຸມພາ', 'ມີເຄື່ອງໝາຍ.','ເດືອນເມສາ','ອາດ','ເດືອນມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'],
       datasets: [{
-        label: 'Data One',
+        label: 'Report E-learning',
         backgroundColor: '#f87979',
         data: [0, 0, 0,0,0,0,0,0,0,0,0,0]
       }]
