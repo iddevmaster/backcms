@@ -102,17 +102,47 @@ export const LogStore = defineStore('result', {
     },
 
     async fetchReport() {
-    //  this.datacollection.datasets[0].data = [Math.random() * 50, Math.random() * 50, Math.random() * 50];
-      const data = await ApiService.get('/course/log/lesson/'+this.formfitter.cs_id+'/'+this.formfitter.year).then(response => {
-        const report = [];
-        for (var i = 0; i < response.data.length; i++) {
-          report.push(response.data[i].total);
-        }
-        
-        this.reportlog = report
-   
 
-      });
+      
+      if(this.formfitter.type == '1'){
+        
+        const report = [];
+        const data = await ApiService.get('/course/log/lesson/'+this.formfitter.cs_id+'/'+this.formfitter.year).then(response => {
+          for (var i = 0; i < response.data.length; i++) {
+            report.push(response.data[i].total);
+          }
+          this.reportlog = report
+        }); 
+      }
+
+      if(this.formfitter.type == '2'){
+   
+        const report = [];
+        const data = await ApiService.get('/course/log/course/'+this.formfitter.course_id+'/'+this.formfitter.year).then(response => {
+          for (var i = 0; i < response.data.length; i++) {
+            report.push(response.data[i].total);
+          }
+          this.reportlog = report
+        }); 
+      }
+
+      if(this.formfitter.type == '3'){
+      
+        const report = [];
+        const data = await ApiService.get('course/log/course/'+this.formfitter.course_id+'/'+this.formfitter.year+'?user_id='+ this.formfitter.user_id).then(response => {
+          for (var i = 0; i < response.data.length; i++) {
+            report.push(response.data[i].total);
+          }
+          this.reportlog = report
+        }); 
+      }
+    //  this.datacollection.datasets[0].data = [Math.random() * 50, Math.random() * 50, Math.random() * 50];
+
+
+
+
+
+
     }
     
    

@@ -13,7 +13,7 @@
 
 
                         <div class="widget-content">
-<button @click="loadNewData">Load New Data</button>
+<!-- <button @click="loadNewData">Load New Data</button> -->
                     
 
    <Bar :data="store.datacollection" />
@@ -60,7 +60,6 @@
 
 
     <div class="col-sm-12">
-      {{ store.formfitter }}
       <label for="exampleFormControlInput1">Course ID</label>
       <select class="form-control" v-model="store.formfitter.course_id" @change="onChange($event)">
         <option disabled :value="null">
@@ -176,14 +175,7 @@ const searchData = async () => {
 
 const chartData = ref(store.datacollection);
 
- watch(() => store.datacollection, (newValue) => {
 
-   if (chartData.value) {
-   console.log(chartData.value.datasets[0].data);
-   chartData.value.datasets[0].data = ['1111','124124','412412'];
-      }
-    
-    }, { deep: true });
 
 const loadNewData = async () => {
 
@@ -219,25 +211,13 @@ const search = async () => {
     }else {
   await store.fetchReport();
 
-
-      store.datacollection = {
-        labels: ['ມັງກອນ', 'ກຸມພາ', 'ມີເຄື່ອງໝາຍ.','ເດືອນເມສາ','ອາດ','ເດືອນມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'],
-        datasets: [{
-          label: 'New Data',
-          backgroundColor: ['#FAE043', '#2A9D8F', '#E63946'],
-          data: [store.reportlog[0],store.reportlog[1],store.reportlog[2],store.reportlog[3],store.reportlog[4],store.reportlog[5],store.reportlog[6],
-          store.reportlog[7],store.reportlog[8],store.reportlog[9],store.reportlog[10],store.reportlog[11]]
-        }]
-      };
+  await updatechart();
     }
 
 
   }
   if (store.formfitter.type == '2') {
-    Swal.fire({
-    text: 'Upload File Image Only2!',
-    icon: 'error',
-  });
+ 
 
   if(store.formfitter.course_id == null){
       Swal.fire({
@@ -246,13 +226,32 @@ const search = async () => {
   });
 
     }else {
-      store.fetchReport();
+     await store.fetchReport();
+
+     await updatechart();
+     
+      
     }
 
   }
   if (store.formfitter.type == '3') {
 
     
+
+    if(store.formfitter.user_id == null){
+      Swal.fire({
+    text: 'กรุณาเลือก Users!',
+    icon: 'error',
+  });
+
+    }else {
+     await store.fetchReport();
+
+await updatechart();
+     
+
+      
+    }
 
 
 
@@ -265,6 +264,22 @@ const onChange = async (event) => {
   await store.fetchLesson();
 
 };
+
+
+const updatechart = async () => {
+
+
+store.datacollection = {
+        labels: ['ມັງກອນ', 'ກຸມພາ', 'ມີເຄື່ອງໝາຍ.','ເດືອນເມສາ','ອາດ','ເດືອນມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'],
+        datasets: [{
+          label: 'New Data',
+          backgroundColor: ['#FAE043', '#2A9D8F', '#E63946'],
+          data: [store.reportlog[0],store.reportlog[1],store.reportlog[2],store.reportlog[3],store.reportlog[4],store.reportlog[5],store.reportlog[6],
+          store.reportlog[7],store.reportlog[8],store.reportlog[9],store.reportlog[10],store.reportlog[11]]
+        }]
+      };
+};
+
 
 
 
