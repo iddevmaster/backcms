@@ -538,7 +538,7 @@
           >
             <div class="">
               <i class="bi bi-person-gear menu-icon"></i>
-              <span>Log</span>
+              <span>{{ $t("menu_lo") }}</span>
             </div>
             <div>
               <svg
