@@ -272,7 +272,7 @@ const updatechart = async () => {
 store.datacollection = {
         labels: ['ມັງກອນ', 'ກຸມພາ', 'ມີເຄື່ອງໝາຍ.','ເດືອນເມສາ','ອາດ','ເດືອນມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'],
         datasets: [{
-          label: 'New Data',
+          label: 'Report E-learning',
           backgroundColor: ['#FAE043', '#2A9D8F', '#E63946'],
           data: [store.reportlog[0],store.reportlog[1],store.reportlog[2],store.reportlog[3],store.reportlog[4],store.reportlog[5],store.reportlog[6],
           store.reportlog[7],store.reportlog[8],store.reportlog[9],store.reportlog[10],store.reportlog[11]]

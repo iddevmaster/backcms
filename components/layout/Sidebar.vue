@@ -564,12 +564,8 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/log/users">Log Users</nuxt-link>
+              <nuxt-link to="/log/users">{{ $t("menu_log") }}</nuxt-link>
             </li>
-            <li>
-              <nuxt-link to="/log/lesson">Log Lesson</nuxt-link>
-            </li>
-          
           </ul>
         </li>
       </ul>
