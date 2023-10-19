@@ -18,11 +18,20 @@
  {{store.formreport}}
   {{store.date}}
   <div class="row">
+     <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
  <Fitter></Fitter>
- <Dlt></Dlt>
+     </div>
+
+     <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+  <Dlt></Dlt>
+     </div>
  <Learn></Learn>
  <Status></Status>
- <Aplearn></Aplearn>
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+  <Aplearn></Aplearn>
+     </div>
 
   </div>
                    <div>
@@ -68,6 +77,7 @@ const date = ref();
 
 // For demo purposes assign range from the current date
 onMounted(() => {
+   store.ResetFormSearch();
   const startDate = new Date();
   const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
   date.value = [startDate, endDate];

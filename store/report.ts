@@ -10,7 +10,7 @@ export const ReportStore = defineStore('report', {
     date:null,
     endDate: '',
     dlt_code:"",
-    ap_learn_type:"",
+    ap_learn_type:"1",
     mr_status:"",
     mr_learn_type:"",
     selectedDate: null,
@@ -137,16 +137,78 @@ export const ReportStore = defineStore('report', {
    async FitterResult(){
       const startdate = ref(new Date(this.date[0]).toISOString().slice(0, 10));
       const enddate = ref(new Date(this.date[1]).toISOString().slice(0, 10));
-
       this.formreport.start_date = startdate.value
       this.formreport.end_date = enddate.value
-
-      console.log('FitterResult',this.formreport);
       const data = await ApiService.post('/report/register', this.formreport).then(response => {
         console.log('FitterResult',response.data.data);
       });
-    }
+    },
 
+    async FitterRegister(){
+
+      const changdaystart = this.date[0].toISOString().slice(0, -5) + '-07:00';  /////แปลงเวลา
+      const startdate = moment.utc(changdaystart).format().slice(0, -10)
+
+      const changdayend = this.date[1].toISOString().slice(0, -5) + '-07:00';  /////แปลงเวลา
+      const enddate = moment.utc(changdayend).format().slice(0, -10)
+
+      this.formreport.start_date = startdate
+      this.formreport.end_date = enddate
+
+      console.log('register',this.formreport);
+      const data = await ApiService.post('/report/register', this.formreport).then(response => {
+        console.log('register',response.data.data);
+      });
+    },
+
+    async FitterAppoint(){
+    
+    //  const startdate = ref(new Date(this.date[0]).toISOString());
+
+
+      const changdaystart = this.date[0].toISOString().slice(0, -5) + '-07:00';  /////แปลงเวลา
+      const startdate = moment.utc(changdaystart).format().slice(0, -10)
+
+      const changdayend = this.date[1].toISOString().slice(0, -5) + '-07:00';  /////แปลงเวลา
+      const enddate = moment.utc(changdayend).format().slice(0, -10)
+
+ 
+      this.formreport.start_date = startdate
+      this.formreport.end_date = enddate
+      this.formreport.dlt_code = this.dlt_code
+      this.formreport.ap_learn_type = this.ap_learn_type
+
+      const data = await ApiService.post('/report/appointment/reserve', this.formreport).then(response => {
+        console.log('FitterAppoint',response.data.data);
+      });
+    },
+
+    async FitterExam(){
+      const startdate = ref(new Date(this.date[0]).toISOString().slice(0, 10));
+      const enddate = ref(new Date(this.date[1]).toISOString().slice(0, 10));
+      this.formreport.start_date = startdate.value
+      this.formreport.end_date = enddate.value
+      const data = await ApiService.post('/report/register', this.formreport).then(response => {
+        console.log('FitterResult',response.data.data);
+      });
+    },
+
+    async ResetFormSearch(){
+this.formreport.page = 1,
+this.formreport.per_page = 50,
+this.formreport.search = "",
+this.formreport.start_date = "",
+this.formreport.end_date = "",
+this.formreport.dlt_code = "",
+this.formreport.ap_learn_type = "",
+this.formreport.mr_status = "",
+this.formreport.mr_learn_type = ""
+
+this.dlt_code = 'A1';
+
+    
+
+    }
   },
 
 });

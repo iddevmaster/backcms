@@ -1,5 +1,6 @@
 <template>
-    <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+<div>
+   
       <label>Date Fitter:</label>
      <VueDatePicker 
             v-model="date" 

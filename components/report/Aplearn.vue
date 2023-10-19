@@ -1,7 +1,7 @@
 <template>
-    <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
+    <div>
       <label>Status:</label>
-      <select class="form-control">
+      <select class="form-control" v-model="store.ap_learn_type">
         <option value="1"> {{ $t("menu_learn_theory") }}</option>
         <option value="2"> {{ $t("menu_learn_practice") }}</option>
       </select>
