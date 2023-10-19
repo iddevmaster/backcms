@@ -1,15 +1,13 @@
 <template>
-    <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
-      <label>Date Fitter:</label>
-     <VueDatePicker 
-            v-model="date" 
-            multi-calendars
-            range
-            locale="lo"
-            :partial-range="false" 
-            :enable-time-picker="false"
-            />
+    <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
+      <label>Dlt:</label>
+      <select class="form-control">
+        <option value="1">Lesson</option>
+        <option value="2">Course</option>
+        <option value="3">Course && User</option>
+      </select>
     </div>
+
 </template>
 <script setup lang="ts">
 
@@ -36,8 +34,8 @@ const store = ReportStore();
 
 
 const startDate = ref("");
-const endDate = ref("");
-const minEndDate = ref(""); 
+    const endDate = ref("");
+    const minEndDate = ref(""); 
 
 
 
@@ -50,7 +48,12 @@ onMounted(() => {
   date.value = [startDate, endDate];
 })
 
-
+const format = (date) => {
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  return `Selected date is ${day}/${month}/${year}`;
+}
 
 const search = () => {
 

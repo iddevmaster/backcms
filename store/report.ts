@@ -8,6 +8,10 @@ export const ReportStore = defineStore('report', {
     user_id: null,
     startDate: '',
     endDate: '',
+    selectedDate: null,
+    fromDate: null,
+    toDate: null,
+    disabledDates: [],
     minEndDate: '',
     formuser: {
       page: 1,
@@ -33,18 +37,9 @@ export const ReportStore = defineStore('report', {
       return new Promise((resolve) => setTimeout(resolve, ms));
     },
 
-    setStartDate(date) {
 
-      console.log('ssss');
-      this.startDate = date;
-      this.minEndDate = date;
-
-      if (this.endDate && new Date(this.endDate) < new Date(date)) {
-        this.endDate = "";
-      }
-    },
-    setEndDate(date) {
-      this.endDate = date;
+    FitterResult(){
+      console.log('FitterResult');
     }
 
   },

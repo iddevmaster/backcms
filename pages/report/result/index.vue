@@ -8,8 +8,25 @@
                             <div class="widget-heading">
                         </div>
                         <div class="widget-content">
-<!-- <button @click="loadNewData">Load New Data</button> -->
-                   <Fitter></Fitter> 
+                            <div>
+    <div id="form_grid_layouts" class="col-lg-12">
+      <div class="seperator-header">
+        <h4 class="">Fitter</h4>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="row">
+ <Fitter></Fitter>
+ <Dlt></Dlt>
+ <Learn></Learn>
+ <Status></Status>
+ <Aplearn></Aplearn>
+
+  </div>
+                   <div>
+                     <button type="button" class="btn btn-primary" @click="search">ค้นหา</button>
+                    </div>
                         </div>
                     </div>
                 </div>      
@@ -31,27 +48,30 @@ import { storeToRefs } from 'pinia';
 import { ref, watch } from 'vue';
 import { defineComponent } from 'vue';
 import Fitter from '@/components/report/Fitter.vue'
+import ButtonSearch from '@/components/report/ButtonSearch.vue'
+import Aplearn from '@/components/report/Aplearn.vue'
+import Dlt from '@/components/report/Dlt.vue'
+import Learn from '@/components/report/Learn.vue'
+import Status from '@/components/report/Status.vue'
 import Swal from 'sweetalert2';
 import { Bar } from 'vue-chartjs';
 import { ReportStore } from '@/store/report'; // import the auth store we just created
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-} from 'chart.js';
-ChartJS.register(
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale
-);
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+
+
 const store = ReportStore();
+
+
+const date = ref();
+
+// For demo purposes assign range from the current date
+onMounted(() => {
+  const startDate = new Date();
+  const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
+  date.value = [startDate, endDate];
+})
+
 
 
 const searchData = async () => {
@@ -59,21 +79,14 @@ const searchData = async () => {
 };
 
 
-
-
 const search = async () => {
-
-
-
- 
+store.FitterResult();
 };
 
 const onChange = async (event) => {
  
 
 };
-
-
 
 
 
