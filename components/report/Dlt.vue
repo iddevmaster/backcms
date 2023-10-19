@@ -2,9 +2,7 @@
     <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
       <label>Dlt:</label>
       <select class="form-control">
-        <option value="1">Lesson</option>
-        <option value="2">Course</option>
-        <option value="3">Course && User</option>
+        <option :value="dlt_i.dlt_code" v-for="(dlt_i,index) in store.dlt">{{dlt_i.dlt_description}}</option>
       </select>
     </div>
 

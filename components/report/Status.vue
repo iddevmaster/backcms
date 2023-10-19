@@ -1,13 +1,11 @@
 <template>
     <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
-      <label>mr_status:</label>
+      <label>Status:</label>
       <select class="form-control">
-        <option value="1">Lesson</option>
-        <option value="2">Course</option>
-        <option value="3">Course && User</option>
+        <option value="pass">{{ $t("menu_pass") }}</option>
+        <option value="fail">{{ $t("menu_fail") }}</option>
       </select>
     </div>
-
 </template>
 <script setup lang="ts">
 

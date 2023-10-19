@@ -2,9 +2,8 @@
  <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
       <label>ap_learn_type:</label>
       <select class="form-control">
-        <option value="1">Lesson</option>
-        <option value="2">Course</option>
-        <option value="3">Course && User</option>
+        <option value="1"> {{ $t("menu_learn_theory") }}</option>
+        <option value="2"> {{ $t("menu_learn_practice") }}</option>
       </select>
     </div>
 </template>
