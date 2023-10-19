@@ -15,7 +15,8 @@
       </div>
     </div>
   </div>
- 
+ {{store.formreport}}
+  {{store.date}}
   <div class="row">
  <Fitter></Fitter>
  <Dlt></Dlt>

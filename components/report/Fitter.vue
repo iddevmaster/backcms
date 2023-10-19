@@ -8,6 +8,7 @@
             locale="lo"
             :partial-range="false" 
             :enable-time-picker="false"
+            @update:model-value="handleDate" 
             />
     </div>
 </template>
@@ -35,9 +36,6 @@ const router = useRouter();
 const store = ReportStore();
 
 
-const startDate = ref("");
-const endDate = ref("");
-const minEndDate = ref(""); 
 
 
 
@@ -48,13 +46,21 @@ onMounted(() => {
   const startDate = new Date();
   const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
   date.value = [startDate, endDate];
+
+  store.date = [startDate, endDate];
+
 })
 
 
 
 const search = () => {
-
+store.FitterResult();
 }
+
+const handleDate = async (event) => {
+    store.date = [event[0], event[1]];
+}
+
 
 </script>
 

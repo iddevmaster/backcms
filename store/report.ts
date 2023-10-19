@@ -7,16 +7,28 @@ export const ReportStore = defineStore('report', {
   state: () => ({
     user_id: null,
     startDate: '',
+    date:null,
     endDate: '',
+    dlt_code:"",
+    ap_learn_type:"",
+    mr_status:"",
+    mr_learn_type:"",
     selectedDate: null,
     fromDate: null,
     toDate: null,
     disabledDates: [],
+    reportregister:[],
     minEndDate: '',
-    formuser: {
+    formreport: {
       page: 1,
-      per_page: 5,
-      search: ""
+      per_page: 50,
+      search: "",
+      start_date: "",
+      end_date: "",
+      dlt_code:"",
+      ap_learn_type:"",
+      mr_status:"",
+      mr_learn_type:"",
     },
     dlt: [
       {
@@ -122,8 +134,17 @@ export const ReportStore = defineStore('report', {
     },
 
 
-    FitterResult(){
-      console.log('FitterResult');
+   async FitterResult(){
+      const startdate = ref(new Date(this.date[0]).toISOString().slice(0, 10));
+      const enddate = ref(new Date(this.date[1]).toISOString().slice(0, 10));
+
+      this.formreport.start_date = startdate.value
+      this.formreport.end_date = enddate.value
+
+      console.log('FitterResult',this.formreport);
+      const data = await ApiService.post('/report/register', this.formreport).then(response => {
+        console.log('FitterResult',response.data.data);
+      });
     }
 
   },
