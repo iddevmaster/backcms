@@ -18,9 +18,13 @@
 
   <div class="row">
  <Fitter></Fitter>
- <Dlt></Dlt>
 
-       <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+ <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
+  <Dlt></Dlt>
+     </div>
+
+
+       <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
   <Aplearn></Aplearn>
      </div>
 
