@@ -1,6 +1,6 @@
 <template>
  <div>
-      <label>Dlt:</label>
+      <label>{{ $t("dlt_fitter") }}:</label>
       <select class="form-control" v-model="store.dlt_code">
         <option :value="dlt_i.dlt_code" v-for="(dlt_i,index) in store.dlt">{{dlt_i.dlt_description}}</option>
       </select>

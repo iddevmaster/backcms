@@ -582,7 +582,7 @@
           >
             <div class="">
               <i class="bi bi-person-gear menu-icon"></i>
-              <span>report</span>
+              <span>{{ $t("report") }}</span>
             </div>
             <div>
               <svg

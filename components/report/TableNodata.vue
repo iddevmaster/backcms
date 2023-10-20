@@ -4,7 +4,7 @@
     <table id="example" class="table table-bordered" style="width:100%">
       <thead>
         <tr style="text-align: center;">
-          No Data
+             {{ $t("table_register_nodata") }}
         </tr>
       </thead>
       <tbody>

@@ -1,7 +1,7 @@
 <template>
 <div>
    
-      <label>Date Fitter:</label>
+      <label>{{ $t("date_fitter") }}</label>
      <VueDatePicker 
             v-model="date" 
             multi-calendars

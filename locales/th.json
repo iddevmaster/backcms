@@ -301,10 +301,29 @@
   "log":"Log E-learning",
   "cms":"cms",
   "report_fitter":"Search",
-  "report_register":"cms",
-  "report_app":"cms",
-  "report_exam":"cms",
-  "report_result":"cms"
+  "report_register":"Register",
+  "report_app":"Appointment",
+  "report_exam":"Exam",
+  "report_result":"Test Results",
+  "date_fitter":"Start Date - End Date",
+  "dlt_fitter":"License type",
+  "ap_learn_type_fitter":"Exam Type",
+  "status_fitter":"Status",
+  "table_register_id":"#",
+  "table_register_name":"ຊື່",
+  "table_register_user_firstname":"ຊື່ແທ້",
+  "table_register_user_lastname":"ນາມສະກຸນ",
+  "table_register_user_email":"ອີເມວ",
+  "table_register_user_phone":"ເບີ​ໂທລະ​ສັບ",
+  "table_register_user_type":"ປະເພດ",
+  "table_register_crt_date":"ວັນທີສ້າງ",
+  "table_register_udp_date":"ດັດແກ້ຫຼ້າສຸດ",
+  "table_register_verify_account":"ຢືນຢັນຕົວຕົນຂອງທ່ານ",
+  "table_register_identification_number":"ໝາຍເລກບັດປະຈຳຕົວ",
+  "report_register_table":"Report Register",
+  "table_register_nodata":"No data",
+  "fitter_register":"ລາຍງານການລົງທະບຽນ",
+  "fitter_appointment":"ລາຍງານນັດ"
 
 }
 

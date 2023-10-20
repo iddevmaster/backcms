@@ -1,6 +1,6 @@
 <template>
  <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
-      <label>ap_learn_type:</label>
+      <label>{{ $t("ap_learn_type_fitter") }}:</label>
       <select class="form-control">
         <option value="1"> {{ $t("menu_learn_theory") }}</option>
         <option value="2"> {{ $t("menu_learn_practice") }}</option>

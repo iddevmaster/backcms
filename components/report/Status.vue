@@ -1,6 +1,6 @@
 <template>
     <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
-      <label>Status:</label>
+      <label>{{ $t("status_fitter") }}:</label>
       <select class="form-control">
         <option value="pass">{{ $t("menu_pass") }}</option>
         <option value="fail">{{ $t("menu_fail") }}</option>

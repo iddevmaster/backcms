@@ -12,7 +12,7 @@
                 <div>
                   <div id="form_grid_layouts" class="col-lg-12">
                     <div class="seperator-header">
-                      <h4 class="">Fitter</h4>
+                      <h4 class="">{{ $t("fitter_register") }}</h4>
                     </div>
                   </div>
                 </div>
@@ -22,7 +22,7 @@
                 </div>
                 <div>
                   <button type="button" class="btn btn-primary" @click="search">
-                    ค้นหา
+                      {{ $t("report_fitter") }}
                   </button>
                 </div>
               </div>
@@ -40,7 +40,7 @@
                 <div>
                   <div id="form_grid_layouts" class="col-lg-12">
                     <div class="seperator-header">
-                      <h4 class="">Report Register</h4>
+                      <h4 class="">{{ $t("report_register_table") }}</h4>
                     </div>
                   </div>
                 </div>

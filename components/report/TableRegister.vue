@@ -20,37 +20,37 @@
       <thead>
         <tr>
           <th>
-        user_id
+        {{ $t("table_register_id") }}
           </th>
             <th>
-        user_name
+        {{ $t("table_register_name") }}
           </th>
             <th>
-        user_firstname
+        {{ $t("table_register_user_firstname") }}
           </th>
             <th>
-        user_lastname
+        {{ $t("table_register_user_lastname") }}
           </th>
             <th>
-        user_email
+        {{ $t("table_register_user_email") }}
           </th>
             <th>
-        user_phone
+        {{ $t("table_register_user_phone") }}
           </th>
             <th>
-        user_type
+        {{ $t("table_register_user_type") }}
           </th>
             <th>
-        crt_date
+        {{ $t("table_register_crt_date") }}
           </th>
             <th>
-        udp_date
+        {{ $t("table_register_udp_date") }}
           </th>
             <th>
-        verify_account
+        {{ $t("table_register_verify_account") }}
           </th>
             <th>
-        identification_number
+        {{ $t("table_register_identification_number") }}
           </th>
             <!-- <th>
         user_img

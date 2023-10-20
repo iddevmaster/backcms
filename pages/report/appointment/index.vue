@@ -11,14 +11,13 @@
                             <div>
     <div id="form_grid_layouts" class="col-lg-12">
       <div class="seperator-header">
-        <h4 class="">Fitter</h4>
+        <h4 class="">{{ $t("fitter_appointment") }}</h4>
       </div>
     </div>
   </div>
 
   <div class="row">
  <Fitter></Fitter>
-
  <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
   <Dlt></Dlt>
      </div>
