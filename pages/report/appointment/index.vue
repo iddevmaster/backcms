@@ -33,6 +33,30 @@
                     </div>
                 </div>      
             </div>
+
+
+            <div class="row layout-top-spacing">
+          <div
+            class="col-xl-12 col-lg-12 col-md-12 col-sm-8 col-12 layout-spacing"
+          >
+            <div class="widget widget-five">
+              <div class="widget-heading"></div>
+              <div class="widget-content">
+                <div>
+                  <div id="form_grid_layouts" class="col-lg-12">
+                    <div class="seperator-header">
+                      <h4 class="">Report Register</h4>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+                  <TableAppoint></TableAppoint>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
 
     </div>
@@ -55,6 +79,7 @@ import Aplearn from '@/components/report/Aplearn.vue'
 import Dlt from '@/components/report/Dlt.vue'
 import Learn from '@/components/report/Learn.vue'
 import Status from '@/components/report/Status.vue'
+import TableAppoint from '@/components/report/TableAppoint.vue'
 import Swal from 'sweetalert2';
 import { Bar } from 'vue-chartjs';
 import { ReportStore } from '@/store/report'; // import the auth store we just created

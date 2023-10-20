@@ -20,34 +20,34 @@
       <thead>
         <tr>
           <th>
-        user_id
+            ap_quota
           </th>
             <th>
-        user_name
+              ap_date_start
           </th>
             <th>
-        user_firstname
+              ap_date_end
           </th>
             <th>
-        user_lastname
+              ap_remark
           </th>
             <th>
-        user_email
+              ap_learn_type
           </th>
             <th>
-        user_phone
+              dlt_code
           </th>
             <th>
-        user_type
+              user_firstname
           </th>
             <th>
-        crt_date
+              user_lastname
           </th>
             <th>
-        udp_date
+              user_email
           </th>
             <th>
-        verify_account
+              user_phone
           </th>
             <th>
         identification_number
@@ -59,39 +59,40 @@
         </tr>
       </thead>
       <tbody>
-      <tr v-for="user in store.reportregister" :key="user.user_id">
+     
+      <tr v-for="appoint in store.reportappoint">
         <td>
-          {{user.user_id}}
+          {{appoint.ap_quota}}
         </td>
          <td>
-          {{user.user_name}}
+          {{appoint.ap_date_start}}
         </td>
          <td>
-          {{user.user_firstname}}
+          {{appoint.ap_date_end}}
         </td>
          <td>
-          {{user.user_lastname}}
+          {{appoint.ap_remark}}
         </td>
          <td>
-          {{user.user_email}}
+          {{appoint.ap_learn_type}}
         </td>
          <td>
-          {{user.user_phone}}
+          {{appoint.dlt_code}}
         </td>
          <td>
-          {{user.user_type}}
+          {{appoint.user_firstname}}
         </td>
          <td>
-          {{user.crt_date}}
+          {{appoint.user_lastname}}
         </td>
           <td>
-          {{user.udp_date}}
+          {{appoint.user_email}}
         </td>
          <td>
-          {{user.verify_account}}
+          {{appoint.user_phone}}
         </td>
          <td>
-          {{user.identification_number}}
+          {{appoint.identification_number}}
         </td>
          <!-- <td>
           {{user.user_img}}

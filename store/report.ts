@@ -7,6 +7,7 @@ export const ReportStore = defineStore('report', {
   state: () => ({
     user_id: null,
     startDate: '',
+    search:"",
     date:null,
     endDate: '',
     dlt_code:"",
@@ -18,6 +19,7 @@ export const ReportStore = defineStore('report', {
     toDate: null,
     disabledDates: [],
     reportregister:[],
+    reportappoint:[],
     minEndDate: '',
     formreport: {
       page: 1,
@@ -144,6 +146,7 @@ export const ReportStore = defineStore('report', {
       const enddate = ref(new Date(this.date[1]).toISOString().slice(0, 10));
       this.formreport.start_date = startdate.value
       this.formreport.end_date = enddate.value
+      
       const data = await ApiService.post('/report/register', this.formreport).then(response => {
         console.log('FitterResult',response.data.data);
       });
@@ -159,17 +162,14 @@ export const ReportStore = defineStore('report', {
 
       this.formreport.start_date = startdate
       this.formreport.end_date = enddate
-
-      console.log('register',this.formreport);
+      this.formreport.search = this.search
       const data = await ApiService.post('/report/register', this.formreport).then(response => {
-        console.log('register',response.data);
         this.reportregister = response.data.data;
         this.current_page = response.data.current_page;
         this.limit_page = response.data.limit_page;
         this.total = response.data.total;
         this.total_filter = response.data.total_filter;
         this.total_page = response.data.total_page;
-  
       });
     },
 
@@ -189,9 +189,10 @@ export const ReportStore = defineStore('report', {
       this.formreport.end_date = enddate
       this.formreport.dlt_code = this.dlt_code
       this.formreport.ap_learn_type = this.ap_learn_type
-console.log(this.formreport);
+
       const data = await ApiService.post('/report/appointment/reserve', this.formreport).then(response => {
-        console.log('FitterAppoint',response.data.data);
+        this.reportappoint = response.data.data
+        console.log('FitterAppoint',this.reportappoint);
       });
     },
 
@@ -219,6 +220,13 @@ this.formreport.mr_learn_type = ""
 this.dlt_code = 'A1';
 this.mr_status = 'pass';
 this.mr_learn_type = '1';
+
+
+this.current_page = null;
+this.limit_page = null;
+this.total = null;
+this.total_filter = null;
+this.total_page = null;
     },
     setCurrentPage(page) {
       this.formreport.page = page
