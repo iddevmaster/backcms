@@ -310,20 +310,20 @@
   "ap_learn_type_fitter":"Exam Type",
   "status_fitter":"Status",
   "table_register_id":"#",
-  "table_register_name":"ຊື່",
-  "table_register_user_firstname":"ຊື່ແທ້",
-  "table_register_user_lastname":"ນາມສະກຸນ",
-  "table_register_user_email":"ອີເມວ",
-  "table_register_user_phone":"ເບີ​ໂທລະ​ສັບ",
-  "table_register_user_type":"ປະເພດ",
-  "table_register_crt_date":"ວັນທີສ້າງ",
-  "table_register_udp_date":"ດັດແກ້ຫຼ້າສຸດ",
-  "table_register_verify_account":"ຢືນຢັນຕົວຕົນຂອງທ່ານ",
-  "table_register_identification_number":"ໝາຍເລກບັດປະຈຳຕົວ",
+  "table_register_name":"Name",
+  "table_register_user_firstname":"First Name",
+  "table_register_user_lastname":"Last Name",
+  "table_register_user_email":"Email",
+  "table_register_user_phone":"Tel",
+  "table_register_user_type":"Type",
+  "table_register_crt_date":"Create",
+  "table_register_udp_date":"Update",
+  "table_register_verify_account":"Verify",
+  "table_register_identification_number":"Identification",
   "report_register_table":"Report Register",
   "table_register_nodata":"No data",
-  "fitter_register":"ລາຍງານການລົງທະບຽນ",
-  "fitter_appointment":"ລາຍງານນັດ"
+  "fitter_register":"Report Register",
+  "fitter_appointment":"Report Appointment"
 
 }
 

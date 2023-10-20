@@ -322,8 +322,8 @@
   "table_register_identification_number":"ໝາຍເລກບັດປະຈຳຕົວ",
   "report_register_table":"Report Register",
   "table_register_nodata":"No data",
-  "fitter_register":"ລາຍງານການລົງທະບຽນ",
-  "fitter_appointment":"ລາຍງານນັດ"
+  "fitter_register":"Report Register",
+  "fitter_appointment":"Report Appointment"
 }
 
 
