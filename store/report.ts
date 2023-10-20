@@ -21,7 +21,7 @@ export const ReportStore = defineStore('report', {
     minEndDate: '',
     formreport: {
       page: 1,
-      per_page: 50,
+      per_page: 5,
       search: "",
       start_date: "",
       end_date: "",
@@ -30,6 +30,11 @@ export const ReportStore = defineStore('report', {
       mr_status:"",
       mr_learn_type:"",
     },
+    current_page:null,
+    limit_page:null,
+    total:null,
+    total_filter:null,
+    total_page:null,
     dlt: [
       {
         dlt_code: "A",
@@ -157,7 +162,14 @@ export const ReportStore = defineStore('report', {
 
       console.log('register',this.formreport);
       const data = await ApiService.post('/report/register', this.formreport).then(response => {
-        console.log('register',response.data.data);
+        console.log('register',response.data);
+        this.reportregister = response.data.data;
+        this.current_page = response.data.current_page;
+        this.limit_page = response.data.limit_page;
+        this.total = response.data.total;
+        this.total_filter = response.data.total_filter;
+        this.total_page = response.data.total_page;
+  
       });
     },
 
@@ -177,7 +189,7 @@ export const ReportStore = defineStore('report', {
       this.formreport.end_date = enddate
       this.formreport.dlt_code = this.dlt_code
       this.formreport.ap_learn_type = this.ap_learn_type
-
+console.log(this.formreport);
       const data = await ApiService.post('/report/appointment/reserve', this.formreport).then(response => {
         console.log('FitterAppoint',response.data.data);
       });
@@ -195,7 +207,7 @@ export const ReportStore = defineStore('report', {
 
     async ResetFormSearch(){
 this.formreport.page = 1,
-this.formreport.per_page = 50,
+this.formreport.per_page = 1,
 this.formreport.search = "",
 this.formreport.start_date = "",
 this.formreport.end_date = "",
@@ -205,10 +217,16 @@ this.formreport.mr_status = "",
 this.formreport.mr_learn_type = ""
 
 this.dlt_code = 'A1';
-
-    
-
-    }
+this.mr_status = 'pass';
+this.mr_learn_type = '1';
+    },
+    setCurrentPage(page) {
+      this.formreport.page = page
+    },
+    selectentires(data_entires) {
+      console.log(data_entires);
+      this.formreport.per_page = data_entires;
+    },
   },
 
 });
