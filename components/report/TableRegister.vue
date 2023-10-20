@@ -9,9 +9,9 @@
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <select class="form-select form-select" aria-label="Default select example" @change="selectshowdata($event)">
-        <option value="1">1</option>
-        <option value="5">5</option>
-        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
       </select>
     </div>
   </div>
