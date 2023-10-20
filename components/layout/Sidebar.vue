@@ -608,16 +608,16 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/report/register">report register</nuxt-link>
+              <nuxt-link to="/report/register">{{ $t("report_register") }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/report/appointment">report appointment</nuxt-link>
+              <nuxt-link to="/report/appointment">{{ $t("report_app") }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/report/exam">report exam</nuxt-link>
+              <nuxt-link to="/report/exam">{{ $t("report_exam") }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/report/result">report result</nuxt-link>
+              <nuxt-link to="/report/result">{{ $t("report_result") }}</nuxt-link>
             </li>
           </ul>
         </li>

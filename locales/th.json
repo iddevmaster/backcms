@@ -299,7 +299,12 @@
   "appication":"APPLICATIONS",
   "report":"Report",
   "log":"Log E-learning",
-  "cms":"cms"
+  "cms":"cms",
+  "report_fitter":"Search",
+  "report_register":"cms",
+  "report_app":"cms",
+  "report_exam":"cms",
+  "report_result":"cms"
 
 }
 

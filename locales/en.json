@@ -298,7 +298,12 @@
   "appication":"APPLICATIONS",
   "report":"Report",
   "log":"Log E-learning",
-  "cms":"cms"
+  "cms":"cms",
+  "report_fitter":"Search",
+  "report_register":"Register",
+  "report_app":"Appointment",
+  "report_exam":"cms",
+  "report_result":"cms"
   
 }
 
