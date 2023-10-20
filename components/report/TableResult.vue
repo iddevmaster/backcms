@@ -9,9 +9,9 @@
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <select class="form-select form-select" aria-label="Default select example" @change="selectshowdata($event)">
-        <option value="1">1</option>
-        <option value="5">5</option>
-        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
       </select>
     </div>
   </div>
@@ -20,38 +20,24 @@
       <thead>
         <tr>
           <th>
-            ap_quota
+            mr_score
           </th>
             <th>
-              ap_date_start
+              mr_learn_type
           </th>
             <th>
-              ap_date_end
-          </th>
-            <th>
-              ap_remark
-          </th>
-            <th>
-              ap_learn_type
-          </th>
-            <th>
-              dlt_code
+              mr_status
           </th>
             <th>
               user_firstname
           </th>
             <th>
-              user_lastname
-          </th>
-            <th>
-              user_email
-          </th>
-            <th>
               user_phone
           </th>
             <th>
-        identification_number
+              identification_number
           </th>
+          
             <!-- <th>
         user_img
           </th> -->
@@ -60,40 +46,27 @@
       </thead>
       <tbody>
      
-      <tr v-for="appoint in store.reportappoint">
+        <tr v-for="result in store.reportresult">
         <td>
-          {{appoint.ap_quota}}
+          {{result.mr_score}}
         </td>
          <td>
-          {{appoint.ap_date_start}}
+          {{result.mr_learn_type}}
         </td>
          <td>
-          {{appoint.ap_date_end}}
+          {{result.mr_status}}
         </td>
          <td>
-          {{appoint.ap_remark}}
+          {{result.user_firstname}} {{result.user_lastname}}
         </td>
          <td>
-          {{appoint.ap_learn_type}}
+          {{result.user_phone}}
         </td>
          <td>
-          {{appoint.dlt_code}}
+          {{result.identification_number}}
         </td>
-         <td>
-          {{appoint.user_firstname}}
-        </td>
-         <td>
-          {{appoint.user_lastname}}
-        </td>
-          <td>
-          {{appoint.user_email}}
-        </td>
-         <td>
-          {{appoint.user_phone}}
-        </td>
-         <td>
-          {{appoint.identification_number}}
-        </td>
+        
+       
          <!-- <td>
           {{user.user_img}}
         </td> -->
@@ -167,7 +140,7 @@ const searchData = async () => {
  // await store.fetchUsers()
  store.page = 1;
 
-   await store.FitterAppoint()
+   await store.FitterResult()
 };
 
 const selchk = async (x) => {
@@ -181,7 +154,7 @@ const selectAll = async () => {
 const setCurrentPageclick = async (page) => {
   store.page = 1;
   await store.setCurrentPage(page)
-  await store.FitterRegister()
+  await store.FitterResult()
 };
 const format = (time) => {
   return moment(time).utc().format("DD/MM/YYYY HH:mm");
@@ -190,12 +163,12 @@ const format = (time) => {
 const selectshowdata = async (x) => {
   store.formreport.page = 1;
   await store.selectentires(x.target.value);
-  await store.FitterAppoint()
+  await store.FitterResult()
 };
 
 const selecttype = async (item) => {
   await selecttypes(item.target.value);
-  await store.FitterAppoint()
+  await store.FitterResult()
 };
 
 const sortList = async (sortBy) => {

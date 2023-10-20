@@ -45,8 +45,9 @@
                   </div>
                 </div>
 
-                <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
-                  <TableRegister></TableRegister>
+                <div class="col-lg-12 col-md-12 col-sm-12 mb-4" >
+                  <TableRegister  v-if="store.reportregister.length > 0"></TableRegister>
+                  <TableNodata  v-else></TableNodata>
                 </div>
               </div>
             </div>
@@ -72,6 +73,7 @@ import Dlt from "@/components/report/Dlt.vue";
 import Learn from "@/components/report/Learn.vue";
 import Status from "@/components/report/Status.vue";
 import TableRegister from "@/components/report/TableRegister.vue";
+import TableNodata from "@/components/report/TableNodata.vue";
 import Swal from "sweetalert2";
 import { Bar } from "vue-chartjs";
 import { ReportStore } from "@/store/report"; // import the auth store we just created

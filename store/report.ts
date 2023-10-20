@@ -20,10 +20,12 @@ export const ReportStore = defineStore('report', {
     disabledDates: [],
     reportregister:[],
     reportappoint:[],
+    reportexam:[],
+    reportresult:[],
     minEndDate: '',
     formreport: {
       page: 1,
-      per_page: 5,
+      per_page: 50,
       search: "",
       start_date: "",
       end_date: "",
@@ -146,9 +148,13 @@ export const ReportStore = defineStore('report', {
       const enddate = ref(new Date(this.date[1]).toISOString().slice(0, 10));
       this.formreport.start_date = startdate.value
       this.formreport.end_date = enddate.value
-      
-      const data = await ApiService.post('/report/register', this.formreport).then(response => {
+      this.formreport.mr_learn_type = this.mr_learn_type
+      this.formreport.mr_status = this.mr_status
+      this.formreport.dlt_code = this.dlt_code
+      console.log('FitterResult',this.formreport);
+      const data = await ApiService.post('/report/main_result', this.formreport).then(response => {
         console.log('FitterResult',response.data.data);
+        this.reportresult = response.data.data
       });
     },
 
@@ -189,10 +195,16 @@ export const ReportStore = defineStore('report', {
       this.formreport.end_date = enddate
       this.formreport.dlt_code = this.dlt_code
       this.formreport.ap_learn_type = this.ap_learn_type
+      this.formreport.search = this.search
 
       const data = await ApiService.post('/report/appointment/reserve', this.formreport).then(response => {
         this.reportappoint = response.data.data
-        console.log('FitterAppoint',this.reportappoint);
+        this.current_page = response.data.current_page;
+        this.limit_page = response.data.limit_page;
+        this.total = response.data.total;
+        this.total_filter = response.data.total_filter;
+        this.total_page = response.data.total_page;
+   
       });
     },
 
@@ -201,14 +213,22 @@ export const ReportStore = defineStore('report', {
       const enddate = ref(new Date(this.date[1]).toISOString().slice(0, 10));
       this.formreport.start_date = startdate.value
       this.formreport.end_date = enddate.value
-      const data = await ApiService.post('/report/register', this.formreport).then(response => {
-        console.log('FitterResult',response.data.data);
+      this.formreport.dlt_code = this.dlt_code
+      this.formreport.search = this.search
+      const data = await ApiService.post('/report/exam', this.formreport).then(response => {
+        
+        this.reportexam = response.data.data
+        this.current_page = response.data.current_page;
+        this.limit_page = response.data.limit_page;
+        this.total = response.data.total;
+        this.total_filter = response.data.total_filter;
+        this.total_page = response.data.total_page;
       });
     },
 
     async ResetFormSearch(){
 this.formreport.page = 1,
-this.formreport.per_page = 1,
+this.formreport.per_page = 20,
 this.formreport.search = "",
 this.formreport.start_date = "",
 this.formreport.end_date = "",
@@ -217,7 +237,7 @@ this.formreport.ap_learn_type = "",
 this.formreport.mr_status = "",
 this.formreport.mr_learn_type = ""
 
-this.dlt_code = 'A1';
+this.dlt_code = 'A';
 this.mr_status = 'pass';
 this.mr_learn_type = '1';
 
@@ -232,8 +252,8 @@ this.total_page = null;
       this.formreport.page = page
     },
     selectentires(data_entires) {
-      console.log(data_entires);
-      this.formreport.per_page = data_entires;
+
+      this.formreport.per_page = parseInt(data_entires);
     },
   },
 

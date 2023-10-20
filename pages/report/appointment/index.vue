@@ -45,13 +45,14 @@
                 <div>
                   <div id="form_grid_layouts" class="col-lg-12">
                     <div class="seperator-header">
-                      <h4 class="">Report Register</h4>
+                      <h4 class="">Report Appointment</h4>
                     </div>
                   </div>
                 </div>
 
                 <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
-                  <TableAppoint></TableAppoint>
+                  <TableAppoint  v-if="store.reportappoint.length > 0"></TableAppoint>
+                  <TableNodata  v-else></TableNodata>
                 </div>
               </div>
             </div>
@@ -80,6 +81,7 @@ import Dlt from '@/components/report/Dlt.vue'
 import Learn from '@/components/report/Learn.vue'
 import Status from '@/components/report/Status.vue'
 import TableAppoint from '@/components/report/TableAppoint.vue'
+import TableNodata from "@/components/report/TableNodata.vue";
 import Swal from 'sweetalert2';
 import { Bar } from 'vue-chartjs';
 import { ReportStore } from '@/store/report'; // import the auth store we just created

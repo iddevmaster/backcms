@@ -15,8 +15,7 @@
       </div>
     </div>
   </div>
- {{store.formreport}}
-  {{store.date}}
+
   <div class="row">
        <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
   <Fitter></Fitter>
@@ -28,6 +27,9 @@
 
 
   </div>
+
+
+  
                    <div>
                      <button type="button" class="btn btn-primary" @click="search">ค้นหา</button>
                     </div>
@@ -35,6 +37,32 @@
                     </div>
                 </div>      
             </div>
+
+
+            
+            <div class="row layout-top-spacing">
+          <div
+            class="col-xl-12 col-lg-12 col-md-12 col-sm-8 col-12 layout-spacing"
+          >
+            <div class="widget widget-five">
+              <div class="widget-heading"></div>
+              <div class="widget-content">
+                <div>
+                  <div id="form_grid_layouts" class="col-lg-12">
+                    <div class="seperator-header">
+                      <h4 class="">Report Exam</h4>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+                  <TableExam  v-if="store.reportexam.length > 0"></TableExam>
+                  <TableNodata  v-else></TableNodata>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
 
     </div>
@@ -62,6 +90,8 @@ import { Bar } from 'vue-chartjs';
 import { ReportStore } from '@/store/report'; // import the auth store we just created
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import TableExam from '@/components/report/TableExam.vue'
+import TableNodata from "@/components/report/TableNodata.vue";
 
 
 const store = ReportStore();

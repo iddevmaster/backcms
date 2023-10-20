@@ -15,8 +15,7 @@
       </div>
     </div>
   </div>
- {{store.formreport}}
-  {{store.date}}
+
   <div class="row">
      <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
  <Fitter></Fitter>
@@ -29,9 +28,7 @@
  <Status></Status>
 
 
-        <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
-  <Aplearn></Aplearn>
-     </div>
+   
 
   </div>
                    <div>
@@ -41,6 +38,31 @@
                     </div>
                 </div>      
             </div>
+
+
+            <div class="row layout-top-spacing">
+          <div
+            class="col-xl-12 col-lg-12 col-md-12 col-sm-8 col-12 layout-spacing"
+          >
+            <div class="widget widget-five">
+              <div class="widget-heading"></div>
+              <div class="widget-content">
+                <div>
+                  <div id="form_grid_layouts" class="col-lg-12">
+                    <div class="seperator-header">
+                      <h4 class="">Report Result</h4>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 mb-4" >
+                  <TableResult  v-if="store.reportresult.length > 0"></TableResult>
+                  <TableNodata  v-else></TableNodata>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
 
     </div>
@@ -63,6 +85,8 @@ import Aplearn from '@/components/report/Aplearn.vue'
 import Dlt from '@/components/report/Dlt.vue'
 import Learn from '@/components/report/Learn.vue'
 import Status from '@/components/report/Status.vue'
+import TableResult from '@/components/report/TableResult.vue'
+import TableNodata from "@/components/report/TableNodata.vue";
 import Swal from 'sweetalert2';
 import { Bar } from 'vue-chartjs';
 import { ReportStore } from '@/store/report'; // import the auth store we just created

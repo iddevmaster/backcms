@@ -9,9 +9,9 @@
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <select class="form-select form-select" aria-label="Default select example" @change="selectshowdata($event)">
-        <option value="1">1</option>
-        <option value="5">5</option>
-        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
       </select>
     </div>
   </div>
@@ -20,38 +20,28 @@
       <thead>
         <tr>
           <th>
-            ap_quota
+            er_score_total
           </th>
             <th>
-              ap_date_start
+              er_question_total
           </th>
             <th>
-              ap_date_end
+              em_code
           </th>
             <th>
-              ap_remark
+              em_name
           </th>
             <th>
-              ap_learn_type
+              user_firstname user_lastname
           </th>
-            <th>
-              dlt_code
+         
+          <th>
+            user_phone
           </th>
-            <th>
-              user_firstname
+          <th>
+            identification_number
           </th>
-            <th>
-              user_lastname
-          </th>
-            <th>
-              user_email
-          </th>
-            <th>
-              user_phone
-          </th>
-            <th>
-        identification_number
-          </th>
+         
             <!-- <th>
         user_img
           </th> -->
@@ -59,44 +49,29 @@
         </tr>
       </thead>
       <tbody>
-     
-      <tr v-for="appoint in store.reportappoint">
+     {{ store.reportexam.length }}
+      <tr v-for="exa in store.reportexam" :key="exa.er_id">
         <td>
-          {{appoint.ap_quota}}
+          {{exa.er_score_total}}
         </td>
-         <td>
-          {{appoint.ap_date_start}}
+        <td>
+          {{exa.er_question_total}}
         </td>
-         <td>
-          {{appoint.ap_date_end}}
+        <td>
+          {{exa.em_code}}
         </td>
-         <td>
-          {{appoint.ap_remark}}
+        <td>
+          {{exa.em_name}}
         </td>
-         <td>
-          {{appoint.ap_learn_type}}
+        <td>
+          {{exa.user_firstname}} {{exa.user_lastname}} 
         </td>
-         <td>
-          {{appoint.dlt_code}}
+        <td>
+          {{exa.user_phone}}
         </td>
-         <td>
-          {{appoint.user_firstname}}
+        <td>
+          {{exa.identification_number}}
         </td>
-         <td>
-          {{appoint.user_lastname}}
-        </td>
-          <td>
-          {{appoint.user_email}}
-        </td>
-         <td>
-          {{appoint.user_phone}}
-        </td>
-         <td>
-          {{appoint.identification_number}}
-        </td>
-         <!-- <td>
-          {{user.user_img}}
-        </td> -->
       </tr>
       
       </tbody>
@@ -167,7 +142,7 @@ const searchData = async () => {
  // await store.fetchUsers()
  store.page = 1;
 
-   await store.FitterAppoint()
+   await store.FitterExam()
 };
 
 const selchk = async (x) => {
@@ -181,7 +156,7 @@ const selectAll = async () => {
 const setCurrentPageclick = async (page) => {
   store.page = 1;
   await store.setCurrentPage(page)
-  await store.FitterRegister()
+  await store.FitterExam()
 };
 const format = (time) => {
   return moment(time).utc().format("DD/MM/YYYY HH:mm");
@@ -190,12 +165,12 @@ const format = (time) => {
 const selectshowdata = async (x) => {
   store.formreport.page = 1;
   await store.selectentires(x.target.value);
-  await store.FitterAppoint()
+  await store.FitterExam()
 };
 
 const selecttype = async (item) => {
   await selecttypes(item.target.value);
-  await store.FitterAppoint()
+  await store.FitterExam()
 };
 
 const sortList = async (sortBy) => {
