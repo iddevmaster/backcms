@@ -321,7 +321,18 @@
   "report_register_table":"ລາຍງານການລົງທະບຽນ",
   "table_register_nodata":"ບໍ່ມີຂໍ້ມູນ",
   "fitter_register":"ລາຍງານການລົງທະບຽນ",
-  "fitter_appointment":"ລາຍງານນັດ"
+  "fitter_appointment":"ລາຍງານນັດ",
+  "table_ap_quota":"ຈໍານວນຈໍາກັດ",
+  "table_ap_date_start":"ວັນ​ທີ່​ເລີ່ມ",
+  "table_ap_date_end":"ວັນທີສິ້ນສຸດ",
+  "table_ap_remark":"ຂໍ້ສັງເກດ",
+  "table_ap_user_f":"ຊື່ແທ້",
+  "table_ap_user_l":"ນາມສະກຸນ",
+  "table_ap_user_email":"ອີເມວ",
+  "table_ap_user_phone":"ເບີ​ໂທລະ​ສັບ",
+  "table_ap_user_identification_number":"ໝາຍເລກບັດປະຈຳຕົວ",
+  "table_ap_user_image":"ຮູບ",
+  "report_search":"ຊອກຫາ"
 }
 
 

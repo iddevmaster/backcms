@@ -22,7 +22,7 @@
                 </div>
                 <div>
                   <button type="button" class="btn btn-primary" @click="search">
-                      {{ $t("report_fitter") }}
+                    {{ $t("report_search") }}
                   </button>
                 </div>
               </div>

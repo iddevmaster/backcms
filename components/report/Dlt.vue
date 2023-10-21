@@ -2,7 +2,12 @@
  <div>
       <label>{{ $t("dlt_fitter") }}:</label>
       <select class="form-control" v-model="store.dlt_code">
-        <option :value="dlt_i.dlt_code" v-for="(dlt_i,index) in store.dlt">{{dlt_i.dlt_description}}</option>
+        <option :value="dlt_i.dlt_code" v-for="(dlt_i,index) in store.dlt">
+        
+          <span v-if="locale == 'la'" >{{dlt_i.dlt_description_loas}}</span>
+      <span v-if="locale == 'en'" >{{dlt_i.dlt_description_english}}</span>
+      <span v-if="locale == 'th'" >{{dlt_i.dlt_description}}</span>
+        </option>
       </select>
     </div>
 

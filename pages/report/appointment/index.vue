@@ -30,7 +30,7 @@
 
   </div>
                    <div>
-                     <button type="button" class="btn btn-primary" @click="search">ค้นหา</button>
+                     <button type="button" class="btn btn-primary" @click="search">{{ $t("report_search") }}</button>
                     </div>
                         </div>
                     </div>

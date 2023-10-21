@@ -19,72 +19,67 @@
     <table id="example" class="table table-bordered" style="width:100%">
       <thead>
         <tr>
-          <th>
-            ap_quota
-          </th>
+
+          <!-- <th>
+            {{ $t("table_ap_quota") }}
+          </th> -->
             <th>
-              ap_date_start
+              {{ $t("table_ap_date_start") }}     {{ $t("table_ap_date_end") }}
           </th>
+           
             <th>
-              ap_date_end
+              {{ $t("table_ap_remark") }}
           </th>
-            <th>
-              ap_remark
-          </th>
-            <th>
+            <!-- <th>
               ap_learn_type
           </th>
             <th>
               dlt_code
-          </th>
+          </th> -->
             <th>
-              user_firstname
-          </th>
-            <th>
-              user_lastname
-          </th>
-            <th>
-              user_email
-          </th>
-            <th>
-              user_phone
-          </th>
-            <th>
-        identification_number
+              {{ $t("table_ap_user_f") }} 
           </th>
             <!-- <th>
-        user_img
+              {{ $t("table_ap_user_l") }}
           </th> -->
+            <th>
+              {{ $t("table_ap_user_email") }}
+          </th>
+            <th>
+              {{ $t("table_ap_user_phone") }}
+          </th>
+            <th>
+              {{ $t("table_ap_user_identification_number") }}
+          </th>
+            <th>
+              {{ $t("table_ap_user_image") }}
+          </th>
 
         </tr>
       </thead>
       <tbody>
      
       <tr v-for="appoint in store.reportappoint">
-        <td>
+        <!-- <td>
           {{appoint.ap_quota}}
-        </td>
+        </td> -->
          <td>
-          {{appoint.ap_date_start}}
+          {{appoint.ap_date_start}}   {{appoint.ap_date_end}}
         </td>
-         <td>
-          {{appoint.ap_date_end}}
-        </td>
+        
          <td>
           {{appoint.ap_remark}}
         </td>
-         <td>
+         <!-- <td>
           {{appoint.ap_learn_type}}
         </td>
          <td>
           {{appoint.dlt_code}}
-        </td>
+        </td> -->
          <td>
-          {{appoint.user_firstname}}
+          {{appoint.user_firstname}}      {{appoint.user_lastname}}
         </td>
-         <td>
-          {{appoint.user_lastname}}
-        </td>
+       
           <td>
           {{appoint.user_email}}
         </td>
@@ -94,9 +89,10 @@
          <td>
           {{appoint.identification_number}}
         </td>
-         <!-- <td>
-          {{user.user_img}}
-        </td> -->
+        
+        <td class="text-end">
+                                        <img :src="coverimage(appoint.user_img)" class="img-fluid" width="120" height="120" />
+                                      </td>
       </tr>
       
       </tbody>
@@ -152,6 +148,7 @@ import Paginate from "vuejs-paginate-next";
 import { useToast } from 'vue-toastification'
 import moment from "moment-timezone";
 import { useI18n } from "vue-i18n";
+import ApiService from "../../services/api.service";
 const { locale, setLocale } = useI18n();
 
 const store = ReportStore();
@@ -212,6 +209,15 @@ function coverttime(date) {
 
 }
 
+function coverimage(i) {
+  let result = i.slice(0, 6);
+  if (result === "static") {
+    let im = ApiService.image(i);
+    return im;
+  } else {
+    return i;
+  }
+}
 
 
 

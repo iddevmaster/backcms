@@ -22,24 +22,22 @@
           <th>
         {{ $t("table_register_id") }}
           </th>
-            <th>
+            <!-- <th>
         {{ $t("table_register_name") }}
-          </th>
+          </th> -->
             <th>
-        {{ $t("table_register_user_firstname") }}
+        {{ $t("table_register_user_firstname") }} 
           </th>
-            <th>
-        {{ $t("table_register_user_lastname") }}
-          </th>
+            
             <th>
         {{ $t("table_register_user_email") }}
           </th>
             <th>
         {{ $t("table_register_user_phone") }}
           </th>
-            <th>
+            <!-- <th>
         {{ $t("table_register_user_type") }}
-          </th>
+          </th> -->
             <th>
         {{ $t("table_register_crt_date") }}
           </th>
@@ -52,6 +50,10 @@
             <th>
         {{ $t("table_register_identification_number") }}
           </th>
+
+          <th>
+        {{ $t("table_ap_user_image") }}
+          </th>
             <!-- <th>
         user_img
           </th> -->
@@ -63,24 +65,24 @@
         <td>
           {{user.user_id}}
         </td>
-         <td>
+         <!-- <td>
           {{user.user_name}}
-        </td>
+        </td> -->
          <td>
           {{user.user_firstname}}
         </td>
-         <td>
+         <!-- <td>
           {{user.user_lastname}}
-        </td>
+        </td> -->
          <td>
           {{user.user_email}}
         </td>
          <td>
           {{user.user_phone}}
         </td>
-         <td>
+         <!-- <td>
           {{user.user_type}}
-        </td>
+        </td> -->
          <td>
           {{user.crt_date}}
         </td>
@@ -93,6 +95,13 @@
          <td>
           {{user.identification_number}}
         </td>
+
+     
+        <td class="text-end">
+                                        <img :src="coverimage(user.user_img)" class="img-fluid" width="80" height="80" />
+                                      </td>
+
+        
          <!-- <td>
           {{user.user_img}}
         </td> -->
@@ -151,6 +160,7 @@ import Paginate from "vuejs-paginate-next";
 import { useToast } from 'vue-toastification'
 import moment from "moment-timezone";
 import { useI18n } from "vue-i18n";
+import ApiService from "../../services/api.service";
 const { locale, setLocale } = useI18n();
 
 const store = ReportStore();
@@ -211,6 +221,15 @@ function coverttime(date) {
 
 }
 
+function coverimage(i) {
+  let result = i.slice(0, 6);
+  if (result === "static") {
+    let im = ApiService.image(i);
+    return im;
+  } else {
+    return i;
+  }
+}
 
 
 
