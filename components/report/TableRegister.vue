@@ -98,7 +98,7 @@
 
      
         <td class="text-end">
-                                        <img :src="coverimage(user.user_img)" class="img-fluid" width="80" height="80" />
+                                        <img :src="coverimage(user.user_img)" id="appUserImg" width="120" height="120" />
                                       </td>
 
         
@@ -240,5 +240,8 @@ function coverimage(i) {
 .bgc{
  
   color: #0a58ca;
+}
+#appUserImg {
+  object-fit: contain;
 }
 </style>

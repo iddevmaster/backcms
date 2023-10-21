@@ -24,7 +24,7 @@
             {{ $t("table_ap_quota") }}
           </th> -->
             <th>
-              {{ $t("table_ap_date_start") }}     {{ $t("table_ap_date_end") }}
+              {{ $t("table_ap_date_start") }}  /   {{ $t("table_ap_date_end") }}
           </th>
            
             <th>
@@ -91,8 +91,8 @@
         </td>
         
         <td class="text-end">
-                                        <img :src="coverimage(appoint.user_img)" class="img-fluid" width="120" height="120" />
-                                      </td>
+          <img :src="coverimage(appoint.user_img)"  width="120" height="120" id="appUserImg" />
+        </td>
       </tr>
       
       </tbody>
@@ -228,5 +228,8 @@ function coverimage(i) {
 .bgc{
  
   color: #0a58ca;
+}
+#appUserImg {
+  object-fit: contain;
 }
 </style>
