@@ -343,7 +343,8 @@
   "table_em_phone":"Phone",
   "table_em_iden":"Identification",
   "table_em_em_random_amount":"Random Question",
-  "table_em_image":"Image"
+  "table_em_image":"Image",
+  "report_exam_table":"Report Exam"
 }
 
 
