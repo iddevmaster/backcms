@@ -19,27 +19,36 @@
     <table id="example" class="table table-bordered" style="width:100%">
       <thead>
         <tr>
+
+
           <th>
-            er_score_total
+        
+          {{ $t("table_ex_score_total") }}
           </th>
             <th>
-              er_question_total
+              {{ $t("table_qu_total") }}
+          </th>
+          <th>
+              {{ $t("table_em_em_random_amount") }}
           </th>
             <th>
-              em_code
+              {{ $t("table_em_code") }}
           </th>
             <th>
-              em_name
+              {{ $t("table_em_name") }}
           </th>
             <th>
-              user_firstname user_lastname
+              {{ $t("table_em_user_name") }}
           </th>
          
           <th>
-            user_phone
+            {{ $t("table_em_phone") }}
           </th>
           <th>
-            identification_number
+            {{ $t("table_em_iden") }}
+          </th>
+          <th>
+            {{ $t("table_em_image") }}
           </th>
          
             <!-- <th>
@@ -49,13 +58,16 @@
         </tr>
       </thead>
       <tbody>
-     {{ store.reportexam.length }}
+ 
       <tr v-for="exa in store.reportexam" :key="exa.er_id">
         <td>
           {{exa.er_score_total}}
         </td>
         <td>
           {{exa.er_question_total}}
+        </td>
+        <td>
+          {{exa.em_random_amount}}
         </td>
         <td>
           {{exa.em_code}}
@@ -72,6 +84,9 @@
         <td>
           {{exa.identification_number}}
         </td>
+        <td class="text-end">
+                                        <img :src="coverimage(exa.user_img)" class="img-fluid" width="120" height="120" />
+                                      </td>
       </tr>
       
       </tbody>
@@ -127,6 +142,7 @@ import Paginate from "vuejs-paginate-next";
 import { useToast } from 'vue-toastification'
 import moment from "moment-timezone";
 import { useI18n } from "vue-i18n";
+import ApiService from "../../services/api.service";
 const { locale, setLocale } = useI18n();
 
 const store = ReportStore();
@@ -177,6 +193,17 @@ const sortList = async (sortBy) => {
   await sortLists(sortBy)
 
 };
+
+function coverimage(i) {
+  let result = i.slice(0, 6);
+  if (result === "static") {
+    let im = ApiService.image(i);
+    return im;
+  } else {
+    return i;
+  }
+}
+
 
 function coverttime(date) {
   const datetime = new Date(date);

@@ -334,7 +334,16 @@
   "table_ap_user_phone":"Phone",
   "table_ap_user_identification_number":"Identification",
   "table_ap_user_image":"Image",
-  "report_search":"Fitter"
+  "report_search":"Fitter",
+  "table_ex_score_total":"Score Total",
+  "table_qu_total":"Question Total",
+  "table_em_code":"Exam Code",
+  "table_em_name":"Exam Name",
+  "table_em_user_name":"Name",
+  "table_em_phone":"Phone",
+  "table_em_iden":"Identification",
+  "table_em_em_random_amount":"Random Question",
+  "table_em_image":"Image"
 }
 
 
