@@ -344,7 +344,15 @@
   "table_em_iden":"Identification",
   "table_em_em_random_amount":"Random Question",
   "table_em_image":"Image",
-  "report_exam_table":"Report Exam"
+  "report_exam_table":"Report Exam",
+  "table_result_score":"Score",
+  "table_result_type":"Type",
+  "table_result_status":"Status",
+  "table_result_name":"Name",
+  "table_result_phone":"Phone",
+  "table_result_iden":"Identification",
+  "table_result":"Report Exam",
+  "report_result_table":"Report Results"
 }
 
 

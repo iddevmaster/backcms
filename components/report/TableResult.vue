@@ -19,23 +19,25 @@
     <table id="example" class="table table-bordered" style="width:100%">
       <thead>
         <tr>
+
+         
           <th>
-            mr_score
+            {{ $t("table_result_score") }}
           </th>
             <th>
-              mr_learn_type
+              {{ $t("table_result_type") }}
           </th>
             <th>
-              mr_status
+              {{ $t("table_result_status") }}
           </th>
             <th>
-              user_firstname
+              {{ $t("table_result_name") }}
           </th>
             <th>
-              user_phone
+              {{ $t("table_result_phone") }}
           </th>
             <th>
-              identification_number
+              {{ $t("table_result_iden") }}
           </th>
           
             <!-- <th>

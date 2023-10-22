@@ -342,7 +342,13 @@
   "table_em_iden":"ໝາຍເລກບັດປະຈຳຕົວ",
   "table_em_em_random_amount":"ຈໍານວນສຸ່ມ",
   "table_em_image":"ຮູບ",
-  "report_exam_table":"ລາຍງານການສອບເສັງ"
+  "report_exam_table":"ລາຍງານການສອບເສັງ",
+  "table_result_score":"ຄະແນນ",
+  "table_result_type":"ປະເພດ",
+  "table_result_status":"ສະຖານະ",
+  "table_result_name":"ຊື່ສອບເສັງ",
+  "table_result_phone":"ເບີ​ໂທລະ​ສັບ",
+  "table_result_iden":"ໝາຍເລກບັດປະຈຳຕົວ",
+  "report_result_table":"ລາຍງານຜົນໄດ້ຮັບ"
 }
-
 

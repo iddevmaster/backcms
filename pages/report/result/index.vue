@@ -11,7 +11,7 @@
                             <div>
     <div id="form_grid_layouts" class="col-lg-12">
       <div class="seperator-header">
-        <h4 class="">Fitter</h4>
+        <h4 class="">{{ $t("report_result_table") }}</h4>
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
                 <div>
                   <div id="form_grid_layouts" class="col-lg-12">
                     <div class="seperator-header">
-                      <h4 class="">Report Result</h4>
+                      <h4 class="">{{ $t("report_result_table") }}</h4>
                     </div>
                   </div>
                 </div>
