@@ -121,6 +121,84 @@
                         </div>
                     </div>
             </div>
+
+
+
+            <div class="row layout-top-spacing">
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12 layout-spacing">
+                        <div class="widget widget-five">
+
+                            <div class="widget-heading">
+
+
+                        </div>
+
+
+                        <div class="widget-content">
+<!-- <button @click="loadNewData">Load New Data</button> -->
+                    
+
+   <Bar :data="store.datacollection" />
+                          
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing">
+                        <div class="widget widget-card-four">
+                            <div class="widget-content">
+                         <!-- <LogFitter></LogFitter> -->
+
+                           <div class="row mb-4">
+    <div id="form_grid_layouts" class="col-lg-10">
+      <div class="seperator-header">
+        <h4 class="">Fitter</h4>
+      </div>
+    </div>
+
+  
+    <div class="col-sm-12">
+      <label for="exampleFormControlInput1">Year</label>
+      <select class="form-control" v-model="store.formfitter.year">
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+        <option value="2028">2028</option>
+      </select>
+    </div>
+
+
+    <div class="col-sm-12">
+      <label for="exampleFormControlInput1">Course ID</label>
+      <select class="form-control" v-model="store.formfitter.course_id" @change="onChange($event)">
+        <option disabled :value="null">
+          เลือก
+        </option>
+        <option v-for="(item, i) in store.courselist" :value="item.course_id">
+          {{ item.course_name }}
+        </option>
+      </select>
+    </div>
+
+
+  </div>
+ 
+
+
+
+
+
+  <button type="button" class="btn btn-primary" @click="search()">ค้นหา</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
         </div>
 
     </div>
