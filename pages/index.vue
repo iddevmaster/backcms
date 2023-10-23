@@ -2,217 +2,115 @@
     <div id="content" class="main-content">
         <div class="layout-px-spacing">
             <div class="middle-content container-xxl p-0">
-                <div class="row layout-top-spacing">
-             
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
-                        <div class="widget widget-card-four">
-                            <div class="widget-content">
-                                <div class="w-header">
-                                    <div class="w-info">
-                                        <h6 class="value">Expenses</h6>
-                                    </div>
-                                    <div class="task-action">
-                                        <div class="dropdown">
-                                            <a class="dropdown-toggle" href="#" role="button" id="expenses"
-                                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                    class="feather feather-more-horizontal">
-                                                    <circle cx="12" cy="12" r="1"></circle>
-                                                    <circle cx="19" cy="12" r="1"></circle>
-                                                    <circle cx="5" cy="12" r="1"></circle>
-                                                </svg>
-                                            </a>
+              
 
-                                            <div class="dropdown-menu left" aria-labelledby="expenses"
-                                                style="will-change: transform;">
-                                                <a class="dropdown-item" href="javascript:void(0);">This Week</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Last Week</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+         <div class="row layout-top-spacing">
+                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="row widget-statistic">
+                                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing" @click="choose('all')">
+                                    <div class="widget widget-one_hybrid widget-followers">
+                                        <div class="widget-heading">
+                                            <div class="w-title">
+                                                <div class="w-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                                </div>
+                                                <div class="">
+                                                    <p class="w-value">31.6K</p>
+                                                    <h5 class="">ALL</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="widget-content">    
+                                            <div class="w-chart">
+                                                <div id="hybrid_followers"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing" @click="choose('course')">
+                                    <div class="widget widget-one_hybrid widget-referral">
+                                        <div class="widget-heading">
+                                            <div class="w-title">
+                                                <div class="w-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                                                </div>
+                                                <div class="">
+                                                    <p class="w-value">1,900</p>
+                                                    <h5 class="">Course</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="widget-content">    
+                                            <div class="w-chart">
+                                                <div id="hybrid_followers1"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing" @click="choose('reserve')">
+                                    <div class="widget widget-one_hybrid widget-engagement">
+                                        <div class="widget-heading">
+                                            <div class="w-title">
+                                                <div class="w-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                                                </div>
+                                                <div class="">
+                                                    <p class="w-value">18.2%</p>
+                                                    <h5 class="">Reserve</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="widget-content">    
+                                            <div class="w-chart">
+                                                <div id="hybrid_followers3"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="w-content">
 
-                                    <div class="w-info">
-                                        <p class="value">$ 45,141 <span>this week</span> <svg
-                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                stroke-linecap="round" stroke-linejoin="round"
-                                                class="feather feather-trending-up">
-                                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                                <polyline points="17 6 23 6 23 12"></polyline>
-                                            </svg></p>
-                                    </div>
-
-                                </div>
-
-                                <div class="w-progress-stats">
-                                    <div class="progress">
-                                        <div class="progress-bar bg-gradient-secondary" role="progressbar"
-                                            style="width: 57%" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100">
+                                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing" @click="choose('exam')">
+                                    <div class="widget widget-one_hybrid widget-engagement">
+                                        <div class="widget-heading">
+                                            <div class="w-title">
+                                                <div class="w-icon">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-circle"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                                                </div>
+                                                <div class="">
+                                                    <p class="w-value">18.2%</p>
+                                                    <h5 class="">Exam</h5>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="">
-                                        <div class="w-icon">
-                                            <p>57%</p>
+                                        <div class="widget-content">    
+                                            <div class="w-chart">
+                                                <div id="hybrid_followers3"></div>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
-                        <div class="widget widget-card-five">
-                            <div class="widget-content">
-                                <div class="account-box">
-
-                                    <div class="info-box">
-                                        <div class="icon">
-                                            <span>
-                                                <img src="/img/money-bag.png" alt="money-bag">
-                                            </span>
-                                        </div>
-
-                                        <div class="balance-info">
-                                            <h6>Total Balance</h6>
-                                            <p>$41,741.42</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="card-bottom-section">
-                                        <div><span class="badge badge-light-success">+ 13.6% <svg
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                    stroke-linecap="round" stroke-linejoin="round"
-                                                    class="feather feather-trending-up">
-                                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                                    <polyline points="17 6 23 6 23 12"></polyline>
-                                                </svg></span></div>
-                                        <a href="javascript:void(0);" class="">View Report</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                
 
 
+            </div>
 
-                 
-
-                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+                    <div class="row layout-top-spacing" v-if="store.type == 'all' || store.type == 'course'">
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12 layout-spacing">
                         <div class="widget widget-five">
 
                             <div class="widget-heading">
 
-                                <a href="javascript:void(0)" class="task-info">
-
-                                    <div class="usr-avatar">
-                                        <span>FD</span>
-                                    </div>
-
-                                    <div class="w-title">
-
-                                        <h5>Figma Design</h5>
-                                        <span>Design Project</span>
-
-                                    </div>
-
-                            </a>
-
-                            <div class="task-action">
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle" href="#" role="button" id="pendingTask"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-more-horizontal">
-                                            <circle cx="12" cy="12" r="1"></circle>
-                                            <circle cx="19" cy="12" r="1"></circle>
-                                            <circle cx="5" cy="12" r="1"></circle>
-                                        </svg>
-                                    </a>
-
-                                    <div class="dropdown-menu left" aria-labelledby="pendingTask"
-                                        style="will-change: transform;">
-                                        <a class="dropdown-item" href="javascript:void(0);">View Project</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Edit Project</a>
-                                        <a class="dropdown-item" href="javascript:void(0);">Mark as Done</a>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
 
 
                         <div class="widget-content">
+<!-- <button @click="loadNewData">Load New Data</button> -->
+                    
 
-                            <p>Doloribus nisi vel suscipit modi, optio ex repudiandae voluptatibus officiis commodi.</p>
-
-                            <div class="progress-data">
-
-                                <div class="progress-info">
-                                    <div class="task-count"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-check-square">
-                                            <polyline points="9 11 12 14 22 4"></polyline>
-                                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                                        </svg>
-                                        <p>5 Tasks</p>
-                                    </div>
-                                    <div class="progress-stats">
-                                        <p>86.2%</p>
-                                    </div>
-                                </div>
-
-                                <div class="progress">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 65%"
-                                        aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-
-                            </div>
-
-                            <div class="meta-info">
-
-                                <div class="due-time">
-                                    <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-clock">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <polyline points="12 6 12 12 16 14"></polyline>
-                                        </svg> 3 Days Left</p>
-                                </div>
-
-
-                                <div class="avatar--group">
-
-                                    <div class="avatar translateY-axis more-group">
-                                        <span class="avatar-title">+6</span>
-                                    </div>
-                                    <div class="avatar translateY-axis">
-                                        <img alt="avatar" src="/img/profile-8.jpeg" />
-                                    </div>
-                                    <div class="avatar translateY-axis">
-                                        <img alt="avatar" src="/img/profile-12.jpeg" />
-                                    </div>
-                                    <div class="avatar translateY-axis">
-                                        <img alt="avatar" src="/img/profile-19.jpeg" />
-                                    </div>
-
-                                </div>
-
-                            </div>
+   <Bar :data="store.datacollection" />
+                          
 
 
                         </div>
@@ -221,79 +119,257 @@
 
                 </div>
 
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
-                    <div class="widget widget-card-one">
-                        <div class="widget-content">
+                       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing">
+                        <div class="widget widget-card-four">
+                            <div class="widget-content">
+                         <!-- <LogFitter></LogFitter> -->
 
-                            <div class="media">
-                                <div class="w-img">
-                                    <img src="/img/profile-19.jpeg" alt="avatar">
-                                </div>
-                                <div class="media-body">
-                                    <h6>Jimmy Turner</h6>
-                                    <p class="meta-date-time">Monday, May 18</p>
-                                </div>
-                            </div>
+                           <div class="row mb-4">
+    <div id="form_grid_layouts" class="col-lg-10">
+      <div class="seperator-header">
+        <h4 class="">Fitter</h4>
+      </div>
+    </div>
 
-                            <p>"Duis aute irure dolor" in reprehenderit in voluptate velit esse cillum "dolore eu
-                                fugiat" nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+    <div class="col-sm-12">
+      <label for="exampleFormControlInput1">Fiiter Type</label>
+      <select class="form-control" v-model="store.formfitter.type">
+        <option value="1">Lesson</option>
+        <option value="2">Course</option>
+        <option value="3">Course && User</option>
+      </select>
+    </div>
+    <div class="col-sm-12">
+      <label for="exampleFormControlInput1">Year</label>
+      <select class="form-control" v-model="store.formfitter.year">
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+        <option value="2028">2028</option>
+      </select>
+    </div>
 
-                            <div class="w-action">
-                                <div class="card-like">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-thumbs-up">
-                                        <path
-                                            d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3">
-                                        </path>
-                                    </svg>
-                                    <span>551 Likes</span>
-                                </div>
 
-                                <div class="read-more">
-                                    <a href="javascript:void(0);">Read More <svg xmlns="http://www.w3.org/2000/svg"
-                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                            class="feather feather-chevrons-right">
-                                            <polyline points="13 17 18 12 13 7"></polyline>
-                                            <polyline points="6 17 11 12 6 7"></polyline>
-                                        </svg></a>
-                                </div>
+    <div class="col-sm-12">
+      <label for="exampleFormControlInput1">Course ID</label>
+      <select class="form-control" v-model="store.formfitter.course_id" @change="onChange($event)">
+        <option disabled :value="null">
+          เลือก
+        </option>
+        <option v-for="(item, i) in store.courselist" :value="item.course_id">
+          {{ item.course_name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-sm-12" v-if="store.formfitter.type != '2' && store.formfitter.type != '3'">
+      <label for="exampleFormControlInput1">Lesson ID</label>
+      <select class="form-control" v-model="store.formfitter.cs_id">
+        <option disabled :value="null">
+          เลือก
+        </option>
+        <option v-for="(less, i) in store.lessonlist" :value="less.cs_id" v-if="store.lessonlist">
+          {{ less.cs_name }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="row layout-top-spacing" v-if="store.formfitter.type == '3'">
+    <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+      <input type="text" class="form-control" id="inputEmail3" placeholder="ค้นหา User *" maxlength="10"
+        v-model="store.formuser.search" @keyup="searchData">
+    </div>
+  </div>
+
+  <div class="col-sm-12" v-if="store.formfitter.type == '3'">
+    <div class="table-responsive">
+      <table id="example" class="table table-bordered" style="width:100%">
+        <thead>
+          <tr>
+            <th>{{ $t("menu_result_name") }} &#8597;</th>
+            <th>{{ $t("menu_result_phone") }} &#8597;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(users, index) in store.userall" :key="users.user_id" @click="Sel(users.user_id)"
+            :class="{ 'table-success': store.myChoose === users.user_id }">
+            <td>{{ users.user_firstname }} {{ users.user_lastname }}</td>
+            <td>{{ users.user_phone }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+
+
+
+
+
+  <button type="button" class="btn btn-primary" @click="search()">ค้นหา</button>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
-                    <div class="widget widget-card-two">
-                        <div class="widget-content">
-
-                            <div class="media">
-                                <div class="w-img">
-                                    <img src="/img/g-8.png" alt="avatar">
-                                </div>
-                                <div class="media-body">
-                                    <h6>Dev Summit - New York</h6>
-                                    <p class="meta-date-time">Bronx, NY</p>
-                                </div>
-                            </div>
-
-                            <div class="card-bottom-section">
-                                <h5>4 Members Going</h5>
-                                <div class="img-group">
-                                    <img src="/img/profile-19.jpeg" alt="avatar">
-                                    <img src="/img/profile-6.jpeg" alt="avatar">
-                                    <img src="/img/profile-8.jpeg" alt="avatar">
-                                    <img src="/img/profile-3.jpeg" alt="avatar">
-                                </div>
-                                <a href="javascript:void(0);" class="btn">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
+    <!-- --------------333333333333333333333333 -->
+                    <div class="row layout-top-spacing" v-if="store.type == 'all' || store.type == 'reserve'">
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12 layout-spacing">
+                        <div class="widget widget-five">
+
+                            <div class="widget-heading">
+
+
+                        </div>
+
+
+                        <div class="widget-content">
+<!-- <button @click="loadNewData">Load New Data</button> -->
+                    
+
+   <Bar :data="store.datacollectionreserve" />
+                          
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing">
+                        <div class="widget widget-card-four">
+                            <div class="widget-content">
+                         <!-- <LogFitter></LogFitter> -->
+
+                           <div class="row mb-4">
+    <div id="form_grid_layouts" class="col-lg-10">
+      <div class="seperator-header">
+        <h4 class="">Fitter Exam</h4>
+      </div>
+    </div>
+
+    <div class="col-sm-12">
+      <label for="exampleFormControlInput1">Year</label>
+      <select class="form-control" v-model="store.formrev.year">
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+        <option value="2028">2028</option>
+      </select>
+    </div>
+
+
+    <div class="col-sm-12">
+      <label for="exampleFormControlInput1">DLT</label>
+      <select class="form-control" @change="onChange($event)"  v-model="store.formrev.dlt_code">
+        <option disabled :value="null">
+          เลือก
+        </option>
+     
+         <option v-for="(item, i) in store.dlt" :value="item.dlt_code">
+          {{ item.dlt_description }}
+        </option>
+      </select>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  <button type="button" class="btn btn-primary" @click="searchReserve()">ค้นหา</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+
+            <div class="row layout-top-spacing" v-if="store.type == 'all' || store.type == 'exam'">
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12 layout-spacing">
+                        <div class="widget widget-five">
+
+                            <div class="widget-heading">
+
+
+                        </div>
+
+
+                        <div class="widget-content">
+<!-- <button @click="loadNewData">Load New Data</button> -->
+                    
+
+   <Bar :data="store.datacollectionexam" />
+                          
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                       <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing">
+                        <div class="widget widget-card-four">
+                            <div class="widget-content">
+                         <!-- <LogFitter></LogFitter> -->
+
+                           <div class="row mb-4">
+    <div id="form_grid_layouts" class="col-lg-10">
+      <div class="seperator-header">
+        <h4 class="">Fitter Exam</h4>
+      </div>
+    </div>
+
+    <div class="col-sm-12">
+      <label for="exampleFormControlInput1">Year</label>
+      <select class="form-control" v-model="store.formexam.year">
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+        <option value="2028">2028</option>
+      </select>
+    </div>
+
+
+    <div class="col-sm-12">
+      <label for="exampleFormControlInput1">DLT</label>
+      <select class="form-control" @change="onChange($event)" v-model="store.formexam.dlt_code">
+        <option disabled :value="null">
+          เลือก
+        </option>
+       <option v-for="(item, i) in store.dlt" :value="item.dlt_code">
+          {{ item.dlt_description }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <button type="button" class="btn btn-primary" @click="searchExam()">ค้นหา</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+
+
+             
         </div>
 
     </div>
@@ -302,12 +378,207 @@
     <!--  END FOOTER  -->
 </div></template>
 <script setup lang="ts">
-/*Call Components*/
-import { storeToRefs } from 'pinia';
-import { defineComponent } from 'vue';
-definePageMeta({
+    definePageMeta({
     middleware: 'auth' // this should match the name of the file inside the middleware directory 
 })
+
+/*Call Components*/
+import { storeToRefs } from 'pinia';
+import { ref, watch } from 'vue';
+import { defineComponent } from 'vue';
+import LogFitter from '@/components/log/LogFitter.vue'
+import Swal from 'sweetalert2';
+import { Bar } from 'vue-chartjs';
+import { LogStore } from '@/store/log'; // import the auth store we just created
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+} from 'chart.js';
+ChartJS.register(
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale
+);
+const store = LogStore();
+
+
+
+const year = new Date().getFullYear();
+store.formfitter.year = year;
+store.formrev.year = year;
+store.formexam.year = year;
+
+await store.fetchCourslist()
+
+
+const searchData = async () => {
+  store.myChoose = [];
+  await store.fetchUsers()
+};
+
+const chartData = ref(store.datacollection);
+
+const loadNewData = async () => {
+     store.datacollection = {
+        labels: ['January', 'February', 'March'],
+        datasets: [{
+          label: 'New Data',
+          backgroundColor: ['#FAE043', '#2A9D8F', '#E63946'],
+          data: [
+            Math.floor(Math.random() * 50),
+            Math.floor(Math.random() * 50),
+            Math.floor(Math.random() * 50)
+          ]
+        }]
+      };
+
+
+};
+
+const search = async () => {
+  if (store.formfitter.type == '1') {
+    if(store.formfitter.cs_id == null){
+      Swal.fire({
+    text: 'กรุณาเลือก Lesson ที่มีบทเรียน !',
+    icon: 'error',
+  });
+
+    }else {
+  await store.fetchReport();
+
+  await updatechart();
+    }
+
+
+  }
+  if (store.formfitter.type == '2') {
+ 
+
+  if(store.formfitter.course_id == null){
+      Swal.fire({
+    text: 'กรุณาเลือก Course!',
+    icon: 'error',
+  });
+
+    }else {
+     await store.fetchReport();
+
+     await updatechart();
+     
+      
+    }
+
+  }
+  if (store.formfitter.type == '3') {
+
+    
+
+    if(store.formfitter.user_id == null){
+      Swal.fire({
+    text: 'กรุณาเลือก Users!',
+    icon: 'error',
+  });
+
+    }else {
+     await store.fetchReport();
+
+await updatechart();
+     
+
+      
+    }
+
+
+
+  }
+ 
+};
+
+const searchExam= async () => {
+
+   await store.fetchLogExam();
+
+await updatechartexam();
+}
+
+const searchReserve= async () => {
+ await store.fetchLogReserve();
+ console.log(store.reportrev[0])
+ await updatechartrev();
+}
+
+const onChange = async (event) => {
+  store.formfitter.cs_id = null;
+  await store.fetchLesson();
+
+};
+
+
+const updatechart = async () => {
+store.datacollection = {
+        labels: ['ມັງກອນ', 'ກຸມພາ', 'ມີເຄື່ອງໝາຍ.','ເດືອນເມສາ','ອາດ','ເດືອນມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'],
+        datasets: [{
+          label: 'Report E-learning',
+          backgroundColor: ['#FAE043', '#2A9D8F', '#E63946'],
+          data: [store.reportlog[0],store.reportlog[1],store.reportlog[2],store.reportlog[3],store.reportlog[4],store.reportlog[5],store.reportlog[6],
+          store.reportlog[7],store.reportlog[8],store.reportlog[9],store.reportlog[10],store.reportlog[11]]
+        }]
+      };
+};
+
+
+
+const updatechartrev = async () => {
+store.datacollectionreserve = {
+        labels: ['ມັງກອນ', 'ກຸມພາ', 'ມີເຄື່ອງໝາຍ.','ເດືອນເມສາ','ອາດ','ເດືອນມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'],
+        datasets: [{
+          label: 'Report Reserve',
+          backgroundColor: ['#FAE043', '#2A9D8F', '#E63946'],
+          data: [store.reportrev[0],store.reportrev[1],store.reportrev[2],store.reportrev[3],store.reportrev[4],store.reportrev[5],store.reportrev[6],
+          store.reportrev[7],store.reportrev[8],store.reportrev[9],store.reportrev[10],store.reportrev[11]]
+        }]
+      };
+};
+
+
+const updatechartexam = async () => {
+store.datacollectionexam = {
+        labels: ['ມັງກອນ', 'ກຸມພາ', 'ມີເຄື່ອງໝາຍ.','ເດືອນເມສາ','ອາດ','ເດືອນມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'],
+        datasets: [{
+          label: 'Report Exam',
+          backgroundColor: ['#FAE043', '#2A9D8F', '#E63946'],
+          data: [store.reportexam[0],store.reportexam[1],store.reportexam[2],store.reportexam[3],store.reportexam[4],store.reportexam[5],store.reportexam[6],
+          store.reportexam[7],store.reportexam[8],store.reportexam[9],store.reportexam[10],store.reportexam[11]]
+        }]
+      };
+};
+
+
+
+const choose = async (e) => {
+
+store.type = e
+  await store.FillterType()
+
+}
+const Sel = async (id) => {
+  store.formfitter.user_id = id;
+  store.myChoose = id;
+
+}
+
+const backToUser = async () => {
+  router.go(-1);
+}
+
 
 </script>
 <style scoped></style>
