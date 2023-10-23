@@ -175,7 +175,7 @@
 
 
     <div class="col-sm-12">
-      <label for="exampleFormControlInput1">Course ID</label>
+      <label for="exampleFormControlInput1">DLT</label>
       <select class="form-control" v-model="store.formfitter.course_id" @change="onChange($event)">
         <option disabled :value="null">
           เลือก
