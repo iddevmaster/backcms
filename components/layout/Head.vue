@@ -20,7 +20,7 @@
                     <div class="dropdown-menu position-absolute" aria-labelledby="language-dropdown">
                         <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(0)"><img :src="image(users.lan[0])" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;{{ $t("l_loas") }}</span></a>
                         <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(1)"><img :src="image(users.lan[1])" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;{{ $t("l_eng") }}</span></a>
-                        <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(2)"><img :src="image(users.lan[2])" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;{{ $t("l_thai") }}</span></a>
+                        <!-- <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(2)"><img :src="image(users.lan[2])" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;{{ $t("l_thai") }}</span></a> -->
                     </div>
                 </li>
 <!-- 

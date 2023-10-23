@@ -349,6 +349,25 @@
   "table_result_name":"ຊື່ສອບເສັງ",
   "table_result_phone":"ເບີ​ໂທລະ​ສັບ",
   "table_result_iden":"ໝາຍເລກບັດປະຈຳຕົວ",
-  "report_result_table":"ລາຍງານຜົນໄດ້ຮັບ"
+  "report_result_table":"ລາຍງານຜົນໄດ້ຮັບ",
+  "menu_dashboard":"ແຜງໜ້າປັດ",
+  "menu_dashboard_all":"ທັງໝົດ",
+  "menu_dashboard_course":"ຄວາມຮູ້",
+  "menu_dashboard_app":"ນັດໝາຍ",
+  "menu_dashboard_exam":"ການ​ກວດ​ສອບ​",
+  "menu_dashboard_all_log":"ແຜງໜ້າປັດ",
+  "menu_dashboard_course_log":"ແຜງໜ້າປັດ",
+  "menu_dashboard_app_log":"ແຜງໜ້າປັດ",
+  "menu_dashboard_exam_log":"ແຜງໜ້າປັດ",
+  "menu_dashboard_course_t":"ຄວາມຮູ້ - ບົດຮຽນ",
+  "menu_dashboard_app_t":"ການຈອງ",
+  "menu_dashboard_exam_t":"ການ​ກວດ​ສອບ​",
+  "chart_log_course":"ບັນທຶກ ຫຼັກສູດ",
+  "chart_log_app":"ບັນທຶກ ຈອງ ",
+  "chart_log_exam":"ບັນທຶກ ການ​ກວດ​ສອບ​",
+  "fitter_dashboard_course":"ຄົ້ນຫາ ຫຼັກສູດ​",
+  "fitter_dashboard_appoint":"ຄົ້ນຫາ ຈອງ​",
+  "fitter_dashboard_exam":"ຄົ້ນຫາ ການ​ກວດ​ສອບ​​",
+  "fitter_search":"ຊອກຫາ"
 }
 

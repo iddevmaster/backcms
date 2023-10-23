@@ -56,11 +56,11 @@ export const LogStore = defineStore('result', {
     },
     formrev:{
       year:null,
-      dlt_code:null
+      dlt_code:'A'
     },
     formexam:{
       year:null,
-      dlt_code:null
+      dlt_code:'A'
     },
     formsearchcourse: {
       page: 1,
@@ -218,7 +218,7 @@ export const LogStore = defineStore('result', {
       if(this.formfitter.type == '1'){
         
         const report = [];
-        const data = await ApiService.get('/course/log/lesson/'+this.formfitter.cs_id+'/'+this.formfitter.year).then(response => {
+        const data = await ApiService.get('/log/lesson/'+this.formfitter.cs_id+'/'+this.formfitter.year).then(response => {
           for (var i = 0; i < response.data.length; i++) {
             report.push(response.data[i].total);
           }
@@ -229,7 +229,7 @@ export const LogStore = defineStore('result', {
       if(this.formfitter.type == '2'){
    
         const report = [];
-        const data = await ApiService.get('/course/log/course/'+this.formfitter.course_id+'/'+this.formfitter.year).then(response => {
+        const data = await ApiService.get('/log/course/'+this.formfitter.course_id+'/'+this.formfitter.year).then(response => {
           for (var i = 0; i < response.data.length; i++) {
             report.push(response.data[i].total);
           }
@@ -240,7 +240,7 @@ export const LogStore = defineStore('result', {
       if(this.formfitter.type == '3'){
       
         const report = [];
-        const data = await ApiService.get('course/log/course/'+this.formfitter.course_id+'/'+this.formfitter.year+'?user_id='+ this.formfitter.user_id).then(response => {
+        const data = await ApiService.get('/log/course/'+this.formfitter.course_id+'/'+this.formfitter.year+'?user_id='+ this.formfitter.user_id).then(response => {
           for (var i = 0; i < response.data.length; i++) {
             report.push(response.data[i].total);
           }
@@ -258,6 +258,7 @@ export const LogStore = defineStore('result', {
           reserv.push(response.data[i].total);
         }
        this.reportrev = reserv
+       console.log(this.reportrev);
       }); 
     },
     
@@ -268,6 +269,7 @@ export const LogStore = defineStore('result', {
           exam.push(response.data[i].total);
         }
        this.reportexam = exam
+       console.log(this.reportexam);
        
       }); 
     },

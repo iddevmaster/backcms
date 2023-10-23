@@ -352,7 +352,27 @@
   "table_result_phone":"Phone",
   "table_result_iden":"Identification",
   "table_result":"Report Exam",
-  "report_result_table":"Report Results"
+  "report_result_table":"Report Results",
+  "menu_dashboard":"DashBoard",
+  "menu_dashboard_all":"All",
+  "menu_dashboard_course":"Course",
+  "menu_dashboard_app":"Appointment",
+  "menu_dashboard_exam":"Examination",
+  "menu_dashboard_all_log":"All",
+  "menu_dashboard_course_log":"Course",
+  "menu_dashboard_app_log":"Appointment",
+  "menu_dashboard_exam_log":"Examination",
+  "menu_dashboard_course_t":"Course - Lesson",
+  "menu_dashboard_app_t":"Reserve",
+  "menu_dashboard_exam_t":"Exam",
+  "chart_log_course":"Log Course",
+  "chart_log_app":"Log Reserve",
+  "chart_log_exam":"Log Exam",
+  "fitter_dashboard_course":"Fitter Course",
+  "fitter_dashboard_appoint":"Fitter Appointment",
+  "fitter_dashboard_exam":"Fitter Exam",
+  "fitter_search":"Search"
+
 }
 
 
