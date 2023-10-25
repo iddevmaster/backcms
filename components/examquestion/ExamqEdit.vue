@@ -181,7 +181,7 @@ const save = async () => {
       let save = await UpdateExa();  ///////////save 
       let clear = await ClearLocal();  ///////////save 
       if(save == true){
-      toast.success('Save Data')
+      toast.success('Edit Success')
       }
       setTimeout(() => {
       router.go(-1);
