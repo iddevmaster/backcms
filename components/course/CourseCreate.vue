@@ -333,13 +333,15 @@ const save = async () => {
       });
       let uploadfile = await UploadfileCourse();
       let updateCourse = await SaveCourse();
-      await setTimeout(() => {
-        toast.success("Save Data");
-      }, 500);
+
       const input = document.querySelector('input[type="file"]');
       input.value = "";
       store.ResetForm();
       v$.value.$reset();
+      await setTimeout(() => {
+        toast.success("Save Data");
+      }, 500);
+    await router.push('/learning');
     } catch (error) {
       await toast.error("Fail Save Data");
     }

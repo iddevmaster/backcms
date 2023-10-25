@@ -11,6 +11,7 @@ import TransportList from '@/components/Newstransport/TransportList.vue'
 import { useModalStore } from '@/store/modal';
 import Loading from '@/components/layout/Success.vue';
 import Alert from '@/components/layout/Alert.vue';
+import { useToast } from "vue-toastification";
 definePageMeta({
   middleware: ['auth','roles'],
   allowedRoles: [1,2],
@@ -27,17 +28,20 @@ const { posts } = storeToRefs(newTransportStore())
   const modalStore = useModalStore();
   const { GetopenModal } = storeToRefs(store); //Get Getter
   const { GetopenModal_ID } = storeToRefs(store); //Get Getter
-
   const { Pending } = storeToRefs(store); //Get Getter
+  
 
   const closeModal = () => {
     store.closeModal();
   };
+  const toast = useToast()
 
 
 const delete_userid = async (id) => {
   await store.deleteItem_id(id);
   await store.fetchNewTransport()
+
+  await toast.success('Delete Success');
   };
   
 </script>

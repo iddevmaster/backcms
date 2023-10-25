@@ -10,7 +10,7 @@
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <select class="form-select form-select" aria-label="Default select example" @change="selectshowdata($event)">
-        <option value="10">10</option>
+        <option value="5">5</option>
         <option value="20">20</option>
         <option value="50">50</option>
       </select>
@@ -44,7 +44,7 @@
           <!-- <td>{{ datanew.news_description }}</td> -->
           <td v-if="datanew.news_type == 1"> กรมขนส่ง</td>
           <td v-else> กรมโยธา</td>
-          <td>{{ coverttime(datanew.udp_date) }}</td>
+          <td>{{ format(datanew.udp_date) }}</td>
           <td>
             <NuxtLink :to="'/news/transport/' + datanew.news_id">
               <a class="badge badge-light-primary text-start me-2 action-edit"> <svg xmlns="http://www.w3.org/2000/svg"
@@ -116,6 +116,7 @@ import "datatables.net-dt/css/jquery.dataTables.min.css"
 import $ from 'jquery'
 import Paginate from "vuejs-paginate-next";
 import { useToast } from "vue-toastification";
+import moment from "moment-timezone";
 
 const store = newTransportStore()
 const toast = useToast();
@@ -196,6 +197,10 @@ function coverttime(date) {
   const formattedDatetime = datetime.toLocaleString(undefined, options);
   return formattedDatetime;
 }
+
+const format = (time) => {
+  return moment(time).format("DD/MM/YYYY HH:mm");
+};
 
 function image(i) {
   let im = ApiService.image(i);

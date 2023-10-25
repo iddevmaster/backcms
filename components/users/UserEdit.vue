@@ -173,7 +173,7 @@ const save = async () => {
   if (!v$.value.$error) {
     let updatedata = await Update(router.currentRoute.value.params.id); //save form  ส่งไป Store User
     if (updatedata) {
-      toast.success('Save Data');
+      toast.success('Edit Success');
     } else {
       toast.error('Fail Save Data')
     }

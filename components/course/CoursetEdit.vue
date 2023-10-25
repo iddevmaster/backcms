@@ -256,7 +256,7 @@ const v$ = useVuelidate(rules, FormDataEditCourse);
 const save = async () => {
   v$.value.$validate();
   if (!v$.value.$error) {
-    await toast.warning("Wait Save Data", {
+    await toast.warning("Wait Edit Data", {
       timeout: 2000,
     });
 
@@ -269,11 +269,13 @@ const save = async () => {
       }, 500);
 
       await setTimeout(() => {
-        toast.success("Save Data");
+        toast.success("Edit Success");
       }, 500);
 
+      await router.push('/learning');
+
     } catch (error) {
-      await toast.error("Fail Save Data");
+      await toast.error("Fail Edit Data");
     }
 
   }
