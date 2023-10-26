@@ -129,9 +129,9 @@ export const ExamHistoryStore = defineStore('examhistory', {
 
 async fetchExamlistByUser() {
   try {
-    const data = await ApiService.get('/exam/history/?em_id=18&user_id=117').then(response => {
+    const data = await ApiService.get('/exam/history/?em_id=22&user_id='+this.user_id).then(response => {
     this.historylist = response.data
-    //  console.log(response);
+      console.log(this.historylist);
     });
     return true
   } catch (error) {

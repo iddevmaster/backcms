@@ -7,6 +7,7 @@ import { useAuthStore } from '@/store/auth';
 import { ExamHistoryStore } from '@/store/examhistory'; // import the auth store we just created
 
 import ExamHistorySearch from '@/components/examhistory/ExamHistorySearch.vue'
+import ExamHistoryByUser from '@/components/examhistory/ExamHistoryByUser.vue'
 import ResultNodata from '@/components/result/ResultNodata.vue'
 
 
@@ -56,10 +57,9 @@ store.fetchExam();
                 <div class="row layout-top-spacing">
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.IsCardInsert">
                         <div class="widget-content widget-content-area br-8 p-3">
-                     
+                        <ExamHistoryByUser></ExamHistoryByUser>
                         </div>
                     </div>
-
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.IsCardNoInsert">
                         <div class="widget-content widget-content-area br-8 p-3">
                             <ResultNodata></ResultNodata>

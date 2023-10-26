@@ -158,7 +158,8 @@ const searchData = async () => {
 
 const Fitter = async () => {
 
-  store.IsCardNoInsert = true;
+  store.IsCardNoInsert = false;
+  store.IsCardInsert = true;
   await store.fetchExamlistByUser();
 
 
