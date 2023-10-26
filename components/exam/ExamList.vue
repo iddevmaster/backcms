@@ -34,11 +34,11 @@
                 <th scope="col" @click="sortList('em_code')">{{ $t("menu_exam_all_code") }} &#8597;</th>
                 <th class="text-center" scope="col">{{ $t("menu_exam_all_pic") }}</th>
                 <th scope="col" @click="sortList('em_name')">{{ $t("menu_exam_all_name") }} &#8597;</th>
-                <th class="text-center" scope="col">{{ $t("menu_exam_all_detail") }}</th>
+                <!-- <th class="text-center" scope="col">{{ $t("menu_exam_all_detail") }}</th> -->
                      <th class="text-center" scope="col">{{ $t("menu_menu_exam_dlt") }}</th>
-                <th class="text-center" scope="col" @click="sortList('em_random_amount')">{{ $t("menu_exam_all_total_random") }} &#8597;</th>
+                <th class="text-center" scope="col" @click="sortList('em_random_amount')">{{ $t("menu_exam_all_total_random") }}</th>
                  <th class="text-center" scope="col" @click="sortList('total_question')">{{ $t("menu_exam_all_total_exam") }} &#8597;</th>
-            
+                 <th class="text-center" scope="col">{{ $t("menu_exam_all_create") }}</th>
                 <th class="text-center" scope="col">{{ $t("menu_exam_all_total_action") }}</th>
             </tr>
         </thead>
@@ -56,9 +56,9 @@
                   </span>
                 </td>
           
-                <td class="text-center">
+                <!-- <td class="text-center">
                   {{item.em_description}}
-                </td>
+                </td> -->
                  <td class="text-center">
                   {{item.dlt_code}}
                 </td>
@@ -67,6 +67,9 @@
                 </td>
                  <td class="text-center">
                     <span class="badge badge-light-secondary">{{item.total_question}}</span>
+                </td>
+                <td class="text-center">
+                    <span class="badge badge-light-secondary">{{item.crt_date}}</span>
                 </td>
                 <!-- <td>
                   <NuxtLink>

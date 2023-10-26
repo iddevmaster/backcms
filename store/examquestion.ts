@@ -111,7 +111,7 @@ export const ExamquestionStore = defineStore('examquestion', {
         });
 
       } catch (error) {
-        console.log('error');
+       
         return false;
       } finally {
 
@@ -125,9 +125,7 @@ export const ExamquestionStore = defineStore('examquestion', {
     },
 
     async questionlist() {
-      console.log(this.quest_Id);
       this.eq = [];
-    
       if (this.examqlist.length == 0) {    //////////เช็ค ก่อนว่า มี ข้อสอบไหม  if คือ ไม่มี
         this.eq = [];
       } else {//////////เช็ค ก่อนว่า มี ข้อสอบไหม else  คือมี

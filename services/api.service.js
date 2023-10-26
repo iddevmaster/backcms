@@ -43,7 +43,8 @@ export default {
   image(img) {
     const imag = ViewImage+img;
     if(!img){
-      console.log('ไม่มีรูป');
+      let noimge = ViewImage+'static/upload/2023/10/files-7wdaRINrS3.jpg'
+    return noimge;
     }
     return imag;
   },

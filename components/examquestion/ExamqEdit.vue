@@ -112,6 +112,7 @@ import { ExamquestionStore } from '@/store/examquestion'; // import the auth sto
 import { useVuelidate } from '@vuelidate/core';
 import { required, email, sameAs, minLength, helpers, maxLength } from '@vuelidate/validators';
 import { useToast } from 'vue-toastification'
+import ApiService from '../../services/api.service';
 
 
 const toast = useToast()
@@ -231,14 +232,11 @@ const index = store.choicelist;
 
 
 function image(i) {
-  var x = null;
-  if (i) {
-    const usingSplit = i.split(",");
-    var x = usingSplit[0];
-  } else {
-    var x = "static/upload/2023/8/files-BuxyK5Sy7I.png";
-  }
-  return "http://oasapi.iddriver.com/media_file/file/?f=" + x;
+
+  let im =  ApiService.image(i);
+
+return im;
+
 }
 
 function coverimage(i) {

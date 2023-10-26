@@ -73,7 +73,9 @@ const DeleteEq = async (item) => {
   await store.fetchExamquestionlist();
 };
 function image(i) {
+
   let im =  ApiService.image(i);
+
   return im;
 }
 </script>
@@ -157,6 +159,7 @@ function image(i) {
                                       <td>{{ index + 1 }}</td>
                                       <td>{{ item.ec_name }}</td>
                                       <td class="text-end">
+                                   
                                         <img :src="image(item.ec_image)" class="img-fluid" width="80" height="80" />
                                       </td>
                                     </tr>
