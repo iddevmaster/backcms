@@ -230,6 +230,9 @@
             <li>
               <nuxt-link to="/examhistory"> {{ $t("menu_exam_all_history") }}</nuxt-link>
             </li>
+            <li>
+              <nuxt-link to="/examhistory/user">{{ $t("menu_exam_all_history") }}</nuxt-link>
+            </li>
           </ul>
         </li>
 

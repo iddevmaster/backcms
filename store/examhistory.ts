@@ -10,11 +10,30 @@ export const ExamHistoryStore = defineStore('examhistory', {
   state: () => ({
     em_id:null,
     history:[],
+    myChoose:[],
+    examlist:[],
+    historylist:[],
     formsearchexamhistory: {
       page: 1,
       per_page: 50,
       search: '',
     },
+    formuser: {
+      page: 1,
+      per_page: 5,
+      search: ""
+    },
+    formsearchexam: {
+      page: 1,
+      per_page: 100,
+      search: '',
+    },
+    IsCardInsert:false,
+    IsCardEdit:false,
+    IsCardListByUser:false,
+    IsCardNoInsert:false,
+    userall:[],
+    user_id: null,
     total_page:null,
     limit_page:null,
     current_page:null,
@@ -68,6 +87,57 @@ export const ExamHistoryStore = defineStore('examhistory', {
       this.formsearchexamhistory.page = page
     },
 
+    async fetchUsers() {
+      const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
+        this.user = response.data.data;
+    
+      });
+
+    let a =  await this.checkuser();
+   
+  },
+  delay(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  },
+ async checkuser() {
+   this.userall = [];
+    for (var i = 0; i < this.user.length; i++) {
+      const data = ApiService.get('/user/get/'+this.user[i].user_id).then(response => {
+     //   this.result = response.data;
+
+     const b = {user_id:response.data.user_id,user_firstname:response.data.user_firstname,user_lastname:response.data.user_lastname,user_phone:response.data.user_phone,detail:response.data.detail?.verify_account,identification_number:response.data.detail?.identification_number}
+        this.userall.push(b)
+      });
+    }
+    return this.userall;
+
+ 
+  },
+
+  
+  async fetchExam() {
+    try {
+      const data = await ApiService.post('/exam/main/list', this.formsearchexam).then(response => {
+        this.examlist = response.data.data
+      });
+      return true
+    } catch (error) {
+      return false;
+    } 
+},
+
+
+async fetchExamlistByUser() {
+  try {
+    const data = await ApiService.get('/exam/history/?em_id=18&user_id=117').then(response => {
+    this.historylist = response.data
+    //  console.log(response);
+    });
+    return true
+  } catch (error) {
+    return false;
+  } 
+},
     
 
 
