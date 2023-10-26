@@ -30,10 +30,10 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-            <th scope="col" @click="sortList('em_code')">{{ $t("menu_exam_history_index") }} &#8597;</th>
-                <th scope="col" @click="sortList('em_code')"> {{ $t("menu_exam_history_score") }} &#8597;</th>
+            <th scope="col">{{ $t("menu_exam_history_index") }} </th>
+                <th scope="col" > {{ $t("menu_exam_history_score") }}</th>
                 <th class="text-center" scope="col"> {{ $t("menu_exam_history_total") }}</th>
-                <th scope="col" @click="sortList('em_name')"> {{ $t("menu_exam_history_email") }} &#8597;</th>
+                <th scope="col"> {{ $t("menu_exam_history_email") }}</th>
                 <th class="text-center" scope="col"> {{ $t("menu_exam_history_phone") }}</th>
                 <th class="text-center" scope="col"> {{ $t("menu_exam_history_name") }}</th>
             </tr>
