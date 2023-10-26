@@ -12,7 +12,7 @@ export const ExamHistoryStore = defineStore('examhistory', {
     history:[],
     formsearchexamhistory: {
       page: 1,
-      per_page: 5,
+      per_page: 50,
       search: '',
     },
     total_page:null,

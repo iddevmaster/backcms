@@ -19,9 +19,9 @@
         class="form-select form-select"
         aria-label="Default select example"   @change="selectshowdata($event)"  
       >
-        <option value="5">5</option>
-        <option value="15">15</option>
-        <option value="30">30</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="150">150</option>
       </select>
     </div>
   </div>
@@ -35,6 +35,7 @@
                 <th class="text-center" scope="col"> {{ $t("menu_exam_history_total") }}</th>
                 <th scope="col" @click="sortList('em_name')"> {{ $t("menu_exam_history_email") }} &#8597;</th>
                 <th class="text-center" scope="col"> {{ $t("menu_exam_history_phone") }}</th>
+                <th class="text-center" scope="col"> {{ $t("menu_exam_history_name") }}</th>
             </tr>
         </thead>
 
@@ -46,6 +47,7 @@
                 <td>{{item.er_question_total}}</td>
                 <td>{{item.out_user.user_email}}</td>
                 <td>{{item.out_user.user_phone}}</td>
+                <td>{{item.out_user.user_firstname}} {{item.out_user.user_lastname}}</td>
              
             </tr>
         </tbody>
