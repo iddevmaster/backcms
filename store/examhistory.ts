@@ -8,11 +8,12 @@ import { ref } from 'vue';
 
 export const ExamHistoryStore = defineStore('examhistory', {
   state: () => ({
-    em_id:null,
+    em_id:0,
     history:[],
     myChoose:[],
     examlist:[],
     historylist:[],
+    byem_id:0,
     formsearchexamhistory: {
       page: 1,
       per_page: 50,
@@ -128,10 +129,11 @@ export const ExamHistoryStore = defineStore('examhistory', {
 
 
 async fetchExamlistByUser() {
+ 
   try {
-    const data = await ApiService.get('/exam/history/?em_id=22&user_id='+this.user_id).then(response => {
+    const data = await ApiService.get('/exam/history/?em_id='+this.byem_id+'&user_id='+this.user_id).then(response => {
     this.historylist = response.data
-      console.log(this.historylist);
+      
     });
     return true
   } catch (error) {

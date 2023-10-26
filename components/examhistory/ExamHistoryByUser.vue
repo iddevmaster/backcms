@@ -1,32 +1,30 @@
 <template>
-
-
   <div class="table-responsive">
     <table class="table table-bordered">
-        <thead>
-            <tr>
-       
-                <th scope="col" @click="sortList('em_code')">{{ $t("menu_exam_all_code") }} &#8597;</th>
-                <th class="text-center" scope="col">{{ $t("menu_exam_all_pic") }}</th>
-                <th scope="col" @click="sortList('em_name')">{{ $t("menu_exam_all_name") }} &#8597;</th>
-                <th class="text-center" scope="col">{{ $t("menu_exam_all_detail") }}</th>
-                <th class="text-center" scope="col" @click="sortList('em_random_amount')">{{ $t("menu_exam_all_total_random") }} &#8597;</th>
-                 <th class="text-center" scope="col" @click="sortList('total_question')">{{ $t("menu_exam_all_total_exam") }} &#8597;</th>
-            
-                <th class="text-center" scope="col">{{ $t("menu_exam_all_total_action") }}</th>
-            </tr>
-        </thead>
+      <thead>
+        <tr>
+          <th scope="col">ชื่อหลักสูตร</th>
+          <th scope="col" @click="sortList('em_code')">คะแนน</th>
+          <th class="text-center" scope="col">จำนวนที่ทำ</th>
+          <th scope="col" @click="sortList('em_name')">ชื่อ - นามสกุล</th>
+          <th class="text-center" scope="col">เวลา</th>
+        </tr>
+      </thead>
 
+      <tbody>
+        <tr v-for="item in store.historylist">
+          <td>{{ item.out_em.em_name }}</td>
+          <td>{{ item.er_score_total }}</td>
+          <td>{{ item.er_question_total }}</td>
+          <td>
+            {{ item.out_user.user_firstname }} {{ item.out_user.user_lastname }}
+          </td>
 
-        <tbody>
-            <tr  v-for="item in store.historylist">
-                <td>{{item.er_id}}</td>
-          
-         
-            </tr>
-        </tbody>
+          <td>{{ item.crt_date }}</td>
+        </tr>
+      </tbody>
     </table>
-</div>
+  </div>
 </template>
 
 
@@ -35,21 +33,18 @@
 // import DataTablesCore from 'datatables.net-bs5';
 import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
-import { ExamHistoryStore } from '@/store/examhistory'; // import the auth store we just created
+import { ExamHistoryStore } from "@/store/examhistory"; // import the auth store we just created
 import { useToast } from "vue-toastification";
-import ApiService from '../../services/api.service';
+import ApiService from "../../services/api.service";
 const router = useRouter();
 
 const toast = useToast();
 const store = ExamHistoryStore();
-
-
 </script>
 <style>
 .dt--pagination {
   float: right;
 }
-
 
 /* .modal-content {
   background-color: white;
@@ -85,5 +80,4 @@ width: 100%;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   position: relative;
 }
-
 </style>

@@ -4,9 +4,9 @@
   <div class="row layout-top-spacing">
 
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4">
-      <select class="form-select form-select" aria-label="Default select example" >
+      <select class="form-select form-select" aria-label="Default select example"  v-model="store.byem_id">
         <option disabled selected :value="0">เลือก</option>
-        <option v-for="(events, x) in store.examlist">{{events.em_name}}</option>
+        <option v-for="(events, x) in store.examlist" :value="events.em_id">{{events.em_name}}</option>
       </select>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
