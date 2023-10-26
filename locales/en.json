@@ -60,6 +60,9 @@
   "menu_exam_modal_close": "Close",
   "menu_exam_modal_save": "Save",
 
+
+
+
   "menu_page_exam": "Course",
   "menu_page_exam_all": "All Course",
  
@@ -90,8 +93,17 @@
   "menu_exam_history_email": "Email",
   "menu_exam_history_phone": "Phone",
   "menu_exam_history_name": "Name",
-  
-  
+
+  "menu_exam_history_course": "Course",
+  "menu_exam_history_score_by_user": "Score",
+  "menu_exam_history_total_user": "Total",
+  "menu_exam_history_name_user": "Name",
+  "menu_exam_history_name_create": "Create at",
+  "menu_exam_history_byuser": "History",
+  "menu_exam_history_byuser_t": "History By Course User",
+  "menu_exam_history_byuser_fitter": "Search",
+  "menu_exam_history_byuser_menu": "History User",
+
   "menu_new_index": "Index",
   "menu_new_image": "Image",
   "menu_new_title": "Title",
@@ -374,6 +386,9 @@
   "fitter_dashboard_appoint":"Fitter Appointment",
   "fitter_dashboard_exam":"Fitter Exam",
   "fitter_search":"Search"
+
+
+  
 
 }
 

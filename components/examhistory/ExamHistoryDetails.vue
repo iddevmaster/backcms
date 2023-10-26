@@ -31,11 +31,14 @@
         <thead>
             <tr>
             <th scope="col">{{ $t("menu_exam_history_index") }} </th>
+                <th class="text-center" scope="col"> {{ $t("menu_exam_history_name") }}</th>
+                    <th class="text-center" scope="col"> {{ $t("menu_exam_history_phone") }}</th>
+                      <th scope="col"> {{ $t("menu_exam_history_email") }}</th>
                 <th scope="col" > {{ $t("menu_exam_history_score") }}</th>
                 <th class="text-center" scope="col"> {{ $t("menu_exam_history_total") }}</th>
-                <th scope="col"> {{ $t("menu_exam_history_email") }}</th>
-                <th class="text-center" scope="col"> {{ $t("menu_exam_history_phone") }}</th>
-                <th class="text-center" scope="col"> {{ $t("menu_exam_history_name") }}</th>
+              
+               
+            
             </tr>
         </thead>
 
@@ -43,11 +46,13 @@
         <tbody>
             <tr  v-for="(item, index ) in store.history" :key="item.er_id" >
                 <td>{{index + 1}}</td>
+                  <td>{{item.out_user.user_firstname}} {{item.out_user.user_lastname}}</td>
+                       <td>{{item.out_user.user_email}}</td>
+                <td>{{item.out_user.user_phone}}</td>
                 <td>{{item.er_score_total}}</td>
                 <td>{{item.er_question_total}}</td>
-                <td>{{item.out_user.user_email}}</td>
-                <td>{{item.out_user.user_phone}}</td>
-                <td>{{item.out_user.user_firstname}} {{item.out_user.user_lastname}}</td>
+           
+              
              
             </tr>
         </tbody>

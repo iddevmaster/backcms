@@ -100,7 +100,7 @@
 
 
 
-  <button type="button" class="btn btn-primary" @click="Fitter()">ค้นหา</button>
+  <button type="button" class="btn btn-primary" @click="Fitter()">{{ $t("menu_exam_history_byuser_fitter") }}</button>
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';

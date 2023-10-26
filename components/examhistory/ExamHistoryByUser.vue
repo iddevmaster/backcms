@@ -1,18 +1,19 @@
 <template>
-  <div class="table-responsive">
+
+  <div class="table-responsive" > 
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th scope="col">ชื่อหลักสูตร</th>
-          <th scope="col" @click="sortList('em_code')">คะแนน</th>
-          <th class="text-center" scope="col">จำนวนที่ทำ</th>
-          <th scope="col" @click="sortList('em_name')">ชื่อ - นามสกุล</th>
-          <th class="text-center" scope="col">เวลา</th>
+          <th scope="col">{{ $t("menu_exam_history_course") }}</th>
+          <th scope="col">  {{ $t("menu_exam_history_score_by_user") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_exam_history_total_user") }}</th>
+          <th scope="col" > {{ $t("menu_exam_history_name_user") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_exam_history_name_create") }}</th>
         </tr>
       </thead>
 
-      <tbody>
-        <tr v-for="item in store.historylist">
+      <tbody >
+        <tr v-for="item in store.historylist" > 
           <td>{{ item.out_em.em_name }}</td>
           <td>{{ item.er_score_total }}</td>
           <td>{{ item.er_question_total }}</td>

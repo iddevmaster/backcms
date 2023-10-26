@@ -90,7 +90,16 @@
   "menu_exam_history_email": "ອີເມວ",
   "menu_exam_history_phone": "ເບີ​ໂທລະ​ສັບ",
   "menu_exam_history_name": "ຊື່",
-  
+  "menu_exam_history_byuser": "ບັນທຶກ",
+  "menu_exam_history_byuser_t": "ໂດຍຜູ້ໃຊ້",
+  "menu_exam_history_byuser_fitter": "ຊອກຫາ",
+  "menu_exam_history_byuser_menu": "ບັນທຶກ ໂດຍຜູ້ໃຊ້",
+
+  "menu_exam_history_course": "ຫຼັກສູດ",
+  "menu_exam_history_score_by_user": "ຄະແນນ",
+  "menu_exam_history_total_user": "ທັງໝົດ",
+  "menu_exam_history_name_user": "ຊື່",
+  "menu_exam_history_name_create": "ເວລາສ້າງ",
   
   "menu_new_index": "ເລກ",
   "menu_new_image": "ຮູບພາບ",

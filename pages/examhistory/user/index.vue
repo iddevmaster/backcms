@@ -41,8 +41,8 @@ store.fetchExam();
             <div class="page-meta">
                 <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                     <li class="breadcrumb-item"><a href="#">{{ $t("menu_result_form") }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ $t("menu_result_form_create") }}</li>
+                     <li class="breadcrumb-item"><a href="#">{{ $t("menu_exam_history_byuser") }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ $t("menu_exam_history_byuser_t") }}</li>
                     </ol>
                 </nav>
             </div>
@@ -54,7 +54,7 @@ store.fetchExam();
                         </div>
                     </div>
                 </div>
-                <div class="row layout-top-spacing">
+                <div class="row layout-top-spacing" v-if="store.historylist.length > 0">
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.IsCardInsert">
                         <div class="widget-content widget-content-area br-8 p-3">
                         <ExamHistoryByUser></ExamHistoryByUser>
