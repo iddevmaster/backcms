@@ -61,8 +61,8 @@ export const useAuthStore = defineStore('auth', {
 
   
         if (data.value) {
-          const token = useCookie('token'); // useCookie new hook in nuxt 3
-          const user_id = useCookie('user_id'); // useCookie new hook in nuxt 3
+          const token = useCookie('tokens'); // useCookie new hook in nuxt 3
+          const user_id = useCookie('Userid'); // useCookie new hook in nuxt 3
           const firstname = useCookie('firstname'); // useCookie new hook in nuxt 3
           const lastname = useCookie('firstname'); // useCookie new hook in nuxt 3
           const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
@@ -87,8 +87,8 @@ export const useAuthStore = defineStore('auth', {
 
     },
     logUserOut() {
-      const token = useCookie('token'); // useCookie new hook in nuxt 3
-      const user_id = useCookie('user_id');
+      const token = useCookie('tokens'); // useCookie new hook in nuxt 3
+      const user_id = useCookie('Userid');
       const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
       this.authenticated = false; // set authenticated  state value to false
       token.value = null; // clear the token cookie
@@ -102,7 +102,7 @@ export const useAuthStore = defineStore('auth', {
 
 
     async getProfile(){
-      const token = useCookie('token'); // useCookie new hook in nuxt 3
+      const token = useCookie('tokens'); // useCookie new hook in nuxt 3
 
       try {
         const data = await ApiService.get('/user/get/'+this.user_id).then(response => {

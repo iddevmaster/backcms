@@ -4,8 +4,8 @@ import { defineComponent } from 'vue';
 
 export default defineNuxtRouteMiddleware((to) => {
   const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive
-  const token = useCookie('token'); // get token from cookies
-  const user_id = useCookie('user_id'); // get token from cookies
+  const token = useCookie('tokens'); // get token from cookies
+  const user_id = useCookie('Userid'); // get token from cookies
   const user_type = useCookie('user_type'); 
  
 
