@@ -46,14 +46,11 @@
         <tbody>
             <tr  v-for="(item, index ) in store.history" :key="item.er_id" >
                 <td>{{index + 1}}</td>
-                  <td>{{item.out_user.user_firstname}} {{item.out_user.user_lastname}}</td>
-                       <td>{{item.out_user.user_email}}</td>
+                <td>{{item.out_user.user_firstname}} {{item.out_user.user_lastname}}</td>
+                 <td>{{item.out_user.user_email}}</td>
                 <td>{{item.out_user.user_phone}}</td>
                 <td>{{item.er_score_total}}</td>
                 <td>{{item.er_question_total}}</td>
-           
-              
-             
             </tr>
         </tbody>
     </table>

@@ -9,11 +9,11 @@
     <div class="col-sm-12">
     
       <label for="exampleFormControlInput1">{{ $t("menu_user_iden") }}</label>
-      <input type="text" class="form-control" id="add" placeholder="ที่อยู่ *"  v-model="store.formDetailEdit.identification_number"
+      <input type="text" class="form-control" id="add" placeholder="ໝາຍເລກບັດປະຈຳຕົວ*"  v-model="store.formDetailEdit.identification_number"
       :class="{
           'border-red-500 focus:border-red-500': v$.identification_number.$error,
           'border-[#42d392] ': !v$.identification_number.$invalid,
-        }" @change="v$.identification_number.$touch" autocomplete="off" maxlength="13"
+        }" @change="v$.identification_number.$touch" autocomplete="off" maxlength="13"   @input="onInput"
       >
       <span class="text-xs text-red-500" style="color:red" v-if="v$.identification_number.$error">{{
         v$.identification_number.$errors[0].$message
@@ -23,7 +23,7 @@
      <div class="row mb-4">
     <div class="col-sm-12">
       <label for="exampleFormControlInput1">{{ $t("menu_user_address") }}</label>
-      <input type="text" class="form-control" id="add" placeholder="ที่อยู่ *"  v-model="store.formDetailEdit.user_address"
+      <input type="text" class="form-control" id="add" placeholder="ທີ່ຢູ່ *"  v-model="store.formDetailEdit.user_address"
       :class="{
           'border-red-500 focus:border-red-500': v$.user_address.$error,
           'border-[#42d392] ': !v$.user_address.$invalid,
@@ -215,6 +215,10 @@ const input = document.querySelector('input[type="file"]');
   input.value = '';
 }
 
+
+const onInput = async (event) => {
+    store.formDetailEdit.identification_number = event.target.value.replace(/\D/g, '');
+}
 
 function coverimage(i) {
   let result = i.slice(0, 6);
