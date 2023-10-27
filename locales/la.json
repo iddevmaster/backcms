@@ -100,7 +100,14 @@
   "menu_exam_history_total_user": "ທັງໝົດ",
   "menu_exam_history_name_user": "ຊື່",
   "menu_exam_history_name_create": "ເວລາສ້າງ",
-  
+
+  "menu_exam_history_user_index": "#",
+  "menu_exam_history_user_dlt": "ໃບ​ຂັບ​ຂີ່",
+  "menu_exam_history_user_start": "ເວລາເລີ່ມຕົ້ນ",
+  "menu_exam_history_user_end": "ເວລາເລີ່ມຕົ້ນສິ້ນສຸດ",
+  "menu_exam_history_user_learn_type": "ປະເພດ",
+  "menu_exam_history_user_learn_action": "ສະຖານະ",
+
   "menu_new_index": "ເລກ",
   "menu_new_image": "ຮູບພາບ",
   "menu_new_title": "ຫົວຂໍ້ຂ່າວ",
@@ -230,6 +237,7 @@
   "menu_app_view_action": "ຈັດການ",
 
   "menu_app_view_present": "ການນັດພົບປະຈໍາວັນ",
+  "menu_app_view_by_user": "ນັດໝາຍຜູ້ໃຊ້",
 
 
   "menu_result": "ຜົນການສອບເສັງ",

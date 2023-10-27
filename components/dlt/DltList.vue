@@ -203,7 +203,7 @@ function coverttime(date) {
 }
 
 const format = (time) => {
-  return moment(time).utc().format("DD/MM/YYYY HH:mm");
+  return moment(time).format("DD/MM/YYYY HH:mm");
 };
 
 

@@ -10,6 +10,7 @@ export const AppointStore = defineStore('appoint', {
   state: () => ({
     isOpen: false,
     isDelAP: false,
+    isDelUser:false,
     searchData: "",
     event:[],
     user:[],
@@ -17,6 +18,7 @@ export const AppointStore = defineStore('appoint', {
     start_date: '',
     reservebyap: [],
     app_present:[],
+    app_user:[],
     users: [],
     usersall:[],
     user_id:null,
@@ -24,6 +26,7 @@ export const AppointStore = defineStore('appoint', {
     dlt_code: 'A',
     myChoose:null,
     ap_id: null,
+    user_id_fitter: null,
     isShowModal: false,
     total_page: null,
     limit_page: null,
@@ -477,16 +480,20 @@ const date_end = await this.changeFormate(currentDateEnd)
 
     },
 
-    // async fetchUsers() {
-    //   try {
-    //     const data = await ApiService.post('/user/list?user_type=3', this.formsearch).then(response => {
-    //       this.usersall = response.data.data;
-    //     });
-  
-    //   } catch (error) {
-    //     return false;
-    //   }
-    // },
+    async FetchAPUser() {
+    
+      try {
+        const data = await ApiService.get('/appointment/reserve/get/' + this.user_id_fitter).then(response => {
+      this.app_user = response.data
+
+        });
+        return data;
+      } catch (error) {
+        return false
+      }
+    },
+
+
 
     async fetchUse() {
 
@@ -542,7 +549,6 @@ return true
 const savereser = {user_id:this.myChoose.user_id,ap_id:this.ap_id}
 try {
   const data = await ApiService.post('/appointment/reserve/create', savereser).then(response => {
-console.log(response);
 return true;
   
   });

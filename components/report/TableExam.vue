@@ -175,7 +175,7 @@ const setCurrentPageclick = async (page) => {
   await store.FitterExam()
 };
 const format = (time) => {
-  return moment(time).utc().format("DD/MM/YYYY HH:mm");
+  return moment(time).format("DD/MM/YYYY HH:mm");
 };
 
 const selectshowdata = async (x) => {

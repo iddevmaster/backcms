@@ -104,6 +104,14 @@
   "menu_exam_history_byuser_fitter": "Search",
   "menu_exam_history_byuser_menu": "History User",
 
+
+  "menu_exam_history_user_index": "#",
+  "menu_exam_history_user_dlt": "DLT",
+  "menu_exam_history_user_start": "Start",
+  "menu_exam_history_user_end": "End",
+  "menu_exam_history_user_learn_type": "Type",
+  "menu_exam_history_user_learn_action": "Action",
+
   "menu_new_index": "Index",
   "menu_new_image": "Image",
   "menu_new_title": "Title",
@@ -233,6 +241,7 @@
   "menu_app_view_action": "Manage",
 
   "menu_app_view_present": "Appointment Present",
+  "menu_app_view_by_user": "Appointment User",
 
 
   "menu_result": "Exam results",

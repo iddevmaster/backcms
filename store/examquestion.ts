@@ -3,7 +3,7 @@ import ApiService from '../services/api.service';
 import axios from "axios";
 import { ref } from 'vue';
 import { fail } from 'assert';
-const user_id = useCookie('user_id');
+
 
 
 
