@@ -61,6 +61,10 @@ export const useAuthStore = defineStore('auth', {
 
   
         if (data.value) {
+          if(data.value.user_type == 3){
+            this.status_login = false;
+            return false;
+          }
           const token = useCookie('token'); // useCookie new hook in nuxt 3
           const user_id = useCookie('user_id'); // useCookie new hook in nuxt 3
           const firstname = useCookie('firstname'); // useCookie new hook in nuxt 3
@@ -74,6 +78,7 @@ export const useAuthStore = defineStore('auth', {
           this.authenticated = true; // set authenticated  state value to true
           this.user_id = data.value.user_id; // set authenticated  state value to true
           this.status_login = true;
+       
         }else{
           this.status_login = false;
         }
