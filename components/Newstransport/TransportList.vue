@@ -25,7 +25,7 @@
           <th @click="sortList('news_id')">{{ $t("menu_new_image") }}  &#8597; </th>
           <th @click="sortList('news_title')">{{ $t("menu_new_title") }} &#8597;</th>
           <!-- <th @click="sortList('user_email')">News Description</th> -->
-          <th @click="sortList('news_type')">{{ $t("menu_new_type") }} &#8597;</th>
+          <!-- <th @click="sortList('news_type')">{{ $t("menu_new_type") }} &#8597;</th> -->
           <th>{{ $t("menu_new_update") }}</th>
           <th class="no-content">{{ $t("menu_new_action") }}</th>
         </tr>
@@ -42,8 +42,8 @@
 
           <td>{{ datanew.news_title }}</td>
           <!-- <td>{{ datanew.news_description }}</td> -->
-          <td v-if="datanew.news_type == 1"> กรมขนส่ง</td>
-          <td v-else> กรมโยธา</td>
+          <!-- <td v-if="datanew.news_type == 1"> กรมขนส่ง</td>
+          <td v-else> กรมโยธา</td> -->
           <td>{{ format(datanew.udp_date) }}</td>
           <td>
             <NuxtLink :to="'/news/transport/' + datanew.news_id">
