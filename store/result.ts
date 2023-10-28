@@ -112,12 +112,12 @@ export const ResultStore = defineStore('result', {
     },
     ap_learn_type: "2",
     date_event: "",
-    dlt_code: "A2",
+    dlt_code: "A",
     formresult: {
       mr_score: null,
       mr_learn_type: 1,
       mr_status: 'pass',
-      dlt_code: "A1",
+      dlt_code: "A",
       identification_number: null
     },
     formeditresult: {
