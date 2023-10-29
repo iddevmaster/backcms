@@ -145,7 +145,7 @@ export const DltStore = defineStore('dlt', {
         return true
 
       } catch (error) {
-        console.log('error');
+      
         return false;
       } finally {
 
@@ -227,7 +227,7 @@ export const DltStore = defineStore('dlt', {
 
       try {
         const data = await ApiService.post('/dlt_card/create/', this.formadddtl).then(response => {
-          console.log(response);
+          
         });
 
         return true
@@ -251,7 +251,7 @@ export const DltStore = defineStore('dlt', {
      
       try {
         const data = await ApiService.put('/dlt_card/update/' + this.id, this.formdtl).then(response => {
-          console.log(response.data)
+          
         });
 
         return true;

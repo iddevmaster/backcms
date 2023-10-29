@@ -266,7 +266,7 @@ export const AppointStore = defineStore('appoint', {
         return true
 
       } catch (error) {
-        console.log('error');
+     
         return false;
       }
     },
@@ -334,7 +334,7 @@ const date_end = await this.changeFormate(currentDateEnd)
 
       try {
         const data = await ApiService.post('/appointment/create', savet).then(response => {
-          console.log(response);
+    
         });
         return true
       } catch (error) {
@@ -506,7 +506,7 @@ await this.checkuser();
       this.userall = [];
       const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
         this.user = response.data.data;
-        console.log(this.user);
+     
       });
 
 

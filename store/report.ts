@@ -151,9 +151,9 @@ export const ReportStore = defineStore('report', {
       this.formreport.mr_learn_type = this.mr_learn_type
       this.formreport.mr_status = this.mr_status
       this.formreport.dlt_code = this.dlt_code
-      console.log('FitterResult',this.formreport);
+     
       const data = await ApiService.post('/report/main_result', this.formreport).then(response => {
-        console.log('FitterResult',response.data.data);
+        
         this.reportresult = response.data.data
       });
     },

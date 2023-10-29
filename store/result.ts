@@ -275,7 +275,7 @@ export const ResultStore = defineStore('result', {
         });
         return data;
       } catch (error) {
-        console.log('error');
+     
         return false
       }
 
@@ -291,7 +291,7 @@ return true;
         });
         return true;
       } catch (error) {
-        console.log('error');
+      
         return false
       }
 
@@ -311,7 +311,7 @@ return true;
         });
         return true;
       } catch (error) {
-        console.log('error');
+      
         return false
       }
 

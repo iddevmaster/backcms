@@ -56,7 +56,7 @@ export const ExamHistoryStore = defineStore('examhistory', {
   actions: {
     async fetchExamlistByEm() {
       const getid = await ApiService.post('/exam/history/' + this.em_id, this.formsearchexamhistory).then(response => {
-        console.log(response.data);
+      
         this.history = response.data.data;
         this.total_page = response.data.total_page
         this.limit_page = response.data.limit_page

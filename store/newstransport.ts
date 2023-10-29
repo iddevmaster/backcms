@@ -164,7 +164,7 @@ export const newTransportStore = defineStore('newstransport', {
           if (response.status == 200) {
             return response;
           } else {
-            console.log('error');
+           
             return response;
           }
         });
@@ -183,9 +183,9 @@ export const newTransportStore = defineStore('newstransport', {
         if (response.data.images_list?.length > 0) {
           ///////////// วนลูป ลบรูปภาพก่อน 
           for (let i = 0; i < response.data.images_list.length; i++) {
-            console.log('newsdata', response.data.images_list[i]);
+           
             const delimage = ApiService.delete('media_file/file/?f=' + response.data.images_list[i].ni_path_file).then(delimage => {
-              console.log('del', delimage);
+             
             });
 
           }
@@ -196,7 +196,7 @@ export const newTransportStore = defineStore('newstransport', {
 
     async DelImage(id) {
       ApiService.delete('/news/image/delete/' + id).then(response => {
-        console.log('response', response);
+       
       });
     },
 
@@ -320,7 +320,7 @@ export const newTransportStore = defineStore('newstransport', {
       counterStorage.formi
       if (counterStorage.formi.length === 0) {
         // File is empty
-        console.log("File is empty");
+  
 
         const TransportStorage = newTransportStore();
         await TransportStorage.SaveDataNew();
@@ -559,7 +559,7 @@ export const newTransportStore = defineStore('newstransport', {
             ApiService.delete('/news/image/delete/' + Upload.data_list_image_same[j].ni_id).then(response => {
               /////Insert ใหม่
               if (response.status == 200) {
-                console.log('ลบ ok');
+          
               }
             });
           }
@@ -585,10 +585,10 @@ export const newTransportStore = defineStore('newstransport', {
 
     async InsertImageNews(obj1) {
       setTimeout(function () {
-        console.log(obj1);
+   
         const SaveDataImage = ApiService.post('/news/image/create', obj1).then(response => {
           if (response.status == 200) {
-            console.log(response.data);
+       
           }
         });
 
@@ -727,7 +727,7 @@ export const newTransportStore = defineStore('newstransport', {
         UploadStorage.image_list = [],
         UploadStorage.formi = []
 
-      console.log('reset upload');
+   
     },
 
 
@@ -752,7 +752,7 @@ export const newTransportStore = defineStore('newstransport', {
       this.page = 1;
     },
     async UploadImage(image) {
-      console.log(image);
+    
 
     },
 
