@@ -44,7 +44,7 @@ const { AlertTextForm } = storeToRefs(store); //Get Getter
                                     <UserEdit></UserEdit>
                                 </div>
                                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                                    <!-- <UserDetail></UserDetail> -->
+                                    <UserDetail></UserDetail>
                                 </div>
                             </div>
                         </div>
