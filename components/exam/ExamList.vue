@@ -69,7 +69,7 @@
                     <span class="badge badge-light-secondary">{{item.total_question}}</span>
                 </td>
                 <td class="text-center">
-                    <span class="badge badge-light-secondary">{{item.crt_date}}</span>
+                    <span class="badge badge-light-secondary">{{ format(item.crt_date)}}</span>
                 </td>
                 <!-- <td>
                   <NuxtLink>
@@ -116,6 +116,7 @@ import { defineComponent } from "vue";
 import { ExamStore } from "@/store/exam";
 import { useToast } from "vue-toastification";
 import ApiService from '../../services/api.service';
+import moment from "moment-timezone";
 const router = useRouter();
 
 const toast = useToast();
@@ -152,6 +153,11 @@ await store.fetchExamlist()
 
 const selchk = async (x) => {
   // await selectone(x);
+};
+
+
+const format = (time) => {
+  return moment(time).format("DD/MM/YYYY HH:mm");
 };
 
 const selectAll = async () => {

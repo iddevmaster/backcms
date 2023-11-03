@@ -344,7 +344,7 @@ return true;
     async deleteChoiceCall() {
    //   console.log('1');
       for (var i = 0; i < this.deletechoice.length; i++) {
-        console.log(this.deletechoice);
+      
       const del = await ApiService.delete('/exam/choice/delete/' + this.deletechoice[i]);
       {
   }
@@ -374,7 +374,7 @@ return true;
         try {
           const data = await ApiService.upload('/media_file/upload/file', formData);
           //  this.path = data.data[0].path
-          console.log(data.data[0].path);
+   
           this.formExamq.eq_image = data.data[0].path
           this.formEditExamq.eq_image = data.data[0].path
           return true;

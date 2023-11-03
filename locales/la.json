@@ -149,6 +149,7 @@
   "menu_user_c_lname": "ນາມສະກຸນ",
   "menu_user_c_username": "ຜູ້ໃຊ້",
   "menu_user_c_pass": "ລະຫັດຜ່ານ",
+  "menu_user_c_pass_message": "ຖ້າເຈົ້າບໍ່ຕ້ອງການແກ້ໄຂ, ຢ່າຕື່ມຂໍ້ມູນໃສ່.",
   "menu_user_c_email": "ອີເມວ",
   "menu_user_c_tel": "ເບີ​ໂທລະ​ສັບ",
   "menu_user_c_status": "ສະຖານະ",

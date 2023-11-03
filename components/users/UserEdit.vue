@@ -12,7 +12,7 @@
     </div>
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">{{ $t("menu_user_c_name") }}</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_name") }}</label> <span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputEmail3"
         v-model="store.formDataEdit.user_firstname" :class="{
           'border-red-500 focus:border-red-500': v$.user_firstname.$error,
@@ -26,7 +26,7 @@
 
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">{{ $t("menu_user_c_lname") }}</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_lname") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputEmail3"
         v-model="store.formDataEdit.user_lastname" :class="{
           'border-red-500 focus:border-red-500': v$.user_lastname.$error,
@@ -42,7 +42,7 @@
   <div class="row mb-4">
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">{{ $t("menu_user_c_username") }}</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_username") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputPassword3" 
         v-model="store.formDataEdit.user_name" :class="{
           'border-red-500 focus:border-red-500': v$.user_name.$error,
@@ -56,26 +56,26 @@
     </div>
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">{{ $t("menu_user_c_pass") }}</label>
-      <input type="text" class="form-control" id="inputPassword3" 
-        v-model="store.formDataEdit.user_password" :class="{
-          'border-red-500 focus:border-red-500': v$.user_password.$error,
-          'border-[#42d392] ': !v$.user_password.$invalid,
-        }" @change="v$.user_password.$touch" autocomplete="off">
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.user_password.$error">{{
-        v$.user_password.$errors[0].$message
-      }}</span>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_pass") }}</label> <span class="text-xs text-red-500" style="color:red"> 
+        
+   
 
+        <span v-if="locale == 'la'" > {{ $t("menu_user_c_pass_message") }}</span>
+      <span v-if="locale == 'en'" > {{ $t("menu_user_c_pass_message") }}</span>
+     
+      </span>
+      <input type="text" class="form-control" id="654134535" 
+        v-model="store.formDataEdit.user_password">
     </div>
   </div>
   <div class="row mb-4">
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">{{ $t("menu_user_c_email") }}</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_email") }}</label> 
       <input type="text" class="form-control" id="inputPassword3" 
         v-model="store.formDataEdit.user_email">
     </div>
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">{{ $t("menu_user_c_tel") }}</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_tel") }}</label> <span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputPassword3" 
         v-model="store.formDataEdit.user_phone" :class="{
           'border-red-500 focus:border-red-500': v$.user_phone.$error,
@@ -143,10 +143,6 @@ const rules = computed(() => {
       required: helpers.withMessage('The User name field is required', required),
       minLength: minLength(1),
     },
-    user_password: {
-      required: helpers.withMessage('The Password field is required', required),
-      minLength: minLength(1),
-    },
     user_firstname: {
       required: helpers.withMessage('The First Name field is required', required),
       minLength: minLength(1),
@@ -155,7 +151,6 @@ const rules = computed(() => {
       required: helpers.withMessage('The Last Name field is required', required),
       minLength: minLength(1),
     },
-
     user_phone: {
       required: helpers.withMessage('The tel field is required', required),
       minLength: minLength(1),

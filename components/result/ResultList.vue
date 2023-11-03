@@ -59,11 +59,12 @@
       <thead>
         <tr>
           <th scope="col">{{ $t("menu_result_index") }}</th>
-          <th scope="col">{{ $t("menu_result_score") }}</th>
-          <th scope="col">{{ $t("menu_result_type") }}</th>
-          <th class="text-center" scope="col">{{ $t("menu_result_status") }}</th>
           <th class="text-center" scope="col">{{ $t("menu_result_name") }}</th>
           <th class="text-center" scope="col">{{ $t("menu_result_phone") }}</th>
+        
+          <th scope="col">{{ $t("menu_result_type") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_result_status") }}</th>
+          <th scope="col">{{ $t("menu_result_score") }}</th>
           <th class="text-center" scope="col">{{ $t("menu_result_time") }}</th>
           <th class="text-center" scope="col">{{ $t("menu_result_action") }}</th>
         </tr>
@@ -71,15 +72,16 @@
       <tbody>
         <tr v-for="(event, index) in store.result">
           <td>{{ index + 1 }}</td>
-          <td>{{ event.mr_score }}</td>
-          <td v-if="event.mr_learn_type == 1">{{ $t("menu_learn_theory") }}</td>
-          <td v-else>{{ $t("menu_learn_practice") }}</td>
-       
-          <td v-if="event.mr_status == 'fail'">{{ $t("menu_fail") }}</td>
-          <td v-else>{{ $t("menu_pass") }}</td>
           <td>{{ event.user_detail.user_firstname }} {{ event.user_detail.user_lastname }}</td>
           <td>{{ event.user_detail.user_phone }}</td>
-          <td>{{ event.crt_date }}</td>
+         
+          <td v-if="event.mr_learn_type == 1">{{ $t("menu_learn_theory") }}</td>
+          <td v-else>{{ $t("menu_learn_practice") }}</td>
+          <td>{{ event.mr_score }}</td>
+          <td v-if="event.mr_status == 'fail'">{{ $t("menu_fail") }}</td>
+          <td v-else>{{ $t("menu_pass") }}</td>
+  
+          <td>{{ format(event.crt_date) }}</td>
            <td>
             <button
               type="button"
@@ -167,8 +169,10 @@ const format_end = (date) => {
   return moment(date).format("YYYY-MM-DD");
 };
 
+
+
 const format = (time) => {
-  return moment(time).format("YYYY-MM-DD HH:ss");
+  return moment(time).format("DD/MM/YYYY HH:mm");
 };
 // store.fetchAppointment()
 

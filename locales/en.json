@@ -153,6 +153,7 @@
   "menu_user_c_lname": "Last Name",
   "menu_user_c_username": "Usersname",
   "menu_user_c_pass": "Password",
+  "menu_user_c_pass_message": "If you don't want to edit, don't fill in.",
   "menu_user_c_email": "Email",
   "menu_user_c_tel": "Phone",
   "menu_user_c_status": "Status",
