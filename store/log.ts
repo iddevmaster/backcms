@@ -272,7 +272,7 @@ export const LogStore = defineStore('log', {
           reserv.push(response.data[i].total);
         }
        this.reportrev = reserv
-       console.log(this.reportrev);
+      
       }); 
     },
     
@@ -283,7 +283,7 @@ export const LogStore = defineStore('log', {
           exam.push(response.data[i].total);
         }
        this.reportexam = exam
-       console.log(this.reportexam);
+  
        
       }); 
     },
@@ -291,7 +291,7 @@ export const LogStore = defineStore('log', {
 
     async FillterType() {
     
-      console.log(this.type);
+   
     
     }
    

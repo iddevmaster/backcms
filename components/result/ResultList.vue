@@ -64,6 +64,7 @@
           <th class="text-center" scope="col">{{ $t("menu_result_status") }}</th>
           <th class="text-center" scope="col">{{ $t("menu_result_name") }}</th>
           <th class="text-center" scope="col">{{ $t("menu_result_phone") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_result_time") }}</th>
           <th class="text-center" scope="col">{{ $t("menu_result_action") }}</th>
         </tr>
       </thead>
@@ -78,6 +79,7 @@
           <td v-else>{{ $t("menu_pass") }}</td>
           <td>{{ event.user_detail.user_firstname }} {{ event.user_detail.user_lastname }}</td>
           <td>{{ event.user_detail.user_phone }}</td>
+          <td>{{ event.crt_date }}</td>
            <td>
             <button
               type="button"
