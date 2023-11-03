@@ -106,7 +106,7 @@ const router = useRouter();
 const store = LogStore();
 
 const year = new Date().getFullYear();
-store.formfitter.year = year;
+await store.formfitter.year = year;
 
 await store.fetchCourslist()
 

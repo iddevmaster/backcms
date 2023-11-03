@@ -3,7 +3,7 @@ import ApiService from '../services/api.service';
 import axios from "axios";
 import moment from "moment";
 
-export const LogStore = defineStore('result', {
+export const LogStore = defineStore('log', {
   state: () => ({
     datacollection: {
       labels: ['ມັງກອນ', 'ກຸມພາ', 'ມີເຄື່ອງໝາຍ.','ເດືອນເມສາ','ອາດ','ເດືອນມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'],
@@ -51,15 +51,15 @@ export const LogStore = defineStore('result', {
       course_id:null,
       cs_id:null,
       user_id:null,
-      year:null,
+      year:new Date().getFullYear(),
       type:1
     },
     formrev:{
-      year:null,
+      year:new Date().getFullYear(),
       dlt_code:'A'
     },
     formexam:{
-      year:null,
+      year:new Date().getFullYear(),
       dlt_code:'A'
     },
     formsearchcourse: {
@@ -198,6 +198,20 @@ export const LogStore = defineStore('result', {
       } finally {
         this.loading = false
         this.pending = false
+      }
+    },
+
+
+    async fetchCourslistLog() {
+      try {
+        const data = await ApiService.post('/course/list', this.formsearchcourse).then(response => {
+          this.courselist = response.data.data
+        });
+
+        return true;
+      } catch (error) {
+       
+        return false;
       }
     },
 
