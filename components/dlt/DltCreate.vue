@@ -33,7 +33,7 @@
 
         <div class="mb-5" style="padding: 0 48px">
           <label for="type" class="fw-bold">{{ $t("menu_dlt_form_issue_date") }}</label>
-          <Datepicker v-model="store.formadddtl.issue_date" :format="format_start" />
+          <Datepicker v-model="store.formadddtl.issue_date" :format="format_start"    :disabledDates="store.disabledDates"/>
  
             <div v-if="locale == 'la'">
         <span v-if="v$.issue_date.$error" class="text-xs text-red-500" style="color: red">
@@ -57,7 +57,7 @@
 
         <div class="mb-5" style="padding: 0 48px">
           <label for="type" class="fw-bold">{{ $t("menu_dlt_form_expiry_date") }}</label>
-          <Datepicker v-model="store.formadddtl.expiry_date" :format="format_end" />
+          <Datepicker v-model="store.formadddtl.expiry_date" :format="format_end"  :disabledDates="store.disabledDatesEnd"/>
 
 
             <div v-if="locale == 'la'">
@@ -223,6 +223,8 @@ const route = useRoute();
 
 const { FormDLTadd } = storeToRefs(store);
 
+
+
 const rules = computed(() => {
   return {
     front_img: {
@@ -322,11 +324,15 @@ const onFileChangeFront = async (event) => {
 
 const format_start = (date) => {
   store.formadddtl.issue_date = moment(date).format("YYYY-MM-DD");
+  console.log(store.formadddtl.issue_date);
+
+  store.disabledDatesEnd.to = new Date(store.formadddtl.issue_date)
   return moment(date).format("YYYY-MM-DD");
 };
 
 const format_end = (date) => {
   store.formadddtl.expiry_date = moment(date).format("YYYY-MM-DD");
+  store.disabledDates.from = new Date(store.formadddtl.expiry_date)
   return moment(date).format("YYYY-MM-DD");
 };
 

@@ -16,6 +16,14 @@ export const DltStore = defineStore('dlt', {
     imagelist: null,
     imagelistFront: null,
     imagelistBack: null,
+    time:8640000,
+    disabledDates: { ////f
+      from: null,
+    },
+    disabledDatesEnd: {
+      to: null,
+    },
+  
     name: null,
     id: null,
     ap_id:null,
@@ -266,9 +274,13 @@ export const DltStore = defineStore('dlt', {
     },
 
     async CheckForm() {
+      this.formadddtl.issue_date = ""
+      this.formadddtl.expiry_date = ""
 this.isAdd = true;
 this.isEdit = false;
 this.isDelete = false;
+
+
     },
 
     async UploadfileImage() {
@@ -319,6 +331,8 @@ this.isDelete = false;
         return false
       }
     },
+
+
 
   },
 
