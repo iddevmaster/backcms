@@ -276,9 +276,9 @@ export const DltStore = defineStore('dlt', {
     async CheckForm() {
       this.formadddtl.issue_date = ""
       this.formadddtl.expiry_date = ""
-this.isAdd = true;
-this.isEdit = false;
-this.isDelete = false;
+      this.isAdd = true;
+      this.isEdit = false;
+      this.isDelete = false;
 
 
     },
