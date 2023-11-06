@@ -99,7 +99,7 @@ const backToNews = async () => {
 const CoverImage = (img) => {
   let result = img.slice(0, 6);
   if (result === "static") {
-    return 'https://oasapi.iddriver.com/media_file/file/?f=' + img;
+    return 'https://oasbe.sky.mpwt.link/media_file/file/?f=' + img;
   } else {
     return img;
   }

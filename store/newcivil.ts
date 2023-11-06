@@ -508,7 +508,7 @@ export const newCivilStore = defineStore('newscivil', {
     //     formData.append('files', counterStorage.formi[i])
     //   }
 
-    //   axios.post('https://oasapi.iddriver.com/media_file/upload/file',
+    //   axios.post('https://oasbe.sky.mpwt.link/media_file/upload/file',
     //     formData, {
     //     headers: {
     //       'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p',

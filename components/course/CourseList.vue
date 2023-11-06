@@ -186,7 +186,7 @@ function image(i) {
 //   } else {
 //     var x = "static/upload/2023/7/files-1689561047889.jpg";
 //   }
-//   return "http://oasapi.iddriver.com/media_file/file/?f=" + x;
+//   return "http://oasbe.sky.mpwt.link/media_file/file/?f=" + x;
 // }
 
 

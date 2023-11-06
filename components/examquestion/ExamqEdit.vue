@@ -242,7 +242,7 @@ return im;
 function coverimage(i) {
 let result = i.slice(0, 6);
 if (result === 'static') {
-  return "http://oasapi.iddriver.com/media_file/file/?f="+i;
+  return "http://oasbe.sky.mpwt.link/media_file/file/?f="+i;
 }else {
   return i;
 }
