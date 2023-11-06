@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">{{ $t("menu_user_c_name") }}</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_name") }}</label> <span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputEmail3"
         v-model="store.formDataregister.user_firstname" :class="{
           'border-red-500 focus:border-red-500': v$.user_firstname.$error,
@@ -25,7 +25,7 @@
 
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">{{ $t("menu_user_c_lname") }}</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_lname") }}</label> <span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputEmail3" 
         v-model="store.formDataregister.user_lastname" :class="{
           'border-red-500 focus:border-red-500': v$.user_lastname.$error,
@@ -41,7 +41,7 @@
   <div class="row mb-4">
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">{{ $t("menu_user_c_username") }}</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_username") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputPassword3" 
         v-model="store.formDataregister.user_name" :class="{
           'border-red-500 focus:border-red-500': v$.user_name.$error,
@@ -53,7 +53,7 @@
     </div>
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">{{ $t("menu_user_c_pass") }}</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_pass") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputPassword3"
         v-model="store.formDataregister.user_password" :class="{
           'border-red-500 focus:border-red-500': v$.user_password.$error,
@@ -72,7 +72,7 @@
    
     </div>
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">{{ $t("menu_user_c_tel") }}</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_c_tel") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputPassword3"  @input="onInput"
         v-model="store.formDataregister.user_phone" :class="{
           'border-red-500 focus:border-red-500': v$.user_phone.$error,

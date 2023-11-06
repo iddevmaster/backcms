@@ -7,7 +7,7 @@
     </div>
   
     <div class="col-md-6">
-      <label for="inputEmail4" class="form-label"> {{ $t("menu_couse_f_title_code") }}</label>
+      <label for="inputEmail4" class="form-label"> {{ $t("menu_couse_f_title_code") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input
         type="text"
         class="form-control"
@@ -37,7 +37,7 @@
 
     </div>
     <div class="col-md-6">
-      <label for="inputPassword4" class="form-label">{{ $t("menu_couse_f_title_name") }}</label>
+      <label for="inputPassword4" class="form-label">{{ $t("menu_couse_f_title_name") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input
         type="text"
         class="form-control"
@@ -69,7 +69,7 @@ The Course Name field is required.</span>
 
     </div>
     <div class="col-12">
-      <label for="inputAddress" class="form-label">{{ $t("menu_couse_f_title_detail") }}</label>
+      <label for="inputAddress" class="form-label">{{ $t("menu_couse_f_title_detail") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <textarea
         class="form-control"
         id="exampleFormControlTextarea1"

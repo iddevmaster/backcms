@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="col-md-6">
-      <label for="inputEmail4" class="form-label">  {{ $t("menu_couse_f_title_code") }}</label>
+      <label for="inputEmail4" class="form-label">  {{ $t("menu_couse_f_title_code") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputEmail4" v-model="store.formDataEditCourse.course_code" :class="{
         'border-red-500 focus:border-red-500': v$.course_code.$error,
         'border-[#42d392] ': !v$.course_code.$invalid,
@@ -28,7 +28,7 @@
   </div>
     </div>
     <div class="col-md-6">
-      <label for="inputPassword4" class="form-label">  {{ $t("menu_couse_f_title_name") }}</label>
+      <label for="inputPassword4" class="form-label">  {{ $t("menu_couse_f_title_name") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputPassword4" v-model="store.formDataEditCourse.course_name" :class="{
         'border-red-500 focus:border-red-500': v$.course_name.$error,
         'border-[#42d392] ': !v$.course_name.$invalid,
@@ -50,7 +50,7 @@ The Course Name field is required.</span>
   </div>
     </div>
     <div class="col-12">
-      <label for="inputAddress" class="form-label">  {{ $t("menu_couse_f_title_detail") }}</label>
+      <label for="inputAddress" class="form-label">  {{ $t("menu_couse_f_title_detail") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" :class="{
         'border-red-500 focus:border-red-500': v$.course_description.$error,
         'border-[#42d392] ': !v$.course_description.$invalid,

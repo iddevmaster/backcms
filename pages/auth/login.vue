@@ -103,8 +103,8 @@ definePageMeta({
 
 
 const formData = reactive({
-  username: 'rkknoob1',
-  password: '123456',
+  username: '',
+  password: '',
 });
 
 
@@ -115,11 +115,11 @@ const formData = reactive({
     username: {
       required: helpers.withMessage('The Usersname field is required', required),
     //   email: helpers.withMessage('Invalid email format', email),
-      minLength: minLength(6),
+      minLength: minLength(4),
     },
     password: {
       required: helpers.withMessage('The password field is required', required),
-      minLength: minLength(6),
+      minLength: minLength(4),
     },
   };
 });

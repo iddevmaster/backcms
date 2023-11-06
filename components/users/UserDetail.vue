@@ -8,7 +8,7 @@
     <div class="row mb-4">
     <div class="col-sm-12">
     
-      <label for="exampleFormControlInput1">{{ $t("menu_user_iden") }}</label>
+      <label for="exampleFormControlInput1">{{ $t("menu_user_iden") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="add" placeholder="ໝາຍເລກບັດປະຈຳຕົວ*"  v-model="store.formDetailEdit.identification_number"
       :class="{
           'border-red-500 focus:border-red-500': v$.identification_number.$error,
