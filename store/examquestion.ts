@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import ApiService from '../services/api.service';
+import ApiService from '@/services/api.service';
 import axios from "axios";
 import { ref } from 'vue';
 import { fail } from 'assert';

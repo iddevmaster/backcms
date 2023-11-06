@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from "axios";
-import ApiService from '../services/api.service';
+import ApiService from '@/services/api.service';
 import { join } from 'path/posix';
 const user_id = useCookie('user_id');
 export const newCivilStore = defineStore('newscivil', {
