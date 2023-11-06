@@ -324,7 +324,6 @@ const onFileChangeFront = async (event) => {
 
 const format_start = (date) => {
   store.formadddtl.issue_date = moment(date).format("YYYY-MM-DD");
-  console.log(store.formadddtl.issue_date);
 
   store.disabledDatesEnd.to = new Date(store.formadddtl.issue_date)
   return moment(date).format("YYYY-MM-DD");

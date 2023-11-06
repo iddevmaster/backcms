@@ -178,12 +178,15 @@ const SelectDtl = async (item) => {
 };
 
 const format_start = (date) => {
-  store.formadddtl.issue_date = moment(date).format("YYYY-MM-DD");
+  store.formdtl.issue_date = moment(date).format("YYYY-MM-DD");
+
+  store.disabledDatesEnd.to = new Date(store.formdtl.issue_date)
   return moment(date).format("YYYY-MM-DD");
 };
 
 const format_end = (date) => {
-  store.formadddtl.expiry_date = moment(date).format("YYYY-MM-DD");
+  store.formdtl.expiry_date = moment(date).format("YYYY-MM-DD");
+  store.disabledDates.from = new Date(store.formdtl.expiry_date)
   return moment(date).format("YYYY-MM-DD");
 };
 
@@ -288,7 +291,7 @@ const DelDlT = async () => {
                         }}</label>
                         <Datepicker
                           v-model="store.formdtl.issue_date"
-                          :format="format_start"
+                          :format="format_start"   :disabledDates="store.disabledDates"
                         />
                       </div>
 
@@ -299,6 +302,7 @@ const DelDlT = async () => {
                         <Datepicker
                           v-model="store.formdtl.expiry_date"
                           :format="format_end"
+                          :disabledDates="store.disabledDatesEnd"
                         />
                       </div>
                       <div>

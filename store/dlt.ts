@@ -215,7 +215,12 @@ export const DltStore = defineStore('dlt', {
       this.formdtl.dlt_code = a.dlt_code
       this.formdtl.issue_date = moment(a.issue_date).format("YYYY-MM-DD");
       this.formdtl.expiry_date = moment(a.expiry_date).format("YYYY-MM-DD");
+//       console.log(this.formdtl.issue_date);
+// this.disabledDates.from = this.formdtl.issue_date;
+// this.disabledDatesEnd.to = this.formdtl.expiry_date;
 
+this.disabledDatesEnd.to = new Date(this.formdtl.issue_date);
+this.disabledDates.from = new Date(this.formdtl.expiry_date);
 
       this.formdtl.user_id = this.user_id;
       this.id = a.id;
