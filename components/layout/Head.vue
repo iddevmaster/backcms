@@ -11,7 +11,9 @@
                     <line x1="3" y1="18" x2="21" y2="18"></line>
                 </svg>
             </a>
-            
+            <div class="search-bar">
+               DoT Smart App
+                   </div>
             <ul class="navbar-item flex-row ms-lg-auto ms-0"> 
                 <li class="nav-item dropdown language-dropdown">
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="language-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
