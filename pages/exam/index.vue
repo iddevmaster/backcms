@@ -13,6 +13,7 @@ import ExamEdit from '@/components/exam/ExamEdit.vue'
 import { useToast } from 'vue-toastification';
 import { required, email, sameAs, minLength, helpers, } from '@vuelidate/validators';
 
+
 definePageMeta({
   middleware: ['auth','roles'],
   allowedRoles: [1,2],
@@ -46,6 +47,8 @@ const closeModal = async () => {
 const Deleteexam = async (item) => {
     const a = await deleteExam(item);
     await store.fetchExamlist()
+
+    toast.success("Delete Success");
 };
 
 

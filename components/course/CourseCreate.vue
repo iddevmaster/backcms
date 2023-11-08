@@ -154,7 +154,7 @@ The Course Name field is required.</span>
     class="btn btn-dark additem _effect--ripple waves-effect waves-light"
     @click="addlesson()"
   >
-  {{ $t("menu_couse_f_add_lesson") }}
+  {{ $t("menu_couse_f_add_lesson") }} {{ store.lessonlist.length }}
   </button>
   <div class="invoice-detail-items">
     <div class="table-responsive">
@@ -325,6 +325,13 @@ const rules = computed(() => {
 const v$ = useVuelidate(rules, FormDataCourse);
 
 const save = async () => {
+
+  if(store.lessonlist.length == 0){
+    await toast.error("Add Lesson Please", {
+        timeout: 2000,
+    });
+return false;
+  }
   v$.value.$validate();
   if (!v$.value.$error) {
     try {
