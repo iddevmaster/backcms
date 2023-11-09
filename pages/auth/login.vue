@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             
-                            <h2>Sign In</h2>
+                            <h2>Welcome to DoT Smart App</h2>
                             <p>Enter your Usersname and password to login</p>
                             
                         </div>

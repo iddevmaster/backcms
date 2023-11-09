@@ -1,6 +1,6 @@
 {
   "home": "ຫນ້າທໍາອິດ",
-  "menu_couse": "ສື່​ການ​ຮຽນ​ຮູ້​",
+  "menu_couse": "ຄວາມຮູ້ອອນໄລນ໌",
   "menu_exam": "ຫຼັກສູດ",
   "menu_new_tra": "ຖະແຫຼງຂ່າວ",
   "menu_new_ci": "ຖະແຫຼງຂ່າວ",
@@ -10,8 +10,8 @@
   "menu_new_resul": "ຜົນການສອບເສັງ",
   "menu_new_user": "ຈັດການຜູ້ໃຊ້",
   "menu_dlt": "ຈັດການໃບຂັບຂີ່ຂອງເຈົ້າ",
-  "menu_couse_all": "ສື່​ການ​ຮຽນ​ຮູ້​ທັງໝົດ", 
-  "menu_couse_add": "ເພີ່ມສື່​ການ​ຮຽນ​ຮູ້​",
+  "menu_couse_all": "ຄວາມຮູ້ອອນໄລນ໌​ທັງໝົດ", 
+  "menu_couse_add": "ເພີ່ມຄວາມຮູ້ອອນໄລນ໌​",
   "menu_couse_p_title": "ເພີ່ມສື່​ການ​ຮຽນ​ຮູ້​",
   "menu_couse_f_title_code": "ລະຫັດສື່​ການ​ຮຽນ​ຮູ້​",
   "menu_couse_f_title_name": "ສື່​ການ​ຮຽນ​ຮູ້​",

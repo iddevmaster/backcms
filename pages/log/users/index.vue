@@ -60,7 +60,7 @@
 
 
     <div class="col-sm-12">
-      <label for="exampleFormControlInput1">Course ID</label>
+      <label for="exampleFormControlInput1">Course</label>
       <select class="form-control" v-model="store.formfitter.course_id" @change="onChange($event)">
         <option disabled :value="null">
           เลือก
@@ -72,7 +72,7 @@
     </div>
 
     <div class="col-sm-12" v-if="store.formfitter.type != '2' && store.formfitter.type != '3'">
-      <label for="exampleFormControlInput1">Lesson ID</label>
+      <label for="exampleFormControlInput1">Lesson</label>
       <select class="form-control" v-model="store.formfitter.cs_id">
         <option disabled :value="null">
           เลือก
@@ -116,7 +116,7 @@
 
 
 
-  <button type="button" class="btn btn-primary" @click="search()">ค้นหา</button>
+  <button type="button" class="btn btn-primary" @click="search()">Search</button>
                             </div>
                         </div>
                     </div>
@@ -194,7 +194,7 @@
 
 
 
-  <button type="button" class="btn btn-primary" @click="search()">ค้นหา</button>
+  <button type="button" class="btn btn-primary" @click="search()">Search</button>
                             </div>
                         </div>
                     </div>

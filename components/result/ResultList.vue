@@ -63,8 +63,9 @@
           <th class="text-center" scope="col">{{ $t("menu_result_phone") }}</th>
         
           <th scope="col">{{ $t("menu_result_type") }}</th>
-          <th class="text-center" scope="col">{{ $t("menu_result_status") }}</th>
+      
           <th scope="col">{{ $t("menu_result_score") }}</th>
+          <th class="text-center" scope="col">{{ $t("menu_result_status") }}</th>
           <th class="text-center" scope="col">{{ $t("menu_result_time") }}</th>
           <th class="text-center" scope="col">{{ $t("menu_result_action") }}</th>
         </tr>

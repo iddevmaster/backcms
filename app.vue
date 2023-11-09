@@ -7,10 +7,10 @@
 
 
 useSeoMeta({
-  title: 'CMS Site',
-  ogTitle: 'CMS Site',
-  description: 'This is my CMS site.',
-  ogDescription: 'This is my CMS site',
+  title: 'DoT Smart App',
+  ogTitle: 'DoT Smart App',
+  description: 'DoT Smart App.',
+  ogDescription: 'DoT Smart App',
   ogImage: 'https://example.com/image.png',
   twitterCard: 'summary_large_image',
 })

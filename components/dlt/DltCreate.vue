@@ -266,6 +266,7 @@ const Add = async () => {
    if (!v$.value.$error) {
   const save = await store.SaveFormDlt();
   if(save == true){
+    await store.ResetForm();
 toast.success('Save Success');
 
 let finddtl = await store.fetchDlt(route.params.id);

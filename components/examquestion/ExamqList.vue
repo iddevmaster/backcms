@@ -3,7 +3,7 @@
     <div class="col-xl-12 col-lg-12">
       <div class="pagination-no_spacing" v-if="store.examqlisttotal > 0">
         <ul class="pagination">
-          <li> <a href="javascript:void(0);" class="prev"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+          <li> <a href="javascript:void(0);" class="prev"  @click="validatePNumberDown()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round" class="feather feather-chevron-left">
                 <polyline points="15 18 9 12 15 6"></polyline>
@@ -17,7 +17,7 @@
           </li>
           <li><a href="javascript:void(0);">/</a></li>
           <li><a href="javascript:void(0);">{{ store.examqlisttotal }}</a></li>
-          <li> <a href="javascript:void(0);" class="next"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+          <li> <a href="javascript:void(0);" class="next"  @click="validatePNumberUp()" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round" class="feather feather-chevron-right">
                 <polyline points="9 18 15 12 9 6"></polyline>
@@ -114,11 +114,46 @@ const validatePNumber = async (evt) => {
     await toast.info("Loadding Data", {
       timeout: 50,
     });
-
   }
+}
 
+const validatePNumberUp = async () => {
 
+  if (store.quest_Id == '') {
+    store.pending = true;
+    store.quest_Id = 1;
+    await questionlist();
+    await toast.info("Loadding Data", {
+      timeout: 50,
+    });
+  } else {
+    console.log('else');
+    store.quest_Id += 1;
+    store.pending = true;
+    await questionlist();
+    await toast.info("Loadding Data", {
+      timeout: 50,
+    });
+  }
+}
 
+const validatePNumberDown = async () => {
+  if (store.quest_Id == 1) {
+    store.pending = true;
+    store.quest_Id = 1;
+    await questionlist();
+    await toast.info("Loadding Data", {
+      timeout: 50,
+    });
+  } else {
+ 
+    store.quest_Id -= 1;
+    store.pending = true;
+    await questionlist();
+    await toast.info("Loadding Data", {
+      timeout: 50,
+    });
+  }
 }
 
 
@@ -152,8 +187,6 @@ function image(i) {
 .dt--pagination {
   float: right;
 }
-
-
 
 .modal {
   display: flex;

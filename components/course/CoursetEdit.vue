@@ -254,6 +254,12 @@ const rules = computed(() => {
 const v$ = useVuelidate(rules, FormDataEditCourse);
 
 const save = async () => {
+  if(store.lessonlist.length == 0){
+    await toast.error("Add Lesson Please", {
+        timeout: 2000,
+    });
+return false;
+  }
   v$.value.$validate();
   if (!v$.value.$error) {
     await toast.warning("Wait Edit Data", {

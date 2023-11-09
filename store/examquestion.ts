@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import ApiService from '../services/api.service';
+import ApiService from '@/services/api.service';
 import axios from "axios";
 import { ref } from 'vue';
 import { fail } from 'assert';
@@ -160,37 +160,46 @@ export const ExamquestionStore = defineStore('examquestion', {
     setCurrentPage(page) {
       this.formsearchexam.page = page
     },
+
+
     async SaveExamq() {
 
+   
       try {
         const data = await ApiService.post('/exam/question/create', this.formExamq).then(response => {
-        let choice = this.SaveChoice(response.data.insertId)
-          return choice;
+
+          if(response.status == 204){
+            return false;
+          }else {
+            let choice = this.SaveChoice(response.data.insertId)
+ 
+        this.delay(500);
+            return choice
+          }
+    
         });
+        return data;
       } catch (error) {
         return false;
-
-      } finally {
       }
-
     },
     async SaveChoice(id) {
       for (var i = 0; i < this.choicelist.length; i++) {
+     
         const x = i + 1;
         this.formChoice.ec_index = x;
         this.formChoice.ec_name = this.choicelist[i].ec_name
         this.formChoice.ec_image = this.choicelist[i].ec_image
         this.formChoice.eq_id = id
-        await this.delay(500);
-       
+    
+     
         const data = await ApiService.post('/exam/choice/create', this.formChoice);
-        {
-        }
+       
       }
       await this.ResetForm();
 
 
-      return true;
+      return await true;
     },
     delay(ms) {
       return new Promise((resolve) => setTimeout(resolve, ms));
@@ -303,6 +312,17 @@ return true;
 
     },
 
+  
+
+    async ResetFormAdd() {
+
+      this.formExamq.eq_name = ""
+      this.formExamq.eq_image = ""
+      this.formExamq.eq_answer = null
+
+  
+    },
+
     async ResetForm() {
 
 
@@ -397,7 +417,6 @@ return true;
     },
     async ClearLocal() {
   localStorage.clear();
-
   return true;
 
 
