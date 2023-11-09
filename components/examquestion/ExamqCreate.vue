@@ -129,6 +129,7 @@ const { ClearLocal } = ExamquestionStore();//Action
 
 store.choicelist = [];
 store.image = null;
+store.ResetFormAdd();
 store.formExamq.em_id = localStorage.getItem('em_id');
 let name = localStorage.getItem('em_name');
 
@@ -172,21 +173,30 @@ const save = async () => {
   //   return false;
   // }
   if (!v$.value.$error) {
+
+    if(store.choicelist.length == 0){
+      await toast.error("Add Choice");
+return false;
+    }
     await toast.warning("Wait Save Data", {
       timeout: 2000,
     });
     let upload = await UploadfileExamq();
     let save = await SaveExamq();  ///////////save 
-    let clear = await ClearLocal();  ///////////save 
-
-
-    await toast.success('Save Data')
-    const input = document.querySelector('input[type="file"]');
+    if(save == true){
+      await toast.success('Save Data')
+      let clear = await ClearLocal();  ///////////save 
+      const input = document.querySelector('input[type="file"]');
     input.value = '';
     v$.value.$reset();
     setTimeout(() => {
       router.go(-1);
     }, 500);
+    } else {
+      await toast.error('Fail Save Data')
+    }
+
+   
   }
 }
 

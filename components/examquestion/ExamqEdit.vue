@@ -178,6 +178,10 @@ const save = async () => {
 // }
   if (!v$.value.$error) {
    // let upload = await UploadfileExamq();
+   if(store.choicelist.length == 0){
+      await toast.error("Add Choice");
+return false;
+    }
     try {
       let save = await UpdateExa();  ///////////save 
       let clear = await ClearLocal();  ///////////save 
