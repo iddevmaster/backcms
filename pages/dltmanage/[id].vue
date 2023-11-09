@@ -40,6 +40,7 @@ const store = DltStore();
 const auth = useAuthStore();
 const profile = await auth.getProfile();
 store.formadddtl.user_id = route.params.id;
+await store.ResetForm();
 
 let finddtl = await store.fetchDlt(route.params.id);
 if (finddtl == true) {
