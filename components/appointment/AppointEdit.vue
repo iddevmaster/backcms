@@ -136,7 +136,8 @@ const date = ref(new Date());
 const update = async () => {
   let data = await store.Update();
   if (data == true) {
-    toast.success('Update Data');
+    await toast.success('Update Data');
+    await router.push('/appointment');
   } else {
     toast.error('Fall Update Data')
   }
@@ -224,7 +225,9 @@ const save = async () => {
     const data = await store.SaveFormAPP();
 
     if (data == true) {
-      toast.success('Save Data');
+     await toast.success('Save Data');
+
+   
     } else {
       toast.error('Fail Save Data')
     }

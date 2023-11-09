@@ -215,8 +215,9 @@ const save = async () => {
        const data = await store.SaveFormAPP();
       
     if (data == true) {
-      toast.success('Save Data');
-         store.ResetForm();
+     await toast.success('Save Data');
+      await   store.ResetForm();
+      await router.push('/appointment');
           
     } else {
       toast.error('Fail Save Data')
