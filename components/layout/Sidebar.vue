@@ -82,7 +82,7 @@
             class="dropdown-toggle"
           >
             <div class="">
-              <i class="bi bi-person-gear menu-icon"></i>
+              <i class="bi bi-bar-chart menu-icon"></i>
               <span>{{ $t("menu_dashboard") }}</span>
             </div>
             <div>
@@ -500,7 +500,7 @@
             class="dropdown-toggle"
           >
             <div class="">
-              <i class="bi bi-person-gear menu-icon"></i>
+              <i class="bi bi-check-all menu-icon"></i>
               <span>{{ $t("menu_approve") }}</span>
             </div>
             <div>
@@ -589,7 +589,7 @@
             class="dropdown-toggle"
           >
             <div class="">
-              <i class="bi bi-person-gear menu-icon"></i>
+              <i class="bi bi-calendar2-fill menu-icon"></i>
               <span>{{ $t("report") }}</span>
             </div>
             <div>
