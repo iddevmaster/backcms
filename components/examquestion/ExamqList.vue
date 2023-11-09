@@ -188,8 +188,6 @@ function image(i) {
   float: right;
 }
 
-
-
 .modal {
   display: flex;
   justify-content: center;
