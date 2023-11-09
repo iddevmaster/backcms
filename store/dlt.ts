@@ -13,6 +13,9 @@ export const DltStore = defineStore('dlt', {
     front_img: null,
     back_img: null,
     image: null,
+    user_firstname:null,
+    user_lastname:null,
+    image_url:null,
     imagelist: null,
     imagelistFront: null,
     imagelistBack: null,
@@ -166,7 +169,12 @@ export const DltStore = defineStore('dlt', {
       try {
         const data = await ApiService.get('/user/get/' + id).then(response => {
           if (response.data) {
-            this.name = response.data.user_firstname;
+            console.log('data',response.data);
+            this.name = response.data.user_name;
+            this.user_firstname = response.data.user_firstname;
+            this.user_lastname = response.data.user_lastname;
+           this.image_url = response.data.detail?.user_img;
+     
             this.getDLT();
             return true;
           } else {
