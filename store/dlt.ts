@@ -30,7 +30,7 @@ export const DltStore = defineStore('dlt', {
     formdtl: {
       front_img: "",
       back_img: "",
-      dlt_code: 'A1',
+      dlt_code: 'A',
       issue_date: "",
       expiry_date: "",
       user_id: null
@@ -39,7 +39,7 @@ export const DltStore = defineStore('dlt', {
     formadddtl: {
       front_img: "",
       back_img: "",
-      dlt_code: 'A1',
+      dlt_code: 'A',
       issue_date: "",
       expiry_date: "",
       user_id: null
@@ -236,8 +236,6 @@ this.disabledDates.from = new Date(this.formdtl.expiry_date);
 
     async SaveFormDlt() {
       let upload = await this.UploadfileAddImage();
-      
-
       try {
         const data = await ApiService.post('/dlt_card/create/', this.formadddtl).then(response => {
           
@@ -285,6 +283,14 @@ this.disabledDates.from = new Date(this.formdtl.expiry_date);
       this.isEdit = false;
       this.isDelete = false;
 
+
+    },
+
+    async ResetForm() {
+this.formadddtl.front_img = "";
+this.formadddtl.back_img = "";
+this.formadddtl.issue_date = "";
+this.formadddtl.expiry_date = "";
 
     },
 

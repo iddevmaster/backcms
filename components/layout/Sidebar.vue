@@ -9,7 +9,7 @@
             </a>
           </div>
           <div class="nav-item theme-text">
-            <a class="nav-link"> {{ $t("cms") }} </a>
+            <a class="nav-link"> <span style="font-size: 17px;"> DoT Smart App</span></a>
           </div>
         </div>
         <div class="nav-item sidebar-toggle" @click="ShowColl()">
