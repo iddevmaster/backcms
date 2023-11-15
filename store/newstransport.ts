@@ -336,7 +336,7 @@ export const newTransportStore = defineStore('newstransport', {
             console.log("File has content", counterStorage.formi[i]);
           }
 
-          axios.post('https://oasbe.sky.mpwt.link/media_file/upload/file',
+          axios.post('https://dot-api.mpwt.link/media_file/upload/file',
             formData, {
             headers: {
               'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p',
@@ -483,7 +483,7 @@ export const newTransportStore = defineStore('newstransport', {
         const data = await ApiService.put('/news/update/' + this.news_id, this.formDataNewsEdit)
 
 
-        // await axios.post('https://oasbe.sky.mpwt.link/media_file/upload/file',
+        // await axios.post('https://dot-api.mpwt.link/media_file/upload/file',
         //   formData, {
         //   headers: {
         //     'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p',
@@ -670,7 +670,7 @@ export const newTransportStore = defineStore('newstransport', {
         formData.append('files', counterStorage.formi[i])
       }
 
-      axios.post('https://oasbe.sky.mpwt.link/media_file/upload/file',
+      axios.post('https://dot-api.mpwt.link/media_file/upload/file',
         formData, {
         headers: {
           'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p',
