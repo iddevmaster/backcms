@@ -68,7 +68,7 @@
           <td>{{ user.user_firstname }} {{ user.user_lastname }}</td>
           <!-- <td>{{ user.user_name }}</td> -->
           <!-- <td>{{ user.user_email }}</td> -->
-          <td v-if="user.user_type == 1">ผู้ดูแลระบบ
+          <td v-if="user.user_type == 1">
 
                     <span v-if="locale == 'la'">{{ $t("menu_user_c_type_user_superadmin") }}</span>
                     <span v-if="locale == 'en'">{{ $t("menu_user_c_type_user_superadmin") }}</span>
