@@ -448,7 +448,9 @@ const DelDlT = async () => {
                       <div
                         class="card"
                         style="height: 100px; width: 100px"
-                      ></div>
+                      >
+                      <img :src="coverimage(store.image_url)" width="100" height="100"  v-if="store.image_url"/>
+                    </div>
                       <h5 class="ms-2">{{ store.name }}</h5>
                     </div>
                     <div
