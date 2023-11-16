@@ -68,9 +68,28 @@
           <td>{{ user.user_firstname }} {{ user.user_lastname }}</td>
           <!-- <td>{{ user.user_name }}</td> -->
           <!-- <td>{{ user.user_email }}</td> -->
-          <td v-if="user.user_type == 1">ผู้ดูแลระบบ</td>
-          <td v-else-if="user.user_type == 2">เจ้าหน้าที่</td>
-          <td v-else>ประชาชน</td>
+          <td v-if="user.user_type == 1">ผู้ดูแลระบบ
+
+                    <span v-if="locale == 'la'">{{ $t("menu_user_c_type_user_superadmin") }}</span>
+                    <span v-if="locale == 'en'">{{ $t("menu_user_c_type_user_superadmin") }}</span>
+           
+
+         
+          
+          </td>
+          <td v-else-if="user.user_type == 2">
+        
+            <span v-if="locale == 'la'">{{ $t("menu_user_c_type_user_admin") }}</span>
+                    <span v-if="locale == 'en'">{{ $t("menu_user_c_type_user_admin") }}</span>
+     
+          </td>
+          <td v-else>
+
+            <span v-if="locale == 'la'">{{ $t("menu_user_c_type_user_user") }}</span>
+                    <span v-if="locale == 'en'">{{ $t("menu_user_c_type_user_user") }}</span>
+                
+
+          </td>
           <td>{{ user.user_phone }}</td>
           <td><button type="button" class="btn btn-primary btn-sm" @click="choose(user.user_id)">{{ $t("menu_user_c_action") }}</button> </td>
           <td>{{ format(user.udp_date) }}</td>
