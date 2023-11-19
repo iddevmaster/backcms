@@ -154,7 +154,7 @@ The Course Name field is required.</span>
     class="btn btn-dark additem _effect--ripple waves-effect waves-light"
     @click="addlesson()"
   >
-  {{ $t("menu_couse_f_add_lesson") }} {{ store.lessonlist.length }}
+  {{ $t("menu_couse_f_add_lesson") }}
   </button>
   <div class="invoice-detail-items">
     <div class="table-responsive">
