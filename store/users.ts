@@ -10,7 +10,7 @@ export const usersStore = defineStore('users', {
   state: () => ({
     locale: true,
     loc:0,
-    lng:'static/upload/2023/11/files-F39mIEriBc.png',
+    lng:'static/upload/2023/11/files-jQHyakITaP.png',
     load: true,
     isOpen: false,
     AlertText: null,
@@ -96,8 +96,8 @@ export const usersStore = defineStore('users', {
     country:null,
     user_img:null,
     lan:[
-     'static/upload/2023/9/files-6TWLyr9FMJ.png','static/upload/2023/9/files-3Nc4g8DjNj.png','static/upload/2023/9/files-JWOxjtiwsQ.png',
-    ]
+      'static/upload/2023/11/files-jQHyakITaP.png','static/upload/2023/11/files-QrkYdiAou9.png','static/upload/2023/9/files-JWOxjtiwsQ.png',
+     ]
   }
 
   ),
