@@ -43,7 +43,7 @@ export default {
   image(img) {
     const imag = ViewImage+img;
     if(!img){
-      let noimge = ViewImage+'static/upload/2023/10/files-7wdaRINrS3.jpg'
+      let noimge = ViewImage+'static/upload/2023/11/files-vOjc6HgALi.jpg'
     return noimge;
     }
     return imag;
