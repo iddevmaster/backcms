@@ -10,7 +10,23 @@
         <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">{{ $t("menu_user_c_back") }}</button>
       </div>
     </div>
-    <div class="col-sm-6">
+
+    <div class="col-sm-2">
+      <label for="exampleFormControlInput1">{{ $t("form_name_title") }}</label> <span class="text-xs text-red-500" style="color:red"> * </span>
+      <select class="form-control" v-model="store.formDataregister.user_prefrix">
+    <option :value="null" disabled>{{ $t("choose") }}</option>
+    <option value="นาย">{{ $t("than") }}</option>
+    <option value="นาง">{{ $t("nang") }}</option>
+
+    </select>
+
+    <span class="text-xs text-red-500" style="color:red" v-if="v$.user_prefrix.$error">{{
+        v$.user_prefrix.$errors[0].$message
+      }}</span>
+
+    
+    </div>
+    <div class="col-sm-5">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_name") }}</label> <span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputEmail3"
         v-model="store.formDataregister.user_firstname" :class="{
@@ -24,7 +40,7 @@
 
 
 
-    <div class="col-sm-6">
+    <div class="col-sm-5">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_lname") }}</label> <span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputEmail3" 
         v-model="store.formDataregister.user_lastname" :class="{
@@ -169,10 +185,10 @@ const rules = computed(() => {
       required: helpers.withMessage('The tel field is required', required),
       minLength: minLength(1),
     },
-    // user_address: {
-    //   required: helpers.withMessage('The Address field is required', required),
-    //   minLength: minLength(6),
-    // },
+    user_prefrix: {
+      required: helpers.withMessage('Field is required', required),
+      minLength: minLength(1),
+    },
     // user_birthday: {
     //   required: helpers.withMessage('The Birthday field is required', required),
     //   minLength: minLength(6),

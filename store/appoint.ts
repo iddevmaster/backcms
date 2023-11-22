@@ -262,6 +262,7 @@ export const AppointStore = defineStore('appoint', {
       try {
         const data = await ApiService.post('/appointment/list', appdata).then(response => {
           this.group = response.data
+
         });
         return true
 
@@ -330,10 +331,10 @@ const date_end = await this.changeFormate(currentDateEnd)
         dlt_code: this.forminsert.dlt_code, user_id: this.forminsert.user_id
       }
 
-   
 
       try {
         const data = await ApiService.post('/appointment/create', savet).then(response => {
+  
     
         });
         return true
