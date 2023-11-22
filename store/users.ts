@@ -57,6 +57,7 @@ export const usersStore = defineStore('users', {
     },
     display_user:null,
     formDataregister: {
+      user_prefrix: null,
       user_name: null,
       user_password: null,
       user_firstname: null,
@@ -73,6 +74,7 @@ export const usersStore = defineStore('users', {
       active:null
     },
     formDataEdit: {
+      user_prefrix: null,
       user_name: null,
       user_password: null,
       user_firstname: null,
@@ -195,7 +197,8 @@ export const usersStore = defineStore('users', {
             this.formDetailEdit.location_id = 1
             this.formDetailEdit.country_id = 1
             this.formDetailEdit.user_id = user_id
-           
+
+          
           }else {
        
             this.formDetailEdit.identification_number = this.formDataEdit.detail.identification_number
@@ -236,7 +239,6 @@ export const usersStore = defineStore('users', {
     },
 
     async Update(user_id) {
-   
       try {
         const response = await ApiService.put('/user/update/' + user_id, this.formDataEdit);
         return response.data
@@ -371,6 +373,7 @@ user_id:this.formDetailEdit.user_id};
 
     async ResetForm() {   ////reset Form
       this.formDataregister = {
+        user_prefrix: null,
         user_name: '',
         user_password: '',
         user_firstname: '',
