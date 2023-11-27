@@ -15,8 +15,8 @@
       <label for="exampleFormControlInput1">{{ $t("form_name_title") }}</label> <span class="text-xs text-red-500" style="color:red"> * </span>
       <select class="form-control" v-model="store.formDataEdit.user_prefrix">
     <option :value="null" disabled>{{ $t("choose") }}</option>
-    <option value="นาย">{{ $t("than") }}</option>
-    <option value="นาง">{{ $t("nang") }}</option>
+    <option value="ທ້າວ">{{ $t("than") }}</option>
+    <option value="ນາງ">{{ $t("nang") }}</option>
 
     </select>
 
