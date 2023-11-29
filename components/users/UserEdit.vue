@@ -33,7 +33,7 @@
         v-model="store.formDataEdit.user_firstname" :class="{
           'border-red-500 focus:border-red-500': v$.user_firstname.$error,
           'border-[#42d392] ': !v$.user_firstname.$invalid,
-        }" @change="v$.user_firstname.$touch" autocomplete="off">
+        }" @change="v$.user_firstname.$touch" autocomplete="off"  placeholder="First Name">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.user_firstname.$error">{{
         v$.user_firstname.$errors[0].$message
       }}</span>
@@ -47,7 +47,7 @@
         v-model="store.formDataEdit.user_lastname" :class="{
           'border-red-500 focus:border-red-500': v$.user_lastname.$error,
           'border-[#42d392] ': !v$.user_lastname.$invalid,
-        }" @change="v$.user_lastname.$touch" autocomplete="off">
+        }" @change="v$.user_lastname.$touch" autocomplete="off"  placeholder="Last Name">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.user_lastname.$error">{{
         v$.user_lastname.$errors[0].$message
       }}</span>
@@ -63,7 +63,7 @@
         v-model="store.formDataEdit.user_name" :class="{
           'border-red-500 focus:border-red-500': v$.user_name.$error,
           'border-[#42d392] ': !v$.user_name.$invalid,
-        }" @change="v$.user_name.$touch" autocomplete="off">
+        }" @change="v$.user_name.$touch" autocomplete="off"  placeholder="User Name">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.user_name.$error">{{
         v$.user_name.$errors[0].$message
       }}</span>
@@ -88,7 +88,7 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_email") }}</label> 
       <input type="text" class="form-control" id="inputPassword3" 
-        v-model="store.formDataEdit.user_email">
+        v-model="store.formDataEdit.user_email"  placeholder="Test@gmail.com">
     </div>
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_tel") }}</label> <span class="text-xs text-red-500" style="color:red"> * </span>
@@ -96,7 +96,7 @@
         v-model="store.formDataEdit.user_phone" :class="{
           'border-red-500 focus:border-red-500': v$.user_phone.$error,
           'border-[#42d392] ': !v$.user_phone.$invalid, 
-        }" @change="v$.user_phone.$touch" autocomplete="off" @input="onInput">
+        }" @change="v$.user_phone.$touch" autocomplete="off" @input="onInput" placeholder="85620xxxxxxxx">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.user_phone.$error">{{
         v$.user_phone.$errors[0].$message
       }}</span>
