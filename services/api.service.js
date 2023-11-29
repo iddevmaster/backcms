@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: 'https://dot-api.mpwt.link',
+  baseURL: 'https://dot-api.mpwt.gov.la',
   // ตั้งค่า baseURL ให้เป็น URL ของเซิร์ฟเวอร์ API ที่ต้องการเชื่อมต่อ
   headers: {
     'Content-Type': 'application/json',
@@ -12,7 +12,7 @@ const apiClient = axios.create({
 
 
 const apiUpload = axios.create({
-  baseURL: 'https://dot-api.mpwt.link',
+  baseURL: 'https://dot-api.mpwt.gov.la',
   // ตั้งค่า baseURL ให้เป็น URL ของเซิร์ฟเวอร์ API ที่ต้องการเชื่อมต่อ
   headers: {
     'Content-Type': 'multipart/form-data',
@@ -22,7 +22,7 @@ const apiUpload = axios.create({
 });
 
 
-const ViewImage = 'https://dot-api.mpwt.link/media_file/file/?f=';
+const ViewImage = 'https://dot-api.mpwt.gov.la/media_file/file/?f=';
 
 export default {
   get(resource) {

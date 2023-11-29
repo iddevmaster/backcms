@@ -146,7 +146,7 @@ const backToNews = async () => {
 const CoverImage = (img) => {
   let result = img.slice(0, 6);
   if (result === "static") {
-    return 'https://dot-api.mpwt.link/media_file/file/?f=' + img;
+    return 'https://dot-api.mpwt.gov.la/media_file/file/?f=' + img;
   } else {
     return img;
   }
