@@ -98,6 +98,8 @@
         v$.user_phone.$errors[0].$message
       }}</span>
     </div>
+
+    
   </div>
   <div class="row mb-4">
     <div class="col-sm-6">

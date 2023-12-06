@@ -173,6 +173,7 @@
 
   "menu_user_iden": "ID Card",
   "menu_user_address": "Address",
+  "menu_user_village": "Ban",
   "menu_user_birdday": "Birthday",
   "menu_user_zipcode": "ZipCode",
   "menu_user_country": "Nationality",

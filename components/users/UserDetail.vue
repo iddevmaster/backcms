@@ -7,7 +7,7 @@
     </div>
     <div class="row mb-4">
     <div class="col-sm-12">
-    
+   
       <label for="exampleFormControlInput1">{{ $t("menu_user_iden") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="add" placeholder="ໝາຍເລກບັດປະຈຳຕົວ*"  v-model="store.formDetailEdit.identification_number"
       :class="{
@@ -49,6 +49,21 @@
       }}</span>
     </div>
   </div> 
+
+  <div class="row mb-4">
+    <div class="col-sm-12">
+      <label for="exampleFormControlInput1">{{ $t("menu_user_village") }}</label>
+      <input type="text" class="form-control" id="add" placeholder="ທີ່ຢູ່ *"  v-model="store.formDetailEdit.user_village"
+      :class="{
+          'border-red-500 focus:border-red-500': v$.user_village.$error,
+          'border-[#42d392] ': !v$.user_village.$invalid,
+        }" @change="v$.user_village.$touch" autocomplete="off"
+      >
+      <span class="text-xs text-red-500" style="color:red" v-if="v$.user_village.$error">{{
+        v$.user_village.$errors[0].$message
+      }}</span>
+    </div>
+  </div>
     <div class="row mb-4">
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_zipcode") }}</label>
@@ -78,6 +93,8 @@
     <option value="system_active">{{ $t("system_active") }}</option>
     </select>
     </div>
+
+    
   </div>
 
     <div class="form-group mb-4 mt-3">
@@ -160,8 +177,12 @@ store.imageReq = false;
         required: helpers.withMessage('The identification_number field is required', required),
         minLength: minLength(13),
       },
+      user_village: {
+        required: helpers.withMessage('Village field is required', required),
+        minLength: minLength(1),
+      },
 
-
+      
       
     };
   });

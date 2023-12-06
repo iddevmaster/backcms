@@ -93,6 +93,7 @@ export const usersStore = defineStore('users', {
       location_id: null,
       country_id: null,
       user_id: null,
+      user_village: "",
     },
     zipcode:null,
     country:null,
@@ -206,6 +207,7 @@ export const usersStore = defineStore('users', {
             this.formDetailEdit.user_address = this.formDataEdit.detail.user_address
             this.formDetailEdit.location_id = this.formDataEdit.detail.location_id
             this.formDetailEdit.country_id = this.formDataEdit.detail.country_id
+            this.formDetailEdit.user_village = this.formDataEdit.detail.user_village
             this.image = this.formDataEdit.detail.user_img
             this.formDetailEdit.user_img = this.formDataEdit.detail.user_img
             this.formDetailEdit.verify_account = this.formDataEdit.detail.verify_account
@@ -316,7 +318,7 @@ user_img:this.formDetailEdit.user_img,user_birthday:this.formDetailEdit.user_bir
 user_address:this.formDetailEdit.user_address,
 location_id:this.formDetailEdit.location_id,
 country_id:this.formDetailEdit.country_id,
-user_id:this.formDetailEdit.user_id};
+user_id:this.formDetailEdit.user_id,user_village:this.formDetailEdit.user_village};
 
   
 
