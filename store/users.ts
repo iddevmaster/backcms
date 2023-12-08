@@ -496,6 +496,7 @@ const a = {verify_account:'system_active',identification_number:response.data[0]
           user_address:response.data[0].user_address,
           location_id:response.data[0].location_id,
           country_id:response.data[0].country_id,
+          user_village:response.data[0].user_village,
           user_id:response.data[0].user_id};
   
           try {
