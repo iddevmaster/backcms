@@ -213,11 +213,11 @@ const save = async () => {
   v$.value.$validate();
     if (!v$.value.$error) {
        const data = await store.SaveFormAPP();
-      console.log(data);
+     
     if (data == true) {
-    // await toast.success('Save Data');
-    //  await   store.ResetForm();
-    //  await router.push('/appointment');
+    await toast.success('Save Data');
+     await   store.ResetForm();
+     await router.push('/appointment');
           
     } else {
       toast.error('Fail Save Data')
