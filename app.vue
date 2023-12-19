@@ -16,6 +16,15 @@ useSeoMeta({
 })
 
 
+useHead({
+  
+  link: [
+      { rel: 'icon', type: 'image/png', href: '/LogoPWT.png' }
+      // You can add other link tags here
+    ]
+})
+
+
 </script>
 
 
