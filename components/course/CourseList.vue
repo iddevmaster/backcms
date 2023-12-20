@@ -100,7 +100,9 @@ import { useToast } from "vue-toastification";
 import ApiService  from "../../services/api.service";
 
 const toast = useToast();
+
 const store = CourseStore();
+store.isLoading == true;
 const { Courselist } = storeToRefs(store);
  const { deleteItem } = CourseStore();//Action
  const { selectentires } = CourseStore();//Action

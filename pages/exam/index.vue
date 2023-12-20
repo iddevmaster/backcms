@@ -12,6 +12,7 @@ import ExamCreate from '@/components/exam/ExamCreate.vue'
 import ExamEdit from '@/components/exam/ExamEdit.vue'
 import { useToast } from 'vue-toastification';
 import { required, email, sameAs, minLength, helpers, } from '@vuelidate/validators';
+import Loading from 'vue-loading-overlay';import 'vue-loading-overlay/dist/css/index.css';
 
 
 definePageMeta({
@@ -22,12 +23,14 @@ definePageMeta({
 
 const toast = useToast()
 const store = ExamStore()
+await store.isLoading == true;
 const auth = useAuthStore()
 const profile = await auth.getProfile();
 
 store.formexam.user_id = auth.user_id
 store.formexamedit.user_id = auth.user_id
 store.user_id = auth.user_id
+
 
 const { GetopenModal } = storeToRefs(store); //Get Getter
 const { GetopenModalCreate } = storeToRefs(store); //Get Getter
@@ -55,6 +58,8 @@ const Deleteexam = async (item) => {
 </script>
 
 <template>
+       <loading v-model:active="store.isLoading" :can-cancel="true" @on-cancel="onCancel"
+                />
     <div id="content" class="main-content">
         <div class="layout-px-spacing">
             <div class="page-meta">
@@ -65,7 +70,7 @@ const Deleteexam = async (item) => {
                     </ol>
                 </nav>
             </div>
-
+         
 
             <div class="middle-content container-xxl p-0">
                 <div class="row layout-top-spacing">

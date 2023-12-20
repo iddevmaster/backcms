@@ -10,10 +10,12 @@ import { CourseStore } from '@/store/course'
 import { useAuthStore } from '@/store/auth'
 import CourseList from '@/components/course/CourseList.vue'
 import { useModalStore } from '@/store/modal';
-import Loading from '@/components/layout/Success.vue';
+
 import Alert from '@/components/layout/Alert.vue';
 import { useToast } from 'vue-toastification';
 import { ref } from 'vue';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/css/index.css';
 
 definePageMeta({
   middleware: ['auth','roles'],
@@ -22,6 +24,7 @@ definePageMeta({
 
 const auth = useAuthStore()
 const store = CourseStore()
+
 store.formDataCourse.user_id = auth.user_id
 store.formDataEditCourse.user_id = auth.user_id
 store.formDatalesson.user_id = auth.user_id
@@ -61,7 +64,8 @@ const delete_userid = async (id) => {
 </script>
 
 <template>
-
+   <loading v-model:active="store.isLoading" :can-cancel="true" @on-cancel="onCancel"
+                />
   <div id="content" class="main-content">
             <div class="layout-px-spacing">
               <div class="page-meta">

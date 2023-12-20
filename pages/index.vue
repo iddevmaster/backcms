@@ -633,6 +633,8 @@ ChartJS.register(
 const { locale, setLocale } = useI18n();
 const store = LogStore();
 
+
+
 onMounted(async () => {
   const year = new Date().getFullYear();
   store.formfitter.year = year;

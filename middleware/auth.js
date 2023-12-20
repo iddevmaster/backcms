@@ -14,6 +14,7 @@ export default defineNuxtRouteMiddleware((to) => {
 
   if (token.value) {
     // check if value exists
+    
     authenticated.value = true; // update the state to authenticated
   }
 
