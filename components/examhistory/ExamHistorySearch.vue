@@ -5,12 +5,12 @@
 
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4">
       <select class="form-select form-select" aria-label="Default select example"  v-model="store.byem_id">
-        <option disabled selected :value="0">เลือก</option>
+        <option disabled selected :value="0">ເລືອກ</option>
         <option v-for="(events, x) in store.examlist" :value="events.em_id">{{events.em_name}}</option>
       </select>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="ค้นหา User *" maxlength="10"
+      <input type="text" class="form-control" id="inputEmail3" placeholder="ຄົ້ນຫາຜູ້ໃຊ້ *" maxlength="10"
       v-model="store.formuser.search" @keyup="searchData"
       >
     </div>

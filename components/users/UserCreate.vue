@@ -32,7 +32,7 @@
         v-model="store.formDataregister.user_firstname" :class="{
           'border-red-500 focus:border-red-500': v$.user_firstname.$error,
           'border-[#42d392] ': !v$.user_firstname.$invalid,
-        }" @change="v$.user_firstname.$touch" autocomplete="off"   placeholder="First Name">
+        }" @change="v$.user_firstname.$touch" autocomplete="off"   placeholder="ຊື່​ແທ້">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.user_firstname.$error">{{
         v$.user_firstname.$errors[0].$message
       }}</span>
@@ -46,7 +46,7 @@
         v-model="store.formDataregister.user_lastname" :class="{
           'border-red-500 focus:border-red-500': v$.user_lastname.$error,
           'border-[#42d392] ': !v$.user_lastname.$invalid,
-        }" @change="v$.user_lastname.$touch" autocomplete="off"  placeholder="Last Name">
+        }" @change="v$.user_lastname.$touch" autocomplete="off"  placeholder="ນາມ​ສະ​ກຸນ">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.user_lastname.$error">{{
         v$.user_lastname.$errors[0].$message
       }}</span>
@@ -62,7 +62,7 @@
         v-model="store.formDataregister.user_name" :class="{
           'border-red-500 focus:border-red-500': v$.user_name.$error,
           'border-[#42d392] ': !v$.user_name.$invalid,
-        }" @change="v$.user_name.$touch" autocomplete="off" placeholder="User Name">
+        }" @change="v$.user_name.$touch" autocomplete="off" placeholder="ຜູ້ໃຊ້">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.user_name.$error">{{
         v$.user_name.$errors[0].$message
       }}</span>
@@ -71,10 +71,13 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_pass") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputPassword3"
+      placeholder="ລະຫັດຜ່ານ"
         v-model="store.formDataregister.user_password" :class="{
           'border-red-500 focus:border-red-500': v$.user_password.$error,
           'border-[#42d392] ': !v$.user_password.$invalid,
-        }" @change="v$.user_password.$touch" autocomplete="off" >
+          
+        }" 
+        @change="v$.user_password.$touch" autocomplete="off" >
       <span class="text-xs text-red-500" style="color:red" v-if="v$.user_password.$error">{{
         v$.user_password.$errors[0].$message
       }}</span>
@@ -167,28 +170,28 @@ await store.Country();
 const rules = computed(() => {
   return {
     user_name: {
-      required: helpers.withMessage('The User name field is required', required),
+      required: helpers.withMessage('ຕ້ອງໃສ່ຊ່ອງໃສ່ຊື່ຜູ້ໃຊ້', required),
       minLength: minLength(1),
     },
     user_password: {
-      required: helpers.withMessage('The Password field is required', required),
+      required: helpers.withMessage('ປ່ອງລະຫັດຜ່ານແມ່ນຕ້ອງການ', required),
       minLength: minLength(1),
     },
     user_firstname: {
-      required: helpers.withMessage('The First Name field is required', required),
+      required: helpers.withMessage('ຕ້ອງມີຊ່ອງໃສ່ຊື່ທໍາອິດ', required),
       minLength: minLength(1),
     },
     user_lastname: {
-      required: helpers.withMessage('The Last Name field is required', required),
+      required: helpers.withMessage('ຕ້ອງມີຊ່ອງໃສ່ນາມສະກຸນ', required),
       minLength: minLength(1),
     },
 
     user_phone: {
-      required: helpers.withMessage('The tel field is required', required),
+      required: helpers.withMessage('ຊ່ອງຂໍ້ມູນໂທລະສັບແມ່ນຕ້ອງການ', required),
       minLength: minLength(1),
     },
     user_prefrix: {
-      required: helpers.withMessage('Field is required', required),
+      required: helpers.withMessage('ຊ່ອງຂໍ້ມູນແມ່ນຕ້ອງການ', required),
       minLength: minLength(1),
     },
     // user_birthday: {

@@ -166,19 +166,19 @@ store.imageReq = false;
   const rules = computed(() => {
     return {
       user_address: {
-        required: helpers.withMessage('The Address field is required', required),
+        required: helpers.withMessage('ປ່ອງທີ່ຢູ່ແມ່ນຕ້ອງການ', required),
         minLength: minLength(1),
       },
       user_birthday: {
-        required: helpers.withMessage('The Birthday field is required', required),
+        required: helpers.withMessage('ຕ້ອງມີຊ່ອງຂໍ້ມູນວັນເກີດ', required),
         minLength: minLength(1),
       },
       identification_number: {
-        required: helpers.withMessage('The identification_number field is required', required),
+        required: helpers.withMessage('ຕ້ອງມີຊ່ອງຂໍ້ມູນການລະບຸຕົວຕົນ', required),
         minLength: minLength(13),
       },
       user_village: {
-        required: helpers.withMessage('Village field is required', required),
+        required: helpers.withMessage('ພື້ນທີ່ບ້ານແມ່ນຕ້ອງການ', required),
         minLength: minLength(1),
       },
 

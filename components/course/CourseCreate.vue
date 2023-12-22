@@ -12,6 +12,7 @@
         type="text"
         class="form-control"
         id="inputEmail4"
+        placeholder="ລະຫັດສື່​ການ​ຮຽນ​ຮູ້"
         v-model="store.formDataCourse.course_code"
         :class="{
           'border-red-500 focus:border-red-500': v$.course_code.$error,
@@ -42,6 +43,7 @@
         type="text"
         class="form-control"
         id="inputPassword4"
+        placeholder="ສື່​ການ​ຮຽນ​ຮູ້​"
         v-model="store.formDataCourse.course_name"
         :class="{
           'border-red-500 focus:border-red-500': v$.course_name.$error,
@@ -74,6 +76,7 @@ The Course Name field is required.</span>
         class="form-control"
         id="exampleFormControlTextarea1"
         rows="3"
+        placeholder="ລາຍລະອຽດສື່​ການ​ຮຽນ​ຮູ້"
         :class="{
           'border-red-500 focus:border-red-500': v$.course_description.$error,
           'border-[#42d392] ': !v$.course_description.$invalid,

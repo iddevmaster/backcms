@@ -12,7 +12,7 @@
             id="type"
             v-model="store.formadddtl.dlt_code"
           >
-            <option selected disabled>โปรดเลือกประเภทใบขับขี่</option>
+            <option selected disabled>ກະລຸນາເລືອກປະເພດໃບຂັບຂີ່ຂອງເຈົ້າ</option>
             <option
               v-for="(item, index) in store.dtla"
               :key="index"
