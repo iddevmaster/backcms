@@ -54,7 +54,7 @@
   </div>
   <div class="row layout-top-spacing" v-if="store.formfitter.type == '3'">
     <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="ค้นหา User *" maxlength="10"
+      <input type="text" class="form-control" id="inputEmail3" placeholder="ຄົ້ນຫາການນໍາໃຊ້ *" maxlength="10"
         v-model="store.formuser.search" @keyup="searchData">
     </div>
   </div>
