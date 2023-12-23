@@ -42,7 +42,7 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-12 mb-3">
-                    <h3>ຍິນດີຕ້ອນຮັບ to DoT Smart App</h3>
+                    <h3>ຍິນດີຕ້ອນຮັບ DoT Smart App</h3>
                     <p>ໃສ່ຊື່ຜູ້ໃຊ້ ແລະລະຫັດຜ່ານຂອງທ່ານເພື່ອເຂົ້າສູ່ລະບົບ</p>
                   </div>
                   <div class="col-md-12">
