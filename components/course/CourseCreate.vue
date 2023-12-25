@@ -156,13 +156,13 @@ The Course Name field is required.</span>
     </div>
   </div>
 
-  <button
+  <!-- <button
     class="btn btn-dark additem _effect--ripple waves-effect waves-light"
     @click="addlesson()"
   >
   {{ $t("menu_couse_f_add_lesson") }}
-  </button>
-  <div class="invoice-detail-items">
+  </button> -->
+  <!-- <div class="invoice-detail-items">
     <div class="table-responsive">
       <table class="table item-table">
         <thead>
@@ -249,7 +249,7 @@ The Course Name field is required.</span>
         </tbody>
       </table>
     </div>
-  </div>
+  </div> -->
 
   <div class="col-xl-12 col-md-12">
     <button type="button" class="btn btn-success" @click="save()">
@@ -330,29 +330,61 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, FormDataCourse);
 
+// const save = async () => {
+
+//   if(store.lessonlist.length == 0){
+//     await toast.error("Add Lesson Please", {
+//         timeout: 2000,
+//     });
+// return false;
+//   }
+//   v$.value.$validate();
+//   if (!v$.value.$error) {
+//     try {
+//       store.isLoaddingsave = true;
+//       let uploadfile = await UploadfileCourse();
+//       let updateCourse = await SaveCourse();
+//       let savelesson = await SaveLesson();
+//       const input = document.querySelector('input[type="file"]');
+//       input.value = "";
+//       store.ResetForm();
+//       v$.value.$reset();
+//       if(savelesson === true){
+//         store.isLoaddingsave = false;
+//         await setTimeout(() => {
+//         toast.success("Save Data");
+
+//         router.push('/learning');
+//       }, 500);
+
+//       }
+
+//     } catch (error) {
+//       await toast.error("Fail Save Data");
+//     }
+//   }
+// };
+
 const save = async () => {
 
-  if(store.lessonlist.length == 0){
-    await toast.error("Add Lesson Please", {
-        timeout: 2000,
-    });
-return false;
-  }
   v$.value.$validate();
   if (!v$.value.$error) {
     try {
       store.isLoaddingsave = true;
       let uploadfile = await UploadfileCourse();
       let updateCourse = await SaveCourse();
-      let savelesson = await SaveLesson();
-      const input = document.querySelector('input[type="file"]');
-      input.value = "";
-      store.ResetForm();
-      v$.value.$reset();
-      if(savelesson === true){
+     // let savelesson = await SaveLesson();
+  
+      if(updateCourse === true){
         store.isLoaddingsave = false;
+
+            const input = document.querySelector('input[type="file"]');
+      input.value = "";
+     
+      v$.value.$reset();
         await setTimeout(() => {
         toast.success("Save Data");
+         store.ResetForm();
 
         router.push('/learning');
       }, 500);
@@ -364,6 +396,7 @@ return false;
     }
   }
 };
+
 
 const addlesson = async () => {
   await Adlesson();
