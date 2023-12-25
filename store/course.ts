@@ -177,7 +177,7 @@ export const CourseStore = defineStore('course', {
   
 
       for (var i = 0; i < this.lessonlist.length; i++) {
-        
+        console.log(this.lessonlist[i]);
         this.formDatalesson.cs_cover = this.lessonlist[i].cs_cover
         this.formDatalesson.cs_name = this.lessonlist[i].cs_name
         this.formDatalesson.cs_video = this.lessonlist[i].cs_video
@@ -185,14 +185,11 @@ export const CourseStore = defineStore('course', {
         this.formDatalesson.user_id = this.user_id
         this.formDatalesson.course_id = this.course_id;
 
-     
-        await this.delay(1000);
-        const data = ApiService.post('/course/lesson/create', this.formDatalesson)
 
-        {
+      
+      //  const data = ApiService.post('/course/lesson/create', this.formDatalesson)
 
-
-        }
+       
 
       }
 
@@ -226,7 +223,6 @@ return true;
         if (response.data.data) {
           for (var i = 0; i < response.data.data.length; i++) {
             this.get_lesson_id.push(response.data.data[i].cs_id);
-
           }
         }
 

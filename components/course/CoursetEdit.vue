@@ -1,6 +1,8 @@
 <template>
   <loading v-model:active="store.isLoaddingsave" :can-cancel="true" @on-cancel="onCancel"
                 />
+
+                {{ store.lessonlist.length }}
   <div class="row mb-4 g-3">
     <div id="form_grid_layouts" class="col-lg-9">
       <div class="seperator-header">
