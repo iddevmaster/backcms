@@ -395,6 +395,18 @@
   "nang":"ນາງ ",
   "form_name_title":"ຄຳນຳໜ້າ",
   
-  "choose":"ເລືອກ"
+  "choose":"ເລືອກ",
+  "lesson_head":"ບົດຮຽນ",
+  "lesson_qui":"ຄຳຖາມ",
+  "lesson_ans":"ຄໍາຕອບ",
+  "lesson_yout":"ວິດີໂອ",
+  "lesson_pic":"ຮູບ",
+  "add_lesson":"ເພີ່ມບົດຮຽນ",
+  "less_ac":"ຈັດການ",
+  "title_lesson":"ບົດຮຽນ",
+  "title_lesson_t":"ຈັດການ",
+  "lesson_edit":"ແກ້ໄຂ",
+  "lesson_delete":"ລຶບ"
+
 }
 

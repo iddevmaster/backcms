@@ -1,4 +1,8 @@
 <template>
+  <loading v-model:active="store.isLoaddingsave" :can-cancel="true" @on-cancel="onCancel"
+                />
+
+                
   <div class="row mb-4 g-3">
     <div id="form_grid_layouts" class="col-lg-9">
       <div class="seperator-header">
@@ -112,10 +116,10 @@ The Course Name field is required.</span>
     <div></div>
   </div>
 
-  <button class="btn btn-dark additem _effect--ripple waves-effect waves-light" @click="addlesson()">
+  <!-- <button class="btn btn-dark additem _effect--ripple waves-effect waves-light" @click="addlesson()">
    {{ $t("menu_couse_f_add_lesson") }}
-  </button>
-  <div class="invoice-detail-items">
+  </button> -->
+  <!-- <div class="invoice-detail-items">
     <div class="table-responsive">
       <table class="table item-table">
         <thead>
@@ -170,7 +174,7 @@ The Course Name field is required.</span>
         </tbody>
       </table>
     </div>
-  </div>
+  </div> -->
   <div class="col-xl-12 col-md-12">
     <button type="button" class="btn btn-success" @click="save()">
     {{ $t("menu_couse_f_save") }}
@@ -192,6 +196,7 @@ import {
 import { useToast } from "vue-toastification";
 import ApiService  from "../../services/api.service";
 import { useI18n } from "vue-i18n";
+import Loading from 'vue-loading-overlay';import 'vue-loading-overlay/dist/css/index.css';
 import Swal from 'sweetalert2';
 const { locale, setLocale } = useI18n();
 const toast = useToast();
@@ -254,31 +259,30 @@ const rules = computed(() => {
 const v$ = useVuelidate(rules, FormDataEditCourse);
 
 const save = async () => {
-  if(store.lessonlist.length == 0){
-    await toast.error("Add Lesson Please", {
-        timeout: 2000,
-    });
-return false;
-  }
+
   v$.value.$validate();
   if (!v$.value.$error) {
-    await toast.warning("Wait Edit Data", {
-      timeout: 2000,
-    });
+    store.isLoaddingsave = true;
 
     try {
       let updatefile = await UploadfileCourse()
       let updatedata = await UpdateCourse();
-      await store.fetchCourslist()
-      await setTimeout(() => {
-        store.fetchCourseId(router.currentRoute.value.params.id);
-      }, 500);
+    //  let savelesson = await SaveLesson();
+    //  await store.fetchCourslist()
+      // await setTimeout(() => {
+      //   store.fetchCourseId(router.currentRoute.value.params.id);
+      // }, 500);
 
-      await setTimeout(() => {
+      if(updatedata === true){
+        await setTimeout(() => {
         toast.success("Edit Success");
       }, 500);
-
+      store.isLoaddingsave = false;
       await router.push('/learning');
+
+      }
+
+    
 
     } catch (error) {
       await toast.error("Fail Edit Data");
@@ -286,6 +290,46 @@ return false;
 
   }
 };
+
+
+// const save = async () => {
+//   if(store.lessonlist.length == 0){
+//     await toast.error("Add Lesson Please", {
+//         timeout: 2000,
+//     });
+// return false;
+//   }
+//   v$.value.$validate();
+//   if (!v$.value.$error) {
+//     store.isLoaddingsave = true;
+
+//     try {
+//       let updatefile = await UploadfileCourse()
+//       let updatedata = await UpdateCourse();
+//       let savelesson = await SaveLesson();
+//     //  await store.fetchCourslist()
+//       // await setTimeout(() => {
+//       //   store.fetchCourseId(router.currentRoute.value.params.id);
+//       // }, 500);
+
+//       if(savelesson === true){
+//         await setTimeout(() => {
+//         toast.success("Edit Success");
+//       }, 500);
+//       store.isLoaddingsave = false;
+//       await router.push('/learning');
+
+//       }
+
+    
+
+//     } catch (error) {
+//       await toast.error("Fail Edit Data");
+//     }
+
+//   }
+// };
+
 
 const addlesson = async () => {
   await Adlesson();
@@ -386,7 +430,7 @@ const onFileChangeBack = async (event) => {
 
 
 function coverimage(i) {
-     console.log('i',i)
+   
   let result = i.slice(0, 6);
   if (result === 'static') {
     let im =  ApiService.image(i);

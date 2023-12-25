@@ -401,6 +401,17 @@
   "than":"ທ້າວ",
   "nang":"ນາງ ",
   "form_name_title":"Prefix",
-  "choose":"ເລືອກ"
+  "choose":"ເລືອກ",
+  "lesson_head":"Lesson",
+  "lesson_qui":"Question",
+  "lesson_ans":"Answer",
+  "lesson_yout":"Video",
+  "lesson_pic":"Picture",
+  "add_lesson":"Add Lesson",
+  "less_ac":"Manage",
+  "title_lesson":"Lesson",
+  "title_lesson_t":"Manage",
+  "lesson_edit":"Edit",
+  "lesson_delete":"Delete"
 }
 

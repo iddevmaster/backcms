@@ -32,7 +32,7 @@
       :key="item.course_id"
     > <div class="gridarea__img">
       <a class="card style-2 mb-md-0 mb-4">
-        <img
+        <img @click="lesson(item.course_id)"
           :src="image(item.course_cover)"
           class="card-img-top"
           alt="..."
@@ -100,7 +100,7 @@ import { useToast } from "vue-toastification";
 import ApiService  from "../../services/api.service";
 
 const toast = useToast();
-
+const router = useRouter();
 const store = CourseStore();
 store.isLoading == true;
 const { Courselist } = storeToRefs(store);
@@ -119,11 +119,15 @@ if (courselist === false) {
   });
 }
 
-
-
 const del = async (id) => {
  const delecourse =  await deleteItem(id);
 };
+
+const lesson = async (id) => {
+   await router.push('/learning/lesson/'+id);
+};
+
+
 
 
 const selectshowdata = async (sel) => {
