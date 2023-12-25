@@ -2,7 +2,7 @@
 
   <div class="row layout-top-spacing">
     <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
-      <input id="t-text" type="text" name="txt" placeholder="Search" class="form-control" required=""
+      <input id="t-text" type="text" name="txt" placeholder="ຊອກຫາ" class="form-control" required=""
       v-model="store.formapprove.search" @keyup="searchData" />
     </div>
 

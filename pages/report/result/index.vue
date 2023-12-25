@@ -32,7 +32,7 @@
 
   </div>
                    <div>
-                     <button type="button" class="btn btn-primary" @click="search">ค้นหา</button>
+                     <button type="button" class="btn btn-primary" @click="search">ຊອກຫາ</button>
                     </div>
                         </div>
                     </div>

@@ -12,6 +12,7 @@ import { useModalStore } from '@/store/modal';
 import Loading from '@/components/layout/Success.vue';
 import Alert from '@/components/layout/Alert.vue';
 import { useToast } from "vue-toastification";
+
 definePageMeta({
   middleware: ['auth','roles'],
   allowedRoles: [1,2],

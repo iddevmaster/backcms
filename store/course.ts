@@ -8,6 +8,7 @@ export const CourseStore = defineStore('course', {
   state: () => ({
     courselist: [],
     image: null,
+    isLoading:true,
     imagelist: null,
     path: "",
     course_id: null,
@@ -106,11 +107,10 @@ export const CourseStore = defineStore('course', {
           this.total_filter = response.data.total_filter
           this.total = response.data.total
         });
-
+        this.isLoading = false;
         return true;
       } catch (error) {
-       
-        return false;
+        return navigateTo('/maintenance');
       } finally {
         this.loading = false
         this.pending = false

@@ -9,6 +9,7 @@ import { ref } from 'vue';
 export const ExamStore = defineStore('exam', {
   state: () => ({
     isOpen: false,
+    isLoading:true,
     isOpenCreate: false,
     isOpenEdit: false,
     image: null,
@@ -185,7 +186,7 @@ export const ExamStore = defineStore('exam', {
           this.total_filter = response.data.total_filter
           this.total = response.data.total
         });
-
+        this.isLoading = false;
         return true
 
       } catch (error) {

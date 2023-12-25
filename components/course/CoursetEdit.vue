@@ -147,9 +147,9 @@ The Course Name field is required.</span>
               </ul>
             </td>
             <td class="description">
-              <input type="text" class="form-control form-control-sm" placeholder="Item Description"
+              <input type="text" class="form-control form-control-sm" placeholder="ຄໍາຖາມ"
                 v-model="item.cs_name" />
-              <textarea class="form-control" placeholder="cs_Description"
+              <textarea class="form-control" placeholder="ຄໍາຕອບ"
                 v-model="item.cs_description">{{ item.cs_description }}</textarea>
             </td>
             <td>
@@ -161,7 +161,7 @@ The Course Name field is required.</span>
                <input
                 type="text"
                 class="form-control form-control-sm"
-                placeholder="Item Description"
+                placeholder="ລິ້ງວິດີໂອ"
                 v-model="item.cs_video"
               />
             

@@ -659,6 +659,10 @@ const store = useAuthStore();
 
 const users = await store.getProfile();
 
+// if(users === false){
+//   await store.logUserOut()
+// }
+
 const GotoPage = async () => {
   router.push('/');
 }

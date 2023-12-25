@@ -41,7 +41,7 @@
 
         :disabled="store.event.length < 1 ? true : false"
         >
-        <option disabled selected :value="0">เลือก</option>
+        <option disabled selected :value="0">ເລືອກ</option>
         
         <option v-for="(events, x) in store.event">{{events.event}}</option>
       </select> 

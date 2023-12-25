@@ -5,7 +5,7 @@
         id="t-text"
         type="text"
         name="txt"
-        placeholder="Search"
+        placeholder="ຊອກຫາ"
         class="form-control"
         required=""
         v-model="store.formsearchcourse.search" @keyup="searchData"
@@ -100,7 +100,9 @@ import { useToast } from "vue-toastification";
 import ApiService  from "../../services/api.service";
 
 const toast = useToast();
+
 const store = CourseStore();
+store.isLoading == true;
 const { Courselist } = storeToRefs(store);
  const { deleteItem } = CourseStore();//Action
  const { selectentires } = CourseStore();//Action

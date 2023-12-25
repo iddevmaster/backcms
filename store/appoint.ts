@@ -223,6 +223,7 @@ export const AppointStore = defineStore('appoint', {
     },
 
     async fetchAppointment() {
+      
       this.form.date_event = 0; 
       const appdata = {
         ap_learn_type: this.form.ap_learn_type,
@@ -245,7 +246,7 @@ export const AppointStore = defineStore('appoint', {
      
 
       } catch (error) {
-        return false;
+        return navigateTo('/maintenance');
       }
 
     },

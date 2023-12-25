@@ -32,7 +32,7 @@
       <label for="exampleFormControlInput1">Course ID</label>
       <select class="form-control" v-model="store.formfitter.course_id" @change="onChange($event)">
         <option disabled :value="null">
-          เลือก
+          ເລືອກ
         </option>
         <option v-for="(item, i) in store.courselist" :value="item.course_id">
           {{ item.course_name }}
@@ -44,7 +44,7 @@
       <label for="exampleFormControlInput1">Lesson ID</label>
       <select class="form-control" v-model="store.formfitter.cs_id">
         <option disabled :value="null">
-          เลือก
+          ເລືອກ
         </option>
         <option v-for="(less, i) in store.lessonlist" :value="less.cs_id" v-if="store.lessonlist">
           {{ less.cs_name }}
@@ -54,7 +54,7 @@
   </div>
   <div class="row layout-top-spacing" v-if="store.formfitter.type == '3'">
     <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
-      <input type="text" class="form-control" id="inputEmail3" placeholder="ค้นหา User *" maxlength="10"
+      <input type="text" class="form-control" id="inputEmail3" placeholder="ຄົ້ນຫາການນໍາໃຊ້ *" maxlength="10"
         v-model="store.formuser.search" @keyup="searchData">
     </div>
   </div>
@@ -85,7 +85,7 @@
 
 
 
-  <button type="button" class="btn btn-primary" @click="search()">ค้นหา</button>
+  <button type="button" class="btn btn-primary" @click="search()">ຊອກຫາ</button>
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';

@@ -330,7 +330,7 @@
                       @change="onChange($event)"
                       v-model="store.formrev.dlt_code"
                     >
-                      <option disabled :value="null">เลือก</option>
+                      <option disabled :value="null">ເລືອກ</option>
 
                       <option
                         v-for="(item, i) in store.dlt"
@@ -545,7 +545,7 @@
                       type="text"
                       class="form-control"
                       id="inputEmail3"
-                      placeholder="ค้นหา User *"
+                      placeholder="ຄົ້ນຫາຜູ້ໃຊ້ *"
                       maxlength="10"
                       v-model="store.formuser.search"
                       @keyup="searchData"
@@ -632,6 +632,8 @@ ChartJS.register(
 );
 const { locale, setLocale } = useI18n();
 const store = LogStore();
+
+
 
 onMounted(async () => {
   const year = new Date().getFullYear();

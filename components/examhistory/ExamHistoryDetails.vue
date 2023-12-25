@@ -5,7 +5,7 @@
         id="t-text"
         type="text"
         name="txt"
-        placeholder="Search"
+        placeholder="ຊອກຫາ"
         class="form-control"
         required=""   v-model="store.formsearchexamhistory.search" @keyup="searchData"
       />
