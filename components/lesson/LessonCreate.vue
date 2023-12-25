@@ -13,7 +13,13 @@
 
    
 
-            <input type="text" class="form-control" id="recipient-name" v-model="store.formcreatelesson.cs_name"  placeholder="ຄໍາຖາມ *">
+         
+
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="ຄໍາຖາມ *" :class="{
+        'border-red-500 focus:border-red-500': v$.cs_name.$error,
+        'border-[#42d392] ': !v$.cs_name.$invalid,
+      }" @change="v$.cs_name.$touch" v-model="store.formcreatelesson.cs_name">
+               </textarea>
 
               <span v-if="v$.cs_name.$error" class="text-xs text-red-500" style="color: red">
                 ຕ້ອງລະບຸລະຫັດຫຼັກສູດ.</span>
@@ -22,8 +28,13 @@
           <div class="mb-3">
             <label for="message-text" class="col-form-label">{{ $t("lesson_ans") }}:</label>
 
-            
-            <input type="text" class="form-control" id="recipient-name" v-model="store.formcreatelesson.cs_description"  placeholder="ຄໍາຕອບ *">
+      
+
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="ຄໍາຕອບ *" :class="{
+        'border-red-500 focus:border-red-500': v$.cs_description.$error,
+        'border-[#42d392] ': !v$.cs_description.$invalid,
+      }" @change="v$.cs_description.$touch" v-model="store.formcreatelesson.cs_description">
+               </textarea>
 
              <span v-if="v$.cs_description.$error" class="text-xs text-red-500" style="color: red">
                 ຕ້ອງລະບຸລະຫັດຫຼັກສູດ.</span>
