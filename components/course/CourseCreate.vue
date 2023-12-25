@@ -1,4 +1,7 @@
 <template>
+
+<loading v-model:active="store.isLoaddingsave" :can-cancel="true" @on-cancel="onCancel"
+                />
   <div class="row mb-4 g-3">
     <div id="form_grid_layouts" class="col-lg-9">
       <div class="seperator-header">
@@ -171,7 +174,6 @@ The Course Name field is required.</span>
           </tr>
           <tr aria-hidden="true" class="mt-3 d-block table-row-hidden"></tr>
         </thead>
-
         <tbody>
           <tr v-for="(item, index) in store.lessonlist" :key="index">
             <td class="delete-item-row">
@@ -271,6 +273,7 @@ import {
 } from "@vuelidate/validators";
 import { useToast } from "vue-toastification";
 import { useI18n } from "vue-i18n";
+import Loading from 'vue-loading-overlay';import 'vue-loading-overlay/dist/css/index.css';
 const { locale, setLocale } = useI18n();
 
 const toast = useToast();
@@ -338,20 +341,24 @@ return false;
   v$.value.$validate();
   if (!v$.value.$error) {
     try {
-      await toast.warning("Wait Save Data", {
-        timeout: 2000,
-      });
+      store.isLoaddingsave = true;
       let uploadfile = await UploadfileCourse();
       let updateCourse = await SaveCourse();
-
+      let savelesson = await SaveLesson();
       const input = document.querySelector('input[type="file"]');
       input.value = "";
       store.ResetForm();
       v$.value.$reset();
-      await setTimeout(() => {
+      if(savelesson === true){
+        store.isLoaddingsave = false;
+        await setTimeout(() => {
         toast.success("Save Data");
+
+        router.push('/learning');
       }, 500);
-    await router.push('/learning');
+
+      }
+
     } catch (error) {
       await toast.error("Fail Save Data");
     }

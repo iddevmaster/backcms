@@ -9,6 +9,7 @@ export const CourseStore = defineStore('course', {
     courselist: [],
     image: null,
     isLoading:true,
+    isLoaddingsave:false,
     imagelist: null,
     path: "",
     course_id: null,
@@ -150,14 +151,19 @@ export const CourseStore = defineStore('course', {
      
       try {
         const data = await ApiService.post('/course/create', this.formDataCourse).then(response => {
-          this.SaveLesson(response.data.insertId)
-          return true;
+         // this.SaveLesson(response.data.insertId)
+          this.formDatalesson.course_id = response.data.insertId
+          this.course_id = response.data.insertId;
+         // return data;
         });
+        return true;
       } catch (error) {
         return false;
 
-      } finally {
-      }
+      } 
+
+
+   
     },
 
     async selectentires(data_entires) {
@@ -167,15 +173,19 @@ export const CourseStore = defineStore('course', {
     setCurrentPage(page) {
       this.formsearchcourse.page = page
     },
-    async SaveLesson(id) {
+    async SaveLesson() {
   
+
       for (var i = 0; i < this.lessonlist.length; i++) {
+        
         this.formDatalesson.cs_cover = this.lessonlist[i].cs_cover
         this.formDatalesson.cs_name = this.lessonlist[i].cs_name
         this.formDatalesson.cs_video = this.lessonlist[i].cs_video
         this.formDatalesson.cs_description = this.lessonlist[i].cs_description
-        this.formDatalesson.course_id = id
         this.formDatalesson.user_id = this.user_id
+        this.formDatalesson.course_id = this.course_id;
+
+     
         await this.delay(1000);
         const data = ApiService.post('/course/lesson/create', this.formDatalesson)
 
@@ -188,15 +198,17 @@ export const CourseStore = defineStore('course', {
 
       await this.ResetForm()
 
-
+return true;
 
     },
     async UpdateCourse() {
       try {
         const updatecourse = await ApiService.put('/course/update/' + this.course_id, this.formDataEditCourse);
-        await this.Dellessons(this.course_id);
-        await this.SaveLesson(this.course_id);
+      await this.Dellessons(this.course_id);
+        // await this.SaveLesson(this.course_id);
         //    return response.data
+  
+        return true;
       } catch (error) {
         return false;
       }

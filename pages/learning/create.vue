@@ -6,6 +6,7 @@ import { useAuthStore } from '@/store/auth';
 import CourseCreate from "@/components/course/CourseCreate.vue";
 import Loading from "@/components/layout/Success.vue";
 
+
 definePageMeta({
   middleware: ['auth','roles'],
   allowedRoles: [1,2],
@@ -13,7 +14,7 @@ definePageMeta({
 
 const auth = useAuthStore()
 const store = CourseStore();
-console.log();
+
 store.formDataCourse.user_id = auth.user_id
 store.formDataEditCourse.user_id = auth.user_id
 store.formDatalesson.user_id = auth.user_id
