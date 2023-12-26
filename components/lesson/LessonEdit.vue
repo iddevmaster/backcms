@@ -225,7 +225,7 @@ const onFileChange = async (event) => {
 };
 
 const removeImage = async () => {
-  store.formcreatelessonedit.cs_cover = null;
+  store.formcreatelessonedit.cs_cover = "";
   store.imageReq = false;
   const input = document.querySelector('input[type="file"]');
   input.value = "";

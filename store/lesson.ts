@@ -8,9 +8,12 @@ export const LessonStore = defineStore('lesson', {
   state: () => ({
     formlesson: {
       page: 1,
-      per_page: 200,
+      per_page: 50,
       search: '',
     },
+    total_page:null,
+    total:null,
+    current_page:null,
     cs_id:null,
     user_id: null,
     lesson: [],
@@ -73,8 +76,10 @@ export const LessonStore = defineStore('lesson', {
       this.course_id = course_id
       try {
         const data = await ApiService.post('/course/lesson/list/' + course_id, this.formlesson).then(response => {
-          console.log(response.data);
-          this.lesson = response.data.data
+        
+      this.lesson = response.data.data
+      this.total_page = response.data.total_page
+     
         });
         return true
 
@@ -123,7 +128,7 @@ export const LessonStore = defineStore('lesson', {
 
     async updateformLesson() { 
       this.formcreatelessonedit.user_id = this.user_id;
-
+console.log(this.formcreatelessonedit);
       try {
         const data = await ApiService.put('/course/lesson/update/'+ this.cs_id, this.formcreatelessonedit).then(response => {
       
@@ -187,6 +192,12 @@ export const LessonStore = defineStore('lesson', {
         this.formcreatelesson.cs_video = '',
         this.formcreatelesson.cs_description = ''
     },
+
+    
+    setCurrentPage(page) {
+      this.formlesson.page = page
+    },
+
 
   },
 });
