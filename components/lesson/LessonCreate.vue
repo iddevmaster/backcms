@@ -110,7 +110,7 @@ const router = useRouter();
 
 const { FormLesson } = storeToRefs(store);
 
-
+store.formcreatelesson.cs_cover = "";
 
 const closeModal = async () => {
    store.GetopenModalCreate = false;
