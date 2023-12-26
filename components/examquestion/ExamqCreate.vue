@@ -17,9 +17,9 @@
     </div>
     <div class="col-md-12">
       <label for="inputEmail4" class="form-label">{{ $t("menu_exam_proposition") }}</label>
-      <input type="text" class="form-control" id="inputEmail4" v-model="store.formExamq.eq_name" :class="{
+      <input type="text" class="form-control" id="inputEmail4" v-model="store.formExamq.eq_name" placeholder="ຄໍາຖາມ *" :class="{
         'border-red-500 focus:border-red-500': v$.eq_name.$error,
-        'border-[#42d392] ': !v$.eq_name.$invalid,
+        'border-[#42d392] ': !v$.eq_name.$invalid, 
       }" @change="v$.eq_name.$touch">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.eq_name.$error">{{
         v$.eq_name.$errors[0].$message
@@ -30,7 +30,7 @@
       <input type="text" class="form-control" id="inputPassword4" v-model="store.formExamq.eq_answer" :class="{
         'border-red-500 focus:border-red-500': v$.eq_answer.$error,
         'border-[#42d392] ': !v$.eq_answer.$invalid,
-      }" @change="v$.eq_answer.$touch" min="1" @keypress="validatePNumber($event)" minlength="1" maxlength="1">
+      }" @change="v$.eq_answer.$touch" min="1" @keypress="validatePNumber($event)" minlength="1" maxlength="1" placeholder="ໃສ່ຕົວເລກເທົ່ານັ້ນ *">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.eq_answer.$error">{{
         v$.eq_answer.$errors[0].$message
       }}</span>
