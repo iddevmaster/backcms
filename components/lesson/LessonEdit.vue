@@ -192,7 +192,8 @@ const update = async () => {
         router.currentRoute.value.params.id
       );
       await toast.success("Save Data");
-
+  store.formcreatelessonedit.cs_cover = "";
+  store.formcreatelesson.cs_cover = "";
       store.GetopenModalEdit = false;
     }
   }

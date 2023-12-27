@@ -146,6 +146,8 @@ const save = async () => {///////////// บันทึก
     } else {
       await toast.success('Save Data')
       await store.ResetForm();
+      store.formcreatelesson.cs_cover = ""
+       
       store.GetopenModalCreate = false;
    //    await removeImage();
       v$.value.$reset();
@@ -189,7 +191,7 @@ const onFileChange = async (event) => {
 };
 
 const removeImage = async () => {
-  store.formcreatelesson.cs_cover = null;
+  store.formcreatelesson.cs_cover = "";
   store.imageReq = false;
   const input = document.querySelector('input[type="file"]');
   input.value = '';
