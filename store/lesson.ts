@@ -18,7 +18,7 @@ export const LessonStore = defineStore('lesson', {
     user_id: null,
     lesson: [],
     formcreatelesson: {
-      cs_cover: "",
+      cs_cover:"",
       cs_name: "",
       cs_video: "",
       cs_description: "",

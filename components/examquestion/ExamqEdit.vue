@@ -246,7 +246,8 @@ return im;
 function coverimage(i) {
 let result = i.slice(0, 6);
 if (result === 'static') {
-  return "http://oasbe.sky.mpwt.link/media_file/file/?f="+i;
+     let im =  ApiService.image(i);
+    return im;
 }else {
   return i;
 }
