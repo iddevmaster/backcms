@@ -52,7 +52,7 @@ export const ExamquestionStore = defineStore('examquestion', {
     exam: [],
     formsearchexamquestion: {
       page: 1,
-      per_page: 200,
+      per_page: 100,
       search: '',
     },
     formExam: {
@@ -101,6 +101,8 @@ export const ExamquestionStore = defineStore('examquestion', {
         const data = await ApiService.post('/exam/question/' + this.em_id + '/list', this.formsearchexamquestion).then(response => {
           this.examqlist = response.data.data
           this.examqlisttotal = response.data.data.length
+        //  this.total_page = 
+          console.log(response.data);
 
           const examdata = ApiService.post('/exam/main/list', this.formsearchexam).then(exam => {  /////////////ดึง หลักสูตร
             this.examlist = exam.data.data
