@@ -9,6 +9,7 @@ import { defineComponent } from "vue";
 import { ExamquestionStore } from "@/store/examquestion";
 import { useToast } from "vue-toastification";
 import ExamqList from "@/components/examquestion/ExamqList.vue";
+import ExamqPage from "@/components/examquestion/ExamqPag.vue";
 import { useAuthStore } from '@/store/auth'
 import ApiService from '../../../services/api.service';
 import {
@@ -136,7 +137,8 @@ function image(i) {
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 align-self-center"
                                   v-for="(exams, x) in store.exam" :key="x">
                                   <p class="inv-to">
-                                    หลักสูตร : {{ exams.em_name }}
+                                    
+ຫຼັກສູດ : {{ exams.em_name }}
                                   </p>
                                 </div>
                               </div>
@@ -211,13 +213,27 @@ function image(i) {
                     </div>
                   </div>
                 </div>
+
+                
               </div>
             </div>
           </div>
+          
+
+   
+
+            <!-- <div class="col-xl-9 col-lg-9 col-sm-9 layout-spacing">
+            <div class="widget-content widget-content-area br-8 p-3">
+              <ExamqPage></ExamqPage>
+            </div>
+          </div>
+             -->
         </div>
       </div>
     </div>
   </div>
+
+  
 
   <div v-if="GetopenModalDelete" class="modal">
     <div class="modal-content" id="deleteConformationLabel">
