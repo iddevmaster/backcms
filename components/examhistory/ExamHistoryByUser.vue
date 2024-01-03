@@ -1,5 +1,17 @@
 <template>
+  <div class="row layout-top-spacing">
+    <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+      <div id="form_grid_layouts" class="col-lg-10">
+      <div class="seperator-header">
+        <h4 class="">{{ $t("fitter_history_exam") }}</h4>
+      </div>
+    </div>
 
+    </div>
+   
+
+
+  </div>
   <div class="table-responsive" > 
     <table class="table table-bordered">
       <thead>

@@ -55,6 +55,8 @@ store.fetchExam();
                     </div>
                 </div>
                 <div class="row layout-top-spacing" v-if="store.historylist.length > 0">
+
+                
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.IsCardInsert">
                         <div class="widget-content widget-content-area br-8 p-3">
                         <ExamHistoryByUser></ExamHistoryByUser>

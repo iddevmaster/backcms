@@ -108,6 +108,8 @@
       </tbody>
     </table>
 
+
+  </div>
          <div class="row">
     <div class="col-xl-12 col-lg-12">
       <div class="pagination-no_spacing" v-if="store.total_page_user > 0">
@@ -141,8 +143,6 @@
       </div>
     </div>
   </div>
-  </div>
-
   
 
   <!-- <div v-if="store.myChoose" class="alert alert-light-primary alert-dismissible fade show border-0 mb-4" role="alert"> 
@@ -223,7 +223,7 @@ const choose = async (item) => {
     Swal.fire({
       position: "center",
       icon: "error",
-      title: "This user has not yet successfully verified their identity.",
+      title: "ຜູ້ໃຊ້ນີ້ຍັງບໍ່ໄດ້ຢືນຢັນຕົວຕົນຂອງເຂົາເຈົ້າສໍາເລັດເທື່ອ.",
       showConfirmButton: false,
       timer: 1500,
     });
