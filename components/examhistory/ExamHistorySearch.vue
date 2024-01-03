@@ -3,6 +3,13 @@
 
   <div class="row layout-top-spacing">
 
+   <div id="form_grid_layouts" class="col-lg-10">
+      <div class="seperator-header">
+        <h4 class="">{{ $t("user_history_exam") }}</h4>
+      </div>
+    </div>
+
+    
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4">
       <select class="form-select form-select" aria-label="Default select example"  v-model="store.byem_id">
         <option disabled selected :value="0">ເລືອກ</option>
@@ -97,7 +104,39 @@
   </div>
 
 
+     <div class="row">
+    <div class="col-xl-12 col-lg-12">
+      <div class="pagination-no_spacing" v-if="store.total_page > 0">
+        <ul class="pagination">
+          <li> <a href="javascript:void(0);" class="prev"  @click="validatePNumberDown()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="feather feather-chevron-left">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg></a>
+          </li>
+          <li>
+            <div class="col-xs-1">
+              <input id="ex1" type="number" style="width:50px" v-model="store.formuser.page" @input="validatePNumber($event)">
+            </div>
+          </li>
+          <li><a href="javascript:void(0);">/</a></li>
+          <li><a href="javascript:void(0);">{{ store.total_page }}</a></li>
+          <li> <a href="javascript:void(0);" class="next"  @click="validatePNumberUp()" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="feather feather-chevron-right">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg></a>
+          </li>
+        </ul>
+      </div>
 
+      <div class="pagination-no_spacing" v-else>
+        <ul class="pagination">
+          ไม่มีข้อมูล
+        </ul>
+      </div>
+    </div>
+  </div>
 
 
   <button type="button" class="btn btn-primary" @click="Fitter()">{{ $t("menu_exam_history_byuser_fitter") }}</button>
@@ -119,7 +158,7 @@ const { locale, setLocale } = useI18n();
 const toast = useToast()
 const router = useRouter();
 const store = ExamHistoryStore();
-
+  await store.fetchUsers()
 
 const rules = computed(() => {
   return {
@@ -152,7 +191,7 @@ const searchData = async () => {
   store.IsCardInsert = false;
   store.IsCardEdit = false;
   store.IsCardListByUser = false;
-
+store.formuser.page = 1;
   await store.fetchUsers()
 };
 
@@ -189,6 +228,80 @@ store.myChoose = users;
 
 const backToUser = async () => {
   router.go(-1);
+}
+
+
+const validatePNumberDown = async () => {
+  if (store.formuser.page == 1) {
+
+    store.pending = true;
+   
+    store.formuser.page = 1;
+   await store.fetchUsers()
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else {
+ 
+
+    store.formuser.page -= 1;
+    store.pending = true;
+   await store.fetchUsers()
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  }
+}
+
+const validatePNumberUp = async () => {
+
+  if (store.formuser.page == store.total_page) {
+    store.pending = true;
+    store.formuser.page = store.total_page;
+
+  await store.fetchUsers()
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else {
+  
+    store.formuser.page += 1;
+    store.pending = true;
+    await store.fetchUsers()
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  }
+}
+
+const validatePNumber = async (evt) => {
+ 
+  const keysAllowed: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  const keyPressed: string = evt.key;
+  if (!keysAllowed.includes(keyPressed)) {
+    evt.preventDefault()
+  }
+  if(store.formuser.page > store.total_page){
+    store.formuser.page = store.total_page
+return false;
+  }
+  if (store.formuser.page == '') {
+   
+  
+    store.pending = true;
+    store.formuser.page = 1;
+   await store.fetchUsers()
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else {
+    
+    store.pending = true;
+    await store.fetchUsers()
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  }
 }
 
 </script>

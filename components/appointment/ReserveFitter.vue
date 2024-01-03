@@ -220,7 +220,7 @@ const choose = async (item) => {
     Swal.fire({
       position: "center",
       icon: "error",
-      title: "This user has not yet successfully verified their identity.",
+      title: "ຜູ້ໃຊ້ນີ້ຍັງບໍ່ໄດ້ຢືນຢັນຕົວຕົນຂອງເຂົາເຈົ້າສໍາເລັດເທື່ອ.",
       showConfirmButton: false,
       timer: 1500,
     });

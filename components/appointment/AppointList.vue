@@ -110,6 +110,7 @@
                   type="button"
                   class="btn btn-success mt-0"
                   style="background-color: #3f2c73"
+                   title="ແກ້ໄຂນັດໝາຍ"
                 >
                   <i class="bi bi-gear"></i>
                 </button>
@@ -120,6 +121,7 @@
                 class="btn btn-success mt-0"
                 style="background-color: #ce0000"
                 @click="del(event)"
+                 title="ລຶບນັດໝາຍ"
               >
                 <i class="bi bi-trash"></i>
               </button>

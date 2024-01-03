@@ -14,6 +14,7 @@ export const ExamHistoryStore = defineStore('examhistory', {
     examlist:[],
     historylist:[],
     byem_id:0,
+    total_page:0,
     formsearchexamhistory: {
       page: 1,
       per_page: 50,
@@ -91,6 +92,7 @@ export const ExamHistoryStore = defineStore('examhistory', {
     async fetchUsers() {
       const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
         this.user = response.data.data;
+        this.total_page = response.data.total_page
     
       });
 
@@ -108,6 +110,8 @@ export const ExamHistoryStore = defineStore('examhistory', {
 
      const b = {user_id:response.data.user_id,user_firstname:response.data.user_firstname,user_lastname:response.data.user_lastname,user_phone:response.data.user_phone,detail:response.data.detail?.verify_account,identification_number:response.data.detail?.identification_number}
         this.userall.push(b)
+
+        this.userall.sort((a, b) => a.user_id - b.user_id).map(item => item.user_id);
       });
     }
     return this.userall;

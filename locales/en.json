@@ -1,7 +1,7 @@
 {
   "home": "Home",
-  "menu_couse": "Online knowledge",
-  "menu_exam": "Course",
+  "menu_couse": "Course",
+  "menu_exam": "Examination",
   "menu_new_tra": "Media Release",
   "menu_new_ci": "ข่าวสารกรมโยธา",
   "menu_new_tra_add": "Media Release Add",
@@ -10,12 +10,12 @@
   "menu_new_resul": "Exam results",
   "menu_new_user": "Manage User",
   "menu_dlt": "Manage DLT",
-  "menu_couse_all": "All E-learning", 
-  "menu_couse_add": "E-learning Add",
-  "menu_couse_p_title": "Form Add E-learning",
+  "menu_couse_all": "Course ALL", 
+  "menu_couse_add": "Course Add",
+  "menu_couse_p_title": "Form Add Course",
   "menu_couse_f_title_code": "Code",
   "menu_couse_f_title_name": "Name",
-  "menu_couse_f_title_detail": "E-learning description",
+  "menu_couse_f_title_detail": "Course description",
   "menu_couse_f_title_picture": "Image Cover",
   "menu_couse_f_title_display_picture": "Image Display here",
   "menu_couse_f_add_lesson": "Add Lesson",
@@ -24,26 +24,26 @@
   "menu_lesson_f_title_picture": "Image Cover",
   "menu_lesson_f_video": "Video",
  
-  "menu_couse_edit": "Edit E-learning",
-  "menu_couse_p_edit_title": "Form Edit E-learning",
+  "menu_couse_edit": "Edit Course",
+  "menu_couse_p_edit_title": "Form Edit Course",
   "menu_couse_f_edit_title_code": "Code",
   "menu_couse_f_edit_title_name": "Name",
-  "menu_couse_f_edit_title_detail": "E-learning description",
+  "menu_couse_f_edit_title_detail": "Course description",
   "menu_couse_f_edit_title_picture": "Image Cover",
   "menu_couse_f_edit_title_display_picture": "Image Display here",
 
   
 
-  "menu_page_course": "E-learning",
-  "menu_page_course_page": "All E-learning",
+  "menu_page_course": "Course",
+  "menu_page_course_page": "Course All",
 
-  "menu_exam_all": "ALL Course",
-  "menu_exam_create": "Create Course",
-  "menu_exam_add": "Create Course",
+  "menu_exam_all": "Examination All",
+  "menu_exam_create": "Create Examination",
+  "menu_exam_add": "Create Examination",
   "menu_exam_all_history": "History Exam",
   "menu_menu_exam_dlt": "DLT",
-  "menu_exam_all_code": "Code Course",
-  "menu_exam_all_pic": "Image Course",
+  "menu_exam_all_code": "Code Exam",
+  "menu_exam_all_pic": "Image Exam",
   "menu_exam_all_name": "Name",
   "menu_exam_all_detail": "Details",
   "menu_exam_all_total_random": "Random",
@@ -52,8 +52,8 @@
   "menu_exam_all_time_test": "Time",
   "menu_exam_all_total_action": "Manage",
   "menu_exam_all_bt_add_exam": "Create Exam",
-  "menu_exam_all_bt_edit_exam": "Edit Course",
-  "menu_exam_all_bt_del_exam": "Delete Course",
+  "menu_exam_all_bt_edit_exam": "Edit Exam",
+  "menu_exam_all_bt_del_exam": "Delete Exam",
   "menu_exam_search": "Search",
   "menu_exam_display_p": "Image display here",
   "menu_exam_display_del": "Delete",
@@ -63,12 +63,12 @@
 
 
 
-  "menu_page_exam": "Course",
-  "menu_page_exam_all": "All Course",
+  "menu_page_exam": "Examination",
+  "menu_page_exam_all": "Examination All",
  
 
-  "menu_exam_back": "Back to Course",
-  "menu_exam_add_ex_form": "Form Add Course",
+  "menu_exam_back": "Back to Exam",
+  "menu_exam_add_ex_form": "Form Add Exam",
   "menu_exam_add_ex": "Add Exam",
   "menu_exam_edit": "Edit Exam",
   "menu_exam_del": "Delete Exam",
@@ -420,7 +420,9 @@
   "choose_user_edit_t":"Please select the user who wants to edit exam results. If the selected user has not passed",
   "choose_user_edit_verify":"Verify your identity",
   "choose_user_edit_e":"It will not be possible to change the test results.",
-  "user_app_nodata":"No Data"
+  "user_app_nodata":"No Data",
+  "fitter_history_exam":"Search History Examination",
+  "user_history_exam":"History Examination"
 
 }
 
