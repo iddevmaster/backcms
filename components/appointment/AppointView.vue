@@ -2,7 +2,7 @@
   <div class="row p-3">
     <div id="form_grid_layouts" class="col-lg-10">
       <div class="seperator-header">
-        <h4 class="">{{ $t("menu_app_view") }}</h4>
+        <h4 class="">{{ $t("menu_app_view_re") }}</h4>
       </div>
     </div>
     <div id="form_grid_layouts" class="col-lg-2">

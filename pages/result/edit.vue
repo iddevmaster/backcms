@@ -61,6 +61,11 @@ const closeModal = () => {
                 </nav>
             </div>
             <div class="middle-content container-xxl p-0">
+                   <div class="row layout-top-spacing">
+                        <div class="widget-content widget-content-area br-8 p-3 text-danger">
+                            {{ $t("choose_user_edit_t") }} <b><u>{{ $t("choose_user_edit_verify") }}</u></b> {{ $t("choose_user_edit_e") }}
+                        </div>
+                    </div>
                 <div class="row layout-top-spacing">
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                         <div class="widget-content widget-content-area br-8 p-3">
@@ -79,16 +84,23 @@ const closeModal = () => {
                             <ResultEdit></ResultEdit>
                         </div>
                     </div>
-                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="!(store.resultUser.length > 0) && !(store.IsCardEdit)">
+
+                          <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.IsCardNoInsert">
+                        <div class="widget-content widget-content-area br-8 p-3">
+                            <ResultNodata></ResultNodata>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="!(store.resultUser.length > 0) && !(store.IsCardEdit)">
                         <div class="widget-content widget-content-area br-8 p-3 text-danger">
-                            #กรุณาเลือกผู้ใช้ที่ต้องการแก้ไขผลสอบ หากผู้ใช้ที่เลือกยังไม่ผ่านการ <b><u>"ยืนยันตัวตน"</u></b> จะไม่สามารถแก้ไขผลสอบได้
+                            {{ $t("choose_user_edit_t") }} <b><u>{{ $t("choose_user_edit_verify") }}</u></b> {{ $t("choose_user_edit_e") }}
                         </div>
                     </div>
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.resultUser.length > 0 && !(store.IsCardEdit)">
                         <div class="widget-content widget-content-area br-8 p-3 text-danger">
-                            #กรุณาเลือกผลการสอบที่ต้องการแก้ไข
+                             {{ $t("choose_user_edit") }}
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <!-- <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.IsCardNoInsert">

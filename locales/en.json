@@ -241,7 +241,7 @@
   "menu_app_view_back": "Back to Appointment",
   "menu_app_view_iden": "ID card number",
   "menu_app_view_action": "Manage",
-
+  "menu_app_view_re": "Report Appointment",
   "menu_app_view_present": "Appointment Present",
   "menu_app_view_by_user": "Appointment User",
 
@@ -412,6 +412,15 @@
   "title_lesson":"Lesson",
   "title_lesson_t":"Manage",
   "lesson_edit":"Edit",
-  "lesson_delete":"Delete"
+  "lesson_delete":"Delete",
+
+  "result_alert_name":"User",
+  "result_alert_role":"Not yet approved",
+  "choose_user_edit":"#Please select the exam result you want to edit",
+  "choose_user_edit_t":"Please select the user who wants to edit exam results. If the selected user has not passed",
+  "choose_user_edit_verify":"Verify your identity",
+  "choose_user_edit_e":"It will not be possible to change the test results.",
+  "user_app_nodata":"No Data"
+
 }
 

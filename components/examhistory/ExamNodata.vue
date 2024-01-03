@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     {{ store.myChoose }} 
-    <h5 class="text-danger">#ผู้ใช้งาน {{ store.myChoose.user_firstname + ' ' + store.myChoose.user_lastname }} ยังไม่ผ่านการยืนยันตัวตน</h5></div>
+    <h5 class="text-danger">#{{ $t("result_alert_name") }} {{ store.myChoose.user_firstname + ' ' + store.myChoose.user_lastname }} {{ $t("result_alert_role") }}</h5></div>
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';

@@ -160,10 +160,7 @@ const rules = computed(() => {
       required: helpers.withMessage('ຕ້ອງໃສ່ຊ່ອງໃສ່ຊື່ຜູ້ໃຊ້', required),
       minLength: minLength(1),
     },
-    user_password: {
-      required: helpers.withMessage('ປ່ອງລະຫັດຜ່ານແມ່ນຕ້ອງການ', required),
-      minLength: minLength(1),
-    },
+
     user_firstname: {
       required: helpers.withMessage('ຕ້ອງມີຊ່ອງໃສ່ຊື່ທໍາອິດ', required),
       minLength: minLength(1),

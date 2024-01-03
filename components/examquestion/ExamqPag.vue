@@ -95,13 +95,13 @@ const validatePNumber = async (evt) => {
     store.pending = true;
     store.quest_Id = 1;
     await questionlist();
-    await toast.info("Loadding Data", {
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   } else {
     store.pending = true;
     await questionlist();
-    await toast.info("Loadding Data", {
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   }
@@ -113,7 +113,7 @@ const validatePNumberUp = async () => {
     store.pending = true;
     store.quest_Id = 1;
     await questionlist();
-    await toast.info("Loadding Data", {
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   } else {
@@ -121,7 +121,7 @@ const validatePNumberUp = async () => {
     store.quest_Id += 1;
     store.pending = true;
     await questionlist();
-    await toast.info("Loadding Data", {
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   }
@@ -132,7 +132,7 @@ const validatePNumberDown = async () => {
     store.pending = true;
     store.quest_Id = 1;
     await questionlist();
-    await toast.info("Loadding Data", {
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   } else {
@@ -140,7 +140,7 @@ const validatePNumberDown = async () => {
     store.quest_Id -= 1;
     store.pending = true;
     await questionlist();
-    await toast.info("Loadding Data", {
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   }

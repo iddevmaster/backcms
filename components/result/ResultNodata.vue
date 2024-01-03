@@ -1,23 +1,33 @@
 <template>
-  <div class="text-center"><h5 class="text-danger">#ผู้ใช้งาน {{ store.myChoose.user_firstname + ' ' + store.myChoose.user_lastname }} ยังไม่ผ่านการยืนยันตัวตน</h5></div>
+  <div class="text-center">
+    <h5 class="text-danger">
+      #{{ $t("result_alert_name") }}
+      {{ store.myChoose.user_firstname + " " + store.myChoose.user_lastname }}
+      {{ $t("result_alert_role") }}
+    </h5>
+  </div>
 </template>
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
-import { defineComponent } from 'vue';
-import { ResultStore } from '@/store/result'; // import the auth store we just created
-import { useVuelidate } from '@vuelidate/core';
-import { required, email, sameAs, minLength, helpers } from '@vuelidate/validators';
-import { useToast } from 'vue-toastification';
-import { ref, onMounted, onUnmounted } from 'vue';
+import { storeToRefs } from "pinia";
+import { defineComponent } from "vue";
+import { ResultStore } from "@/store/result"; // import the auth store we just created
+import { useVuelidate } from "@vuelidate/core";
+import {
+  required,
+  email,
+  sameAs,
+  minLength,
+  helpers,
+} from "@vuelidate/validators";
+import { useToast } from "vue-toastification";
+import { ref, onMounted, onUnmounted } from "vue";
 
-
-
-const toast = useToast()
+const toast = useToast();
 const router = useRouter();
 const store = ResultStore();
 
-await store.fetchDlt()
-await store.fetchUser()
+await store.fetchDlt();
+await store.fetchUser();
 
 const { FormResult } = ResultStore();
 const myOptions = JSON.parse(JSON.stringify(store.dlt));
@@ -29,40 +39,44 @@ const myUser = ref();
 const rules = computed(() => {
   return {
     mr_score: {
-      required: helpers.withMessage('The Score field is required', required),
+      required: helpers.withMessage("The Score field is required", required),
       minLength: minLength(1),
     },
     mr_learn_type: {
-      required: helpers.withMessage('The mr_learn_type field is required', required),
+      required: helpers.withMessage(
+        "The mr_learn_type field is required",
+        required
+      ),
       minLength: minLength(1),
     },
     dlt_code: {
-      required: helpers.withMessage('The dlt_code field is required', required),
+      required: helpers.withMessage("The dlt_code field is required", required),
       minLength: minLength(1),
     },
     mr_status: {
-      required: helpers.withMessage('The mr_status field is required', required),
+      required: helpers.withMessage(
+        "The mr_status field is required",
+        required
+      ),
       minLength: minLength(1),
     },
     user_id: {
-      required: helpers.withMessage('The user_id field is required', required),
+      required: helpers.withMessage("The user_id field is required", required),
       minLength: minLength(1),
     },
-
   };
 });
 
 const myChangeEvent = (event) => {
-    console.log("myChangeEvent: ", event.value);
-  }
-  const mySelectEvent = (e) => {
-    console.log("mySelectEvent: ", e.value);
-  }
+  console.log("myChangeEvent: ", event.value);
+};
+const mySelectEvent = (e) => {
+  console.log("mySelectEvent: ", e.value);
+};
 
 const backToUser = async () => {
   router.go(-1);
-}
-
+};
 
 const v$ = useVuelidate(rules, FormResult);
 
@@ -70,20 +84,15 @@ const save = async () => {
   v$.value.$validate();
 
   if (!v$.value.$error) {
-  let data = await store.saveResult();
-      
+    let data = await store.saveResult();
+
     if (data == true) {
-      toast.success('Save Data');
+      toast.success("Save Data");
     } else {
-      toast.error('Fail Save Data')
+      toast.error("Fail Save Data");
     }
-  
   }
-
-
-}
-
-
+};
 </script>
 
 <style>
