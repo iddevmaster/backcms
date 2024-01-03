@@ -6,6 +6,8 @@ import { AppointStore } from '@/store/appoint'
 import { useAuthStore } from '@/store/auth';
 import AppointViewUser from '@/components/appointment/AppointViewUser.vue';
 import ReserveFitter from '@/components/appointment/ReserveFitter.vue';
+import AppointNodata from '@/components/appointment/AppointNodata.vue';
+
 import { useToast } from 'vue-toastification';
 
 import { AlertStore } from '@/store/alert'; // import the auth store we just created
@@ -62,9 +64,15 @@ toast.success('Delete Success');
                             <ReserveFitter></ReserveFitter>
                         </div>
                     </div>
-                         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.app_user.length > 0">
                         <div class="widget-content widget-content-area br-8 p-3">
                             <AppointViewUser></AppointViewUser>
+                        </div>
+                    </div>
+
+                      <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-else>
+                        <div class="widget-content widget-content-area br-8 p-3">
+                            <AppointNodata></AppointNodata>
                         </div>
                     </div>
                    

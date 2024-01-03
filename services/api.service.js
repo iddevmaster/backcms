@@ -27,13 +27,13 @@ const ViewImage = 'https://oasapi.iddriver.com/media_file/file/?f=';
 export default {
   get(resource) {
     return apiClient.get(resource).catch(({ response }) => {
-      console.log(response.status);
-  navigateTo('/maintenance');
+  //     console.log(response.status);
+  // navigateTo('/maintenance');
      });
   },
   post(resource, data) {
     return apiClient.post(resource, data).catch(({ response }) => {
-      return navigateTo('/maintenance');
+      // return navigateTo('/maintenance');
            });
   },
   upload(resource, data) {

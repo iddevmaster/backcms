@@ -43,7 +43,15 @@ store.userall = [];
                     </ol>
                 </nav>
             </div>
+            
             <div class="middle-content container-xxl p-0">
+
+                          <div class="row layout-top-spacing">
+                        <div class="widget-content widget-content-area br-8 p-3 text-danger">
+                            {{ $t("choose_user_edit_t") }} <b><u>{{ $t("choose_user_edit_verify") }}</u></b> {{ $t("choose_user_edit_e") }}
+                        </div>
+                    </div>
+            
                 <div class="row layout-top-spacing">
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                         <div class="widget-content widget-content-area br-8 p-3">
@@ -63,7 +71,12 @@ store.userall = [];
                             <ResultNodata></ResultNodata>
                         </div>
                     </div>
+
+
+           
                 </div>
+
+                
             </div>
 
         </div>

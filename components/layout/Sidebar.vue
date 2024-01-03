@@ -492,7 +492,7 @@
           </ul>
         </li>
 
-        <li class="menu">
+        <!-- <li class="menu">
           <a
             href="#approve"
             data-bs-toggle="collapse"
@@ -530,7 +530,7 @@
               <nuxt-link to="/users/approve">{{ $t("page_menu_approve") }}</nuxt-link>
             </li>
           </ul>
-        </li>
+        </li> -->
 
         <li class="menu">
           <a
@@ -571,6 +571,9 @@
             </li>
             <li>
               <nuxt-link to="/users/create">{{ $t("menu_user_page_create") }}</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/users/approve">{{ $t("page_menu_approve") }}</nuxt-link>
             </li>
           
           </ul>

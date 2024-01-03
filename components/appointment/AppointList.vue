@@ -99,7 +99,7 @@
                   style="background-color: #92a8d1"
                   data-bs-toggle="tooltip" 
                   data-bs-placement="top" 
-                  title="รายละเอียดเพิ่มเติม"
+                  title="ລາຍລະອຽດການຈອງການນັດໝາຍ"
                 >
                   <i class="bi bi-clipboard"></i>
                 </button>

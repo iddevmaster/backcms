@@ -10,6 +10,7 @@ export const ResultStore = defineStore('result', {
     mr_id:null,
     identification_number:null,
     myChoose:[],
+    total_page:0,
     dlt: [
       {
         dlt_code: "A",
@@ -197,10 +198,16 @@ export const ResultStore = defineStore('result', {
 
         const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
           this.user = response.data.data;
+this.total_page = response.data.total_page
+
+         
+
+          
        
         });
 
       let a =  await this.checkuser();
+
      
     },
     delay(ms) {
@@ -208,14 +215,19 @@ export const ResultStore = defineStore('result', {
     },
    async checkuser() {
      this.userall = [];
+  
       for (var i = 0; i < this.user.length; i++) {
+       
         const data = ApiService.get('/user/get/'+this.user[i].user_id).then(response => {
        //   this.result = response.data;
-
+     //  console.log(response.data.user_id);
        const b = {user_id:response.data.user_id,user_firstname:response.data.user_firstname,user_lastname:response.data.user_lastname,user_phone:response.data.user_phone,detail:response.data.detail?.verify_account,identification_number:response.data.detail?.identification_number}
-          this.userall.push(b)
+          this.userall.push(b);
+          this.userall.sort((a, b) => a.user_id - b.user_id).map(item => item.user_id);
         });
       }
+     
+     // console.log(this.userall.sort());
       return this.userall;
   
    
@@ -238,9 +250,11 @@ export const ResultStore = defineStore('result', {
 
     
     async fetchResult() {
+   
       try {
         const data = await ApiService.get('/main_result/list/option/?dlt_code='+this.dlt_code+'&mr_learn_type='+ this.ap_learn_type +'&present_day='+this.date_event+'').then(response => {
           this.result = response.data;
+          console.log(this.result);
         });
         return data;
       } catch (error) {

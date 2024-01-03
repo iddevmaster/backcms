@@ -237,6 +237,7 @@
   "menu_app_view_back": "ກັບຄືນນັດໝາຍ",
   "menu_app_view_iden": "ໝາຍເລກບັດປະຈຳຕົວ",
   "menu_app_view_action": "ຈັດການ",
+  "menu_app_view_re": "ລາຍການນັດໝາຍ",
 
   "menu_app_view_present": "ການນັດພົບປະຈໍາວັນ",
   "menu_app_view_by_user": "ນັດໝາຍຜູ້ໃຊ້",
@@ -406,7 +407,16 @@
   "title_lesson":"ບົດຮຽນ",
   "title_lesson_t":"ຈັດການ",
   "lesson_edit":"ແກ້ໄຂ",
-  "lesson_delete":"ລຶບ"
-
+  "lesson_delete":"ລຶບ",
+  "result_alert_name":"ຜູ້ໃຊ້",
+  "result_alert_role":"ຍັງບໍ່ທັນໄດ້ຮັບການອະນຸມັດ",
+  "choose_user_edit":"#กรุณาเลือกผลการสอบที่ต้องการแก้ไข",
+  "choose_user_edit_t":"#กรุณาเลือกผู้ใช้ที่ต้องการแก้ไขผลสอบ หากผู้ใช้ที่เลือกยังไม่ผ่านการ",
+  "choose_user_edit_verify":"ยืนยันตัวตน",
+  "choose_user_edit_e":"จะไม่สามารถแก้ไขผลสอบได้",
+  "user_app_nodata":"ບໍ່ມີຂໍ້ມູນ"
+  
 }
+
+
 
