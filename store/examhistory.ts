@@ -13,6 +13,7 @@ export const ExamHistoryStore = defineStore('examhistory', {
     myChoose:[],
     examlist:[],
     historylist:[],
+    Showdata:false,
     byem_id:0,
     total_page:0,
     formsearchexamhistory: {
@@ -108,7 +109,7 @@ export const ExamHistoryStore = defineStore('examhistory', {
       const data = ApiService.get('/user/get/'+this.user[i].user_id).then(response => {
      //   this.result = response.data;
 
-     const b = {user_id:response.data.user_id,user_firstname:response.data.user_firstname,user_lastname:response.data.user_lastname,user_phone:response.data.user_phone,detail:response.data.detail?.verify_account,identification_number:response.data.detail?.identification_number}
+     const b = {user_prefrix:response.data.user_prefrix,user_id:response.data.user_id,user_firstname:response.data.user_firstname,user_lastname:response.data.user_lastname,user_phone:response.data.user_phone,detail:response.data.detail?.verify_account,identification_number:response.data.detail?.identification_number}
         this.userall.push(b)
 
         this.userall.sort((a, b) => a.user_id - b.user_id).map(item => item.user_id);
@@ -137,7 +138,7 @@ async fetchExamlistByUser() {
   try {
     const data = await ApiService.get('/exam/history/?em_id='+this.byem_id+'&user_id='+this.user_id).then(response => {
     this.historylist = response.data
-      
+    this.Showdata = true;   
     });
     return true
   } catch (error) {

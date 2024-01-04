@@ -15,10 +15,9 @@
     <table id="example" class="table table-bordered" style="width:100%" >
       <thead>
         <tr>
-          <th>
+          <!-- <th>
             {{ $t("menu_result_index") }}
-            <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
-          </th>
+          </th> -->
           <th>{{ $t("menu_result_name") }} &#8597;</th>
           <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
@@ -33,8 +32,8 @@
 
 
           
-          <td>{{ users.user_id }}</td>
-           <td>{{ users.user_firstname }}  {{ users.user_lastname }}</td>
+          <!-- <td>{{ users.user_id }}</td> -->
+           <td>{{ users.user_prefrix }}  {{ users.user_firstname }}  {{ users.user_lastname }}</td>
           <td>{{ users.user_phone }}</td>
           <td v-if="!users.detail">
             
@@ -203,14 +202,17 @@ const Sel = async (users,item,identification_number,id) => {
 store.user_id = id;
 store.myChoose = users;
 store.formeditresult.identification_number = identification_number;
-await store.fetchResultByUser()
+
  if(item == 'system_active'){
+  await store.fetchResultByUser()
   store.IsCardInsert = true;
   store.IsCardEdit = false;
   store.IsCardNoInsert = false;
   store.formresult.identification_number = identification_number;
   store.identification_number = identification_number
  }else {
+  store.resultUser = [];
+  store.ShowNodataResult = false;
   store.IsCardInsert = false;
   store.IsCardEdit = false;
   store.IsCardNoInsert = true;

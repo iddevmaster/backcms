@@ -57,7 +57,7 @@ export const CourseStore = defineStore('course', {
     },
     formsearchcourse: {
       page: 1,
-      per_page: 10,
+      per_page: 8,
       search: '',
     },
     vdo: "/assets/images/sample-5.mp4"

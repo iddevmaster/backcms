@@ -22,10 +22,10 @@
     >
       <thead>
         <tr>
-          <th>
+          <!-- <th>
             {{ $t("menu_app_view_list_index") }}
-            <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
-          </th>
+         
+          </th> -->
           <th @click="sortList('id')">
             {{ $t("menu_app_view_list_name") }} 
           </th>
@@ -47,8 +47,8 @@
           :class="{ 'table-success': store.myChoose === users }"
         >
          
-          <td id="clickTest">{{ index + 1 }}</td>
-          <td>{{ users.user_firstname }} {{ users.user_lastname }}</td>
+          <!-- <td id="clickTest">{{ index + 1 }}</td> -->
+          <td>{{ users.user_prefrix }} {{ users.user_firstname }} {{ users.user_lastname }}</td>
           <td>{{ users.user_phone }}</td>
           <td>{{ users.user_email }}</td>
 

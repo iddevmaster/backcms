@@ -9,6 +9,7 @@ import { ExamHistoryStore } from '@/store/examhistory'; // import the auth store
 import ExamHistorySearch from '@/components/examhistory/ExamHistorySearch.vue'
 import ExamHistoryByUser from '@/components/examhistory/ExamHistoryByUser.vue'
 import ResultNodata from '@/components/result/ResultNodata.vue'
+import SearchNodata from '@/components/examhistory/SearchNodata.vue'
 
 
 import { AlertStore } from '@/store/alert'; // import the auth store we just created
@@ -60,11 +61,20 @@ store.fetchExam();
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.IsCardInsert">
                         <div class="widget-content widget-content-area br-8 p-3">
                         <ExamHistoryByUser></ExamHistoryByUser>
+                        
                         </div>
                     </div>
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.IsCardNoInsert">
                         <div class="widget-content widget-content-area br-8 p-3">
                             <ResultNodata></ResultNodata>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row layout-top-spacing" v-if="store.Showdata">
+                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" >
+                        <div class="widget-content widget-content-area br-8 p-3">
+                            <SearchNodata></SearchNodata>
                         </div>
                     </div>
                 </div>

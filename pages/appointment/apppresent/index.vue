@@ -8,7 +8,7 @@ import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import { AppointStore } from '@/store/appoint'
 import AppointListPresent from '@/components/appointment/AppointListPresent.vue'
-
+import AppointListPresentData from '@/components/appointment/AppointListPresentData.vue'
 
 import { useModalStore } from '@/store/modal';
 import { useToast } from 'vue-toastification'
@@ -37,14 +37,23 @@ const store = AppointStore()
 
       <div class="middle-content container-xxl p-0">
         <div class="row layout-top-spacing">
-          <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+          <div class="col-xl-12 col-lg-12 col-sm-12">
             <div class="widget-content widget-content-area br-8 p-3">
               <AppointListPresent></AppointListPresent>
             </div>
           </div>
-          <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.group">
-            <!-- <AppointListByGroup></AppointListByGroup> -->
+         
+        </div>
+      </div>
+
+           <div class="middle-content container-xxl p-0">
+        <div class="row layout-top-spacing">
+          <div class="col-xl-12 col-lg-12 col-sm-12">
+            <div class="widget-content widget-content-area br-8 p-3">
+              <AppointListPresentData></AppointListPresentData>
+            </div>
           </div>
+        
         </div>
       </div>
     </div>

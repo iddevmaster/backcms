@@ -48,7 +48,7 @@
         >
          
           <td id="clickTest">{{ index + 1 }}</td>
-          <td>{{ users.user_firstname }} {{ users.user_lastname }}</td>
+          <td>{{ users.user_prefrix }} {{ users.user_firstname }} {{ users.user_lastname }}</td>
           <td>{{ users.user_phone }}</td>
           <td>{{ users.user_email }}</td>
 

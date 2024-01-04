@@ -63,9 +63,9 @@
         <tr v-for="(item, index) in store.reservebyap">
           <td>{{ index + 1 }}</td>
           <td>{{ item.user_reserve.user_email }}</td>
-          <td>
-            {{ item.user_reserve.user_firstname }} 
-            {{ item.user_reserve.user_lastname }}
+          <td> {{item.user_reserve.user_prefrix}} {{ item.user_reserve.user_firstname }} {{ item.user_reserve.user_lastname }}
+         
+         
           </td>
           <td>{{ item.user_reserve.user_phone }}</td>
           <td>{{ item.user_reserve.identification_number }}</td>
