@@ -1,56 +1,50 @@
 <template>
-  <div class="row mb-2 justify-content-center">
-    <div class="type">
-      <select
-        class="form-select form-select cateSelect"
-        aria-label="Default select example"
-        v-model="store.formreserve.dlt_code"
-      >
-        <option
-          v-for="(item, index) in store.dtl"
-          :key="item.dlt_code"
-          :value="item.dlt_code"
-        >
-        <span v-if="locale == 'la'" >{{item.dlt_description_loas}}</span>
-      <span v-if="locale == 'en'" >{{item.dlt_description_english}}</span>
-      <span v-if="locale == 'th'" >{{item.dlt_description}}</span>
-        
-        </option>
-      </select>
-    </div>
-  </div>
-  <div class="row ps-4 mb-5 gap-2 justify-content-center">
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12 picker">
-      <!-- <VueDatePicker v-model="store.form.start_date"></VueDatePicker> -->
-      <Datepicker v-model="store.formreserve.present_day" :format="format_present" />
-    </div>
-    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-      <select
-        class="form-select typeSelect h-100"
-        aria-label="Default select example"
-        v-model="store.formreserve.ap_learn_type"
-      >
-        <option :value="1">{{ $t("menu_learn_theory") }}</option>
-        <option :value="2">{{ $t("menu_learn_practice") }}</option>
-      </select>
-    </div>
 
+
+
+  <div class="table-responsive">
+    <table class="table" v-if="store.app_present.length > 0">
+      <thead>
+        <tr>
+          <th scope="col">{{ $t("menu_app_manage_index") }}</th>
+          <th scope="col">{{ $t("app_round") }}</th>
+          <th scope="col"> {{ $t("menu_app_view_list_name") }}</th>
+          <th scope="col">{{ $t("menu_app_view_list_phone") }}</th>
+          <th scope="col">  {{ $t("menu_app_view_iden") }}</th>
+          <th scope="col">  {{ $t("menu_user_birdday") }}</th>
+          
+  
+        </tr>
+      </thead>
+      <tbody>
+      
+        <tr v-for="(event, index) in store.app_present">
+          <td>{{ index + 1 }}</td>
+          <td>{{ format_start(event.appointment_detail.ap_date_start) }}</td>
+          <td>{{ event.user_reserve.user_prefrix }} {{ event.user_reserve.user_firstname }} {{ event.user_reserve.user_lastname }}</td>
+          <td>{{ event.user_reserve.user_phone }}</td>
+          <td>{{ event.user_reserve.identification_number }}</td>
+          <td>{{ event.user_reserve.user_birthday }}</td>
+         
+      
+        </tr>
+      </tbody>
+    </table>
+
+     <table class="table" v-else>
     
-  <!-- <div class="row mb-4">
-    <div class="col-sm-6">
-      <label for="exampleFormControlInput1">User</label>
-      <Select2 v-model="store.form.user_id" :options="myOptionsUser" :settings="{ settingOption: value, settingOption: value }"  @change="myChangeEvent($event)" @select="mySelectEvent($event)"/>
-    </div>
-   
-  </div> -->
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
-      <button class="btn btn-primary mt-0 w-100" @click="Search()">
-        <i class="bi bi-search me-2"></i>{{ $t("menu_app_manage_search") }}
-      </button>
-    </div>
+      <tbody>
+      
+      
+          <td style="text-align:center">
+ບໍ່ມີຂໍ້ມູນ</td>
+        
+         
+      
+      
+      </tbody>
+    </table>
   </div>
-
-
 
   
 </template>

@@ -30,10 +30,9 @@
     <table id="example" class="table table-bordered" style="width:100%" >
       <thead>
         <tr>
-          <th>
-            {{ $t("menu_result_index") }}
-            <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
-          </th>
+          <!-- <th>
+            {{ $t("menu_result_index") }} 
+          </th> -->
           <th>{{ $t("menu_result_name") }} &#8597;</th>
           <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
@@ -44,9 +43,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(users,index) in store.userall" :key="users.user_id"  @click="Sel(users,users.detail,users.identification_number,users.user_id)" :class="{ 'table-success': store.myChoose === users && users.detail == 'system_active' , 'table-danger': store.myChoose === users && users.detail != 'system_active' }">
-          <td>{{ users.user_id }}</td>
-           <td>{{ users.user_firstname }}  {{ users.user_lastname }}</td>
+        <tr v-for="(users,index) in store.userall" :key="users.user_id"  @click="Sel(users,users.detail,users.identification_number,users.user_id)" :class="{ 'table-success': store.myChoose === users && (users.detail == 'system_active') || store.myChoose === users && (users.detail == 'phone_active'), 'table-danger': store.myChoose === users && (users.detail != 'system_active') && (users.detail != 'phone_active')}">
+          <!-- <td>{{ index + 1 }}</td> -->
+         
+           <td>{{ users.user_prefrix }}  {{ users.user_firstname }}  {{ users.user_lastname }}</td>
           <td>{{ users.user_phone }}</td>
           <td v-if="!users.detail">
             
@@ -69,7 +69,7 @@
           </p>
           </td>
           <td v-if="users.detail == 'phone_active'">
-            <p class="mb-0 text-danger">
+            <p class="mb-0 text-success">
          
       <span v-if="locale == 'la'" >{{ $t("phone_active") }}</span>
       <span v-if="locale == 'en'" >{{ $t("phone_active") }}</span>
@@ -151,6 +151,7 @@ import { useToast } from 'vue-toastification';
 import { doesNotReject } from 'assert';
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useI18n } from "vue-i18n";
+import Swal from 'sweetalert2';
 const { locale, setLocale } = useI18n();
 
  
@@ -196,12 +197,26 @@ store.formuser.page = 1;
 };
 
 const Fitter = async () => {
+  
 
-  store.IsCardNoInsert = false;
+ 
+
+  if(store.myChoose.detail == 'system_active' || store.myChoose.detail == 'phone_active'){
+    store.IsCardNoInsert = false;
   store.IsCardInsert = true;
   await store.fetchExamlistByUser();
 
+  }else {
 
+    Swal.fire({
+      text: 'ຂ້ອຍຍັງບໍ່ໄດ້ຢືນຢັນຕົວຕົນຂອງຂ້ອຍເທື່ອ!',
+      icon: 'error',
+    });
+
+  }
+  
+
+  
 };
 
 

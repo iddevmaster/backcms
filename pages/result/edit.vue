@@ -25,6 +25,7 @@ const auth = useAuthStore()
 const store = ResultStore()
 
 store.myChoose = [];
+store.resultUser = [];
 store.IsCardInsert = false
 store.IsCardEdit = false;
 store.IsCardNoInsert = false;
@@ -79,6 +80,11 @@ const closeModal = () => {
                             <ResultListUser></ResultListUser>
                         </div>
                     </div>
+                        <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing"  v-if="store.ShowNodataResult">
+                        <div class="widget-content widget-content-area br-8 p-3">
+                            <ResultListUser></ResultListUser>
+                        </div>
+                    </div>
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.IsCardEdit">
                         <div class="widget-content widget-content-area br-8 p-3">
                             <ResultEdit></ResultEdit>
@@ -91,23 +97,7 @@ const closeModal = () => {
                         </div>
                     </div>
 
-                    <!-- <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="!(store.resultUser.length > 0) && !(store.IsCardEdit)">
-                        <div class="widget-content widget-content-area br-8 p-3 text-danger">
-                            {{ $t("choose_user_edit_t") }} <b><u>{{ $t("choose_user_edit_verify") }}</u></b> {{ $t("choose_user_edit_e") }}
-                        </div>
-                    </div>
-                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.resultUser.length > 0 && !(store.IsCardEdit)">
-                        <div class="widget-content widget-content-area br-8 p-3 text-danger">
-                             {{ $t("choose_user_edit") }}
-                        </div>
-                    </div> -->
-
-
-                    <!-- <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.IsCardNoInsert">
-                        <div class="widget-content widget-content-area br-8 p-3">
-                            <ResultNodata></ResultNodata>
-                        </div>
-                    </div> -->
+            
                 </div>
 
 

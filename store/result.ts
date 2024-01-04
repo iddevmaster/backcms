@@ -7,6 +7,7 @@ export const ResultStore = defineStore('result', {
   state: () => ({
     user_id: null,
     modaldelete:false,
+    ShowNodataResult:false,
     mr_id:null,
     identification_number:null,
     myChoose:[],
@@ -221,7 +222,7 @@ this.total_page = response.data.total_page
         const data = ApiService.get('/user/get/'+this.user[i].user_id).then(response => {
        //   this.result = response.data;
      //  console.log(response.data.user_id);
-       const b = {user_id:response.data.user_id,user_firstname:response.data.user_firstname,user_lastname:response.data.user_lastname,user_phone:response.data.user_phone,detail:response.data.detail?.verify_account,identification_number:response.data.detail?.identification_number}
+       const b = {user_prefrix:response.data.user_prefrix,user_id:response.data.user_id,user_firstname:response.data.user_firstname,user_lastname:response.data.user_lastname,user_phone:response.data.user_phone,detail:response.data.detail?.verify_account,identification_number:response.data.detail?.identification_number}
           this.userall.push(b);
           this.userall.sort((a, b) => a.user_id - b.user_id).map(item => item.user_id);
         });
@@ -234,12 +235,18 @@ this.total_page = response.data.total_page
     },
     async fetchResultByUser() {
       this.resultUser = [];
+
       try {
         const data = await ApiService.get('/main_result/list/?user_id='+this.user_id).then(response => {
-     
+
           if(response.data.length > 0){
             this.resultUser = response.data;
             this.IsCardListByUser = true;
+            this.ShowNodataResult = false;
+          }else {
+            this.ShowNodataResult = true;
+     
+         
           }
         });
         return data;

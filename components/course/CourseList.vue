@@ -19,9 +19,10 @@
         class="form-select form-select"
         aria-label="Default select example"  @change="selectshowdata($event)" 
       >
-        <option value="10">10</option>
+        <option value="8">8</option>
+        <option value="12">12</option>
+        <option value="16">16</option>
         <option value="20">20</option>
-        <option value="50">50</option>
       </select>
     </div>
   </div>

@@ -289,10 +289,8 @@ const onFileChange = async (event) => {
     const input = document.querySelector('input[type="file"]');
   input.value = "";
     Swal.fire({
-
       text: 'Upload File Image Only!',
       icon: 'error',
-
     });
   }
 };

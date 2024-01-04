@@ -178,7 +178,6 @@ const format = (time) => {
 // store.fetchAppointment()
 
 const del = async (id) => {
-
   store.mr_id = id;
   store.PopupDelete = true;
   // store.deleteItem(id);
@@ -191,6 +190,9 @@ const closeModal = async () => {
 const delt = async () => {
   await store.DeleteResult();
   await store.fetchResult();
+  store.PopupDelete = false;
+
+  store.IsCardEdit = false;
   store.PopupDelete = false;
  };
 

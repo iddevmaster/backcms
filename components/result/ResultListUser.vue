@@ -58,6 +58,16 @@
         </tr>
       </tbody>
     </table>
+
+
+       <table class="table text-center" v-else>
+     
+      <tbody>
+        <tr>
+       <td style="text-align">ບໍ່ມີຂໍ້ມູນ</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
@@ -86,6 +96,7 @@ const { deleteItem } = ResultStore(); //Action
 // store.fetchAppointment()
 
 const del = async (item) => {
+  store.IsCardEdit = false;
   store.mr_id = item;
   store.modaldelete = true
  //

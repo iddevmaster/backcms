@@ -525,7 +525,7 @@ export const AppointStore = defineStore('appoint', {
 
           //   this.result = response.data;
 
-          const b = { user_id: response.data.user_id, user_email: response.data.user_email, user_firstname: response.data.user_firstname, user_lastname: response.data.user_lastname, user_phone: response.data.user_phone, detail: response.data.detail?.verify_account, identification_number: response.data.detail?.identification_number }
+          const b = { user_prefrix:response.data.user_prefrix,user_id: response.data.user_id, user_email: response.data.user_email, user_firstname: response.data.user_firstname, user_lastname: response.data.user_lastname, user_phone: response.data.user_phone, detail: response.data.detail?.verify_account, identification_number: response.data.detail?.identification_number }
           this.userall.push(b)
 
           this.userall.sort((a, b) => a.user_id - b.user_id).map(item => item.user_id);
@@ -594,6 +594,7 @@ export const AppointStore = defineStore('appoint', {
       try {
         const data = await ApiService.get('/appointment/reserve/list/?dlt_code=' + this.formreserve.dlt_code + '&ap_learn_type=' + this.formreserve.ap_learn_type + '&present_day=' + this.formreserve.present_day + '').then(response => {
           this.app_present = response.data
+        
         });
         return true
       } catch (error) {
