@@ -215,12 +215,12 @@ const save = async () => {
        const data = await store.SaveFormAPP();
      
     if (data == true) {
-    await toast.success('Save Data');
+    await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
      await   store.ResetForm();
      await router.push('/appointment');
           
     } else {
-      toast.error('Fail Save Data')
+      toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
     }
   
   }

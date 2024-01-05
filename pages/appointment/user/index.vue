@@ -40,7 +40,7 @@ await store.deleteRerve()
 await store.FetchAPUser();
 store.isDelUser = false;
 
-toast.success('Delete Success');
+toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
 
 //await store.fetchUse();
  };

@@ -69,7 +69,7 @@ const closedeleteItem = async () => {
 };
 const DeleteEq = async (item) => {
   const a = await deleteExamq(item);
-  await toast.success("Delete Data");
+  await toast.success("ລຶບຂໍ້ມູນສຳເລັດ");
   store.modaldelete = false;
   await store.fetchExamquestionlist();
 };
@@ -261,10 +261,10 @@ function image(i) {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn" data-bs-dismiss="modal" @click="closedeleteItem">
-          Cancel
+          {{ $t("cancel") }}
         </button>
         <button type="button" class="btn btn-danger" data-remove="task" @click="DeleteEq(store.eq)">
-          Delete
+          {{ $t("delete") }}
         </button>
       </div>
     </div>

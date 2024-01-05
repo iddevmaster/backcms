@@ -204,11 +204,11 @@ return false;
   if (!v$.value.$error) {
     const data = await UpdateDetails();
       if(data === true){
-      await toast.success('Save Data')
+      await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
 
       router.push('/users');
       }else {
-       await toast.error('Fail Save Data')
+       await toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
    
 
     

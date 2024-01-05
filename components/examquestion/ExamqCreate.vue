@@ -178,13 +178,13 @@ const save = async () => {
       await toast.error("Add Choice");
 return false;
     }
-    await toast.warning("Wait Save Data", {
+    await toast.warning("ລໍຖ້າຈັກໜ່ອຍ", {
       timeout: 2000,
     });
     let upload = await UploadfileExamq();
     let save = await SaveExamq();  ///////////save 
     if(save == true){
-      await toast.success('Save Data')
+      await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
       let clear = await ClearLocal();  ///////////save 
       const input = document.querySelector('input[type="file"]');
     input.value = '';
@@ -193,7 +193,7 @@ return false;
       router.go(-1);
     }, 500);
     } else {
-      await toast.error('Fail Save Data')
+      await toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
     }
 
    

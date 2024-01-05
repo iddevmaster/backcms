@@ -275,7 +275,7 @@ const save = async () => {
 
       if(updatedata === true){
         await setTimeout(() => {
-        toast.success("Edit Success");
+        toast.success("ແກ້ໄຂສຳເລັດແລ້ວ");
       }, 500);
       store.isLoaddingsave = false;
       await router.push('/learning');
@@ -285,11 +285,12 @@ const save = async () => {
     
 
     } catch (error) {
-      await toast.error("Fail Edit Data");
+      await toast.error("ແກ້ໄຂບໍ່ສຳເລັດ");
     }
 
   }
 };
+
 
 
 // const save = async () => {

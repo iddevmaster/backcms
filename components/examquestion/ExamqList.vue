@@ -129,7 +129,7 @@ const validatePNumberUp = async () => {
       timeout: 50,
     });
   } else {
-    console.log('else');
+   
     store.quest_Id += 1;
     store.pending = true;
     await questionlist();

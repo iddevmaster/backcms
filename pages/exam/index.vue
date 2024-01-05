@@ -51,7 +51,7 @@ const Deleteexam = async (item) => {
     const a = await deleteExam(item);
     await store.fetchExamlist()
 
-    toast.success("Delete Success");
+    toast.success("ລຶບຂໍ້ມູນສຳເລັດ");
 };
 
 

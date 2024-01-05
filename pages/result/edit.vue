@@ -38,10 +38,10 @@ const closeModal = () => {
 
   const dele = async (id) => {
     let delel = await store.DeleteResult();
-  console.log(delel);
+
   store.modaldelete = false;
   if(delel == true){
-    toast.success('Delete Data');
+    toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
     await store.fetchResultByUser()
 
   }
@@ -90,7 +90,6 @@ const closeModal = () => {
                             <ResultEdit></ResultEdit>
                         </div>
                     </div>
-
                           <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.IsCardNoInsert">
                         <div class="widget-content widget-content-area br-8 p-3">
                             <ResultNodata></ResultNodata>

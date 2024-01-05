@@ -51,20 +51,20 @@
             {{ $t("menu_user_index") }}
             <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
           </th>
-          <th @click="sortList('id')">{{ $t("menu_user_name") }} &#8597;</th>
+          <th >{{ $t("menu_user_name") }}</th>
           <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
-          <th @click="sortList('user_phone')">{{ $t("menu_user_type") }}</th>
-          <th >{{ $t("menu_user_tel") }} &#8597;</th>
+          <th >{{ $t("menu_user_type") }}</th>
+          <th >{{ $t("menu_user_tel") }}</th>
           <th>{{ $t("menu_user_dlt") }}</th>
           <th>{{ $t("menu_user_time") }}</th>
           <th class="no-content">{{ $t("menu_user_c_action") }}</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in posts.data" :key="user.user_id">
+        <tr v-for="(user,index) in posts.data" :key="user.user_id">
           <!-- <td><input type="checkbox" v-model="store.selected" :value="user" number></td> -->
-          <td>{{ user.user_id }}</td>
+          <td>{{ index + 1 }}</td>
           <td>{{ user.user_firstname }} {{ user.user_lastname }}</td>
           <!-- <td>{{ user.user_name }}</td> -->
           <!-- <td>{{ user.user_email }}</td> -->

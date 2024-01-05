@@ -197,16 +197,16 @@ const UpdateDlT = async () => {
     store.isDelete = false;
     let update = await store.Updatedtl();
     if (update == true) {
-      toast.success("Save Success");
+      toast.success("ບັນທຶກສໍາເລັດ");
       store.getDLT();
     } else {
-      toast.error("Failed  Save Data");
+      toast.error("ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ");
     }
   }
 };
 
 const Add = async () => {
-  toast.success("Save Success");
+  toast.success("ບັນທຶກສໍາເລັດ");
 };
 
 const AddDLT = async () => {
@@ -217,10 +217,10 @@ const DelDlT = async () => {
   let del = await store.delete();
 
   if (del == true) {
-    toast.success("Delete Success");
+    toast.success("ລຶບສຳເລັດ");
     store.getDLT();
   } else {
-    toast.error("Failed  Save Data");
+    toast.error("ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ");
   }
 };
 </script>

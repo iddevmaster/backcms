@@ -169,7 +169,7 @@ export const DltStore = defineStore('dlt', {
       try {
         const data = await ApiService.get('/user/get/' + id).then(response => {
           if (response.data) {
-            console.log('data',response.data);
+         
             this.name = response.data.user_name;
             this.user_firstname = response.data.user_firstname;
             this.user_lastname = response.data.user_lastname;

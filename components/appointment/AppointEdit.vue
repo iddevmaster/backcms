@@ -136,10 +136,10 @@ const date = ref(new Date());
 const update = async () => {
   let data = await store.Update();
   if (data == true) {
-    await toast.success('Update Data');
+    await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດ');
     await router.push('/appointment');
   } else {
-    toast.error('Fall Update Data')
+    toast.error('ບັນທຶກຂໍ້ມູນລົ້ມເຫລວ')
   }
 }
 
@@ -225,11 +225,11 @@ const save = async () => {
     const data = await store.SaveFormAPP();
 
     if (data == true) {
-     await toast.success('Save Data');
+     await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
 
    
     } else {
-      toast.error('Fail Save Data')
+      toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
     }
 
   }

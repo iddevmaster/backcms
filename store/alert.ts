@@ -33,7 +33,7 @@ export const AlertStore = defineStore('alert', {
 
     AlertSuccess(){
         this.show = true;
-        this.message = 'Save success'
+        this.message = 'ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ'
         this.typeclass = 'alert-light-success';
     },
     Clear(){
@@ -43,7 +43,7 @@ export const AlertStore = defineStore('alert', {
     },
     AlertError(){
         this.show = true;
-        this.message = 'Fail Save Data'
+        this.message = 'ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ'
         this.typeclass = 'alert-light-danger';
     },
 

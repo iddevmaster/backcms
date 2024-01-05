@@ -267,7 +267,7 @@ const Add = async () => {
   const save = await store.SaveFormDlt();
   if(save == true){
     await store.ResetForm();
-toast.success('Save Success');
+toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດ');
 
 let finddtl = await store.fetchDlt(route.params.id);
 if (finddtl == true) {
@@ -276,7 +276,7 @@ if (finddtl == true) {
   toast.error('Can not Data')
 }
 }else {
-toast.error('Failed  Save Data')
+toast.error('ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ')
 }
   }
 };

@@ -215,12 +215,12 @@ const save = async () => {
   if (!v$.value.$error) {
     const data = await SaveForm();
     if (data == true) {
-      toast.success('Save Data');
+      toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
       await ResetForm();
       v$.value.$reset();
       router.push('/users');
     } else {
-      toast.error('Fail Save Data')
+      toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
     }
   }
 }

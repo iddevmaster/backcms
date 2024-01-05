@@ -250,7 +250,7 @@ const Updatedata = async () => {
   if (!v$.value.$error) {
     await store.UploadfileExam()
     await store.UpdateExam()
-    await toast.success('Edit Data')
+    await toast.success('ແກ້ໄຂຂໍ້ມູນສຳເລັດ')
     await store.fetchExamlist();
 
   }

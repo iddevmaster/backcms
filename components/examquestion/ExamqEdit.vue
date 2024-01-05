@@ -186,14 +186,14 @@ return false;
       let save = await UpdateExa();  ///////////save 
       let clear = await ClearLocal();  ///////////save 
       if(save == true){
-      toast.success('Edit Success')
+      toast.success('ແກ້ໄຂສຳເລັດ')
       }
       setTimeout(() => {
       router.go(-1);
     }, 500);
   
     } catch (error) {
-      toast.error('Fail Save Data')
+      toast.error('ບັນທຶກລົ້ມເຫລວ')
     }
 
   }
