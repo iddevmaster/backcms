@@ -276,7 +276,7 @@ if (finddtl == true) {
   toast.error('Can not Data')
 }
 }else {
-toast.error('Failed  Save Data')
+toast.error('ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ')
 }
   }
 };

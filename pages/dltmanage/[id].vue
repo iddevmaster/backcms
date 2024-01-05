@@ -200,7 +200,7 @@ const UpdateDlT = async () => {
       toast.success("Save Success");
       store.getDLT();
     } else {
-      toast.error("Failed  Save Data");
+      toast.error("ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ");
     }
   }
 };
@@ -220,7 +220,7 @@ const DelDlT = async () => {
     toast.success("Delete Success");
     store.getDLT();
   } else {
-    toast.error("Failed  Save Data");
+    toast.error("ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ");
   }
 };
 </script>

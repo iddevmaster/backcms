@@ -201,11 +201,11 @@ const save = async () => {
   } else {
     let savere = await store.SaveFormreserve();
     if (savere == true) {
-      toast.success("Save Data");
+      toast.success("ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ");
     //  await store.fetchUsers();
       await store.FetchAP();
     } else {
-      toast.error("Fail Save Data");
+      toast.error("ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ");
     }
   }
 };

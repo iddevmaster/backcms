@@ -163,9 +163,11 @@ const save = async () => {
     let data = await store.saveResult();
 
     if (data == true) {
-      toast.success('Save Data');
+      toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ
+');
     } else {
-      toast.error('Fail Save Data')
+      toast.error('Fail ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ
+')
     }
 
   }

@@ -144,19 +144,6 @@
     </div>
   </div>
   
-
-  <!-- <div v-if="store.myChoose" class="alert alert-light-primary alert-dismissible fade show border-0 mb-4" role="alert"> 
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"  @click="close()"> 
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-bs-dismiss="alert"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button> 
-      <strong>Choose User Complete</strong> Lorem Ipsum is simply dummy text of the printing. </div> -->
-
-  <!-- <div class="row mb-4">
-    <div class="col-sm-6">
-      <label for="exampleFormControlInput1">User</label>
-      {{store.myValue}}
-      <Select2  v-model="store.myValue"  :options="myOptionsUser" :settings="{ settingOption: value, settingOption: value }"  @change="myChangeEvent($event)" @select="mySelectEvent($event)"/>
-    </div>
-  </div> -->
   <button type="button" class="btn btn-primary" @click="save()">บันทึก</button>
 </template>
 <script setup lang="ts">
@@ -194,7 +181,7 @@ const save = async () => {
     Swal.fire({
       position: "top-end",
       icon: "error",
-      title: "กรุณาเลือก",
+      title: "ກະ​ລຸ​ນາ​ເລືອກ",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -204,11 +191,11 @@ const save = async () => {
     let savere = await store.SaveFormreserve();
     console.log(savere);
     if (savere == 200) {
-      toast.success("บันทึกสำเร็จ");
+      toast.success("ບັນທຶກສຳເລັດແລ້ວ");
     //  await store.fetchUsers();
       await store.FetchAP();
     }else if(savere == 404){
-      toast.error("ມີຢູ່ແລ້ວໃນຖັນນີ້.");
+      toast.error("ບັນທຶກລົ້ມເຫລວ.");
     } else {
       toast.error("ຕິດຕໍ່ຜູ້ເບິ່ງແຍງລະບົບ");
     }

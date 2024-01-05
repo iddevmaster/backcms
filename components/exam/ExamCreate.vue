@@ -241,9 +241,9 @@ const save = async () => {///////////// บันทึก
     let save = await SaveExam();  ///////////save 
     await store.fetchExamlist();
     if (save === false) {
-      await toast.error('Fail Save Data')
+      await toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
     } else {
-      await toast.success('Save Data')
+      await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
       await ResetForm();
       v$.value.$reset();
 

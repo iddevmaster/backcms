@@ -193,7 +193,7 @@ return false;
     }, 500);
   
     } catch (error) {
-      toast.error('Fail Save Data')
+      toast.error('ບັນທຶກລົ້ມເຫລວ')
     }
 
   }
