@@ -158,9 +158,9 @@ const save = async () => {
 
     try {
       await SaveSubmitForm(); //save form  ส่งไป Store User
-      await toast.success('Save Data')
+      await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
     } catch (e) {
-      await toast.error('Fail Save Data')
+      await toast.error('ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ')
     }
 
     v$.value.$reset();

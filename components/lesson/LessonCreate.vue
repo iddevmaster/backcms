@@ -142,9 +142,9 @@ const save = async () => {///////////// บันทึก
 
       let lesson = await store.fetchLessonId(router.currentRoute.value.params.id)
     if (save === false) {
-      await toast.error('Fail Save Data')
+      await toast.error('ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ')
     } else {
-      await toast.success('Save Data')
+      await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
       await store.ResetForm();
       store.formcreatelesson.cs_cover = ""
        

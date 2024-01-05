@@ -125,14 +125,14 @@ const save = async () => {
     return false;
   }
   if (!v$.value.$error) {
-    await toast.warning("Wait Save Data", {
+    await toast.warning("ລໍຖ້າຈັກໜ່ອຍ", {
       timeout: 2000,
     });
     try {
       await SaveSubmitForm(); //save form  ส่งไป Store User
-      await toast.success('Save Data')
+      await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
     } catch (e) {
-      await toast.error('Fail Save Data')
+      await toast.error('ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ')
     }
     v$.value.$reset();
     const input = document.querySelector('input[type="file"]');

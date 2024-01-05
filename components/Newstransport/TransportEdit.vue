@@ -172,18 +172,18 @@ const edit = async () => {
     return false;
   }
   if (!v$.value.$error) {
-    await toast.warning("Wait Save Data",{
+    await toast.warning("ລໍຖ້າຈັກໜ່ອຍ",{
   timeout: 2000,
     });
     try {
       await UpdateFormNews();
-      await toast.success('Save Data')
+      await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
 
       setTimeout(() => {
       router.push('/news/transport');
     }, 2000);
     } catch (e) {
-      await toast.error('Fail Save Data')
+      await toast.error('ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ')
     }
   }
 }
