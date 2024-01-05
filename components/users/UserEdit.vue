@@ -193,7 +193,7 @@ const save = async () => {
     if (updatedata) {
       toast.success('Edit Success');
     } else {
-      toast.error('Fail Save Data')
+      toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
     }
 
   }

@@ -34,10 +34,10 @@ const closeModal = () => {
 const delete_userid = async (id) => {
   const deleitem = await store.deleteItem_id(id);
   if (deleitem) {
-    toast.success('Save Data');
+    toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
     await store.fetchUsers()
   } else {
-    toast.error('Fail Save Data')
+    toast.error('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
   }
   // await store.fetchUsers()
 };
