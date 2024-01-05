@@ -90,7 +90,6 @@ const closeModal = () => {
                             <ResultEdit></ResultEdit>
                         </div>
                     </div>
-
                           <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing" v-if="store.IsCardNoInsert">
                         <div class="widget-content widget-content-area br-8 p-3">
                             <ResultNodata></ResultNodata>
