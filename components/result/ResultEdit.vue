@@ -162,7 +162,7 @@ const update = async () => {
     if (data == true) {
       toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
     } else {
-      toast.error('Fail ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
+      toast.error('ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ')
     }
   
   }

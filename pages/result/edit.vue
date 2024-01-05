@@ -38,10 +38,10 @@ const closeModal = () => {
 
   const dele = async (id) => {
     let delel = await store.DeleteResult();
-  console.log(delel);
+
   store.modaldelete = false;
   if(delel == true){
-    toast.success('Delete Data');
+    toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
     await store.fetchResultByUser()
 
   }
