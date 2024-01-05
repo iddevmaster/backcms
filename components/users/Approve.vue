@@ -138,13 +138,13 @@ const choose = async (id) => {
 
 const approve = async (item) => {
   await store.Approve(item);
-  await toast.success('Approve Success');
+  await toast.success('ອະນຸມັດສຳເລັດ');
   await store.fetchUsersApprove()
 };
 
 const notapproved = async (item) => {
   await store.Notapprove(item);
-  await toast.success('NotApprove Success');
+  await toast.success('ອະນຸມັດບໍ່ສຳເລັດ');
   await store.fetchUsersApprove()
 };
 

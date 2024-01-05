@@ -93,8 +93,8 @@ await store.fetchLessonId(router.currentRoute.value.params.id)
 
       <div class="modal-footer">
         <button class="btn btn btn-light-dark" data-bs-dismiss="modal" @click="closeModal()">
-          <i class="flaticon-cancel-12"></i> ปิด</button>
-        <button type="button" class="btn btn-primary" @click="dele()">ลบ</button>
+          <i class="flaticon-cancel-12"></i> {{ $t("cancel") }}</button>
+        <button type="button" class="btn btn-primary" @click="dele()">{{ $t("delete") }}</button>
       </div>
     </div>
     </div>

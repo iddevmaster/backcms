@@ -422,7 +422,9 @@
   "choose_user_edit_e":"It will not be possible to change the test results.",
   "user_app_nodata":"No Data",
   "fitter_history_exam":"Search History Examination",
-  "user_history_exam":"History Examination"
+  "user_history_exam":"History Examination",
+  "cancel":"Cancel",
+  "delete":"Delete"
 
 }
 

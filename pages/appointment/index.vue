@@ -27,10 +27,10 @@ const closeModal = () => {
 const deletel = async () => {
   let del = await store.deleteApp();
   if (del == true) {
-    toast.success('Delete Data');
+    toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
     store.fetchAppointment();
   } else {
-    toast.error('Failed Delete Data')
+    toast.error('ລຶບຂໍ້ມູນລົ້ມເຫລວ')
   }
 };
 

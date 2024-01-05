@@ -191,7 +191,7 @@ const save = async () => {
   if (!v$.value.$error) {
     let updatedata = await Update(router.currentRoute.value.params.id); //save form  ส่งไป Store User
     if (updatedata) {
-      toast.success('Edit Success');
+      toast.success('ແກ້ໄຂສຳເລັດແລ້ວ');
     } else {
       toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
     }

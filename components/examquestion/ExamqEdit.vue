@@ -186,7 +186,7 @@ return false;
       let save = await UpdateExa();  ///////////save 
       let clear = await ClearLocal();  ///////////save 
       if(save == true){
-      toast.success('Edit Success')
+      toast.success('ແກ້ໄຂສຳເລັດ')
       }
       setTimeout(() => {
       router.go(-1);

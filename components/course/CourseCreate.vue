@@ -383,7 +383,7 @@ const save = async () => {
      
       v$.value.$reset();
         await setTimeout(() => {
-        toast.success("Save Data");
+        toast.success("ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ");
          store.ResetForm();
 
         router.push('/learning');
@@ -392,7 +392,7 @@ const save = async () => {
       }
 
     } catch (error) {
-      await toast.error("Fail Save Data");
+      await toast.error("ຂໍ້ມູນບໍ່ໄດ້ບັນທຶກສຳເລັດ.");
     }
   }
 };

@@ -42,7 +42,7 @@ const delete_userid = async (id) => {
   await store.deleteItem_id(id);
   await store.fetchNewTransport()
 
-  await toast.success('Delete Success');
+  await toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
   };
   
 </script>

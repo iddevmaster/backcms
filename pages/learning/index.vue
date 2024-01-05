@@ -53,10 +53,10 @@ const delete_userid = async (id) => {
 
   const delc = await store.deleteItem_id(id);
   if(delc){
-    toast.success('Delete Success');
+    toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
     await store.fetchCourslist()
       }else{
-   toast.error('Failed  Delete Data')
+   toast.error('ລຶບຂໍ້ມູນລົ້ມເຫລວ')
       }
 
   };
@@ -95,8 +95,8 @@ const delete_userid = async (id) => {
                                     <p class="">{{ $t("delete_record_t") }}</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal" >Cancel</button>
-                                    <button type="button" class="btn btn-danger" data-remove="task"  @click="delete_userid(GetopenModal_ID)">Delete </button>
+                                    <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal" >{{ $t("cancel") }}</button>
+                                    <button type="button" class="btn btn-danger" data-remove="task"  @click="delete_userid(GetopenModal_ID)">{{ $t("delete") }} </button>
                                 </div>
                             </div>
   </div>
