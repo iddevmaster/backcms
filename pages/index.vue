@@ -410,7 +410,7 @@
                       @change="onChange($event)"
                       v-model="store.formexam.dlt_code"
                     >
-                      <option disabled :value="null">เลือก</option>
+                      <option disabled :value="null">​ເລືອກ</option>
                       <option
                         v-for="(item, i) in store.dlt"
                         :value="item.dlt_code"
@@ -503,7 +503,7 @@
                       v-model="store.formfitter.course_id"
                       @change="onChange($event)"
                     >
-                      <option disabled :value="null">เลือก</option>
+                      <option disabled :value="null">​ເລືອກ</option>
                       <option
                         v-for="(item, i) in store.courselist"
                         :value="item.course_id"
@@ -525,7 +525,7 @@
                       class="form-control"
                       v-model="store.formfitter.cs_id"
                     >
-                      <option disabled :value="null">เลือก</option>
+                      <option disabled :value="null">​ເລືອກ</option>
                       <option
                         v-for="(less, i) in store.lessonlist"
                         :value="less.cs_id"
@@ -676,7 +676,7 @@ const search = async () => {
   if (store.formfitter.type == "1") {
     if (store.formfitter.cs_id == null) {
       Swal.fire({
-        text: "กรุณาเลือก Lesson ที่มีบทเรียน !",
+        text: "ກະ​ລຸ​ນາ​ເລືອກ Lesson ທີ່ມີບົດຮຽນ !",
         icon: "error",
       });
     } else {
@@ -688,7 +688,7 @@ const search = async () => {
   if (store.formfitter.type == "2") {
     if (store.formfitter.course_id == null) {
       Swal.fire({
-        text: "กรุณาเลือก Course!",
+        text: "ກະ​ລຸ​ນາ​ເລືອກ ຫຼັກສູດ!",
         icon: "error",
       });
     } else {
@@ -700,7 +700,7 @@ const search = async () => {
   if (store.formfitter.type == "3") {
     if (store.formfitter.user_id == null) {
       Swal.fire({
-        text: "กรุณาเลือก Users!",
+        text: "ກະ​ລຸ​ນາ​ເລືອກ Users!",
         icon: "error",
       });
     } else {

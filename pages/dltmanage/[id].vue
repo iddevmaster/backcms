@@ -266,7 +266,7 @@ const DelDlT = async () => {
                           v-model="store.formdtl.dlt_code"
                         >
                           <option selected disabled>
-                            โปรดเลือกประเภทใบขับขี่
+                            ກະລຸນາເລືອກປະເພດໃບຂັບຂີ່ຂອງເຈົ້າ.
                           </option>
                           <option
                             v-for="(item, index) in store.dtla"

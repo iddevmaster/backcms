@@ -14,7 +14,7 @@
     </div>
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_quota") }}</label>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="จำนวนที่สามารถจองได้ *" maxlength="3"
+      <input type="text" class="form-control" id="inputEmail3" placeholder="ປະລິມານທີ່ສາມາດຈອງໄດ້ *" maxlength="3"
         v-model="store.formedit.ap_quota" :class="{
           'border-red-500 focus:border-red-500': v$.ap_quota.$error,
           'border-[#42d392] ': !v$.ap_quota.$invalid,
@@ -40,7 +40,7 @@
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_remark") }}</label>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="หมายเหตุ *" maxlength="20"
+      <input type="text" class="form-control" id="inputEmail3" placeholder="ຫມາຍ​ເຫດ​ *" maxlength="20"
         v-model="store.formedit.ap_remark" :class="{
           'border-red-500 focus:border-red-500': v$.ap_remark.$error,
           'border-[#42d392] ': !v$.ap_remark.$invalid,

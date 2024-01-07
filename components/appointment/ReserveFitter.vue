@@ -192,7 +192,7 @@ const save = async () => {
     Swal.fire({
       position: "top-end",
       icon: "error",
-      title: "กรุณาเลือก",
+      title: "ກະ​ລຸ​ນາ​ເລືອກ",
       showConfirmButton: false,
       timer: 1500,
     });
