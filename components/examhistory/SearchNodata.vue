@@ -21,9 +21,6 @@ const store = ExamHistoryStore();
 
 
 
-
-
-
 </script>
 
 <style>
