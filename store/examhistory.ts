@@ -137,7 +137,12 @@ async fetchExamlistByUser() {
   try {
     const data = await ApiService.get('/exam/history/?em_id='+this.byem_id+'&user_id='+this.user_id).then(response => {
     this.historylist = response.data
-    this.Showdata = true;   
+    if(this.historylist.length > 0){
+      this.Showdata = false;  
+    }else {
+      this.Showdata = true;  
+    }
+
     });
     return true
   } catch (error) {

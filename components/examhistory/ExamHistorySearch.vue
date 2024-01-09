@@ -132,7 +132,7 @@
 
       <div class="pagination-no_spacing" v-else>
         <ul class="pagination">
-          ไม่มีข้อมูล
+          {{ $t("data_his") }}
         </ul>
       </div>
     </div>
@@ -199,11 +199,12 @@ store.formuser.page = 1;
 const Fitter = async () => {
   
 
- 
-
   if(store.myChoose.detail == 'system_active' || store.myChoose.detail == 'phone_active'){
     store.IsCardNoInsert = false;
   store.IsCardInsert = true;
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
   await store.fetchExamlistByUser();
 
   }else {
