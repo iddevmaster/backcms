@@ -1,7 +1,7 @@
 <template>
   <div class="text-center">
     
-    <h5 class="text-danger">#ไม่มีข้อมูล</h5></div>
+    <h5 class="text-danger">{{ $t("data_his") }}</h5></div>
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
@@ -17,9 +17,6 @@ import { ref, onMounted, onUnmounted } from 'vue';
 const toast = useToast()
 const router = useRouter();
 const store = ExamHistoryStore();
-
-
-
 
 
 

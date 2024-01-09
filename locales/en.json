@@ -424,7 +424,8 @@
   "fitter_history_exam":"Search History Examination",
   "user_history_exam":"History Examination",
   "cancel":"Cancel",
-  "delete":"Delete"
+  "delete":"Delete",
+  "data_his":"#Nodata"
 
 }
 

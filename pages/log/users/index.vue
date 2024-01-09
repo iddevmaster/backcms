@@ -282,7 +282,7 @@ const search = async () => {
   if (store.formfitter.type == '1') {
     if(store.formfitter.cs_id == null){
       Swal.fire({
-    text: 'กรุณาเลือก Lesson ที่มีบทเรียน !',
+    text: 'ກະ​ລຸ​ນາ​ເລືອກ Lesson ທີ່ມີບົດຮຽນ !',
     icon: 'error',
   });
 
@@ -299,7 +299,7 @@ const search = async () => {
 
   if(store.formfitter.course_id == null){
       Swal.fire({
-    text: 'กรุณาเลือก Course!',
+    text: 'ກະ​ລຸ​ນາ​ເລືອກ ຫຼັກສູດ!',
     icon: 'error',
   });
 
@@ -318,7 +318,7 @@ const search = async () => {
 
     if(store.formfitter.user_id == null){
       Swal.fire({
-    text: 'กรุณาเลือก Users!',
+    text: 'ກະ​ລຸ​ນາ​ເລືອກ Users!',
     icon: 'error',
   });
 
