@@ -65,25 +65,80 @@
     </div>
   </div>
     <div class="row mb-4">
-    <div class="col-sm-6">
+    <div class="col-sm-12">
       <label for="exampleFormControlInput1">{{ $t("menu_user_zipcode") }}</label>
-    <select class="form-control" v-if="store.zipcode" v-model="store.formDetailEdit.location_id">
+
+      <span v-if="locale == 'la'">
+                  <span
+                    class="text-xs text-red-500"
+                    style="color: red"
+                    v-if="v$.location.$error"
+                    >ເລືອກສັນຊາດຂອງເຈົ້າ</span
+                  >
+                </span>
+
+                <span v-if="locale == 'en'">
+                  <span
+                    class="text-xs text-red-500"
+                    style="color: red"
+                    v-if="v$.location.$error"
+                    >
+Choose your nationality</span
+                  >
+                </span>
+    <!-- <select class="form-control" v-if="store.zipcode" v-model="store.formDetailEdit.location_id">
     <option   v-for="(zipcode, index) in store.zipcode" :key="zipcode.id" :value="zipcode.id">{{zipcode.zipcode_name}}</option>
-    </select>
+    </select> -->
+
+
+    <v-select
+  v-model="store.formDetailEdit.location"
+    :options="store.zipcode"
+    label="zipcode_name" 
+    @input="changedLabelZip"
+     placeholder="ເລືອກ"
+  ></v-select>
 
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-12">
       <label for="exampleFormControlInput1">{{ $t("menu_user_country") }}</label>
-      <select class="form-control" v-if="store.country" v-model="store.formDetailEdit.country_id">
-    <option   v-for="(country, x) in store.country" :key="country.country_id" :value="country.country_id">{{country.country_name_eng}}</option>
-    </select>
 
+      <span v-if="locale == 'la'">
+                  <span
+                    class="text-xs text-red-500"
+                    style="color: red"
+                    v-if="v$.country.$error"
+                    >ເລືອກສັນຊາດຂອງເຈົ້າ</span
+                  >
+                </span>
+
+                <span v-if="locale == 'en'">
+                  <span
+                    class="text-xs text-red-500"
+                    style="color: red"
+                    v-if="v$.country.$error"
+                    >
+Choose your nationality</span
+                  >
+                </span>
+      <!-- <select class="form-control" v-if="store.country" v-model="store.formDetailEdit.country_id">
+    <option   v-for="(country, x) in store.country" :key="country.country_id" :value="country.country_id">{{country.country_name_eng}}</option>
+    </select> -->
+    <v-select
+  v-model="store.formDetailEdit.country"
+    :options="store.country"
+    label="country_name_eng"
+     placeholder="ເລືອກ"
+     @input="changedLabelCounrt"
+  ></v-select>
+
+ 
     </div>
   </div>
 
 
     <div class="row mb-4">
-    <div class="col-sm-6">
+    <div class="col-sm-12">
       <label for="exampleFormControlInput1">{{ $t("menu_user_verify") }}</label>
       <select class="form-control" v-model="store.formDetailEdit.verify_account">
     <option value="unactive">{{ $t("unactive") }}</option>
@@ -116,6 +171,8 @@
         </div>
       </template>
     </div>
+
+  
     <div class="form-group mb-4 mt-3">
       <button type="button" class="btn btn-primary" @click="savedetail()">{{ $t("menu_user_bt_save") }}</button>
     </div>
@@ -123,6 +180,8 @@
 </template>
 
   <script setup lang="ts">
+  import 'vue-select/dist/vue-select.css';
+  import vSelect from 'vue-select';
   import { storeToRefs } from 'pinia';
   import { defineComponent } from 'vue';
   import { usersStore } from '@/store/users'; // import the auth store we just created
@@ -133,6 +192,8 @@
   import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
 import { ref } from 'vue';
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
 
 
   const toast = useToast()
@@ -169,6 +230,14 @@ store.imageReq = false;
         required: helpers.withMessage('ປ່ອງທີ່ຢູ່ແມ່ນຕ້ອງການ', required),
         minLength: minLength(1),
       },
+      country: {
+      required: helpers.withMessage("Select Country field is required", required),
+      minLength: minLength(1),
+      },
+      location: {
+      required: helpers.withMessage("Select Country field is required", required),
+      minLength: minLength(1),
+      },
       user_birthday: {
         required: helpers.withMessage('ຕ້ອງມີຊ່ອງຂໍ້ມູນວັນເກີດ', required),
         minLength: minLength(1),
@@ -181,6 +250,7 @@ store.imageReq = false;
         required: helpers.withMessage('ພື້ນທີ່ບ້ານແມ່ນຕ້ອງການ', required),
         minLength: minLength(1),
       },
+
 
       
       
@@ -197,7 +267,9 @@ store.imageReq = false;
 
 const savedetail = async () => {
   v$.value.$validate();
-  if(!store.image){/////////////////// req image  ใช้ rules ไม่ได้ 
+
+
+  if(!store.image){
 store.imageReq = true;
 return false;
 }
@@ -205,16 +277,23 @@ return false;
     const data = await UpdateDetails();
       if(data === true){
       await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
-
       router.push('/users');
       }else {
        await toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
-   
-
-    
       }
   
   }
+}
+
+const changedLabelCounrt = async (event) => {
+store.formscount.search = event.target.value
+await store.Country();
+}
+
+const changedLabelZip = async (event) => {
+store.formszipcode.search = event.target.value
+await store.Zipcode();
+
 }
 
   const onFileChange = async (event) => {

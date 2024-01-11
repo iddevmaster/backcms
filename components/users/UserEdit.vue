@@ -17,7 +17,6 @@
     <option :value="null" disabled>{{ $t("choose") }}</option>
     <option value="ທ້າວ">{{ $t("than") }}</option>
     <option value="ນາງ">{{ $t("nang") }}</option>
-
     </select>
 
     <span class="text-xs text-red-500" style="color:red" v-if="v$.user_prefrix.$error">{{
