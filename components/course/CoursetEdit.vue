@@ -14,7 +14,9 @@
       <input type="text" class="form-control" id="inputEmail4" v-model="store.formDataEditCourse.course_code" :class="{
         'border-red-500 focus:border-red-500': v$.course_code.$error,
         'border-[#42d392] ': !v$.course_code.$invalid,
-      }" @change="v$.course_code.$touch" />
+      }" @change="v$.course_code.$touch"
+       maxlength="20"
+      />
  
  <div v-if="locale == 'la'" >
       <span v-if="v$.course_code.$error" class="text-xs text-red-500"
@@ -36,7 +38,9 @@
       <input type="text" class="form-control" id="inputPassword4" v-model="store.formDataEditCourse.course_name" :class="{
         'border-red-500 focus:border-red-500': v$.course_name.$error,
         'border-[#42d392] ': !v$.course_name.$invalid,
-      }" @change="v$.course_name.$touch" />
+      }" @change="v$.course_name.$touch" 
+       maxlength="30"
+      />
       <div v-if="locale == 'la'" >
       <span v-if="v$.course_name.$error" class="text-xs text-red-500"
         style="color: red" >ຕ້ອງມີຊ່ອງໃສ່ຊື່ຫຼັກສູດ.</span>
@@ -58,7 +62,7 @@ The Course Name field is required.</span>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" :class="{
         'border-red-500 focus:border-red-500': v$.course_description.$error,
         'border-[#42d392] ': !v$.course_description.$invalid,
-      }" @change="v$.course_description.$touch" v-model="store.formDataEditCourse.course_description">
+      }" @change="v$.course_description.$touch" v-model="store.formDataEditCourse.course_description" maxlength="200">
       </textarea>
       <div v-if="locale == 'la'" >
       <span v-if="v$.course_description.$error" class="text-xs text-red-500"

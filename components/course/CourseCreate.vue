@@ -22,6 +22,7 @@
           'border-[#42d392] ': !v$.course_code.$invalid,
         }"
         @change="v$.course_code.$touch"
+        maxlength="20"
       />
 
   <div v-if="locale == 'la'" >
@@ -53,6 +54,7 @@
           'border-[#42d392] ': !v$.course_name.$invalid,
         }"
         @change="v$.course_name.$touch"
+        maxlength="30"
       />
    <div v-if="locale == 'la'" >
       <span v-if="v$.course_name.$error" class="text-xs text-red-500"
@@ -86,6 +88,7 @@ The Course Name field is required.</span>
         }"
         @change="v$.course_description.$touch"
         v-model="store.formDataCourse.course_description"
+        maxlength="200"
       >
       </textarea>
 
