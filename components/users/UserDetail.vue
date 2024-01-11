@@ -53,7 +53,7 @@
   <div class="row mb-4">
     <div class="col-sm-12">
       <label for="exampleFormControlInput1">{{ $t("menu_user_village") }}</label>
-      <input type="text" class="form-control" id="add" placeholder="ທີ່ຢູ່ *"  v-model="store.formDetailEdit.user_village"
+      <input type="text" class="form-control" id="add" placeholder="ທີ່ຢູ່ *"  v-model="store.formDetailEdit.user_village" maxlength="30"
       :class="{
           'border-red-500 focus:border-red-500': v$.user_village.$error,
           'border-[#42d392] ': !v$.user_village.$invalid,
@@ -298,15 +298,21 @@ await store.Zipcode();
 
   const onFileChange = async (event) => {
    var input = event.target;
-       if (input.files) {
+   const file = event.target.files[0];
+      if (file && file.type.startsWith('image/')) {
          var reader = new FileReader();
          reader.onload = (e) => {
            store.image = e.target.result;
          }
          store.imagelist=input.files[0];
          reader.readAsDataURL(input.files[0]);
-       }
+       } else {
+    toast.error('ອັບໂຫຼດໄຟລ໌ຮູບພາບເທົ່ານັ້ນ')
+     }
+
  }
+
+
 
 const removeImage = async () => {
 store.image = null;
