@@ -17,7 +17,6 @@
     <option :value="null" disabled>{{ $t("choose") }}</option>
     <option value="ທ້າວ">{{ $t("than") }}</option>
     <option value="ນາງ">{{ $t("nang") }}</option>
-
     </select>
 
     <span class="text-xs text-red-500" style="color:red" v-if="v$.user_prefrix.$error">{{
@@ -29,7 +28,7 @@
 
     <div class="col-sm-5">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_name") }}</label> <span class="text-xs text-red-500" style="color:red"> * </span>
-      <input type="text" class="form-control" id="inputEmail3"
+      <input type="text" class="form-control" id="inputEmail3" maxlength="20"
         v-model="store.formDataEdit.user_firstname" :class="{
           'border-red-500 focus:border-red-500': v$.user_firstname.$error,
           'border-[#42d392] ': !v$.user_firstname.$invalid,
@@ -43,7 +42,7 @@
 
     <div class="col-sm-5">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_lname") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
-      <input type="text" class="form-control" id="inputEmail3"
+      <input type="text" class="form-control" id="inputEmail3" maxlength="20"
       
         v-model="store.formDataEdit.user_lastname" :class="{
           'border-red-500 focus:border-red-500': v$.user_lastname.$error,
@@ -60,7 +59,7 @@
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_username") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
-      <input type="text" class="form-control" id="inputPassword3" 
+      <input type="text" class="form-control" id="inputPassword3"  maxlength="20"
         v-model="store.formDataEdit.user_name" :class="{
           'border-red-500 focus:border-red-500': v$.user_name.$error,
           'border-[#42d392] ': !v$.user_name.$invalid,
@@ -82,18 +81,18 @@
      
       </span>
       <input type="text" class="form-control" id="654134535" 
-        v-model="store.formDataEdit.user_password">
+        v-model="store.formDataEdit.user_password" maxlength="20">
     </div>
   </div>
   <div class="row mb-4">
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_email") }}</label> 
       <input type="text" class="form-control" id="inputPassword3" 
-        v-model="store.formDataEdit.user_email"  placeholder="Test@gmail.com">
+        v-model="store.formDataEdit.user_email"  placeholder="Test@gmail.com" maxlength="30">
     </div>
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_tel") }}</label> <span class="text-xs text-red-500" style="color:red"> * </span>
-      <input type="text" class="form-control" id="inputPassword3" 
+      <input type="text" class="form-control" id="inputPassword3"  maxlength="20"
         v-model="store.formDataEdit.user_phone" :class="{
           'border-red-500 focus:border-red-500': v$.user_phone.$error,
           'border-[#42d392] ': !v$.user_phone.$invalid, 

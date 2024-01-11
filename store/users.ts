@@ -55,6 +55,11 @@ export const usersStore = defineStore('users', {
       per_page: 200,
       search: '',
     },
+    formscount: {
+      page: 1,
+      per_page: 200,
+      search: '',
+    },
     display_user:null,
     formDataregister: {
       user_prefrix: null,
@@ -195,8 +200,8 @@ export const usersStore = defineStore('users', {
             this.formDetailEdit.user_img = ""
             this.formDetailEdit.verify_account = "unactive"
             this.image = null
-            this.formDetailEdit.location_id = 1
-            this.formDetailEdit.country_id = 1
+            this.formDetailEdit.location_id = null
+            this.formDetailEdit.country_id = null
             this.formDetailEdit.user_id = user_id
 
           
@@ -212,6 +217,12 @@ export const usersStore = defineStore('users', {
             this.formDetailEdit.user_img = this.formDataEdit.detail.user_img
             this.formDetailEdit.verify_account = this.formDataEdit.detail.verify_account
             this.formDetailEdit.user_id = parseInt(user_id)
+
+       //     this.formDetailEdit.location = this.formDataEdit.detail.location
+            this.formDetailEdit.country = this.formDataEdit.detail.country
+            this.formDetailEdit.location = this.formDataEdit.detail.location
+            this.formDetailEdit.location.id = response.data.detail.location_id
+            this.formDetailEdit.country.country_id = response.data.detail.country_id
           
             
           }
@@ -316,16 +327,15 @@ return true;
 const a = {verify_account:this.formDetailEdit.verify_account,identification_number:this.formDetailEdit.identification_number,
 user_img:this.formDetailEdit.user_img,user_birthday:this.formDetailEdit.user_birthday,
 user_address:this.formDetailEdit.user_address,
-location_id:this.formDetailEdit.location_id,
-country_id:this.formDetailEdit.country_id,
+location_id:this.formDetailEdit.location.id,
+country_id:this.formDetailEdit.country.country_id,
 user_id:this.formDetailEdit.user_id,user_village:this.formDetailEdit.user_village};
-
-  
+console.log(a);
 
       try {
         const updatedetails = await ApiService.post('/user/detail/create', a).then(response => {
 
-          //  this.pending_form = true;
+      
         });
      
   
@@ -396,7 +406,7 @@ user_id:this.formDetailEdit.user_id,user_village:this.formDetailEdit.user_villag
       }
     },
     async Country() {
-      const country = await ApiService.post('/master_data/contry', this.formszipcode)
+      const country = await ApiService.post('/master_data/contry', this.formscount)
       if(country.data.data){
 this.country = country.data.data
       }else {

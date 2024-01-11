@@ -32,7 +32,7 @@
         v-model="store.formDataregister.user_firstname" :class="{
           'border-red-500 focus:border-red-500': v$.user_firstname.$error,
           'border-[#42d392] ': !v$.user_firstname.$invalid,
-        }" @change="v$.user_firstname.$touch" autocomplete="off"   placeholder="ຊື່​ແທ້">
+        }" @change="v$.user_firstname.$touch" autocomplete="off"   placeholder="ຊື່​ແທ້" maxlength="20">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.user_firstname.$error">{{
         v$.user_firstname.$errors[0].$message
       }}</span>
@@ -42,7 +42,7 @@
 
     <div class="col-sm-5">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_lname") }}</label> <span class="text-xs text-red-500" style="color:red"> * </span>
-      <input type="text" class="form-control" id="inputEmail3" 
+      <input type="text" class="form-control" id="inputEmail3" maxlength="20"
         v-model="store.formDataregister.user_lastname" :class="{
           'border-red-500 focus:border-red-500': v$.user_lastname.$error,
           'border-[#42d392] ': !v$.user_lastname.$invalid,
@@ -62,7 +62,7 @@
         v-model="store.formDataregister.user_name" :class="{
           'border-red-500 focus:border-red-500': v$.user_name.$error,
           'border-[#42d392] ': !v$.user_name.$invalid,
-        }" @change="v$.user_name.$touch" autocomplete="off" placeholder="ຜູ້ໃຊ້">
+        }" @change="v$.user_name.$touch" autocomplete="off" placeholder="ຜູ້ໃຊ້" maxlength="20">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.user_name.$error">{{
         v$.user_name.$errors[0].$message
       }}</span>
@@ -71,7 +71,7 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_pass") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputPassword3"
-      placeholder="ລະຫັດຜ່ານ"
+      placeholder="ລະຫັດຜ່ານ" maxlength="20"
         v-model="store.formDataregister.user_password" :class="{
           'border-red-500 focus:border-red-500': v$.user_password.$error,
           'border-[#42d392] ': !v$.user_password.$invalid,
@@ -87,18 +87,18 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_email") }}</label>
       <input type="text" class="form-control" id="inputPassword3"
-        v-model="store.formDataregister.user_email"  placeholder="Test@gmail.com" >
+        v-model="store.formDataregister.user_email"  placeholder="Test@gmail.com" maxlength="30" >
    
     </div>
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_tel") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
-      <input type="text" class="form-control" id="inputPassword3"  @input="onInput"
+      <input type="text" class="form-control" id="inputPassword3"  @input="onInput" maxlength="20"
         v-model="store.formDataregister.user_phone" :class="{
           'border-red-500 focus:border-red-500': v$.user_phone.$error,
-          'border-[#42d392] ': !v$.user_phone.$invalid,
+          'border-[#42d392] ': !v$.user_phone.$invalid, 
         }" @change="v$.user_phone.$touch" autocomplete="off" placeholder="85620xxxxxxxx">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.user_phone.$error">{{
-        v$.user_phone.$errors[0].$message
+        v$.user_phone.$errors[0].$message 
       }}</span>
     </div>
 
