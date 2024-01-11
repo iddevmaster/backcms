@@ -23,7 +23,7 @@ const auth = useAuthStore()
 
 const store = ResultStore()
 
-
+store.ResetFetch()
 store.myChoose = [];
 store.IsCardInsert = false
 store.IsCardEdit = false;

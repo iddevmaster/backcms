@@ -160,6 +160,12 @@ export const usersStore = defineStore('users', {
       this.isOpen = false;
     },
 
+    async ResetFetch() {
+      this.formsearch.page = 1;
+      this.formsearch.per_page = 10;
+      this.formsearch.search = '';
+      this.searchDa = '';
+    },
     async fetchUsers() {
       this.selected = [];
       this.isAllSelected = false;

@@ -174,6 +174,13 @@ export const ExamStore = defineStore('exam', {
   },
 
   actions: {
+
+    async ResetFetch() {
+this.formsearchexam.page = 1
+this.formsearchexam.per_page = 10
+this.formsearchexam.search = ''
+
+    },
     async fetchExamlist() {
 
       await this.ResetForm();

@@ -22,7 +22,7 @@ const toast = useToast()
 const store = ExamStore()
 const auth = useAuthStore()
 const profile = await auth.getProfile();
-
+store.ResetFetch();
 store.formexam.user_id = auth.user_id
 store.formexamedit.user_id = auth.user_id
 store.user_id = auth.user_id

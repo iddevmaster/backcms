@@ -24,11 +24,13 @@ definePageMeta({
 
 const auth = useAuthStore()
 const store = CourseStore()
-
+store.ResetFetch()
 store.formDataCourse.user_id = auth.user_id
 store.formDataEditCourse.user_id = auth.user_id
 store.formDatalesson.user_id = auth.user_id
 store.formDataeditlesson.user_id = auth.user_id
+
+
 
 const toast = useToast()
 

@@ -23,7 +23,7 @@ const toast = useToast()
 const auth = useAuthStore()
 
 const store = ResultStore()
-
+store.ResetFetch()
 store.myChoose = [];
 store.resultUser = [];
 store.IsCardInsert = false

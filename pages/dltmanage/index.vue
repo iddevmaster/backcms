@@ -27,7 +27,7 @@ const { GetopenModal } = storeToRefs(store); //Get Getter
 const { GetopenModal_ID } = storeToRefs(store); //Get Getter
 const { Pending } = storeToRefs(store); //Get Getter
 
-
+await store.ResetFetch();
 const closeModal = () => {
   store.closeModal();
 };

@@ -32,6 +32,7 @@ store.IsCardEdit = false;
 store.IsCardNoInsert = false;
 store.userall = [];
 store.fetchExam();
+store.ResetFetch();
 
 
 </script>

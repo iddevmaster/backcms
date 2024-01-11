@@ -193,6 +193,24 @@ export const ResultStore = defineStore('result', {
 
   actions: {
 
+    async ResetFetch() {
+      this.formuser.page = 1
+      this.formuser.per_page = 5
+      this.formuser.search = ''
+
+this.formresult.mr_score = null
+this.formresult.mr_learn_type = 1
+this.formresult.mr_status = 'pass'
+this.formresult.dlt_code = "A"
+this.formresult.identification_number = null
+
+this.formeditresult.mr_score = null
+this.formeditresult.mr_learn_type = null
+this.formeditresult.mr_status = null
+this.formeditresult.dlt_code = null
+this.formeditresult.identification_number = null
+
+    },
     async fetchUsers() {
 
      

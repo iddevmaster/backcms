@@ -223,6 +223,17 @@ export const AppointStore = defineStore('appoint', {
       this.page = 1;
     },
 
+    async ResetFetch() {
+
+      this.forminsert.ap_learn_type = 1
+      this.forminsert.ap_quota = ""
+      this.forminsert.ap_date_start = null
+      this.forminsert.ap_date_end = null
+      this.forminsert.ap_remark = ""
+      this.forminsert.dlt_code = "A1"
+
+    },
+
     async fetchAppointment() {
 
       this.form.date_event = 0;

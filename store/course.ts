@@ -96,7 +96,14 @@ export const CourseStore = defineStore('course', {
 
   actions: {
 
+    async ResetFetch() {
 
+      this.formsearchcourse.page = 1
+      this.formsearchcourse.per_page = 8
+      this.formsearchcourse.search = ''
+
+      
+    },
 
     async fetchCourslist() {
       try {
