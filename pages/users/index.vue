@@ -96,7 +96,7 @@ const delete_userid = async (id) => {
   </div>
 </template>
 
-<style>
+<style scoped>
 .modal {
   position: fixed;
   top: 0;
@@ -112,7 +112,8 @@ const delete_userid = async (id) => {
 .modal-content {
   background-color: white;
   padding: 20px;
-  width: 50%;
+  width: unset !important;
+  height: unset !important;
 }
 
 button {
