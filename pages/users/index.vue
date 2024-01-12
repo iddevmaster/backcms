@@ -81,7 +81,7 @@ const delete_userid = async (id) => {
           </svg>
         </div>
         <h5 class="modal-title" id="exampleModalLabel">{{ $t("delete_record") }}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"  @click="closeModal">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
