@@ -244,7 +244,7 @@ store.imageReq = false;
       },
       identification_number: {
         required: helpers.withMessage('ຕ້ອງມີຊ່ອງຂໍ້ມູນການລະບຸຕົວຕົນ', required),
-        minLength: minLength(13),
+        minLength: minLength(5),
       },
       user_village: {
         required: helpers.withMessage('ພື້ນທີ່ບ້ານແມ່ນຕ້ອງການ', required),
