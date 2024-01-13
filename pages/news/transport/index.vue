@@ -31,7 +31,7 @@ const { posts } = storeToRefs(newTransportStore())
   const { GetopenModal_ID } = storeToRefs(store); //Get Getter
   const { Pending } = storeToRefs(store); //Get Getter
   
-
+store.ResetFetch();
   const closeModal = () => {
     store.closeModal();
   };

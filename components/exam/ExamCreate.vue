@@ -1,7 +1,7 @@
 <template>
   <div v-if="GetopenModalCreate" class="modal">
 
-    <div class="modal-content modal-dialog modal-xl" id="deleteConformationLabel">
+    <div class="modal-content modal-dialog modal-xl addExamModal" id="deleteConformationLabel">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">{{ $t("menu_exam_create") }}</h5>
       </div>
@@ -317,3 +317,12 @@ const formatTime = async () => {
 
 </script>
 
+<style scoped>
+.addExamModal {
+  width: unset;
+  height: 80%;
+}
+.addExamModal > .modal-body {
+  overflow-y: auto;
+}
+</style>

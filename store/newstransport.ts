@@ -119,7 +119,14 @@ export const newTransportStore = defineStore('newstransport', {
       this.isOpen = false;
     },
 
+    async ResetFetch() {
 
+this.formsearchnews.page = 1
+this.formsearchnews.per_page = 10
+this.formsearchnews.search = ''
+ 
+
+    },
 
     async fetchNewTransport() {
       this.selected = [];

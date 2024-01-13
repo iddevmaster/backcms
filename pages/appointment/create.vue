@@ -15,6 +15,8 @@ definePageMeta({
 
 
 const store = AppointStore()
+
+store.ResetFetch()
 const auth = useAuthStore()
 store.user_id = auth.user_id
 store.forminsert.user_id = auth.user_id

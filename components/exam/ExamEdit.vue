@@ -1,7 +1,7 @@
 <template>
   <div v-if="GetopenModalEdit" class="modal">
 
-    <div class="modal-content modal-dialog modal-xl" id="deleteConformationLabel">
+    <div class="modal-content modal-dialog modal-xl addExamModal" id="deleteConformationLabel">
       <div class="modal-header">
 
         <h5 class="modal-title" id="exampleModalLabel">{{ $t("menu_exam_all_bt_edit_exam") }}</h5>
@@ -318,5 +318,13 @@ function coverimage(i) {
 
 
 </script>
- 
+<style scoped>
+.addExamModal {
+  width: unset;
+  height: 80%;
+}
+.addExamModal > .modal-body {
+  overflow-y: auto;
+}
+</style>
  

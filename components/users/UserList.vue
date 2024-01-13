@@ -114,7 +114,7 @@
         </tr>
       </tbody>
     </table>
-    <div>
+    <!-- <div>
       <div class="dt--pagination" v-if="posts.total_page > 1" >
         <div class="dataTables_paginate paging_simple_numbers" id="zero-config_paginate">
           <ul class="pagination">
@@ -143,7 +143,37 @@
         </div>
       </div>
 
+    </div> -->
+
+    <div class="row">
+    <div class="col-xl-12 col-lg-12">
+      <div class="pagination-no_spacing"  v-if="posts.total_page > 1">
+        <ul class="pagination">
+          <li> <a href="javascript:void(0);" class="prev" @click="validatePNumberDown()" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="feather feather-chevron-left">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg></a>
+          </li>
+          <li>
+            <div class="col-xs-1">
+              <input id="ex1" type="number" style="width:50px" v-model="store.formsearch.page" @input="validatePNumber($event)">
+            </div>
+          </li>
+          <li><a href="javascript:void(0);">/</a></li>
+          <li><a href="javascript:void(0);">{{ store.total_page }}</a></li>
+          <li> <a href="javascript:void(0);" class="next"  @click="validatePNumberUp()"  ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="feather feather-chevron-right">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg></a>
+          </li>
+        </ul>
+      </div>
     </div>
+  </div>
+
+    
   </div>
 </template>
 
@@ -195,6 +225,7 @@ const choose = async (id) => {
 };
 
 const searchData = async () => {
+  store.formsearch.page = 1
   await store.fetchUsers()
 };
 
@@ -215,11 +246,13 @@ const format = (time) => {
 };
 
 const selectshowdata = async (x) => {
+  store.formsearch.page = 1
   await selectentires(x.target.value);
   await store.fetchUsers()
 };
 
 const selecttype = async (item) => {
+  store.formsearch.page = 1
   await selecttypes(item.target.value);
   await store.fetchUsers()
 };
@@ -238,6 +271,77 @@ function coverttime(date) {
 
 }
 
+
+const validatePNumber = async (evt) => {
+ 
+ const keysAllowed: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+ const keyPressed: string = evt.key;
+ if (!keysAllowed.includes(keyPressed)) {
+   evt.preventDefault()
+ }
+ if(store.formsearch.page > store.total_page){
+   store.formsearch.page = store.total_page
+return false;
+ }
+ if (store.formsearch.page == '') {
+  
+   store.formsearch.page = 1;
+  await store.fetchUsers()
+   await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+     timeout: 50,
+   });
+ } else {
+ 
+await store.fetchUsers()
+   await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+     timeout: 50,
+   });
+ }
+}
+
+
+const validatePNumberDown = async () => {
+  if (store.formsearch.page == 1) {
+
+    store.pending = true;
+
+    store.formsearch.page = 1;
+   await store.fetchUsers()
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else {
+ 
+
+    store.formsearch.page -= 1;
+    store.pending = true;
+   await store.fetchUsers()
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  }
+}
+
+const validatePNumberUp = async () => {
+
+  if (store.formsearch.page == store.total_page) {
+    store.pending = true;
+    store.formsearch.page = store.total_page;
+
+  await store.fetchUsers()
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else {
+
+    store.formsearch.page += 1;
+    store.pending = true;
+    await store.fetchUsers()
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  }
+}
 
 
 

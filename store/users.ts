@@ -160,12 +160,20 @@ export const usersStore = defineStore('users', {
       this.isOpen = false;
     },
 
+    async ResetFetch() {
+      this.formsearch.page = 1;
+      this.formsearch.per_page = 10;
+      this.formsearch.search = '';
+      this.searchDa = '';
+    },
     async fetchUsers() {
       this.selected = [];
       this.isAllSelected = false;
-      this.formsearch.page = this.page;
+
       this.formsearch.per_page = this.per_page;
       this.formsearch.search = this.searchDa;
+
+
       try {
         this.pending = true
         const data = await ApiService.post('/user/list?'+this.type, this.formsearch).then(response => {

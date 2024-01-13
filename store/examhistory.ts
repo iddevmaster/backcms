@@ -55,6 +55,28 @@ export const ExamHistoryStore = defineStore('examhistory', {
   },
 
   actions: {
+
+
+    async ResetFetch() {
+
+      this.formuser.page = 1
+      this.formuser.per_page = 5
+      this.formuser.search = ''
+      this.history = []
+      this.userall = []
+      this.total_page = null
+      this.limit_page = null
+      this.current_page = null
+      this.total_filter = null
+      this.total =null
+
+      this.formsearchexamhistory.page = 1
+      this.formsearchexamhistory.per_page = 50
+      this.formsearchexamhistory.search = ''
+      this.byem_id = 0;
+
+  
+    },
     async fetchExamlistByEm() {
       const getid = await ApiService.post('/exam/history/' + this.em_id, this.formsearchexamhistory).then(response => {
       
@@ -65,7 +87,6 @@ export const ExamHistoryStore = defineStore('examhistory', {
         this.total_filter = response.data.total_filter
         this.total = response.data.total
 
-     
         
       });
 

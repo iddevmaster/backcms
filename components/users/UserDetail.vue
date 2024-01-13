@@ -27,7 +27,7 @@
       :class="{
           'border-red-500 focus:border-red-500': v$.user_address.$error,
           'border-[#42d392] ': !v$.user_address.$invalid,
-        }" @change="v$.user_address.$touch" autocomplete="off"
+        }" @change="v$.user_address.$touch" autocomplete="off" maxlength="100"
       >
       <span class="text-xs text-red-500" style="color:red" v-if="v$.user_address.$error">{{
         v$.user_address.$errors[0].$message
@@ -244,7 +244,7 @@ store.imageReq = false;
       },
       identification_number: {
         required: helpers.withMessage('ຕ້ອງມີຊ່ອງຂໍ້ມູນການລະບຸຕົວຕົນ', required),
-        minLength: minLength(13),
+        minLength: minLength(5),
       },
       user_village: {
         required: helpers.withMessage('ພື້ນທີ່ບ້ານແມ່ນຕ້ອງການ', required),
