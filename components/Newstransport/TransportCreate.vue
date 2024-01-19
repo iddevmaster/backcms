@@ -13,7 +13,7 @@
     </div>
     <div class="form-group mb-4">
       <label for="formGroupExampleInput">{{ $t("menu_new_title") }}</label>
-      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="หัวข้อข่าว *"
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="ຫົວຂໍ້ຂ່າວ *"
         v-model="store.formDataNews.news_title" :class="{
           'border-red-500 focus:border-red-500': v$.news_title.$error,
           'border-[#42d392] ': !v$.news_title.$invalid,
