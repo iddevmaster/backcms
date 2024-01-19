@@ -6,7 +6,12 @@
 <script setup lang="ts">
 import { useAuthStore } from '@/store/auth'
 
+const store = useAuthStore();
+const users = await store.getProfile();
 
+if(users === false){
+  await store.logUserOut()
+}
 
 useSeoMeta({
   title: 'DoT Smart App',
