@@ -32,10 +32,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="datanew in datanewstransport.data" :key="datanew.news_id">
+        <tr v-for="(datanew, index) in datanewstransport.data" :key="datanew.news_id">
           <!-- <td><input type="checkbox" v-model="store.selected" :value="datanew" number></td> -->
           <td>
-            {{ datanew.news_id }}
+            {{((store.formsearchnews.page * store.formsearchnews.per_page - (store.formsearchnews.per_page -  index)) +  1)}}
           </td>
           <td>
             <img :src="image(datanew.news_cover)" class="img-fluid" width="80" height="80" />
