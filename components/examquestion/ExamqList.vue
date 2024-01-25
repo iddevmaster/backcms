@@ -51,6 +51,10 @@ const store = ExamquestionStore();
 const { questionlist } = ExamquestionStore();//Action
 
   store.eq = null;
+  store.total_page = null;
+  store.choicelist = [];
+
+     
 const Examlistq = await store.fetchExamquestionlist();
 
 
