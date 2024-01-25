@@ -132,8 +132,6 @@ let em_id = localStorage.getItem('em_id');
 let name = localStorage.getItem('em_name');
 
 
-
-
 await store.edit();
 
 
@@ -153,18 +151,13 @@ const rules = computed(() => {
 
 
 
-
-
-
 const validatePNumber = async (evt) => {
-
   const keysAllowed: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     const keyPressed: string = evt.key;
     if (!keysAllowed.includes(keyPressed)) {
            evt.preventDefault()
     }
   }
-
 const backToquestion = async () => {
   router.go(-1);
 }  

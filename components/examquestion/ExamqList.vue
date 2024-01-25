@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-xl-12 col-lg-12">
-      <div class="pagination-no_spacing" v-if="store.examqlisttotal > 0">
+      <div class="pagination-no_spacing" v-if="store.total_page > 0">
         <ul class="pagination">
           <li> <a href="javascript:void(0);" class="prev"  @click="validatePNumberDown()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -11,12 +11,12 @@
           </li>
           <li>
             <div class="col-xs-1">
-              <input id="ex1" type="number" style="width:50px" v-model="store.quest_Id" min="1"
+              <input id="ex1" type="number" style="width:50px" v-model="store.formsearchexamquestion.page" min="1"
                 @input="validatePNumber($event)">
             </div>
           </li>
           <li><a href="javascript:void(0);">/</a></li>
-          <li><a href="javascript:void(0);">{{ store.examqlisttotal }}</a></li>
+          <li><a href="javascript:void(0);">{{ store.total_page }}</a></li>
           <li> <a href="javascript:void(0);" class="next"  @click="validatePNumberUp()" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                 stroke-linejoin="round" class="feather feather-chevron-right">
@@ -50,7 +50,7 @@ const toast = useToast();
 const store = ExamquestionStore();
 const { questionlist } = ExamquestionStore();//Action
 
-
+  store.eq = null;
 const Examlistq = await store.fetchExamquestionlist();
 
 
@@ -102,37 +102,43 @@ const validatePNumber = async (evt) => {
     evt.preventDefault()
   }
 
-  if (store.quest_Id == '') {
-    console.log('if')
+  if (store.formsearchexamquestion.page == '') {
     store.pending = true;
-    store.quest_Id = 1;
-    await questionlist();
+    store.formsearchexamquestion.page = 1;
+   await store.fetchExamquestionlist();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   } else {
     store.pending = true;
-    await questionlist();
+
+    if(store.formsearchexamquestion.page > store.total_page){
+ store.formsearchexamquestion.page = store.total_page;
+        await store.fetchExamquestionlist();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
+
+    }else {
+       await store.fetchExamquestionlist();
+   await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+
+    }
+     
   }
 }
 
 const validatePNumberUp = async () => {
-
-  if (store.quest_Id == '') {
+  if (store.formsearchexamquestion.page == store.total_page) {
     store.pending = true;
-    store.quest_Id = 1;
-    await questionlist();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   } else {
-   
-    store.quest_Id += 1;
-    store.pending = true;
-    await questionlist();
+    store.formsearchexamquestion.page++;
+    await store.fetchExamquestionlist();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
@@ -140,22 +146,20 @@ const validatePNumberUp = async () => {
 }
 
 const validatePNumberDown = async () => {
-  if (store.quest_Id == 1) {
+
+    if (store.formsearchexamquestion.page == 1) {
     store.pending = true;
-    store.quest_Id = 1;
-    await questionlist();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   } else {
- 
-    store.quest_Id -= 1;
-    store.pending = true;
-    await questionlist();
+    store.formsearchexamquestion.page--;
+    await store.fetchExamquestionlist();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   }
+
 }
 
 
