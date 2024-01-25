@@ -61,9 +61,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="user in posts.data" :key="user.user_id">
+        <tr v-for="(user,index) in posts.data" :key="user.user_id">
           <!-- <td><input type="checkbox" v-model="store.selected" :value="user" number></td> -->
-          <td>{{ user.user_id }}</td>
+          <td>{{ index + 1 }}</td>
           <td>{{ user.user_firstname }} {{ user.user_lastname }}</td>
           <!-- <td>{{ user.user_name }}</td> -->
           <!-- <td>{{ user.user_email }}</td> -->
