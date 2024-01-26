@@ -133,6 +133,13 @@ store.ResetFormAdd();
 store.formExamq.em_id = localStorage.getItem('em_id');
 let name = localStorage.getItem('em_name');
 
+
+const em_id = localStorage.getItem('em_id');
+
+if(!em_id){
+  router.push("/exam");
+}
+
 const rules = computed(() => {
   return {
     eq_name: {
@@ -185,7 +192,7 @@ return false;
     let save = await SaveExamq();  ///////////save 
     if(save == true){
       await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
-      let clear = await ClearLocal();  ///////////save 
+   let clear = await ClearLocal();  ///////////save 
       const input = document.querySelector('input[type="file"]');
     input.value = '';
     v$.value.$reset();

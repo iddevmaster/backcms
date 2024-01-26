@@ -44,6 +44,14 @@ const router = useRouter();
 
 store.em_id = route.params.id;
 
+const em_id = localStorage.getItem('em_id');
+
+if(!em_id){
+  router.push("/exam");
+}
+
+
+
 const goToCreatePage = async () => {
  // localStorage.setItem("em_id", store.exam[0].em_id);
  // localStorage.setItem("em_name", store.exam[0].em_name);
@@ -77,8 +85,9 @@ const closedeleteItem = async () => {
   store.modaldelete = false;
 };
 const DeleteEq = async (item) => {
+
+  store.eq = null;
   const del = await deleteExamq(item);
-  console.log(del);
   await toast.success("ລຶບຂໍ້ມູນສຳເລັດ");
   store.modaldelete = false;
   await store.fetchExamquestionlist();

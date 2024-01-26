@@ -187,7 +187,6 @@ this.eq = response.data.data[0];
 
     async SaveExamq() {
 
-   
       try {
         const data = await ApiService.post('/exam/question/create', this.formExamq).then(response => {
 
@@ -420,7 +419,9 @@ return true;
 
     },
     async ClearLocal() {
-  localStorage.clear();
+ // localStorage.clear();
+
+  
   return true;
 
 

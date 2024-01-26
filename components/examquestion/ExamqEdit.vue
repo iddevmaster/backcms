@@ -136,6 +136,12 @@ await store.edit();
 
 
 
+if(!em_id){
+  router.push("/exam");
+}
+
+
+
 const rules = computed(() => {
   return {
     eq_name: {
@@ -177,7 +183,7 @@ return false;
     }
     try {
       let save = await UpdateExa();  ///////////save 
-      let clear = await ClearLocal();  ///////////save 
+   let clear = await ClearLocal();  ///////////save 
       if(save == true){
       toast.success('ແກ້ໄຂສຳເລັດ')
       }
