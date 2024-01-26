@@ -21,7 +21,7 @@ import {
 } from "@vuelidate/validators";
 import { useRoute } from "vue-router";
 import Loading from "@/components/layout/Success.vue";
-
+import Swal from 'sweetalert2';
 definePageMeta({
   middleware: ['auth','roles'],
   allowedRoles: [1,2],
@@ -43,6 +43,23 @@ const router = useRouter();
 
 
 store.em_id = route.params.id;
+
+
+store.eq = null;
+  store.total_page = null;
+  store.choicelist = [];
+
+  Swal.fire({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading()
+    },
+  });  
+const Examlistq = await store.fetchExamquestionlist();
+if(Examlistq == true){
+  setTimeout(() => Swal.close(), 500);
+}
 
 const em_id = localStorage.getItem('em_id');
 

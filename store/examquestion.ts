@@ -269,7 +269,7 @@ this.formEditExamq = {
 
     },
     async UpdateExa() {
-   //   await this.UploadfileExamq();
+   await this.UploadfileExamq();
       await this.deleteChoiceCall();
      await this.UpdateExamq()
     await this.UpdateChoice()
