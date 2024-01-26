@@ -103,6 +103,8 @@ export const ExamquestionStore = defineStore('examquestion', {
           this.examqlist = response.data.data
           this.examqlisttotal = response.data.data.length
           this.total_page = response.data.total
+
+          console.log(response.data.total);
           this.choicelist = response.data.data[0].choices
 this.eq = response.data.data[0];
 
@@ -113,8 +115,11 @@ this.eq = response.data.data[0];
             console.log(this.formsearchexam);
             this.formExamq.em_id = this.exam[0].em_id
           });
+
+          return true;
         // this.questionlist();
         });
+        return data;
 
       } catch (error) {
        

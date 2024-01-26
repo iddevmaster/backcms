@@ -85,8 +85,6 @@ const closedeleteItem = async () => {
   store.modaldelete = false;
 };
 const DeleteEq = async (item) => {
-
-  store.eq = null;
   const del = await deleteExamq(item);
   await toast.success("ລຶບຂໍ້ມູນສຳເລັດ");
   store.modaldelete = false;

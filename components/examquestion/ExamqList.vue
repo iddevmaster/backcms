@@ -45,17 +45,28 @@ import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
 import { ExamquestionStore } from "@/store/examquestion";
 import { useToast } from "vue-toastification";
-
+import Swal from 'sweetalert2';
 const toast = useToast();
 const store = ExamquestionStore();
 const { questionlist } = ExamquestionStore();//Action
+
+
 
   store.eq = null;
   store.total_page = null;
   store.choicelist = [];
 
-     
+  Swal.fire({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading()
+    },
+  });  
 const Examlistq = await store.fetchExamquestionlist();
+if(Examlistq == true){
+  setTimeout(() => Swal.close(), 500);
+}
 
 
 
