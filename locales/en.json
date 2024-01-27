@@ -47,6 +47,7 @@
   "menu_exam_all_name": "Name",
   "menu_exam_all_detail": "Details",
   "menu_exam_all_total_random": "Random",
+  "menu_exam_all_total_pass": "Expected Score",
   "menu_exam_all_total_exam": "Total",
   "menu_exam_all_create": "Create at",
   "menu_exam_all_time_test": "Time",

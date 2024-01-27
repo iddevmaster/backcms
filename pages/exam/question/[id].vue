@@ -57,7 +57,10 @@ store.eq = null;
     },
   });  
 const Examlistq = await store.fetchExamquestionlist();
+
 if(Examlistq == true){
+  setTimeout(() => Swal.close(), 500);
+}else {
   setTimeout(() => Swal.close(), 500);
 }
 
