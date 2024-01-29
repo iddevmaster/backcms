@@ -36,6 +36,7 @@
                       <th scope="col"> {{ $t("menu_exam_history_email") }}</th>
                 <th scope="col" > {{ $t("menu_exam_history_score") }}</th>
                 <th class="text-center" scope="col"> {{ $t("menu_exam_history_total") }}</th>
+                <th class="text-center" scope="col"> {{ $t("menu_exam_history_status") }}</th>
               
                
             
@@ -51,6 +52,8 @@
                 <td>{{item.out_user.user_phone}}</td>
                 <td>{{item.er_score_total}}</td>
                 <td>{{item.er_question_total}}</td>
+                <td  v-if="item.status == 'fail'">{{ $t("menu_exam_history_status_fail") }}</td>
+                <td  v-else>{{ $t("menu_exam_history_status_pass") }}</td>
             </tr>
         </tbody>
     </table>
