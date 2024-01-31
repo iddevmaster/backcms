@@ -79,8 +79,18 @@
               class="text-xs text-red-500" style="color:red" v-if="v$.em_random_amount.$error">{{
                 v$.em_random_amount.$errors[0].$message
               }}</span>
-            <input type="number" class="form-control" id="recipient-name" v-model="store.formexamedit.em_random_amount"
+            <input type="number" class="form-control" id="recipient-name" v-model="store.formexamedit.em_random_amount" @input="onInputamount"
               min="50">
+          </div>
+
+
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">{{ $t("menu_exam_all_total_pass") }}:</label> <span
+              class="text-xs text-red-500" style="color:red" v-if="v$.em_measure.$error">{{
+                v$.em_measure.$errors[0].$message
+              }}</span>
+            <input type="number" class="form-control" id="recipient-name" v-model="store.formexamedit.em_measure" @input="onInput"
+              min="1">
           </div>
 
           <div class="mb-3">
@@ -226,6 +236,10 @@ const rules = computed(() => {
       required: helpers.withMessage('Exam Amount field is required', required),
       minLength: minLength(1),
     },
+    em_measure: {
+      required: helpers.withMessage('Exam Amount field is required', required),
+      minLength: minLength(1),
+    },
     em_time: {
       pattern: /^(2[0-3]|[0-1]?[\d]):[0-5][\d]:[0-5][\d]$/,
       required: helpers.withMessage('em_time', required),
@@ -257,7 +271,30 @@ const Updatedata = async () => {
 };
 
 
-
+const onInput = async (event) => {
+  if(event.data == '-'){
+    store.formexamedit.em_measure = 1
+  }
+  else if(event.data == '+'){
+    store.formexamedit.em_measure = 45
+  }
+  else if(event.data == '.'){
+    store.formexamedit.em_measure = 45
+  }
+}
+const onInputamount = async (event) => {
+  
+  if(event.data == '-'){
+    store.formexamedit.em_random_amount = 50
+  }
+  else if(event.data == '+'){
+    store.formexamedit.em_random_amount = 50
+  }
+  else if(event.data == '.'){
+    console.log(event);
+    store.formexamedit.em_random_amount = 0
+  }
+}
 
 
 const onFileChange = async (event) => {

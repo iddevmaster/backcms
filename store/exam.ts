@@ -31,6 +31,7 @@ export const ExamStore = defineStore('exam', {
       em_cover: "",
       em_description: "",
       em_random_amount: 50,
+      em_measure:47,
       dlt_code:"A",
       em_time: ref({
         hours: '00',
@@ -45,7 +46,8 @@ export const ExamStore = defineStore('exam', {
       em_name: "",
       em_cover: "",
       em_description: "",
-      em_random_amount: null,
+      em_measure:47,
+      em_random_amount: 0,
       dlt_code:null,
       em_time: ref({
         hours: '00',
@@ -277,6 +279,7 @@ this.formsearchexam.search = ''
         em_cover: '',
         em_description: '',
         em_random_amount: 50,
+        em_measure: 47,
         dlt_code:"A",
         em_time: ref({
           hours: '00',
@@ -302,6 +305,7 @@ this.formsearchexam.search = ''
       this.formexamedit.em_name = item.em_name
       this.formexamedit.em_description = item.em_description
       this.formexamedit.em_cover = item.em_cover
+      this.formexamedit.em_measure = item.em_measure
       this.formexamedit.em_time = timeedit
       this.formexamedit.em_random_amount = item.em_random_amount
       this.formexamedit.dlt_code = item.dlt_code,

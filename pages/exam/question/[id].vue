@@ -21,7 +21,7 @@ import {
 } from "@vuelidate/validators";
 import { useRoute } from "vue-router";
 import Loading from "@/components/layout/Success.vue";
-
+import Swal from 'sweetalert2';
 definePageMeta({
   middleware: ['auth','roles'],
   allowedRoles: [1,2],
@@ -44,17 +44,54 @@ const router = useRouter();
 
 store.em_id = route.params.id;
 
+
+store.eq = null;
+  store.total_page = null;
+  store.choicelist = [];
+
+  Swal.fire({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading()
+    },
+  });  
+const Examlistq = await store.fetchExamquestionlist();
+
+if(Examlistq == true){
+  setTimeout(() => Swal.close(), 500);
+}else {
+  setTimeout(() => Swal.close(), 500);
+}
+
+const em_id = localStorage.getItem('em_id');
+
+if(!em_id){
+  router.push("/exam");
+}
+
+
+
 const goToCreatePage = async () => {
-  localStorage.setItem("em_id", store.exam[0].em_id);
-  localStorage.setItem("em_name", store.exam[0].em_name);
+ // localStorage.setItem("em_id", store.exam[0].em_id);
+ // localStorage.setItem("em_name", store.exam[0].em_name);
   router.push("/exam/question/create/");
 };
+
+const goToCreatePageNew = async () => {
+  
+  localStorage.setItem("em_id", store.exam[0].em_id);
+ localStorage.setItem("em_name", store.exam[0].em_name);
+  router.push("/exam/question/create/");
+};
+
 const goToEditPage = async () => {
   localStorage.setItem("em_id", store.exam[0].em_id);
   localStorage.setItem("em_name", store.exam[0].em_name);
 
   localStorage.setItem("cachedData", JSON.stringify(store.eq));
   localStorage.setItem("choice", JSON.stringify(store.choicelist));
+
   router.push("/exam/question/edit/");
 };
 const goToExmPage = async () => {
@@ -68,7 +105,7 @@ const closedeleteItem = async () => {
   store.modaldelete = false;
 };
 const DeleteEq = async (item) => {
-  const a = await deleteExamq(item);
+  const del = await deleteExamq(item);
   await toast.success("ລຶບຂໍ້ມູນສຳເລັດ");
   store.modaldelete = false;
   await store.fetchExamquestionlist();
@@ -104,19 +141,19 @@ function image(i) {
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="doc-container">
               <div class="row">
-                <div class="col-xl-9" v-if="store.eq != 0">
+                <div class="col-xl-9" v-if="store.eq">
                   <div class="invoice-container">
                     <div class="invoice-inbox">
                       <div id="ct" class="">
                         <div class="invoice-00001">
-                          <div class="content-section" v-if="store.eq != 0">
+                          <div class="content-section" v-if="store.eq">
                             <div class="inv--head-section inv--detail-section">
-                              <div class="row" v-for="(quest, indexs) in store.eq" :key="indexs">
+                              <div class="row">
                                 <div class="col-sm-6 col-12 mr-auto">
                                   <div class="d-flex">
-                                    <img class="company-logo"  v-if="quest.eq_image" :src="image(quest.eq_image)" alt="company" />
+                                    <img class="company-logo"  v-if="store.eq.eq_image" :src="image(store.eq.eq_image)" alt="company" />
                                     <h3 class="in-heading align-self-center">
-                                      {{ $t("menu_exam_proposition") }} {{ quest.eq_name }}
+                                      {{ $t("menu_exam_proposition") }} {{ store.eq.eq_name }}
                                     </h3>
                                   </div>
                                 </div>
@@ -125,7 +162,7 @@ function image(i) {
                                   <p class="inv-list-number mt-sm-3 pb-sm-2 mt-4">
                                     <span class="inv-title">{{ $t("menu_exam_answer") }}  : </span>
                                     <span class="inv-number">{{
-                                      quest.eq_answer
+                                      store.eq.eq_answer
                                     }}</span>
                                   </p>
                                 </div>
@@ -177,7 +214,7 @@ function image(i) {
                   </div>
                 </div>
 
-                <div class="col-xl-3" v-if="store.eq != 0">
+                <div class="col-xl-3" v-if="store.total_page > 0">
                   <div class="invoice-actions-btn">
                     <div class="invoice-action-btn">
                       <div class="row">
@@ -185,7 +222,7 @@ function image(i) {
                           <a class="btn btn-success btn-send" @click="goToExmPage()">{{ $t("menu_exam_back") }}</a>
                         </div>
                         <div class="col-xl-12 col-md-3 col-sm-6">
-                          <a class="btn btn-primary btn-print" @click="goToCreatePage()">{{ $t("menu_exam_add_ex") }}</a>
+                          <a class="btn btn-primary btn-print" @click="goToCreatePageNew()">{{ $t("menu_exam_add_ex") }}</a>
                         </div>
                         <div class="col-xl-12 col-md-3 col-sm-6">
                           <a class="btn btn-dark btn-download" @click="goToEditPage()">{{ $t("menu_exam_edit") }}</a>

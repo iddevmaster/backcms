@@ -38,6 +38,7 @@
                      <!-- <th class="text-center" scope="col">{{ $t("menu_menu_exam_dlt") }}</th> -->
                 <th class="text-center" scope="col" @click="sortList('em_random_amount')">{{ $t("menu_exam_all_total_random") }}</th>
                  <th class="text-center" scope="col" @click="sortList('total_question')">{{ $t("menu_exam_all_total_exam") }} &#8597;</th>
+                 <th class="text-center" scope="col" @click="sortList('total_question')">{{ $t("menu_exam_all_total_pass") }} &#8597;</th>
                  <th class="text-center" scope="col">{{ $t("menu_exam_all_create") }}</th>
                 <th class="text-center" scope="col">{{ $t("menu_exam_all_total_action") }}</th>
             </tr>
@@ -67,6 +68,9 @@
                 </td>
                  <td class="text-center">
                     <span class="badge badge-light-secondary">{{item.total_question}}</span>
+                </td>
+                <td class="text-center">
+                    <span class="badge badge-light-secondary">{{item.em_measure}}</span>
                 </td>
                 <td class="text-center">
                     <span class="badge badge-light-secondary">{{ format(item.crt_date)}}</span>

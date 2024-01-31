@@ -44,7 +44,7 @@ export const ExamquestionStore = defineStore('examquestion', {
     },
     formsearchexam: {
       page: 1,
-      per_page: 10,
+      per_page: 50,
       search: '',
     },
     path: "",
@@ -52,7 +52,7 @@ export const ExamquestionStore = defineStore('examquestion', {
     exam: [],
     formsearchexamquestion: {
       page: 1,
-      per_page: 100,
+      per_page: 1,
       search: '',
     },
     formExam: {
@@ -69,7 +69,7 @@ export const ExamquestionStore = defineStore('examquestion', {
       em_id: 0,
       id: 0,
     },
-    eq: [],
+    eq: null,
     modaldelete: false,
   }
 
@@ -97,27 +97,34 @@ export const ExamquestionStore = defineStore('examquestion', {
 
   actions: {
     async fetchExamquestionlist() {
+      this.examqlist = [];
       try {
         const data = await ApiService.post('/exam/question/' + this.em_id + '/list', this.formsearchexamquestion).then(response => {
           this.examqlist = response.data.data
           this.examqlisttotal = response.data.data.length
-        //  this.total_page = 
-          console.log(response.data);
+          this.total_page = response.data.total
+
+          console.log(response.data.total);
+          this.choicelist = response.data.data[0].choices
+this.eq = response.data.data[0];
+
 
           const examdata = ApiService.post('/exam/main/list', this.formsearchexam).then(exam => {  /////////////ดึง หลักสูตร
             this.examlist = exam.data.data
             this.exam = this.examlist.filter(item => item.em_id == this.em_id);
+            console.log(this.formsearchexam);
             this.formExamq.em_id = this.exam[0].em_id
           });
-          this.questionlist();
+
+          return true;
+        // this.questionlist();
         });
+        return data;
 
       } catch (error) {
        
         return false;
-      } finally {
-
-      }
+      } 
 
 
     },
@@ -155,6 +162,25 @@ export const ExamquestionStore = defineStore('examquestion', {
       
     },
 
+
+    async questionlisChoice() {
+
+      try {
+        const data = await ApiService.post('/exam/question/' + this.em_id + '/list', this.formsearchexamquestion).then(response => {
+        
+        
+    
+      
+        });
+
+      } catch (error) {
+       
+        return false;
+      } 
+     
+      
+    },
+
     async selectentires(data_entires) {
 
 
@@ -166,7 +192,6 @@ export const ExamquestionStore = defineStore('examquestion', {
 
     async SaveExamq() {
 
-   
       try {
         const data = await ApiService.post('/exam/question/create', this.formExamq).then(response => {
 
@@ -226,55 +251,35 @@ for (var i = 0; i < c.length; i++) {
      this.choicelist.push({ id:i+1, ec_id: c[i].ec_id, ec_image: c[i].ec_image, ec_index:c[i].ec_index, ec_name:c[i].ec_name, em_id:c[i].em_id,eq_id:c[i].eq_id });
 }
 
+console.log(x);
+
 
 this.formEditExamq = {
-  eq_name: x[0].eq_name,
-  eq_image: x[0].eq_image,
-  eq_answer: x[0].eq_answer,
+  eq_name: x.eq_name,
+  eq_image: x.eq_image,
+  eq_answer: x.eq_answer,
   em_id: emid,
-  id: x[0].id,
+  id: x.eq_id,
 };
 
-this.image = x[0].eq_image;
+ this.image = x.eq_image;
 
 
-
-
-
-      // try {
-      //   const data = await ApiService.post('/exam/question/' + this.em_id + '/list', this.formsearchexamquestion).then(response => {
-      //     this.examqlist = response.data.data
-      //     this.examqlisttotal = response.data.data.length
-
-      //     const examdata = ApiService.post('/exam/main/list', this.formsearchexam).then(exam => {  /////////////ดึง หลักสูตร
-      //       this.examlist = exam.data.data
-      //       this.exam = this.examlist.filter(item => item.em_id == this.em_id);
-      //       this.formExamq.em_id = this.exam[0].em_id
-      //     });
-      //     this.questionlist();
-      //   });
-
-      // } catch (error) {
-      //   console.log('error');
-      //   return false;
-      // } finally {
-
-      // }
 
 
     },
     async UpdateExa() {
-      await this.UploadfileExamq();
+   await this.UploadfileExamq();
       await this.deleteChoiceCall();
-      await this.UpdateExamq()
-      await this.UpdateChoice()
+     await this.UpdateExamq()
+    await this.UpdateChoice()
       return true;
 
     },
 
     async UpdateExamq() {
    
-  
+  console.log(this.formEditExamq);
       if(this.image == null){
         this.formEditExamq.eq_image = "";
       }/////////////clear image 
@@ -302,9 +307,10 @@ return true;
 
     async deleteExamq(item) {
       try {
-        const del = await ApiService.delete('/exam/question/delete/' + item[0].id);
-        this.eq = [];
-        return true;
+        const data = await ApiService.delete('/exam/question/delete/' + item.eq_id).then(response => {
+          return true;
+          });
+          return data;
       } catch (error) {
         return false;
       }
@@ -418,7 +424,9 @@ return true;
 
     },
     async ClearLocal() {
-  localStorage.clear();
+ // localStorage.clear();
+
+  
   return true;
 
 

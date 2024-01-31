@@ -26,8 +26,8 @@
 
      
         <tbody> 
-            <tr  v-for="(item,index ) in store.lesson" :key="item.cs_id">
-                <td>{{index +1}}</td>
+            <tr  v-for="(item,index) in store.lesson" :key="item.cs_id">
+                <td>{{((store.formlesson.page * 50 - (50 -  index)) +  1)}}</td>
                 <td class="text-center">
   <img :src="image(item.cs_cover)" class="img-fluid" width="80" height="80" />
                 </td>

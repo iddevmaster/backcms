@@ -74,6 +74,7 @@ export const LessonStore = defineStore('lesson', {
 
     async fetchLessonId(course_id) {
       this.course_id = course_id
+     
       try {
         const data = await ApiService.post('/course/lesson/list/' + course_id, this.formlesson).then(response => {
         
