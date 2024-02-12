@@ -16,7 +16,6 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-       
                 <th scope="col">#</th>
                 <th scope="col">{{ $t("lesson_pic") }}</th>
                 <th class="text-center" scope="col">{{ $t("lesson_qui") }}</th>
@@ -24,7 +23,6 @@
             </tr>
         </thead>
 
-     
         <tbody> 
             <tr  v-for="(item,index) in store.lesson" :key="item.cs_id">
                 <td>{{((store.formlesson.page * 50 - (50 -  index)) +  1)}}</td>
@@ -37,11 +35,7 @@
                   </span>
                 </td>
           
-                <!-- <td class="text-center">
-                  {{item.em_description}}
-                </td> -->
-              
-       
+ 
                 <td align="center">
              <div class="btn-group-vertical">
             <button type="button" class="btn btn-success" style="background-color:#3F2C73;"  @click="edit(item.cs_id)"> {{ $t("lesson_edit") }}</button>
