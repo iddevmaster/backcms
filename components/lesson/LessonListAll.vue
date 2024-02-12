@@ -135,7 +135,7 @@
     </table>
   </div>
 
-
+<!-- 
   <div>
       <div class="dt--pagination" v-if="store.lesson_total_page > 1">
         <div class="dataTables_paginate paging_simple_numbers" id="zero-config_paginate">
@@ -164,8 +164,46 @@
           </ul>
         </div>
       </div>
-    </div>
+    </div> -->
 
+
+  <div class="row">
+    <div class="col-xl-12 col-lg-12">
+      <div class="pagination-no_spacing" v-if="store.lesson_total_page > 1">
+        <ul class="pagination">
+          <li> <a href="javascript:void(0);" class="prev" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="feather feather-chevron-left">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg></a>
+          </li>
+          <li>
+            <div class="col-xs-1">
+              <input id="ex1" type="number" style="width:50px" v-model="store.formsearchlesson.page" min="1"
+               >
+            </div>
+          </li>
+          <li><a href="javascript:void(0);">/</a></li>
+          <li><a href="javascript:void(0);">{{ store.lesson_total_page }}</a></li>
+          <li> <a href="javascript:void(0);" class="next" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" class="feather feather-chevron-right">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="pagination-no_spacing" v-else>
+        <ul class="pagination">
+          ไม่มีข้อมูล
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+<br>
 
   <div v-if="store.GetopenModalLesson" class="modal">
 
