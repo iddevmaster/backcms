@@ -20,10 +20,10 @@
         aria-label="Default select example"
         @change="selectshowdata($event)"
       >
-        <option value="8">8</option>
-        <option value="12">12</option>
-        <option value="16">16</option>
+        <option value="10">10</option>
         <option value="20">20</option>
+        <option value="50">50</option>
+     
       </select>
     </div>
   </div>
@@ -41,14 +41,14 @@
         </thead>
 
       <tbody>
-        <tr v-for="(item, index) in store.courselist" :key="item.course_id">
-          <td>{{ (store.formsearchcourse.page * store.formsearchcourse.per_page) - (store.formsearchcourse.per_page -  index) +  1 }}</td>
-             <td>{{ item.course_code }}</td>
-               <td>{{ item.course_name }}</td>
+        <tr v-for="(item, index) in store.lessonlist" :key="item.course_id">
+          <td>{{ (store.formsearchlesson.page * store.formsearchlesson.per_page) - (store.formsearchlesson.per_page -  index) +  1 }}</td>
+             <td>{{ item.cs_name }}</td>
+               <td>{{ item.user_create }}</td>
          
           <td class="text-center">
             <img
-              :src="image(item.course_cover)"
+              :src="image(item.cs_cover)"
               class="img-fluid"
               width="80"
               height="80"
@@ -136,7 +136,38 @@
   </div>
 
 
-  <div v-if="store.GetopenModal" class="modal">
+  <div>
+      <div class="dt--pagination" v-if="store.lesson_total_page > 1">
+        <div class="dataTables_paginate paging_simple_numbers" id="zero-config_paginate">
+          <ul class="pagination">
+            <li class="paginate_button page-item previous" id="zero-config_previous">
+              <a href="#" aria-controls="zero-config" data-dt-idx="0" tabindex="0" class="page-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="feather feather-arrow-left">
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline>
+                </svg></a>
+            </li>
+            <li class="paginate_button page-item " v-for="page in store.lesson_total_page" :key="page">
+              <a href="#" aria-controls="zero-config" data-dt-idx="1" tabindex="0" class="page-link"  @click="setCurrentPageLessonclick(page)"
+              >
+                {{ page }}</a>
+            </li>
+            <li class="paginate_button page-item next" id="zero-config_next"><a href="#" aria-controls="zero-config"
+                data-dt-idx="4" tabindex="0" class="page-link"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                  height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+  <div v-if="store.GetopenModalLesson" class="modal">
 
 <div class="modal-content modal-dialog modal-xl" id="deleteConformationLabel">
   <div class="modal-header">
@@ -144,9 +175,9 @@
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn btn-light-dark" data-bs-dismiss="modal" >
+    <button class="btn btn btn-light-dark" data-bs-dismiss="modal" @click="closemodalLesson()">
       <i class="flaticon-cancel-12"></i> {{ $t("cancel") }}</button>
-    <button type="button" class="btn btn-primary">{{ $t("delete") }}</button>
+    <button type="button" class="btn btn-primary" @click="delelelesson()">{{ $t("delete") }}</button>
   </div>
 </div>
 </div>
@@ -180,12 +211,14 @@ const { Courselist } = storeToRefs(store);
 const { deleteItem } = CourseStore(); //Action
 const { selectentires } = CourseStore(); //Action
 const { setCurrentPage } = CourseStore(); //Action
+const { selectentireslesson } = CourseStore(); //Action
+const { selectentiresentires } = CourseStore(); //Action
 
 const auth = useAuthStore();
 
-const courselist = await store.fetchCourslist();
-
-if (courselist === false) {
+const lessonlist = await store.fetchLessonlist();
+console.log(lessonlist);
+if (lessonlist === false) {
   await toast.error("Error Data Contact Admin", {
     timeout: 30000,
   });
@@ -194,29 +227,27 @@ if (courselist === false) {
 
 
 
+
+
 const selectshowdata = async (sel) => {
-  await selectentires(sel.target.value);
-  await store.fetchCourslist();
+  await selectentiresentires(sel.target.value);
+  await store.fetchLessonlist();
 };
 
-const selchk = async (x) => {
-  // await selectone(x);
-};
-
-const selectAll = async () => {
-  // await selectall();
-};
 const searchData = async () => {
-  await store.fetchCourslist();
+  await store.fetchLessonlist();
 };
 
 function goToPage(page) {
   console.log(page);
 }
 
-const setCurrentPageclick = async (page) => {
-  await setCurrentPage(page);
-  await store.fetchCourslist();
+
+
+
+const setCurrentPageLessonclick = async (page) => {
+  await selectentireslesson(page);
+  await store.fetchLessonlist();
 };
 
 const sortList = async (sortBy) => {
@@ -238,16 +269,39 @@ function coverttime(date) {
   return formattedDatetime;
 }
 
-// const del = async (item) => {
+const del = async (item) => {
+store.GetopenModalLesson = true
+store.cs_id = item.cs_id;
+//await store.selectlessId(item)
 
-// store.GetopenModal = true
-// await store.selectlessId(item)
-// };
+};
+
+const delelelesson = async () => {
+ let de =  await store.deleteLesson();
+
+ if(de == true){
+  store.GetopenModalLesson = false
+  await toast.success('ລຶບຂໍ້ມູນສຳເລັດ',{
+    timeout: 30000,
+  });
+ }else {
+  store.GetopenModalLesson = false
+  await toast.error("ລຶບລົ້ມເຫລວ", {
+    timeout: 30000,
+  });
+ }
+
+ // await toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
+};
 // const edit = async (item) => {
 
 // store.GetopenModalEdit = true
 // await store.fetchLessonIdedit(item)
 // };
+
+const closemodalLesson = async () => {
+  store.GetopenModalLesson = false;
+}
 
 
 function image(i) {

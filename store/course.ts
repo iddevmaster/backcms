@@ -15,6 +15,8 @@ export const CourseStore = defineStore('course', {
     course_id: null,
     pending: false,
     isOpen: false,
+    cs_id:null,
+    GetopenModalLesson:false,
     lessonlist: [],
     user_id:null,
     del_lesson: [],
@@ -58,6 +60,11 @@ export const CourseStore = defineStore('course', {
     formsearchcourse: {
       page: 1,
       per_page: 8,
+      search: '',
+    },
+    formsearchlesson: {
+      page: 1,
+      per_page: 20,
       search: '',
     },
     vdo: "/assets/images/sample-5.mp4"
@@ -124,6 +131,28 @@ export const CourseStore = defineStore('course', {
         this.pending = false
       }
     },
+
+    async fetchLessonlist() {
+      try {
+        const data = await ApiService.post('/course/lesson/all', this.formsearchlesson).then(response => {
+        
+          this.lessonlist = response.data.data
+          this.lesson_total_page = response.data.total_page
+          this.lesson_limit_page = response.data.limit_page
+          this.lesson_current_page = response.data.current_page
+          this.lesson_total_filter = response.data.total_filter
+          this.lesson_total = response.data.total
+        });
+        this.isLoading = false;
+        return true;
+      } catch (error) {
+        return navigateTo('/maintenance');
+      } finally {
+        this.loading = false
+        this.pending = false
+      }
+    },
+
     async fetchCourseId(id) {
       this.course_id = id;
 
@@ -176,6 +205,16 @@ export const CourseStore = defineStore('course', {
     async selectentires(data_entires) {
       this.formsearchcourse.per_page = data_entires;
       this.formsearchcourse.page = 1;
+    },
+
+    async selectentiresentires(data_entires) {
+      this.formsearchlesson.per_page = data_entires;
+      this.formsearchlesson.page = 1;
+    },
+    async selectentireslesson(data_entires) {
+
+   //   this.formsearchlesson.per_page = data_entires;
+      this.formsearchlesson.page = data_entires;
     },
     setCurrentPage(page) {
       this.formsearchcourse.page = page
@@ -312,6 +351,7 @@ return true;
 
 
     },
+    
     async Dellessons(id) {
 
       const getid = await ApiService.post('/course/lesson/list/' + id, this.formsearchcourse).then(response => {
@@ -340,7 +380,25 @@ return true;
     },
 
 
+    async deleteLesson() {
 
+
+      try {
+
+        const delcs_id = await ApiService.delete('/course/lesson/delete/' + this.cs_id).then(response => {
+          console.log(response);
+
+          return true
+        });
+    
+        return true;
+        } catch (error) {
+          return false;
+        } 
+
+
+   
+    },
 
     closeModal() {
       this.isOpen = false;

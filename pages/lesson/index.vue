@@ -9,9 +9,8 @@ import { defineComponent } from 'vue';
 import { CourseStore } from '@/store/course'
 import { useAuthStore } from '@/store/auth'
 import LessonListAll from '@/components/lesson/LessonListAll.vue'
-import { useModalStore } from '@/store/modal';
 
-import Alert from '@/components/layout/Alert.vue';
+
 import { useToast } from 'vue-toastification';
 import { ref } from 'vue';
 import Loading from 'vue-loading-overlay';
@@ -24,12 +23,6 @@ definePageMeta({
 
 const auth = useAuthStore()
 const store = CourseStore()
-store.ResetFetch()
-store.formDataCourse.user_id = auth.user_id
-store.formDataEditCourse.user_id = auth.user_id
-store.formDatalesson.user_id = auth.user_id
-store.formDataeditlesson.user_id = auth.user_id
-
 
 
 const toast = useToast()
