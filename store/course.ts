@@ -150,7 +150,9 @@ export const CourseStore = defineStore('course', {
     async fetchLessonInCourseId() {
       const data = await ApiService.post('/course/lesson/list/' + this.course_id,this.formsearchlesson).then(response => {
         if(response){
-          console.log('if');
+          console.log('if',response.data);
+          const Storage = LessonStore();
+          Storage.selected = response.data.data
         }else {
           console.log('else');
         }
@@ -163,11 +165,11 @@ export const CourseStore = defineStore('course', {
           this.formDatalesson.course_id = response.data.insertId
           this.course_id = response.data.insertId;
 
-      const Storage = LessonStore();
-      for (var i = 0; i < Storage.selected.length; i++) { 
-        const les = {cs_id:Storage.selected[i].cs_id}
-        this.savelesson.push(les);
-      }
+    //  const Storage = LessonStore();
+      // for (var i = 0; i < Storage.selected.length; i++) { 
+      //   const les = {cs_id:Storage.selected[i].cs_id}
+      //   this.savelesson.push(les);
+      // }
         });
         return true;
       } catch (error) {
@@ -178,13 +180,24 @@ export const CourseStore = defineStore('course', {
     },
 
     async SaveLessoncluster() {
+
+     const Storage = LessonStore();
+     if(Storage.selected.length > 0){
+      for (var i = 0; i < Storage.selected.length; i++) { 
+        const les = {cs_id:Storage.selected[i].cs_id}
+        this.savelesson.push(les);
+      }
       try {
         const data = await ApiService.post('/course/cluster/create/'+this.course_id, this.savelesson).then(response => {
+
         });
         return true;
       } catch (error) {
         return false;
       } 
+
+     }
+    
 
 
     },

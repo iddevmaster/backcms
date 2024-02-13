@@ -106,21 +106,13 @@
     const toast = useToast();
     const router = useRouter();
     const store = LessonStore();
-    store.formsearchlesson.per_page = 5
-    store.formsearchlesson.page = 1
-    store.formsearchlesson.search = "";
-    const lessonlist = await store.fetchLessonlist();
+
+ 
 
     
 const { selectentireslesson } = LessonStore(); //Action
 const { selectentiresentires } = LessonStore(); //Action
 
-
-if (lessonlist === false) {
-  await toast.error("Error Data Contact Admin", {
-    timeout: 30000,
-  });
-}
 
     
 

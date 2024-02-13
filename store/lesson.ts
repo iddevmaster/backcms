@@ -84,11 +84,9 @@ export const LessonStore = defineStore('lesson', {
     },
 
     async fetchLessonlist() {
-     
+     console.log('test',this.formsearchlesson)
       try {
         const data = await ApiService.post('/course/lesson/all', this.formsearchlesson).then(response => {
-    
-    
           this.lessonlist = response.data.data
           this.lesson_total_page = response.data.total_page
           this.lesson_limit_page = response.data.limit_page
