@@ -6,10 +6,11 @@
 // import DataTablesCore from 'datatables.net-bs5';
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-import { CourseStore } from '@/store/course'
+import { LessonStore } from '@/store/lesson'
 import { useAuthStore } from '@/store/auth'
 import LessonListAll from '@/components/lesson/LessonListAll.vue'
-
+import LessonCreate from '@/components/lesson/LessonCreate.vue'
+import LessonEdit from '@/components/lesson/LessonEdit.vue'
 
 import { useToast } from 'vue-toastification';
 import { ref } from 'vue';
@@ -22,17 +23,21 @@ definePageMeta({
 })
 
 const auth = useAuthStore()
-const store = CourseStore()
+const store = LessonStore()
+const toast = useToast();
+store.formcreatelesson.user_id = auth.user_id
+store.user_id = auth.user_id
+const lessonlist = await store.fetchLessonlist();
+
+if (lessonlist === false) {
+  await toast.error("Error Data Contact Admin", {
+    timeout: 30000,
+  });
+}
 
 
-const toast = useToast()
-
-  const { deleteItem_id } = CourseStore();//Action
-  const { fetchCourslist } = CourseStore();//Action
 
 
-
-  
   const modalStore = useModalStore();
   const { GetopenModal } = storeToRefs(store); //Get Getter
   const { GetopenModal_ID } = storeToRefs(store); //Get Getter
@@ -40,16 +45,16 @@ const toast = useToast()
   const { Pending } = storeToRefs(store); //Get Getter
 
   const closeModal = () => {
-    store.closeModal();
+    //store.closeModal();
   };
 
 
 const delete_userid = async (id) => {
 
-  const delc = await store.deleteItem_id(id);
+  const delc = await store.selectlessId(id);
   if(delc){
     toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
-    await store.fetchCourslist()
+    await store.fetchLessonlist()
       }else{
    toast.error('ລຶບຂໍ້ມູນລົ້ມເຫລວ')
       }
@@ -75,6 +80,9 @@ const delete_userid = async (id) => {
             <LessonListAll></LessonListAll>
             </div>
           </div>
+
+   <LessonCreate></LessonCreate>
+    <LessonEdit></LessonEdit>
 </template>
 
 <style>

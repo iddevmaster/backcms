@@ -8,21 +8,35 @@
         placeholder="ຊອກຫາ"
         class="form-control"
         required=""
-        v-model="store.formsearchcourse.search"
+        v-model="store.formsearchlesson.search"
         @keyup="searchData"
       />
     </div>
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto"></div>
-
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
+      <input
+        id="t-text"
+        type="button"
+        name="txt"
+        placeholder="ຊອກຫາ"
+        class="form-control"
+        value="+"
+style="
+    background-color: dodgerblue;
+"
+        @click="openmodal"
+      />
+      
+    </div>
+
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
       <select
         class="form-select form-select"
         aria-label="Default select example"
         @change="selectshowdata($event)"
       >
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="50">50</option>
+        <option :value="10">10</option>
+        <option :value="20">20</option>
+        <option :value="50">50</option>
      
       </select>
     </div>
@@ -41,7 +55,7 @@
         </thead>
 
       <tbody>
-        <tr v-for="(item, index) in store.lessonlist" :key="item.course_id">
+        <tr v-for="(item, index) in store.lessonlist" :key="item.cs_id">
           <td>{{ (store.formsearchlesson.page * store.formsearchlesson.per_page) - (store.formsearchlesson.per_page -  index) +  1 }}</td>
              <td>{{ item.cs_name }}</td>
                <td>{{ item.user_create }}</td>
@@ -60,7 +74,7 @@
                   <a
                     href="javascript:void(0);"
                     class="action-btn btn-edit bs-tooltip me-2"
-                    @click="lesson(item.course_id)"
+                    @click="edit(item)"
                     data-toggle="tooltip"
                     data-placement="top"
                     aria-label="Edit"
@@ -71,11 +85,11 @@
                     </svg>
                   </a>
                 </NuxtLink>
-                <NuxtLink :to="'/learning/' + item.course_id">
+                <NuxtLink>
                   <a
                     href="javascript:void(0);"
                     class="action-btn btn-edit bs-tooltip me-2"
-                    @click="edit(item)"
+                    @click="edit(item.cs_id)"
                     data-toggle="tooltip"
                     data-placement="top"
                     aria-label="Edit"
@@ -102,7 +116,7 @@
                 <a
                   href="javascript:void(0);"
                   class="action-btn btn-delete bs-tooltip"
-                  @click="del(item)"
+                  @click="del(item.cs_id)"
                   data-toggle="tooltip"
                   data-placement="top"
                   aria-label="Delete"
@@ -179,7 +193,7 @@
           </li>
           <li>
             <div class="col-xs-1">
-              <input id="ex1" type="number" style="width:50px" v-model="store.formsearchlesson.page" min="1"
+              <input id="ex1" type="number" style="width:50px" v-model="store.formsearchlesson.page" min="1"  @input="validatePNumber($event)"
                >
             </div>
           </li>
@@ -211,7 +225,6 @@
   <div class="modal-header">
     <h5 class="modal-title" id="exampleModalLabel">ต้องการลบบทเรียนี้?</h5>
   </div>
-
   <div class="modal-footer">
     <button class="btn btn btn-light-dark" data-bs-dismiss="modal" @click="closemodalLesson()">
       <i class="flaticon-cancel-12"></i> {{ $t("cancel") }}</button>
@@ -220,17 +233,23 @@
 </div>
 </div>
 
-
+<div>
+    <b-table responsive :items="store.items"></b-table>
+  </div>
  
 </template>
 
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
+<link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
+
+<!-- Add this after vue.js -->
 
 <script setup lang="ts">
 // import DataTable from 'datatables.net-vue3';
 // import DataTablesCore from 'datatables.net-bs5';
 import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
-import { CourseStore } from "@/store/course";
+import { LessonStore } from "@/store/lesson";
 import { useAuthStore } from "@/store/auth";
 import "jquery/dist/jquery.min.js";
 //Datatable Modules
@@ -243,24 +262,16 @@ import ApiService from "../../services/api.service";
 
 const toast = useToast();
 const router = useRouter();
-const store = CourseStore();
+const store = LessonStore();;
 store.isLoading == true;
-const { Courselist } = storeToRefs(store);
-const { deleteItem } = CourseStore(); //Action
-const { selectentires } = CourseStore(); //Action
-const { setCurrentPage } = CourseStore(); //Action
-const { selectentireslesson } = CourseStore(); //Action
-const { selectentiresentires } = CourseStore(); //Action
+
+const { deleteItem } = LessonStore(); //Action
+
+const { selectentireslesson } = LessonStore(); //Action
+const { selectentiresentires } = LessonStore(); //Action
 
 const auth = useAuthStore();
 
-const lessonlist = await store.fetchLessonlist();
-console.log(lessonlist);
-if (lessonlist === false) {
-  await toast.error("Error Data Contact Admin", {
-    timeout: 30000,
-  });
-}
 
 
 
@@ -276,11 +287,14 @@ const searchData = async () => {
   await store.fetchLessonlist();
 };
 
+const openmodal = async () => {
+  store.GetopenModalCreate = true;
+};
+
+
 function goToPage(page) {
   console.log(page);
 }
-
-
 
 
 const setCurrentPageLessonclick = async (page) => {
@@ -331,11 +345,50 @@ const delelelesson = async () => {
 
  // await toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
 };
-// const edit = async (item) => {
+const edit = async (item) => {
+console.log(item);
+store.GetopenModalEdit = true
+ await store.fetchLessonIdedit(item)
+};
 
-// store.GetopenModalEdit = true
-// await store.fetchLessonIdedit(item)
-// };
+
+const validatePNumber = async (evt) => {
+  
+  const keysAllowed: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  const keyPressed: string = evt.key;
+  if (!keysAllowed.includes(keyPressed)) {
+    evt.preventDefault()
+  
+  }
+
+  if (store.formsearchlesson.page == '') {
+    store.pending = true;
+    store.formsearchexamquestion.page = 1;
+    await store.fetchLessonlist();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else {
+    store.pending = true;
+
+    if(store.formsearchlesson.page > store.lesson_total_page){
+ store.formsearchlesson.page = store.lesson_total_page;
+ await store.fetchLessonlist();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+
+    }else {
+      await store.fetchLessonlist();
+   await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+
+    }
+     
+  }
+
+}
 
 const closemodalLesson = async () => {
   store.GetopenModalLesson = false;

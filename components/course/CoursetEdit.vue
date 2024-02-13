@@ -209,7 +209,7 @@ const store = CourseStore();
 
 await store.fetchCourslist();
 await store.fetchCourseId(router.currentRoute.value.params.id);
-
+await store.fetchLessonInCourseId();
 // const { Clear } = AlertStore(); // use  action
 const { FormDataCourse } = storeToRefs(store);
 const { FormDataEditCourse } = storeToRefs(store);

@@ -3,6 +3,8 @@
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import CoursetEdit from '@/components/course/CoursetEdit.vue'
+import ListLesson from "@/components/course/ListLesson.vue";
+import SelectListLesson from "@/components/course/SelectListLesson.vue";
 import { useAuthStore } from '@/store/auth'
 import { CourseStore } from '@/store/course'
 definePageMeta({
@@ -41,6 +43,24 @@ store.user_id = auth.user_id
                         </div>
                     </div>
 
+                </div>
+
+                <div class="row layout-top-spacing">
+                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+
+                        <div class="widget-content widget-content-area br-8 p-3">
+                            <SelectListLesson></SelectListLesson>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row layout-top-spacing">
+                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                        <div class="widget-content widget-content-area br-8 p-3">
+                            <ListLesson></ListLesson>
+                        </div>
+                    </div>
                 </div>
 
             </div>
