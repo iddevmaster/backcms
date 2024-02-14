@@ -8,7 +8,7 @@ export const LessonStore = defineStore('lesson', {
   state: () => ({
     formlesson: {
       page: 1,
-      per_page: 50,
+      per_page: 5,
       search: '',
     },
     items: [
@@ -84,7 +84,7 @@ export const LessonStore = defineStore('lesson', {
     },
 
     async fetchLessonlist() {
-     console.log('test',this.formsearchlesson)
+  
       try {
         const data = await ApiService.post('/course/lesson/all', this.formsearchlesson).then(response => {
           this.lessonlist = response.data.data
@@ -112,6 +112,7 @@ export const LessonStore = defineStore('lesson', {
         
       this.lesson = response.data.data
       this.total_page = response.data.total_page
+ 
      
         });
         return true

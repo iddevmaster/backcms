@@ -64,7 +64,7 @@ export const CourseStore = defineStore('course', {
     },
     formsearchlesson: {
       page: 1,
-      per_page: 20,
+      per_page: 5,
       search: '',
     },
     savelesson: [],
@@ -153,6 +153,9 @@ export const CourseStore = defineStore('course', {
           console.log('if',response.data);
           const Storage = LessonStore();
           Storage.selected = response.data.data
+          Storage.total_page = response.data.total_page
+          
+          
         }else {
           console.log('else');
         }
