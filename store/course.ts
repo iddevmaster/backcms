@@ -202,6 +202,15 @@ export const CourseStore = defineStore('course', {
 
     },
 
+    async ClearLessoncluster() {
+
+   
+
+   },
+
+
+  
+
     async selectentires(data_entires) {
       this.formsearchcourse.per_page = data_entires;
       this.formsearchcourse.page = 1;

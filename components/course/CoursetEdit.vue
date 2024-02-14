@@ -221,6 +221,8 @@ const { UploadfileCourse } = CourseStore();
 const { deletelesson } = CourseStore();
 const { Adlesson } = CourseStore();
 const { uploadfilecourse } = CourseStore();
+const { SaveLessoncluster } = CourseStore();
+const { ClearLessoncluster } = CourseStore();
 
 // store.ClearData();
 // storealert.Clear()
@@ -270,6 +272,8 @@ const save = async () => {
     try {
       let updatefile = await UploadfileCourse()
       let updatedata = await UpdateCourse();
+      let clearlesson = await ClearLessoncluster();
+      let savelesson = await SaveLessoncluster();
     //  let savelesson = await SaveLesson();
     //  await store.fetchCourslist()
       // await setTimeout(() => {
