@@ -127,6 +127,11 @@ const save = async () => {
       await toast.error("ແກ້ໄຂບໍ່ສຳເລັດ");
     }
 
+  } else {
+    Swal.fire({
+          text: "ກະລຸນາຕື່ມຂໍ້ມູນໃຫ້ຄົບຖ້ວນ.!",
+          icon: "error",
+        });
   }
 };
 

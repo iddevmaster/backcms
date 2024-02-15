@@ -13,6 +13,7 @@ import ApiService  from "../../services/api.service";
 import { useI18n } from "vue-i18n";
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
+import Swal from 'sweetalert2';
 import {
   required,
   email,
@@ -136,6 +137,11 @@ const save = async () => {
     } catch (error) {
       await toast.error("ຂໍ້ມູນບໍ່ໄດ້ບັນທຶກສຳເລັດ.");
     }
+  } else {
+    Swal.fire({
+          text: "ກະລຸນາຕື່ມຂໍ້ມູນໃຫ້ຄົບຖ້ວນ.!",
+          icon: "error",
+        });
   }
 };
 
