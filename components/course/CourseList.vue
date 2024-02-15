@@ -41,7 +41,7 @@
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
           <th>ชื่อความรู้</th>
           <th>ผู้สร้าง</th>
-          <th>วันที่สร้าง</th>
+          <th>บทเรียน</th>
        <th>รูปภาพ</th>
           <th class="no-content">{{ $t("menu_user_c_action") }}</th>
         </tr>
@@ -54,7 +54,10 @@
              <td>{{ item.course_code }}</td>
                <td>{{ item.course_name }}</td>
                 <td>{{ item.user_create }}</td>
-                 <td>{{ item.crt_date }}</td>
+                 <td>
+                  <span v-if="item.is_complete == 1 ">มี</span>
+                  <span v-else>ไม่มี</span>
+                </td>
           <td class="text-center">
             <img
               :src="image(item.course_cover)"
