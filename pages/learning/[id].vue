@@ -41,6 +41,11 @@ storelesson.item = [];
 storelesson.formsearchlesson.per_page = 5
 storelesson.formsearchlesson.page = 1
 storelesson.formsearchlesson.search = "";
+
+storelesson.selectlesson_form.per_page = 5
+storelesson.selectlesson_form.page = 1
+storelesson.formsearchlesson.search = "";
+
 await store.fetchCourseId(router.currentRoute.value.params.id);
 await store.fetchLessonInCourseId();
 const lessonlist = await storelesson.fetchLessonlist();

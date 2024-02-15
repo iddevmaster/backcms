@@ -81,10 +81,10 @@
   "menu_exam_dis_image": "ສະແດງຮູບທີ່ນີ້",
   "menu_exam_history_detail": "ລາຍລະອຽດ",
 
+
   "menu_exam_history": "ປະຫວັດການສອບເສັງ",
   "menu_exam_history_all": "ປະຫວັດການສອບເສັງທັງໝົດ",
   "menu_exam_historyin_exam": "ປະຫວັດຂອງນັກສອບເສັງໃນຫຼັກສູດ",
-
   "menu_exam_history_index": "ເລກ",
   "menu_exam_history_score": "ຄະແນນ",
   "menu_exam_history_total": "ຈໍານວນຄໍາຖາມ",
@@ -401,6 +401,9 @@
   "form_name_title":"ຄຳນຳໜ້າ",
   
   "choose":"ເລືອກ",
+  "lesson_select":"ບົດຮຽນທີ່ເລືອກ",
+  "lesson_all":"ລາຍຊື່ບົດຮຽນທັງໝົດ",
+  "lesson_noselect":"ບໍ່ມີຂໍ້ມູນທີ່ເລືອກ",
   "lesson_head":"ບົດຮຽນ",
   "lesson_qui":"ຄຳຖາມ",
   "lesson_ans":"ຄໍາຕອບ",

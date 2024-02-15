@@ -8,7 +8,7 @@
   <div class="row layout-top-spacing">
     <div class="col-lg-12 col-md-12 col-sm-12">
       <div class="seperator-headerx">
-        <h4 class="">บทเรียน</h4>
+        <h4 class="">{{ $t("lesson_all") }}</h4>
       </div>
     </div>
   </div>
@@ -38,7 +38,7 @@
         placeholder="ຊອກຫາ"
         class="form-control"
         @click="selectAllRows"
-        value="Select All"
+        value="ເລືອກ​ທັງ​ຫມົດ"
 style="
     background-color: dodgerblue;
     color: white;
@@ -56,7 +56,7 @@ style="
         name="txt"
         placeholder="ຊອກຫາ"
         class="form-control"
-        value="UnSelect All"
+        value="ຍົກເລີກການເລືອກ"
         style="
     background-color: dodgerblue;
     color: white;
@@ -84,8 +84,11 @@ style="
             <th class="checkbox-area" scope="col">
               <div class="form-check form-check-primary">#</div>
             </th>
-            <th scope="col">ถาม</th>
-            <th scope="col">ตอบ</th>
+            <th scope="col"> {{ $t("lesson_qui") }}</th>
+                <th scope="col"> {{ $t("lesson_ans") }}</th>
+                <th scope="col"> {{ $t("lesson_yout") }}</th>
+                <th scope="col"> {{ $t("lesson_pic") }}</th>
+
           </tr>
         </thead>
         <tbody>
@@ -100,8 +103,12 @@ style="
                 />
               </div>
             </td>
-            <td>{{ item.cs_name }}</td>
-            <td>{{ item.cs_description }}</td>
+            <td>{{item.cs_name}}</td>
+                <td>{{item.cs_description}}</td>
+                <td>{{item.cs_video}}</td>
+          
+
+                <td class="text-center"><img :src="coverimage(item.cs_cover)" class="img-fluid" width="80" height="80"></td>
           </tr>
         </tbody>
       </table>
@@ -114,7 +121,7 @@ style="
       <div class="pagination-no_spacing" v-if="store.lesson_total_page > 1">
         <ul class="pagination">
           <li>
-            <a href="javascript:void(0);" class="prev"
+            <a href="javascript:void(0);" class="prev" @click="Prev()"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -145,8 +152,8 @@ style="
             <a href="javascript:void(0);">{{ store.lesson_total_page }}</a>
           </li>
           <li>
-            <a href="javascript:void(0);" class="next"
-              ><svg
+            <a href="javascript:void(0);" class="next" @click="Next()"
+              ><svg 
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -221,6 +228,43 @@ const UnselectAllRows = async () => {
   store.selectlesson_form.page = 1 
   await store.UnSeleectAllLessonlist();
   await stores.paginatedItems() 
+};
+
+const Next = async () => {
+
+
+  if (store.formsearchlesson.page == store.lesson_total_page) {
+    store.pending = true;
+    store.formsearchlesson.page = store.lesson_total_page;
+  await store.fetchLessonlist();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else {
+    store.formsearchlesson.page += 1;
+await store.fetchLessonlist();
+    store.pending = true;
+  }
+
+};
+
+const Prev = async () => {
+
+  if (store.formsearchlesson.page == 1) {
+    console.log(store.formsearchlesson.page)
+    await store.fetchLessonlist();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else {
+    store.formsearchlesson.page -= 1;
+    await store.fetchLessonlist();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+   
+  }
+
 };
 
 const validatePNumber = async (evt) => {

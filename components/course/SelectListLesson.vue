@@ -5,12 +5,10 @@
       <div class="row mb-4 g-3">
         <div id="form_grid_layouts" class="col-lg-9">
           <div class="seperator-header">
-            <h4 class=""> บนเรียนที่เลือก</h4>
+            <h4 class=""> {{ $t("lesson_select") }}</h4>
           </div>
         </div>
         <div class="table-responsive">
-         {{ store.selected.length }}
-         {{ store.selectlesson_form }}
     <table class="table table-hover table-bordered" v-if="store.item.length > 1">
         <thead>
             <tr>
@@ -19,16 +17,25 @@
                        #
                     </div>
                 </th>
-                <th scope="col">ถาม</th>
-                <th scope="col">ตอบ</th>
+                <th scope="col"> {{ $t("lesson_qui") }}</th>
+                <th scope="col"> {{ $t("lesson_ans") }}</th>
+                <th scope="col"> {{ $t("lesson_yout") }}</th>
+                <th scope="col"> {{ $t("lesson_pic") }}</th>
+
+
                
             </tr>
         </thead>
         <tbody>
             <tr v-for="(item, index) in store.selected" :key="item.cs_id">
-              <td>{{index + 1}}</td>
+              <td>{{ (store.selectlesson_form.page * store.selectlesson_form.per_page) - (store.selectlesson_form.per_page -  index) +  1 }}</td>
+              
                 <td>{{item.cs_name}}</td>
                 <td>{{item.cs_description}}</td>
+                <td>{{item.cs_video}}</td>
+          
+
+                <td class="text-center"><img :src="coverimage(item.cs_cover)" class="img-fluid" width="80" height="80"></td>
             </tr>
         </tbody>
     </table>
@@ -38,7 +45,7 @@
             <tr>
                 <th class="checkbox-area" scope="col" style="text-align: center;">
                     <div class="form-check form-check-primary">
-                       <span > ไม่มีข้อมูล</span>
+                       <span > {{ $t("lesson_noselect") }}</span>
                     </div>
                 </th>
             </tr>

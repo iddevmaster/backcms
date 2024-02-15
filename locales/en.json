@@ -274,9 +274,7 @@
   "menu_result_fall": "Fail",
   "menu_result_create": "Create Date",
 
-
   "menu_result_form_edit": "Form - Edit Exam results",
-
   "menu_learn_theory": "Theory",
   "menu_learn_practice": "Practice",
   "menu_fail": "Fail",
@@ -405,7 +403,12 @@
   "than":"ທ້າວ",
   "nang":"ນາງ ",
   "form_name_title":"Prefix",
-  "choose":"ເລືອກ",
+  "choose":"Choose",
+  "lesson_select":"Selected lessons",
+  "lesson_all":"All lessons",
+  "lesson_noselect":"No selected data",
+  "lesson_select_all":"Selected All",
+  "lesson_unselect_all":"UnSelected",
   "lesson_head":"Lesson",
   "lesson_qui":"Question",
   "lesson_ans":"Answer",
