@@ -174,7 +174,7 @@
               <nuxt-link to="/learning/create">{{ $t("menu_couse_add") }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/lesson">บทเรียนทั้งหมด</nuxt-link>
+              <nuxt-link to="/lesson">{{ $t("lesson_all") }}</nuxt-link>
             </li>
           </ul>
         </li>
