@@ -44,6 +44,7 @@ store.formDataEditCourse.user_id = auth.user_id
 store.formDatalesson.user_id = auth.user_id
 store.formDataeditlesson.user_id = auth.user_id
 store.user_id = auth.user_id
+storelesson.item = [];
 store.ResetForm()
 const { Pending } = storeToRefs(store); //Get Getter
 

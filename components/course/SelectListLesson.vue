@@ -9,7 +9,9 @@
           </div>
         </div>
         <div class="table-responsive">
-    <table class="table table-hover table-bordered">
+         {{ store.selected.length }}
+         {{ store.selectlesson_form }}
+    <table class="table table-hover table-bordered" v-if="store.item.length > 1">
         <thead>
             <tr>
                 <th class="checkbox-area" scope="col">
@@ -30,13 +32,26 @@
             </tr>
         </tbody>
     </table>
+
+    <table class="table table-hover table-bordered" v-else>
+        <thead>
+            <tr>
+                <th class="checkbox-area" scope="col" style="text-align: center;">
+                    <div class="form-check form-check-primary">
+                       <span > ไม่มีข้อมูล</span>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+      
+    </table>
 </div>
 
 
      </div>
   <div class="row">
     <div class="col-xl-12 col-lg-12">
-      <div class="pagination-no_spacing" v-if="store.total_page > 1">
+      <div class="pagination-no_spacing" v-if="store.selectlesson_form.total_page > 1">
         <ul class="pagination">
           <li>
             <a href="javascript:void(0);" class="prev"
@@ -52,8 +67,7 @@
                 stroke-linejoin="round"
                 class="feather feather-chevron-left"
               >
-                <polyline points="15 18 9 12 15 6"></polyline></svg
-            ></a>
+                <polyline points="15 18 9 12 15 6"></polyline></svg ></a>
           </li>
           <li>
             <div class="col-xs-1">
@@ -61,7 +75,7 @@
                 id="ex1"
                 type="number"
                 style="width: 50px"
-                v-model="store.formsearchlesson.page"
+                v-model="store.selectlesson_form.page"
                 min="1"
                 @input="validatePNumberSelect($event)"
               />
@@ -69,7 +83,7 @@
           </li>
           <li><a href="javascript:void(0);">/</a></li>
           <li>
-            <a href="javascript:void(0);">{{ store.total_page }}</a>
+            <a href="javascript:void(0);">{{ store.selectlesson_form.total_page }}</a>
           </li>
           <li>
             <a href="javascript:void(0);" class="next"
@@ -85,15 +99,14 @@
                 stroke-linejoin="round"
                 class="feather feather-chevron-right"
               >
-                <polyline points="9 18 15 12 9 6"></polyline></svg
-            ></a>
+                <polyline points="9 18 15 12 9 6"></polyline></svg></a>
           </li>
         </ul>
       </div>
 
       <div class="pagination-no_spacing" v-else>
         <ul class="pagination">
-          ไม่มีข้อมูล
+         
         </ul>
       </div>
     </div>
@@ -137,7 +150,7 @@ const { selectentiresentires } = LessonStore(); //Action
 
 
 
-    
+await stores.paginatedItems();
 
 
 const selectshowdata = async (sel) => {
@@ -204,20 +217,30 @@ const validatePNumberSelect = async (evt) => {
   
   }
 
-  if (store.formsearchlesson.page == '') {
-
-  } else {
-
-stores.fetchLessonInCourseId() 
-
+  if (store.selectlesson_form.page == "") {
+    store.selectlesson_form.page = 1;
+  //  await store.fetchLessonlist();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else if(store.selectlesson_form.page > store.selectlesson_form.total_page){
+    store.selectlesson_form.page = store.selectlesson_form.total_page;
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  }else {
+ //   await store.fetchLessonlist();
+    store.pending = true;
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+    await stores.paginatedItems() 
   }
-
+ // await stores.paginatedItems() 
 }
  
     
-   
-    
-    
+
     function coverimage(i) {
       let result = i.slice(0, 6);
       if (result === "static") {

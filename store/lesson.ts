@@ -24,6 +24,11 @@ export const LessonStore = defineStore('lesson', {
     cs_id:null,
     user_id: null,
     lesson: [],
+    selectlesson_form: {
+      per_page: 5,
+      total_page: 0,
+      page: 1,
+    },
     formcreatelesson: {
       cs_cover:"",
       cs_name: "",
@@ -44,6 +49,7 @@ export const LessonStore = defineStore('lesson', {
       search: '',
     },
     selected: [],
+    item:[],
     imagelist: null,
     imageReq: false,
     GetopenModalCreate: false,
@@ -241,22 +247,20 @@ export const LessonStore = defineStore('lesson', {
       this.formlesson.page = page
     },
     async SeleectAllLessonlist() {
-
-    //  this.selected.push(this.lessonlist);
-
       for (var i = 0; i < this.lessonlist.length; i++) { 
-
-
-if (!this.selected.some(item => item.cs_id === this.lessonlist[i].cs_id)) {
-  this.selected.push(this.lessonlist[i]);
+if (!this.item.some(item => item.cs_id === this.lessonlist[i].cs_id)) {
+  this.item.push(this.lessonlist[i]);
 } 
       }
-      
-      
+    },
 
+    async UnSeleectAllLessonlist() {
+      for (var i = 0; i < this.lessonlist.length; i++) { 
+        if (this.item.some(item => item.cs_id === this.lessonlist[i].cs_id)) {
+          this.item = this.item.filter((e)=>e.cs_id !== this.lessonlist[i].cs_id )
+        }
+      }
     }
-
-    
 
   },
 });

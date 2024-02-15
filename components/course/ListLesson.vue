@@ -14,7 +14,7 @@
   </div>
 
   <div class="row layout-top-spacing">
-    <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
+    <div class="col-lg-4 col-md-3 col-sm-3 mb-4">
       <input
         id="t-text"
         type="text"
@@ -26,7 +26,46 @@
         @keyup="searchData"
       />
     </div>
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto"></div>
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
+
+      
+    </div>
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
+      <input
+        id="t-text"
+        type="button"
+        name="txt"
+        placeholder="ຊອກຫາ"
+        class="form-control"
+        @click="selectAllRows"
+        value="Select All"
+style="
+    background-color: dodgerblue;
+    color: white;
+    
+"
+       
+      />
+      
+    </div>
+
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
+      <input
+        id="t-text"
+        type="button"
+        name="txt"
+        placeholder="ຊອກຫາ"
+        class="form-control"
+        value="UnSelect All"
+        style="
+    background-color: dodgerblue;
+    color: white;
+" 
+@click="UnselectAllRows"
+      />
+      
+    </div>
+
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <select
@@ -56,7 +95,7 @@
                 <input
                   class="form-check-input hover_child"
                   type="checkbox"
-                  v-model="store.selected"
+                  v-model="store.item"
                   :value="item"
                 />
               </div>
@@ -67,12 +106,11 @@
         </tbody>
       </table>
     </div>
+    <div class="row">
 
-    <button size="sm" @click="selectAllRows">Select all</button>
-  </div>
 
-  <div class="row">
-    <div class="col-xl-12 col-lg-12">
+
+    <div class="col-12 col-xl-12 col-lg-12 col-sm-12" style="padding: 2px;">
       <div class="pagination-no_spacing" v-if="store.lesson_total_page > 1">
         <ul class="pagination">
           <li>
@@ -88,9 +126,7 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 class="feather feather-chevron-left"
-              >
-                <polyline points="15 18 9 12 15 6"></polyline></svg
-            ></a>
+              ><polyline points="15 18 9 12 15 6"></polyline></svg></a>
           </li>
           <li>
             <div class="col-xs-1">
@@ -122,8 +158,7 @@
                 stroke-linejoin="round"
                 class="feather feather-chevron-right"
               >
-                <polyline points="9 18 15 12 9 6"></polyline></svg
-            ></a>
+                <polyline points="9 18 15 12 9 6"></polyline></svg></a>
           </li>
         </ul>
       </div>
@@ -135,6 +170,9 @@
       </div>
     </div>
   </div>
+  </div>
+
+ 
 </template>
     <script setup lang="ts">
 import { storeToRefs } from "pinia";
@@ -161,6 +199,7 @@ const { locale, setLocale } = useI18n();
 const toast = useToast();
 const router = useRouter();
 const store = LessonStore();
+const stores = CourseStore();
 
 const { selectentireslesson } = LessonStore(); //Action
 const { selectentiresentires } = LessonStore(); //Action
@@ -174,7 +213,14 @@ const searchData = async () => {
   await store.fetchLessonlist();
 };
 const selectAllRows = async () => {
+ store.selectlesson_form.page = 1 
   await store.SeleectAllLessonlist();
+  await stores.paginatedItems() 
+};
+const UnselectAllRows = async () => {
+  store.selectlesson_form.page = 1 
+  await store.UnSeleectAllLessonlist();
+  await stores.paginatedItems() 
 };
 
 const validatePNumber = async (evt) => {
@@ -195,28 +241,16 @@ const validatePNumber = async (evt) => {
     evt.preventDefault();
   }
 
-  if (store.formsearchlesson.page == "") {
+  if (store.selectlesson_form.page == "") {
     store.pending = true;
-    store.formsearchexamquestion.page = 1;
-    await store.fetchLessonlist();
+    store.selectlesson_form.page = 1;
+  await store.fetchLessonlist();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   } else {
+await store.fetchLessonlist();
     store.pending = true;
-
-    if (store.formsearchlesson.page > store.lesson_total_page) {
-      store.formsearchlesson.page = store.lesson_total_page;
-      await store.fetchLessonlist();
-      await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
-        timeout: 50,
-      });
-    } else {
-      await store.fetchLessonlist();
-      await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
-        timeout: 50,
-      });
-    }
   }
 };
 

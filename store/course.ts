@@ -67,6 +67,11 @@ export const CourseStore = defineStore('course', {
       per_page: 5,
       search: '',
     },
+    formsearcheditlesson: {
+      page: 1,
+      per_page: 2,
+      search: '',
+    },
     savelesson: [],
     vdo: "/assets/images/sample-5.mp4"
   }
@@ -143,53 +148,77 @@ export const CourseStore = defineStore('course', {
         this.formDataEditCourse.course_name = response.data.course_name
         this.formDataEditCourse.course_description = response.data.course_description
         this.image = response.data.course_cover
-        console.log(response.data);
+  
       });
     },
 
     async fetchLessonInCourseId() {
-      const data = await ApiService.post('/course/lesson/list/' + this.course_id,this.formsearchlesson).then(response => {
-        if(response){
-          console.log('if',response.data);
+
+      const checkpag =  await ApiService.post('/course/lesson/list/' + this.course_id,this.formsearcheditlesson)
+    
+      if(checkpag.data.total_page > 1){
+        for(let i = 0; i < checkpag.data.total_page; i++){
+          this.formsearcheditlesson.page = i + 1;
+          const data =  await ApiService.post('/course/lesson/list/' + this.course_id,this.formsearcheditlesson)
           const Storage = LessonStore();
-          Storage.selected = response.data.data
-          Storage.total_page = response.data.total_page
-          
-          
-        }else {
-          console.log('else');
-        }
-      });
+          for(let i = 0; i < data.data.data.length; i++){
+            Storage.item.push(data.data.data[i]);
+          }
+      //  Storage.selected.push(data.data.data)
+
+      }
+      const Storage = LessonStore();
+      Storage.selectlesson_form.total_page = checkpag.data.total_page
+
+
+
+      }
+
     },
 
     async SaveCourse() {
+
+      
       try {
         const data = await ApiService.post('/course/create', this.formDataCourse).then(response => {
           this.formDatalesson.course_id = response.data.insertId
           this.course_id = response.data.insertId;
 
-    //  const Storage = LessonStore();
-      // for (var i = 0; i < Storage.selected.length; i++) { 
-      //   const les = {cs_id:Storage.selected[i].cs_id}
-      //   this.savelesson.push(les);
-      // }
         });
         return true;
       } catch (error) {
         return false;
       } 
-      
 
     },
 
-    async SaveLessoncluster() {
+    async paginatedItems() {
+      const Storage = LessonStore();
+      const startIndex = (Storage.selectlesson_form.page - 1) * Storage.selectlesson_form.per_page;
+      const endIndex = startIndex + Storage.selectlesson_form.per_page;
+      Storage.selectlesson_form.total_page = Math.ceil(Storage.item.length / Storage.selectlesson_form.per_page);
+      Storage.selected = Storage.item.slice(startIndex, endIndex);
 
+    
+
+    },
+
+    async changePage() {
+      const Storage = LessonStore();
+
+   Storage.selected = Storage.selected.slice(0, 2);
+      console.log(Storage.selected);
+    },
+
+    async SaveLessoncluster() {
+      this.savelesson = [];
      const Storage = LessonStore();
-     if(Storage.selected.length > 0){
-      for (var i = 0; i < Storage.selected.length; i++) { 
-        const les = {cs_id:Storage.selected[i].cs_id}
+     if(Storage.item.length > 0){
+      for (var i = 0; i < Storage.item.length; i++) { 
+        const les = {cs_id:Storage.item[i].cs_id}
         this.savelesson.push(les);
       }
+      console.log(this.savelesson);
       try {
         const data = await ApiService.post('/course/cluster/create/'+this.course_id, this.savelesson).then(response => {
 
