@@ -26,7 +26,7 @@
 
         <tbody> 
             <tr  v-for="(item,index) in store.lesson" :key="item.cs_id">
-                <td>{{((store.formlesson.page * 50 - (50 -  index)) +  1)}}</td>
+                <td>{{ (store.formlesson.page * store.formlesson.per_page) - (store.formlesson.per_page -  index) +  1 }}</td>
                 <td class="text-center">
   <img :src="image(item.cs_cover)" class="img-fluid" width="80" height="80" />
                 </td>
@@ -35,18 +35,18 @@
                     {{item.cs_name}}
                   </span>
                 </td>
+                <td>
+                  <span class="table-inner-text">
+                    {{item.cs_description}}
+                  </span>
+                </td>
           
                 <!-- <td class="text-center">
                   {{item.em_description}}
                 </td> -->
               
        
-                <td align="center">
-             <div class="btn-group-vertical">
-            <button type="button" class="btn btn-success" style="background-color:#3F2C73;"  @click="edit(item.cs_id)"> {{ $t("lesson_edit") }}</button>
-            <button type="button" class="btn btn-success" style="background-color:#3F2C73;" @click="del(item.cs_id)"> {{ $t("lesson_delete") }}</button>
-            </div>
-          </td>
+             
             </tr>
         </tbody>
     </table>
