@@ -324,6 +324,7 @@ const delelelesson = async () => {
   await toast.success('ລຶບຂໍ້ມູນສຳເລັດ',{
     timeout: 30000,
   });
+  await store.fetchLessonlist();
  }else {
   store.GetopenModalLesson = false
   await toast.error("ລຶບລົ້ມເຫລວ", {

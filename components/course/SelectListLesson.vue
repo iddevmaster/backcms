@@ -32,7 +32,10 @@
               
                 <td>{{item.cs_name}}</td>
                 <td>{{item.cs_description}}</td>
-                <td>{{item.cs_video}}</td>
+                <td> 
+            <a v-if="item.cs_video" :href="item.cs_video" target="_blank"><span class="badge badge-success">Watch click!</span></a>
+            <a v-else><span class="badge badge-danger">No Video</span></a>
+          </td>
           
 
                 <td class="text-center"><img :src="coverimage(item.cs_cover)" class="img-fluid" width="80" height="80"></td>
