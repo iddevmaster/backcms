@@ -20,10 +20,10 @@
         aria-label="Default select example"
         @change="selectshowdata($event)"
       >
-        <option value="8">8</option>
-        <option value="12">12</option>
-        <option value="16">16</option>
+        <option value="5">5</option>
+        <option value="10">10</option>
         <option value="20">20</option>
+        <option value="50">50</option>
       </select>
     </div>
   </div>
@@ -36,16 +36,17 @@
             #
             <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
           </th>
-          <th>รหัสความรู้</th>
+          <th>{{ $t("table_course_code") }}</th>
           <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
-          <th>ชื่อความรู้</th>
-          <th>ผู้สร้าง</th>
-          <th>บทเรียน</th>
-       <th>รูปภาพ</th>
+          <th>{{ $t("table_course_name") }}</th>
+          <th>{{ $t("table_course_user_create") }}</th>
+          <th>{{ $t("table_course_lesson") }}</th>
+       <th>{{ $t("table_course_pic") }}</th>
           <th class="no-content">{{ $t("menu_user_c_action") }}</th>
         </tr>
       </thead>
+
 
       <tbody>
         <tr v-for="(item, index) in store.courselist" :key="item.course_id">
@@ -55,8 +56,9 @@
                <td>{{ item.course_name }}</td>
                 <td>{{ item.user_create }}</td>
                  <td>
-                  <span v-if="item.is_complete == 1 ">มี</span>
-                  <span v-else>ไม่มี</span>
+                  <span class="badge badge-success" v-if="item.is_complete == 1 ">ມີບົດຮຽນ.</span>
+                  <span class="badge badge-danger" v-else>ບໍ່ມີບົດຮຽນ.</span>
+           
                 </td>
           <td class="text-center">
             <img

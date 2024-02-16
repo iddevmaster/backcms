@@ -17,9 +17,12 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">{{ $t("lesson_pic") }}</th>
                 <th class="text-center" scope="col">{{ $t("lesson_qui") }}</th>
+                <th class="text-center" scope="col">{{ $t("lesson_ans") }}</th>
+                <th class="text-center" scope="col">{{ $t("lesson_pic") }}</th>
                   <th class="text-center" scope="col">{{ $t("less_ac") }}</th>
+
+           
             </tr>
         </thead>
 
@@ -27,9 +30,7 @@
         <tbody> 
             <tr  v-for="(item,index) in store.lesson" :key="item.cs_id">
                 <td>{{ (store.formlesson.page * store.formlesson.per_page) - (store.formlesson.per_page -  index) +  1 }}</td>
-                <td class="text-center">
-  <img :src="image(item.cs_cover)" class="img-fluid" width="80" height="80" />
-                </td>
+                
                 <td>
                   <span class="table-inner-text">
                     {{item.cs_name}}
@@ -39,6 +40,12 @@
                   <span class="table-inner-text">
                     {{item.cs_description}}
                   </span>
+                </td>
+                <td class="text-center">
+  <img :src="image(item.cs_cover)" class="img-fluid" width="80" height="80" />
+                </td>
+                <td class="text-center">
+  <img :src="image(item.cs_cover)" class="img-fluid" width="80" height="80" />
                 </td>
           
                 <!-- <td class="text-center">

@@ -34,6 +34,7 @@ style="
         aria-label="Default select example"
         @change="selectshowdata($event)"
       >
+        <option :value="5">5</option>
         <option :value="10">10</option>
         <option :value="20">20</option>
         <option :value="50">50</option>
@@ -47,9 +48,9 @@ style="
       <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">{{ $t("lesson_pic") }}</th>
                 <th class="text-center" scope="col">{{ $t("lesson_qui") }}</th>
-                  <th class="text-center" scope="col">{{ $t("less_ac") }}</th>
+                <th class="text-center" scope="col">{{ $t("lesson_ans") }}</th>
+                <th scope="col">{{ $t("lesson_pic") }}</th>
                   <th class="text-center" scope="col">{{ $t("less_ac") }}</th>
             </tr>
         </thead>
@@ -58,7 +59,7 @@ style="
         <tr v-for="(item, index) in store.lessonlist" :key="item.cs_id">
           <td>{{ (store.formsearchlesson.page * store.formsearchlesson.per_page) - (store.formsearchlesson.per_page -  index) +  1 }}</td>
              <td>{{ item.cs_name }}</td>
-               <td>{{ item.user_create }}</td>
+               <td>{{ item.cs_description }}</td>
          
           <td class="text-center">
             <img
@@ -70,21 +71,7 @@ style="
           </td>
           <td>    
              <div class="action-btns">
-            <NuxtLink >
-                  <a
-                    href="javascript:void(0);"
-                    class="action-btn btn-edit bs-tooltip me-2"
-                    @click="edit(item)"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    aria-label="Edit"
-                    data-bs-original-title="Edit"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z"/>
-                    </svg>
-                  </a>
-                </NuxtLink>
+
                 <NuxtLink>
                   <a
                     href="javascript:void(0);"
@@ -322,14 +309,15 @@ function coverttime(date) {
 }
 
 const del = async (item) => {
+
 store.GetopenModalLesson = true
-store.cs_id = item.cs_id;
+store.cs_id = item;
 //await store.selectlessId(item)
 
 };
 
 const delelelesson = async () => {
- let de =  await store.deleteLesson();
+ let de =  await store.deletelesson();
 
  if(de == true){
   store.GetopenModalLesson = false

@@ -45,7 +45,7 @@ export const LessonStore = defineStore('lesson', {
     },
     formsearchlesson: {
       page: 1,
-      per_page: 20,
+      per_page: 5,
       search: '',
     },
     selected: [],
@@ -169,10 +169,15 @@ export const LessonStore = defineStore('lesson', {
 
     async updateformLesson() { 
       this.formcreatelessonedit.user_id = this.user_id;
+ 
       try {
         const data = await ApiService.put('/course/lesson/update/'+ this.cs_id, this.formcreatelessonedit).then(response => {
-          console.log(data);
-          return data;
+          if(response.status == 200){
+            return true;
+          }else {
+            return false;
+          }
+        
         });
         return true
 
@@ -180,6 +185,24 @@ export const LessonStore = defineStore('lesson', {
 
         return false;
       }
+
+    },
+
+    async deletelesson() {
+try {
+  const data = await ApiService.delete('/course/lesson/delete/'+ this.cs_id).then(response => {
+    if(response.status == 200){
+      return true;
+    }else {
+      return false;
+    }
+  });
+  return true
+} catch (error) {
+  return false;
+}
+
+
 
     },
 

@@ -189,7 +189,7 @@ const update = async () => {
       await toast.error("ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ");
     } else {
       await toast.success("ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ");
-
+      const lessonlist = await store.fetchLessonlist();
       store.GetopenModalEdit = false;
     }
   }

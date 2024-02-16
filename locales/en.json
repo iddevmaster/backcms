@@ -32,7 +32,12 @@
   "menu_couse_f_edit_title_picture": "Image Cover",
   "menu_couse_f_edit_title_display_picture": "Image Display here",
 
-  
+  "table_course_code": "Code",
+  "table_course_name": "Name",
+  "table_course_user_create": "Create by",
+  "table_course_lesson": "Lesson",
+  "table_course_pic": "Picture",
+  "table_course_ac": "Manage",
 
   "menu_page_course": "Course",
   "menu_page_course_page": "Course All",
@@ -417,7 +422,7 @@
   "add_lesson":"Add Lesson",
   "less_ac":"Manage",
   "title_lesson":"Lesson",
-  "title_lesson_t":"Manage",
+  "title_lesson_t":"Lesson All",
   "lesson_edit":"Edit",
   "lesson_delete":"Delete",
 

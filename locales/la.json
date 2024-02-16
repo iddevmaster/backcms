@@ -20,10 +20,14 @@
   "menu_couse_f_title_display_picture": "ສະແດງຮູບທີ່ນີ້",
   "menu_couse_f_add_lesson": "ເພີ່ມບົດຮຽນ",
   "menu_couse_f_save": "ບັນທຶກ",
-  "menu_lesson_name_and_detail": "ຄໍາຖາມ && ຄໍາຕອບ",
-  "menu_lesson_f_title_picture": "ຮູບພາບສະແດງໃຫ້ເຫັນການປົກຫຸ້ມຂອງ.",
-  "menu_lesson_f_video": "ວິດີໂອ",
- 
+  
+  "table_course_code": "ຫຼັກສູດ",
+  "table_course_name": "ຊື່ຫຼັກສູດ",
+  "table_course_user_create": "ຜູ້ສ້າງຫຼັກສູດ",
+  "table_course_lesson": "ບົດຮຽນ",
+  "table_course_pic": "ຮູບ",
+  "table_course_ac": "ຈັດການ",
+
   "menu_couse_edit": "ແກ້ໄຂສື່​ການ​ຮຽນ​ຮູ້​",
   "menu_couse_p_edit_title": "ແກ້ໄຂສື່​ການ​ຮຽນ​ຮູ້​",
   "menu_couse_f_edit_title_code": "ລະຫັດສື່​ການ​ຮຽນ​ຮູ້​",
@@ -412,7 +416,7 @@
   "add_lesson":"ເພີ່ມບົດຮຽນ",
   "less_ac":"ຈັດການ",
   "title_lesson":"ບົດຮຽນ",
-  "title_lesson_t":"ຈັດການ",
+  "title_lesson_t":"ບົດຮຽນທັງໝົດ",
   "lesson_edit":"ແກ້ໄຂ",
   "lesson_delete":"ລຶບ",
   "result_alert_name":"ຜູ້ໃຊ້",

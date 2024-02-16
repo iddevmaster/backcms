@@ -59,7 +59,7 @@ export const CourseStore = defineStore('course', {
     },
     formsearchcourse: {
       page: 1,
-      per_page: 8,
+      per_page: 5,
       search: '',
     },
     formsearchlesson: {
@@ -112,13 +112,14 @@ export const CourseStore = defineStore('course', {
     async ResetFetch() {
 
       this.formsearchcourse.page = 1
-      this.formsearchcourse.per_page = 8
+      this.formsearchcourse.per_page = 5
       this.formsearchcourse.search = ''
 
       
     },
 
     async fetchCourslist() {
+      console.log(this.formsearchcourse);
       try {
         const data = await ApiService.post('/course/list', this.formsearchcourse).then(response => {
           this.courselist = response.data.data
@@ -378,13 +379,10 @@ return true;
 
     },
     async deletelesson(item) {
-
       const index = this.lessonlist[item]
       if (index !== -1) {
         this.lessonlist.splice(index, 1)
       }
-
-
     },
     
     async Dellessons(id) {
