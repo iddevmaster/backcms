@@ -72,11 +72,12 @@ const delete_userid = async (id) => {
               <div class="page-meta">
                         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#"> บทเรียน </a></li>
-                                <li class="breadcrumb-item active" aria-current="page"> บทเรียนทั้งหมด</li>
+                                <li class="breadcrumb-item"><a href="#"> {{ $t("title_lesson") }} </a></li>
+                                <li class="breadcrumb-item active" aria-current="page"> {{ $t("title_lesson_t") }}</li>
                             </ol>
                         </nav>
                     </div>
+          
                 <Loading v-if="Pending"></Loading>
             <LessonListAll></LessonListAll>
             </div>
