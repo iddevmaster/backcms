@@ -17,10 +17,7 @@ const auth = useAuthStore()
 
 
 const store = LessonStore()
-let course = await store.fetchCourse(router.currentRoute.value.params.id)
-if(course == 204){
-router.push('/learning');
-}
+
 let lesson = await store.fetchLessonId(router.currentRoute.value.params.id)
 
 
@@ -66,13 +63,13 @@ await store.fetchLessonId(router.currentRoute.value.params.id)
                 <div class="row layout-top-spacing">
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                         <div class="widget-content widget-content-area br-8 p-3">
-                            <div class="widget-header">
+                            <!-- <div class="widget-header">
                                 <div class="row">
                                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                         <button class="btn btn-primary mb-2 me-4" @click="OpenFormInsert()">{{ $t("add_lesson") }}</button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <Lessonlist></Lessonlist>
                         </div>
                     </div>

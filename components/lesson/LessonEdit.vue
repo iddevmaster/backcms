@@ -188,12 +188,8 @@ const update = async () => {
     if (updatelesson === false) {
       await toast.error("ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ");
     } else {
-      let lesson = await store.fetchLessonId(
-        router.currentRoute.value.params.id
-      );
       await toast.success("ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ");
-  store.formcreatelessonedit.cs_cover = "";
-  store.formcreatelesson.cs_cover = "";
+      const lessonlist = await store.fetchLessonlist();
       store.GetopenModalEdit = false;
     }
   }

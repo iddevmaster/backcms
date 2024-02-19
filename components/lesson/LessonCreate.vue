@@ -49,8 +49,7 @@
           </div>
 
 
-   
-
+  
 
           <div class="mb-3">
             <label for="message-text" class="col-form-label">{{ $t("lesson_pic") }}:</label>
@@ -79,7 +78,6 @@
     </div>
   </div>
 </template>
-
 
 
 
@@ -140,10 +138,11 @@ const save = async () => {///////////// บันทึก
     let uploadfile = await store.UploadfileLesson();   ///////////upload รูป
    let save = await store.saveformLesson();
 
-      let lesson = await store.fetchLessonId(router.currentRoute.value.params.id)
+    
     if (save === false) {
       await toast.error('ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ')
     } else {
+      const lessonlist = await store.fetchLessonlist();
       await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
       await store.ResetForm();
       store.formcreatelesson.cs_cover = ""

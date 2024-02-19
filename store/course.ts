@@ -15,6 +15,8 @@ export const CourseStore = defineStore('course', {
     course_id: null,
     pending: false,
     isOpen: false,
+    cs_id:null,
+    GetopenModalLesson:false,
     lessonlist: [],
     user_id:null,
     del_lesson: [],
@@ -57,9 +59,20 @@ export const CourseStore = defineStore('course', {
     },
     formsearchcourse: {
       page: 1,
-      per_page: 8,
+      per_page: 5,
       search: '',
     },
+    formsearchlesson: {
+      page: 1,
+      per_page: 5,
+      search: '',
+    },
+    formsearcheditlesson: {
+      page: 1,
+      per_page: 2,
+      search: '',
+    },
+    savelesson: [],
     vdo: "/assets/images/sample-5.mp4"
   }
 
@@ -99,13 +112,14 @@ export const CourseStore = defineStore('course', {
     async ResetFetch() {
 
       this.formsearchcourse.page = 1
-      this.formsearchcourse.per_page = 8
+      this.formsearchcourse.per_page = 5
       this.formsearchcourse.search = ''
 
       
     },
 
     async fetchCourslist() {
+      console.log(this.formsearchcourse);
       try {
         const data = await ApiService.post('/course/list', this.formsearchcourse).then(response => {
           this.courselist = response.data.data
@@ -124,65 +138,123 @@ export const CourseStore = defineStore('course', {
         this.pending = false
       }
     },
+
+
+
     async fetchCourseId(id) {
       this.course_id = id;
-
-      let item = this.courselist.filter(actor => actor.course_id == id);
-      this.formDataEditCourse.course_cover = item[0].course_cover
-      this.formDataEditCourse.course_code = item[0].course_code
-      this.formDataEditCourse.course_name = item[0].course_name
-      this.formDataEditCourse.course_description = item[0].course_description
-      this.formDataEditCourse.user_id = this.user_id
-      this.image = item[0].course_cover
-      const data = await ApiService.post('/course/lesson/list/' + id, this.formsearchcourse).then(response => {
-        if (response.data.data) {
-          this.lessonlist = [];
-          this.del_lesson = [];
-          const sortedArray = response.data.data;
-          // Sort the array based on the 'id' property in ascending order
-          sortedArray.sort((a, b) => a.cs_id - b.cs_id
-          );
-          for (var i = 0; i < sortedArray.length; i++) {
-            this.lessonlist.push(sortedArray[i]);
-            this.del_lesson.push(sortedArray[i].cs_id);
-          }
-
-        }
-
-
-        //this.lessoneditlist.response.data.data =
+      const data = await ApiService.get('/course/get/' + this.course_id).then(response => {
+        this.formDataEditCourse.course_cover = response.data.course_cover
+        this.formDataEditCourse.course_code = response.data.course_code
+        this.formDataEditCourse.course_name = response.data.course_name
+        this.formDataEditCourse.course_description = response.data.course_description
+        this.image = response.data.course_cover
+  
       });
     },
 
+    async fetchLessonInCourseId() {
+
+      const checkpag =  await ApiService.post('/course/lesson/list/' + this.course_id,this.formsearcheditlesson)
+    
+      if(checkpag.data.total_page > 1){
+        for(let i = 0; i < checkpag.data.total_page; i++){
+          this.formsearcheditlesson.page = i + 1;
+          const data =  await ApiService.post('/course/lesson/list/' + this.course_id,this.formsearcheditlesson)
+          const Storage = LessonStore();
+          for(let i = 0; i < data.data.data.length; i++){
+            Storage.item.push(data.data.data[i]);
+          }
+      //  Storage.selected.push(data.data.data)
+
+      }
+      const Storage = LessonStore();
+      Storage.selectlesson_form.total_page = checkpag.data.total_page
+
+
+
+      }
+
+    },
+
     async SaveCourse() {
-     
+
+      
       try {
         const data = await ApiService.post('/course/create', this.formDataCourse).then(response => {
-         // this.SaveLesson(response.data.insertId)
           this.formDatalesson.course_id = response.data.insertId
           this.course_id = response.data.insertId;
-         // return data;
+
         });
         return true;
       } catch (error) {
         return false;
-
       } 
 
+    },
+
+    async paginatedItems() {
+      const Storage = LessonStore();
+      const startIndex = (Storage.selectlesson_form.page - 1) * Storage.selectlesson_form.per_page;
+      const endIndex = startIndex + Storage.selectlesson_form.per_page;
+      Storage.selectlesson_form.total_page = Math.ceil(Storage.item.length / Storage.selectlesson_form.per_page);
+      Storage.selected = Storage.item.slice(startIndex, endIndex);
+
+    
+
+    },
+
+    async changePage() {
+      const Storage = LessonStore();
+
+   Storage.selected = Storage.selected.slice(0, 2);
+      console.log(Storage.selected);
+    },
+
+    async SaveLessoncluster() {
+      this.savelesson = [];
+     const Storage = LessonStore();
+     if(Storage.item.length > 0){
+      for (var i = 0; i < Storage.item.length; i++) { 
+        const les = {cs_id:Storage.item[i].cs_id}
+        this.savelesson.push(les);
+      }
+      console.log(this.savelesson);
+      try {
+        const data = await ApiService.post('/course/cluster/create/'+this.course_id, this.savelesson).then(response => {
+
+        });
+        return true;
+      } catch (error) {
+        return false;
+      } 
+
+     }
+    
+
+
+    },
+
+    async ClearLessoncluster() {
 
    
-    },
+
+   },
+
+
+  
 
     async selectentires(data_entires) {
       this.formsearchcourse.per_page = data_entires;
       this.formsearchcourse.page = 1;
     },
+
+
+
     setCurrentPage(page) {
       this.formsearchcourse.page = page
     },
     async SaveLesson() {
-  
-
       for (var i = 0; i < this.lessonlist.length; i++) {
         console.log(this.lessonlist[i]);
         this.formDatalesson.cs_cover = this.lessonlist[i].cs_cover
@@ -206,9 +278,12 @@ return true;
 
     },
     async UpdateCourse() {
+
+      this.formDataEditCourse.user_id = this.user_id
+      console.log(this.formDataEditCourse);
       try {
         const updatecourse = await ApiService.put('/course/update/' + this.course_id, this.formDataEditCourse);
-      await this.Dellessons(this.course_id);
+    //  await this.Dellessons(this.course_id);
         // await this.SaveLesson(this.course_id);
         //    return response.data
   
@@ -304,14 +379,12 @@ return true;
 
     },
     async deletelesson(item) {
-
       const index = this.lessonlist[item]
       if (index !== -1) {
         this.lessonlist.splice(index, 1)
       }
-
-
     },
+    
     async Dellessons(id) {
 
       const getid = await ApiService.post('/course/lesson/list/' + id, this.formsearchcourse).then(response => {
@@ -340,7 +413,25 @@ return true;
     },
 
 
+    async deleteLesson() {
 
+
+      try {
+
+        const delcs_id = await ApiService.delete('/course/lesson/delete/' + this.cs_id).then(response => {
+          console.log(response);
+
+          return true
+        });
+    
+        return true;
+        } catch (error) {
+          return false;
+        } 
+
+
+   
+    },
 
     closeModal() {
       this.isOpen = false;

@@ -207,10 +207,7 @@ const toast = useToast();
 const router = useRouter();
 const store = CourseStore();
 
-await store.fetchCourslist();
-await store.fetchCourseId(router.currentRoute.value.params.id);
 
-// const { Clear } = AlertStore(); // use  action
 const { FormDataCourse } = storeToRefs(store);
 const { FormDataEditCourse } = storeToRefs(store);
 const { Images } = storeToRefs(store);
@@ -222,9 +219,9 @@ const { UploadfileCourse } = CourseStore();
 const { deletelesson } = CourseStore();
 const { Adlesson } = CourseStore();
 const { uploadfilecourse } = CourseStore();
+const { SaveLessoncluster } = CourseStore();
+const { ClearLessoncluster } = CourseStore();
 
-// store.ClearData();
-// storealert.Clear()
 
 const rules = computed(() => {
   return {
@@ -261,21 +258,15 @@ const rules = computed(() => {
 });
 
 const v$ = useVuelidate(rules, FormDataEditCourse);
-
 const save = async () => {
-
   v$.value.$validate();
   if (!v$.value.$error) {
     store.isLoaddingsave = true;
-
     try {
       let updatefile = await UploadfileCourse()
       let updatedata = await UpdateCourse();
-    //  let savelesson = await SaveLesson();
-    //  await store.fetchCourslist()
-      // await setTimeout(() => {
-      //   store.fetchCourseId(router.currentRoute.value.params.id);
-      // }, 500);
+      let clearlesson = await ClearLessoncluster();
+      let savelesson = await SaveLessoncluster();
 
       if(updatedata === true){
         await setTimeout(() => {
@@ -283,11 +274,7 @@ const save = async () => {
       }, 500);
       store.isLoaddingsave = false;
       await router.push('/learning');
-
       }
-
-    
-
     } catch (error) {
       await toast.error("ແກ້ໄຂບໍ່ສຳເລັດ");
     }
@@ -297,51 +284,9 @@ const save = async () => {
 
 
 
-// const save = async () => {
-//   if(store.lessonlist.length == 0){
-//     await toast.error("Add Lesson Please", {
-//         timeout: 2000,
-//     });
-// return false;
-//   }
-//   v$.value.$validate();
-//   if (!v$.value.$error) {
-//     store.isLoaddingsave = true;
-
-//     try {
-//       let updatefile = await UploadfileCourse()
-//       let updatedata = await UpdateCourse();
-//       let savelesson = await SaveLesson();
-//     //  await store.fetchCourslist()
-//       // await setTimeout(() => {
-//       //   store.fetchCourseId(router.currentRoute.value.params.id);
-//       // }, 500);
-
-//       if(savelesson === true){
-//         await setTimeout(() => {
-//         toast.success("Edit Success");
-//       }, 500);
-//       store.isLoaddingsave = false;
-//       await router.push('/learning');
-
-//       }
-
-    
-
-//     } catch (error) {
-//       await toast.error("Fail Edit Data");
-//     }
-
-//   }
-// };
 
 
-const addlesson = async () => {
-  await Adlesson();
-};
-const removelesson = async (x) => {
-  await deletelesson(x);
-};
+
 const removeImage = async () => {
  
     store.formDataEditCourse.course_cover = null
@@ -351,59 +296,6 @@ const removeImage = async () => {
 
 
 
-const handleFiles = async (event, x) => {
-  const file = event.target.files[0];
-  if (file && file.type.startsWith('image/')) {
-    let formData = new FormData();
-  formData.append("files", event.target.files[0]);
-  const image = await uploadfilecourse(formData);
-
-  const index = store.lessonlist;
-
-  index[x].cs_cover = image.data[0].path;
-
-  }else {
-    Swal.fire({
-      text: 'Upload File Image Only!',
-      icon: 'error',
-    });
-
-  }
-
-};
-
-const handleFilesVideo = async (event, x) => {
-  let formData = new FormData();
-  formData.append("files", event.target.files[0]);
-  const video = await uploadfilecourse(formData);
-
-  const index = store.lessonlist;
-  index[x].cs_video = video.data[0].path;
-};
-
-const onFileChange = async (event) => {
-  var input = event.target;
-  if (input.files) {
-    var reader = new FileReader();
-    reader.onload = (e) => {
-      store.image = e.target.result;
-    };
-    store.imagelist = input.files[0];
-    reader.readAsDataURL(input.files[0]);
-  }
-};
-
-function image(i) {
-  var x = null;
-  if (i) {
-    const usingSplit = i.split(",");
-    var x = usingSplit[0];
-  } else {
-    var x = "static/upload/2023/9/files-riRE6hEnHI.jpg";
-  }
-  let im =  ApiService.image(x);
-  return im;
-}
 
 const onFileChangeBack = async (event) => {
   var input = event.target;
