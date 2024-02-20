@@ -50,6 +50,7 @@
 
       <tbody>
         <tr v-for="(item, index) in store.courselist" :key="item.course_id">
+      
           <!-- <td><input type="checkbox" v-model="store.selected" :value="user" number></td> -->
           <td>{{ (store.formsearchcourse.page * store.formsearchcourse.per_page) - (store.formsearchcourse.per_page -  index) +  1 }}</td>
              <td>{{ item.course_code }}</td>
