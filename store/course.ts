@@ -166,13 +166,19 @@ export const CourseStore = defineStore('course', {
               Storage.item.push(data.data.data[i]);
             }
     
-  
+
         }
         const Storage = LessonStore();
         Storage.selectlesson_form.total_page = checkpag.data.total_page
   
   
   
+        }else {
+          const Storage = LessonStore();
+
+Storage.item = checkpag.data.data
+Storage.selected = checkpag.data.data
+          
         }
         
       }
@@ -201,7 +207,7 @@ export const CourseStore = defineStore('course', {
       const endIndex = startIndex + Storage.selectlesson_form.per_page;
       Storage.selectlesson_form.total_page = Math.ceil(Storage.item.length / Storage.selectlesson_form.per_page);
       Storage.selected = Storage.item.slice(startIndex, endIndex);
-      console.log(Storage.selected);
+    
     },
 
     async paginatedItemsClear() {
