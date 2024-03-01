@@ -17,11 +17,12 @@
             <ul class="navbar-item flex-row ms-lg-auto ms-0"> 
                 <li class="nav-item dropdown language-dropdown">
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="language-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img :src="image(users.lng)" class="flag-width" alt="flag">
+                        <img src="../../assets/images/loas.png" class="flag-width" alt="flag" v-if="users.loc == 0">
+                        <img src="../../assets/images/thai.png" class="flag-width" alt="flag" v-else>
                     </a>
                     <div class="dropdown-menu position-absolute" aria-labelledby="language-dropdown">
-                        <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(0)"><img :src="image(users.lan[0])" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;{{ $t("l_loas") }}</span></a>
-                        <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(1)"><img :src="image(users.lan[1])" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;{{ $t("l_eng") }}</span></a>
+                        <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(0)"><img src="../../assets/images/loas.png" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;{{ $t("l_loas") }}</span></a>
+                        <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(1)"><img src="../../assets/images/thai.png" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;{{ $t("l_eng") }}</span></a>
                         <!-- <a class="dropdown-item d-flex" href="javascript:void(0);" @click="changeLocale(2)"><img :src="image(users.lan[2])" class="flag-width" alt="flag"> <span class="align-self-center">&nbsp;{{ $t("l_thai") }}</span></a> -->
                     </div>
                 </li>
@@ -300,6 +301,7 @@ const changeLocale = (newLocale) => {
 const le = ['la','en','th']
 locale.value = le[newLocale];
 users.loc = newLocale;
+console.log(users.loc);
 users.selectLan();
 };
 
