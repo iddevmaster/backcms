@@ -181,7 +181,7 @@ style="
 
       <div class="pagination-no_spacing" v-else>
         <ul class="pagination">
-          ไม่มีข้อมูล
+      
         </ul>
       </div>
     </div>
