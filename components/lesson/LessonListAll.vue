@@ -63,12 +63,9 @@ style="
                <td>{{ item.cs_description }}</td>
          
           <td class="text-center">
-            <img
-              :src="image(item.cs_cover)"
-              class="img-fluid"
-              width="80"
-              height="80"
-            />
+            
+            <img :src="image(item.cs_cover)" class="img-fluid" width="80" height="80" v-if="item.cs_cover">
+                  <img src="../../assets/images/no_photo.jpg" class="img-fluid" width="80" height="80" v-else>
           </td>
           <td>    
              <div class="action-btns">
@@ -198,7 +195,7 @@ style="
 
       <div class="pagination-no_spacing" v-else>
         <ul class="pagination">
-          ไม่มีข้อมูล
+         
         </ul>
       </div>
     </div>
