@@ -20,8 +20,7 @@
                 <th class="text-center" scope="col">{{ $t("lesson_qui") }}</th>
                 <th class="text-center" scope="col">{{ $t("lesson_ans") }}</th>
                 <th class="text-center" scope="col">{{ $t("lesson_pic") }}</th>
-                  <th class="text-center" scope="col">{{ $t("less_ac") }}</th>
-
+              
            
             </tr>
         </thead>
@@ -42,11 +41,10 @@
                   </span>
                 </td>
                 <td class="text-center">
-  <img :src="image(item.cs_cover)" class="img-fluid" width="80" height="80" />
-                </td>
-                <td class="text-center">
-  <img :src="image(item.cs_cover)" class="img-fluid" width="80" height="80" />
-                </td>
+            
+            <img :src="image(item.cs_cover)" class="img-fluid" width="80" height="80" v-if="item.cs_cover">
+                  <img src="../../assets/images/no_photo.jpg" class="img-fluid" width="80" height="80" v-else>
+          </td>
           
                 <!-- <td class="text-center">
                   {{item.em_description}}
