@@ -39,7 +39,11 @@
           </td>
           
 
-                <td class="text-center"><img :src="coverimage(item.cs_cover)" class="img-fluid" width="80" height="80"></td>
+                <td class="text-center">
+                  <img :src="coverimage(item.cs_cover)" class="img-fluid" width="80" height="80" v-if="item.cs_cover">
+                  <img src="../../assets/images/no_photo.jpg" class="img-fluid" width="80" height="80" v-else>
+                
+                </td>
             </tr>
         </tbody>
     </table>
