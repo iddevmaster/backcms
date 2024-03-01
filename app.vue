@@ -39,4 +39,17 @@ useHead({
 </script>
 
 
+<style>
 
+
+input::placeholder {
+  color: rgb(211, 208, 208)!important;
+  opacity: 1;
+}
+
+textarea::placeholder {
+  color: rgb(211, 208, 208)!important;
+  opacity: 1;
+}
+
+</style>
