@@ -207,7 +207,9 @@
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <div class="avatar-container">
                             <div class="avatar avatar-sm avatar-indicators avatar-online">
-                                <img alt="avatar" :src="image(store.detail.user_img)" class="rounded-circle">
+                              
+                                <img alt="avatar" :src="image(store.detail.user_img)" class="rounded-circle" v-if="store.detail.user_img">
+                                <img alt="avatar" src="../../assets/images/person-avatar.jpg" class="rounded-circle" v-else>
                             </div>
                         </div>
                     </a>
