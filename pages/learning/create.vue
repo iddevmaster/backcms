@@ -79,14 +79,14 @@ const rules = computed(() => {
         "The Course Code field is required",
         required
       ),
-      minLength: minLength(6),
+      minLength: minLength(1),
     },
     course_name: {
       required: helpers.withMessage(
         "The Course Name is required",
         required
       ),
-      minLength: minLength(6),
+      minLength: minLength(1),
     },
      course_cover: {
       required: helpers.withMessage(
@@ -101,7 +101,7 @@ const rules = computed(() => {
         "The Course Description is required",
         required
       ),
-      minLength: minLength(6),
+      minLength: minLength(1),
     },
   };
 });
