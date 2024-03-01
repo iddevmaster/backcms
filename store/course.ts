@@ -156,30 +156,31 @@ export const CourseStore = defineStore('course', {
     async fetchLessonInCourseId() {
 
       const checkpag =  await ApiService.post('/course/lesson/list/' + this.course_id,this.formsearcheditlesson)
+      if(checkpag){
+        if(checkpag.data.total_page > 1){
+          for(let i = 0; i < checkpag.data.total_page; i++){
+            this.formsearcheditlesson.page = i + 1;
+            const data =  await ApiService.post('/course/lesson/list/' + this.course_id,this.formsearcheditlesson)
+            const Storage = LessonStore();
+            for(let i = 0; i < data.data.data.length; i++){
+              Storage.item.push(data.data.data[i]);
+            }
     
-      if(checkpag.data.total_page > 1){
-        for(let i = 0; i < checkpag.data.total_page; i++){
-          this.formsearcheditlesson.page = i + 1;
-          const data =  await ApiService.post('/course/lesson/list/' + this.course_id,this.formsearcheditlesson)
-          const Storage = LessonStore();
-          for(let i = 0; i < data.data.data.length; i++){
-            Storage.item.push(data.data.data[i]);
-          }
-      //  Storage.selected.push(data.data.data)
-
+  
+        }
+        const Storage = LessonStore();
+        Storage.selectlesson_form.total_page = checkpag.data.total_page
+  
+  
+  
+        }
+        
       }
-      const Storage = LessonStore();
-      Storage.selectlesson_form.total_page = checkpag.data.total_page
 
-
-
-      }
 
     },
 
     async SaveCourse() {
-
-      
       try {
         const data = await ApiService.post('/course/create', this.formDataCourse).then(response => {
           this.formDatalesson.course_id = response.data.insertId
@@ -195,12 +196,17 @@ export const CourseStore = defineStore('course', {
 
     async paginatedItems() {
       const Storage = LessonStore();
+ 
       const startIndex = (Storage.selectlesson_form.page - 1) * Storage.selectlesson_form.per_page;
       const endIndex = startIndex + Storage.selectlesson_form.per_page;
       Storage.selectlesson_form.total_page = Math.ceil(Storage.item.length / Storage.selectlesson_form.per_page);
       Storage.selected = Storage.item.slice(startIndex, endIndex);
+      console.log(Storage.selected);
+    },
 
-    
+    async paginatedItemsClear() {
+      const Storage = LessonStore();
+      Storage.selected = [];
 
     },
 
