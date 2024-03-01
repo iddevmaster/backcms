@@ -283,7 +283,13 @@ if (!this.item.some(item => item.cs_id === this.lessonlist[i].cs_id)) {
           this.item = this.item.filter((e)=>e.cs_id !== this.lessonlist[i].cs_id )
         }
       }
-    }
+    },
+
+//     async SeleectOneLessonlist() {
+// console.log('2',this.item);
+// this.item.push(this.lessonlist[i]);
+
+//     },
 
   },
 });

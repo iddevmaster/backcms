@@ -100,6 +100,8 @@ style="
                   type="checkbox"
                   v-model="store.item"
                   :value="item"
+                  
+                  @click="selectAllRowsOne()"
                 />
               </div>
             </td>
@@ -232,6 +234,22 @@ const UnselectAllRows = async () => {
   await store.UnSeleectAllLessonlist();
   await stores.paginatedItems() 
 };
+
+const selectAllRowsOne = async () => {
+  store.selectlesson_form.page = 1 
+
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  FeedData();
+
+};
+const FeedData = async () => {
+  //store.isLoaddingsave = true;
+await stores.paginatedItemsClear() ;
+await stores.paginatedItems() 
+// store.isLoaddingsave = false;
+
+
+}
 
 const Next = async () => {
 

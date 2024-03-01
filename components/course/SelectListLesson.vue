@@ -9,7 +9,7 @@
           </div>
         </div>
         <div class="table-responsive">
-    <table class="table table-hover table-bordered" v-if="store.item.length > 1">
+    <table class="table table-hover table-bordered" v-if="store.selected.length > 0">
         <thead>
             <tr>
                 <th class="checkbox-area" scope="col">
@@ -27,6 +27,7 @@
             </tr>
         </thead>
         <tbody>
+      
             <tr v-for="(item, index) in store.selected" :key="item.cs_id">
               <td>{{ (store.selectlesson_form.page * store.selectlesson_form.per_page) - (store.selectlesson_form.per_page -  index) +  1 }}</td>
               
