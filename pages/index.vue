@@ -6,7 +6,7 @@
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="row widget-statistic">
               <div
-                class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing"
+                class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing clickable"
                 @click="choose('all')"
               >
                 <div class="widget widget-one_hybrid widget-followers">
@@ -47,7 +47,7 @@
                 </div>
               </div>
               <div
-                class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing"
+                class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing clickable"
                 @click="choose('course')"
               >
                 <div class="widget widget-one_hybrid widget-referral">
@@ -88,7 +88,7 @@
                 </div>
               </div>
               <div
-                class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing"
+                class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing clickable"
                 @click="choose('reserve')"
               >
                 <div class="widget widget-one_hybrid widget-engagement">
@@ -127,7 +127,7 @@
               </div>
 
               <div
-                class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing"
+                class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing clickable"
                 @click="choose('exam')"
               >
                 <div class="widget widget-one_hybrid widget-engagement">
@@ -732,10 +732,10 @@ const updatechart = async () => {
     labels: [
       "ມັງກອນ",
       "ກຸມພາ",
-      "ມີເຄື່ອງໝາຍ.",
-      "ເດືອນເມສາ",
-      "ອາດ",
-      "ເດືອນມິຖຸນາ",
+      "ມີນາ",
+      "ເມສາ",
+      "ພຶດສະພາ",
+      "ມິຖຸນາ",
       "ກໍລະກົດ",
       "ສິງຫາ",
       "ກັນຍາ",
@@ -769,12 +769,12 @@ const updatechart = async () => {
 const updatechartrev = async () => {
   store.datacollectionreserve = {
     labels: [
-      "ມັງກອນ",
+    "ມັງກອນ",
       "ກຸມພາ",
-      "ມີເຄື່ອງໝາຍ.",
-      "ເດືອນເມສາ",
-      "ອາດ",
-      "ເດືອນມິຖຸນາ",
+      "ມີນາ",
+      "ເມສາ",
+      "ພຶດສະພາ",
+      "ມິຖຸນາ",
       "ກໍລະກົດ",
       "ສິງຫາ",
       "ກັນຍາ",
@@ -785,7 +785,7 @@ const updatechartrev = async () => {
     datasets: [
       {
         label: "Log Reserve",
-        backgroundColor: ["#FAE043", "#2A9D8F", "#E63946"],
+        backgroundColor: "#FAE043",
         data: [
           store.reportrev[0],
           store.reportrev[1],
@@ -810,10 +810,10 @@ const updatechartexam = async () => {
     labels: [
       "ມັງກອນ",
       "ກຸມພາ",
-      "ມີເຄື່ອງໝາຍ.",
-      "ເດືອນເມສາ",
-      "ອາດ",
-      "ເດືອນມິຖຸນາ",
+      "ມີນາ",
+      "ເມສາ",
+      "ພຶດສະພາ",
+      "ມິຖຸນາ",
       "ກໍລະກົດ",
       "ສິງຫາ",
       "ກັນຍາ",
@@ -824,7 +824,7 @@ const updatechartexam = async () => {
     datasets: [
       {
         label: "Log Exam",
-        backgroundColor: ["#FAE043", "#2A9D8F", "#E63946"],
+        backgroundColor: "#E63946",
         data: [
           store.reportexam[0],
           store.reportexam[1],
@@ -857,4 +857,10 @@ const backToUser = async () => {
   router.go(-1);
 };
 </script>
-<style scoped></style>
+<style scoped>
+
+.clickable {
+        cursor: pointer; /* Change cursor to hand icon */
+    }
+
+</style>

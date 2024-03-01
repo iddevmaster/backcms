@@ -73,19 +73,20 @@
 
 
   
-
+                  
          <li class="menu">
+          
           <a
-            href="#log"
-            data-bs-toggle="collapse"
-            aria-expanded="false"
-            class="dropdown-toggle"
+        
+            class="dropdown-toggle" @click="GotoPage"
           >
             <div class="">
+           
               <i class="bi bi-bar-chart menu-icon"></i>
               <span>{{ $t("menu_dashboard") }}</span>
+         
             </div>
-            <div>
+            <!-- <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -100,10 +101,10 @@
               >
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
-            </div>
+            </div> -->
           </a>
           
-          <ul
+          <!-- <ul
             class="collapse submenu list-unstyled"
             id="log"
             data-bs-parent="#accordionExample"
@@ -111,7 +112,7 @@
             <li>
               <nuxt-link to="/">{{ $t("menu_log") }}</nuxt-link>
             </li>
-          </ul>
+          </ul> -->
         </li>
 
                     <li class="menu menu-heading">
