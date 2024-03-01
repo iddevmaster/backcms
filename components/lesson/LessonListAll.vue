@@ -19,9 +19,10 @@
         name="txt"
         placeholder="ຊອກຫາ"
         class="form-control"
-        value="+"
+        value="+ ເພີ່ມບົດຮຽນ"
 style="
-    background-color: dodgerblue;
+    background-color: rgb(15, 119, 223);
+    color: white;
 "
         @click="openmodal"
       />

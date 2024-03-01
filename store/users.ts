@@ -104,8 +104,8 @@ export const usersStore = defineStore('users', {
     country:null,
     user_img:null,
     lan:[
-     'static/upload/2023/11/files-jQHyakITaP.png','static/upload/2023/11/files-QrkYdiAou9.png','static/upload/2023/9/files-JWOxjtiwsQ.png',
-    ]
+      '../../assets/images/loas.png','static/upload/2023/11/files-QrkYdiAou9.png','static/upload/2023/9/files-JWOxjtiwsQ.png',
+     ]
   }
 
   ),
