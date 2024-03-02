@@ -11,8 +11,10 @@
       />
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
-
+      <button class="btn btn-primary mb-2 me-4" >{{ $t("menu_exam_add") }}</button>
     </div>
+
+    
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <select

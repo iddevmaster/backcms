@@ -440,6 +440,13 @@
   "data_his":"#Nodata",
   "fitter_year":"Year",
   "fitter_dlt":"DLT",
-  "fitter_province":"Province"
+  "fitter_province":"Province",
+  "title_group":"Group",
+  "title_group_t":"Group All",
+  "table_id_group" :"#",
+  "table_id_name" :"#",
+  "table_id_create" :"#",
+  "table_id_action" :"#"
+
 }
 

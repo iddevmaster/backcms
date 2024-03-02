@@ -2,7 +2,7 @@
   <loading
     v-model:active="store.isLoaddingsave"
     :can-cancel="true"
-    @on-cancel="onCancel"
+
   />
 
   <div class="row layout-top-spacing">

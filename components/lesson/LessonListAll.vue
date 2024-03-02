@@ -218,10 +218,7 @@ style="
 </div>
 </div>
 
-<div>
-    <b-table responsive :items="store.items"></b-table>
-  </div>
- 
+
 </template>
 
 <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>

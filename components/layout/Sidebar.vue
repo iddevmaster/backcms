@@ -177,6 +177,9 @@
             <li>
               <nuxt-link to="/lesson">{{ $t("lesson_all") }}</nuxt-link>
             </li>
+            <li>
+              <nuxt-link to="/group">{{ $t("lesson_all") }}</nuxt-link>
+            </li>
           </ul>
         </li>
 

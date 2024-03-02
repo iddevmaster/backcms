@@ -66,7 +66,7 @@ const delete_userid = async (id) => {
 </script>
 
 <template>
-   <loading v-model:active="store.isLoading" :can-cancel="true" @on-cancel="onCancel"
+   <loading v-model:active="store.isLoading" :can-cancel="true"
                 />
   <div id="content" class="main-content">
             <div class="layout-px-spacing">

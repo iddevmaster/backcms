@@ -6,11 +6,10 @@
 // import DataTablesCore from 'datatables.net-bs5';
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-import { LessonStore } from '@/store/lesson'
+import { GroupStore } from '@/store/group'
 import { useAuthStore } from '@/store/auth'
-import LessonListAll from '@/components/lesson/LessonListAll.vue'
-import LessonCreate from '@/components/lesson/LessonCreate.vue'
-import LessonEdit from '@/components/lesson/LessonEdit.vue'
+import GroupList from '@/components/group/GroupList.vue'
+import GroupCreate from '@/components/group/GroupCreate.vue'
 
 import { useToast } from 'vue-toastification';
 import { ref } from 'vue';
@@ -23,45 +22,17 @@ definePageMeta({
 })
 
 const auth = useAuthStore()
-const store = LessonStore()
+const store = GroupStore()
 const toast = useToast();
-store.formcreatelesson.user_id = auth.user_id
-store.user_id = auth.user_id
+store.formcreategroup.user_id = auth.user_id
 
-const lessonlist = await store.fetchLessonlist();
-
-if (lessonlist === false) {
-  await toast.error("Error Data Contact Admin", {
-    timeout: 30000,
-  });
-}
-
-
-
-
-  const modalStore = useModalStore();
-  const { GetopenModal } = storeToRefs(store); //Get Getter
-  const { GetopenModal_ID } = storeToRefs(store); //Get Getter
-
-  const { Pending } = storeToRefs(store); //Get Getter
-
+ store.fetchGrouplist();
   const closeModal = () => {
     //store.closeModal();
   };
 
 
-const delete_userid = async (id) => {
 
-  const delc = await store.selectlessId(id);
-  if(delc){
-    toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
-    await store.fetchLessonlist()
-      }else{
-   toast.error('ລຶບຂໍ້ມູນລົ້ມເຫລວ')
-      }
-
-  };
-  
 </script>
 
 <template>
@@ -72,19 +43,17 @@ const delete_userid = async (id) => {
               <div class="page-meta">
                         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#"> {{ $t("title_lesson") }} </a></li>
-                                <li class="breadcrumb-item active" aria-current="page"> {{ $t("title_lesson_t") }}</li>
+                                <li class="breadcrumb-item"><a href="#"> {{ $t("title_group") }} </a></li>
+                                <li class="breadcrumb-item active" aria-current="page"> {{ $t("title_group_t") }}</li>
                             </ol>
                         </nav>
                     </div>
-          
-                <Loading v-if="Pending"></Loading>
-            <LessonListAll></LessonListAll>
+            <GroupList></GroupList>
             </div>
           </div>
 
-   <LessonCreate></LessonCreate>
-    <LessonEdit></LessonEdit>
+ <GroupCreate></GroupCreate>
+    <!-- <LessonEdit></LessonEdit> -->
 </template>
 
 <style>

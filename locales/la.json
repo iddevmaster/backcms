@@ -38,8 +38,8 @@
 
   
 
-  "menu_page_course": "ສື່​ການ​ຮຽນ​ຮູ້​",
-  "menu_page_course_page": "ສື່​ການ​ຮຽນ​ຮູ້​ທັງໝົດ",
+  "menu_page_course": "ຄວາມຮູ້ອອນໄລນ໌",
+  "menu_page_course_page": "ຄວາມຮູ້ອອນໄລນ໌​ທັງໝົດ",
 
   "menu_exam_all": "ແບບທົດສອບທັງໝົດ",
   "menu_exam_create": "ສ້າງຫຼັກສູດ",
@@ -433,8 +433,14 @@
   "data_his":"#ບໍ່​ມີ​ຂໍ້​ມູນ",
   "fitter_year":"ປີ",
   "fitter_dlt":"ປະເພດໃບຂັບຂີ່",
-  "fitter_province":"ແຂວງ"
-  
+  "fitter_province":"ແຂວງ",
+  "backto_lean":"ກັບໄປທີ່ຄວາມຮູ້ອອນໄລນ໌",
+  "title_group":"ບົດຮຽນ",
+  "title_group_t":"ບົດຮຽນທັງໝົດ",
+  "table_id_group" :"#",
+  "table_id_name" :"#",
+  "table_id_create" :"#",
+  "table_id_action" :"#"
 }
 
 

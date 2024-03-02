@@ -22,7 +22,7 @@
                </textarea>
 
               <span v-if="v$.cs_name.$error" class="text-xs text-red-500" style="color: red">
-                ຕ້ອງລະບຸລະຫັດຫຼັກສູດ.</span>
+                ຕ້ອງໃສ່ຂໍ້ຄວາມ.</span>
           </div>
 
           <div class="mb-3">
@@ -37,7 +37,7 @@
                </textarea>
 
              <span v-if="v$.cs_description.$error" class="text-xs text-red-500" style="color: red">
-                ຕ້ອງລະບຸລະຫັດຫຼັກສູດ.</span>
+              ຕ້ອງໃສ່ຂໍ້ຄວາມ.</span>
           </div>
 
               <div class="mb-3">

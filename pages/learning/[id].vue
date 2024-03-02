@@ -137,7 +137,9 @@ const save = async () => {
 
 
 
-
+const backtoLean = async () => {
+  await router.push('/learning');
+}
 
 
 const removeImage = async () => {
@@ -211,13 +213,20 @@ function coverimage(i) {
 
                         <div class="widget-content widget-content-area br-8 p-3">
                          
-
+                          <div class="widget-header">                                
+                                    <div class="row">
+                                        <div class="col-xl-10 col-md-10 col-sm-10 col-10">
+                                            <h4>{{ $t("menu_couse_p_title") }}</h4>
+                                        </div>
+                                        <div class="col-xl-2 col-md-2 col-sm-12 col-2" style="text-align: center;">
+                                          <button type="button" class="btn btn-primary additem _effect--ripple waves-effect waves-light" @click="backtoLean()">
+      {{ $t("backto_lean") }}
+    </button>   
+   </div> 
+  </div>
+                                </div>
                             <div class="row mb-4 g-3">
-    <div id="form_grid_layouts" class="col-lg-9">
-      <div class="seperator-header">
-        <h4 class=""> {{ $t("menu_couse_p_edit_title") }} </h4>
-      </div>
-    </div>
+ 
     <div class="col-md-6">
       <label for="inputEmail4" class="form-label">  {{ $t("menu_couse_f_title_code") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputEmail4" v-model="store.formDataEditCourse.course_code" :class="{
