@@ -401,9 +401,9 @@
   "chart_log_course":"Log Course",
   "chart_log_app":"Log Reserve",
   "chart_log_exam":"Log Exam",
-  "fitter_dashboard_course":"Fitter Course",
-  "fitter_dashboard_appoint":"Fitter Appointment",
-  "fitter_dashboard_exam":"Fitter Exam",
+  "fitter_dashboard_course":"ກອງຂໍ້ມູນ - Filter Data",
+  "fitter_dashboard_appoint":"ກອງຂໍ້ມູນ - Filter Data",
+  "fitter_dashboard_exam":"ກອງຂໍ້ມູນ - Filter Data",
   "fitter_search":"Search",
   "than":"ທ້າວ",
   "nang":"ນາງ ",
@@ -437,7 +437,9 @@
   "user_history_exam":"History Examination",
   "cancel":"Cancel",
   "delete":"Delete",
-  "data_his":"#Nodata"
-
+  "data_his":"#Nodata",
+  "fitter_year":"Year",
+  "fitter_dlt":"DLT",
+  "fitter_province":"Province"
 }
 

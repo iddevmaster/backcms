@@ -181,7 +181,7 @@
   "menu_user_birdday": "ວັນເດືອນປີເກີດ",
   "menu_user_zipcode": "ແຂວງ",
   "menu_user_country": "ສັນຊາດ",
-  "menu_user_verify": "ສະຖານະตัวตน",
+  "menu_user_verify": "ສະຖານະต",
   "menu_user_image": "ຮູບ",
   "menu_user_bt_save": "ບັນທຶກ",
 
@@ -396,9 +396,9 @@
   "chart_log_course":"ບັນທຶກ ຫຼັກສູດ",
   "chart_log_app":"ນັດໝາຍ - ຈຳນວນການຈອງ",
   "chart_log_exam":"ບັນທຶກ ການເຮັດສອບເສັງ",
-  "fitter_dashboard_course":"ຄົ້ນຫາ ຫຼັກສູດ​",
-  "fitter_dashboard_appoint":"ຄົ້ນຫາ ຈອງ​",
-  "fitter_dashboard_exam":"ຄົ້ນຫາ ການເຮັດສອບເສັງ",
+  "fitter_dashboard_course":"ກອງຂໍ້ມູນ - Filter Data​",
+  "fitter_dashboard_appoint":"ກອງຂໍ້ມູນ - Filter Data​",
+  "fitter_dashboard_exam":"ກອງຂໍ້ມູນ - Filter Data",
   "fitter_search":"ຊອກຫາ",
   "than":"ທ້າວ",
   "nang":"ນາງ ",
@@ -430,7 +430,10 @@
   "user_history_exam":"ລາຍຊື່ຜົນການທົດສອບ",
   "cancel":"ຍົກເລີກ",
   "delete":"ລຶບ",
-  "data_his":"#ບໍ່​ມີ​ຂໍ້​ມູນ"
+  "data_his":"#ບໍ່​ມີ​ຂໍ້​ມູນ",
+  "fitter_year":"ປີ",
+  "fitter_dlt":"ປະເພດໃບຂັບຂີ່",
+  "fitter_province":"ແຂວງ"
   
 }
 

@@ -312,7 +312,11 @@
                   </div>
 
                   <div class="col-sm-12">
-                    <label for="exampleFormControlInput1">Year</label>
+                    <label for="exampleFormControlInput1">
+                  
+                    <span v-if="locale == 'en'">{{ $t("fitter_year") }}</span>
+                    <span v-if="locale == 'la'">{{ $t("fitter_year") }}</span>
+                    </label>
                     <select class="form-control" v-model="store.formrev.year">
                       <option value="2023">2023</option>
                       <option value="2024">2024</option>
@@ -324,7 +328,11 @@
                   </div>
 
                   <div class="col-sm-12">
-                    <label for="exampleFormControlInput1">DLT</label>
+                    <label for="exampleFormControlInput1">
+               
+                     <span v-if="locale == 'en'">{{ $t("fitter_dlt") }}</span>
+                    <span v-if="locale == 'la'">{{ $t("fitter_dlt") }}</span>
+                    </label>
                     <select
                       class="form-control"
                       @change="onChange($event)"
@@ -338,6 +346,31 @@
                       >
                     
                           <span v-if="locale == 'la'">{{ item.dlt_description_loas }}</span>
+                  <span v-if="locale == 'en'">{{ item.dlt_description_english }}</span>
+                  <span v-if="locale == 'th'">{{ item.dlt_description }}</span>
+                      </option>
+                    </select>
+                  </div>
+
+
+                  <div class="col-sm-12">
+                    <label for="exampleFormControlInput1">
+
+                      <span v-if="locale == 'en'">{{ $t("fitter_province") }}</span>
+                    <span v-if="locale == 'la'">{{ $t("fitter_province") }}</span>
+                    </label>
+                    <select
+                      class="form-control"
+                      @change="onChange($event)"
+                      v-model="store.formexam.dlt_code"
+                    >
+                      <option  :value="null">ທັງໝົດ</option>
+                      <option
+                        v-for="(item, i) in store.dlt"
+                        :value="item.dlt_code"
+                      >
+                  
+                  <span v-if="locale == 'la'">{{ item.dlt_description_loas }}</span>
                   <span v-if="locale == 'en'">{{ item.dlt_description_english }}</span>
                   <span v-if="locale == 'th'">{{ item.dlt_description }}</span>
                       </option>
@@ -392,7 +425,10 @@
                   </div>
 
                   <div class="col-sm-12">
-                    <label for="exampleFormControlInput1">Year</label>
+                    <label for="exampleFormControlInput1">
+                    <span v-if="locale == 'en'">{{ $t("fitter_year") }}</span>
+                    <span v-if="locale == 'la'">{{ $t("fitter_year") }}</span>
+                    </label>
                     <select class="form-control" v-model="store.formexam.year">
                       <option value="2023">2023</option>
                       <option value="2024">2024</option>
@@ -404,19 +440,48 @@
                   </div>
 
                   <div class="col-sm-12">
-                    <label for="exampleFormControlInput1">DLT</label>
+                    <label for="exampleFormControlInput1">
+
+                      <span v-if="locale == 'en'">{{ $t("fitter_dlt") }}</span>
+                    <span v-if="locale == 'la'">{{ $t("fitter_dlt") }}</span>
+                    </label>
                     <select
                       class="form-control"
                       @change="onChange($event)"
                       v-model="store.formexam.dlt_code"
                     >
-                      <option disabled :value="null">​ເລືອກ</option>
+                      <option  :value="null">ທັງໝົດ</option>
                       <option
                         v-for="(item, i) in store.dlt"
                         :value="item.dlt_code"
                       >
                   
-                         <span v-if="locale == 'la'">{{ item.dlt_description_loas }}</span>
+                  <span v-if="locale == 'la'">{{ item.dlt_description_loas }}</span>
+                  <span v-if="locale == 'en'">{{ item.dlt_description_english }}</span>
+                  <span v-if="locale == 'th'">{{ item.dlt_description }}</span>
+                      </option>
+                    </select>
+                  </div>
+
+
+                  <div class="col-sm-12">
+                    <label for="exampleFormControlInput1">
+
+                      <span v-if="locale == 'en'">{{ $t("fitter_province") }}</span>
+                    <span v-if="locale == 'la'">{{ $t("fitter_province") }}</span>
+                    </label>
+                    <select
+                      class="form-control"
+                      @change="onChange($event)"
+                      v-model="store.formexam.dlt_code"
+                    >
+                      <option  :value="null">ທັງໝົດ</option>
+                      <option
+                        v-for="(item, i) in store.dlt"
+                        :value="item.dlt_code"
+                      >
+                  
+                  <span v-if="locale == 'la'">{{ item.dlt_description_loas }}</span>
                   <span v-if="locale == 'en'">{{ item.dlt_description_english }}</span>
                   <span v-if="locale == 'th'">{{ item.dlt_description }}</span>
                       </option>
@@ -525,7 +590,7 @@
                       class="form-control"
                       v-model="store.formfitter.cs_id"
                     >
-                      <option disabled :value="null">​ເລືອກ</option>
+                      <option disabled :value="null">ທັງໝົດ</option>
                       <option
                         v-for="(less, i) in store.lessonlist"
                         :value="less.cs_id"
