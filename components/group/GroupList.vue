@@ -75,8 +75,8 @@ style="
                 <td align="center">
              <div class="btn-group-vertical">
             <button type="button" class="btn btn-success" style="background-color:#0f3bc9;" @click="edit(item)">{{ $t("menu_exam_all_bt_edit_exam") }}</button>
-            <button type="button" class="btn btn-success" style="background-color:#0f3bc9;"  @click="goToAddEx(item)">{{ $t("menu_exam_all_bt_add_exam") }}</button>
-            <button type="button" class="btn btn-success" style="background-color:#0f3bc9;" @click="del(item)">{{ $t("menu_exam_all_bt_del_exam") }}</button>
+      
+            <button type="button" class="btn btn-success" style="background-color:#0f3bc9;" @click="del(item.cg_id)">{{ $t("menu_exam_all_bt_del_exam") }}</button>
             </div>
           </td>
        
@@ -86,7 +86,7 @@ style="
     </table>
 
     <div>
-      <div class="dt--pagination" v-if="store.total_page > 1">
+      <div class="dt--pagination" v-if="store.group_total_page > 1">
         <div class="dataTables_paginate paging_simple_numbers" id="zero-config_paginate">
           <ul class="pagination">
             <li class="paginate_button page-item previous" id="zero-config_previous">
@@ -98,7 +98,7 @@ style="
                   <polyline points="12 19 5 12 12 5"></polyline>
                 </svg></a>
             </li>
-            <li class="paginate_button page-item " v-for="page in store.total_page" :key="page">
+            <li class="paginate_button page-item " v-for="page in store.group_total_page" :key="page">
               <a href="#" aria-controls="zero-config" data-dt-idx="1" tabindex="0" class="page-link"  @click="setCurrentPageclick(page)"
               >
                 {{ page }}</a>
@@ -164,6 +164,13 @@ function coverttime(date) {
 const openmodal = async () => {
 store.GetopenModalCreate = true;
 };
+
+const del = async (item) => {
+ store.cg_id = item;
+
+store.GetopenModal = true;
+};
+
 const edit = async (item) => {
 
   store.formeditgroup.cg_id = item.cg_id
@@ -173,6 +180,11 @@ store.GetopenModalEdit = true;
 };
 
 
+
+const setCurrentPageclick = async (page) => {
+  await store.setCurrentPage(page)
+  await store.fetchGrouplist()
+};
 
 </script>
 <style>

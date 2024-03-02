@@ -9,6 +9,8 @@ export const GroupStore = defineStore('group', {
     isLoading:true,
     GetopenModalCreate:false,
     GetopenModalEdit:false,
+    GetopenModal:false,
+    cg_id:null,
     formgroup:{
 
     },
@@ -48,7 +50,6 @@ export const GroupStore = defineStore('group', {
       try {
         const data = await ApiService.post('/course/group/all', this.formsearchgroup).then(response => {
 
-          console.log(response.data.data);
           this.group = response.data.data
           this.group_total_page = response.data.total_page
           this.group_limit_page = response.data.limit_page
@@ -78,14 +79,41 @@ export const GroupStore = defineStore('group', {
     },
 
     async UpdateGroup() {
+
+      try {
+        const data = await ApiService.put('/course/group/update/'+ this.formeditgroup.cg_id, this.formeditgroup).then(response => {
+          if(response.status == 200){
+            return true;
+          }else {
+            return false;
+          }
+        });
+        return data
+      } catch (error) {
+        return false;
+      }
   
 
-      const data = await ApiService.put('/course/group/update/'+this.formeditgroup.cg_id).then(response => {
-        console.log(this.formeditgroup.cg_id);
-        return true;
-                });
-   
-   return true;
+    },
+    async DeleteGroup() {
+    
+      try {
+        const data = await ApiService.delete('/course/group/delete/'+ this.cg_id).then(response => {
+          if(response.status == 200){
+            return true;
+          }else {
+            return false;
+          }
+        });
+        return data
+      } catch (error) {
+        return false;
+      }
+
+    },
+
+    setCurrentPage(page) {
+      this.formsearchgroup.page = page
     },
 
 

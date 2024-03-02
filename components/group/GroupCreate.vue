@@ -107,6 +107,11 @@ const save = async () => {
   }
   }
 };
+
+const closeModal = async () => {
+
+  store.GetopenModalCreate = false;
+}
 </script>
 
 
