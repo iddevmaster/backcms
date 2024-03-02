@@ -72,11 +72,13 @@ style="
                   </span>
                 </td>
       
-          
-                <td class="text-center">
-                
-                </td>
-              
+                <td align="center">
+             <div class="btn-group-vertical">
+            <button type="button" class="btn btn-success" style="background-color:#0f3bc9;" @click="edit(item)">{{ $t("menu_exam_all_bt_edit_exam") }}</button>
+            <button type="button" class="btn btn-success" style="background-color:#0f3bc9;"  @click="goToAddEx(item)">{{ $t("menu_exam_all_bt_add_exam") }}</button>
+            <button type="button" class="btn btn-success" style="background-color:#0f3bc9;" @click="del(item)">{{ $t("menu_exam_all_bt_del_exam") }}</button>
+            </div>
+          </td>
        
              
             </tr>
@@ -162,6 +164,15 @@ function coverttime(date) {
 const openmodal = async () => {
 store.GetopenModalCreate = true;
 };
+const edit = async (item) => {
+
+  store.formeditgroup.cg_id = item.cg_id
+  store.formeditgroup.cg_name = item.cg_name
+  store.formeditgroup.user_id = auth.user_id
+store.GetopenModalEdit = true;
+};
+
+
 
 </script>
 <style>

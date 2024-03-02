@@ -8,6 +8,7 @@ export const GroupStore = defineStore('group', {
     user_id: null,
     isLoading:true,
     GetopenModalCreate:false,
+    GetopenModalEdit:false,
     formgroup:{
 
     },
@@ -20,6 +21,11 @@ export const GroupStore = defineStore('group', {
       cg_name:"",
       user_id:null,
     },
+    formeditgroup: {
+      cg_name:"",
+      user_id:null,
+      cg_id:null
+    },
     group:[],
 
   }
@@ -28,6 +34,9 @@ export const GroupStore = defineStore('group', {
   getters: {
     FormGroup(state) {
       return state.formcreategroup;
+    },
+    FormEditGroup(state) {
+      return state.formeditgroup;
     },
   
   },
@@ -66,6 +75,17 @@ export const GroupStore = defineStore('group', {
       } catch (error) {
        // return navigateTo('/maintenance');
       }
+    },
+
+    async UpdateGroup() {
+  
+
+      const data = await ApiService.put('/course/group/update/'+this.formeditgroup.cg_id).then(response => {
+        console.log(this.formeditgroup.cg_id);
+        return true;
+                });
+   
+   return true;
     },
 
 

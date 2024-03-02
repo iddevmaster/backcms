@@ -1,5 +1,5 @@
 <template>
-  <div v-if="store.GetopenModalCreate" class="modal">
+  <div v-if="store.GetopenModalEdit" class="modal">
     <div
       class="modal-content modal-dialog modal-xl"
       id="deleteConformationLabel"
@@ -20,7 +20,7 @@
               type="text"
               class="form-control"
               id="recipient-name"
-              v-model="store.formcreategroup.cg_name"
+              v-model="store.formeditgroup.cg_name"
             />
 
             <span
@@ -76,7 +76,7 @@ const toast = useToast();
 const store = GroupStore();
 const router = useRouter();
 
-const { FormGroup } = storeToRefs(store);
+const { FormEditGroup } = storeToRefs(store);
 
 const rules = computed(() => {
   return {
@@ -86,7 +86,12 @@ const rules = computed(() => {
     },
   };
 });
-const v$ = useVuelidate(rules, FormGroup);
+const v$ = useVuelidate(rules, FormEditGroup);
+
+
+const closeModal = async () => {
+  store.GetopenModalEdit = false;
+}
 const save = async () => {
   ///////////// บันทึก
 
@@ -95,10 +100,10 @@ const save = async () => {
   if (!v$.value.$error) {
 
 
-  let save = await store.SaveGroup();
+  let save = await store.UpdateGroup();
   
   if(save === true){
-    store.GetopenModalCreate = false;
+    store.GetopenModalEdit = false;
     await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
     store.fetchGrouplist();
     

@@ -10,6 +10,8 @@ import { GroupStore } from '@/store/group'
 import { useAuthStore } from '@/store/auth'
 import GroupList from '@/components/group/GroupList.vue'
 import GroupCreate from '@/components/group/GroupCreate.vue'
+import GroupEdit from '@/components/group/GroupEdit.vue'
+
 
 import { useToast } from 'vue-toastification';
 import { ref } from 'vue';
@@ -53,6 +55,7 @@ store.formcreategroup.user_id = auth.user_id
           </div>
 
  <GroupCreate></GroupCreate>
+ <GroupEdit></GroupEdit>
     <!-- <LessonEdit></LessonEdit> -->
 </template>
 
