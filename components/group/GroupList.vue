@@ -160,7 +160,9 @@ function coverttime(date) {
   return formattedDatetime;
 }
 
-
+const searchData = async () => {
+  await store.fetchGrouplist();
+};
 const openmodal = async () => {
 store.GetopenModalCreate = true;
 };
