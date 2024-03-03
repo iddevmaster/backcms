@@ -7,6 +7,7 @@
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import { LessonStore } from '@/store/lesson'
+import { GroupStore } from '@/store/group'
 import { useAuthStore } from '@/store/auth'
 import LessonListAll from '@/components/lesson/LessonListAll.vue'
 import LessonCreate from '@/components/lesson/LessonCreate.vue'
@@ -24,11 +25,15 @@ definePageMeta({
 
 const auth = useAuthStore()
 const store = LessonStore()
+
+
 const toast = useToast();
 store.formcreatelesson.user_id = auth.user_id
 store.user_id = auth.user_id
 
 const lessonlist = await store.fetchLessonlist();
+const group = await store.fetchGrouplist();
+
 
 if (lessonlist === false) {
   await toast.error("Error Data Contact Admin", {

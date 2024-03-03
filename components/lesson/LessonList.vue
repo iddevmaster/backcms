@@ -21,7 +21,7 @@
                 <th class="text-center" scope="col">{{ $t("lesson_ans") }}</th>
                 <th class="text-center" scope="col">{{ $t("lesson_pic") }}</th>
               
-           
+
             </tr>
         </thead>
 

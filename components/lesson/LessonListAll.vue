@@ -28,8 +28,25 @@ style="
       />
       
     </div>
+        <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
+     
+    </div>
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
+      <select
+        class="form-select form-select"
+        aria-label="Default select example" @change="selectshowdata_ch($event)"
+      
+      >
+        <option value="0">ทั้งหมด</option>
+
+       
+        <option v-for="item in store.group" :value="item.cg_id" :key="item.cg_id"   >{{item.cg_name}}</option>
+      
+     
+      </select>
+    </div>
+       <div class="col-xl- col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
       <select
         class="form-select form-select"
         aria-label="Default select example"
@@ -51,6 +68,7 @@ style="
                 <th scope="col">#</th>
                 <th class="text-center" scope="col">{{ $t("lesson_qui") }}</th>
                 <th class="text-center" scope="col">{{ $t("lesson_ans") }}</th>
+                 <th scope="col">GROUP</th>
                 <th scope="col">{{ $t("lesson_pic") }}</th>
                   <th class="text-center" scope="col">{{ $t("less_ac") }}</th>
             </tr>
@@ -61,7 +79,7 @@ style="
           <td>{{ (store.formsearchlesson.page * store.formsearchlesson.per_page) - (store.formsearchlesson.per_page -  index) +  1 }}</td>
              <td>{{ item.cs_name }}</td>
                <td>{{ item.cs_description }}</td>
-         
+            <td>{{ item.cg_name }}</td>
           <td class="text-center">
             
             <img :src="image(item.cs_cover)" class="img-fluid" width="80" height="80" v-if="item.cs_cover">
@@ -257,9 +275,6 @@ const auth = useAuthStore();
 
 
 
-
-
-
 const selectshowdata = async (sel) => {
   await selectentiresentires(sel.target.value);
   await store.fetchLessonlist();
@@ -272,6 +287,11 @@ const searchData = async () => {
 const openmodal = async () => {
   store.GetopenModalCreate = true;
 };
+
+const selectshowdata_ch = async (cg) => {
+ await store.fitter(cg.target.value);
+};
+
 
 
 function goToPage(page) {

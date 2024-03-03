@@ -11,6 +11,7 @@ export const GroupStore = defineStore('group', {
     GetopenModalEdit:false,
     GetopenModal:false,
     cg_id:null,
+    myValue: null,
     formgroup:{
 
     },
@@ -49,7 +50,6 @@ export const GroupStore = defineStore('group', {
     async fetchGrouplist() {
       try {
         const data = await ApiService.post('/course/group/all', this.formsearchgroup).then(response => {
-
           this.group = response.data.data
           this.group_total_page = response.data.total_page
           this.group_limit_page = response.data.limit_page
@@ -119,6 +119,10 @@ export const GroupStore = defineStore('group', {
     async selectentires(data_entires) {
       this.formsearchgroup.per_page = data_entires;
       this.formsearchgroup.page = 1;
+    },
+
+    async fitter() {
+
     },
 
 
