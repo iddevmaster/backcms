@@ -33,6 +33,7 @@ style="
       <select
         class="form-select form-select"
         aria-label="Default select example"
+          @change="selectshowdata($event)"
      
       >
         <option :value="5">5</option>
@@ -72,14 +73,71 @@ style="
                   </span>
                 </td>
       
-                <td align="center">
-             <div class="btn-group-vertical">
-            <button type="button" class="btn btn-success" style="background-color:#0f3bc9;" @click="edit(item)">{{ $t("menu_exam_all_bt_edit_exam") }}</button>
       
-            <button type="button" class="btn btn-success" style="background-color:#0f3bc9;" @click="del(item.cg_id)">{{ $t("menu_exam_all_bt_del_exam") }}</button>
-            </div>
-          </td>
+
+           <td>    
+             <div class="action-btns">
+
+                <NuxtLink>
+                  <a
+                    href="javascript:void(0);"
+                    class="action-btn btn-edit bs-tooltip me-2"
+                   @click="edit(item)"
+                    data-toggle="tooltip"
+                    data-placement="top"
+                    aria-label="Edit"
+                    data-bs-original-title="Edit"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="feather feather-edit-2"
+                    >
+                      <path
+                        d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"
+                      ></path>
+                    </svg>
+                  </a>
+                </NuxtLink>
+                <a
+                  href="javascript:void(0);"
+                  class="action-btn btn-delete bs-tooltip"
+                 @click="del(item.cg_id)"
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  aria-label="Delete"
+                  data-bs-original-title="Delete"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-trash-2"
+                  >
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path
+                      d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                    ></path>
+                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                  </svg>
+                </a>
+              </div></td>
        
+             
              
             </tr>
         </tbody>
@@ -89,7 +147,7 @@ style="
       <div class="dt--pagination" v-if="store.group_total_page > 1">
         <div class="dataTables_paginate paging_simple_numbers" id="zero-config_paginate">
           <ul class="pagination">
-            <li class="paginate_button page-item previous" id="zero-config_previous">
+            <li class="paginate_button page-item previous" id="zero-config_previous" @click="Prev()">
               <a href="#" aria-controls="zero-config" data-dt-idx="0" tabindex="0" class="page-link">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -99,11 +157,11 @@ style="
                 </svg></a>
             </li>
             <li class="paginate_button page-item " v-for="page in store.group_total_page" :key="page">
-              <a href="#" aria-controls="zero-config" data-dt-idx="1" tabindex="0" class="page-link"  @click="setCurrentPageclick(page)"
+              <a href="#" aria-controls="zero-config" data-dt-idx="1" tabindex="0" class="page-link"  :class="{ bgc: page === store.formsearchgroup.page }"  @click="setCurrentPageclick(page)"
               >
                 {{ page }}</a>
             </li>
-            <li class="paginate_button page-item next" id="zero-config_next"><a href="#" aria-controls="zero-config"
+            <li class="paginate_button page-item next" id="zero-config_next"><a href="#" aria-controls="zero-config" @click="Next()"
                 data-dt-idx="4" tabindex="0" class="page-link"><svg xmlns="http://www.w3.org/2000/svg" width="24"
                   height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                   stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right">
@@ -182,11 +240,54 @@ store.GetopenModalEdit = true;
 };
 
 
-
 const setCurrentPageclick = async (page) => {
   await store.setCurrentPage(page)
   await store.fetchGrouplist()
 };
+
+const selectshowdata = async (x) => {
+  await store.selectentires(x.target.value);
+  await store.fetchGrouplist();
+};
+
+
+const Prev = async () => {
+
+  if (store.formsearchgroup.page == 1) {
+    await store.fetchGrouplist();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else {
+    store.formsearchgroup.page -= 1;
+    await store.fetchGrouplist();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  }
+};
+
+
+
+
+const Next = async () => {
+
+
+  if (store.formsearchgroup.page == store.group_total_page) {
+   
+    store.formsearchgroup.page = store.group_total_page;
+  await store.fetchGrouplist();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else {
+    store.formsearchgroup.page += 1;
+await store.fetchGrouplist();
+   
+  }
+
+};
+
 
 </script>
 <style>
@@ -209,6 +310,11 @@ padding: 20px;
 width: 100%;
 }
 } */
+
+
+.bgc{
+  color: #0a58ca;
+}
 
 .modal {
   display: flex;

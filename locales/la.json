@@ -28,6 +28,8 @@
   "table_course_pic": "ຮູບ",
   "table_course_ac": "ຈັດການ",
 
+  "menu_group_all" :"Group All",
+
   "menu_couse_edit": "ແກ້ໄຂສື່​ການ​ຮຽນ​ຮູ້​",
   "menu_couse_p_edit_title": "ແກ້ໄຂສື່​ການ​ຮຽນ​ຮູ້​",
   "menu_couse_f_edit_title_code": "ລະຫັດສື່​ການ​ຮຽນ​ຮູ້​",
@@ -438,9 +440,10 @@
   "title_group":"ບົດຮຽນ",
   "title_group_t":"ບົດຮຽນທັງໝົດ",
   "table_id_group" :"#",
-  "table_id_name" :"#",
-  "table_id_create" :"#",
-  "table_id_action" :"#"
+  "table_id_name" :"ຊື່ກຸ່ມ",
+  "table_id_create" :"ສ້າງ",
+  "table_id_action" :"ຈັດການ"
+
 }
 
 

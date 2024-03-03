@@ -32,6 +32,8 @@
   "menu_couse_f_edit_title_picture": "Image Cover",
   "menu_couse_f_edit_title_display_picture": "Image Display here",
 
+  "menu_group_all" :"Group All",
+
   "table_course_code": "Code",
   "table_course_name": "Name",
   "table_course_user_create": "Create by",
@@ -444,9 +446,10 @@
   "title_group":"Group",
   "title_group_t":"Group All",
   "table_id_group" :"#",
-  "table_id_name" :"#",
-  "table_id_create" :"#",
-  "table_id_action" :"#"
+  "table_id_name" :"Name Group",
+  "table_id_create" :"Create",
+  "table_id_action" :"Manage"
+
 
 }
 

@@ -276,7 +276,6 @@ await store.fetchLessonlist();
 const Prev = async () => {
 
   if (store.formsearchlesson.page == 1) {
-    console.log(store.formsearchlesson.page)
     await store.fetchLessonlist();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
@@ -287,9 +286,7 @@ const Prev = async () => {
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
-   
   }
-
 };
 
 const validatePNumber = async (evt) => {

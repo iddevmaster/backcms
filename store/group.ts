@@ -116,6 +116,11 @@ export const GroupStore = defineStore('group', {
       this.formsearchgroup.page = page
     },
 
+    async selectentires(data_entires) {
+      this.formsearchgroup.per_page = data_entires;
+      this.formsearchgroup.page = 1;
+    },
+
 
   },
 
