@@ -55,7 +55,7 @@ export const LessonStore = defineStore('lesson', {
     },
     formsearchlesson: {
       page: 1,
-      per_page: 5,
+      per_page: 50,
       search: '',
       exclude:[]
     },
@@ -86,9 +86,6 @@ export const LessonStore = defineStore('lesson', {
     FormEditLesson(state) {
       return state.formcreatelessonedit;
     },
-
-
-    
 
   },
 
