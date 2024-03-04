@@ -57,10 +57,9 @@
     :options="store.group"
     label="cg_name"
      placeholder="ເລືອກ"
-
          @change="changedLabelCounrt($event)"
   ></v-select>
-  {{store.myselect_group}}
+
  <span v-if="v$.cg_id.$error" class="text-xs text-red-500" style="color: red">
               ຕ້ອງໃສ່ຂໍ້ຄວາມ.</span>
             

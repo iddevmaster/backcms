@@ -202,12 +202,10 @@ Storage.selected = checkpag.data.data
 
     async paginatedItems() {
       const Storage = LessonStore();
- 
       const startIndex = (Storage.selectlesson_form.page - 1) * Storage.selectlesson_form.per_page;
       const endIndex = startIndex + Storage.selectlesson_form.per_page;
       Storage.selectlesson_form.total_page = Math.ceil(Storage.item.length / Storage.selectlesson_form.per_page);
       Storage.selected = Storage.item.slice(startIndex, endIndex);
-    
     },
 
     async paginatedItemsClear() {

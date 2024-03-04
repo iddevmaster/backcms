@@ -33,6 +33,7 @@ store.user_id = auth.user_id
 
 const lessonlist = await store.fetchLessonlist();
 const group = await store.fetchGrouplist();
+await store.paginatedItems() 
 
 
 if (lessonlist === false) {

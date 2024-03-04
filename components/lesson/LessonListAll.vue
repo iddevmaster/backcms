@@ -8,7 +8,7 @@
         placeholder="ຊອກຫາ"
         class="form-control"
         required=""
-        v-model="store.formsearchlesson.search"
+        v-model="store.selectlesson_form_menu_less.search"
         @keyup="searchData"
       />
     </div>
@@ -38,7 +38,7 @@ style="
         aria-label="Default select example" @change="selectshowdata_ch($event)"
       
       >
-        <option value="0">ทั้งหมด</option>
+        <option :value="0">ทั้งหมด</option>
 
        
         <option v-for="item in store.group" :value="item.cg_id" :key="item.cg_id"   >{{item.cg_name}}</option>
@@ -75,8 +75,8 @@ style="
         </thead>
 
       <tbody>
-        <tr v-for="(item, index) in store.lessonlist" :key="item.cs_id">
-          <td>{{ (store.formsearchlesson.page * store.formsearchlesson.per_page) - (store.formsearchlesson.per_page -  index) +  1 }}</td>
+        <tr v-for="(item, index) in store.lesson_item" :key="item.cs_id">
+          <td>{{ (store.selectlesson_form_menu_less.page * store.selectlesson_form_menu_less.per_page) - (store.selectlesson_form_menu_less.per_page -  index) +  1 }}</td>
              <td>{{ item.cs_name }}</td>
                <td>{{ item.cs_description }}</td>
             <td>{{ item.cg_name }}</td>
@@ -92,7 +92,7 @@ style="
                   <a
                     href="javascript:void(0);"
                     class="action-btn btn-edit bs-tooltip me-2"
-                    @click="edit(item.cs_id)"
+                    @click="edit(item)"
                     data-toggle="tooltip"
                     data-placement="top"
                     aria-label="Edit"
@@ -184,7 +184,7 @@ style="
     </div> -->
 
 
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-xl-12 col-lg-12">
       <div class="pagination-no_spacing" v-if="store.lesson_total_page > 1">
         <ul class="pagination">
@@ -207,6 +207,70 @@ style="
                 stroke-linejoin="round" class="feather feather-chevron-right">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg></a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="pagination-no_spacing" v-else>
+        <ul class="pagination">
+         
+        </ul>
+      </div>
+    </div>
+  </div> -->
+
+
+  <div class="row">
+    <div class="col-xl-12 col-lg-12">
+      <div class="pagination-no_spacing" v-if="store.selectlesson_form_menu_less.total_page > 1">
+        <ul class="pagination">
+          <li>
+            <a href="javascript:void(0);" class="prev"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-chevron-left"
+              >
+                <polyline points="15 18 9 12 15 6"></polyline></svg ></a>
+          </li>
+          <li>
+            <div class="col-xs-1">
+              <input
+                id="ex1"
+                type="number"
+                style="width: 50px"
+                v-model="store.selectlesson_form_menu_less.page"  @input="validatePNumberSelect($event)"
+                min="1"
+              
+              />
+            </div>
+          </li>
+          <li><a href="javascript:void(0);">/</a></li>
+          <li>
+            <a href="javascript:void(0);">{{ store.selectlesson_form_menu_less.total_page }}</a>
+          </li>
+          <li>
+            <a href="javascript:void(0);" class="next"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-chevron-right"
+              >
+                <polyline points="9 18 15 12 9 6"></polyline></svg></a>
           </li>
         </ul>
       </div>
@@ -277,11 +341,11 @@ const auth = useAuthStore();
 
 const selectshowdata = async (sel) => {
   await selectentiresentires(sel.target.value);
-  await store.fetchLessonlist();
+  await store.paginatedItems() 
 };
 
 const searchData = async () => {
-  await store.fetchLessonlist();
+  await store.paginatedItems() 
 };
 
 const openmodal = async () => {
@@ -289,7 +353,8 @@ const openmodal = async () => {
 };
 
 const selectshowdata_ch = async (cg) => {
- await store.fitter(cg.target.value);
+store.selectlesson_form_menu_less.cg_id = cg.target.value
+ await store.paginatedItems() 
 };
 
 
@@ -331,6 +396,41 @@ store.cs_id = item;
 
 };
 
+
+const validatePNumberSelect = async (evt) => {
+  
+  const keysAllowed: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  const keyPressed: string = evt.key;
+  if (!keysAllowed.includes(keyPressed)) {
+    evt.preventDefault()
+  
+  }
+
+  if (store.selectlesson_form_menu_less.page == "") {
+    store.selectlesson_form_menu_less.page = 1;
+  //  await store.fetchLessonlist();
+  await store.paginatedItems() 
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else if(store.selectlesson_form_menu_less.page > store.selectlesson_form_menu_less.total_page){
+    store.selectlesson_form_menu_less.page = store.selectlesson_form_menu_less.total_page;
+    await store.paginatedItems() 
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  }else {
+ //   await store.fetchLessonlist();
+    store.pending = true;
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+    await store.paginatedItems() 
+  }
+ // await stores.paginatedItems() 
+}
+ 
+
 const delelelesson = async () => {
  let de =  await store.deletelesson();
 
@@ -350,8 +450,9 @@ const delelelesson = async () => {
  // await toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
 };
 const edit = async (item) => {
-console.log(item);
+store.formcreatelessonedit.user_id = auth.user_id
 store.GetopenModalEdit = true
+store.myselect_group = item.cg_id
  await store.fetchLessonIdedit(item)
 };
 
@@ -365,25 +466,24 @@ const validatePNumber = async (evt) => {
   
   }
 
-  if (store.formsearchlesson.page == '') {
+  if (store.selectlesson_form_menu_less.page == '') {
     store.pending = true;
-    store.formsearchexamquestion.page = 1;
-    await store.fetchLessonlist();
+   
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   } else {
     store.pending = true;
 
-    if(store.formsearchlesson.page > store.lesson_total_page){
- store.formsearchlesson.page = store.lesson_total_page;
- await store.fetchLessonlist();
+    if(store.selectlesson_form_menu_less.page > store.max){
+ store.selectlesson_form_menu_less.page = store.max;
+
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
 
     }else {
-      await store.fetchLessonlist();
+   
    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });

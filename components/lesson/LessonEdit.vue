@@ -82,6 +82,22 @@
           </div>
 
           <div class="mb-3">
+            <label for="message-text" class="col-form-label">{{ $t("lesson_yout") }}:</label>
+
+           <v-select
+  v-model="store.myselect_group"
+    :options="store.group"
+    label="cg_name"
+     placeholder="ເລືອກ"
+         @change="changedLabelCounrt($event)"
+  ></v-select>
+
+ <span v-if="v$.cg_id.$error" class="text-xs text-red-500" style="color: red">
+              ຕ້ອງໃສ່ຂໍ້ຄວາມ.</span>
+            
+          </div>
+
+          <div class="mb-3">
             <label for="message-text" class="col-form-label"
               >{{ $t("lesson_pic") }}:</label
             >
@@ -139,6 +155,8 @@ import { defineComponent } from "vue";
 import { LessonStore } from "@/store/lesson";
 import { useToast } from "vue-toastification";
 import { useVuelidate } from "@vuelidate/core";
+import 'vue-select/dist/vue-select.css';
+import vSelect from 'vue-select';
 import {
   required,
   email,
@@ -174,11 +192,19 @@ const rules = computed(() => {
       required: helpers.withMessage("Exam code field is required", required),
       minLength: minLength(1),
     },
+    cg_id: {
+      required: helpers.withMessage('Exam code field is required', required),
+      minLength: minLength(1),
+    },
   };
 });
 const v$ = useVuelidate(rules, FormEditLesson);
 const update = async () => {
   ///////////// บันทึก
+
+if(store.myselect_group){
+store.formcreatelessonedit.cg_id = store.myselect_group.cg_id;
+}
 
   v$.value.$validate(); ///////////ดัก req
   if (!v$.value.$error) {
@@ -228,6 +254,12 @@ const removeImage = async () => {
   input.value = "";
 };
 
+
+const changedLabelCounrt = async (event) => {
+
+console.log(event.target.value);
+
+}
 function image(i) {
   let result = i.slice(0, 6);
   if (result === "static") {
