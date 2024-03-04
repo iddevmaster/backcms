@@ -21,15 +21,11 @@
         name="txt"
         placeholder="ຊອກຫາ"
         class="form-control"
-        required=""
-        v-model="store.formsearchlesson.search"
+        v-model="store.selectlesson_form_menu_course.search"
         @keyup="searchData"
       />
     </div>
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
 
-      
-    </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <input
         id="t-text"
@@ -66,6 +62,20 @@ style="
       
     </div>
 
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
+      <select
+        class="form-select form-select"
+        aria-label="Default select example" @change="selectshowdata_ch($event)"
+      >
+      <option  v-for="(item, index) in store.group"
+          :key="item.cg_id"
+          :value="item.cg_id"
+        >
+        {{ item.cg_name }}
+      </option>
+      </select>
+    </div>
+
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <select
@@ -92,8 +102,9 @@ style="
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in store.lessonlist" :key="item.cs_id">
+          <tr v-for="(item, index) in store.lesson_item" :key="item.cs_id">
             <td>
+              {{ item.cs_id }}
               <div class="form-check form-check-primary">
                 <input
                   class="form-check-input hover_child"
@@ -103,11 +114,11 @@ style="
                   
                   @click="selectAllRowsOne()"
                 />
+               
               </div>
             </td>
             <td>{{item.cs_name}}</td>
-                <td>{{item.cs_description}}</td>
-               
+                <td>{{item.cs_description}}</td>     
           <td> 
             <a v-if="item.cs_video" :href="item.cs_video" target="_blank"><span class="badge badge-success">Watch click!</span></a>
             <a v-else><span class="badge badge-danger">No Video</span></a>
@@ -122,15 +133,18 @@ style="
         </tbody>
       </table>
     </div>
+
+    {{ store.selectlesson_form_menu_course }}
     <div class="row">
 
 
 
-    <div class="col-12 col-xl-12 col-lg-12 col-sm-12" style="padding: 2px;">
-      <div class="pagination-no_spacing" v-if="store.lesson_total_page > 1">
+      <div class="row">
+    <div class="col-xl-12 col-lg-12">
+      <div class="pagination-no_spacing" v-if="store.selectlesson_form_menu_course.total_page > 1">
         <ul class="pagination">
           <li>
-            <a href="javascript:void(0);" class="prev" @click="Prev()"
+            <a href="javascript:void(0);" class="prev"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -142,7 +156,8 @@ style="
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 class="feather feather-chevron-left"
-              ><polyline points="15 18 9 12 15 6"></polyline></svg></a>
+              >
+                <polyline points="15 18 9 12 15 6"></polyline></svg ></a>
           </li>
           <li>
             <div class="col-xs-1">
@@ -150,19 +165,19 @@ style="
                 id="ex1"
                 type="number"
                 style="width: 50px"
-                v-model="store.formsearchlesson.page"
+                v-model="store.selectlesson_form_menu_course.page"  @input="validatePNumberSelect($event)"
                 min="1"
-                @input="validatePNumber($event)"
+              
               />
             </div>
           </li>
           <li><a href="javascript:void(0);">/</a></li>
           <li>
-            <a href="javascript:void(0);">{{ store.lesson_total_page }}</a>
+            <a href="javascript:void(0);">{{ store.selectlesson_form_menu_course.total_page }}</a>
           </li>
           <li>
-            <a href="javascript:void(0);" class="next" @click="Next()"
-              ><svg 
+            <a href="javascript:void(0);" class="next"
+              ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -181,10 +196,11 @@ style="
 
       <div class="pagination-no_spacing" v-else>
         <ul class="pagination">
-      
+         
         </ul>
       </div>
     </div>
+  </div>
   </div>
   </div>
 
@@ -220,30 +236,36 @@ const stores = CourseStore();
 const { selectentireslesson } = LessonStore(); //Action
 const { selectentiresentires } = LessonStore(); //Action
 
+await store.fetchLessonlist();
+await store.paginatedItemsCourse();
+
 const selectshowdata = async (sel) => {
   await selectentiresentires(sel.target.value);
   await store.fetchLessonlist();
 };
 
 const searchData = async () => {
-  await store.fetchLessonlist();
+  await store.paginatedItemsCourse() 
 };
 const selectAllRows = async () => {
  store.selectlesson_form.page = 1 
   await store.SeleectAllLessonlist();
-  await stores.paginatedItems() 
+  await store.CheckSelectRemove();
+  await store.paginatedItemsCourse() 
+  await store.paginatedItemsSelete() 
 };
 const UnselectAllRows = async () => {
   store.selectlesson_form.page = 1 
   await store.UnSeleectAllLessonlist();
-  await stores.paginatedItems() 
+  await store.paginatedItemsCourse() 
 };
 
 const selectAllRowsOne = async () => {
   store.selectlesson_form.page = 1 
-
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  FeedData();
+  await store.paginatedItemsCourse() 
+ // await store.paginatedItemsCourse() 
+ // await new Promise(resolve => setTimeout(resolve, 1000));
+//  FeedData();
 
 };
 const FeedData = async () => {
@@ -319,6 +341,49 @@ await store.fetchLessonlist();
     store.pending = true;
   }
 };
+
+
+const selectshowdata_ch = async (cg) => {
+  console.log(cg.target.value);
+store.selectlesson_form_menu_course.cg_id = cg.target.value
+ await store.paginatedItemsCourse() 
+};
+
+
+const validatePNumberSelect = async (evt) => {
+  
+  const keysAllowed: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  const keyPressed: string = evt.key;
+  if (!keysAllowed.includes(keyPressed)) {
+    evt.preventDefault()
+  
+  }
+
+  if (store.selectlesson_form_menu_course.page == "") {
+    store.selectlesson_form_menu_less.page = 1;
+  //  await store.fetchLessonlist();
+  await store.paginatedItemsCourse() 
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else if(store.selectlesson_form_menu_course.page > store.selectlesson_form_menu_course.total_page){
+    store.selectlesson_form_menu_course.page = store.selectlesson_form_menu_course.total_page;
+    await store.paginatedItemsCourse() 
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  }else {
+ //   await store.fetchLessonlist();
+    store.pending = true;
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+    await store.paginatedItemsCourse() 
+  }
+ // await stores.paginatedItems() 
+}
+
+
 
 function coverimage(i) {
   let result = i.slice(0, 6);

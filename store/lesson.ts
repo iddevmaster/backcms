@@ -37,6 +37,18 @@ export const LessonStore = defineStore('lesson', {
       search: '',
       cg_id: 0,
     },
+    selectlesson_form_menu_course: {
+      per_page: 5,
+      total_page: 0,
+      page: 1,
+      search: '',
+      cg_id: 0,
+    },
+    formselect: {
+      per_page: 5,
+      total_page: 0,
+      page: 1,
+    },
     formcreatelesson: {
       cs_cover:"",
       cs_name: "",
@@ -106,11 +118,8 @@ export const LessonStore = defineStore('lesson', {
     },
 
     async fetchLessonlist() {
-
-
+      this.lessonlist = [];
       const checkpag =  await ApiService.post('/course/lesson/all',this.formsearchlesson)
-
-    
       if(checkpag){
         if(checkpag.data.total_page > 1){
           for(let i = 0; i < checkpag.data.total_page; i++){
@@ -121,7 +130,6 @@ export const LessonStore = defineStore('lesson', {
               this.lessonlist.push(data.data.data[i]);
             }
         }
-    
         }else {
           const data =  await ApiService.post('/course/group/all',this.formsearchlesson)
           this.lessonlist = data.data.data
@@ -329,17 +337,33 @@ try {
       this.formlesson.page = page
     },
     async SeleectAllLessonlist() {
-      for (var i = 0; i < this.lessonlist.length; i++) { 
-if (!this.item.some(item => item.cs_id === this.lessonlist[i].cs_id)) {
-  this.item.push(this.lessonlist[i]);
+      console.log('1');
+      for (var i = 0; i < this.lesson_item.length; i++) { 
+if (!this.item.some(item => item.cs_id === this.lesson_item[i].cs_id)) {
+  this.item.push(this.lesson_item[i]);
 } 
       }
     },
 
+    async CheckSelectRemove() {
+      console.log('2');
+for (var i = 0; i < this.item.length; i++) { 
+  const objWithIdIndex = this.lessonlist.findIndex((obj) => obj.cs_id === this.item[i].cs_id);
+
+if (objWithIdIndex > -1) {
+  this.lessonlist.splice(objWithIdIndex, 1);
+}
+
+}
+
+// console.log(this.lesson_item);
+
+    },
+
     async UnSeleectAllLessonlist() {
-      for (var i = 0; i < this.lessonlist.length; i++) { 
-        if (this.item.some(item => item.cs_id === this.lessonlist[i].cs_id)) {
-          this.item = this.item.filter((e)=>e.cs_id !== this.lessonlist[i].cs_id )
+      for (var i = 0; i < this.lesson_item.length; i++) { 
+        if (this.item.some(item => item.cs_id === this.lesson_item[i].cs_id)) {
+          this.item = this.item.filter((e)=>e.cs_id !== this.lesson_item[i].cs_id )
         }
       }
     },
@@ -348,7 +372,7 @@ if (!this.item.some(item => item.cs_id === this.lessonlist[i].cs_id)) {
       this.group = [];
       const checkpag =  await ApiService.post('/course/group/all',this.formsearchlessongroup)
 
-    
+
     if(checkpag){
       if(checkpag.data.total_page > 1){
         for(let i = 0; i < checkpag.data.total_page; i++){
@@ -387,19 +411,74 @@ if (!this.item.some(item => item.cs_id === this.lessonlist[i].cs_id)) {
       
        
       }
-  
+
       const startIndex = (this.selectlesson_form_menu_less.page - 1) * this.selectlesson_form_menu_less.per_page;
       const endIndex = startIndex + this.selectlesson_form_menu_less.per_page;
       this.selectlesson_form_menu_less.total_page = Math.ceil(this.lesson_item.length / this.selectlesson_form_menu_less.per_page);
       this.lesson_item = this.lesson_item.slice(startIndex, endIndex);
       this.max = endIndex;
-     
-     
     },
 
     async paginatedItemsClear() {
    
     },
+
+
+    async paginatedItemsCourse() {
+
+      this.lesson_item = this.lessonlist;
+     
+      if(this.selectlesson_form_menu_course.search != ""){
+        this.lesson_item = this.lesson_item.filter(item => item.cs_name.includes(this.selectlesson_form_menu_course.search));
+      }
+      // if(this.selectlesson_form_menu_course.search == ""){
+      //   this.lesson_item = this.lesson_item.filter(item => item.cs_name.includes(this.selectlesson_form_menu_course.search));
+      // }
+
+      if(this.selectlesson_form_menu_course.cg_id != 0){
+        this.lesson_item = this.lesson_item.filter(item => item.cg_id == this.selectlesson_form_menu_course.cg_id);
+      }
+      if(this.selectlesson_form_menu_course.cg_id == 0){
+      
+       
+      }
+
+      const startIndex = (this.selectlesson_form_menu_course.page - 1) * this.selectlesson_form_menu_course.per_page;
+      const endIndex = startIndex + this.selectlesson_form_menu_course.per_page;
+      this.selectlesson_form_menu_course.total_page = Math.ceil(this.lesson_item.length / this.selectlesson_form_menu_course.per_page);
+      this.lesson_item = this.lesson_item.slice(startIndex, endIndex);
+      this.max = endIndex;
+      console.log(this.lesson_item);
+ 
+    },
+
+    async paginatedItemsSelete() {
+   
+    
+      const startIndex = (this.formselect.page - 1) * this.formselect.per_page;
+      const endIndex = startIndex + this.formselect.per_page;
+      this.formselect.total_page = Math.ceil(this.item.length / this.formselect.per_page);
+      console.log('4',this.formselect.total_page);
+      this.selected = this.item.slice(startIndex, endIndex);
+    },
+
+
+    async RemoveSelect(items) {
+    
+      const objWithIdIndex = this.item.findIndex((obj) => obj.cs_id === items.cs_id);
+   if (objWithIdIndex > -1) {
+    this.item.splice(objWithIdIndex, 1);
+  }
+
+  this.lessonlist.push(this.items);
+
+  console.log(this.lessonlist.length)
+
+  
+
+    },
+
+    
 
 
 
