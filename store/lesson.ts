@@ -119,9 +119,11 @@ export const LessonStore = defineStore('lesson', {
     },
 
     async fetchLessonlist() {
+
   
       this.lessonlist = [];
       const checkpag =  await ApiService.post('/course/lesson/all',this.formsearchlesson)
+      
       if(checkpag){
         if(checkpag.data.total_page > 1){
           for(let i = 0; i < checkpag.data.total_page; i++){
@@ -347,6 +349,11 @@ if (!this.item.some(item => item.cs_id === this.lesson_item[i].cs_id)) {
       }
     },
 
+    async SelectOneessonlist(tem) {
+     console.log(tem);
+    this.item.push(tem);
+    },
+
     async CheckSelectRemove() {
       console.log('2');
 for (var i = 0; i < this.item.length; i++) { 
@@ -461,7 +468,9 @@ if (objWithIdIndex > -1) {
       const endIndex = startIndex + this.formselect.per_page;
       this.formselect.total_page = Math.ceil(this.item.length / this.formselect.per_page);
       console.log('4',this.formselect.total_page);
+      console.log('4',this.formselect.page);
       this.selected = this.item.slice(startIndex, endIndex);
+      this.max_selc = endIndex
     },
 
 

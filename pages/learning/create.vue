@@ -14,6 +14,7 @@ import { useI18n } from "vue-i18n";
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
 import Swal from 'sweetalert2';
+
 import {
   required,
   email,
@@ -21,6 +22,7 @@ import {
   minLength,
   helpers,
 } from "@vuelidate/validators";
+import { onMounted } from 'vue'
 
 definePageMeta({
   middleware: ['auth','roles'],
@@ -66,18 +68,28 @@ storelesson.formsearchlesson.per_page = 5
 storelesson.formsearchlesson.page = 1
 storelesson.formsearchlesson.search = "";
 
-const lessonlist = await storelesson.fetchLessonlist();
+
 const grouplist = await storelesson.fetchGrouplist();
 
 
-if (lessonlist === false) {
-  await toast.error("Error Data Contact Admin", {
-    timeout: 30000,
-  });
-}
 
 
 
+// if (store.isLoading === true) {
+
+//  const lessonlist = await storelesson.fetchLessonlist();
+//  await storelesson.paginatedItemsCourse();
+// }
+
+ onMounted(async()  => {
+      // Fetch items when the component is mounted
+      
+      const lessonlist = await storelesson.fetchLessonlist();
+     await storelesson.paginatedItemsCourse();
+    await console.log('loadก่อน');
+    store.isLoading = false;
+    })
+// fetchdata();
 
 const rules = computed(() => {
   return {
@@ -122,6 +134,9 @@ const backtoLean = async () => {
   await router.push('/learning');
 }
 
+const fetchdata = async () => {
+console.log('data');
+}
 const save = async () => {
   v$.value.$validate();
   if (!v$.value.$error) {
@@ -207,6 +222,7 @@ const onFileChangeBack = async (event) => {
 </script>
 
 <template>
+
   <div id="content" class="main-content">
     <div class="layout-px-spacing">
       <div class="page-meta">
@@ -219,9 +235,11 @@ const onFileChangeBack = async (event) => {
           </ol>
         </nav>
       </div>
-    
-      <loading v-model="store.isLoading" :can-cancel="true"
+
+
+      <loading v-model:active="store.isLoading" :can-cancel="true"
                 />
+            
       <div class="middle-content container-xxl p-0">
         <div class="row layout-top-spacing">
           <div class="doc-container">
@@ -446,6 +464,22 @@ The Course Name field is required.</span>
 
 <style>
 
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  background-color: #8d847f;
+  border-radius: 50%;
+  animation: l4 3s infinite;
+}
+@keyframes l4 {
+  12.5% {background-image:radial-gradient(80% 65% at left, #0000 94%,#fff9)}
+  25%   {background-image:linear-gradient(90deg,#0000 50%,#fff9 0)}
+  37.5% {background-image:radial-gradient(80% 65% at right,#fff9 94%,#0000)}
+  50%   {background-image:linear-gradient(#fff9 0 0)}
+  62.5% {background-image:radial-gradient(80% 65% at left, #fff9 94%,#0000)}
+  75%   {background-image:linear-gradient(-90deg,#0000 50%,#fff9 0)}
+  87.5% {background-image:radial-gradient(80% 65% at right,#0000 94%,#fff9)}
+}
 .video-container {
   position: relative;
   width: 100%;

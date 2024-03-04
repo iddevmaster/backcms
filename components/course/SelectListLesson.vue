@@ -32,7 +32,7 @@
         <tbody>
       
             <tr v-for="(item, index) in store.selected" :key="item.cs_id">
-              <td>{{ (store.formselect.page * store.formselect.per_page) - (store.formselect.per_page -  index) +  1 }}</td>
+              <td>{{ (store.formselect.page * store.formselect.per_page) - (store.formselect.per_page -  index) +  1 }} {{item.cs_id}}</td>
               
                 <td>{{item.cs_name}}</td>
                 <td>{{item.cs_description}}</td>
@@ -271,24 +271,30 @@ const validatePNumberSelect = async (evt) => {
   
   }
 
-  if (store.selectlesson_form.page == "") {
+    console.log(store.formselect.page);
+   console.log(store.formselect.total_page);
+
+  if (store.formselect.page == "") {
     store.selectlesson_form.page = 1;
   //  await store.fetchLessonlist();
+   await store.paginatedItemsSelete()
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
-  } else if(store.selectlesson_form.page > store.selectlesson_form.total_page){
-    store.selectlesson_form.page = store.selectlesson_form.total_page;
+  } else if(store.formselect.page > store.formselect.total_page){
+    store.formselect.page = store.formselect.total_page;
+   console.log('else if');
+     await store.paginatedItemsSelete()
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   }else {
- //   await store.fetchLessonlist();
+
     store.pending = true;
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
-    await stores.paginatedItems() 
+    await store.paginatedItemsSelete()
   }
  // await stores.paginatedItems() 
 }

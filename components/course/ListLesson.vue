@@ -26,6 +26,11 @@
       />
     </div>
 
+        <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
+     
+      
+    </div>
+
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <input
         id="t-text"
@@ -45,28 +50,18 @@ style="
       
     </div>
 
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
-      <input
-        id="t-text"
-        type="button"
-        name="txt"
-        placeholder="ຊອກຫາ"
-        class="form-control"
-        value="ຍົກເລີກການເລືອກ"
-        style="
-    background-color: dodgerblue;
-    color: white;
-" 
-@click="UnselectAllRows"
-      />
-      
-    </div>
+
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <select
         class="form-select form-select"
         aria-label="Default select example" @change="selectshowdata_ch($event)"
       >
+
+          <option  value="0"
+        >
+        ทั้งหมด
+      </option>
       <option  v-for="(item, index) in store.group"
           :key="item.cg_id"
           :value="item.cg_id"
@@ -106,19 +101,14 @@ style="
             <td>
               {{ item.cs_id }}
               <div class="form-check form-check-primary">
-                <input
-                  class="form-check-input hover_child"
-                  type="checkbox"
-                  v-model="store.item"
-                  :value="item"
+       
+<input type="button"  value="Select Lesson"  @click="selectAllRowsOne(item)"/>
                   
-                  @click="selectAllRowsOne()"
-                />
                
               </div>
             </td>
             <td>{{item.cs_name}}</td>
-                <td>{{item.cs_description}}</td>     
+            <td>{{item.cs_description}}</td>     
           <td> 
             <a v-if="item.cs_video" :href="item.cs_video" target="_blank"><span class="badge badge-success">Watch click!</span></a>
             <a v-else><span class="badge badge-danger">No Video</span></a>
@@ -236,8 +226,7 @@ const stores = CourseStore();
 const { selectentireslesson } = LessonStore(); //Action
 const { selectentiresentires } = LessonStore(); //Action
 
-await store.fetchLessonlist();
-await store.paginatedItemsCourse();
+
 
 const selectshowdata = async (sel) => {
   await selectentiresentires(sel.target.value);
@@ -260,9 +249,12 @@ const UnselectAllRows = async () => {
   await store.paginatedItemsCourse() 
 };
 
-const selectAllRowsOne = async () => {
+const selectAllRowsOne = async (item) => {
   store.selectlesson_form.page = 1 
-  await store.paginatedItemsCourse() 
+  await store.SelectOneessonlist(item) 
+  await store.CheckSelectRemove();
+ await store.paginatedItemsCourse() 
+await store.paginatedItemsSelete() 
  // await store.paginatedItemsCourse() 
  // await new Promise(resolve => setTimeout(resolve, 1000));
 //  FeedData();
