@@ -113,12 +113,20 @@ const save = async () => {
     try {
       let updatefile = await UploadfileCourse()
       let updatedata = await UpdateCourse();
+
       let clearlesson = await ClearLessoncluster();
       let savelesson = await SaveLessoncluster();
 
       if(updatedata === true){
         await setTimeout(() => {
         toast.success("ແກ້ໄຂສຳເລັດແລ້ວ");
+      }, 500);
+   
+      await router.push('/learning');
+      }
+      if(updatedata === false){
+        await setTimeout(() => {
+           toast.error("ແກ້ໄຂບໍ່ສຳເລັດ");
       }, 500);
       store.isLoaddingsave = false;
       await router.push('/learning');

@@ -27,8 +27,12 @@ definePageMeta({
   allowedRoles: [1,2],
 })
 const { locale, setLocale } = useI18n();
+
 const auth = useAuthStore()
 const store = CourseStore();
+
+
+
 const storelesson = LessonStore();
 const { FormDataCourse } = storeToRefs(store);
 const { SaveCourse } = CourseStore();
@@ -47,10 +51,11 @@ store.formDataeditlesson.user_id = auth.user_id
 store.user_id = auth.user_id
 storelesson.item = [];
 store.ResetForm()
+
 const { Pending } = storeToRefs(store); //Get Getter
 
 
-
+store.isLoading = true;
 const toast = useToast();
 const router = useRouter();
 storelesson.formcreatelesson.user_id = auth.user_id
@@ -214,7 +219,9 @@ const onFileChangeBack = async (event) => {
           </ol>
         </nav>
       </div>
-      <Loading v-if="Pending"></Loading>
+    
+      <loading v-model="store.isLoading" :can-cancel="true"
+                />
       <div class="middle-content container-xxl p-0">
         <div class="row layout-top-spacing">
           <div class="doc-container">

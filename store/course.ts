@@ -229,7 +229,7 @@ Storage.selected = checkpag.data.data
         const les = {cs_id:Storage.item[i].cs_id}
         this.savelesson.push(les);
       }
-      console.log(this.savelesson);
+   
       try {
         const data = await ApiService.post('/course/cluster/create/'+this.course_id, this.savelesson).then(response => {
 
