@@ -15,7 +15,7 @@
         'border-red-500 focus:border-red-500': v$.course_code.$error,
         'border-[#42d392] ': !v$.course_code.$invalid,
       }" @change="v$.course_code.$touch"
-       maxlength="20"
+  
       />
  
  <div v-if="locale == 'la'" >
