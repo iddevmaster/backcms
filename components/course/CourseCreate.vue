@@ -54,7 +54,7 @@
           'border-[#42d392] ': !v$.course_name.$invalid,
         }"
         @change="v$.course_name.$touch"
-     
+  
       />
    <div v-if="locale == 'la'" >
       <span v-if="v$.course_name.$error" class="text-xs text-red-500"
@@ -159,8 +159,6 @@ The Course Name field is required.</span>
     </div>
   </div>
 
-
-  
 
 
   <div class="col-xl-12 col-md-12">
