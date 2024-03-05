@@ -372,7 +372,7 @@ return true;
 
       try {
         const getlesson = await this.Dellessons(course_id);
-        const del = await ApiService.delete('/course/delete/' + course_id);
+         const del = await ApiService.delete('/course/delete/' + course_id);
 
         this.isOpen = false;
         const index = this.courselist.findIndex(item => item.course_id === course_id)
@@ -396,13 +396,41 @@ return true;
     
     async Dellessons(id) {
 
-      const getid = await ApiService.post('/course/lesson/list/' + id, this.formsearchcourse).then(response => {
-        if (response.data.data) {
-          for (var i = 0; i < response.data.data.length; i++) {
-            const del = ApiService.delete('/course/lesson/delete/' + response.data.data[i].cs_id);
+
+
+      const getid = await ApiService.post('/course/lesson/list/' + id, this.formsearchcourse)
+        if(getid){
+          if(getid.data.total_page > 1){ 
+            this.formsearchcourse.page = 1;
+            this.delless = [];
+            ////////////////// จัดdata //////////////////////
+            for(let i = 0; i < getid.data.total_page; i++){
+              this.formsearchcourse.page = i + 1;
+              const data =  await ApiService.post('/course/lesson/list/' + id,this.formsearchcourse)
+              for(let i = 0; i < data.data.data.length; i++){
+                this.delless.push(data.data.data[i]);
+              }
+              console.log('>1',this.delless);
           }
+          ///////////////del ต่อ///////////////////////
+          for (var i = 0; i < this.delless.length; i++) {
+            const del = ApiService.delete('/course/cluster/delete?course_id='+id+'&cs_id='+this.delless[i].cs_id+'');
+            }
+            this.formsearchcourse.page = 1;
+          ///////////////del ต่อ///////////////////////
+          }
+          if(getid.data.total_page == 1){ 
+            if(getid.data.data.length > 0){
+            for (var i = 0; i < getid.data.data.length; i++) {
+            const del = ApiService.delete('/course/cluster/delete?course_id='+id+'&cs_id='+getid.data.data[i].cs_id+'');
+            }
+            }
+          }
+     
+        }else {
+         
+          return true;
         }
-      });
     },
 
 
