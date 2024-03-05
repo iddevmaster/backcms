@@ -14,6 +14,7 @@ import { useI18n } from "vue-i18n";
 import Loading from 'vue-loading-overlay';import 'vue-loading-overlay/dist/css/index.css';
 import Swal from 'sweetalert2';
 import { useVuelidate } from "@vuelidate/core";
+import { onMounted } from 'vue'
 import {
   required,
   email,
@@ -29,9 +30,13 @@ definePageMeta({
 
 const auth = useAuthStore()
 const store = CourseStore()
+
+
 const storelesson = LessonStore()
+store.isLoading = true;
    const router = useRouter();
     const toast = useToast();
+    
 store.formDataCourse.user_id = auth.user_id
 store.formDataEditCourse.user_id = auth.user_id
 store.formDatalesson.user_id = auth.user_id
@@ -46,14 +51,31 @@ storelesson.selectlesson_form.per_page = 5
 storelesson.selectlesson_form.page = 1
 storelesson.formsearchlesson.search = "";
 
+storelesson.formselect.per_page = 5
+storelesson.formselect.page = 1
+storelesson.formselect.total_page = 0;
+
+storelesson.selectlesson_form_menu_course.page = 1;
+storelesson.selectlesson_form_menu_course.per_page = 5;
+storelesson.selectlesson_form_menu_course.search = "";
+
 await store.fetchCourseId(router.currentRoute.value.params.id);
+const grouplist = await storelesson.fetchGrouplist();
+
 await store.fetchLessonInCourseId();
-const lessonlist = await storelesson.fetchLessonlist();
-if (lessonlist === false) {
-  await toast.error("Error Data Contact Admin", {
-    timeout: 30000,
-  });
-}
+await storelesson.paginatedItemsSelete();
+
+
+onMounted(async()  => {
+      // Fetch items when the component is mounted
+      
+   const lessonlist = await storelesson.fetchLessonlist();
+   await storelesson.RemoveLesson();
+   await storelesson.paginatedItemsCourse();
+
+    store.isLoading = false;
+    })
+
 
 
 const { FormDataCourse } = storeToRefs(store);
@@ -94,7 +116,6 @@ const rules = computed(() => {
       ),
       minLength: minLength(6),
     },
-
     course_description: {
       required: helpers.withMessage(
         "The Course cover is required",
@@ -214,7 +235,8 @@ function coverimage(i) {
                     </ol>
                 </nav>
             </div>
-
+            <loading v-model:active="store.isLoading" :can-cancel="true"
+                />
             <div class="middle-content container-xxl p-0">
                 <div class="row layout-top-spacing">
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
@@ -224,7 +246,7 @@ function coverimage(i) {
                           <div class="widget-header">                                
                                     <div class="row">
                                         <div class="col-xl-10 col-md-10 col-sm-10 col-10">
-                                            <h4>{{ $t("menu_couse_p_title") }}</h4>
+                                            <h4>{{ $t("menu_couse_e_title") }}</h4>
                                         </div>
                                         <div class="col-xl-2 col-md-2 col-sm-12 col-2" style="text-align: center;">
                                           <button type="button" class="btn btn-primary additem _effect--ripple waves-effect waves-light" @click="backtoLean()">
@@ -236,7 +258,7 @@ function coverimage(i) {
                             <div class="row mb-4 g-3">
  
     <div class="col-md-6">
-      <label for="inputEmail4" class="form-label">  {{ $t("menu_couse_f_title_code") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
+      <label for="inputEmail4" class="form-label">  {{ $t("menu_couse_f_title_code") }} </label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputEmail4" v-model="store.formDataEditCourse.course_code" :class="{
         'border-red-500 focus:border-red-500': v$.course_code.$error,
         'border-[#42d392] ': !v$.course_code.$invalid,

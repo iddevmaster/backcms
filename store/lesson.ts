@@ -457,7 +457,7 @@ if (objWithIdIndex > -1) {
       this.selectlesson_form_menu_course.total_page = Math.ceil(this.lesson_item.length / this.selectlesson_form_menu_course.per_page);
       this.lesson_item = this.lesson_item.slice(startIndex, endIndex);
       this.max = endIndex;
-      console.log(this.lesson_item);
+   
  
     },
 
@@ -467,10 +467,12 @@ if (objWithIdIndex > -1) {
       const startIndex = (this.formselect.page - 1) * this.formselect.per_page;
       const endIndex = startIndex + this.formselect.per_page;
       this.formselect.total_page = Math.ceil(this.item.length / this.formselect.per_page);
-      console.log('4',this.formselect.total_page);
-      console.log('4',this.formselect.page);
+   
       this.selected = this.item.slice(startIndex, endIndex);
       this.max_selc = endIndex
+
+      console.log('1');
+      
     },
 
 
@@ -480,12 +482,21 @@ if (objWithIdIndex > -1) {
    if (objWithIdIndex > -1) {
     this.item.splice(objWithIdIndex, 1);
   }
-
   this.lessonlist.push(this.items);
+    },
 
-  console.log(this.lessonlist.length)
 
-  
+    async RemoveLesson() {
+      console.log('2',this.lessonlist.length);
+
+
+      for (var i = 0; i < this.selected.length; i++) { 
+        if (this.lessonlist.some(item => item.cs_id === this.selected[i].cs_id)) {
+          this.lessonlist = this.lessonlist.filter((e)=>e.cs_id !== this.selected[i].cs_id )
+        }
+      }
+
+      console.log(this.lessonlist.length);
 
     },
 

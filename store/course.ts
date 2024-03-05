@@ -156,6 +156,7 @@ export const CourseStore = defineStore('course', {
     async fetchLessonInCourseId() {
 
       const checkpag =  await ApiService.post('/course/lesson/list/' + this.course_id,this.formsearcheditlesson)
+      console.log(checkpag);
       if(checkpag){
         if(checkpag.data.total_page > 1){
           for(let i = 0; i < checkpag.data.total_page; i++){
@@ -165,19 +166,16 @@ export const CourseStore = defineStore('course', {
             for(let i = 0; i < data.data.data.length; i++){
               Storage.item.push(data.data.data[i]);
             }
-    
-
         }
         const Storage = LessonStore();
         Storage.selectlesson_form.total_page = checkpag.data.total_page
   
-  
-  
+
         }else {
           const Storage = LessonStore();
 
 Storage.item = checkpag.data.data
-Storage.selected = checkpag.data.data
+//Storage.selected = checkpag.data.data
           
         }
         

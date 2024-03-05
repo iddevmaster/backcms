@@ -4,11 +4,9 @@
                     />
       <div class="row mb-4 g-3">
         <div id="form_grid_layouts" class="col-lg-9">
-          <div class="seperator-header">
-            <h4 class=""> {{ $t("lesson_select") }}</h4>
-          </div>
+          <h4 class=""> {{ $t("lesson_select") }}</h4>
         </div>
-{{ store.item.length }}
+
         
         <div class="table-responsive">
     <table class="table table-hover table-bordered" v-if="store.item.length > 0">
@@ -32,7 +30,7 @@
         <tbody>
       
             <tr v-for="(item, index) in store.selected" :key="item.cs_id">
-              <td>{{ (store.formselect.page * store.formselect.per_page) - (store.formselect.per_page -  index) +  1 }} {{item.cs_id}}</td>
+              <td>{{ (store.formselect.page * store.formselect.per_page) - (store.formselect.per_page -  index) +  1 }}</td>
               
                 <td>{{item.cs_name}}</td>
                 <td>{{item.cs_description}}</td>

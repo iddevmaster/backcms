@@ -7,9 +7,7 @@
 
   <div class="row layout-top-spacing">
     <div class="col-lg-12 col-md-12 col-sm-12">
-      <div class="seperator-headerx">
-        <h4 class="">{{ $t("lesson_all") }}</h4>
-      </div>
+      <h4 class="">{{ $t("lesson_all") }}</h4>
     </div>
   </div>
 
@@ -32,16 +30,25 @@
     </div>
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
+      <!-- <select
+        class="form-select form-select"
+        aria-label="Default select example"
+      >
+        <option value="5">5</option>
+      </select> -->
+    </div>
+
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <input
         id="t-text"
         type="button"
         name="txt"
         placeholder="ຊອກຫາ"
-        class="form-control"
+        class="form-control btn-danger"
         @click="selectAllRows"
         value="ເລືອກ​ທັງ​ຫມົດ"
 style="
-    background-color: dodgerblue;
+   
     color: white;
     
 "
@@ -60,7 +67,7 @@ style="
 
           <option  value="0"
         >
-        ทั้งหมด
+        ທັງໝົດ
       </option>
       <option  v-for="(item, index) in store.group"
           :key="item.cg_id"
@@ -72,14 +79,7 @@ style="
     </div>
 
 
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
-      <select
-        class="form-select form-select"
-        aria-label="Default select example"
-      >
-        <option value="5">5</option>
-      </select>
-    </div>
+
   </div>
   <div class="row mb-4 g-3">
     <div class="table-responsive">
@@ -87,7 +87,7 @@ style="
         <thead>
           <tr>
             <th class="checkbox-area" scope="col">
-              <div class="form-check form-check-primary">#</div>
+              <div class="form-check form-check-primary">{{ $t("lesson_select_record") }}</div>
             </th>
             <th scope="col"> {{ $t("lesson_qui") }}</th>
                 <th scope="col"> {{ $t("lesson_ans") }}</th>
@@ -99,10 +99,10 @@ style="
         <tbody>
           <tr v-for="(item, index) in store.lesson_item" :key="item.cs_id">
             <td>
-              {{ item.cs_id }}
+            
               <div class="form-check form-check-primary">
        
-<input type="button"  value="Select Lesson"  @click="selectAllRowsOne(item)"/>
+<input type="button" class="btn btn-primary" value="ເລືອກ"  @click="selectAllRowsOne(item)"/>
                   
                
               </div>
@@ -124,7 +124,7 @@ style="
       </table>
     </div>
 
-    {{ store.selectlesson_form_menu_course }}
+ 
     <div class="row">
 
 

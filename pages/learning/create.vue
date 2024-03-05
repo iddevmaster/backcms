@@ -68,6 +68,13 @@ storelesson.formsearchlesson.per_page = 5
 storelesson.formsearchlesson.page = 1
 storelesson.formsearchlesson.search = "";
 
+storelesson.formselect.per_page = 5
+storelesson.formselect.page = 1
+storelesson.formselect.total_page = 0;
+
+storelesson.selectlesson_form_menu_course.page = 1;
+storelesson.selectlesson_form_menu_course.per_page = 5;
+storelesson.selectlesson_form_menu_course.search = "";
 
 const grouplist = await storelesson.fetchGrouplist();
 
@@ -86,7 +93,7 @@ const grouplist = await storelesson.fetchGrouplist();
       
       const lessonlist = await storelesson.fetchLessonlist();
      await storelesson.paginatedItemsCourse();
-    await console.log('loadก่อน');
+
     store.isLoading = false;
     })
 // fetchdata();
