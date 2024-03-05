@@ -43,6 +43,13 @@ const closeModal = async () => {
 
 };
 
+const backtoLean = async () => {
+  await router.push('/learning');
+};
+
+
+
+
 </script>
 
 <template>
@@ -63,13 +70,18 @@ const closeModal = async () => {
                 <div class="row layout-top-spacing">
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                         <div class="widget-content widget-content-area br-8 p-3">
-                            <!-- <div class="widget-header">
-                                <div class="row">
-                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                        <button class="btn btn-primary mb-2 me-4" @click="OpenFormInsert()">{{ $t("add_lesson") }}</button>
-                                    </div>
+                          <div class="widget-header">                                
+                                    <div class="row">
+                                        <div class="col-xl-10 col-md-10 col-sm-10 col-10">
+                                            <h4>ບົດຮຽນ</h4>
+                                        </div>
+                                        <div class="col-xl-2 col-md-2 col-sm-12 col-2" style="text-align: center;">
+                                          <button type="button" class="btn btn-primary additem _effect--ripple waves-effect waves-light" @click="backtoLean()">
+      {{ $t("backto_lean") }}
+    </button>   
+   </div> 
+  </div>
                                 </div>
-                            </div> -->
                             <Lessonlist></Lessonlist>
                         </div>
                     </div>
