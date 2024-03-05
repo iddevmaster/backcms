@@ -79,15 +79,6 @@ storelesson.selectlesson_form_menu_course.search = "";
 const grouplist = await storelesson.fetchGrouplist();
 
 
-
-
-
-// if (store.isLoading === true) {
-
-//  const lessonlist = await storelesson.fetchLessonlist();
-//  await storelesson.paginatedItemsCourse();
-// }
-
  onMounted(async()  => {
       // Fetch items when the component is mounted
       
@@ -151,6 +142,8 @@ const save = async () => {
       store.isLoaddingsave = true;
       let uploadfile = await UploadfileCourse();
       let updateCourse = await SaveCourse();
+
+      console.log(updateCourse);
       let savelesson = await SaveLessoncluster();
       
   
@@ -167,6 +160,9 @@ const save = async () => {
         router.push('/learning');
       }, 500);
 
+      }
+      if(updateCourse === false){
+        await toast.error("ຂໍ້ມູນບໍ່ໄດ້ບັນທຶກສຳເລັດ.");
       }
 
     } catch (error) {
@@ -362,7 +358,7 @@ The Course Name field is required.</span>
         }"
         @change="v$.course_description.$touch"
         v-model="store.formDataCourse.course_description"
-        maxlength="200"
+    
       >
       </textarea>
 

@@ -310,7 +310,7 @@ The Course Name field is required.</span>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" :class="{
         'border-red-500 focus:border-red-500': v$.course_description.$error,
         'border-[#42d392] ': !v$.course_description.$invalid,
-      }" @change="v$.course_description.$touch" v-model="store.formDataEditCourse.course_description" maxlength="200">
+      }" @change="v$.course_description.$touch" v-model="store.formDataEditCourse.course_description">
       </textarea>
       <div v-if="locale == 'la'" >
       <span v-if="v$.course_description.$error" class="text-xs text-red-500"

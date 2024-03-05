@@ -119,7 +119,7 @@ export const CourseStore = defineStore('course', {
     },
 
     async fetchCourslist() {
-      console.log(this.formsearchcourse);
+  
       try {
         const data = await ApiService.post('/course/list', this.formsearchcourse).then(response => {
           this.courselist = response.data.data
@@ -185,6 +185,7 @@ Storage.item = checkpag.data.data
     },
 
     async SaveCourse() {
+      console.log(this.formDataCourse);
       try {
         const data = await ApiService.post('/course/create', this.formDataCourse).then(response => {
           this.formDatalesson.course_id = response.data.insertId
@@ -264,7 +265,7 @@ Storage.item = checkpag.data.data
     },
     async SaveLesson() {
       for (var i = 0; i < this.lessonlist.length; i++) {
-        console.log(this.lessonlist[i]);
+
         this.formDatalesson.cs_cover = this.lessonlist[i].cs_cover
         this.formDatalesson.cs_name = this.lessonlist[i].cs_name
         this.formDatalesson.cs_video = this.lessonlist[i].cs_video
