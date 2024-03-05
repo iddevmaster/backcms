@@ -19,7 +19,7 @@
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="ຄໍາຖາມ *" :class="{
         'border-red-500 focus:border-red-500': v$.cs_name.$error,
         'border-[#42d392] ': !v$.cs_name.$invalid,
-      }" @change="v$.cs_name.$touch" v-model="store.formcreatelesson.cs_name" >
+      }" @change="v$.cs_name.$touch" v-model="store.formcreatelesson.cs_name"   maxlength="200" >
                </textarea>
 
               <span v-if="v$.cs_name.$error" class="text-xs text-red-500" style="color: red">
@@ -34,7 +34,7 @@
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="ຄໍາຕອບ *" :class="{
         'border-red-500 focus:border-red-500': v$.cs_description.$error,
         'border-[#42d392] ': !v$.cs_description.$invalid,
-      }" @change="v$.cs_description.$touch" v-model="store.formcreatelesson.cs_description">
+      }" @change="v$.cs_description.$touch" v-model="store.formcreatelesson.cs_description" maxlength="200">
                </textarea>
 
              <span v-if="v$.cs_description.$error" class="text-xs text-red-500" style="color: red">
@@ -44,13 +44,13 @@
               <div class="mb-3">
             <label for="message-text" class="col-form-label">{{ $t("lesson_yout") }}:</label>
 
-            <input type="text" class="form-control" id="recipient-name" v-model="store.formcreatelesson.cs_video" placeholder="https://youtu.be/DCh2jlZzC1g *">
+            <input type="text" class="form-control" id="recipient-name" v-model="store.formcreatelesson.cs_video" placeholder="https://youtu.be/DCh2jlZzC1g *" maxlength="200">
 
             
           </div>
-
+       
             <div class="mb-3">
-            <label for="message-text" class="col-form-label">{{ $t("lesson_yout") }}:</label>
+            <label for="message-text" class="col-form-label">{{ $t("lesson_group") }}:</label>
 
            <v-select
   v-model="store.myselect_group"

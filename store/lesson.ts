@@ -208,7 +208,7 @@ export const LessonStore = defineStore('lesson', {
 
       try {
         const data = await ApiService.post('/course/lesson/create', this.formcreatelesson).then(response => {
-          console.log(response);
+          this.myselect_group = null
     
           return true
         });
@@ -222,6 +222,12 @@ export const LessonStore = defineStore('lesson', {
     },
 
     async updateformLesson() { 
+      console.log(this.myselect_group);
+
+
+      if(this.myselect_group == null){
+return false;
+      }
 
       this.formcreatelessonedit.cg_id = this.myselect_group.cg_id;
     

@@ -27,6 +27,7 @@
               }"
               @change="v$.cs_name.$touch"
               v-model="store.formcreatelessonedit.cs_name"
+              maxlength="200"
             >
             </textarea>
 
@@ -55,6 +56,7 @@
               }"
               @change="v$.cs_description.$touch"
               v-model="store.formcreatelessonedit.cs_description"
+              maxlength="200"
             >
             </textarea>
 
@@ -78,11 +80,12 @@
               id="recipient-name"
               v-model="store.formcreatelessonedit.cs_video"
               placeholder="https://youtu.be/DCh2jlZzC1g *"
+              maxlength="200"
             />
           </div>
 
           <div class="mb-3">
-            <label for="message-text" class="col-form-label">{{ $t("lesson_yout") }}:</label>
+            <label for="message-text" class="col-form-label">{{ $t("lesson_group") }}:</label>
 
            <v-select
   v-model="store.myselect_group"
@@ -215,8 +218,11 @@ store.formcreatelessonedit.cg_id = store.myselect_group.cg_id;
       await toast.error("ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ");
     } else {
       await toast.success("ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ");
-      const lessonlist = await store.fetchLessonlist();
-      store.GetopenModalEdit = false;
+    const lessonlist = await store.fetchLessonlist();
+    await store.paginatedItems() 
+   store.GetopenModalEdit = false;
+      router.push('/lesson');
+     
     }
   }
 };

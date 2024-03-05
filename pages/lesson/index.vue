@@ -31,7 +31,7 @@ store.isLoading = true;
 const toast = useToast();
 store.formcreatelesson.user_id = auth.user_id
 store.user_id = auth.user_id
-
+store.myselect_group = null
 const group = await store.fetchGrouplist();
 
 
@@ -62,8 +62,7 @@ const delete_userid = async (id) => {
 
   const delc = await store.selectlessId(id);
   if(delc){
-    toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
-    await store.fetchLessonlist()
+
       }else{
    toast.error('ລຶບຂໍ້ມູນລົ້ມເຫລວ')
       }

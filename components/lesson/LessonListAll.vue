@@ -435,7 +435,9 @@ const delelelesson = async () => {
   await toast.success('ລຶບຂໍ້ມູນສຳເລັດ',{
     timeout: 30000,
   });
-  await store.fetchLessonlist();
+
+    const lessonlist = await store.fetchLessonlist();
+await store.paginatedItems() 
  }else {
   store.GetopenModalLesson = false
   await toast.error("ລຶບລົ້ມເຫລວ", {
@@ -449,6 +451,7 @@ const edit = async (item) => {
 store.formcreatelessonedit.user_id = auth.user_id
 store.GetopenModalEdit = true
 store.myselect_group = item.cg_id
+store.formcreatelessonedit.cg_id = item.cg_id;
  await store.fetchLessonIdedit(item)
 };
 
