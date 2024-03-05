@@ -39,9 +39,7 @@ const { OpenFormInser } = ExamStore();//Action
 const { GetExamDelId } = storeToRefs(store); //Get Getter
 const { deleteExam } = ExamStore();//Action
 
-const OpenFormInsert = async () => {
-    await store.OpenFormInser()
-};
+
 
 const closeModal = async () => {
     await store.closeModal()
@@ -78,11 +76,11 @@ const Deleteexam = async (item) => {
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                         <div class="widget-content widget-content-area br-8 p-3">
                             <div class="widget-header">
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                                         <button class="btn btn-primary mb-2 me-4" @click="OpenFormInsert()">{{ $t("menu_exam_add") }}</button>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <ExamList></ExamList>
                         </div>

@@ -10,8 +10,14 @@
         required=""   v-model="store.formsearchexam.search" @keyup="searchData"
       />
     </div>
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
-      <button class="btn btn-primary mb-2 me-4" >{{ $t("menu_exam_add") }}</button>
+    <div class="col-lg-5 col-md-5 col-sm-3 mb-4">
+      
+    </div>
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ">
+      <button class="btn btn-primary mb-2 me-4" style="
+    width: 100%;
+    height: 100%;
+" @click="OpenFormInsert()" >{{ $t("menu_exam_add") }}</button>
     </div>
 
     
@@ -160,7 +166,9 @@ await store.fetchExamlist()
 const selchk = async (x) => {
   // await selectone(x);
 };
-
+const OpenFormInsert = async () => {
+    await store.OpenFormInser()
+};
 
 const format = (time) => {
   return moment(time).format("DD/MM/YYYY HH:mm");
