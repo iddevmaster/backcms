@@ -38,12 +38,8 @@ style="
         aria-label="Default select example" @change="selectshowdata_ch($event)"
       
       >
-        <option :value="0">ทั้งหมด</option>
-
-       
+        <option :value="0">ທັງໝົດ</option>
         <option v-for="item in store.group" :value="item.cg_id" :key="item.cg_id"   >{{item.cg_name}}</option>
-      
-     
       </select>
     </div>
        <div class="col-xl- col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
@@ -68,7 +64,7 @@ style="
                 <th scope="col">#</th>
                 <th class="text-center" scope="col">{{ $t("lesson_qui") }}</th>
                 <th class="text-center" scope="col">{{ $t("lesson_ans") }}</th>
-                 <th scope="col">GROUP</th>
+                 <th scope="col">{{ $t("lesson_group") }}</th>
                 <th scope="col">{{ $t("lesson_pic") }}</th>
                   <th class="text-center" scope="col">{{ $t("less_ac") }}</th>
             </tr>

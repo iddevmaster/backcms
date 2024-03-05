@@ -17,6 +17,7 @@ import { useToast } from 'vue-toastification';
 import { ref } from 'vue';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
+import { onMounted } from 'vue'
 
 definePageMeta({
   middleware: ['auth','roles'],
@@ -26,22 +27,23 @@ definePageMeta({
 const auth = useAuthStore()
 const store = LessonStore()
 
-
+store.isLoading = true;
 const toast = useToast();
 store.formcreatelesson.user_id = auth.user_id
 store.user_id = auth.user_id
 
-const lessonlist = await store.fetchLessonlist();
 const group = await store.fetchGrouplist();
+
+
+
+onMounted(async()  => {
+      // Fetch items when the component is mounted
+      const lessonlist = await store.fetchLessonlist();
+
 await store.paginatedItems() 
-
-
-if (lessonlist === false) {
-  await toast.error("Error Data Contact Admin", {
-    timeout: 30000,
-  });
-}
-
+store.isLoading = false;
+     
+    })
 
 
 

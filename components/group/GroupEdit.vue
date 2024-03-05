@@ -6,7 +6,7 @@
     >
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          {{ $t("lesson_head") }}
+          {{ $t("group_edit") }}
         </h5>
       </div>
       <div class="modal-body">

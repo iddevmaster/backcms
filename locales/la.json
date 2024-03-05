@@ -414,6 +414,7 @@
   "lesson_select_record":"ເລືອກ",
   "lesson_head":"ບົດຮຽນ",
   "lesson_qui":"ຄຳຖາມ",
+  "lesson_group":"ກຸ່ມ",
   "lesson_ans":"ຄໍາຕອບ",
   "lesson_yout":"ວິດີໂອ",
   "lesson_pic":"ຮູບ",
@@ -444,8 +445,13 @@
   "table_id_group" :"#",
   "table_id_name" :"ຊື່ກຸ່ມ",
   "table_id_create" :"ສ້າງ",
-  "table_id_action" :"ຈັດການ"
+  "table_id_action" :"ຈັດການ",
 
+  "group_title" :"ກຸ່ມ",
+  "group_name" :"ຊື່ກຸ່ມ",
+  "group_add" :"ເພີ່ມກຸ່ມ",
+  "group_edit" :"ແກ້ໄຂກຸ່ມ"
+  
 }
 
 

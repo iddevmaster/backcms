@@ -6,14 +6,14 @@
     >
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          {{ $t("lesson_head") }}
+          {{ $t("group_add") }}
         </h5>
       </div>
       <div class="modal-body">
         <form>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">
-              {{ $t("lesson_qui") }}:</label
+              {{ $t("group_name") }}:</label
             >
 
             <input

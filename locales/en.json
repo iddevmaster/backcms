@@ -419,6 +419,7 @@
   "lesson_unselect_all":"UnSelected",
   "lesson_head":"Lesson",
   "lesson_qui":"Question",
+  "lesson_group":"Group",
   "lesson_ans":"Answer",
   "lesson_yout":"Video",
   "lesson_pic":"Picture",
@@ -449,7 +450,11 @@
   "table_id_group" :"#",
   "table_id_name" :"Name Group",
   "table_id_create" :"Create",
-  "table_id_action" :"Manage"
+  "table_id_action" :"Manage",
+  "group_title" :"Group",
+  "group_name" :"Group Name",
+  "group_add" :"Add Group",
+  "group_edit" :"Edit Group"
 
 
 }
