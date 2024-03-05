@@ -17,6 +17,7 @@ export const LessonStore = defineStore('lesson', {
       { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
       { age: 89, first_name: 'Geneva', last_name: 'Wilson' }
     ],
+    course_del:null,
     pending: false,
     lessonlist: [],
     total_page:null,
@@ -186,11 +187,12 @@ export const LessonStore = defineStore('lesson', {
       this.cs_id = cs_id
     },
     async deletelessId() {
-   
       try {
-        const data = await ApiService.delete('/course/lesson/delete/' + this.cs_id).then(response => {
-        
+        const del = await ApiService.delete('course/cluster/delete?course_id='+this.course_del+'&cs_id='+this.cs_id+'').then(response => {
+          return true
         });
+
+      
         return true
 
       } catch (error) {
@@ -470,9 +472,6 @@ if (objWithIdIndex > -1) {
    
       this.selected = this.item.slice(startIndex, endIndex);
       this.max_selc = endIndex
-
-      console.log('1');
-      
     },
 
 
@@ -487,17 +486,11 @@ if (objWithIdIndex > -1) {
 
 
     async RemoveLesson() {
-      console.log('2',this.lessonlist.length);
-
-
       for (var i = 0; i < this.selected.length; i++) { 
         if (this.lessonlist.some(item => item.cs_id === this.selected[i].cs_id)) {
           this.lessonlist = this.lessonlist.filter((e)=>e.cs_id !== this.selected[i].cs_id )
         }
       }
-
-      console.log(this.lessonlist.length);
-
     },
 
     

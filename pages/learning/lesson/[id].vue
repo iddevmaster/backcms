@@ -38,15 +38,15 @@ await store.deletelessId()
 await store.fetchLessonId(router.currentRoute.value.params.id)
 };
 
+const closeModal = async () => {
+  store.GetopenModal = false;
 
-
-
+};
 
 </script>
 
 <template>
-       <loading v-model:active="store.isLoading" :can-cancel="true" @on-cancel="onCancel"
-                />
+
     <div id="content" class="main-content">
         <div class="layout-px-spacing">
             <div class="page-meta">
@@ -85,7 +85,7 @@ await store.fetchLessonId(router.currentRoute.value.params.id)
 
     <div class="modal-content modal-dialog modal-xl" id="deleteConformationLabel">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">ต้องการลบบทเรียนี้?</h5>
+        <h5 class="modal-title" id="exampleModalLabel">ຕ້ອງການລຶບບົດຮຽນນີ້ບໍ?</h5>
       </div>
 
       <div class="modal-footer">
