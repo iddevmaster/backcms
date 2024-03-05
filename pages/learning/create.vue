@@ -243,7 +243,7 @@ const onFileChangeBack = async (event) => {
       <loading v-model:active="store.isLoading" :can-cancel="true"
                 />
             
-      <div class="middle-content container-xxl p-0">
+      <div class="middle-content container-xxl p-0 mb-4">
         <div class="row layout-top-spacing">
           <div class="doc-container">
             
