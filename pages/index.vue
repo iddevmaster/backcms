@@ -6,7 +6,7 @@
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="row widget-statistic">
               <div
-                class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing"
+                class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing clickable"
                 @click="choose('all')"
               >
                 <div class="widget widget-one_hybrid widget-followers">
@@ -47,7 +47,7 @@
                 </div>
               </div>
               <div
-                class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing"
+                class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing clickable"
                 @click="choose('course')"
               >
                 <div class="widget widget-one_hybrid widget-referral">
@@ -88,7 +88,7 @@
                 </div>
               </div>
               <div
-                class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing"
+                class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing clickable"
                 @click="choose('reserve')"
               >
                 <div class="widget widget-one_hybrid widget-engagement">
@@ -127,7 +127,7 @@
               </div>
 
               <div
-                class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing"
+                class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing clickable"
                 @click="choose('exam')"
               >
                 <div class="widget widget-one_hybrid widget-engagement">
@@ -312,7 +312,11 @@
                   </div>
 
                   <div class="col-sm-12">
-                    <label for="exampleFormControlInput1">Year</label>
+                    <label for="exampleFormControlInput1">
+                  
+                    <span v-if="locale == 'en'">{{ $t("fitter_year") }}</span>
+                    <span v-if="locale == 'la'">{{ $t("fitter_year") }}</span>
+                    </label>
                     <select class="form-control" v-model="store.formrev.year">
                       <option value="2023">2023</option>
                       <option value="2024">2024</option>
@@ -324,7 +328,11 @@
                   </div>
 
                   <div class="col-sm-12">
-                    <label for="exampleFormControlInput1">DLT</label>
+                    <label for="exampleFormControlInput1">
+               
+                     <span v-if="locale == 'en'">{{ $t("fitter_dlt") }}</span>
+                    <span v-if="locale == 'la'">{{ $t("fitter_dlt") }}</span>
+                    </label>
                     <select
                       class="form-control"
                       @change="onChange($event)"
@@ -338,6 +346,31 @@
                       >
                     
                           <span v-if="locale == 'la'">{{ item.dlt_description_loas }}</span>
+                  <span v-if="locale == 'en'">{{ item.dlt_description_english }}</span>
+                  <span v-if="locale == 'th'">{{ item.dlt_description }}</span>
+                      </option>
+                    </select>
+                  </div>
+
+
+                  <div class="col-sm-12">
+                    <label for="exampleFormControlInput1">
+
+                      <span v-if="locale == 'en'">{{ $t("fitter_province") }}</span>
+                    <span v-if="locale == 'la'">{{ $t("fitter_province") }}</span>
+                    </label>
+                    <select
+                      class="form-control"
+                      @change="onChange($event)"
+                      v-model="store.formexam.dlt_code"
+                    >
+                      <option  :value="null">ທັງໝົດ</option>
+                      <option
+                        v-for="(item, i) in store.dlt"
+                        :value="item.dlt_code"
+                      >
+                  
+                  <span v-if="locale == 'la'">{{ item.dlt_description_loas }}</span>
                   <span v-if="locale == 'en'">{{ item.dlt_description_english }}</span>
                   <span v-if="locale == 'th'">{{ item.dlt_description }}</span>
                       </option>
@@ -392,7 +425,10 @@
                   </div>
 
                   <div class="col-sm-12">
-                    <label for="exampleFormControlInput1">Year</label>
+                    <label for="exampleFormControlInput1">
+                    <span v-if="locale == 'en'">{{ $t("fitter_year") }}</span>
+                    <span v-if="locale == 'la'">{{ $t("fitter_year") }}</span>
+                    </label>
                     <select class="form-control" v-model="store.formexam.year">
                       <option value="2023">2023</option>
                       <option value="2024">2024</option>
@@ -404,19 +440,48 @@
                   </div>
 
                   <div class="col-sm-12">
-                    <label for="exampleFormControlInput1">DLT</label>
+                    <label for="exampleFormControlInput1">
+
+                      <span v-if="locale == 'en'">{{ $t("fitter_dlt") }}</span>
+                    <span v-if="locale == 'la'">{{ $t("fitter_dlt") }}</span>
+                    </label>
                     <select
                       class="form-control"
                       @change="onChange($event)"
                       v-model="store.formexam.dlt_code"
                     >
-                      <option disabled :value="null">​ເລືອກ</option>
+                      <option  :value="null">ທັງໝົດ</option>
                       <option
                         v-for="(item, i) in store.dlt"
                         :value="item.dlt_code"
                       >
                   
-                         <span v-if="locale == 'la'">{{ item.dlt_description_loas }}</span>
+                  <span v-if="locale == 'la'">{{ item.dlt_description_loas }}</span>
+                  <span v-if="locale == 'en'">{{ item.dlt_description_english }}</span>
+                  <span v-if="locale == 'th'">{{ item.dlt_description }}</span>
+                      </option>
+                    </select>
+                  </div>
+
+
+                  <div class="col-sm-12">
+                    <label for="exampleFormControlInput1">
+
+                      <span v-if="locale == 'en'">{{ $t("fitter_province") }}</span>
+                    <span v-if="locale == 'la'">{{ $t("fitter_province") }}</span>
+                    </label>
+                    <select
+                      class="form-control"
+                      @change="onChange($event)"
+                      v-model="store.formexam.dlt_code"
+                    >
+                      <option  :value="null">ທັງໝົດ</option>
+                      <option
+                        v-for="(item, i) in store.dlt"
+                        :value="item.dlt_code"
+                      >
+                  
+                  <span v-if="locale == 'la'">{{ item.dlt_description_loas }}</span>
                   <span v-if="locale == 'en'">{{ item.dlt_description_english }}</span>
                   <span v-if="locale == 'th'">{{ item.dlt_description }}</span>
                       </option>
@@ -525,7 +590,7 @@
                       class="form-control"
                       v-model="store.formfitter.cs_id"
                     >
-                      <option disabled :value="null">​ເລືອກ</option>
+                      <option disabled :value="null">ທັງໝົດ</option>
                       <option
                         v-for="(less, i) in store.lessonlist"
                         :value="less.cs_id"
@@ -732,10 +797,10 @@ const updatechart = async () => {
     labels: [
       "ມັງກອນ",
       "ກຸມພາ",
-      "ມີເຄື່ອງໝາຍ.",
-      "ເດືອນເມສາ",
-      "ອາດ",
-      "ເດືອນມິຖຸນາ",
+      "ມີນາ",
+      "ເມສາ",
+      "ພຶດສະພາ",
+      "ມິຖຸນາ",
       "ກໍລະກົດ",
       "ສິງຫາ",
       "ກັນຍາ",
@@ -769,12 +834,12 @@ const updatechart = async () => {
 const updatechartrev = async () => {
   store.datacollectionreserve = {
     labels: [
-      "ມັງກອນ",
+    "ມັງກອນ",
       "ກຸມພາ",
-      "ມີເຄື່ອງໝາຍ.",
-      "ເດືອນເມສາ",
-      "ອາດ",
-      "ເດືອນມິຖຸນາ",
+      "ມີນາ",
+      "ເມສາ",
+      "ພຶດສະພາ",
+      "ມິຖຸນາ",
       "ກໍລະກົດ",
       "ສິງຫາ",
       "ກັນຍາ",
@@ -785,7 +850,7 @@ const updatechartrev = async () => {
     datasets: [
       {
         label: "Log Reserve",
-        backgroundColor: ["#FAE043", "#2A9D8F", "#E63946"],
+        backgroundColor: "#FAE043",
         data: [
           store.reportrev[0],
           store.reportrev[1],
@@ -810,10 +875,10 @@ const updatechartexam = async () => {
     labels: [
       "ມັງກອນ",
       "ກຸມພາ",
-      "ມີເຄື່ອງໝາຍ.",
-      "ເດືອນເມສາ",
-      "ອາດ",
-      "ເດືອນມິຖຸນາ",
+      "ມີນາ",
+      "ເມສາ",
+      "ພຶດສະພາ",
+      "ມິຖຸນາ",
       "ກໍລະກົດ",
       "ສິງຫາ",
       "ກັນຍາ",
@@ -824,7 +889,7 @@ const updatechartexam = async () => {
     datasets: [
       {
         label: "Log Exam",
-        backgroundColor: ["#FAE043", "#2A9D8F", "#E63946"],
+        backgroundColor: "#E63946",
         data: [
           store.reportexam[0],
           store.reportexam[1],
@@ -857,4 +922,10 @@ const backToUser = async () => {
   router.go(-1);
 };
 </script>
-<style scoped></style>
+<style scoped>
+
+.clickable {
+        cursor: pointer; /* Change cursor to hand icon */
+    }
+
+</style>

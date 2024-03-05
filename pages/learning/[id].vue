@@ -14,6 +14,7 @@ import { useI18n } from "vue-i18n";
 import Loading from 'vue-loading-overlay';import 'vue-loading-overlay/dist/css/index.css';
 import Swal from 'sweetalert2';
 import { useVuelidate } from "@vuelidate/core";
+import { onMounted } from 'vue'
 import {
   required,
   email,
@@ -29,9 +30,13 @@ definePageMeta({
 
 const auth = useAuthStore()
 const store = CourseStore()
+
+
 const storelesson = LessonStore()
+store.isLoading = true;
    const router = useRouter();
     const toast = useToast();
+    
 store.formDataCourse.user_id = auth.user_id
 store.formDataEditCourse.user_id = auth.user_id
 store.formDatalesson.user_id = auth.user_id
@@ -46,14 +51,31 @@ storelesson.selectlesson_form.per_page = 5
 storelesson.selectlesson_form.page = 1
 storelesson.formsearchlesson.search = "";
 
+storelesson.formselect.per_page = 5
+storelesson.formselect.page = 1
+storelesson.formselect.total_page = 0;
+
+storelesson.selectlesson_form_menu_course.page = 1;
+storelesson.selectlesson_form_menu_course.per_page = 5;
+storelesson.selectlesson_form_menu_course.search = "";
+
 await store.fetchCourseId(router.currentRoute.value.params.id);
+const grouplist = await storelesson.fetchGrouplist();
+
 await store.fetchLessonInCourseId();
-const lessonlist = await storelesson.fetchLessonlist();
-if (lessonlist === false) {
-  await toast.error("Error Data Contact Admin", {
-    timeout: 30000,
-  });
-}
+await storelesson.paginatedItemsSelete();
+
+
+onMounted(async()  => {
+      // Fetch items when the component is mounted
+      
+   const lessonlist = await storelesson.fetchLessonlist();
+   await storelesson.RemoveLesson();
+   await storelesson.paginatedItemsCourse();
+
+    store.isLoading = false;
+    })
+
 
 
 const { FormDataCourse } = storeToRefs(store);
@@ -94,7 +116,6 @@ const rules = computed(() => {
       ),
       minLength: minLength(6),
     },
-
     course_description: {
       required: helpers.withMessage(
         "The Course cover is required",
@@ -113,12 +134,20 @@ const save = async () => {
     try {
       let updatefile = await UploadfileCourse()
       let updatedata = await UpdateCourse();
+
       let clearlesson = await ClearLessoncluster();
       let savelesson = await SaveLessoncluster();
 
       if(updatedata === true){
         await setTimeout(() => {
         toast.success("ແກ້ໄຂສຳເລັດແລ້ວ");
+      }, 500);
+   
+      await router.push('/learning');
+      }
+      if(updatedata === false){
+        await setTimeout(() => {
+           toast.error("ແກ້ໄຂບໍ່ສຳເລັດ");
       }, 500);
       store.isLoaddingsave = false;
       await router.push('/learning');
@@ -137,7 +166,9 @@ const save = async () => {
 
 
 
-
+const backtoLean = async () => {
+  await router.push('/learning');
+}
 
 
 const removeImage = async () => {
@@ -204,22 +235,30 @@ function coverimage(i) {
                     </ol>
                 </nav>
             </div>
-
+            <loading v-model:active="store.isLoading" :can-cancel="true"
+                />
             <div class="middle-content container-xxl p-0">
                 <div class="row layout-top-spacing">
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
 
                         <div class="widget-content widget-content-area br-8 p-3">
                          
-
+                          <div class="widget-header">                                
+                                    <div class="row">
+                                        <div class="col-xl-10 col-md-10 col-sm-10 col-10">
+                                            <h4>{{ $t("menu_couse_e_title") }}</h4>
+                                        </div>
+                                        <div class="col-xl-2 col-md-2 col-sm-12 col-2" style="text-align: center;">
+                                          <button type="button" class="btn btn-primary additem _effect--ripple waves-effect waves-light" @click="backtoLean()">
+      {{ $t("backto_lean") }}
+    </button>   
+   </div> 
+  </div>
+                                </div>
                             <div class="row mb-4 g-3">
-    <div id="form_grid_layouts" class="col-lg-9">
-      <div class="seperator-header">
-        <h4 class=""> {{ $t("menu_couse_p_edit_title") }} </h4>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <label for="inputEmail4" class="form-label">  {{ $t("menu_couse_f_title_code") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
+ 
+    <div class="col-md-12">
+      <label for="inputEmail4" class="form-label">  {{ $t("menu_couse_f_title_code") }} </label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputEmail4" v-model="store.formDataEditCourse.course_code" :class="{
         'border-red-500 focus:border-red-500': v$.course_code.$error,
         'border-[#42d392] ': !v$.course_code.$invalid,
@@ -242,13 +281,13 @@ function coverimage(i) {
         style="color: red" >ต้องระบุฟิลด์รหัสหลักสูตร</span>
   </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
       <label for="inputPassword4" class="form-label">  {{ $t("menu_couse_f_title_name") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputPassword4" v-model="store.formDataEditCourse.course_name" :class="{
         'border-red-500 focus:border-red-500': v$.course_name.$error,
         'border-[#42d392] ': !v$.course_name.$invalid,
       }" @change="v$.course_name.$touch" 
-       maxlength="30"
+       maxlength="200"
       />
       <div v-if="locale == 'la'" >
       <span v-if="v$.course_name.$error" class="text-xs text-red-500"
@@ -271,7 +310,9 @@ The Course Name field is required.</span>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" :class="{
         'border-red-500 focus:border-red-500': v$.course_description.$error,
         'border-[#42d392] ': !v$.course_description.$invalid,
-      }" @change="v$.course_description.$touch" v-model="store.formDataEditCourse.course_description" maxlength="200">
+      }" @change="v$.course_description.$touch" v-model="store.formDataEditCourse.course_description"
+          maxlength="500"
+      >
       </textarea>
       <div v-if="locale == 'la'" >
       <span v-if="v$.course_description.$error" class="text-xs text-red-500"

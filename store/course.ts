@@ -119,7 +119,7 @@ export const CourseStore = defineStore('course', {
     },
 
     async fetchCourslist() {
-      console.log(this.formsearchcourse);
+  
       try {
         const data = await ApiService.post('/course/list', this.formsearchcourse).then(response => {
           this.courselist = response.data.data
@@ -156,6 +156,7 @@ export const CourseStore = defineStore('course', {
     async fetchLessonInCourseId() {
 
       const checkpag =  await ApiService.post('/course/lesson/list/' + this.course_id,this.formsearcheditlesson)
+      console.log(checkpag);
       if(checkpag){
         if(checkpag.data.total_page > 1){
           for(let i = 0; i < checkpag.data.total_page; i++){
@@ -165,19 +166,16 @@ export const CourseStore = defineStore('course', {
             for(let i = 0; i < data.data.data.length; i++){
               Storage.item.push(data.data.data[i]);
             }
-    
-
         }
         const Storage = LessonStore();
         Storage.selectlesson_form.total_page = checkpag.data.total_page
   
-  
-  
+
         }else {
           const Storage = LessonStore();
 
 Storage.item = checkpag.data.data
-Storage.selected = checkpag.data.data
+//Storage.selected = checkpag.data.data
           
         }
         
@@ -187,6 +185,7 @@ Storage.selected = checkpag.data.data
     },
 
     async SaveCourse() {
+      console.log(this.formDataCourse);
       try {
         const data = await ApiService.post('/course/create', this.formDataCourse).then(response => {
           this.formDatalesson.course_id = response.data.insertId
@@ -202,12 +201,10 @@ Storage.selected = checkpag.data.data
 
     async paginatedItems() {
       const Storage = LessonStore();
- 
       const startIndex = (Storage.selectlesson_form.page - 1) * Storage.selectlesson_form.per_page;
       const endIndex = startIndex + Storage.selectlesson_form.per_page;
       Storage.selectlesson_form.total_page = Math.ceil(Storage.item.length / Storage.selectlesson_form.per_page);
       Storage.selected = Storage.item.slice(startIndex, endIndex);
-    
     },
 
     async paginatedItemsClear() {
@@ -231,7 +228,7 @@ Storage.selected = checkpag.data.data
         const les = {cs_id:Storage.item[i].cs_id}
         this.savelesson.push(les);
       }
-      console.log(this.savelesson);
+   
       try {
         const data = await ApiService.post('/course/cluster/create/'+this.course_id, this.savelesson).then(response => {
 
@@ -268,7 +265,7 @@ Storage.selected = checkpag.data.data
     },
     async SaveLesson() {
       for (var i = 0; i < this.lessonlist.length; i++) {
-        console.log(this.lessonlist[i]);
+
         this.formDatalesson.cs_cover = this.lessonlist[i].cs_cover
         this.formDatalesson.cs_name = this.lessonlist[i].cs_name
         this.formDatalesson.cs_video = this.lessonlist[i].cs_video

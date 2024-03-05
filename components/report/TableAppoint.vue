@@ -222,11 +222,11 @@ function coverimage(i) {
 
 
 </script>
-<style>.dt--pagination {
+<style>
+.dt--pagination {
   float: right;
 }
 .bgc{
- 
   color: #0a58ca;
 }
 #appUserImg {

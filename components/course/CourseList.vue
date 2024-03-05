@@ -237,84 +237,38 @@
     </div>
   </div> -->
 
-  <div
-    class="paginating-container"
-    v-if="store.total_filter > store.limit_page"
-  >
-    <div
-      class="dataTables_paginate paging_simple_numbers"
-      id="zero-config_paginate"
-    >
-      <ul class="pagination">
-        <li
-          class="paginate_button page-item previous"
-          id="zero-config_previous"
-        >
-          <a
-            href="#"
-            aria-controls="zero-config"
-            data-dt-idx="0"
-            tabindex="0"
-            class="page-link"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-arrow-left"
-            >
-              <line x1="19" y1="12" x2="5" y2="12"></line>
-              <polyline points="12 19 5 12 12 5"></polyline></svg
-          ></a>
-        </li>
-        <li
-          class="paginate_button page-item"
-          v-for="page in store.total_page"
-          :key="page"
-        >
-          <a
-            href="#"
-            aria-controls="zero-config"
-            data-dt-idx="1"
-            tabindex="0"
-            class="page-link"
-            @click="setCurrentPageclick(page)"
-          >
-            {{ page }}
-          </a>
-        </li>
-        <li class="paginate_button page-item next" id="zero-config_next">
-          <a
-            href="#"
-            aria-controls="zero-config"
-            data-dt-idx="4"
-            tabindex="0"
-            class="page-link"
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="feather feather-arrow-right"
-            >
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline></svg
-          ></a>
-        </li>
-      </ul>
+
+      <div>
+      <div class="dt--pagination" v-if="store.total_page > 1">
+        <div class="dataTables_paginate paging_simple_numbers" id="zero-config_paginate">
+          <ul class="pagination">
+            <li class="paginate_button page-item previous" id="zero-config_previous" @click="Prev()">
+              <a href="#" aria-controls="zero-config" data-dt-idx="0" tabindex="0" class="page-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="feather feather-arrow-left">
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline>
+                </svg></a>
+            </li>
+            <li class="paginate_button page-item " v-for="page in store.total_page" :key="page">
+              <a href="#" aria-controls="zero-config" data-dt-idx="1" tabindex="0" class="page-link"  :class="{ bgcx: page === store.formsearchcourse.page }"  @click="setCurrentPageclick(page)"
+              >
+                {{ page }}</a>
+            </li>
+            <li class="paginate_button page-item next" id="zero-config_next"><a href="#" aria-controls="zero-config" @click="Next()"
+                data-dt-idx="4" tabindex="0" class="page-link"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+                  height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg></a></li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
+
+
 </template>
 
 
@@ -421,11 +375,55 @@ function image(i) {
 //   }
 //   return "http://oasbe.sky.mpwt.link/media_file/file/?f=" + x;
 // }
+
+
+const Prev = async () => {
+
+  if (store.formsearchcourse.page == 1) {
+    await store.fetchCourslist();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else {
+    store.formsearchcourse.page -= 1;
+    await store.fetchCourslist();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  }
+};
+
+
+
+
+const Next = async () => {
+
+
+  if (store.formsearchcourse.page == store.total_page) {
+   
+    store.formsearchcourse.page = store.total_page;
+  await store.fetchCourslist();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else {
+    store.formsearchcourse.page += 1;
+await store.fetchCourslist();
+   
+  }
+
+};
+
 </script>
 <style>
 .dt--pagination {
   float: right;
 }
+
+.bgcx{
+  color: #0a58ca;
+}
+
 
 .gridarea__img img {
   object-fit: cover;

@@ -5,6 +5,7 @@
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">{{ $t("lesson_head") }}</h5>
       </div>
+   
       <div class="modal-body">
         <form>
 
@@ -22,7 +23,7 @@
                </textarea>
 
               <span v-if="v$.cs_name.$error" class="text-xs text-red-500" style="color: red">
-                ຕ້ອງລະບຸລະຫັດຫຼັກສູດ.</span>
+                ຕ້ອງໃສ່ຂໍ້ຄວາມ.</span>
           </div>
 
           <div class="mb-3">
@@ -37,7 +38,7 @@
                </textarea>
 
              <span v-if="v$.cs_description.$error" class="text-xs text-red-500" style="color: red">
-                ຕ້ອງລະບຸລະຫັດຫຼັກສູດ.</span>
+              ຕ້ອງໃສ່ຂໍ້ຄວາມ.</span>
           </div>
 
               <div class="mb-3">
@@ -48,8 +49,24 @@
             
           </div>
 
+            <div class="mb-3">
+            <label for="message-text" class="col-form-label">{{ $t("lesson_yout") }}:</label>
 
-  
+           <v-select
+  v-model="store.myselect_group"
+    :options="store.group"
+    label="cg_name"
+     placeholder="ເລືອກ"
+         @change="changedLabelCounrt($event)"
+  ></v-select>
+
+ <span v-if="v$.cg_id.$error" class="text-xs text-red-500" style="color: red">
+              ຕ້ອງໃສ່ຂໍ້ຄວາມ.</span>
+            
+          </div>
+
+
+              
 
           <div class="mb-3">
             <label for="message-text" class="col-form-label">{{ $t("lesson_pic") }}:</label>
@@ -93,9 +110,13 @@ import { useVuelidate } from '@vuelidate/core';
 import { required, email, sameAs, minLength, helpers, } from '@vuelidate/validators';
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import 'vue-select/dist/vue-select.css';
+import vSelect from 'vue-select';
 import { ref } from 'vue';
 import { useI18n } from "vue-i18n";
 import Swal from 'sweetalert2';
+
+
 const { locale, setLocale } = useI18n();
 
 
@@ -115,6 +136,9 @@ const closeModal = async () => {
 };
 
 
+
+
+
 const rules = computed(() => {
   return {
     cs_name: {
@@ -125,6 +149,10 @@ const rules = computed(() => {
       required: helpers.withMessage('Exam code field is required', required),
       minLength: minLength(1),
     },
+     cg_id: {
+      required: helpers.withMessage('Exam code field is required', required),
+      minLength: minLength(1),
+    },
 
   };
 });
@@ -132,10 +160,15 @@ const v$ = useVuelidate(rules, FormLesson);
 const save = async () => {///////////// บันทึก
  
 
+if(store.myselect_group){
+store.formcreatelesson.cg_id = store.myselect_group.cg_id;
+}
+
   v$.value.$validate();  ///////////ดัก req
 
     if (!v$.value.$error) {
-    let uploadfile = await store.UploadfileLesson();   ///////////upload รูป
+  
+    let uploadfile = await store.UploadfileLesson();  
    let save = await store.saveformLesson();
 
     
@@ -148,7 +181,6 @@ const save = async () => {///////////// บันทึก
       store.formcreatelesson.cs_cover = ""
        
       store.GetopenModalCreate = false;
-   //    await removeImage();
       v$.value.$reset();
 
     }
@@ -156,6 +188,7 @@ const save = async () => {///////////// บันทึก
   }
 
 };
+
 
 
 
@@ -198,7 +231,11 @@ const removeImage = async () => {
 
 
 
+const changedLabelCounrt = async (event) => {
 
+console.log(event.target.value);
+
+}
 
 </script>
 

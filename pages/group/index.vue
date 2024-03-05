@@ -6,12 +6,13 @@
 // import DataTablesCore from 'datatables.net-bs5';
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
-import { CourseStore } from '@/store/course'
+import { GroupStore } from '@/store/group'
 import { useAuthStore } from '@/store/auth'
-import CourseList from '@/components/course/CourseList.vue'
-import { useModalStore } from '@/store/modal';
+import GroupList from '@/components/group/GroupList.vue'
+import GroupCreate from '@/components/group/GroupCreate.vue'
+import GroupEdit from '@/components/group/GroupEdit.vue'
 
-import Alert from '@/components/layout/Alert.vue';
+
 import { useToast } from 'vue-toastification';
 import { ref } from 'vue';
 import Loading from 'vue-loading-overlay';
@@ -23,46 +24,33 @@ definePageMeta({
 })
 
 const auth = useAuthStore()
-const store = CourseStore()
-store.ResetFetch()
-store.formDataCourse.user_id = auth.user_id
-store.formDataEditCourse.user_id = auth.user_id
-store.formDatalesson.user_id = auth.user_id
-store.formDataeditlesson.user_id = auth.user_id
+const store = GroupStore()
+const toast = useToast();
+store.formcreategroup.user_id = auth.user_id
 
-
-
-const toast = useToast()
-
-  const { deleteItem_id } = CourseStore();//Action
-  const { fetchCourslist } = CourseStore();//Action
-
-
-
-  
-  const modalStore = useModalStore();
-  const { GetopenModal } = storeToRefs(store); //Get Getter
-  const { GetopenModal_ID } = storeToRefs(store); //Get Getter
-
-  const { Pending } = storeToRefs(store); //Get Getter
-
+ store.fetchGrouplist();
   const closeModal = () => {
-    store.closeModal();
+    store.GetopenModal = false;
+  };
+
+  const delet = async () => {
+    let dele = await store.DeleteGroup();
+ 
+    if(dele === true){
+      await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
+      store.GetopenModal = false;
+      
+      await store.fetchGrouplist();
+    }else {
+      await toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
+      store.GetopenModal = false;
+    }
+
   };
 
 
-const delete_userid = async (id) => {
 
-  const delc = await store.deleteItem_id(id);
-  if(delc){
-    toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
-    await store.fetchCourslist()
-      }else{
-   toast.error('ລຶບຂໍ້ມູນລົ້ມເຫລວ')
-      }
 
-  };
-  
 </script>
 
 <template>
@@ -73,16 +61,20 @@ const delete_userid = async (id) => {
               <div class="page-meta">
                         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="#">{{ $t("menu_page_course") }} </a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{ $t("menu_page_course_page") }}</li>
+                                <li class="breadcrumb-item"><a href="#"> {{ $t("title_group") }} </a></li>
+                                <li class="breadcrumb-item active" aria-current="page"> {{ $t("title_group_t") }}</li>
                             </ol>
                         </nav>
                     </div>
-                <Loading v-if="Pending"></Loading>
-            <CourseList></CourseList>
+            <GroupList></GroupList>
             </div>
           </div>
-  <div class="modal"  v-if="GetopenModal">
+
+ <GroupCreate></GroupCreate>
+ <GroupEdit></GroupEdit>
+    <!-- <LessonEdit></LessonEdit> -->
+
+    <div class="modal"  v-if="store.GetopenModal">
 <div class="modal-content" id="deleteConformationLabel">
                                 <div class="modal-header">
                                     <div class="icon">
@@ -98,15 +90,11 @@ const delete_userid = async (id) => {
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal" >{{ $t("cancel") }}</button>
-                                    <button type="button" class="btn btn-danger" data-remove="task"  @click="delete_userid(GetopenModal_ID)">{{ $t("delete") }} </button>
+                                    <button type="button" class="btn btn-danger" data-remove="task" @click="delet">{{ $t("delete") }} </button>
                                 </div>
                             </div>
   </div>
 
-    
-    
-
-       
 </template>
 
 <style>

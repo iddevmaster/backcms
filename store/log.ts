@@ -5,27 +5,28 @@ import moment from "moment";
 
 export const LogStore = defineStore('log', {
   state: () => ({
-    datacollection: {
-      labels: ['ມັງກອນ', 'ກຸມພາ', 'ມີເຄື່ອງໝາຍ.','ເດືອນເມສາ','ອາດ','ເດືອນມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'],
+   
+    datacollectionreserve: {
+      labels: ['ມັງກອນ', 'ກຸມພາ', 'ມີນາ.','ເມສາ','ພຶດສະພາ','ມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'],
       datasets: [{
-        label: 'Report E-learning',
-        backgroundColor: '#f87979',
+        label: 'Report Reserve',
+        backgroundColor: '#79f8791',
         data: [0, 0, 0,0,0,0,0,0,0,0,0,0]
       }]
     },
-    datacollectionreserve: {
-      labels: ['ມັງກອນ', 'ກຸມພາ', 'ມີເຄື່ອງໝາຍ.','ເດືອນເມສາ','ອາດ','ເດືອນມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'],
+    datacollection: {
+      labels: ['ມັງກອນ', 'ກຸມພາ', 'ມີນາ.','ເມສາ','ພຶດສະພາ','ມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'],
       datasets: [{
-        label: 'Report Reserve',
-        backgroundColor: '#f87979',
+        label: 'Report E-learning',
+        backgroundColor: '#79f879',
         data: [0, 0, 0,0,0,0,0,0,0,0,0,0]
       }]
     },
     datacollectionexam: {
-      labels: ['ມັງກອນ', 'ກຸມພາ', 'ມີເຄື່ອງໝາຍ.','ເດືອນເມສາ','ອາດ','ເດືອນມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'],
+      labels: ['ມັງກອນ', 'ກຸມພາ', 'ມີນາ.','ເມສາ','ພຶດສະພາ','ມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'],
       datasets: [{
         label: 'Report Exam',
-        backgroundColor: '#f87979',
+        backgroundColor: '#7979f8',
         data: [0, 0, 0,0,0,0,0,0,0,0,0,0]
       }]
     },

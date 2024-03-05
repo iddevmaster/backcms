@@ -1,15 +1,15 @@
 <template>
 
-    <loading v-model:active="store.isLoaddingsave" :can-cancel="true" @on-cancel="onCancel"
+    <loading v-model:active="store.isLoaddingsave" :can-cancel="true" 
                     />
       <div class="row mb-4 g-3">
         <div id="form_grid_layouts" class="col-lg-9">
-          <div class="seperator-header">
-            <h4 class=""> {{ $t("lesson_select") }}</h4>
-          </div>
+          <h4 class=""> {{ $t("lesson_select") }}</h4>
         </div>
+
+        
         <div class="table-responsive">
-    <table class="table table-hover table-bordered" v-if="store.selected.length > 0">
+    <table class="table table-hover table-bordered" v-if="store.item.length > 0">
         <thead>
             <tr>
                 <th class="checkbox-area" scope="col">
@@ -21,6 +21,7 @@
                 <th scope="col"> {{ $t("lesson_ans") }}</th>
                 <th scope="col"> {{ $t("lesson_yout") }}</th>
                 <th scope="col"> {{ $t("lesson_pic") }}</th>
+                <th scope="col"> - </th>
 
 
                
@@ -29,7 +30,7 @@
         <tbody>
       
             <tr v-for="(item, index) in store.selected" :key="item.cs_id">
-              <td>{{ (store.selectlesson_form.page * store.selectlesson_form.per_page) - (store.selectlesson_form.per_page -  index) +  1 }}</td>
+              <td>{{ (store.formselect.page * store.formselect.per_page) - (store.formselect.per_page -  index) +  1 }}</td>
               
                 <td>{{item.cs_name}}</td>
                 <td>{{item.cs_description}}</td>
@@ -44,6 +45,39 @@
                   <img src="../../assets/images/no_photo.jpg" class="img-fluid" width="80" height="80" v-else>
                 
                 </td>
+                <td>     <div class="action-btns">
+
+
+    <a
+      href="javascript:void(0);"
+      class="action-btn btn-delete bs-tooltip"
+      @click="remove(item)"
+      data-toggle="tooltip"
+      data-placement="top"
+      aria-label="Delete"
+      data-bs-original-title="Delete"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="feather feather-trash-2"
+      >
+        <polyline points="3 6 5 6 21 6"></polyline>
+        <path
+          d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+        ></path>
+        <line x1="10" y1="11" x2="10" y2="17"></line>
+        <line x1="14" y1="11" x2="14" y2="17"></line>
+      </svg>
+    </a>
+  </div></td>
             </tr>
         </tbody>
     </table>
@@ -66,7 +100,7 @@
      </div>
   <div class="row">
     <div class="col-xl-12 col-lg-12">
-      <div class="pagination-no_spacing" v-if="store.selectlesson_form.total_page > 1">
+      <div class="pagination-no_spacing" v-if="store.formselect.total_page > 1">
         <ul class="pagination">
           <li>
             <a href="javascript:void(0);" class="prev"
@@ -90,7 +124,7 @@
                 id="ex1"
                 type="number"
                 style="width: 50px"
-                v-model="store.selectlesson_form.page"
+                v-model="store.formselect.page"
                 min="1"
                 @input="validatePNumberSelect($event)"
               />
@@ -98,7 +132,7 @@
           </li>
           <li><a href="javascript:void(0);">/</a></li>
           <li>
-            <a href="javascript:void(0);">{{ store.selectlesson_form.total_page }}</a>
+            <a href="javascript:void(0);">{{ store.formselect.total_page }}</a>
           </li>
           <li>
             <a href="javascript:void(0);" class="next"
@@ -163,11 +197,7 @@
 const { selectentireslesson } = LessonStore(); //Action
 const { selectentiresentires } = LessonStore(); //Action
 
-
-
 await stores.paginatedItems();
-
-
 const selectshowdata = async (sel) => {
   await selectentiresentires(sel.target.value);
   await store.fetchLessonlist();
@@ -179,6 +209,13 @@ const searchData = async () => {
 const selectAllRows = async () => {
     await store.SeleectAllLessonlist();
 };
+
+const remove = async (item) => {
+    await store.RemoveSelect(item);
+     await store.paginatedItemsSelete()
+   await store.paginatedItemsCourse()
+};
+
 
 
 
@@ -232,24 +269,30 @@ const validatePNumberSelect = async (evt) => {
   
   }
 
-  if (store.selectlesson_form.page == "") {
+    console.log(store.formselect.page);
+   console.log(store.formselect.total_page);
+
+  if (store.formselect.page == "") {
     store.selectlesson_form.page = 1;
   //  await store.fetchLessonlist();
+   await store.paginatedItemsSelete()
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
-  } else if(store.selectlesson_form.page > store.selectlesson_form.total_page){
-    store.selectlesson_form.page = store.selectlesson_form.total_page;
+  } else if(store.formselect.page > store.formselect.total_page){
+    store.formselect.page = store.formselect.total_page;
+   console.log('else if');
+     await store.paginatedItemsSelete()
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   }else {
- //   await store.fetchLessonlist();
+
     store.pending = true;
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
-    await stores.paginatedItems() 
+    await store.paginatedItemsSelete()
   }
  // await stores.paginatedItems() 
 }

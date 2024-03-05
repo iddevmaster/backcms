@@ -7,6 +7,7 @@
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import { LessonStore } from '@/store/lesson'
+import { GroupStore } from '@/store/group'
 import { useAuthStore } from '@/store/auth'
 import LessonListAll from '@/components/lesson/LessonListAll.vue'
 import LessonCreate from '@/components/lesson/LessonCreate.vue'
@@ -16,6 +17,7 @@ import { useToast } from 'vue-toastification';
 import { ref } from 'vue';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
+import { onMounted } from 'vue'
 
 definePageMeta({
   middleware: ['auth','roles'],
@@ -24,18 +26,24 @@ definePageMeta({
 
 const auth = useAuthStore()
 const store = LessonStore()
+
+store.isLoading = true;
 const toast = useToast();
 store.formcreatelesson.user_id = auth.user_id
 store.user_id = auth.user_id
 
-const lessonlist = await store.fetchLessonlist();
+const group = await store.fetchGrouplist();
 
-if (lessonlist === false) {
-  await toast.error("Error Data Contact Admin", {
-    timeout: 30000,
-  });
-}
 
+
+onMounted(async()  => {
+      // Fetch items when the component is mounted
+      const lessonlist = await store.fetchLessonlist();
+
+await store.paginatedItems() 
+store.isLoading = false;
+     
+    })
 
 
 
@@ -65,7 +73,7 @@ const delete_userid = async (id) => {
 </script>
 
 <template>
-   <loading v-model:active="store.isLoading" :can-cancel="true" @on-cancel="onCancel"
+   <loading v-model:active="store.isLoading" :can-cancel="true"
                 />
   <div id="content" class="main-content">
             <div class="layout-px-spacing">
