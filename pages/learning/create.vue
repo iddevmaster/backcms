@@ -250,7 +250,7 @@ const onFileChangeBack = async (event) => {
             <div class="row">
               
               <div class="col-xl-12">
-                <div class="widget-content widget-content-area br-8 p-3">
+                <div class="widget-content widget-content-area br-8 p-4">
                   <div class="widget-header">                                
                                     <div class="row">
                                         <div class="col-xl-10 col-md-10 col-sm-10 col-10">
@@ -345,7 +345,7 @@ The Course Name field is required.</span>
   
 
     </div>
-    <div class="col-12">
+    <div class="col-12 mt-3">
       <label for="inputAddress" class="form-label">{{ $t("menu_couse_f_title_detail") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <textarea
         class="form-control"
@@ -410,18 +410,21 @@ The Course Name field is required.</span>
       <span v-if="v$.course_cover.$error" class="text-xs text-red-500"
         style="color: red" >อัพโหลดรูปภาพ</span>
   </div>
-    <div class="border p-2 mt-3">
-      <p>{{ $t("menu_couse_f_title_display_picture") }}:</p>
-      <template v-if="store.formDataCourse.course_cover">
-        <div class="row">
-          <div id="image-container" class="col-md-3 col-sm-4 col-6">
-            <div class="image-wrapper">
-              <img  :src="coverimage(store.formDataCourse.course_cover)" class="img-fluid" />
-              <button @click="removeImage()" class="delete-button"><i class="bi bi-x-lg"></i></button>
+
+    <div class="col-12 ">
+      <div class="border rounded p-2">
+        <p>{{ $t("menu_couse_f_title_display_picture") }}:</p>
+        <template v-if="store.formDataCourse.course_cover">
+          <div class="row">
+            <div id="image-container" class="col-md-3 col-sm-4 col-6">
+              <div class="image-wrapper">
+                <img  :src="coverimage(store.formDataCourse.course_cover)" class="img-fluid" />
+                <button @click="removeImage()" class="delete-button"><i class="bi bi-x-lg"></i></button>
+              </div>
             </div>
           </div>
-        </div>
-      </template>
+        </template>
+      </div>
     </div>
 
     <div>
@@ -434,7 +437,7 @@ The Course Name field is required.</span>
             <br>
             <div class="row">
               <div class="col-xl-12">
-                <div class="widget-content widget-content-area br-8 p-3">
+                <div class="widget-content widget-content-area br-8 p-4">
                   <SelectListLesson></SelectListLesson>
                 </div>
               </div>
@@ -442,7 +445,7 @@ The Course Name field is required.</span>
 <br>
             <div class="row">
               <div class="col-xl-12">
-                <div class="widget-content widget-content-area br-8 p-3">
+                <div class="widget-content widget-content-area br-8 p-4">
                   <ListLesson></ListLesson>
                 </div>
               </div>

@@ -5,7 +5,7 @@
 
   />
 
-  <div class="row layout-top-spacing">
+  <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12">
       <h4 class="">{{ $t("lesson_all") }}</h4>
     </div>
