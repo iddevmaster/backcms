@@ -279,7 +279,7 @@ const onFileChangeBack = async (event) => {
     </div> -->
 
 
-    <div class="col-md-6">
+    <div class="col-md-12">
       <label for="inputEmail4" class="form-label"> {{ $t("menu_couse_f_title_code") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input
         type="text"
@@ -311,7 +311,7 @@ const onFileChangeBack = async (event) => {
   </div>
 
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
       <label for="inputPassword4" class="form-label">{{ $t("menu_couse_f_title_name") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input
         type="text"
@@ -324,7 +324,7 @@ const onFileChangeBack = async (event) => {
           'border-[#42d392] ': !v$.course_name.$invalid,
         }"
         @change="v$.course_name.$touch"
-   
+        maxlength="200"
       />
    <div v-if="locale == 'la'" >
       <span v-if="v$.course_name.$error" class="text-xs text-red-500"
@@ -358,7 +358,7 @@ The Course Name field is required.</span>
         }"
         @change="v$.course_description.$touch"
         v-model="store.formDataCourse.course_description"
-    
+        maxlength="500"
       >
       </textarea>
 

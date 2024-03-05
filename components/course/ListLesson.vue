@@ -100,7 +100,7 @@ style="
           <tr v-for="(item, index) in store.lesson_item" :key="item.cs_id">
             <td>
             
-              <div class="form-check form-check-primary">
+              <div >
        
 <input type="button" class="btn btn-primary" value="ເລືອກ"  @click="selectAllRowsOne(item)"/>
                   
