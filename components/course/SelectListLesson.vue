@@ -103,7 +103,7 @@
       <div class="pagination-no_spacing" v-if="store.formselect.total_page > 1">
         <ul class="pagination">
           <li>
-            <a href="javascript:void(0);" class="prev"
+            <a href="javascript:void(0);" class="prev"  @click="Previou()"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -135,7 +135,7 @@
             <a href="javascript:void(0);">{{ store.formselect.total_page }}</a>
           </li>
           <li>
-            <a href="javascript:void(0);" class="next"
+            <a href="javascript:void(0);" class="next"  @click="Nextu()"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -219,45 +219,32 @@ const remove = async (item) => {
 
 
 
-    
-const validatePNumber = async (evt) => {
+const Previou = async () => {
+
+if(store.formselect.page == 1){
+
+}else {
   
-  const keysAllowed: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  const keyPressed: string = evt.key;
-  if (!keysAllowed.includes(keyPressed)) {
-    evt.preventDefault()
-  
-  }
-
-  if (store.formsearchlesson.page == '') {
-    store.pending = true;
-    store.formsearchexamquestion.page = 1;
-    await store.fetchLessonlist();
-    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+  await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
-  } else {
-    store.pending = true;
+  store.formselect.page -= 1
+  await store.paginatedItemsCourse() 
+}
+};
+const Nextu = async () => {
+if(store.formselect.page == store.formselect.total_page){
 
-    if(store.formsearchlesson.page > store.lesson_total_page){
- store.formsearchlesson.page = store.lesson_total_page;
- await store.fetchLessonlist();
-    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+}else {
+  await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
-
-    }else {
-      await store.fetchLessonlist();
-   await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
-      timeout: 50,
-    });
-
-    }
-     
-  }
-
+  store.formselect.page += 1
+  await store.paginatedItemsCourse()
 }
 
+
+};
 
 
 const validatePNumberSelect = async (evt) => {
@@ -269,8 +256,7 @@ const validatePNumberSelect = async (evt) => {
   
   }
 
-    console.log(store.formselect.page);
-   console.log(store.formselect.total_page);
+
 
   if (store.formselect.page == "") {
     store.selectlesson_form.page = 1;
@@ -281,7 +267,7 @@ const validatePNumberSelect = async (evt) => {
     });
   } else if(store.formselect.page > store.formselect.total_page){
     store.formselect.page = store.formselect.total_page;
-   console.log('else if');
+
      await store.paginatedItemsSelete()
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,

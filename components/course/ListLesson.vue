@@ -134,7 +134,7 @@ style="
       <div class="pagination-no_spacing" v-if="store.selectlesson_form_menu_course.total_page > 1">
         <ul class="pagination">
           <li>
-            <a href="javascript:void(0);" class="prev"
+            <a href="javascript:void(0);" class="prev" @click="Previou()"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -166,7 +166,7 @@ style="
             <a href="javascript:void(0);">{{ store.selectlesson_form_menu_course.total_page }}</a>
           </li>
           <li>
-            <a href="javascript:void(0);" class="next"
+            <a href="javascript:void(0);" class="next"  @click="Nextu()"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -269,39 +269,65 @@ await stores.paginatedItems()
 
 }
 
-const Next = async () => {
+// const Next = async () => {
+//   if (store.formsearchlesson.page == store.lesson_total_page) {
+//     store.pending = true;
+//     store.formsearchlesson.page = store.lesson_total_page;
+//   await store.fetchLessonlist();
+//     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+//       timeout: 50,
+//     });
+//   } else {
+//     store.formsearchlesson.page += 1;
+// await store.fetchLessonlist();
+//     store.pending = true;
+//   }
 
+// };
 
-  if (store.formsearchlesson.page == store.lesson_total_page) {
-    store.pending = true;
-    store.formsearchlesson.page = store.lesson_total_page;
-  await store.fetchLessonlist();
-    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+// const Prev = async () => {
+
+//   if (store.formsearchlesson.page == 1) {
+//     await store.fetchLessonlist();
+//     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+//       timeout: 50,
+//     });
+//   } else {
+//     store.formsearchlesson.page -= 1;
+//     await store.fetchLessonlist();
+//     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+//       timeout: 50,
+//     });
+//   }
+// };
+
+const Previou = async () => {
+
+if(store.selectlesson_form_menu_course.page == 1){
+
+}else {
+  
+  await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
-  } else {
-    store.formsearchlesson.page += 1;
-await store.fetchLessonlist();
-    store.pending = true;
-  }
+  store.selectlesson_form_menu_course.page -= 1
+  await store.paginatedItemsCourse() 
+}
+};
+const Nextu = async () => {
+if(store.selectlesson_form_menu_course.page == store.selectlesson_form_menu_course.total_page){
+
+}else {
+  await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  store.selectlesson_form_menu_course.page += 1
+  await store.paginatedItemsCourse()
+}
+
 
 };
 
-const Prev = async () => {
-
-  if (store.formsearchlesson.page == 1) {
-    await store.fetchLessonlist();
-    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
-      timeout: 50,
-    });
-  } else {
-    store.formsearchlesson.page -= 1;
-    await store.fetchLessonlist();
-    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
-      timeout: 50,
-    });
-  }
-};
 
 const validatePNumber = async (evt) => {
   const keysAllowed: string[] = [
@@ -365,14 +391,13 @@ const validatePNumberSelect = async (evt) => {
       timeout: 50,
     });
   }else {
- //   await store.fetchLessonlist();
     store.pending = true;
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
     await store.paginatedItemsCourse() 
   }
- // await stores.paginatedItems() 
+
 }
 
 
