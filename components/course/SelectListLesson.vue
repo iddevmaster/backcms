@@ -23,9 +23,6 @@
                 <th scope="col"> {{ $t("lesson_yout") }}</th>
                 <th scope="col"> {{ $t("lesson_pic") }}</th>
                 <th scope="col"> - </th>
-
-
-               
             </tr>
         </thead>
         <tbody>

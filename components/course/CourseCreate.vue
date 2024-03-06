@@ -9,7 +9,7 @@
       </div>
     </div>
   
-    <div class="col-md-6">
+    <div class="col-md-6 mt-3">
       <label for="inputEmail4" class="form-label"> {{ $t("menu_couse_f_title_code") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input
         type="text"
@@ -25,7 +25,11 @@
         maxlength="20"
       />
 
-  <div v-if="locale == 'la'" >
+
+
+    </div>
+
+    <div v-if="locale == 'la'" >
       <span v-if="v$.course_code.$error" class="text-xs text-red-500"
         style="color: red" >ຕ້ອງມີຊ່ອງຂໍ້ມູນລະຫັດຫຼັກສູດ</span>
   </div>
@@ -39,9 +43,8 @@
       <span v-if="v$.course_code.$error" class="text-xs text-red-500"
         style="color: red" >ต้องระบุฟิลด์รหัสหลักสูตร</span>
   </div>
-
-    </div>
-    <div class="col-md-6">
+  <br>
+    <div class="col-md-6 mt-3">
       <label for="inputPassword4" class="form-label">{{ $t("menu_couse_f_title_name") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input
         type="text"
@@ -56,7 +59,12 @@
         @change="v$.course_name.$touch"
   
       />
-   <div v-if="locale == 'la'" >
+
+  
+
+    </div>
+
+    <div v-if="locale == 'la'" >
       <span v-if="v$.course_name.$error" class="text-xs text-red-500"
         style="color: red" >ຕ້ອງມີຊ່ອງໃສ່ຊື່ຫຼັກສູດ.</span>
   </div>
@@ -72,9 +80,6 @@ The Course Name field is required.</span>
         style="color: red" >ต้องระบุฟิลด์ชื่อหลักสูตร</span>
   </div>
 
-  
-
-    </div>
     <div class="col-12">
       <label for="inputAddress" class="form-label">{{ $t("menu_couse_f_title_detail") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <textarea

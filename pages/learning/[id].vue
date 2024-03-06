@@ -257,7 +257,7 @@ function coverimage(i) {
                                 </div>
                             <div class="row mb-4 g-3">
  
-    <div class="col-md-12">
+    <div class="col-md-12 mt-3">
       <label for="inputEmail4" class="form-label">  {{ $t("menu_couse_f_title_code") }} </label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputEmail4" v-model="store.formDataEditCourse.course_code" :class="{
         'border-red-500 focus:border-red-500': v$.course_code.$error,
@@ -281,7 +281,7 @@ function coverimage(i) {
         style="color: red" >ต้องระบุฟิลด์รหัสหลักสูตร</span>
   </div>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-12 mt-3">
       <label for="inputPassword4" class="form-label">  {{ $t("menu_couse_f_title_name") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputPassword4" v-model="store.formDataEditCourse.course_name" :class="{
         'border-red-500 focus:border-red-500': v$.course_name.$error,

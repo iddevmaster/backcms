@@ -279,7 +279,7 @@ const onFileChangeBack = async (event) => {
     </div> -->
 
 
-    <div class="col-md-12">
+    <div class="col-md-12 mt-3">
       <label for="inputEmail4" class="form-label"> {{ $t("menu_couse_f_title_code") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input
         type="text"
@@ -311,7 +311,7 @@ const onFileChangeBack = async (event) => {
   </div>
 
     </div>
-    <div class="col-md-12">
+    <div class="col-md-12 mt-3">
       <label for="inputPassword4" class="form-label">{{ $t("menu_couse_f_title_name") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input
         type="text"
