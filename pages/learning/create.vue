@@ -324,7 +324,7 @@ const onFileChangeBack = async (event) => {
           'border-[#42d392] ': !v$.course_name.$invalid,
         }"
         @change="v$.course_name.$touch"
-        maxlength="150"
+        maxlength="100"
       />
    <div v-if="locale == 'la'" >
       <span v-if="v$.course_name.$error" class="text-xs text-red-500"
