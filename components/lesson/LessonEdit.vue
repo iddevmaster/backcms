@@ -56,7 +56,7 @@
               }"
               @change="v$.cs_description.$touch"
               v-model="store.formcreatelessonedit.cs_description"
-              maxlength="200"
+              maxlength="100"
             >
             </textarea>
 
@@ -80,7 +80,7 @@
               id="recipient-name"
               v-model="store.formcreatelessonedit.cs_video"
               placeholder="https://youtu.be/DCh2jlZzC1g *"
-              maxlength="200"
+              maxlength="100"
             />
           </div>
 
