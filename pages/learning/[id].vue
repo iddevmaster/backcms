@@ -287,7 +287,7 @@ function coverimage(i) {
         'border-red-500 focus:border-red-500': v$.course_name.$error,
         'border-[#42d392] ': !v$.course_name.$invalid,
       }" @change="v$.course_name.$touch" 
-       maxlength="200"
+         maxlength="100"
       />
       <div v-if="locale == 'la'" >
       <span v-if="v$.course_name.$error" class="text-xs text-red-500"
