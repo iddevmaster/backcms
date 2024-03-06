@@ -19,7 +19,7 @@
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="ຄໍາຖາມ *" :class="{
         'border-red-500 focus:border-red-500': v$.cs_name.$error,
         'border-[#42d392] ': !v$.cs_name.$invalid,
-      }" @change="v$.cs_name.$touch" v-model="store.formcreatelesson.cs_name"   maxlength="150" >
+      }" @change="v$.cs_name.$touch" v-model="store.formcreatelesson.cs_name"   maxlength="100" >
                </textarea>
 
               <span v-if="v$.cs_name.$error" class="text-xs text-red-500" style="color: red">
@@ -34,7 +34,7 @@
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="ຄໍາຕອບ *" :class="{
         'border-red-500 focus:border-red-500': v$.cs_description.$error,
         'border-[#42d392] ': !v$.cs_description.$invalid,
-      }" @change="v$.cs_description.$touch" v-model="store.formcreatelesson.cs_description" maxlength="150">
+      }" @change="v$.cs_description.$touch" v-model="store.formcreatelesson.cs_description" maxlength="100">
                </textarea>
 
              <span v-if="v$.cs_description.$error" class="text-xs text-red-500" style="color: red">
