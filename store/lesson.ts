@@ -82,6 +82,7 @@ export const LessonStore = defineStore('lesson', {
     lesson_item:[],
     myselect_group:null,
     item:[],
+    itemselect:[],
     group:[],
     cg_id:0,
     imagelist: null,
@@ -350,6 +351,8 @@ if (!this.item.some(item => item.cs_id === this.lessonlist[i].cs_id)) {
   this.item.push(this.lessonlist[i]);
 } 
       }
+
+     this.itemselect = this.item
     },
 
     async SelectOneessonlist(tem) {
@@ -500,6 +503,7 @@ if (objWithIdIndex > -1) {
 for (var i = 0; i < this.item.length; i++) { 
 this.formsearchlesson.exclude.push(this.item[i].cs_id)
 }
+this.itemselect = [];
 
     },
 

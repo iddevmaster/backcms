@@ -25,7 +25,7 @@
     </div>
 
         <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
-          <button type="button" class="btn btn-primary" style="width: 100%; height: 100%; margin-top: auto;"  @click="ChangeLesson"  v-if="store.item.length > 0">
+          <button type="button" class="btn btn-primary" style="width: 100%; height: 100%; margin-top: auto;"  @click="ChangeLesson"  v-if="store.itemselect.length > 0">
 ບັນທຶກ</button>
 
       
