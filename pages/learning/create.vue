@@ -83,7 +83,7 @@ const grouplist = await storelesson.fetchGrouplist();
       // Fetch items when the component is mounted
       
       const lessonlist = await storelesson.fetchLessonlist();
-     await storelesson.paginatedItemsCourse();
+   //  await storelesson.paginatedItemsCourse();
 
     store.isLoading = false;
     })

@@ -30,12 +30,7 @@
     </div>
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
-      <!-- <select
-        class="form-select form-select"
-        aria-label="Default select example"
-      >
-        <option value="5">5</option>
-      </select> -->
+
     </div>
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
@@ -97,7 +92,7 @@ style="
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item, index) in store.lesson_item" :key="item.cs_id">
+          <tr v-for="(item, index) in store.lessonlist" :key="item.cs_id">
             <td>
             
               <div >
@@ -131,7 +126,7 @@ style="
 
       <div class="row">
     <div class="col-xl-12 col-lg-12">
-      <div class="pagination-no_spacing" v-if="store.selectlesson_form_menu_course.total_page > 1">
+      <div class="pagination-no_spacing" v-if="store.lesson_total_page > 1">
         <ul class="pagination">
           <li>
             <a href="javascript:void(0);" class="prev" @click="Previou()"
@@ -155,7 +150,7 @@ style="
                 id="ex1"
                 type="number"
                 style="width: 50px"
-                v-model="store.selectlesson_form_menu_course.page"  @input="validatePNumberSelect($event)"
+                v-model="store.formlesson.page"  @input="validatePNumberSelect($event)"
                 min="1"
               
               />
@@ -163,7 +158,7 @@ style="
           </li>
           <li><a href="javascript:void(0);">/</a></li>
           <li>
-            <a href="javascript:void(0);">{{ store.selectlesson_form_menu_course.total_page }}</a>
+            <a href="javascript:void(0);">{{ store.lesson_total_page }}</a>
           </li>
           <li>
             <a href="javascript:void(0);" class="next"  @click="Nextu()"
@@ -368,25 +363,63 @@ store.selectlesson_form_menu_course.cg_id = cg.target.value
 };
 
 
-const validatePNumberSelect = async (evt) => {
+// const validatePNumberSelect = async (evt) => {
   
+//   const keysAllowed: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+//   const keyPressed: string = evt.key;
+//   if (!keysAllowed.includes(keyPressed)) {
+//     evt.preventDefault()
+  
+//   }
+
+//   if (store.selectlesson_form_menu_course.page == "") {
+//     store.selectlesson_form_menu_less.page = 1;
+//   //  await store.fetchLessonlist();
+//   await store.paginatedItemsCourse() 
+//     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+//       timeout: 50,
+//     });
+//   } else if(store.selectlesson_form_menu_course.page > store.selectlesson_form_menu_course.total_page){
+//     store.selectlesson_form_menu_course.page = store.selectlesson_form_menu_course.total_page;
+//     await store.paginatedItemsCourse() 
+//     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+//       timeout: 50,
+//     });
+//   }else {
+//     store.pending = true;
+//     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+//       timeout: 50,
+//     });
+//     await store.paginatedItemsCourse() 
+//   }
+
+// }
+
+
+const validatePNumberSelect = async (evt) => {
+
   const keysAllowed: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   const keyPressed: string = evt.key;
   if (!keysAllowed.includes(keyPressed)) {
     evt.preventDefault()
   
   }
+  console.log(store.formsearchlesson.page);
+  console.log(store.lesson_total_page);
 
-  if (store.selectlesson_form_menu_course.page == "") {
-    store.selectlesson_form_menu_less.page = 1;
-  //  await store.fetchLessonlist();
-  await store.paginatedItemsCourse() 
+  if (store.formsearchlesson.page == "") {
+    store.formsearchlesson.page = 1;
+await store.fetchLessonlist();
+ // await store.paginatedItemsCourse() 
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
-  } else if(store.selectlesson_form_menu_course.page > store.selectlesson_form_menu_course.total_page){
-    store.selectlesson_form_menu_course.page = store.selectlesson_form_menu_course.total_page;
-    await store.paginatedItemsCourse() 
+  } else if(store.formsearchlesson.page > store.lesson_total_page){
+   
+    store.formsearchlesson.page = store.lesson_total_page;
+    
+  //  await store.paginatedItemsCourse() 
+  await store.fetchLessonlist();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
@@ -395,7 +428,9 @@ const validatePNumberSelect = async (evt) => {
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
-    await store.paginatedItemsCourse() 
+    store.formsearchlesson.page += 1;
+    await store.fetchLessonlist();
+  //  await store.paginatedItemsCourse() 
   }
 
 }

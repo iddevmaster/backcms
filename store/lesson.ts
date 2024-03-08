@@ -120,46 +120,42 @@ export const LessonStore = defineStore('lesson', {
     },
 
     async fetchLessonlist() {
-
-  
       this.lessonlist = [];
-      const checkpag =  await ApiService.post('/course/lesson/all',this.formsearchlesson)
+      // const checkpag =  await ApiService.post('/course/lesson/all',this.formsearchlesson)
       
-      if(checkpag){
-        if(checkpag.data.total_page > 1){
-          for(let i = 0; i < checkpag.data.total_page; i++){
-            this.formsearchlesson.page = i + 1;
-            const data =  await ApiService.post('/course/lesson/all',this.formsearchlesson)
-            // const Storage = LessonStore();
-            for(let i = 0; i < data.data.data.length; i++){
-              this.lessonlist.push(data.data.data[i]);
-            }
-        }
-        }else {
-          const data =  await ApiService.post('/course/group/all',this.formsearchlesson)
-          this.lessonlist = data.data.data
-        }
+      // if(checkpag){
+      //   if(checkpag.data.total_page > 1){
+      //     for(let i = 0; i < checkpag.data.total_page; i++){
+      //       this.formsearchlesson.page = i + 1;
+      //       const data =  await ApiService.post('/course/lesson/all',this.formsearchlesson)
+      //       // const Storage = LessonStore();
+      //       for(let i = 0; i < data.data.data.length; i++){
+      //         this.lessonlist.push(data.data.data[i]);
+      //       }
+      //   }
+      //   }else {
+      //     const data =  await ApiService.post('/course/group/all',this.formsearchlesson)
+      //     this.lessonlist = data.data.data
+      //   }
   
-      }
-  
-      // try {
-      //   const data = await ApiService.post('/course/lesson/all', this.formsearchlesson).then(response => {
-      //     this.lessonlist = response.data.data
-      //     this.lesson_total_page = response.data.total_page
-      //     this.lesson_limit_page = response.data.limit_page
-      //     this.lesson_current_page = response.data.current_page
-      //     this.lesson_total_filter = response.data.total_filter
-      //     this.lesson_total = response.data.total
-      //   });
-      //   this.isLoading = false;
-      //   return true;
-      // } catch (error) {
-      //   return navigateTo('/maintenance');
       // }
+  console.log(this.formsearchlesson);
+      try {
+        const data = await ApiService.post('/course/lesson/all?cg_id='+0, this.formsearchlesson).then(response => {
+          this.lessonlist = response.data.data
+          this.lesson_total_page = response.data.total_page
+          this.lesson_limit_page = response.data.limit_page
+          this.lesson_current_page = response.data.current_page
+          this.lesson_total_filter = response.data.total_filter
+          this.lesson_total = response.data.total
 
-
-  
-    
+          console.log(response.data);
+        });
+        this.isLoading = false;
+        return true;
+      } catch (error) {
+        return navigateTo('/maintenance');
+      }
     },
 
     async fetchLessonId(course_id) {

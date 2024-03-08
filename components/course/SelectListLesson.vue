@@ -2,12 +2,72 @@
 
     <loading v-model:active="store.isLoaddingsave" :can-cancel="true" 
                     />
-      <div class="row mb-4 g-3">
-        <div id="form_grid_layouts" class="col-lg-9">
-          <h4 class=""> {{ $t("lesson_select") }}</h4>
-        </div>
 
-        
+
+                    <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+      <h4 class="">{{ $t("lesson_select") }}</h4>
+    </div>
+  </div>
+
+  <div class="row layout-top-spacing">
+    <div class="col-lg-4 col-md-3 col-sm-3 mb-4">
+      <input
+        id="t-text"
+        type="text"
+        name="txt"
+        placeholder="ຊອກຫາ"
+        class="form-control"
+        v-model="store.selectlesson_form_menu_course.search"
+        @keyup="searchData"
+      />
+    </div>
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
+     
+      
+    </div>
+
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
+    
+    </div>
+
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
+      <button type="button" class="btn btn-primary" style="width: 100%; height: 100%; margin-top: auto;
+">ຍົກເລີກທັງໝົດ</button>
+    </div>
+
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
+      <select
+        class="form-select form-select"
+        aria-label="Default select example" @change="selectshowdata_ch($event)"
+      >
+
+          <option  value="0"
+        >
+        ທັງໝົດ
+      </option>
+      <option  v-for="(item, index) in store.group"
+          :key="item.cg_id"
+          :value="item.cg_id"
+        >
+        {{ item.cg_name }}
+      </option>
+      </select>
+    </div>
+
+
+
+
+
+
+
+  </div>
+      <div class="row mb-4 g-3">
+ 
+
+
+
+
         <div class="table-responsive">
     <table class="table table-hover table-bordered" v-if="store.item.length > 0">
         <thead>
