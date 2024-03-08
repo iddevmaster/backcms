@@ -19,37 +19,28 @@
         name="txt"
         placeholder="ຊອກຫາ"
         class="form-control"
-        v-model="store.selectlesson_form_menu_course.search"
+        v-model="store.formsearchlesson.search"
         @keyup="searchData"
       />
     </div>
 
         <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
-     
+          <button type="button" class="btn btn-primary" style="width: 100%; height: 100%; margin-top: auto;"  @click="ChangeLesson"  v-if="store.item.length > 0">
+ບັນທຶກ</button>
+
       
     </div>
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
 
+
+      <button type="button" class="btn btn-primary" style="width: 100%; height: 100%; margin-top: auto;"  @click="UnselectAllRows">ຍົກເລີກທັງໝົດ</button>
+
+
     </div>
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
-      <input
-        id="t-text"
-        type="button"
-        name="txt"
-        placeholder="ຊອກຫາ"
-        class="form-control btn-danger"
-        @click="selectAllRows"
-        value="ເລືອກ​ທັງ​ຫມົດ"
-style="
-   
-    color: white;
-    
-"
-       
-      />
-      
+      <button type="button" class="btn btn-primary" style="width: 100%; height: 100%; margin-top: auto;"  @click="selectAllRows">ເລືອກ​ທັງ​ຫມົດ</button>
     </div>
 
 
@@ -76,6 +67,8 @@ style="
 
 
   </div>
+
+  {{ store.item.length }}
   <div class="row mb-4 g-3">
     <div class="table-responsive">
       <table class="table table-hover table-bordered">
@@ -87,6 +80,7 @@ style="
             <th scope="col"> {{ $t("lesson_qui") }}</th>
                 <th scope="col"> {{ $t("lesson_ans") }}</th>
                 <th scope="col"> {{ $t("lesson_yout") }}</th>
+                <th scope="col"> {{ $t("lesson_group") }}</th>
                 <th scope="col"> {{ $t("lesson_pic") }}</th>
 
           </tr>
@@ -97,17 +91,25 @@ style="
             
               <div >
        
-<input type="button" class="btn btn-primary" value="ເລືອກ"  @click="selectAllRowsOne(item)"/>
+
+                <input
+                  class="form-check-input hover_child"
+                  type="checkbox"
+                  v-model="store.item"
+                  :value="item"
                   
-               
+                  @click="selectAllRowsOne(item)"
+                />
               </div>
             </td>
             <td>{{item.cs_name}}</td>
-            <td>{{item.cs_description}}</td>     
+            <td>{{item.cs_description}}</td>   
+         
           <td> 
             <a v-if="item.cs_video" :href="item.cs_video" target="_blank"><span class="badge badge-success">Watch click!</span></a>
             <a v-else><span class="badge badge-danger">No Video</span></a>
           </td>
+          <td>{{item.cg_name}}</td>    
                
                 <td class="text-center">
                   <img :src="coverimage(item.cs_cover)" class="img-fluid" width="80" height="80" v-if="item.cs_cover">
@@ -121,9 +123,6 @@ style="
 
  
     <div class="row">
-
-
-
       <div class="row">
     <div class="col-xl-12 col-lg-12">
       <div class="pagination-no_spacing" v-if="store.lesson_total_page > 1">
@@ -150,7 +149,7 @@ style="
                 id="ex1"
                 type="number"
                 style="width: 50px"
-                v-model="store.formlesson.page"  @input="validatePNumberSelect($event)"
+                v-model="store.formsearchlesson.page"  @input="validatePNumberSelect($event)"
                 min="1"
               
               />
@@ -229,27 +228,34 @@ const selectshowdata = async (sel) => {
 };
 
 const searchData = async () => {
-  await store.paginatedItemsCourse() 
+  await store.fetchLessonlist();
 };
 const selectAllRows = async () => {
- store.selectlesson_form.page = 1 
-  await store.SeleectAllLessonlist();
-  await store.CheckSelectRemove();
-  await store.paginatedItemsCourse() 
-  await store.paginatedItemsSelete() 
-};
-const UnselectAllRows = async () => {
-  store.selectlesson_form.page = 1 
-  await store.UnSeleectAllLessonlist();
-  await store.paginatedItemsCourse() 
+
+ await store.SeleectAllLessonlist();
+  // await store.CheckSelectRemove();
+  // await store.paginatedItemsCourse() 
+// await store.paginatedItemsSelete() 
 };
 
-const selectAllRowsOne = async (item) => {
+
+const ChangeLesson = async () => {
+  await store.paginatedItemsSelete() 
+ await store.ManageSelectRemove() 
+  await store.fetchLessonlist() 
+}
+const UnselectAllRows = async () => {
+
+  await store.UnSeleectAllLessonlist();
+//  await store.paginatedItemsCourse() 
+};
+
+const selectAllRowsOne = async () => {
   store.selectlesson_form.page = 1 
-  await store.SelectOneessonlist(item) 
-  await store.CheckSelectRemove();
- await store.paginatedItemsCourse() 
-await store.paginatedItemsSelete() 
+//   await store.SelectOneessonlist(item) 
+//   await store.CheckSelectRemove();
+//  await store.paginatedItemsCourse() 
+// await store.paginatedItemsSelete() 
  // await store.paginatedItemsCourse() 
  // await new Promise(resolve => setTimeout(resolve, 1000));
 //  FeedData();
@@ -357,9 +363,9 @@ await store.fetchLessonlist();
 
 
 const selectshowdata_ch = async (cg) => {
-  console.log(cg.target.value);
-store.selectlesson_form_menu_course.cg_id = cg.target.value
- await store.paginatedItemsCourse() 
+
+store.cg_id = cg.target.value
+ await store.fetchLessonlist() 
 };
 
 
@@ -404,8 +410,7 @@ const validatePNumberSelect = async (evt) => {
     evt.preventDefault()
   
   }
-  console.log(store.formsearchlesson.page);
-  console.log(store.lesson_total_page);
+
 
   if (store.formsearchlesson.page == "") {
     store.formsearchlesson.page = 1;
@@ -428,7 +433,7 @@ await store.fetchLessonlist();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
-    store.formsearchlesson.page += 1;
+  
     await store.fetchLessonlist();
   //  await store.paginatedItemsCourse() 
   }

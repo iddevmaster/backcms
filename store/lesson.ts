@@ -83,6 +83,7 @@ export const LessonStore = defineStore('lesson', {
     myselect_group:null,
     item:[],
     group:[],
+    cg_id:0,
     imagelist: null,
     imageReq: false,
     GetopenModalCreate: false,
@@ -139,17 +140,15 @@ export const LessonStore = defineStore('lesson', {
       //   }
   
       // }
-  console.log(this.formsearchlesson);
+
       try {
-        const data = await ApiService.post('/course/lesson/all?cg_id='+0, this.formsearchlesson).then(response => {
+        const data = await ApiService.post('/course/lesson/all?cg_id='+this.cg_id, this.formsearchlesson).then(response => {
           this.lessonlist = response.data.data
           this.lesson_total_page = response.data.total_page
           this.lesson_limit_page = response.data.limit_page
           this.lesson_current_page = response.data.current_page
           this.lesson_total_filter = response.data.total_filter
           this.lesson_total = response.data.total
-
-          console.log(response.data);
         });
         this.isLoading = false;
         return true;
@@ -345,16 +344,15 @@ try {
       this.formlesson.page = page
     },
     async SeleectAllLessonlist() {
-      console.log('1');
-      for (var i = 0; i < this.lesson_item.length; i++) { 
-if (!this.item.some(item => item.cs_id === this.lesson_item[i].cs_id)) {
-  this.item.push(this.lesson_item[i]);
+ 
+      for (var i = 0; i < this.lessonlist.length; i++) { 
+if (!this.item.some(item => item.cs_id === this.lessonlist[i].cs_id)) {
+  this.item.push(this.lessonlist[i]);
 } 
       }
     },
 
     async SelectOneessonlist(tem) {
-     console.log(tem);
     this.item.push(tem);
     },
 
@@ -374,9 +372,9 @@ if (objWithIdIndex > -1) {
     },
 
     async UnSeleectAllLessonlist() {
-      for (var i = 0; i < this.lesson_item.length; i++) { 
-        if (this.item.some(item => item.cs_id === this.lesson_item[i].cs_id)) {
-          this.item = this.item.filter((e)=>e.cs_id !== this.lesson_item[i].cs_id )
+      for (var i = 0; i < this.lessonlist.length; i++) { 
+        if (this.item.some(item => item.cs_id === this.lessonlist[i].cs_id)) {
+          this.item = this.item.filter((e)=>e.cs_id !== this.lessonlist[i].cs_id )
         }
       }
     },
@@ -474,6 +472,7 @@ if (objWithIdIndex > -1) {
    
       this.selected = this.item.slice(startIndex, endIndex);
       this.max_selc = endIndex
+    //  this.item = [];
     },
 
 
@@ -494,6 +493,17 @@ if (objWithIdIndex > -1) {
         }
       }
     },
+
+    async ManageSelectRemove() {
+
+
+for (var i = 0; i < this.item.length; i++) { 
+this.formsearchlesson.exclude.push(this.item[i].cs_id)
+}
+
+    },
+
+    
 
     
 

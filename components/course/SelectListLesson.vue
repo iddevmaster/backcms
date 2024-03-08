@@ -69,7 +69,7 @@
 
 
         <div class="table-responsive">
-    <table class="table table-hover table-bordered" v-if="store.item.length > 0">
+    <table class="table table-hover table-bordered" v-if="store.selected.length > 0">
         <thead>
             <tr>
                 <th class="checkbox-area" scope="col">
