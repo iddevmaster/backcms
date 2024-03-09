@@ -264,19 +264,9 @@ const onFileChangeBack = async (event) => {
   </div>
                                 </div>
                                 <br>
-                  <!-- <CourseCreate></CourseCreate> -->
+             
                   <div class="row">
-    <!-- <div id="form_grid_layouts" class="col-lg-9">
-      <div class="seperator-header">
-        <h3 class="">{{ $t("menu_couse_p_title") }}</h3>
-      </div>
-    </div>
 
-    <div id="form_grid_layouts" class="col-lg-3">
-      <div class="seperator-header">
-        <h3 class="">{{ $t("menu_couse_p_title") }}</h3>
-      </div>
-    </div> -->
 
 
     <div class="col-md-12 mt-3">
@@ -427,9 +417,18 @@ The Course Name field is required.</span>
       </div>
     </div>
 
-    <div>
 
+
+    <div class="col-md-12 mt-3">
+   
+
+      <button type="button" class="btn btn-success" @click="save()">
+      {{ $t("menu_couse_f_save") }}
+    </button>
+  
     </div>
+
+ 
   </div>
                 </div>
               </div>
@@ -451,13 +450,7 @@ The Course Name field is required.</span>
               </div>
             </div>
             <br>
-            <div class="row">
-              <div class="col-xl-12">
-                <button type="button" class="btn btn-success" @click="save()">
-      {{ $t("menu_couse_f_save") }}
-    </button>
-              </div>
-            </div>
+ 
           </div>
         </div>
       </div>

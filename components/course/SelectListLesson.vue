@@ -32,7 +32,7 @@
     </div>
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
-      <button type="button" class="btn btn-primary" style="width: 100%; height: 100%; margin-top: auto;
+      <button type="button" class="btn btn-danger" style="width: 100%; height: 100%; margin-top: auto;
 ">ຍົກເລີກທັງໝົດ</button>
     </div>
 

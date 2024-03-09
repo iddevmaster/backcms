@@ -25,7 +25,7 @@
     </div>
 
         <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
-          <button type="button" class="btn btn-primary" style="width: 100%; height: 100%; margin-top: auto;"  @click="ChangeLesson"  v-if="store.itemselect.length > 0">
+          <button type="button" class="btn btn-success" style="width: 100%; height: 100%; margin-top: auto;"  @click="ChangeLesson"  v-if="store.itemselect.length > 0">
 ບັນທຶກ</button>
 
       
@@ -34,7 +34,7 @@
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
 
 
-      <button type="button" class="btn btn-primary" style="width: 100%; height: 100%; margin-top: auto;"  @click="UnselectAllRows">ຍົກເລີກທັງໝົດ</button>
+      <button type="button" class="btn btn-danger" style="width: 100%; height: 100%; margin-top: auto;"  @click="UnselectAllRows">ຍົກເລີກທັງໝົດ</button>
 
 
     </div>
@@ -68,7 +68,6 @@
 
   </div>
 
-  {{ store.item.length }}
   <div class="row mb-4 g-3">
     <div class="table-responsive">
       <table class="table table-hover table-bordered">
@@ -97,7 +96,7 @@
                   type="checkbox"
                   v-model="store.item"
                   :value="item"
-                  
+                  style="color: red;"
                   @click="selectAllRowsOne(item)"
                 />
               </div>
@@ -243,6 +242,10 @@ const ChangeLesson = async () => {
   await store.paginatedItemsSelete() 
  await store.ManageSelectRemove() 
   await store.fetchLessonlist() 
+
+  await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
 }
 const UnselectAllRows = async () => {
 
@@ -531,6 +534,11 @@ video {
   min-height: 200px;
   max-width: 300px;
   max-height: 300px;
+}
+
+.table .form-check-input {
+    background-color: #101113;
+    border-color: #bfc9d4;
 }
 </style>
     
