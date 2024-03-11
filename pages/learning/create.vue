@@ -64,7 +64,7 @@ storelesson.formcreatelesson.user_id = auth.user_id
 storelesson.user_id = auth.user_id
 
 
-storelesson.formsearchlesson.per_page = 5
+storelesson.formsearchlesson.per_page = 10
 storelesson.formsearchlesson.page = 1
 storelesson.formsearchlesson.search = "";
 
@@ -275,7 +275,7 @@ const onFileChangeBack = async (event) => {
         type="text"
         class="form-control"
         id="inputEmail4"
-        placeholder="ລະຫັດສື່​ການ​ຮຽນ​ຮູ້"
+        placeholder="ລະຫັດຫຼັກສູດ"
         v-model="store.formDataCourse.course_code"
         :class="{
           'border-red-500 focus:border-red-500': v$.course_code.$error,
@@ -307,7 +307,7 @@ const onFileChangeBack = async (event) => {
         type="text"
         class="form-control"
         id="inputPassword4"
-        placeholder="ສື່​ການ​ຮຽນ​ຮູ້​"
+        placeholder="ຊື່ຫຼັກສູດ"
         v-model="store.formDataCourse.course_name"
         :class="{
           'border-red-500 focus:border-red-500': v$.course_name.$error,
@@ -341,7 +341,7 @@ The Course Name field is required.</span>
         class="form-control"
         id="exampleFormControlTextarea1"
         rows="3"
-        placeholder="ລາຍລະອຽດສື່​ການ​ຮຽນ​ຮູ້"
+        placeholder="ຄຳອະທິບາຍຫຼັກສູດ"
         :class="{
           'border-red-500 focus:border-red-500': v$.course_description.$error,
           'border-[#42d392] ': !v$.course_description.$invalid,

@@ -43,21 +43,17 @@ store.formDatalesson.user_id = auth.user_id
 store.formDataeditlesson.user_id = auth.user_id
 store.user_id = auth.user_id
 storelesson.item = [];
-storelesson.formsearchlesson.per_page = 5
+storelesson.formsearchlesson.per_page = 10
 storelesson.formsearchlesson.page = 1
 storelesson.formsearchlesson.search = "";
 
-storelesson.selectlesson_form.per_page = 5
-storelesson.selectlesson_form.page = 1
-storelesson.formsearchlesson.search = "";
+
 
 storelesson.formselect.per_page = 5
 storelesson.formselect.page = 1
 storelesson.formselect.total_page = 0;
 
-storelesson.selectlesson_form_menu_course.page = 1;
-storelesson.selectlesson_form_menu_course.per_page = 5;
-storelesson.selectlesson_form_menu_course.search = "";
+
 
 await store.fetchCourseId(router.currentRoute.value.params.id);
 const grouplist = await storelesson.fetchGrouplist();
@@ -66,12 +62,14 @@ await store.fetchLessonInCourseId();
 await storelesson.paginatedItemsSelete();
 
 
+
+
 onMounted(async()  => {
       // Fetch items when the component is mounted
-      
-   const lessonlist = await storelesson.fetchLessonlist();
-   await storelesson.RemoveLesson();
-   await storelesson.paginatedItemsCourse();
+      await storelesson.ManageSelectRemove();
+ const lessonlist = await storelesson.fetchLessonlist();
+ //  await storelesson.RemoveLesson();
+ //  await storelesson.paginatedItemsCourse();
 
     store.isLoading = false;
     })

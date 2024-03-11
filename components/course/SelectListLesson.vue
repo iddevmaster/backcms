@@ -18,7 +18,7 @@
         name="txt"
         placeholder="ຊອກຫາ"
         class="form-control"
-        v-model="store.selectlesson_form_menu_course.search"
+        v-model="store.formselect.search"
         @keyup="searchData"
       />
     </div>
@@ -27,14 +27,19 @@
       
     </div>
 
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
+    <div class="col-xl-1 col-lg-3 col-md-3 col-sm-3 mb-4">
     
     </div>
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <button type="button" class="btn btn-danger" style="width: 100%; height: 100%; margin-top: auto;
-">ຍົກເລີກທັງໝົດ</button>
+" @click="deleteSelect">ຍົກເລີກການເລືອກທັງໝົດ</button>
     </div>
+
+    <label for="staticEmail" class="col-sm-1 col-form-label" style="
+    text-align: center;
+">
+ໝວດ : </label>
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <select
@@ -96,8 +101,8 @@
 
               
                 <td> 
-            <a v-if="item.cs_video" :href="item.cs_video" target="_blank"><span class="badge badge-success">Watch click!</span></a>
-            <a v-else><span class="badge badge-danger">No Video</span></a>
+            <a v-if="item.cs_video" :href="item.cs_video" target="_blank"><span class="badge badge-success">ກົດເພື່ອເປີດເບິ່ງ</span></a>
+            <a v-else><span class="badge badge-danger">ບໍ່ມີວິດີໂອ</span></a>
           </td>
           
 
@@ -265,7 +270,8 @@ const selectshowdata = async (sel) => {
 };
 
 const searchData = async () => {
-  await store.fetchLessonlist();
+//  await store.fetchLessonlist();
+await store.paginatedItemsSeleteFitter()
 };
 const selectAllRows = async () => {
     await store.SeleectAllLessonlist();
@@ -275,6 +281,22 @@ const remove = async (item) => {
     await store.RemoveSelect(item);
      await store.paginatedItemsSelete()
    await store.paginatedItemsCourse()
+};
+
+const deleteSelect = async () => {
+
+
+  if(store.selected.length == 0){
+    toast.error('ບໍ່ມີບົດຮຽນ')
+  }else {
+    await store.deleteSelecte()
+  await store.paginatedItemsSelete() 
+await store.ManageSelectRemove()
+ await store.fetchLessonlist() 
+  toast.success("ຍົກເລີກສຳເລັດ");
+
+  }
+
 };
 
 
@@ -290,7 +312,7 @@ if(store.formselect.page == 1){
       timeout: 50,
     });
   store.formselect.page -= 1
-  await store.paginatedItemsCourse() 
+  await store.paginatedItemsSeleteFitter() 
 }
 };
 const Nextu = async () => {
@@ -301,11 +323,18 @@ if(store.formselect.page == store.formselect.total_page){
       timeout: 50,
     });
   store.formselect.page += 1
-  await store.paginatedItemsCourse()
+   await store.paginatedItemsSeleteFitter() 
 }
 
 
 };
+
+const selectshowdata_ch = async (cg) => {
+store.formselect.cg_id = cg.target.value
+await store.paginatedItemsSeleteFitter()
+// await store.fetchLessonlist() 
+};
+
 
 
 const validatePNumberSelect = async (evt) => {

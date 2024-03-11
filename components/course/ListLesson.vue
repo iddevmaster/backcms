@@ -12,7 +12,7 @@
   </div>
 
   <div class="row layout-top-spacing">
-    <div class="col-lg-4 col-md-3 col-sm-3 mb-4">
+    <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
       <input
         id="t-text"
         type="text"
@@ -34,7 +34,7 @@
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
 
 
-      <button type="button" class="btn btn-danger" style="width: 100%; height: 100%; margin-top: auto;"  @click="UnselectAllRows">ຍົກເລີກທັງໝົດ</button>
+      <button type="button" class="btn btn-danger" style="width: 100%; height: 100%; margin-top: auto;"  @click="UnselectAllRows">ຍົກເລີກການເລືອກທັງໝົດ</button>
 
 
     </div>
@@ -44,8 +44,12 @@
     </div>
 
 
-
+    <label for="staticEmail" class="col-sm-1 col-form-label" style="
+    text-align: center;
+">
+ໝວດ : </label>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
+      
       <select
         class="form-select form-select"
         aria-label="Default select example" @change="selectshowdata_ch($event)"
@@ -63,11 +67,9 @@
       </option>
       </select>
     </div>
-
-
-
   </div>
 
+  {{ store.item }}
   <div class="row mb-4 g-3">
     <div class="table-responsive">
       <table class="table table-hover table-bordered">
@@ -86,18 +88,15 @@
         </thead>
         <tbody>
           <tr v-for="(item, index) in store.lessonlist" :key="item.cs_id">
-            <td>
-            
+            <td>  
               <div >
-       
-
                 <input
                   class="form-check-input hover_child"
                   type="checkbox"
                   v-model="store.item"
                   :value="item"
                   style="color: red;"
-                  @click="selectAllRowsOne(item)"
+                  @click="selectAllRowsOne()"
                 />
               </div>
             </td>
@@ -105,22 +104,18 @@
             <td>{{item.cs_description}}</td>   
          
           <td> 
-            <a v-if="item.cs_video" :href="item.cs_video" target="_blank"><span class="badge badge-success">Watch click!</span></a>
-            <a v-else><span class="badge badge-danger">No Video</span></a>
+            <a v-if="item.cs_video" :href="item.cs_video" target="_blank"><span class="badge badge-success">ກົດເພື່ອເປີດເບິ່ງ</span></a>
+            <a v-else><span class="badge badge-danger">ບໍ່ມີວິດີໂອ</span></a>
           </td>
           <td>{{item.cg_name}}</td>    
-               
                 <td class="text-center">
                   <img :src="coverimage(item.cs_cover)" class="img-fluid" width="80" height="80" v-if="item.cs_cover">
                   <img src="../../assets/images/no_photo.jpg" class="img-fluid" width="80" height="80" v-else>
                 </td>
-                
           </tr>
         </tbody>
       </table>
     </div>
-
- 
     <div class="row">
       <div class="row">
     <div class="col-xl-12 col-lg-12">
@@ -254,7 +249,11 @@ const UnselectAllRows = async () => {
 };
 
 const selectAllRowsOne = async () => {
-  store.selectlesson_form.page = 1 
+ // await store.SeleectAllLessonlist();
+ // store.selectlesson_form.page = 1 
+ 
+ await new Promise(resolve => setTimeout(resolve, 500));
+ await store.SelectOneessonlist()
 //   await store.SelectOneessonlist(item) 
 //   await store.CheckSelectRemove();
 //  await store.paginatedItemsCourse() 

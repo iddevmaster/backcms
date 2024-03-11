@@ -50,6 +50,13 @@ export const LessonStore = defineStore('lesson', {
       per_page: 5,
       total_page: 0,
       page: 1,
+      cg_id:0,
+      search:''
+    },
+    formselectdelete: {
+      per_page: 5,
+      total_page: 0,
+      page: 1,
     },
     formcreatelesson: {
       cs_cover:"",
@@ -141,7 +148,7 @@ export const LessonStore = defineStore('lesson', {
       //   }
   
       // }
-
+console.log(this.formsearchlesson);
       try {
         const data = await ApiService.post('/course/lesson/all?cg_id='+this.cg_id, this.formsearchlesson).then(response => {
           this.lessonlist = response.data.data
@@ -355,8 +362,12 @@ if (!this.item.some(item => item.cs_id === this.lessonlist[i].cs_id)) {
      this.itemselect = this.item
     },
 
-    async SelectOneessonlist(tem) {
-    this.item.push(tem);
+    async SelectOneessonlist() {
+
+ 
+
+this.itemselect = this.item
+       
     },
 
     async CheckSelectRemove() {
@@ -467,13 +478,41 @@ if (objWithIdIndex > -1) {
     },
 
     async paginatedItemsSelete() {
-   
-    
+
+
       const startIndex = (this.formselect.page - 1) * this.formselect.per_page;
       const endIndex = startIndex + this.formselect.per_page;
       this.formselect.total_page = Math.ceil(this.item.length / this.formselect.per_page);
    
       this.selected = this.item.slice(startIndex, endIndex);
+      this.max_selc = endIndex
+    //  this.item = [];
+    },
+
+
+    async paginatedItemsSeleteFitter() {
+      this.selected = this.item
+
+      if(this.formselect.search != ""){
+      this.selected = this.selected.filter(item => item.cs_name.includes(this.formselect.search));
+    
+      }
+      if(this.formselect.search == ""){
+       this.selected = this.selected.filter(item => item.cs_name.includes(this.formselect.search));
+      }
+      if(this.formselect.cg_id != 0){
+        this.selected = this.selected.filter(item => item.cg_id == this.formselect.cg_id);
+      }
+      if(this.formselect.cg_id == 0){
+      
+       
+      }
+   
+      const startIndex = (this.formselect.page - 1) * this.formselect.per_page;
+      const endIndex = startIndex + this.formselect.per_page;
+      this.formselect.total_page = Math.ceil(this.selected.length / this.formselect.per_page);
+   
+      this.selected = this.selected.slice(startIndex, endIndex);
       this.max_selc = endIndex
     //  this.item = [];
     },
@@ -498,21 +537,41 @@ if (objWithIdIndex > -1) {
     },
 
     async ManageSelectRemove() {
-
-
+      this.formsearchlesson.exclude = []
 for (var i = 0; i < this.item.length; i++) { 
 this.formsearchlesson.exclude.push(this.item[i].cs_id)
 }
+
 this.itemselect = [];
 
     },
 
-    
+    async ManageSelectRemoveEdit() {
+      this.formsearchlesson.exclude = []
+for (var i = 0; i < this.item.length; i++) { 
+this.formsearchlesson.exclude.push(this.item[i].cs_id)
+}
+
+this.itemselect = [];
+
+    },
+    async deleteSelecte() {
+      const startIndex = (this.formselect.page - 1) * this.formselect.per_page;
+      const endIndex = startIndex + this.formselect.per_page;
+      this.selected = this.item.slice(startIndex, endIndex);
 
     
+     
 
+      for (var i = 0; i < this.selected.length; i++) { 
+     const objWithIdIndex = this.item.findIndex((obj) => obj.cs_id === this.selected[i].cs_id);
+     if (objWithIdIndex > -1) {
+      this.item.splice(objWithIdIndex, 1);
+    }
+      }
+      this.formselect.page = 1
 
-
+    }
 
   },
 
