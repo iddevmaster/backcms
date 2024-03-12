@@ -11,6 +11,7 @@ export const CourseStore = defineStore('course', {
     isLoading:true,
     isLoaddingsave:false,
     imagelist: null,
+    imagelist_pdf: null,
     path: "",
     course_id: null,
     pending: false,
@@ -32,6 +33,7 @@ export const CourseStore = defineStore('course', {
       course_code: "",
       course_name: "",
       course_description: "",
+      course_file_pdf:"",
       user_id: null
     },
     formDataEditCourse: {
@@ -39,6 +41,7 @@ export const CourseStore = defineStore('course', {
       course_code: "",
       course_name: "",
       course_description: "",
+      course_file_pdf:"",
       user_id: null
     },
     formDatalesson: {
@@ -222,8 +225,10 @@ Storage.item = checkpag.data.data
     },
 
     async SaveLessoncluster() {
+   
       this.savelesson = [];
      const Storage = LessonStore();
+
      if(Storage.item.length > 0){
       for (var i = 0; i < Storage.item.length; i++) { 
         const les = {cs_id:Storage.item[i].cs_id}
@@ -246,6 +251,17 @@ Storage.item = checkpag.data.data
     },
 
     async ClearLessoncluster() {
+
+      try {
+        const data = await ApiService.delete('/course/cluster/empty/'+this.course_id).then(response => {
+          return true;
+
+        });
+        return true;
+      } catch (error) {
+        return false;
+      } 
+
 
    
 
@@ -351,18 +367,20 @@ return true;
     // },
     async UploadfileCourse() {  
   
-      let formData = new FormData();
-      formData.append('files', this.imagelist);
       if(this.imagelist){
-        try {
-          const data = await ApiService.upload('/media_file/upload/file',formData);
-        //  this.path = data.data[0].path
+        let formData = new FormData();
+     formData.append('files', this.imagelist);
+        const data = await ApiService.upload('/media_file/upload/file',formData);
         this.formDataCourse.course_cover = data.data[0].path
           this.formDataEditCourse.course_cover = data.data[0].path
-          return true;
-          } catch (error) {
-            return false;
-          } 
+      }
+      if(this.imagelist_pdf){
+        let formData = new FormData();
+
+        formData.append('files', this.imagelist_pdf);
+        const data_pdf = await ApiService.upload('/media_file/upload/file',formData);
+        this.formDataCourse.course_file_pdf = data_pdf.data[0].path
+          this.formDataEditCourse.course_file_pdf = data_pdf.data[0].path
       }
     },
     async deleteItem(course) {

@@ -280,7 +280,9 @@ const selectAllRows = async () => {
 const remove = async (item) => {
     await store.RemoveSelect(item);
      await store.paginatedItemsSelete()
-   await store.paginatedItemsCourse()
+     await store.ManageSelectRemove()
+ await store.fetchLessonlist() 
+ //  await store.paginatedItemsCourse()
 };
 
 const deleteSelect = async () => {

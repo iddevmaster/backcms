@@ -69,7 +69,7 @@
     </div>
   </div>
 
-  {{ store.item }}
+
   <div class="row mb-4 g-3">
     <div class="table-responsive">
       <table class="table table-hover table-bordered">
@@ -306,26 +306,26 @@ await stores.paginatedItems()
 
 const Previou = async () => {
 
-if(store.selectlesson_form_menu_course.page == 1){
+if(store.formsearchlesson.page == 1){
 
 }else {
   
   await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
-  store.selectlesson_form_menu_course.page -= 1
-  await store.paginatedItemsCourse() 
+  store.formsearchlesson.page -= 1
+  await store.fetchLessonlist() 
 }
 };
 const Nextu = async () => {
-if(store.selectlesson_form_menu_course.page == store.selectlesson_form_menu_course.total_page){
+if(store.formsearchlesson.page == store.lesson_total_page){
 
 }else {
   await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
-  store.selectlesson_form_menu_course.page += 1
-  await store.paginatedItemsCourse()
+  store.formsearchlesson.page += 1
+  await store.fetchLessonlist() 
 }
 
 

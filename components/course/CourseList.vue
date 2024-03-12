@@ -91,7 +91,7 @@
                   <a
                     href="javascript:void(0);"
                     class="action-btn btn-edit bs-tooltip me-2"
-                    @click="edit(item)"
+               
                     data-toggle="tooltip"
                     data-placement="top"
                     aria-label="Edit"

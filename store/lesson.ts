@@ -479,10 +479,18 @@ if (objWithIdIndex > -1) {
 
     async paginatedItemsSelete() {
 
-
-      const startIndex = (this.formselect.page - 1) * this.formselect.per_page;
-      const endIndex = startIndex + this.formselect.per_page;
       this.formselect.total_page = Math.ceil(this.item.length / this.formselect.per_page);
+      if(this.formselect.total_page == 1){
+        this.formselect.page = 1
+      }
+      const startIndex = (this.formselect.page - 1) * this.formselect.per_page;
+     
+  
+      const endIndex = startIndex + this.formselect.per_page;
+   
+   
+
+
    
       this.selected = this.item.slice(startIndex, endIndex);
       this.max_selc = endIndex
@@ -524,7 +532,7 @@ if (objWithIdIndex > -1) {
    if (objWithIdIndex > -1) {
     this.item.splice(objWithIdIndex, 1);
   }
-  this.lessonlist.push(this.items);
+ // this.lessonlist.push(this.items);
     },
 
 

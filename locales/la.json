@@ -10,15 +10,16 @@
   "menu_new_resul": "ຜົນການສອບເສັງ",
   "menu_new_user": "ຈັດການຜູ້ໃຊ້",
   "menu_dlt": "ຈັດການ ຮູບໃບຂັບຂີ່",
-  "menu_couse_all": "ຄວາມຮູ້ອອນໄລນ໌​ທັງໝົດ", 
-  "menu_couse_add": "ເພີ່ມຄວາມຮູ້ອອນໄລນ໌​",
+  "menu_couse_all": "ຫຼັກສູດ​ທັງໝົດ", 
+  "menu_couse_add": "ເພີ່ມຫຼັກສູດ",
   "menu_couse_p_title": "ເພິ່ມຫຼັກສູດ",
-  "menu_couse_e_title": "ແກ້ໄຂຄວາມຮູ້ອອນໄລນ໌",
+  "menu_couse_e_title": "ແກ້ໄຂຫຼັກສູດ",
   "menu_couse_f_title_code": "ລະຫັດຫຼັກສູດ",
   "menu_couse_f_title_name": "ຊື່ຫຼັກສູດ",
   "menu_couse_f_title_detail": "ຄຳອະທິບາຍຫຼັກສູດ",
   "menu_couse_f_title_picture": "ຮູບໜ້າປົກຂອງຫຼັກສູດ",
   "menu_couse_f_title_display_picture": "ຮູບທີ່ເລືອກຈະສະແດງທີ່ນີ້",
+  "menu_couse_f_title_pdf":"ແນບເອກະສານ",
   "menu_couse_f_add_lesson": "ເພີ່ມບົດຮຽນ",
   "menu_couse_f_save": "ບັນທຶກ",
   
@@ -31,13 +32,13 @@
 
   "menu_group_all" :"ກຸ່ມທັງໝົດ",
 
-  "menu_couse_edit": "ແກ້ໄຂຄວາມຮູ້ອອນໄລນ໌​",
-  "menu_couse_p_edit_title": "ແກ້ໄຂຄວາມຮູ້ອອນໄລນ໌​",
-  "menu_couse_f_edit_title_code": "ລະຫັດຄວາມຮູ້ອອນໄລນ໌​",
-  "menu_couse_f_edit_title_name": "ຊື່ຄວາມຮູ້ອອນໄລນ໌",
-  "menu_couse_f_edit_title_detail": "ລາຍລະອຽດຄວາມຮູ້ອອນໄລນ໌​",
-  "menu_couse_f_edit_title_picture": "ຮູບພາບສະແດງໃຫ້ເຫັນການປົກຫຸ້ມຂອງ.",
-  "menu_couse_f_edit_title_display_picture": "ສະແດງຮູບທີ່ນີ້",
+  "menu_couse_edit": "ແກ້ໄຂຫຼັກສູດ​",
+  "menu_couse_p_edit_title": "ແກ້ໄຂຫຼັກສູດ​",
+  "menu_couse_f_edit_title_code": "ລະຫັດຫຼັກສູດ​",
+  "menu_couse_f_edit_title_name": "ຊື່ຫຼັກສູດ",
+  "menu_couse_f_edit_title_detail": "ຄຳອະທິບາຍຫຼັກສູດ",
+  "menu_couse_f_edit_title_picture": "ຮູບໜ້າປົກຂອງຫຼັກສູດ",
+  "menu_couse_f_edit_title_display_picture": "ຮູບທີ່ເລືອກຈະສະແດງທີ່ນີ້",
 
   
 

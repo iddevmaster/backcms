@@ -177,7 +177,33 @@ const removeImage = async () => {
 };
 
 
+const onFileChangeBackPdf = async (event) => {
+  var input = event.target;
+  const file = event.target.files[0];
 
+  if (file && file.type.startsWith('application/pdf')) {
+    // Use FileReader to read the selected image and set it as the source for the <img> tag
+    const reader = new FileReader();
+    reader.onload = () => {
+      //  this.imageUrl = reader.result;
+      store.formDataEditCourse.course_file_pdf = reader.result;
+    };
+    store.imagelist_pdf = input.files[0];
+    reader.readAsDataURL(file);
+   
+  } else {
+    // Reset the image URL if the selected file is not an image
+    //   this.imageUrl = null;
+    const input = document.querySelector('input[type="file"]');
+    document.getElementById('exampleFormControlFilePdf').value = ''; // Set value to empty string
+  input.value = "";
+    Swal.fire({
+      text: 'Upload File PDF Only!',
+      icon: 'error',
+    });
+  }
+
+};
 
 const onFileChangeBack = async (event) => {
   var input = event.target;
@@ -365,6 +391,27 @@ The Course Name field is required.</span>
       </template>
     </div>
 
+    <div class="form-group mb-4 mt-3">
+      <label for="exampleFormControlFile1">{{ $t("menu_couse_f_title_pdf") }}</label>
+      <input
+        type="file"
+        class="form-control-file"
+        id="exampleFormControlFilePdf"
+        @change="onFileChangeBackPdf"
+        ref="fileupload"
+      />
+    </div>
+
+    <span v-if="store.imagelist_pdf">{{ store.imagelist_pdf.name }}</span>
+    <div class="col-md-12 mt-3">
+   
+
+   <button type="button" class="btn btn-success" @click="save()">
+   {{ $t("menu_couse_f_save") }}
+ </button>
+
+ </div>
+
     <div></div>
   </div>
                         </div>
@@ -390,13 +437,7 @@ The Course Name field is required.</span>
                     </div>
                 </div>
                 <br>
-            <div class="row">
-              <div class="col-xl-12">
-                <button type="button" class="btn btn-success" @click="save()">
-      {{ $t("menu_couse_f_save") }}
-    </button>
-              </div>
-            </div>
+
 
             </div>
 
