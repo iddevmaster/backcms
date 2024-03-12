@@ -75,6 +75,7 @@ storelesson.formselect.total_page = 0;
 storelesson.selectlesson_form_menu_course.page = 1;
 storelesson.selectlesson_form_menu_course.per_page = 5;
 storelesson.selectlesson_form_menu_course.search = "";
+storelesson.cg_id = 0
 
 const grouplist = await storelesson.fetchGrouplist();
 
