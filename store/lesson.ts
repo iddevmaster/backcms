@@ -130,25 +130,7 @@ export const LessonStore = defineStore('lesson', {
 
     async fetchLessonlist() {
       this.lessonlist = [];
-      // const checkpag =  await ApiService.post('/course/lesson/all',this.formsearchlesson)
-      
-      // if(checkpag){
-      //   if(checkpag.data.total_page > 1){
-      //     for(let i = 0; i < checkpag.data.total_page; i++){
-      //       this.formsearchlesson.page = i + 1;
-      //       const data =  await ApiService.post('/course/lesson/all',this.formsearchlesson)
-      //       // const Storage = LessonStore();
-      //       for(let i = 0; i < data.data.data.length; i++){
-      //         this.lessonlist.push(data.data.data[i]);
-      //       }
-      //   }
-      //   }else {
-      //     const data =  await ApiService.post('/course/group/all',this.formsearchlesson)
-      //     this.lessonlist = data.data.data
-      //   }
-  
-      // }
-console.log(this.formsearchlesson);
+
       try {
         const data = await ApiService.post('/course/lesson/all?cg_id='+this.cg_id, this.formsearchlesson).then(response => {
           this.lessonlist = response.data.data
@@ -343,8 +325,8 @@ try {
        },
 
        async selectentiresentires(data_entires) {
-        this.selectlesson_form_menu_less.per_page = parseInt(data_entires);
-        this.selectlesson_form_menu_less.page = 1;
+        this.formsearchlesson.per_page = parseInt(data_entires);
+        this.formsearchlesson.page = 1;
       },
 
     

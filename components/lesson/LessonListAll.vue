@@ -8,7 +8,7 @@
         placeholder="ຊອກຫາ"
         class="form-control"
         required=""
-        v-model="store.selectlesson_form_menu_less.search"
+        v-model="store.formsearchlesson.search"
         @keyup="searchData"
       />
     </div>
@@ -48,9 +48,9 @@ style="
         aria-label="Default select example"
         @change="selectshowdata($event)"
       >
-        <option :value="5">5</option>
         <option :value="10">10</option>
         <option :value="20">20</option>
+        <option :value="30">30</option>
         <option :value="50">50</option>
      
       </select>
@@ -71,8 +71,8 @@ style="
         </thead>
 
       <tbody>
-        <tr v-for="(item, index) in store.lesson_item" :key="item.cs_id">
-          <td>{{ (store.selectlesson_form_menu_less.page * store.selectlesson_form_menu_less.per_page) - (store.selectlesson_form_menu_less.per_page -  index) +  1 }}</td>
+        <tr v-for="(item, index) in store.lessonlist" :key="item.cs_id">
+          <td>{{ (store.formsearchlesson.page * store.formsearchlesson.per_page) - (store.formsearchlesson.per_page -  index) +  1 }}</td>
              <td>{{ item.cs_name }}</td>
                <td>{{ item.cs_description }}</td>
             <td>{{ item.cg_name }}</td>
@@ -218,7 +218,7 @@ style="
 
   <div class="row">
     <div class="col-xl-12 col-lg-12">
-      <div class="pagination-no_spacing" v-if="store.selectlesson_form_menu_less.total_page > 1">
+      <div class="pagination-no_spacing" v-if="store.lesson_total_page > 1">
         <ul class="pagination">
           <li>
             <a href="javascript:void(0);" class="prev"
@@ -242,7 +242,7 @@ style="
                 id="ex1"
                 type="number"
                 style="width: 50px"
-                v-model="store.selectlesson_form_menu_less.page"  @input="validatePNumberSelect($event)"
+                v-model="store.formsearchlesson.page"  @input="validatePNumberSelect($event)"
                 min="1"
               
               />
@@ -250,7 +250,7 @@ style="
           </li>
           <li><a href="javascript:void(0);">/</a></li>
           <li>
-            <a href="javascript:void(0);">{{ store.selectlesson_form_menu_less.total_page }}</a>
+            <a href="javascript:void(0);">{{ store.lesson_total_page }}</a>
           </li>
           <li>
             <a href="javascript:void(0);" class="next"
@@ -337,11 +337,11 @@ const auth = useAuthStore();
 
 const selectshowdata = async (sel) => {
   await selectentiresentires(sel.target.value);
-  await store.paginatedItems() 
+  await store.fetchLessonlist() 
 };
 
 const searchData = async () => {
-  await store.paginatedItems() 
+  await store.fetchLessonlist() 
 };
 
 const openmodal = async () => {
@@ -349,8 +349,8 @@ const openmodal = async () => {
 };
 
 const selectshowdata_ch = async (cg) => {
-store.selectlesson_form_menu_less.cg_id = cg.target.value
- await store.paginatedItems() 
+store.cg_id = cg.target.value
+ await store.fetchLessonlist() 
 };
 
 
@@ -392,7 +392,6 @@ store.cs_id = item;
 
 };
 
-
 const validatePNumberSelect = async (evt) => {
   
   const keysAllowed: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -402,16 +401,16 @@ const validatePNumberSelect = async (evt) => {
   
   }
 
-  if (store.selectlesson_form_menu_less.page == "") {
-    store.selectlesson_form_menu_less.page = 1;
-  //  await store.fetchLessonlist();
-  await store.paginatedItems() 
+  if (store.formsearchlesson.page == "") {
+    store.formsearchlesson.page = 1;
+    await store.fetchLessonlist();
+  //await store.paginatedItems() 
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
-  } else if(store.selectlesson_form_menu_less.page > store.selectlesson_form_menu_less.total_page){
-    store.selectlesson_form_menu_less.page = store.selectlesson_form_menu_less.total_page;
-    await store.paginatedItems() 
+  } else if(store.formsearchlesson.page > store.lesson_total_page){
+    store.formsearchlesson.page = store.lesson_total_page;
+    await store.fetchLessonlist();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
@@ -421,7 +420,7 @@ const validatePNumberSelect = async (evt) => {
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
-    await store.paginatedItems() 
+    await store.fetchLessonlist();
   }
  // await stores.paginatedItems() 
 }

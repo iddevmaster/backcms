@@ -34,13 +34,18 @@ store.user_id = auth.user_id
 store.myselect_group = null
 const group = await store.fetchGrouplist();
 
+store.formsearchlesson.per_page = 10
+store.formsearchlesson.page = 1
+store.formsearchlesson.search = "";
 
+
+store.cg_id = 0;
 
 onMounted(async()  => {
       // Fetch items when the component is mounted
       const lessonlist = await store.fetchLessonlist();
 
-await store.paginatedItems() 
+//await store.paginatedItems() 
 store.isLoading = false;
      
     })
