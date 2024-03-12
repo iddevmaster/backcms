@@ -444,12 +444,12 @@
   "title_group":"ບົດຮຽນ",
   "title_group_t":"ບົດຮຽນທັງໝົດ",
   "table_id_group" :"#",
-  "table_id_name" :"ຊື່ກຸ່ມ",
+  "table_id_name" :"ຊື່ໝວດ",
   "table_id_create" :"ສ້າງ",
   "table_id_action" :"ຈັດການ",
 
   "group_title" :"ກຸ່ມ",
-  "group_name" :"ຊື່ກຸ່ມ",
+  "group_name" :"ຊື່ໝວດ",
   "group_add" :"ເພີ່ມກຸ່ມ",
   "group_edit" :"ແກ້ໄຂກຸ່ມ"
   

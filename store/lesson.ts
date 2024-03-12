@@ -193,6 +193,7 @@ export const LessonStore = defineStore('lesson', {
 
       try {
         const data = await ApiService.post('/course/lesson/create', this.formcreatelesson).then(response => {
+       
           this.myselect_group = null
     
           return true

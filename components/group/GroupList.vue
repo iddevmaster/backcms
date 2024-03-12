@@ -19,7 +19,7 @@
         name="txt"
         placeholder="ຊອກຫາ"
         class="form-control"
-        value="+ ເພີ່ມບົດຮຽນ"
+        value="+ ເພີ່ມໝວດ"
 style="
     background-color: rgb(15, 119, 223);
     color: white;

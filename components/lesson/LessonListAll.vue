@@ -350,6 +350,7 @@ const openmodal = async () => {
 
 const selectshowdata_ch = async (cg) => {
 store.cg_id = cg.target.value
+store.formsearchlesson.page = 1;
  await store.fetchLessonlist() 
 };
 
