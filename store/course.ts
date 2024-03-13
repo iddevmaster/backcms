@@ -17,6 +17,7 @@ export const CourseStore = defineStore('course', {
     pending: false,
     isOpen: false,
     cs_id:null,
+    selectedFiles:[],
     GetopenModalLesson:false,
     lessonlist: [],
     user_id:null,

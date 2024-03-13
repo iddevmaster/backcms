@@ -14,6 +14,10 @@ import { useI18n } from "vue-i18n";
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
 import Swal from 'sweetalert2';
+import { ref } from 'vue';
+
+
+
 
 import {
   required,
@@ -24,10 +28,13 @@ import {
 } from "@vuelidate/validators";
 import { onMounted } from 'vue'
 
+
+
 definePageMeta({
   middleware: ['auth','roles'],
   allowedRoles: [1,2],
 })
+
 const { locale, setLocale } = useI18n();
 
 const auth = useAuthStore()
@@ -182,6 +189,10 @@ const removeImage = async () => {
   input.value = "";
 };
 
+const remove = async (e) => {
+  store.selectedFiles.splice(e, 1); // Remove the file at the specified index
+};
+
 
 function coverimage(i) {
   let result = i.slice(0, 6);
@@ -193,6 +204,15 @@ function coverimage(i) {
   }
 }
 
+
+
+ function formatBytes(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
 
 const onFileChangeBack = async (event) => {
   var input = event.target;
@@ -223,29 +243,35 @@ const onFileChangeBack = async (event) => {
 
 const onFileChangeBackPdf = async (event) => {
   var input = event.target;
-  const file = event.target.files[0];
 
-  if (file && file.type.startsWith('application/pdf')) {
-    // Use FileReader to read the selected image and set it as the source for the <img> tag
-    const reader = new FileReader();
-    reader.onload = () => {
-      //  this.imageUrl = reader.result;
-      store.formDataCourse.course_file_pdf = reader.result;
-    };
-    store.imagelist_pdf = input.files[0];
-    reader.readAsDataURL(file);
-   
-  } else {
-    // Reset the image URL if the selected file is not an image
-    //   this.imageUrl = null;
-    const input = document.querySelector('input[type="file"]');
-    document.getElementById('exampleFormControlFilePdf').value = ''; // Set value to empty string
-  input.value = "";
-    Swal.fire({
-      text: 'Upload File PDF Only!',
-      icon: 'error',
-    });
+
+  store.selectedFiles = Array.from(event.target.files);
+  console.log(event.target.files.length);
+  if(event.target.files.length > 0){
+
+    ////////////////
+
   }
+  // if (file && file.type.startsWith('application/pdf')) {
+  //   // Use FileReader to read the selected image and set it as the source for the <img> tag
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+  //     //  this.imageUrl = reader.result;
+  //     store.formDataCourse.course_file_pdf = reader.result;
+  //   };
+  //   store.imagelist_pdf = input.files[0];
+  //   reader.readAsDataURL(file);
+   
+  // } else {
+
+  //   const input = document.querySelector('input[type="file"]');
+  //   document.getElementById('exampleFormControlFilePdf').value = ''; // Set value to empty string
+  // input.value = "";
+  //   Swal.fire({
+  //     text: 'Upload File PDF Only!',
+  //     icon: 'error',
+  //   });
+  // }
 
 };
 
@@ -272,6 +298,9 @@ const onFileChangeBackPdf = async (event) => {
 
       <loading v-model:active="store.isLoading" :can-cancel="true"
                 />
+
+
+
             
       <div class="middle-content container-xxl p-0 mb-4">
         <div class="row layout-top-spacing">
@@ -456,9 +485,76 @@ The Course Name field is required.</span>
         id="exampleFormControlFilePdf"
         @change="onFileChangeBackPdf"
         ref="fileupload"
+        multiple
       />
     </div>
     <span v-if="store.imagelist_pdf">{{ store.imagelist_pdf.name }}</span>
+
+     <div class="row mb-4 g-3" v-if="store.selectedFiles.length > 0">
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th class="checkbox-area" scope="col">
+              <div class="form-check form-check-primary">{{ $t("lesson_select_record") }}</div>
+            </th>
+             <th>File Name</th>
+          <th>File Size</th>
+          <th>Type</th>
+ <th>Manage</th>
+          </tr>
+        </thead>
+
+      
+         <tbody>
+          <tr v-for="(file, index) in store.selectedFiles" :key="index">
+         
+ <td>{{ index + 1 }}</td>
+          <td>{{ file.name }}</td>
+          <td>{{ formatBytes(file.size) }}</td>
+          <td>{{ file.type }}</td>
+          <td>
+               <div class="action-btns">
+
+
+    <a
+      href="javascript:void(0);"
+      class="action-btn btn-delete bs-tooltip"
+      @click="remove(index)"
+      data-toggle="tooltip"
+      data-placement="top"
+      aria-label="Delete"
+      data-bs-original-title="Delete"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="feather feather-trash-2"
+      >
+        <polyline points="3 6 5 6 21 6"></polyline>
+        <path
+          d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+        ></path>
+        <line x1="10" y1="11" x2="10" y2="17"></line>
+        <line x1="14" y1="11" x2="14" y2="17"></line>
+      </svg>
+    </a>
+  </div>
+          </td>
+          </tr>
+         
+         </tbody>
+      </table>
+    </div>
+     </div>
+    
 
     <div class="col-md-12 mt-3">
       <button type="button" class="btn btn-success" @click="save()">
