@@ -51,6 +51,7 @@ export const LessonStore = defineStore('lesson', {
       total_page: 0,
       page: 1,
       cg_id:0,
+      cg_name:"",
       search:''
     },
     formselectdelete: {
@@ -485,8 +486,8 @@ if (objWithIdIndex > -1) {
 
     async paginatedItemsSeleteFitter() {
       this.selected = this.item
-      console.log(this.selected);
-
+   
+console.log(this.formselect);
       if(this.formselect.search != ""){
       this.selected = this.selected.filter(item => item.cs_name.includes(this.formselect.search));
     
@@ -494,16 +495,14 @@ if (objWithIdIndex > -1) {
       if(this.formselect.search == ""){
        this.selected = this.selected.filter(item => item.cs_name.includes(this.formselect.search));
       }
-      if(this.formselect.cg_id != 0){
-        console.log(this.selected);
-        this.selected = this.selected.filter(item => item.cg_id == this.formselect.cg_id);
-        console.log(this.formselect.cg_id);
+      if(this.formselect.cs_name != ""){
+      
+
+        this.selected = this.selected.filter(item => item.cs_name.includes(this.formselect.cg_id));
+    
      
       }
-      if(this.formselect.cg_id == 0){
-      
-       
-      }
+     
    
       const startIndex = (this.formselect.page - 1) * this.formselect.per_page;
       const endIndex = startIndex + this.formselect.per_page;

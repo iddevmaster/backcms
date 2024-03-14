@@ -153,7 +153,6 @@ export const CourseStore = defineStore('course', {
         this.formDataEditCourse.course_name = response.data.course_name
         this.formDataEditCourse.course_description = response.data.course_description
         this.image = response.data.course_cover
-  
       });
     },
 

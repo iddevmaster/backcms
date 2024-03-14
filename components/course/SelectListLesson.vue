@@ -53,7 +53,7 @@
       </option>
       <option  v-for="(item, index) in store.group"
           :key="item.cg_id"
-          :value="item.cg_id"
+          :value="item.cg_name"
         >
         {{ item.cg_name }}
       </option>
@@ -332,7 +332,9 @@ if(store.formselect.page == store.formselect.total_page){
 };
 
 const selectshowdata_ch = async (cg) => {
-store.formselect.cg_id = cg.target.value
+
+store.formselect.cg_name = cg.target.value
+
 await store.paginatedItemsSeleteFitter()
 // await store.fetchLessonlist() 
 };
