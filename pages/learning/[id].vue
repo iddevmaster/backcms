@@ -168,6 +168,25 @@ const backtoLean = async () => {
   await router.push('/learning');
 }
 
+const filterInputCourse = async (event) => {
+  const key = event.data;
+      if (event.data === ' ') {
+        store.formDataEditCourse.course_name = store.formDataEditCourse.course_name.substring(0, store.formDataEditCourse.course_name.length - 1);
+        return;
+      }
+      store.formDataEditCourse.course_name = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
+const filterInputCourseDes = async (event) => {
+  const key = event.data;
+      if (event.data === ' ') {
+        store.formDataEditCourse.course_description = store.formDataEditCourse.course_description.substring(0, store.formDataEditCourse.course_description.length - 1);
+        return;
+      }
+      store.formDataEditCourse.course_description = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
+
 
 const removeImage = async () => {
  
@@ -312,6 +331,7 @@ function coverimage(i) {
         'border-[#42d392] ': !v$.course_name.$invalid,
       }" @change="v$.course_name.$touch" 
          maxlength="100"
+         @input="filterInputCourse"
       />
       <div v-if="locale == 'la'" >
       <span v-if="v$.course_name.$error" class="text-xs text-red-500"
@@ -336,6 +356,7 @@ The Course Name field is required.</span>
         'border-[#42d392] ': !v$.course_description.$invalid,
       }" @change="v$.course_description.$touch" v-model="store.formDataEditCourse.course_description"
           maxlength="500"
+          @input="filterInputCourseDes"
       >
       </textarea>
       <div v-if="locale == 'la'" >

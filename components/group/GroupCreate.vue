@@ -22,6 +22,7 @@
               id="recipient-name"
               v-model="store.formcreategroup.cg_name"
               maxlength="50"
+              @input="filterInputCgName"
             />
 
             <span
@@ -100,6 +101,7 @@ const save = async () => {
   
   if(save === true){
     store.GetopenModalCreate = false;
+    store.formcreategroup.cg_name = ""
     await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
     store.fetchGrouplist();
     
@@ -110,9 +112,15 @@ const save = async () => {
 };
 
 const closeModal = async () => {
-
+  store.formcreategroup.cg_name = ""
   store.GetopenModalCreate = false;
 }
+
+const filterInputCgName = async (event) => {
+
+      store.formcreategroup.cg_name = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
 </script>
 
 

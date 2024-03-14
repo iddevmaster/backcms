@@ -205,6 +205,24 @@ function coverimage(i) {
 }
 
 
+const filterInputCourse = async (event) => {
+  const key = event.data;
+      if (event.data === ' ') {
+        store.formDataCourse.course_name = store.formDataCourse.course_name.substring(0, store.formDataCourse.course_name.length - 1);
+        return;
+      }
+      store.formDataCourse.course_name = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
+const filterInputCourseDes = async (event) => {
+  const key = event.data;
+      if (event.data === ' ') {
+        store.formDataCourse.course_description = store.formDataCourse.course_description.substring(0, store.formDataCourse.course_description.length - 1);
+        return;
+      }
+      store.formDataCourse.course_description = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
 
  function formatBytes(bytes) {
       if (bytes === 0) return '0 Bytes';
@@ -342,6 +360,7 @@ const onFileChangeBackPdf = async (event) => {
         }"
         @change="v$.course_code.$touch"
         maxlength="20"
+  
       />
 
   <div v-if="locale == 'la'" >
@@ -374,6 +393,7 @@ const onFileChangeBackPdf = async (event) => {
         }"
         @change="v$.course_name.$touch"
         maxlength="100"
+        @input="filterInputCourse"
       />
    <div v-if="locale == 'la'" >
       <span v-if="v$.course_name.$error" class="text-xs text-red-500"
@@ -408,6 +428,7 @@ The Course Name field is required.</span>
         @change="v$.course_description.$touch"
         v-model="store.formDataCourse.course_description"
         maxlength="500"
+        @input="filterInputCourseDes"
       >
       </textarea>
 

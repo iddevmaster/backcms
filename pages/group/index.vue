@@ -28,6 +28,8 @@ const store = GroupStore()
 const toast = useToast();
 store.formcreategroup.user_id = auth.user_id
 
+
+
  store.fetchGrouplist();
   const closeModal = () => {
     store.GetopenModal = false;
