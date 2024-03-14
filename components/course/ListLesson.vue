@@ -234,7 +234,7 @@ const selectAllRows = async () => {
 
 
 const ChangeLesson = async () => {
-  await store.paginatedItemsSelete() 
+  await store.paginatedItemsSeleteFitter() 
  await store.ManageSelectRemove() 
   await store.fetchLessonlist() 
 

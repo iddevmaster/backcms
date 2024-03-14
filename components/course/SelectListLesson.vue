@@ -279,20 +279,19 @@ const selectAllRows = async () => {
 
 const remove = async (item) => {
     await store.RemoveSelect(item);
-     await store.paginatedItemsSelete()
+     await store.paginatedItemsSeleteFitter()
      await store.ManageSelectRemove()
  await store.fetchLessonlist() 
  //  await store.paginatedItemsCourse()
 };
 
 const deleteSelect = async () => {
-
-
+ 
   if(store.selected.length == 0){
     toast.error('ບໍ່ມີບົດຮຽນ')
   }else {
     await store.deleteSelecte()
-  await store.paginatedItemsSelete() 
+  await store.paginatedItemsSeleteFitter() 
 await store.ManageSelectRemove()
  await store.fetchLessonlist() 
   toast.success("ຍົກເລີກສຳເລັດ");
@@ -332,8 +331,16 @@ if(store.formselect.page == store.formselect.total_page){
 };
 
 const selectshowdata_ch = async (cg) => {
+   store.formselect.page = 1;
+if(cg.target.value == 0){
+store.formselect.cg_name = ""
+}
+if(cg.target.value != 0){
+  store.formselect.cg_name = cg.target.value
+}
 
-store.formselect.cg_name = cg.target.value
+
+
 
 await store.paginatedItemsSeleteFitter()
 // await store.fetchLessonlist() 
@@ -355,14 +362,14 @@ const validatePNumberSelect = async (evt) => {
   if (store.formselect.page == "") {
     store.selectlesson_form.page = 1;
   //  await store.fetchLessonlist();
-   await store.paginatedItemsSelete()
+ await store.paginatedItemsSeleteFitter()
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   } else if(store.formselect.page > store.formselect.total_page){
     store.formselect.page = store.formselect.total_page;
 
-     await store.paginatedItemsSelete()
+     await store.paginatedItemsSeleteFitter()
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
@@ -372,7 +379,7 @@ const validatePNumberSelect = async (evt) => {
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
-    await store.paginatedItemsSelete()
+   await store.paginatedItemsSeleteFitter()
   }
  // await stores.paginatedItems() 
 }

@@ -132,8 +132,15 @@ export const LessonStore = defineStore('lesson', {
     async fetchLessonlist() {
       this.lessonlist = [];
 
+      if(this.cg_id == 0){
+        this.urlt = '/course/lesson/all?';
+      }
+      if(this.cg_id != 0){
+        this.urlt = '/course/lesson/all?cg_id='+this.cg_id;
+      }
+
       try {
-        const data = await ApiService.post('/course/lesson/all?cg_id='+this.cg_id, this.formsearchlesson).then(response => {
+        const data = await ApiService.post(this.urlt, this.formsearchlesson).then(response => {
           this.lessonlist = response.data.data
           this.lesson_total_page = response.data.total_page
           this.lesson_limit_page = response.data.limit_page
@@ -475,9 +482,6 @@ if (objWithIdIndex > -1) {
       const endIndex = startIndex + this.formselect.per_page;
    
    
-
-
-   
       this.selected = this.item.slice(startIndex, endIndex);
       this.max_selc = endIndex
     //  this.item = [];
@@ -486,8 +490,7 @@ if (objWithIdIndex > -1) {
 
     async paginatedItemsSeleteFitter() {
       this.selected = this.item
-   
-console.log(this.formselect);
+  
       if(this.formselect.search != ""){
       this.selected = this.selected.filter(item => item.cs_name.includes(this.formselect.search));
     
@@ -496,11 +499,7 @@ console.log(this.formselect);
        this.selected = this.selected.filter(item => item.cs_name.includes(this.formselect.search));
       }
       if(this.formselect.cs_name != ""){
-      
-
-        this.selected = this.selected.filter(item => item.cs_name.includes(this.formselect.cg_id));
-    
-     
+        this.selected = this.selected.filter(item => item.cg_name.includes(this.formselect.cg_name));
       }
      
    
@@ -520,6 +519,35 @@ console.log(this.formselect);
    if (objWithIdIndex > -1) {
     this.item.splice(objWithIdIndex, 1);
   }
+
+  this.selected = this.item;
+
+  if(this.formselect.search != ""){
+    this.selected = this.selected.filter(item => item.cs_name.includes(this.formselect.search));
+  
+    }
+    if(this.formselect.search == ""){
+     this.selected = this.selected.filter(item => item.cs_name.includes(this.formselect.search));
+    }
+    if(this.formselect.cs_name != ""){
+      this.selected = this.selected.filter(item => item.cg_name.includes(this.formselect.cg_name));
+    }
+
+
+    const modPag = this.selected.length % 5 === 0 ? true : false
+    if(modPag == true){
+      this.formselect.page -= 1
+      if(this.formselect.page == 0){
+        this.formselect.page = 1
+      }
+    }
+
+    // const startIndex = (this.formselect.page - 1) * this.formselect.per_page;
+    // const endIndex = startIndex + this.formselect.per_page;
+    // this.selected = this.selected.slice(startIndex, endIndex);
+  
+
+
  // this.lessonlist.push(this.items);
     },
 
@@ -552,12 +580,21 @@ this.itemselect = [];
 
     },
     async deleteSelecte() {
+      this.selected = this.item
+      if(this.formselect.search != ""){
+        this.selected = this.selected.filter(item => item.cs_name.includes(this.formselect.search));
+      
+        }
+        if(this.formselect.search == ""){
+         this.selected = this.selected.filter(item => item.cs_name.includes(this.formselect.search));
+        }
+        if(this.formselect.cs_name != ""){
+          this.selected = this.selected.filter(item => item.cg_name.includes(this.formselect.cg_name));
+        }
+
       const startIndex = (this.formselect.page - 1) * this.formselect.per_page;
       const endIndex = startIndex + this.formselect.per_page;
-      this.selected = this.item.slice(startIndex, endIndex);
-
-    
-     
+      this.selected = this.selected.slice(startIndex, endIndex);
 
       for (var i = 0; i < this.selected.length; i++) { 
      const objWithIdIndex = this.item.findIndex((obj) => obj.cs_id === this.selected[i].cs_id);
