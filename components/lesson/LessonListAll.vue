@@ -345,6 +345,7 @@ const searchData = async () => {
 };
 
 const openmodal = async () => {
+  store.myselect_group = null
   store.GetopenModalCreate = true;
 };
 

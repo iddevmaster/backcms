@@ -170,10 +170,10 @@ const backtoLean = async () => {
 
 const filterInputCourse = async (event) => {
   const key = event.data;
-      if (event.data === ' ') {
-        store.formDataEditCourse.course_name = store.formDataEditCourse.course_name.substring(0, store.formDataEditCourse.course_name.length - 1);
-        return;
-      }
+      // if (event.data === ' ') {
+      //   store.formDataEditCourse.course_name = store.formDataEditCourse.course_name.substring(0, store.formDataEditCourse.course_name.length - 1);
+      //   return;
+      // }
       store.formDataEditCourse.course_name = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
 };
 
@@ -298,6 +298,8 @@ function coverimage(i) {
    </div> 
   </div>
                                 </div>
+
+                             
                             <div class="row mb-4 g-3">
  
     <div class="col-md-12 mt-3">
@@ -411,7 +413,7 @@ The Course Name field is required.</span>
         </div>
       </template>
     </div>
-
+<!-- 
     <div class="form-group mb-4 mt-3">
       <label for="exampleFormControlFile1">{{ $t("menu_couse_f_title_pdf") }}</label>
       <input
@@ -421,7 +423,7 @@ The Course Name field is required.</span>
         @change="onFileChangeBackPdf"
         ref="fileupload"
       />
-    </div>
+    </div> -->
 
     <span v-if="store.imagelist_pdf">{{ store.imagelist_pdf.name }}</span>
     <div class="col-md-12 mt-3">

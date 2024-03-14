@@ -207,10 +207,10 @@ function coverimage(i) {
 
 const filterInputCourse = async (event) => {
   const key = event.data;
-      if (event.data === ' ') {
-        store.formDataCourse.course_name = store.formDataCourse.course_name.substring(0, store.formDataCourse.course_name.length - 1);
-        return;
-      }
+      // if (event.data === ' ') {
+      //   store.formDataCourse.course_name = store.formDataCourse.course_name.substring(0, store.formDataCourse.course_name.length - 1);
+      //   return;
+      // }
       store.formDataCourse.course_name = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
 };
 
@@ -498,7 +498,7 @@ The Course Name field is required.</span>
     </div>
 
 
-    <div class="form-group mb-4 mt-3">
+    <!-- <div class="form-group mb-4 mt-3">
       <label for="exampleFormControlFile1">{{ $t("menu_couse_f_title_pdf") }}</label>
       <input
         type="file"
@@ -508,7 +508,7 @@ The Course Name field is required.</span>
         ref="fileupload"
         multiple
       />
-    </div>
+    </div> -->
     <span v-if="store.imagelist_pdf">{{ store.imagelist_pdf.name }}</span>
 
      <div class="row mb-4 g-3" v-if="store.selectedFiles.length > 0">

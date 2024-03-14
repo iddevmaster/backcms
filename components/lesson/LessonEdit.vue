@@ -15,7 +15,6 @@
             <label for="recipient-name" class="col-form-label"
               >{{ $t("lesson_qui") }}:</label
             >
-
             <textarea
               class="form-control"
               id="exampleFormControlTextarea1"
@@ -56,7 +55,7 @@
               }"
               @change="v$.cs_description.$touch"
               v-model="store.formcreatelessonedit.cs_description"
-              maxlength="100"
+              maxlength="500"
             >
             </textarea>
 
@@ -205,11 +204,21 @@ const v$ = useVuelidate(rules, FormEditLesson);
 const update = async () => {
   ///////////// บันทึก
 
+
 if(store.myselect_group){
-store.formcreatelessonedit.cg_id = store.myselect_group.cg_id;
+if(store.myselect_group.length == 1){
+  store.formcreatelessonedit.cg_id = store.myselect_group[0].cg_id;
+}
+else {
+  store.formcreatelessonedit.cg_id = store.myselect_group.cg_id;
+}
+}
+if(store.myselect_group == null){
+  store.formcreatelessonedit.cg_id = null;
 }
 
-  v$.value.$validate(); ///////////ดัก req
+
+   v$.value.$validate(); 
   if (!v$.value.$error) {
     let uploadfile = await store.UploadfileLesson(); ///////////upload รูป
     let updatelesson = await store.updateformLesson();

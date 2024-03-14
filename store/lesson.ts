@@ -191,6 +191,7 @@ export const LessonStore = defineStore('lesson', {
     },
     async saveformLesson() {
 
+
       try {
         const data = await ApiService.post('/course/lesson/create', this.formcreatelesson).then(response => {
        
@@ -208,14 +209,15 @@ export const LessonStore = defineStore('lesson', {
     },
 
     async updateformLesson() { 
-      console.log(this.myselect_group);
+ 
 
 
-      if(this.myselect_group == null){
+      if(this.formcreatelessonedit.cg_id == null){
 return false;
       }
 
-      this.formcreatelessonedit.cg_id = this.myselect_group.cg_id;
+   //   this.formcreatelessonedit.cg_id = this.myselect_group.cg_id;
+   //   console.log(this.formcreatelessonedit);
     
       try {
         const data = await ApiService.put('/course/lesson/update/'+ this.cs_id, this.formcreatelessonedit).then(response => {
@@ -354,7 +356,7 @@ this.itemselect = this.item
     },
 
     async CheckSelectRemove() {
-      console.log('2');
+     
 for (var i = 0; i < this.item.length; i++) { 
   const objWithIdIndex = this.lessonlist.findIndex((obj) => obj.cs_id === this.item[i].cs_id);
 
@@ -483,6 +485,7 @@ if (objWithIdIndex > -1) {
 
     async paginatedItemsSeleteFitter() {
       this.selected = this.item
+      console.log(this.selected);
 
       if(this.formselect.search != ""){
       this.selected = this.selected.filter(item => item.cs_name.includes(this.formselect.search));
@@ -492,7 +495,10 @@ if (objWithIdIndex > -1) {
        this.selected = this.selected.filter(item => item.cs_name.includes(this.formselect.search));
       }
       if(this.formselect.cg_id != 0){
+        console.log(this.selected);
         this.selected = this.selected.filter(item => item.cg_id == this.formselect.cg_id);
+        console.log(this.formselect.cg_id);
+     
       }
       if(this.formselect.cg_id == 0){
       

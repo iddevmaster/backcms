@@ -19,7 +19,7 @@
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="ຄໍາຖາມ *" :class="{
         'border-red-500 focus:border-red-500': v$.cs_name.$error,
         'border-[#42d392] ': !v$.cs_name.$invalid,
-      }" @change="v$.cs_name.$touch" v-model="store.formcreatelesson.cs_name"   maxlength="100" >
+      }" @change="v$.cs_name.$touch" v-model="store.formcreatelesson.cs_name"   maxlength="200" >
                </textarea>
 
               <span v-if="v$.cs_name.$error" class="text-xs text-red-500" style="color: red">
@@ -34,7 +34,7 @@
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="ຄໍາຕອບ *" :class="{
         'border-red-500 focus:border-red-500': v$.cs_description.$error,
         'border-[#42d392] ': !v$.cs_description.$invalid,
-      }" @change="v$.cs_description.$touch" v-model="store.formcreatelesson.cs_description" maxlength="100">
+      }" @change="v$.cs_description.$touch" v-model="store.formcreatelesson.cs_description" maxlength="500">
                </textarea>
 
              <span v-if="v$.cs_description.$error" class="text-xs text-red-500" style="color: red">
@@ -167,9 +167,9 @@ store.formcreatelesson.cg_id = store.myselect_group.cg_id;
   v$.value.$validate();  ///////////ดัก req
 
     if (!v$.value.$error) {
-  
-    let uploadfile = await store.UploadfileLesson();  
-   let save = await store.saveformLesson();
+ 
+ let uploadfile = await store.UploadfileLesson();  
+  let save = await store.saveformLesson();
 
     
     if (save === false) {
@@ -179,7 +179,7 @@ store.formcreatelesson.cg_id = store.myselect_group.cg_id;
       await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
       await store.ResetForm();
       store.formcreatelesson.cs_cover = ""
-       
+      store.myselect_group = null
       store.GetopenModalCreate = false;
       v$.value.$reset();
 
