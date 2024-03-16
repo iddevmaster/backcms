@@ -52,6 +52,8 @@ const { UploadfileCourse } = CourseStore();
 const { deletelesson } = CourseStore();
 const { Adlesson } = CourseStore();
 const { uploadfilecourse } = CourseStore();
+const { Savepdf } = CourseStore();
+const { UploadfileCoursePdf } = CourseStore();
 
 store.formDataCourse.user_id = auth.user_id
 store.formDataEditCourse.user_id = auth.user_id
@@ -146,31 +148,33 @@ console.log('data');
 const save = async () => {
   v$.value.$validate();
   if (!v$.value.$error) {
+    let uploadfile = await UploadfileCourse();
     try {
       store.isLoaddingsave = true;
       let uploadfile = await UploadfileCourse();
       let updateCourse = await SaveCourse();
-
-     let savelesson = await SaveLessoncluster();
+      let uploadpdf = await UploadfileCoursePdf();
+      let savepdf = await Savepdf();
+      let savelesson = await SaveLessoncluster();
       
   
-      if(updateCourse === true){
-              store.isLoaddingsave = false;
-            const input = document.querySelector('input[type="file"]');
-      input.value = "";
+      // if(updateCourse === true){
+      //         store.isLoaddingsave = false;
+      //       const input = document.querySelector('input[type="file"]');
+      // input.value = "";
      
-      v$.value.$reset();
-        await setTimeout(() => {
-        toast.success("ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ");
-         store.ResetForm();
+      // v$.value.$reset();
+      //   await setTimeout(() => {
+      //   toast.success("ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ");
+      //    store.ResetForm();
 
-        router.push('/learning');
-      }, 500);
+      //   router.push('/learning');
+      // }, 500);
 
-      }
-      if(updateCourse === false){
-        await toast.error("ຂໍ້ມູນບໍ່ໄດ້ບັນທຶກສຳເລັດ.");
-      }
+      // }
+      // if(updateCourse === false){
+      //   await toast.error("ຂໍ້ມູນບໍ່ໄດ້ບັນທຶກສຳເລັດ.");
+      // }
 
     } catch (error) {
       await toast.error("ຂໍ້ມູນບໍ່ໄດ້ບັນທຶກສຳເລັດ.");
@@ -263,12 +267,15 @@ const onFileChangeBackPdf = async (event) => {
   var input = event.target;
 
 
-  store.selectedFiles = Array.from(event.target.files);
-  console.log(event.target.files.length);
+//  store.selectedFiles = Array.from(event.target.files);
+
   if(event.target.files.length > 0){
-
-    ////////////////
-
+    for (var i = 0; i < event.target.files.length; i++) {
+    const file = event.target.files[i];
+      if (file && file.type.startsWith('application/pdf')) {
+        store.selectedFiles.push(event.target.files[i])
+      }
+    }
   }
   // if (file && file.type.startsWith('application/pdf')) {
   //   // Use FileReader to read the selected image and set it as the source for the <img> tag
@@ -498,7 +505,7 @@ The Course Name field is required.</span>
     </div>
 
 
-    <!-- <div class="form-group mb-4 mt-3">
+    <div class="form-group mb-4 mt-3">
       <label for="exampleFormControlFile1">{{ $t("menu_couse_f_title_pdf") }}</label>
       <input
         type="file"
@@ -508,7 +515,7 @@ The Course Name field is required.</span>
         ref="fileupload"
         multiple
       />
-    </div> -->
+    </div>
     <span v-if="store.imagelist_pdf">{{ store.imagelist_pdf.name }}</span>
 
      <div class="row mb-4 g-3" v-if="store.selectedFiles.length > 0">
@@ -520,8 +527,8 @@ The Course Name field is required.</span>
               <div class="form-check form-check-primary">{{ $t("lesson_select_record") }}</div>
             </th>
              <th>File Name</th>
-          <th>File Size</th>
-          <th>Type</th>
+          <!-- <th>File Size</th>
+          <th>Type</th> -->
  <th>Manage</th>
           </tr>
         </thead>
@@ -532,8 +539,8 @@ The Course Name field is required.</span>
          
  <td>{{ index + 1 }}</td>
           <td>{{ file.name }}</td>
-          <td>{{ formatBytes(file.size) }}</td>
-          <td>{{ file.type }}</td>
+          <!-- <td>{{ formatBytes(file.size) }}</td>
+          <td>{{ file.type }}</td> -->
           <td>
                <div class="action-btns">
 

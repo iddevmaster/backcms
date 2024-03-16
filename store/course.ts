@@ -13,11 +13,13 @@ export const CourseStore = defineStore('course', {
     imagelist: null,
     imagelist_pdf: null,
     path: "",
+    pdf:null,
     course_id: null,
     pending: false,
     isOpen: false,
     cs_id:null,
     selectedFiles:[],
+    savepd:[],
     GetopenModalLesson:false,
     lessonlist: [],
     user_id:null,
@@ -34,7 +36,6 @@ export const CourseStore = defineStore('course', {
       course_code: "",
       course_name: "",
       course_description: "",
-      course_file_pdf:"",
       user_id: null
     },
     formDataEditCourse: {
@@ -53,6 +54,7 @@ export const CourseStore = defineStore('course', {
       course_id: null,
       user_id: null
     },
+    filepdf:[],
     formDataeditlesson: {
       cs_cover: "",
       cs_name: "",
@@ -189,7 +191,6 @@ Storage.item = checkpag.data.data
     },
 
     async SaveCourse() {
-      console.log(this.formDataCourse);
       try {
         const data = await ApiService.post('/course/create', this.formDataCourse).then(response => {
           this.formDatalesson.course_id = response.data.insertId
@@ -374,15 +375,32 @@ return true;
         this.formDataCourse.course_cover = data.data[0].path
           this.formDataEditCourse.course_cover = data.data[0].path
       }
-      if(this.imagelist_pdf){
-        let formData = new FormData();
 
-        formData.append('files', this.imagelist_pdf);
-        const data_pdf = await ApiService.upload('/media_file/upload/file',formData);
-        this.formDataCourse.course_file_pdf = data_pdf.data[0].path
-          this.formDataEditCourse.course_file_pdf = data_pdf.data[0].path
-      }
     },
+    async UploadfileCoursePdf() { 
+      if(this.selectedFiles){
+        const formData = new FormData();
+        Array.from(this.selectedFiles).forEach(file => {
+          formData.append('files', file);
+        });
+        const pdf = await ApiService.upload('/media_file/upload/file',formData);
+        this.pdf = pdf.data;
+        }
+    },
+    async Savepdf() { 
+      this.filepdf = [];
+      if(this.pdf.length > 0){
+        for (var i = 0; i < this.pdf.length; i++) {
+          const daa = {cd_name:this.pdf[i].originalname,cd_path:this.pdf[i].path,course_id:this.course_id}
+          this.filepdf.push(daa);
+            }
+
+
+            /////////////////save///////////////
+      }
+
+    },
+
     async deleteItem(course) {
       this.isOpen = true;
       this.course_id = course.course_id;

@@ -98,15 +98,14 @@ export const ExamquestionStore = defineStore('examquestion', {
   actions: {
     async fetchExamquestionlist() {
       this.examqlist = [];
+  
       try {
         const data = await ApiService.post('/exam/question/' + this.em_id + '/list', this.formsearchexamquestion).then(response => {
           this.examqlist = response.data.data
           this.examqlisttotal = response.data.data.length
           this.total_page = response.data.total
-
-          console.log(response.data.total);
           this.choicelist = response.data.data[0].choices
-this.eq = response.data.data[0];
+          this.eq = response.data.data[0];
 
 
           const examdata = ApiService.post('/exam/main/list', this.formsearchexam).then(exam => {  /////////////ดึง หลักสูตร
