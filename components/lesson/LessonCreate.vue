@@ -172,9 +172,7 @@ store.formcreatelesson.cg_id = store.myselect_group.cg_id;
   let save = await store.saveformLesson();
 
     
-    if (save === false) {
-      await toast.error('ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ')
-    } else {
+    if (save === true) {
       const lessonlist = await store.fetchLessonlist();
       await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
       await store.ResetForm();
@@ -182,7 +180,8 @@ store.formcreatelesson.cg_id = store.myselect_group.cg_id;
       store.myselect_group = null
       store.GetopenModalCreate = false;
       v$.value.$reset();
-
+    } else {
+      await toast.error('ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ')
     }
 
   }
@@ -225,6 +224,7 @@ const onFileChange = async (event) => {
 const removeImage = async () => {
   store.formcreatelesson.cs_cover = "";
   store.imageReq = false;
+  store.imagelist = null
   const input = document.querySelector('input[type="file"]');
   input.value = '';
 }
