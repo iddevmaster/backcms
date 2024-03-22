@@ -193,6 +193,7 @@ Storage.item = checkpag.data.data
     async SaveCourse() {
       try {
         const data = await ApiService.post('/course/create', this.formDataCourse).then(response => {
+
           this.formDatalesson.course_id = response.data.insertId
           this.course_id = response.data.insertId;
 

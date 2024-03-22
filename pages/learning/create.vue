@@ -158,23 +158,23 @@ const save = async () => {
       let savelesson = await SaveLessoncluster();
       
   
-      // if(updateCourse === true){
-      //         store.isLoaddingsave = false;
-      //       const input = document.querySelector('input[type="file"]');
-      // input.value = "";
+      if(updateCourse === true){
+              store.isLoaddingsave = false;
+            const input = document.querySelector('input[type="file"]');
+      input.value = "";
      
-      // v$.value.$reset();
-      //   await setTimeout(() => {
-      //   toast.success("ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ");
-      //    store.ResetForm();
+      v$.value.$reset();
+        await setTimeout(() => {
+        toast.success("ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ");
+         store.ResetForm();
 
-      //   router.push('/learning');
-      // }, 500);
+        router.push('/learning');
+      }, 500);
 
-      // }
-      // if(updateCourse === false){
-      //   await toast.error("ຂໍ້ມູນບໍ່ໄດ້ບັນທຶກສຳເລັດ.");
-      // }
+      }
+      if(updateCourse === false){
+        await toast.error("ຂໍ້ມູນບໍ່ໄດ້ບັນທຶກສຳເລັດ.");
+      }
 
     } catch (error) {
       await toast.error("ຂໍ້ມູນບໍ່ໄດ້ບັນທຶກສຳເລັດ.");
