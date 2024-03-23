@@ -224,30 +224,35 @@ const onFileChangeBackPdf = async (event) => {
 
 };
 
+
+
+
 const onFileChangeBack = async (event) => {
   var input = event.target;
   const file = event.target.files[0];
+  const idxDot = file.name.lastIndexOf(".") + 1;
+  const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+const extFile = file.name.substr(idxDot, file.name.length).toLowerCase();
 
-  if (file && file.type.startsWith('image/')) {
-    // Use FileReader to read the selected image and set it as the source for the <img> tag
-
-    const reader = new FileReader();
+if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
+            //TO DO
+            const reader = new FileReader();
     reader.onload = () => {
       //  this.imageUrl = reader.result;
       store.formDataEditCourse.course_cover = reader.result;
     };
     store.imagelist = input.files[0];
     reader.readAsDataURL(file);
-  } else {
-    // Reset the image URL if the selected file is not an image
-    //   this.imageUrl = null;
-    const input = document.querySelector('input[type="file"]');
+} else {
+          
+  const input = document.querySelector('input[type="file"]');
   input.value = "";
     Swal.fire({
-      text: 'Upload File Image Only!',
+      text: 'Upload File Image PNG JPG!',
       icon: 'error',
     });
-  }
+ }
+
 };
 
 
@@ -332,7 +337,7 @@ function coverimage(i) {
         'border-red-500 focus:border-red-500': v$.course_name.$error,
         'border-[#42d392] ': !v$.course_name.$invalid,
       }" @change="v$.course_name.$touch" 
-         maxlength="100"
+         maxlength="128"
          @input="filterInputCourse"
       />
       <div v-if="locale == 'la'" >

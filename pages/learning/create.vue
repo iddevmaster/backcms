@@ -236,30 +236,34 @@ const filterInputCourseDes = async (event) => {
       return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
     }
 
+
+
 const onFileChangeBack = async (event) => {
   var input = event.target;
   const file = event.target.files[0];
+  const idxDot = file.name.lastIndexOf(".") + 1;
+  const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+const extFile = file.name.substr(idxDot, file.name.length).toLowerCase();
 
-  if (file && file.type.startsWith('image/')) {
-    // Use FileReader to read the selected image and set it as the source for the <img> tag
-   
-    const reader = new FileReader();
+if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
+            //TO DO
+            const reader = new FileReader();
     reader.onload = () => {
       //  this.imageUrl = reader.result;
       store.formDataCourse.course_cover = reader.result;
     };
     store.imagelist = input.files[0];
     reader.readAsDataURL(file);
-  } else {
-    // Reset the image URL if the selected file is not an image
-    //   this.imageUrl = null;
-    const input = document.querySelector('input[type="file"]');
+} else {
+          
+  const input = document.querySelector('input[type="file"]');
   input.value = "";
     Swal.fire({
-      text: 'Upload File Image Only!',
+      text: 'Upload File Image PNG JPG!',
       icon: 'error',
     });
-  }
+ }
+
 };
 
 

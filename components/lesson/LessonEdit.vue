@@ -26,7 +26,8 @@
               }"
               @change="v$.cs_name.$touch"
               v-model="store.formcreatelessonedit.cs_name"
-              maxlength="200"
+              maxlength="250"
+              @input="filterInputT"
             >
             </textarea>
 
@@ -56,6 +57,7 @@
               @change="v$.cs_description.$touch"
               v-model="store.formcreatelessonedit.cs_description"
               maxlength="500"
+              @input="filterInputTdes"
             >
             </textarea>
 
@@ -239,10 +241,14 @@ if(store.myselect_group == null){
 const onFileChange = async (event) => {
   var input = event.target;
   const file = event.target.files[0];
+  const idxDot = file.name.lastIndexOf(".") + 1;
+  const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+const extFile = file.name.substr(idxDot, file.name.length).toLowerCase();
 
-  if (file && file.type.startsWith("image/")) {
-    // Use FileReader to read the selected image and set it as the source for the <img> tag
-    store.imageReq = false;
+if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
+            //TO DO
+
+            store.imageReq = false;
     const reader = new FileReader();
     reader.onload = () => {
       //  this.imageUrl = reader.result;
@@ -250,17 +256,43 @@ const onFileChange = async (event) => {
     };
     store.imagelist = input.files[0];
     reader.readAsDataURL(file);
-  } else {
-    // Reset the image URL if the selected file is not an image
-    //   this.imageUrl = null;
-    const input = document.querySelector('input[type="file"]');
-    input.value = "";
+} else {
+          
+  const input = document.querySelector('input[type="file"]');
+  input.value = "";
     Swal.fire({
-      text: "Upload File Image Only!",
-      icon: "error",
+      text: 'Upload File Image PNG JPG!',
+      icon: 'error',
     });
-  }
+ }
+
 };
+
+// const onFileChange = async (event) => {
+//   var input = event.target;
+//   const file = event.target.files[0];
+
+//   if (file && file.type.startsWith("image/")) {
+//     // Use FileReader to read the selected image and set it as the source for the <img> tag
+//     store.imageReq = false;
+//     const reader = new FileReader();
+//     reader.onload = () => {
+//       //  this.imageUrl = reader.result;
+//       store.formcreatelessonedit.cs_cover = reader.result;
+//     };
+//     store.imagelist = input.files[0];
+//     reader.readAsDataURL(file);
+//   } else {
+//     // Reset the image URL if the selected file is not an image
+//     //   this.imageUrl = null;
+//     const input = document.querySelector('input[type="file"]');
+//     input.value = "";
+//     Swal.fire({
+//       text: "Upload File Image Only!",
+//       icon: "error",
+//     });
+//   }
+// };
 
 const removeImage = async () => {
   store.formcreatelessonedit.cs_cover = "";
@@ -276,6 +308,20 @@ const changedLabelCounrt = async (event) => {
 console.log(event.target.value);
 
 }
+
+
+const filterInputT = async (event) => {
+  const key = event.data;
+
+
+      store.formcreatelessonedit.cs_name = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
+const filterInputTdes = async (event) => {
+  const key = event.data;
+      store.formcreatelessonedit.cs_description = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
 function image(i) {
   let result = i.slice(0, 6);
   if (result === "static") {

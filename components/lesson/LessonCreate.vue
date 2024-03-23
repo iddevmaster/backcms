@@ -19,7 +19,9 @@
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="ຄໍາຖາມ *" :class="{
         'border-red-500 focus:border-red-500': v$.cs_name.$error,
         'border-[#42d392] ': !v$.cs_name.$invalid,
-      }" @change="v$.cs_name.$touch" v-model="store.formcreatelesson.cs_name"   maxlength="200" >
+      }" @change="v$.cs_name.$touch" v-model="store.formcreatelesson.cs_name"   maxlength="250" 
+      @input="filterInputT"
+      >
                </textarea>
 
               <span v-if="v$.cs_name.$error" class="text-xs text-red-500" style="color: red">
@@ -34,7 +36,10 @@
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="ຄໍາຕອບ *" :class="{
         'border-red-500 focus:border-red-500': v$.cs_description.$error,
         'border-[#42d392] ': !v$.cs_description.$invalid,
-      }" @change="v$.cs_description.$touch" v-model="store.formcreatelesson.cs_description" maxlength="500">
+      }" @change="v$.cs_description.$touch" v-model="store.formcreatelesson.cs_description" maxlength="500"
+      @input="filterInputTdes"
+
+      >
                </textarea>
 
              <span v-if="v$.cs_description.$error" class="text-xs text-red-500" style="color: red">
@@ -70,7 +75,7 @@
 
           <div class="mb-3">
             <label for="message-text" class="col-form-label">{{ $t("lesson_pic") }}:</label>
-            <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChange"
+            <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChange"  accept=".jpg, .jpeg, .png"
               ref="fileupload">
           </div>
           <div class="border p-2 mt-3">
@@ -196,29 +201,53 @@ store.formcreatelesson.cg_id = store.myselect_group.cg_id;
 const onFileChange = async (event) => {
   var input = event.target;
   const file = event.target.files[0];
+  const idxDot = file.name.lastIndexOf(".") + 1;
+  const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+const extFile = file.name.substr(idxDot, file.name.length).toLowerCase();
 
-  if (file && file.type.startsWith('image/')) {
-    // Use FileReader to read the selected image and set it as the source for the <img> tag
-    store.imageReq = false;
+if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
+            //TO DO
+
+            store.imageReq = false;
     const reader = new FileReader();
     reader.onload = () => {
-      //  this.imageUrl = reader.result;
+ 
       store.formcreatelesson.cs_cover = reader.result;
     };
     store.imagelist = input.files[0];
     reader.readAsDataURL(file);
-  } else {
-    // Reset the image URL if the selected file is not an image
-    //   this.imageUrl = null;
-    const input = document.querySelector('input[type="file"]');
+} else {
+          
+  const input = document.querySelector('input[type="file"]');
   input.value = "";
     Swal.fire({
-
-      text: 'Upload File Image Only!',
+      text: 'Upload File Image PNG JPG!',
       icon: 'error',
-
     });
-  }
+ }
+
+
+  // if (file && allowedTypes.includes(file.type)) {
+
+  //   store.imageReq = false;
+  //   const reader = new FileReader();
+  //   reader.onload = () => {
+ 
+  //     store.formcreatelesson.cs_cover = reader.result;
+  //   };
+  //   store.imagelist = input.files[0];
+  //   reader.readAsDataURL(file);
+  // } else {
+    
+  //   const input = document.querySelector('input[type="file"]');
+  // input.value = "";
+  //   Swal.fire({
+
+  //     text: 'Upload File Image PNG JPG!',
+  //     icon: 'error',
+
+  //   });
+  // }
 };
 
 const removeImage = async () => {
@@ -236,6 +265,17 @@ const changedLabelCounrt = async (event) => {
 console.log(event.target.value);
 
 }
+
+const filterInputT = async (event) => {
+  const key = event.data;
+      store.formcreatelesson.cs_name = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
+const filterInputTdes = async (event) => {
+  const key = event.data;
+      store.formcreatelesson.cs_description = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
 
 </script>
 
