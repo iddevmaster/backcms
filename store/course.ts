@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia';
 import ApiService from '@/services/api.service';
 import axios from "axios";
-
+import { ref } from 'vue';
 
 
 export const CourseStore = defineStore('course', {
   state: () => ({
     courselist: [],
+    fileInputRef: ref(null),
     image: null,
     isLoading:true,
     isLoaddingsave:false,
@@ -526,6 +527,12 @@ return true;
     delay(ms) {
       return new Promise((resolve) => setTimeout(resolve, ms));
     },
+
+    setFileInputRef(ref) {
+      this.fileInputRef = ref;
+    },
+
+
   },
 
 

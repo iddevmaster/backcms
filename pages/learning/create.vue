@@ -14,9 +14,8 @@ import { useI18n } from "vue-i18n";
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
 import Swal from 'sweetalert2';
-import { ref } from 'vue';
 
-
+import { ref, computed, watch, onMounted } from 'vue'
 
 
 import {
@@ -26,7 +25,7 @@ import {
   minLength,
   helpers,
 } from "@vuelidate/validators";
-import { onMounted } from 'vue'
+
 
 
 
@@ -89,13 +88,18 @@ storelesson.cg_id = 0
 const grouplist = await storelesson.fetchGrouplist();
 
 
+
+
  onMounted(async()  => {
       // Fetch items when the component is mounted
       
       const lessonlist = await storelesson.fetchLessonlist();
    //  await storelesson.paginatedItemsCourse();
 
+ 
+
     store.isLoading = false;
+
     })
 // fetchdata();
 
@@ -141,6 +145,18 @@ const v$ = useVuelidate(rules, FormDataCourse);
 const backtoLean = async () => {
   await router.push('/learning');
 }
+
+const fileInputRef = ref(null);
+const openFileInput = async () => {
+  // fileInputRef.value.click();
+  if (fileInputRef.value) {
+    fileInputRef.value.click();
+    console.log('x');
+  }
+
+
+}
+
 
 const fetchdata = async () => {
 console.log('data');
@@ -271,16 +287,22 @@ const onFileChangeBackPdf = async (event) => {
   var input = event.target;
 
 
-//  store.selectedFiles = Array.from(event.target.files);
-
   if(event.target.files.length > 0){
     for (var i = 0; i < event.target.files.length; i++) {
+      console.log(i);
     const file = event.target.files[i];
       if (file && file.type.startsWith('application/pdf')) {
         store.selectedFiles.push(event.target.files[i])
+      }else {
+        
+
       }
     }
   }
+  
+
+  
+
   // if (file && file.type.startsWith('application/pdf')) {
   //   // Use FileReader to read the selected image and set it as the source for the <img> tag
   //   const reader = new FileReader();
@@ -508,19 +530,28 @@ The Course Name field is required.</span>
       </div>
     </div>
 
-
-    <div class="form-group mb-4 mt-3">
+<!-- 
+    <div class="form-group mb-4 mt-3" >
       <label for="exampleFormControlFile1">{{ $t("menu_couse_f_title_pdf") }}</label>
-      <input
+      <input  
         type="file"
+        title=" - "
         class="form-control-file"
         id="exampleFormControlFilePdf"
         @change="onFileChangeBackPdf"
-        ref="fileupload"
+        ref="fileInputRef"
         multiple
+        style="display: none;"
       />
+     
+    
     </div>
-    <span v-if="store.imagelist_pdf">{{ store.imagelist_pdf.name }}</span>
+
+    <div class="form-group mb-4 mt-3" >
+      <button class="btn" @click="openFileInput">Selete File PDF</button>
+    </div>
+  
+    <span v-if="store.imagelist_pdf">{{ store.imagelist_pdf.name }}</span> -->
 
      <div class="row mb-4 g-3" v-if="store.selectedFiles.length > 0">
     <div class="table-responsive">
@@ -695,6 +726,10 @@ video {
   min-height: 200px;
   max-width: 300px;
   max-height: 300px;
+}
+
+#exampleFormControlFilePdf{
+  opacity:0    
 }
 
 </style>
