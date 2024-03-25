@@ -20,6 +20,7 @@ export const CourseStore = defineStore('course', {
     isOpen: false,
     cs_id:null,
     selectedFiles:[],
+    selectedEditFiles:[],
     savepd:[],
     GetopenModalLesson:false,
     lessonlist: [],
@@ -156,6 +157,15 @@ export const CourseStore = defineStore('course', {
         this.formDataEditCourse.course_name = response.data.course_name
         this.formDataEditCourse.course_description = response.data.course_description
         this.image = response.data.course_cover
+      });
+    },
+
+    async fetchGetPdf(id) {
+      this.course_id = id;
+      const data = await ApiService.get('/course/document/get/' + this.course_id).then(response => {
+this.selectedEditFiles = response.data;
+
+
       });
     },
 
@@ -309,7 +319,7 @@ return true;
     async UpdateCourse() {
 
       this.formDataEditCourse.user_id = this.user_id
-      console.log(this.formDataEditCourse);
+ 
       try {
         const updatecourse = await ApiService.put('/course/update/' + this.course_id, this.formDataEditCourse);
     //  await this.Dellessons(this.course_id);
@@ -389,18 +399,33 @@ return true;
         this.pdf = pdf.data;
         }
     },
+
+    async UploadfileCoursePdfEdit() { 
+  
+      if(this.selectedFiles){
+        const formData = new FormData();
+        Array.from(this.selectedFiles).forEach(file => {
+          formData.append('files', file);
+        });
+        const pdf = await ApiService.upload('/media_file/upload/file',formData);
+        this.pdf = pdf.data;
+        }
+    },
     async Savepdf() { 
       this.filepdf = [];
       if(this.pdf.length > 0){
         for (var i = 0; i < this.pdf.length; i++) {
           const daa = {cd_name:this.pdf[i].originalname,cd_path:this.pdf[i].path,course_id:this.course_id}
           this.filepdf.push(daa);
+          const savepdf = await ApiService.post('/course/document/create', daa)
+          console.log(savepdf);
             }
-
-
-            /////////////////save///////////////
       }
 
+    },
+
+    async deletepdf(id) {
+      const deletepdf = await ApiService.delete('/course/document/delete/'+id)
     },
 
     async deleteItem(course) {

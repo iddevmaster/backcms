@@ -56,6 +56,8 @@ storelesson.formselect.total_page = 0;
 
 
 await store.fetchCourseId(router.currentRoute.value.params.id);
+await store.fetchGetPdf(router.currentRoute.value.params.id);
+
 const grouplist = await storelesson.fetchGrouplist();
 
 await store.fetchLessonInCourseId();
@@ -168,6 +170,16 @@ const backtoLean = async () => {
   await router.push('/learning');
 }
 
+const fileInputRef = ref(null);
+const openFileInput = async () => {
+  // fileInputRef.value.click();
+  if (fileInputRef.value) {
+    fileInputRef.value.click();
+
+  }
+
+}
+
 const filterInputCourse = async (event) => {
   const key = event.data;
       // if (event.data === ' ') {
@@ -198,32 +210,29 @@ const removeImage = async () => {
 
 const onFileChangeBackPdf = async (event) => {
   var input = event.target;
-  const file = event.target.files[0];
 
-  if (file && file.type.startsWith('application/pdf')) {
-    // Use FileReader to read the selected image and set it as the source for the <img> tag
-    const reader = new FileReader();
-    reader.onload = () => {
-      //  this.imageUrl = reader.result;
-      store.formDataEditCourse.course_file_pdf = reader.result;
-    };
-    store.imagelist_pdf = input.files[0];
-    reader.readAsDataURL(file);
-   
-  } else {
-    // Reset the image URL if the selected file is not an image
-    //   this.imageUrl = null;
-    const input = document.querySelector('input[type="file"]');
-    document.getElementById('exampleFormControlFilePdf').value = ''; // Set value to empty string
-  input.value = "";
-    Swal.fire({
-      text: 'Upload File PDF Only!',
-      icon: 'error',
-    });
+
+  if(event.target.files.length > 0){
+    for (var i = 0; i < event.target.files.length; i++) {
+    const file = event.target.files[i];
+      if (file && file.type.startsWith('application/pdf')) {
+   store.selectedFiles.push(event.target.files[i])
+
+
+      }else {
+        
+
+      }
+    }
+
+await store.UploadfileCoursePdfEdit();
+await store.Savepdf();
+await store.fetchGetPdf(router.currentRoute.value.params.id);
   }
+  
+
 
 };
-
 
 
 
@@ -255,6 +264,11 @@ if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
 
 };
 
+
+const remove = async (e,id) => {
+ store.selectedEditFiles.splice(e, 1); // Remove the file at the specified index
+ store.deletepdf(id);
+};
 
 
 
@@ -418,19 +432,94 @@ The Course Name field is required.</span>
         </div>
       </template>
     </div>
-<!-- 
-    <div class="form-group mb-4 mt-3">
-      <label for="exampleFormControlFile1">{{ $t("menu_couse_f_title_pdf") }}</label>
-      <input
+
+
+    <div class="form-group" >
+  
+      <input  
         type="file"
+        title=" - "
         class="form-control-file"
         id="exampleFormControlFilePdf"
         @change="onFileChangeBackPdf"
-        ref="fileupload"
+        ref="fileInputRef"
+        multiple
+        style="display: none;"
       />
-    </div> -->
+     
+    
+    </div>
 
-    <span v-if="store.imagelist_pdf">{{ store.imagelist_pdf.name }}</span>
+    <div class="form-group" >
+      <button class="btn btn-warning" @click="openFileInput">{{ $t("menu_couse_f_title_pdf") }}</button>
+    </div>
+  
+   
+     <div class="row mb-4 g-3" v-if="store.selectedEditFiles.length > 0">
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered">
+        <thead>
+          <tr>
+            <th class="checkbox-area" scope="col">
+              <div class="form-check form-check-primary">{{ $t("lesson_select_record") }}</div>
+            </th>
+             <th>File Name</th>
+          <!-- <th>File Size</th>
+          <th>Type</th> -->
+ <th>Manage</th>
+          </tr>
+        </thead>
+
+      
+         <tbody>
+          <tr v-for="(file, index) in store.selectedEditFiles" :key="index">
+         
+          <td>{{ index + 1 }}</td>
+          <td>{{ file.cd_name }}</td>
+          <!-- <td>{{ formatBytes(file.size) }}</td>
+          <td>{{ file.type }}</td> -->
+          <td>
+               <div class="action-btns">
+
+
+    <a
+      href="javascript:void(0);"
+      class="action-btn btn-delete bs-tooltip"
+      @click="remove(index,file.id)"
+      data-toggle="tooltip"
+      data-placement="top"
+      aria-label="Delete"
+      data-bs-original-title="Delete"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="feather feather-trash-2"
+      >
+        <polyline points="3 6 5 6 21 6"></polyline>
+        <path
+          d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+        ></path>
+        <line x1="10" y1="11" x2="10" y2="17"></line>
+        <line x1="14" y1="11" x2="14" y2="17"></line>
+      </svg>
+    </a>
+  </div>
+          </td>
+          </tr>
+         
+         </tbody>
+      </table>
+    </div>
+     </div>
+    
     <div class="col-md-12 mt-3">
    
 
@@ -473,4 +562,8 @@ The Course Name field is required.</span>
     </div>
 </template>
 
-<style></style>
+<style>
+#exampleFormControlFilePdf{
+  opacity:0    
+}
+</style>

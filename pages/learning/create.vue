@@ -151,9 +151,8 @@ const openFileInput = async () => {
   // fileInputRef.value.click();
   if (fileInputRef.value) {
     fileInputRef.value.click();
-    console.log('x');
-  }
 
+  }
 
 }
 
@@ -171,7 +170,7 @@ const save = async () => {
       let updateCourse = await SaveCourse();
       let uploadpdf = await UploadfileCoursePdf();
       let savepdf = await Savepdf();
-      let savelesson = await SaveLessoncluster();
+   let savelesson = await SaveLessoncluster();
       
   
       if(updateCourse === true){
@@ -289,7 +288,7 @@ const onFileChangeBackPdf = async (event) => {
 
   if(event.target.files.length > 0){
     for (var i = 0; i < event.target.files.length; i++) {
-      console.log(i);
+    
     const file = event.target.files[i];
       if (file && file.type.startsWith('application/pdf')) {
         store.selectedFiles.push(event.target.files[i])
@@ -301,28 +300,6 @@ const onFileChangeBackPdf = async (event) => {
   }
   
 
-  
-
-  // if (file && file.type.startsWith('application/pdf')) {
-  //   // Use FileReader to read the selected image and set it as the source for the <img> tag
-  //   const reader = new FileReader();
-  //   reader.onload = () => {
-  //     //  this.imageUrl = reader.result;
-  //     store.formDataCourse.course_file_pdf = reader.result;
-  //   };
-  //   store.imagelist_pdf = input.files[0];
-  //   reader.readAsDataURL(file);
-   
-  // } else {
-
-  //   const input = document.querySelector('input[type="file"]');
-  //   document.getElementById('exampleFormControlFilePdf').value = ''; // Set value to empty string
-  // input.value = "";
-  //   Swal.fire({
-  //     text: 'Upload File PDF Only!',
-  //     icon: 'error',
-  //   });
-  // }
 
 };
 
@@ -530,7 +507,7 @@ The Course Name field is required.</span>
       </div>
     </div>
 
-<!-- 
+
     <div class="form-group mb-4 mt-3" >
       <label for="exampleFormControlFile1">{{ $t("menu_couse_f_title_pdf") }}</label>
       <input  
@@ -551,7 +528,7 @@ The Course Name field is required.</span>
       <button class="btn" @click="openFileInput">Selete File PDF</button>
     </div>
   
-    <span v-if="store.imagelist_pdf">{{ store.imagelist_pdf.name }}</span> -->
+ 
 
      <div class="row mb-4 g-3" v-if="store.selectedFiles.length > 0">
     <div class="table-responsive">
@@ -572,7 +549,7 @@ The Course Name field is required.</span>
          <tbody>
           <tr v-for="(file, index) in store.selectedFiles" :key="index">
          
- <td>{{ index + 1 }}</td>
+          <td>{{ index + 1 }}</td>
           <td>{{ file.name }}</td>
           <!-- <td>{{ formatBytes(file.size) }}</td>
           <td>{{ file.type }}</td> -->
