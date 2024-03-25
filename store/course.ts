@@ -320,11 +320,13 @@ return true;
 
       this.formDataEditCourse.user_id = this.user_id
  
+    
       try {
         const updatecourse = await ApiService.put('/course/update/' + this.course_id, this.formDataEditCourse);
     //  await this.Dellessons(this.course_id);
         // await this.SaveLesson(this.course_id);
         //    return response.data
+        this.imagelist = null;
   
         return true;
       } catch (error) {

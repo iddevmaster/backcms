@@ -55,6 +55,9 @@ storelesson.formselect.total_page = 0;
 
 
 
+ 
+
+
 await store.fetchCourseId(router.currentRoute.value.params.id);
 await store.fetchGetPdf(router.currentRoute.value.params.id);
 
@@ -137,6 +140,8 @@ const save = async () => {
 
       let clearlesson = await ClearLessoncluster();
       let savelesson = await SaveLessoncluster();
+
+
 
       if(updatedata === true){
         await setTimeout(() => {
