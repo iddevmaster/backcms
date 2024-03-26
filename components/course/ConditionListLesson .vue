@@ -64,9 +64,9 @@
 
 
 
-
+{{ stores.mycondition }}
         <div class="table-responsive">
-    <table class="table table-hover table-bordered" v-if="store.selected.length > 0">
+    <table class="table table-hover table-bordered" v-if="stores.mycondition.length > 0">
         <thead>
             <tr>
                 <th class="checkbox-area" scope="col">
@@ -74,42 +74,34 @@
                        #
                     </div>
                 </th>
-                <th scope="col"> {{ $t("lesson_qui") }}</th>
-                <th scope="col"> {{ $t("lesson_ans") }}</th>
-                <th scope="col"> {{ $t("lesson_group") }}</th>
-                <th scope="col"> {{ $t("lesson_yout") }}</th>
-                <th scope="col"> {{ $t("lesson_pic") }}</th>
+                <th scope="col">ໝວດວິຊາ</th>
+                <th scope="col">ຈຳນວນບົດຮຽນ</th>
+                <th scope="col">ຈຳນວນ ຄຳຖາມເສັງ </th>
+
                 <th scope="col"> - </th>
             </tr>
         </thead>
         <tbody>
       
-            <tr v-for="(item, index) in store.selected" :key="item.cs_id">
-              <td>{{ (store.formselect.page * store.formselect.per_page) - (store.formselect.per_page -  index) +  1 }}</td>
+            <tr v-for="(item, index) in stores.mycondition" :key="item.cg_id">
+              <td>{{ index + 1 }}</td>
               
-                <td>{{item.cs_name}}</td>
-                <td>{{item.cs_description}}</td>
                 <td>{{item.cg_name}}</td>
-
+                <td>{{item.cc_value_a}}</td>
+                <td>{{item.cc_value_b}}</td>
+       
               
-                <td> 
-            <a v-if="item.cs_video" :href="item.cs_video" target="_blank"><span class="badge badge-success">ກົດເພື່ອເປີດເບິ່ງ</span></a>
-            <a v-else><span class="badge badge-danger">ບໍ່ມີວິດີໂອ</span></a>
-          </td>
+                
           
 
-                <td class="text-center">
-                  <img :src="coverimage(item.cs_cover)" class="img-fluid" width="80" height="80" v-if="item.cs_cover">
-                  <img src="../../assets/images/no_photo.jpg" class="img-fluid" width="80" height="80" v-else>
-                
-                </td>
+        
                 <td>     <div class="action-btns">
 
 
     <a
       href="javascript:void(0);"
       class="action-btn btn-delete bs-tooltip"
-      @click="remove(item)"
+      @click="removecondition(item)"
       data-toggle="tooltip"
       data-placement="top"
       aria-label="Delete"
@@ -277,6 +269,17 @@ const remove = async (item) => {
  //  await store.paginatedItemsCourse()
 };
 
+const removecondition = async (item) => {
+
+
+const index = stores.mycondition.indexOf(item);
+      if (index !== -1) {
+        stores.mycondition.splice(index, 1); // Remove value if already present
+      } else {
+        
+      }
+}
+
 const deleteSelect = async () => {
  
   if(store.selected.length == 0){
@@ -342,7 +345,8 @@ await store.paginatedItemsSeleteFitter()
 
 
 const ShowModalAdd = async () => {
-console.log('เพิ่ม');
+
+stores.openModalCreateCon = true;
 }
 const validatePNumberSelect = async (evt) => {
   

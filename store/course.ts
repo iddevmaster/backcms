@@ -7,12 +7,14 @@ import { ref } from 'vue';
 export const CourseStore = defineStore('course', {
   state: () => ({
     courselist: [],
+    openModalCreateCon:true,
     fileInputRef: ref(null),
     image: null,
     isLoading:true,
     isLoaddingsave:false,
     imagelist: null,
     imagelist_pdf: null,
+    mycondition_group:null,
     path: "",
     pdf:null,
     course_id: null,
@@ -23,6 +25,7 @@ export const CourseStore = defineStore('course', {
     selectedEditFiles:[],
     savepd:[],
     GetopenModalLesson:false,
+    mycondition: [],
     lessonlist: [],
     user_id:null,
     del_lesson: [],
@@ -47,6 +50,13 @@ export const CourseStore = defineStore('course', {
       course_description: "",
       course_file_pdf:"",
       user_id: null
+    },
+
+    formDataCondit :{
+      cc_value_a: "",
+      cc_value_b: "",
+      cg_id: "",
+      cg_name: "",
     },
     formDatalesson: {
       cs_cover: "",
@@ -96,7 +106,10 @@ export const CourseStore = defineStore('course', {
     FormDataCourse(state) {
       return state.formDataCourse;
     },
-
+    FormDataCondition(state) {
+      return state.formDataCondit;
+    },
+    
     FormDataEditCourse(state) {
       return state.formDataEditCourse;
     },
@@ -559,6 +572,34 @@ return true;
       this.fileInputRef = ref;
     },
 
+    async ResetCondition() {
+      this.formDataCondit.cg_name = "";
+      this.formDataCondit.cg_id = "";
+      this.formDataCondit.cc_value_a = "";
+      this.formDataCondit.cc_value_b = "";
+    },
+    async AddCondition() {
+
+      console.log(this.formDataCondit);
+   //   this.mycondition.push(this.formDataCondit)
+
+
+      const b = {cg_id:this.formDataCondit.cg_id,cg_name:this.formDataCondit.cg_name,cc_value_a:this.formDataCondit.cc_value_a,cc_value_b:this.formDataCondit.cc_value_b}
+      this.mycondition.push(b)
+
+// let ax = [];
+//       for(let i = 0; i < this.mycondition.length; i++){
+//         const b = {cg_id:this.mycondition[i].cg_id,cg_name:this.mycondition[i].cg_name,cc_value_a:this.mycondition[i].cc_value_a,cc_value_b:this.mycondition[i].cc_value_b,course_id:1}
+
+//  ax.push(b)
+//       }
+      // console.log(ax);
+    },
+
+    async SaveCondition() {
+console.log(this.mycondition.length);
+    }
+    
 
   },
 

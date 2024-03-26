@@ -8,6 +8,7 @@ import CourseCreate from "@/components/course/CourseCreate.vue";
 import ListLesson from "@/components/course/ListLesson.vue";
 import SelectListLesson from "@/components/course/SelectListLesson.vue";
 import ConditionListLesson from "@/components/course/ConditionListLesson .vue";
+import ConditionCreate from "@/components/course/ConditionCreate.vue";
 import { useVuelidate } from "@vuelidate/core";
 import { useToast } from "vue-toastification";
 import ApiService  from "../../services/api.service";
@@ -46,6 +47,7 @@ const storelesson = LessonStore();
 const { FormDataCourse } = storeToRefs(store);
 const { SaveCourse } = CourseStore();
 const { SaveLessoncluster } = CourseStore();
+const { SaveCondition } = CourseStore();
 const { SaveLesson } = CourseStore();
 const { ResetForm } = CourseStore();
 const { UploadfileCourse } = CourseStore();
@@ -172,7 +174,7 @@ const save = async () => {
       let uploadpdf = await UploadfileCoursePdf();
       let savepdf = await Savepdf();
    let savelesson = await SaveLessoncluster();
-      
+   let savecondition = await SaveCondition();
   
       if(updateCourse === true){
               store.isLoaddingsave = false;
@@ -635,12 +637,12 @@ The Course Name field is required.</span>
               </div>
             </div>
             <br>
- 
+
           </div>
         </div>
       </div>
     </div>
-
+    <ConditionCreate></ConditionCreate>
   </div>
 
 
@@ -717,6 +719,28 @@ video {
 
 #exampleFormControlFilePdf{
   opacity:0    
+}
+
+
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
 </style>
