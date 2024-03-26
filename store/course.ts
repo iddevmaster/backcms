@@ -7,7 +7,7 @@ import { ref } from 'vue';
 export const CourseStore = defineStore('course', {
   state: () => ({
     courselist: [],
-    openModalCreateCon:true,
+    openModalCreateCon:false,
     fileInputRef: ref(null),
     image: null,
     isLoading:true,
@@ -587,17 +587,28 @@ return true;
       const b = {cg_id:this.formDataCondit.cg_id,cg_name:this.formDataCondit.cg_name,cc_value_a:this.formDataCondit.cc_value_a,cc_value_b:this.formDataCondit.cc_value_b}
       this.mycondition.push(b)
 
-// let ax = [];
-//       for(let i = 0; i < this.mycondition.length; i++){
-//         const b = {cg_id:this.mycondition[i].cg_id,cg_name:this.mycondition[i].cg_name,cc_value_a:this.mycondition[i].cc_value_a,cc_value_b:this.mycondition[i].cc_value_b,course_id:1}
 
-//  ax.push(b)
-//       }
-      // console.log(ax);
     },
 
     async SaveCondition() {
-console.log(this.mycondition.length);
+
+
+let ax = [];
+      for(let i = 0; i < this.mycondition.length; i++){
+        const b = {cg_id:this.mycondition[i].cg_id,cg_name:this.mycondition[i].cg_name,cc_value_a:this.mycondition[i].cc_value_a,cc_value_b:this.mycondition[i].cc_value_b,course_id:this.course_id}
+
+
+
+ const data = await ApiService.post('/course/condition/create', b).then(response => {
+  console.log(response)
+
+});
+
+ 
+      }
+
+
+    
     }
     
 

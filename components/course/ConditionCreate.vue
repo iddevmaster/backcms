@@ -29,8 +29,7 @@ v-model="store.mycondition_group"
        
   ></v-select>
 
-  <span v-if="v$.cg_id.$error" class="text-xs text-red-500" style="color: red">
-              ຕ້ອງໃສ່ຂໍ້ຄວາມ.</span>
+
 
  
     </div>
@@ -45,13 +44,7 @@ v-model="store.mycondition_group"
               @input="filterInputCgNameA"
             />
 
-            <span
-              v-if="v$.cc_value_a.$error"
-              class="text-xs text-red-500"
-              style="color: red"
-            >
-              ຕ້ອງໃສ່ຂໍ້ຄວາມ.</span
-            >
+       
 
     </div>
 
@@ -65,13 +58,7 @@ v-model="store.mycondition_group"
               maxlength="2"
               @input="filterInputCgNameB"
             />
-            <span
-              v-if="v$.cc_value_b.$error"
-              class="text-xs text-red-500"
-              style="color: red"
-            >
-              ຕ້ອງໃສ່ຂໍ້ຄວາມ.</span
-            >
+         
     </div>
   
     
@@ -146,10 +133,10 @@ const rules = computed(() => {
  
   };
 });
-const v$ = useVuelidate(rules, FormDataCondition);
+
 const save = async () => {
   ///////////// บันทึก
-  v$.value.$validate(); ///////////ดัก req
+ 
   store.formDataCondit.cg_id = store.mycondition_group.cg_id
   store.formDataCondit.cg_name = store.mycondition_group.cg_name
 
@@ -158,7 +145,7 @@ await store.ResetCondition();
 
 store.mycondition_group = null;
 store.openModalCreateCon = false;
-v$.value.$reset();
+
 
 
 };

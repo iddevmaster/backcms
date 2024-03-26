@@ -174,7 +174,7 @@ const save = async () => {
       let uploadpdf = await UploadfileCoursePdf();
       let savepdf = await Savepdf();
    let savelesson = await SaveLessoncluster();
-   let savecondition = await SaveCondition();
+  let savecondition = await SaveCondition();
   
       if(updateCourse === true){
               store.isLoaddingsave = false;
