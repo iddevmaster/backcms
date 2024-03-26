@@ -7,6 +7,7 @@ import { useAuthStore } from '@/store/auth';
 import CourseCreate from "@/components/course/CourseCreate.vue";
 import ListLesson from "@/components/course/ListLesson.vue";
 import SelectListLesson from "@/components/course/SelectListLesson.vue";
+import ConditionListLesson from "@/components/course/ConditionListLesson .vue";
 import { useVuelidate } from "@vuelidate/core";
 import { useToast } from "vue-toastification";
 import ApiService  from "../../services/api.service";
@@ -609,6 +610,15 @@ The Course Name field is required.</span>
               </div>
             </div>
             <br>
+
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="widget-content widget-content-area br-8 p-4">
+                  <ConditionListLesson></ConditionListLesson>
+                </div>
+              </div>
+            </div>
+              <br>
             <div class="row">
               <div class="col-xl-12">
                 <div class="widget-content widget-content-area br-8 p-4">
