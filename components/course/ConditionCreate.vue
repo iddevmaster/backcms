@@ -6,7 +6,7 @@
     >
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          {{ $t("group_add") }}
+          ເພິ່ມ ເນື້ອໃນອົງປະກອບ
         </h5>
       </div>
       <div class="modal-body">
@@ -29,35 +29,50 @@ v-model="store.mycondition_group"
        
   ></v-select>
 
+  <span  class="text-xs text-red-500" v-if="store.AlertCondition"
+        style="color: red" >ຕ້ອງມີຊ່ອງຂໍ້ມູນ</span>
+
 
 
  
     </div>
 
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4">
+      <label for="recipient-name" class="col-form-label">
+        ຈຳນວນບົດຮຽນ </label
+            >
       <input
               type="text"
               class="form-control"
               id="recipient-name"
               v-model="store.formDataCondit.cc_value_a"
               maxlength="2"
+              placeholder="ຈຳນວນບົດຮຽນ"
               @input="filterInputCgNameA"
             />
 
+            <span  class="text-xs text-red-500" v-if="store.AlertA"
+        style="color: red" >ຕ້ອງມີຊ່ອງຂໍ້ມູນ</span>
        
 
     </div>
 
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4">
-      
+      <label for="recipient-name" class="col-form-label">
+      ຈຳນວນ ຄຳຖາມເສັງ </label
+            >
       <input
               type="text"
               class="form-control"
               id="recipient-name"
               v-model="store.formDataCondit.cc_value_b"
               maxlength="2"
+              placeholder="ຈຳນວນ ຄຳຖາມເສັງ"
               @input="filterInputCgNameB"
             />
+            <span  class="text-xs text-red-500" v-if="store.AlertB"
+        style="color: red" >ຕ້ອງມີຊ່ອງຂໍ້ມູນ</span>
+       
          
     </div>
   
@@ -136,6 +151,22 @@ const rules = computed(() => {
 
 const save = async () => {
   ///////////// บันทึก
+
+
+  
+  if(store.mycondition_group == null){
+    store.AlertCondition = true;
+return false
+  }
+  if(store.formDataCondit.cc_value_a == ''){
+    store.AlertA = true;
+return false
+  }
+  if(store.formDataCondit.cc_value_b == ''){
+    store.AlertB = true;
+return false
+  }
+ 
  
   store.formDataCondit.cg_id = store.mycondition_group.cg_id
   store.formDataCondit.cg_name = store.mycondition_group.cg_name
@@ -147,22 +178,47 @@ store.mycondition_group = null;
 store.openModalCreateCon = false;
 
 
+store.AlertCondition = false;
+store.AlertA = false;
+store.AlertB = false;
+
+
 
 };
 
 const closeModal = async () => {
 store.openModalCreateCon = false;
 }
-
 const filterInputCgNameA = async (event) => {
-
-     
+  const key = event.data;
+      if (event.data === ' ') {
+        store.formDataCondit.cc_value_a = store.formDataCondit.cc_value_a.substring(0, store.formDataCondit.cc_value_a.length - 1);
+        return;
+      }
+      if (store.formDataCondit.cc_value_a.charAt(0) === '0') {
+        store.formDataCondit.cc_value_a = store.formDataCondit.cc_value_a.substring(0, store.formDataCondit.cc_value_a.length - 1);
+        return;
+  } 
+    store.formDataCondit.cc_value_a = event.target.value.replace(/\D/g, "");
 };
 
 const filterInputCgNameB = async (event) => {
 
+
+  const key = event.data;
+      if (event.data === ' ') {
+        store.formDataCondit.cc_value_b = store.formDataCondit.cc_value_b.substring(0, store.formDataCondit.cc_value_b.length - 1);
+        return;
+      }
+      if (store.formDataCondit.cc_value_b.charAt(0) === '0') {
+        store.formDataCondit.cc_value_b = store.formDataCondit.cc_value_b.substring(0, store.formDataCondit.cc_value_b.length - 1);
+        return;
+  } 
+    store.formDataCondit.cc_value_b = event.target.value.replace(/\D/g, "");
+
      
 };
+
 
 </script>
 

@@ -12,8 +12,8 @@
 
   <div class="row layout-top-spacing">
     <div class="col-lg-4 col-md-3 col-sm-3 mb-4">
- <button type="button" class="btn btn-danger" style="width: 100%; height: 100%; margin-top: auto;
-" @click="ShowModalAdd">Add Condition</button>
+ <button type="button" class="btn btn-primary" style="width: 100%; height: 100%; margin-top: auto;
+" @click="ShowModalAdd">ເພິ່ມ ເນື້ອໃນອົງປະກອບ</button>
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
      
@@ -64,7 +64,7 @@
 
 
 
-{{ stores.editmycondition }}
+
         <div class="table-responsive">
     <table class="table table-hover table-bordered" v-if="stores.editmycondition.length > 0">
         <thead>
@@ -156,7 +156,7 @@
             <tr>
                 <th class="checkbox-area" scope="col" style="text-align: center;">
                     <div class="form-check form-check-primary">
-                       <span > {{ $t("lesson_noselect") }}</span>
+                       <span > ບໍ່ມີເນື້ອໃນອົງປະກອບ</span>
                     </div>
                 </th>
             </tr>
@@ -167,71 +167,9 @@
 
 
      </div>
-  <div class="row">
-    <div class="col-xl-12 col-lg-12">
-      <div class="pagination-no_spacing" v-if="store.formselect.total_page > 1">
-        <ul class="pagination">
-          <li>
-            <a href="javascript:void(0);" class="prev"  @click="Previou()"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-chevron-left"
-              >
-                <polyline points="15 18 9 12 15 6"></polyline></svg ></a>
-          </li>
-          <li>
-            <div class="col-xs-1">
-              <input
-                id="ex1"
-                type="number"
-                style="width: 50px"
-                v-model="store.formselect.page"
-                min="1"
-                @input="validatePNumberSelect($event)"
-              />
-            </div>
-          </li>
-          <li><a href="javascript:void(0);">/</a></li>
-          <li>
-            <a href="javascript:void(0);">{{ store.formselect.total_page }}</a>
-          </li>
-          <li>
-            <a href="javascript:void(0);" class="next"  @click="Nextu()"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline></svg></a>
-          </li>
-        </ul>
-      </div>
 
-      <div class="pagination-no_spacing" v-else>
-        <ul class="pagination">
-         
-        </ul>
-      </div>
-    </div>
-  </div>
-    
 
- 
+
     
       
     </template>
