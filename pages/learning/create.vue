@@ -242,6 +242,18 @@ const filterInputCourseDes = async (event) => {
       store.formDataCourse.course_description = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
 };
 
+const filterInputCourseremarkA = async (event) => {
+
+      store.formDataCourse.course_remark_a = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
+const filterInputCourseremarkB = async (event) => {
+
+      store.formDataCourse.course_remark_b = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
+
+
 
  function formatBytes(bytes) {
       if (bytes === 0) return '0 Bytes';
@@ -427,14 +439,14 @@ The Course Name field is required.</span>
 
     <div class="col-md-12 mt-3">
       <label for="inputPassword4" class="form-label">  ຫົວຂໍ້ </label><span class="text-xs text-red-500" style="color:red">  </span>
-      <input type="text" class="form-control" id="inputPassword4"  placeholder="ຊື່ຫຼັກສູດ" v-model="store.formDataCourse.course_remark_a"  
+      <input type="text" class="form-control" id="inputPassword4"  placeholder="ຊື່ຫຼັກສູດ" v-model="store.formDataCourse.course_remark_a" @input="filterInputCourseremarkA"
       maxlength="200" 
       />
     </div>
 
     <div class="col-md-12 mt-3">
       <label for="inputPassword4" class="form-label">  ເງືອນໄຂສອບເສັງທິດສະດ </label>
-      <input type="text" class="form-control" id="inputPassword4"  placeholder="ເງືອນໄຂສອບເສັງທິດສະດ" v-model="store.formDataCourse.course_remark_b" 
+      <input type="text" class="form-control" id="inputPassword4"  placeholder="ເງືອນໄຂສອບເສັງທິດສະດ" v-model="store.formDataCourse.course_remark_b"    @input="filterInputCourseremarkB"
          maxlength="200"   
       />
     </div>
@@ -506,8 +518,8 @@ The Course Name field is required.</span>
         style="color: red" >อัพโหลดรูปภาพ</span>
   </div>
 
-    <div class="col-12 ">
-      <div class="border rounded p-2">
+   
+  <div class="border p-2 mt-3">
         <p>{{ $t("menu_couse_f_title_display_picture") }}:</p>
         <template v-if="store.formDataCourse.course_cover">
           <div class="row">
@@ -520,29 +532,30 @@ The Course Name field is required.</span>
           </div>
         </template>
       </div>
-    </div>
+   
 
-
-    <div class="form-group mb-4 mt-3" >
-      <label for="exampleFormControlFile1">{{ $t("menu_couse_f_title_pdf") }}</label>
-      <input  
-        type="file"
-        title=" - "
-        class="form-control-file"
-        id="exampleFormControlFilePdf"
-        @change="onFileChangeBackPdf"
-        ref="fileInputRef"
-        multiple
-        style="display: none;"
-      />
-     
     
-    </div>
-
-    <div class="form-group mb-4 mt-3" >
-      <button class="btn" @click="openFileInput">Selete File PDF</button>
-    </div>
+  <br>
+    
+    <div class="form-group" >
   
+  <input  
+    type="file"
+    title=" - "
+    class="form-control-file"
+    id="exampleFormControlFilePdf"
+    @change="onFileChangeBackPdf"
+    ref="fileInputRef"
+    multiple
+    style="display: none;"
+  />
+ 
+
+</div>
+
+<div class="form-group p-2 mt-3" >
+  <button class="btn btn-warning" @click="openFileInput">{{ $t("menu_couse_f_title_pdf") }}</button>
+</div>
  
 
      <div class="row mb-4 g-3" v-if="store.selectedFiles.length > 0">
@@ -662,72 +675,6 @@ The Course Name field is required.</span>
 
 <style>
 
-.loader {
-  width: 50px;
-  aspect-ratio: 1;
-  background-color: #8d847f;
-  border-radius: 50%;
-  animation: l4 3s infinite;
-}
-@keyframes l4 {
-  12.5% {background-image:radial-gradient(80% 65% at left, #0000 94%,#fff9)}
-  25%   {background-image:linear-gradient(90deg,#0000 50%,#fff9 0)}
-  37.5% {background-image:radial-gradient(80% 65% at right,#fff9 94%,#0000)}
-  50%   {background-image:linear-gradient(#fff9 0 0)}
-  62.5% {background-image:radial-gradient(80% 65% at left, #fff9 94%,#0000)}
-  75%   {background-image:linear-gradient(-90deg,#0000 50%,#fff9 0)}
-  87.5% {background-image:radial-gradient(80% 65% at right,#0000 94%,#fff9)}
-}
-.video-container {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio (change this value as per your video's aspect ratio) */
-}
-
-video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-
-.preview {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
-  width: 100px;
-}
-#image-container img{
-  width: 250px;
-  height: 250px;
-  object-fit: cover;
-}
-#image-container .delete-button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: red;
-  color: white;
-  border: none;
-  padding: 2.5px 5px;
-  cursor: pointer;
-}
-#image-container .image-wrapper {
-  position: relative;
-  display: inline-block;
-  margin: 10px;
-  border: 1px solid;
-}
-#image-container {
-  width: fit-content;
-  min-width: 200px;
-  min-height: 200px;
-  max-width: 300px;
-  max-height: 300px;
-}
 
 #exampleFormControlFilePdf{
   opacity:0    

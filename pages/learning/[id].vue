@@ -208,6 +208,17 @@ const filterInputCourseDes = async (event) => {
       store.formDataEditCourse.course_description = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
 };
 
+const filterInputCourseremarkA = async (event) => {
+
+store.formDataEditCourse.course_remark_a = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
+const filterInputCourseremarkB = async (event) => {
+
+store.formDataEditCourse.course_remark_b = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
+
 
 
 const removeImage = async () => {
@@ -382,15 +393,15 @@ The Course Name field is required.</span>
     </div>
 
     <div class="col-md-12 mt-3">
-      <label for="inputPassword4" class="form-label">  ຫົວຂໍ້ </label><span class="text-xs text-red-500" style="color:red">  </span>
-      <input type="text" class="form-control" id="inputPassword4"  placeholder="ຊື່ຫຼັກສູດ" v-model="store.formDataEditCourse.course_remark_a"  
+      <label for="inputPassword4" class="form-label">  ຫົວຂໍ້ </label><span class="text-xs text-red-500" style="color:red">  </span> 
+      <input type="text" class="form-control" id="inputPassword4"  placeholder="ຊື່ຫຼັກສູດ" v-model="store.formDataEditCourse.course_remark_a"   @input="filterInputCourseremarkA"
       maxlength="200" 
       />
     </div>
 
     <div class="col-md-12 mt-3">
       <label for="inputPassword4" class="form-label">  ເງືອນໄຂສອບເສັງທິດສະດ </label>
-      <input type="text" class="form-control" id="inputPassword4"  placeholder="ເງືອນໄຂສອບເສັງທິດສະດ" v-model="store.formDataEditCourse.course_remark_b" 
+      <input type="text" class="form-control" id="inputPassword4"  placeholder="ເງືອນໄຂສອບເສັງທິດສະດ" v-model="store.formDataEditCourse.course_remark_b" @input="filterInputCourseremarkB"
          maxlength="200"   
       />
     </div>
