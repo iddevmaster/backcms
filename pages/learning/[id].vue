@@ -131,6 +131,20 @@ const rules = computed(() => {
       ),
       minLength: minLength(1),
     },
+    course_remark_a: {
+      required: helpers.withMessage(
+        "The Course Description is required",
+        required
+      ),
+      minLength: minLength(1),
+    },
+    course_remark_b: {
+      required: helpers.withMessage(
+        "The Course Description is required",
+        required
+      ),
+      minLength: minLength(1),
+    },
   };
 });
 
@@ -397,6 +411,8 @@ The Course Name field is required.</span>
       <input type="text" class="form-control" id="inputPassword4"  placeholder="ຊື່ຫຼັກສູດ" v-model="store.formDataEditCourse.course_remark_a"   @input="filterInputCourseremarkA"
       maxlength="200" 
       />
+      <span v-if="v$.course_remark_a.$error" class="text-xs text-red-500"
+        style="color: red" >ຕ້ອງມີຊ່ອງຂໍ້ມູນ</span>
     </div>
 
     <div class="col-md-12 mt-3">
@@ -404,6 +420,8 @@ The Course Name field is required.</span>
       <input type="text" class="form-control" id="inputPassword4"  placeholder="ເງືອນໄຂສອບເສັງທິດສະດ" v-model="store.formDataEditCourse.course_remark_b" @input="filterInputCourseremarkB"
          maxlength="200"   
       />
+      <span v-if="v$.course_remark_b.$error" class="text-xs text-red-500"
+        style="color: red" >ຕ້ອງມີຊ່ອງຂໍ້ມູນ</span>
     </div>
     <div class="col-12">
       <label for="inputAddress" class="form-label">  {{ $t("menu_couse_f_title_detail") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
