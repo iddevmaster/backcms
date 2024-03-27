@@ -8,6 +8,9 @@ export const CourseStore = defineStore('course', {
   state: () => ({
     courselist: [],
     openModalCreateCon:false,
+    openCreateConEdit:false,
+    openEditConEdit:false,
+    condition_id:null,
     fileInputRef: ref(null),
     image: null,
     isLoading:true,
@@ -26,6 +29,7 @@ export const CourseStore = defineStore('course', {
     savepd:[],
     GetopenModalLesson:false,
     mycondition: [],
+    editmycondition: [],
     lessonlist: [],
     user_id:null,
     del_lesson: [],
@@ -41,6 +45,8 @@ export const CourseStore = defineStore('course', {
       course_code: "",
       course_name: "",
       course_description: "",
+      course_remark_a:"",
+      course_remark_b:"",
       user_id: null
     },
     formDataEditCourse: {
@@ -49,6 +55,8 @@ export const CourseStore = defineStore('course', {
       course_name: "",
       course_description: "",
       course_file_pdf:"",
+      course_remark_a:"",
+      course_remark_b:"",
       user_id: null
     },
 
@@ -168,6 +176,8 @@ export const CourseStore = defineStore('course', {
         this.formDataEditCourse.course_cover = response.data.course_cover
         this.formDataEditCourse.course_code = response.data.course_code
         this.formDataEditCourse.course_name = response.data.course_name
+        this.formDataEditCourse.course_remark_a = response.data.course_remark_a
+        this.formDataEditCourse.course_remark_b = response.data.course_remark_b
         this.formDataEditCourse.course_description = response.data.course_description
         this.image = response.data.course_cover
       });
@@ -215,9 +225,10 @@ Storage.item = checkpag.data.data
     },
 
     async SaveCourse() {
+      
       try {
         const data = await ApiService.post('/course/create', this.formDataCourse).then(response => {
-
+       
           this.formDatalesson.course_id = response.data.insertId
           this.course_id = response.data.insertId;
 
@@ -260,10 +271,8 @@ Storage.item = checkpag.data.data
         const les = {cs_id:Storage.item[i].cs_id}
         this.savelesson.push(les);
       }
-   
       try {
         const data = await ApiService.post('/course/cluster/create/'+this.course_id, this.savelesson).then(response => {
-
         });
         return true;
       } catch (error) {
@@ -330,10 +339,7 @@ return true;
 
     },
     async UpdateCourse() {
-
       this.formDataEditCourse.user_id = this.user_id
- 
-    
       try {
         const updatecourse = await ApiService.put('/course/update/' + this.course_id, this.formDataEditCourse);
     //  await this.Dellessons(this.course_id);
@@ -591,25 +597,48 @@ return true;
     },
 
     async SaveCondition() {
-
-
 let ax = [];
       for(let i = 0; i < this.mycondition.length; i++){
         const b = {cg_id:this.mycondition[i].cg_id,cg_name:this.mycondition[i].cg_name,cc_value_a:this.mycondition[i].cc_value_a,cc_value_b:this.mycondition[i].cc_value_b,course_id:this.course_id}
-
-
-
  const data = await ApiService.post('/course/condition/create', b).then(response => {
-  console.log(response)
-
 });
 
+  }
+},
+
+async SaveConditionOne() {
+
+
+  const b = {cg_id:this.formDataCondit.cg_id,cg_name:this.formDataCondit.cg_name,cc_value_a:this.formDataCondit.cc_value_a,cc_value_b:this.formDataCondit.cc_value_b,course_id:this.course_id}
+  const data = await ApiService.post('/course/condition/create', b).then(response => {
+  });
+  
+  },
+  async FetchCondition(id) {
+const data = await ApiService.get('/course/condition/list/?course_id=' + id).then(response => {
+this.editmycondition = response.data.data;
+});
+  },
+
+  async deleteCondition(id) {
+    const data = await ApiService.delete('course/condition/delete/'+ id).then(response => {
+      return true
+    });
+   },
+  async UpdateCondition() {
+
+
+this.formDataCondit.cg_id = this.mycondition_group.cg_id;
+this.formDataCondit.course_id = this.course_id;
+
+if(this.condition_id == null){
+return false;
+}
+    const data = await ApiService.put('/course/condition/update/'+ this.condition_id, this.formDataCondit).then(response => {
  
-      }
-
-
-    
-    }
+    });
+  
+  }, 
     
 
   },

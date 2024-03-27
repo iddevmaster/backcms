@@ -5,6 +5,10 @@ import { defineComponent } from 'vue';
 import CoursetEdit from '@/components/course/CoursetEdit.vue'
 import SelectListLesson from "@/components/course/SelectListLesson.vue";
 import ListLesson from "@/components/course/ListLesson.vue";
+import ConditionEditListLesson from "@/components/course/ConditionEditListLesson.vue";
+import ConditionCreateEdit from "@/components/course/ConditionCreateEdit.vue";
+import ConditionEditEdit from "@/components/course/ConditionEditEdit.vue";
+
 import { useAuthStore } from '@/store/auth'
 import { CourseStore } from '@/store/course'
 import { LessonStore } from '@/store/lesson'
@@ -60,6 +64,7 @@ storelesson.formselect.total_page = 0;
 
 await store.fetchCourseId(router.currentRoute.value.params.id);
 await store.fetchGetPdf(router.currentRoute.value.params.id);
+await store.FetchCondition(router.currentRoute.value.params.id);
 
 const grouplist = await storelesson.fetchGrouplist();
 
@@ -375,6 +380,20 @@ The Course Name field is required.</span>
         style="color: red" >ต้องระบุฟิลด์ชื่อหลักสูตร</span>
   </div>
     </div>
+
+    <div class="col-md-12 mt-3">
+      <label for="inputPassword4" class="form-label">  ຫົວຂໍ້ </label><span class="text-xs text-red-500" style="color:red">  </span>
+      <input type="text" class="form-control" id="inputPassword4"  placeholder="ຊື່ຫຼັກສູດ" v-model="store.formDataEditCourse.course_remark_a"  
+      maxlength="200" 
+      />
+    </div>
+
+    <div class="col-md-12 mt-3">
+      <label for="inputPassword4" class="form-label">  ເງືອນໄຂສອບເສັງທິດສະດ </label>
+      <input type="text" class="form-control" id="inputPassword4"  placeholder="ເງືອນໄຂສອບເສັງທິດສະດ" v-model="store.formDataEditCourse.course_remark_b" 
+         maxlength="200"   
+      />
+    </div>
     <div class="col-12">
       <label for="inputAddress" class="form-label">  {{ $t("menu_couse_f_title_detail") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" :class="{
@@ -403,6 +422,9 @@ The Course Name field is required.</span>
   </div>
     </div>
 
+
+    
+
     <div class="form-group mb-4 mt-3">
       <label for="exampleFormControlFile1">  {{ $t("menu_couse_f_title_picture") }}</label>
       <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChangeBack" ref="fileupload" />
@@ -423,6 +445,8 @@ The Course Name field is required.</span>
       <span v-if="v$.course_cover.$error" class="text-xs text-red-500"
         style="color: red" >อัพโหลดรูปภาพ</span>
   </div>
+
+  
 
     <div class="border p-2 mt-3">
       <p>  {{ $t("menu_couse_f_title_display_picture") }}:</p>
@@ -540,7 +564,15 @@ The Course Name field is required.</span>
                     </div>
 
                 </div>
-
+                <div class="row layout-top-spacing">
+                         <div class="row">
+              <div class="col-xl-12">
+                <div class="widget-content widget-content-area br-8 p-4">
+                  <ConditionEditListLesson></ConditionEditListLesson>
+                </div>
+              </div>
+            </div>
+          </div>
                 <div class="row layout-top-spacing">
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
 
@@ -562,13 +594,35 @@ The Course Name field is required.</span>
 
 
             </div>
-
+       
         </div>
+        <ConditionCreateEdit></ConditionCreateEdit>
+        <ConditionEditEdit></ConditionEditEdit>
     </div>
 </template>
 
 <style>
 #exampleFormControlFilePdf{
   opacity:0    
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 </style>

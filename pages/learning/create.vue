@@ -95,12 +95,9 @@ const grouplist = await storelesson.fetchGrouplist();
 
  onMounted(async()  => {
       // Fetch items when the component is mounted
-      
+    
       const lessonlist = await storelesson.fetchLessonlist();
    //  await storelesson.paginatedItemsCourse();
-
- 
-
     store.isLoading = false;
 
     })
@@ -427,6 +424,21 @@ The Course Name field is required.</span>
   
 
     </div>
+
+    <div class="col-md-12 mt-3">
+      <label for="inputPassword4" class="form-label">  ຫົວຂໍ້ </label><span class="text-xs text-red-500" style="color:red">  </span>
+      <input type="text" class="form-control" id="inputPassword4"  placeholder="ຊື່ຫຼັກສູດ" v-model="store.formDataCourse.course_remark_a"  
+      maxlength="200" 
+      />
+    </div>
+
+    <div class="col-md-12 mt-3">
+      <label for="inputPassword4" class="form-label">  ເງືອນໄຂສອບເສັງທິດສະດ </label>
+      <input type="text" class="form-control" id="inputPassword4"  placeholder="ເງືອນໄຂສອບເສັງທິດສະດ" v-model="store.formDataCourse.course_remark_b" 
+         maxlength="200"   
+      />
+    </div>
+
     <div class="col-12 mt-3">
       <label for="inputAddress" class="form-label">{{ $t("menu_couse_f_title_detail") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <textarea
