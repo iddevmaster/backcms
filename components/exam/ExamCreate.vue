@@ -14,7 +14,7 @@
 
             <div v-if="locale == 'la'">
               <span v-if="v$.em_code.$error" class="text-xs text-red-500" style="color: red">
-                ຕ້ອງລະບຸລະຫັດຫຼັກສູດ.</span>
+              ລະຫັດ ຕ້ອງມີຢ່າງໜ້ອຍ 1 ຕົວອັກສອນ</span>
             </div>
 
             <div v-if="locale == 'en'">
@@ -36,7 +36,7 @@
 
             <div v-if="locale == 'la'">
               <span v-if="v$.em_name.$error" class="text-xs text-red-500" style="color: red">
-                ຕ້ອງມີຊ່ອງໃສ່ຊື່ສອບເສັງ.</span>
+                ຊື່ເສັງ ຕ້ອງມີຢ່າງໜ້ອຍ 1 ຕົວອັກສອນ.</span>
             </div>
 
             <div v-if="locale == 'en'">
@@ -81,8 +81,8 @@
 
 
 
-            <input type="number" class="form-control" id="recipient-name" v-model="store.formexam.em_random_amount" @input="onInputamount"
-              min="1">
+            <input type="text" class="form-control" id="recipient-name" v-model="store.formexam.em_random_amount" @input="onInputamount"
+             minlength="1" maxlength="3">
           </div>
 
           <div class="mb-3">
@@ -90,8 +90,8 @@
               class="text-xs text-red-500" style="color:red" v-if="v$.em_measure.$error">{{
                 v$.em_measure.$errors[0].$message
               }}</span>
-            <input type="number" class="form-control" id="em_measure-name" v-model="store.formexam.em_measure"  pattern="[0-9]" @input="onInput"
-              min="1">
+            <input type="text" class="form-control" id="em_measure-name" v-model="store.formexam.em_measure"  pattern="[0-9]" @input="onInputmeasure"
+               minlength="1" maxlength="3">
           </div>
 
           <div class="mb-3">
@@ -225,13 +225,13 @@ const rules = computed(() => {
       minLength: minLength(1),
     },
     em_random_amount: {
-      required: helpers.withMessage('Exam Amount field is required', required),
+      required: helpers.withMessage('ສອບເສັງແບບສຸ່ມ ຕ້ອງມີຢ່າງໜ້ອຍ 1 ຕົວອັກສອນ', required),
       minLength: minLength(1),
     },
     
     em_time: {
       pattern: /^(2[0-3]|[0-1]?[\d]):[0-5][\d]:[0-5][\d]$/,
-      required: helpers.withMessage('em_time', required),
+      required: helpers.withMessage('ໃສ່ເວລາທີ່ຖືກຕ້ອງ', required),
     },
     em_cover: {
       required: helpers.withMessage(
@@ -241,7 +241,7 @@ const rules = computed(() => {
       minLength: minLength(1),
     },
     em_measure: {
-      required: helpers.withMessage('Exam Score field is required', required),
+      required: helpers.withMessage('ຄະແນນທີ່ຄາດໄວ້ ຕ້ອງມີຢ່າງໜ້ອຍ 1 ຕົວອັກສອນ', required),
       minLength: minLength(1),
     },
 
@@ -334,14 +334,28 @@ const onInput = async (event) => {
 
 
 const onInputamount = async (event) => {
-  if(event.data == '-'){
-    store.formexam.em_random_amount = 50
-  }
-  else if(event.data == '+'){
-    store.formexam.em_random_amount = 50
-  }
-  
- 
+ if (event.data === ' ') {
+        store.formexam.em_random_amount = store.formexam.em_random_amount.substring(0, store.formexam.em_random_amount.length - 1);
+        return;
+      }
+      if (store.formexam.em_random_amount.charAt(0) == '0') {
+        store.formexam.em_random_amount = "";
+        return;
+      } 
+  store.formexam.em_random_amount = event.target.value.replace(/\D/g, "");
+}
+
+
+const onInputmeasure = async (event) => {
+ if (event.data === ' ') {
+        store.formexam.em_measure = store.formexam.em_measure.substring(0, store.formexam.em_measure.length - 1);
+        return;
+      }
+      if (store.formexam.em_measure.charAt(0) == '0') {
+        store.formexam.em_measure = "";
+        return;
+      } 
+  store.formexam.em_measure = event.target.value.replace(/\D/g, "");
 }
 
 const onPressEnter = async (e) => {
@@ -360,6 +374,7 @@ const formatTime = async () => {
   }
 
 };
+
 
 
 </script>

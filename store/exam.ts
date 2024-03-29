@@ -30,8 +30,8 @@ export const ExamStore = defineStore('exam', {
       em_name: "",
       em_cover: "",
       em_description: "",
-      em_random_amount: 50,
-      em_measure:47,
+      em_random_amount: "50",
+      em_measure:"47",
       dlt_code:"A",
       em_time: ref({
         hours: '00',

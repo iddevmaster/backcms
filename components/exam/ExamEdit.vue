@@ -14,7 +14,7 @@
             <label for="recipient-name" class="col-form-label">{{ $t("menu_exam_all_code") }}:</label>
             <div v-if="locale == 'la'">
               <span v-if="v$.em_code.$error" class="text-xs text-red-500" style="color: red">
-                ຕ້ອງລະບຸລະຫັດຫຼັກສູດ.</span>
+                ລະຫັດ ຕ້ອງມີຢ່າງໜ້ອຍ 1 ຕົວອັກສອນ.</span>
             </div>
 
             <div v-if="locale == 'en'">
@@ -36,7 +36,7 @@
 
             <div v-if="locale == 'la'">
               <span v-if="v$.em_name.$error" class="text-xs text-red-500" style="color: red">
-                ຕ້ອງມີຊ່ອງໃສ່ຊື່ສອບເສັງ.</span>
+                ຊື່ເສັງ ຕ້ອງມີຢ່າງໜ້ອຍ 1 ຕົວອັກສອນ.</span>
             </div>
 
             <div v-if="locale == 'en'">
@@ -79,8 +79,8 @@
               class="text-xs text-red-500" style="color:red" v-if="v$.em_random_amount.$error">{{
                 v$.em_random_amount.$errors[0].$message
               }}</span>
-            <input type="number" class="form-control" id="recipient-name" v-model="store.formexamedit.em_random_amount" @input="onInputamount"
-              min="50">
+            <input type="text" class="form-control" id="recipient-name" v-model="store.formexamedit.em_random_amount" @input="onInputamount"
+              minlength="1" maxlength="3">
           </div>
 
 
@@ -89,8 +89,8 @@
               class="text-xs text-red-500" style="color:red" v-if="v$.em_measure.$error">{{
                 v$.em_measure.$errors[0].$message
               }}</span>
-            <input type="number" class="form-control" id="recipient-name" v-model="store.formexamedit.em_measure" @input="onInput"
-              min="1">
+            <input type="text" class="form-control" id="recipient-name" v-model="store.formexamedit.em_measure" @input="onInputmeasure"
+              minlength="1" maxlength="3">
           </div>
 
           <div class="mb-3">
@@ -220,7 +220,7 @@ const closeModal = async () => {
 
 const rules = computed(() => {
   return {
-    em_code: {
+ em_code: {
       required: helpers.withMessage('Exam code field is required', required),
       minLength: minLength(1),
     },
@@ -233,22 +233,23 @@ const rules = computed(() => {
       minLength: minLength(1),
     },
     em_random_amount: {
-      required: helpers.withMessage('Exam Amount field is required', required),
+      required: helpers.withMessage('ສອບເສັງແບບສຸ່ມ ຕ້ອງມີຢ່າງໜ້ອຍ 1 ຕົວອັກສອນ', required),
       minLength: minLength(1),
     },
-    em_measure: {
-      required: helpers.withMessage('Exam Amount field is required', required),
-      minLength: minLength(1),
-    },
+    
     em_time: {
       pattern: /^(2[0-3]|[0-1]?[\d]):[0-5][\d]:[0-5][\d]$/,
-      required: helpers.withMessage('em_time', required),
+      required: helpers.withMessage('ໃສ່ເວລາທີ່ຖືກຕ້ອງ', required),
     },
     em_cover: {
       required: helpers.withMessage(
         "The  Image  field is required",
         required
       ),
+      minLength: minLength(1),
+    },
+    em_measure: {
+      required: helpers.withMessage('ຄະແນນທີ່ຄາດໄວ້ ຕ້ອງມີຢ່າງໜ້ອຍ 1 ຕົວອັກສອນ', required),
       minLength: minLength(1),
     },
 
@@ -271,29 +272,32 @@ const Updatedata = async () => {
 };
 
 
-const onInput = async (event) => {
-  if(event.data == '-'){
-    store.formexamedit.em_measure = 1
-  }
-  else if(event.data == '+'){
-    store.formexamedit.em_measure = 45
-  }
-  else if(event.data == '.'){
-    store.formexamedit.em_measure = 45
-  }
-}
+
+
+
 const onInputamount = async (event) => {
-  
-  if(event.data == '-'){
-    store.formexamedit.em_random_amount = 50
-  }
-  else if(event.data == '+'){
-    store.formexamedit.em_random_amount = 50
-  }
-  else if(event.data == '.'){
-    console.log(event);
-    store.formexamedit.em_random_amount = 0
-  }
+ if (event.data === ' ') {
+        store.formexamedit.em_random_amount = store.formexamedit.em_random_amount.substring(0, store.formexamedit.em_random_amount.length - 1);
+        return;
+      }
+      if (store.formexamedit.em_random_amount.charAt(0) == '0') {
+        store.formexamedit.em_random_amount = "";
+        return;
+      } 
+  store.formexamedit.em_random_amount = event.target.value.replace(/\D/g, "");
+}
+
+
+const onInputmeasure = async (event) => {
+ if (event.data === ' ') {
+        store.formexamedit.em_measure = store.formexamedit.em_measure.substring(0, store.formexamedit.em_measure.length - 1);
+        return;
+      }
+      if (store.formexamedit.em_measure.charAt(0) == '0') {
+        store.formexamedit.em_measure = "";
+        return;
+      } 
+  store.formexamedit.em_measure = event.target.value.replace(/\D/g, "");
 }
 
 
