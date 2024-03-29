@@ -83,7 +83,7 @@
             <div class="">
            
               <i class="bi bi-bar-chart menu-icon"></i>
-              <span>{{ $t("menu_dashboard") }}</span>
+              <span>Dashboard</span>
          
             </div>
             <!-- <div>
