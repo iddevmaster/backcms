@@ -312,7 +312,7 @@ this.total_page = response.data.total_page
     },
     async fetchUser() {
       try {
-        const data = await ApiService.post('/user/list?', this.formuser).then(response => {
+        const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
           const user = [];
           for (var i = 0; i < response.data.data.length; i++) {
             const lt = { id: response.data.data[i].user_id, text: response.data.data[i].user_firstname + '-' + response.data.data[i].user_lastname }
