@@ -34,7 +34,7 @@
   <div class="table-responsive">
     <table class="table table-bordered">
         <thead>
-            <tr>
+            <tr class="cours_move">
        
                 <th scope="col" @click="sortList('em_code')">{{ $t("menu_exam_all_code") }} &#8597;</th>
                 <th class="text-center" scope="col">{{ $t("menu_exam_all_pic") }}</th>
@@ -44,7 +44,7 @@
                 <th class="text-center" scope="col" @click="sortList('em_random_amount')">{{ $t("menu_exam_all_total_random") }}</th>
                  <th class="text-center" scope="col" @click="sortList('total_question')">{{ $t("menu_exam_all_total_exam") }} &#8597;</th>
                  <th class="text-center" scope="col" @click="sortList('total_question')">{{ $t("menu_exam_all_total_pass") }} &#8597;</th>
-                 <th class="text-center" scope="col">{{ $t("menu_exam_all_create") }}</th>
+                 <th class="text-center" scope="col"  @click="sortList('crt_date')">{{ $t("menu_exam_all_create") }} &#8597;</th>
                 <th class="text-center" scope="col">{{ $t("menu_exam_all_total_action") }}</th>
             </tr>
         </thead>
@@ -263,5 +263,11 @@ width: 100%;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   position: relative;
 }
+
+.cours_move{
+
+cursor: pointer;
+}
+
 
 </style>

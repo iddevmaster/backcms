@@ -31,17 +31,17 @@
   <div class="table-responsive">
     <table id="example" class="table table-bordered" style="width: 100%">
       <thead>
-        <tr>
+        <tr class="cours_move">
           <th>
             #
             <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
           </th>
-          <th>{{ $t("table_course_code") }}</th>
+          <th @click="sortList('course_id')">{{ $t("table_course_code") }} &#8597;</th>
           <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
-          <th>{{ $t("table_course_name") }}</th>
-          <th>{{ $t("table_course_user_create") }}</th>
-          <th>{{ $t("table_course_lesson") }}</th>
+          <th @click="sortList('course_name')">{{ $t("table_course_name") }} &#8597;</th>
+          <th @click="sortList('user_create')">{{ $t("table_course_user_create") }} &#8597;</th>
+          <th>{{ $t("table_course_lesson") }} </th>
        <th>{{ $t("table_course_pic") }}</th>
           <th class="no-content">{{ $t("menu_user_c_action") }}</th>
         </tr>
@@ -71,22 +71,7 @@
           </td>
           <td>     <div class="action-btns">
 
-            <!-- <NuxtLink >
-                  <a
-                    href="javascript:void(0);"
-                    class="action-btn btn-edit bs-tooltip me-2"
-                    @click="lesson(item.course_id)"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    aria-label="Edit"
-                    data-bs-original-title="Edit"
-                  >
-      
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z"/>
-                    </svg>
-                  </a>
-                </NuxtLink> -->
+       
                 <NuxtLink :to="'/learning/' + item.course_id">
                   <a
                     href="javascript:void(0);"
@@ -150,93 +135,7 @@
       </tbody>
     </table>
   </div>
-  <!-- <div class="row">
-    <div
-      class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 mb-4"
-      v-for="item in store.courselist"
-      :key="item.course_id"
-    >
-      <div class="gridarea__img">
-        <a class="card style-2 mb-md-0 mb-4">
-          <img
-            @click="lesson(item.course_id)"
-            :src="image(item.course_cover)"
-            class="card-img-top"
-            alt="..."
-          />
-          <div class="card-body px-0 pb-0">
-            <h5 class="card-title mb-3">{{ item.course_name }}</h5>
-            <div class="media mt-4 mb-0 pt-1">
-              <div class="media-body">
-                <h4 class="media-heading mb-1">{{ item.user_create }}</h4>
-                <p class="media-text">{{ coverttime(item.crt_date) }}</p>
-              </div>
-              <div class="action-btns">
-                <NuxtLink :to="'/learning/' + item.course_id">
-                  <a
-                    href="javascript:void(0);"
-                    class="action-btn btn-edit bs-tooltip me-2"
-                    @click="edit(item)"
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    aria-label="Edit"
-                    data-bs-original-title="Edit"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="feather feather-edit-2"
-                    >
-                      <path
-                        d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"
-                      ></path>
-                    </svg>
-                  </a>
-                </NuxtLink>
-                <a
-                  href="javascript:void(0);"
-                  class="action-btn btn-delete bs-tooltip"
-                  @click="del(item)"
-                  data-toggle="tooltip"
-                  data-placement="top"
-                  aria-label="Delete"
-                  data-bs-original-title="Delete"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="feather feather-trash-2"
-                  >
-                    <polyline points="3 6 5 6 21 6"></polyline>
-                    <path
-                      d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                    ></path>
-                    <line x1="10" y1="11" x2="10" y2="17"></line>
-                    <line x1="14" y1="11" x2="14" y2="17"></line>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div> -->
-
+ 
 
       <div>
       <div class="dt--pagination" v-if="store.total_page > 1">
@@ -341,7 +240,7 @@ const setCurrentPageclick = async (page) => {
 };
 
 const sortList = async (sortBy) => {
-  //await sortLists (sortBy)
+ await store.sortLists (sortBy)
 };
 
 function coverttime(date) {
@@ -430,4 +329,12 @@ await store.fetchCourslist();
   height: 200px;
   width: 100%;
 }
+.cours_move{
+
+cursor: pointer;
+}
+
+
+
+
 </style>

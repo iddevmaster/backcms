@@ -28,7 +28,7 @@
 
     <div class="col-sm-5">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_name") }}</label> <span class="text-xs text-red-500" style="color:red"> * </span>
-      <input type="text" class="form-control" id="inputEmail3" maxlength="20"
+      <input type="text" class="form-control" id="inputEmail3" maxlength="20" @input="filterInputFirst"
         v-model="store.formDataEdit.user_firstname" :class="{
           'border-red-500 focus:border-red-500': v$.user_firstname.$error,
           'border-[#42d392] ': !v$.user_firstname.$invalid,
@@ -42,7 +42,7 @@
 
     <div class="col-sm-5">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_lname") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
-      <input type="text" class="form-control" id="inputEmail3" maxlength="20"
+      <input type="text" class="form-control" id="inputEmail3" maxlength="20"  @input="filterInputLast"
       
         v-model="store.formDataEdit.user_lastname" :class="{
           'border-red-500 focus:border-red-500': v$.user_lastname.$error,
@@ -59,7 +59,7 @@
 
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_username") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
-      <input type="text" class="form-control" id="inputPassword3"  maxlength="20"
+      <input type="text" class="form-control" id="inputPassword3"  maxlength="20" @input="filterInputUser"
         v-model="store.formDataEdit.user_name" :class="{
           'border-red-500 focus:border-red-500': v$.user_name.$error,
           'border-[#42d392] ': !v$.user_name.$invalid,
@@ -81,7 +81,7 @@
      
       </span>
       <input type="text" class="form-control" id="654134535" 
-        v-model="store.formDataEdit.user_password" maxlength="20">
+        v-model="store.formDataEdit.user_password" minlength="6">
     </div>
   </div>
   <div class="row mb-4">
@@ -92,11 +92,11 @@
     </div>
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_tel") }}</label> <span class="text-xs text-red-500" style="color:red"> * </span>
-      <input type="text" class="form-control" id="inputPassword3"  maxlength="20"
+      <input type="text" class="form-control" id="inputPassword3"  maxlength="10"
         v-model="store.formDataEdit.user_phone" :class="{
           'border-red-500 focus:border-red-500': v$.user_phone.$error,
           'border-[#42d392] ': !v$.user_phone.$invalid, 
-        }" @change="v$.user_phone.$touch" autocomplete="off" @input="onInput" placeholder="85620xxxxxxxx">
+        }" @change="v$.user_phone.$touch" autocomplete="off" @input="filterInput" placeholder="20xxxxxxxx">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.user_phone.$error">{{
         v$.user_phone.$errors[0].$message
       }}</span>
@@ -156,22 +156,22 @@ const { Update } = usersStore(); // use authenticateUser action from  auth store
 const rules = computed(() => {
   return {
     user_name: {
-      required: helpers.withMessage('ຕ້ອງໃສ່ຊ່ອງໃສ່ຊື່ຜູ້ໃຊ້', required),
+      required: helpers.withMessage('Username ຕ້ອງມີຢ່າງໜ້ອຍ 1 ຕົວອັກສອນ', required),
       minLength: minLength(1),
     },
 
     user_firstname: {
-      required: helpers.withMessage('ຕ້ອງມີຊ່ອງໃສ່ຊື່ທໍາອິດ', required),
+      required: helpers.withMessage('ຊື່ ຕ້ອງມີຢ່າງໜ້ອຍ 1 ຕົວອັກສອນ', required),
       minLength: minLength(1),
     },
     user_lastname: {
-      required: helpers.withMessage('ຕ້ອງມີຊ່ອງໃສ່ນາມສະກຸນ', required),
+      required: helpers.withMessage('ນາມສະກຸນ ຕ້ອງມີຢ່າງໜ້ອຍ 1 ຕົວອັກສອນ', required),
       minLength: minLength(1),
     },
 
     user_phone: {
-      required: helpers.withMessage('ຊ່ອງຂໍ້ມູນໂທລະສັບແມ່ນຕ້ອງການ', required),
-      minLength: minLength(1),
+      required: helpers.withMessage('ເບີໂທ ຕ້ອງມີຢ່າງໜ້ອຍ 10 ຕົວອັກສອນ', required),
+      minLength: minLength(10),
     },
     user_prefrix: {
       required: helpers.withMessage('ຊ່ອງຂໍ້ມູນແມ່ນຕ້ອງການ', required),
@@ -205,6 +205,56 @@ const backToUser = async () => {
 const onInput = async (event) => {
     store.formDataEdit.user_phone = event.target.value.replace(/\D/g, '');
 }
+
+const filterInput = async (event) => {
+  // stores.form.user_phone = event.target.value.replace(/\D/g, "");
+  const key = event.data;
+      if (event.data === ' ') {
+        store.formDataEdit.user_phone = store.formDataEdit.user_phone.substring(0, store.formDataEdit.user_phone.length - 1);
+        return;
+      }
+      if (store.formDataEdit.user_phone.charAt(0) !== '2') {
+        store.formDataEdit.user_phone = "";
+        return;
+      } 
+      if  (store.formDataEdit.user_phone.charAt(1) !== '0') {
+       store.formDataEdit.user_phone = "2";
+        return;
+      } 
+  store.formDataEdit.user_phone = event.target.value.replace(/\D/g, "");
+};
+
+
+
+
+
+const filterInputUser = async (event) => {
+  const key = event.data;
+      if (event.data === ' ') {
+        store.formDataEdit.user_name = store.formDataEdit.user_name.substring(0, store.formDataEdit.user_name.length - 1);
+        return;
+      }
+      store.formDataEdit.user_name = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
+const filterInputFirst = async (event) => {
+  const key = event.data;
+      if (event.data === ' ') {
+        store.formDataEdit.user_firstname = store.formDataEdit.user_firstname.substring(0, store.formDataEdit.user_firstname.length - 1);
+        return;
+      }
+      store.formDataEdit.user_firstname = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
+const filterInputLast = async (event) => {
+  const key = event.data;
+      if (event.data === ' ') {
+        store.formDataEdit.user_lastname = store.formDataEdit.user_lastname.substring(0, store.formDataEdit.user_lastname.length - 1);
+        return;
+      }
+      store.formDataEdit.user_lastname = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
 
 
 </script>

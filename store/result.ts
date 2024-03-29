@@ -288,7 +288,7 @@ this.total_page = response.data.total_page
       try {
         const data = await ApiService.get('/main_result/list/option/?dlt_code='+this.dlt_code+'&mr_learn_type='+ this.ap_learn_type +'&present_day='+this.date_event+'').then(response => {
           this.result = response.data;
-          console.log(this.result);
+         
         });
         return data;
       } catch (error) {

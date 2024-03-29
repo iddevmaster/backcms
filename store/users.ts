@@ -85,7 +85,7 @@ export const usersStore = defineStore('users', {
       user_firstname: null,
       user_lastname: null,
       user_email: null,
-      user_phone: null,
+      user_phone: "",
       user_type: null,
       active:null
     },
@@ -338,7 +338,7 @@ user_address:this.formDetailEdit.user_address,
 location_id:this.formDetailEdit.location.id,
 country_id:this.formDetailEdit.country.country_id,
 user_id:this.formDetailEdit.user_id,user_village:this.formDetailEdit.user_village};
-console.log(a);
+
 
       try {
         const updatedetails = await ApiService.post('/user/detail/create', a).then(response => {
@@ -361,6 +361,7 @@ console.log(a);
     },
 
     sortLists(sortBy) {
+    
       if (this.sortedbyASC) {
         this.posts.data.sort((x, y) => (x[sortBy] > y[sortBy] ? -1 : 1));
         this.sortedbyASC = false;

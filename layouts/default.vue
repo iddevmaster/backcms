@@ -3,9 +3,7 @@
 import Head from '@/components/layout/Head.vue';
 import Sidebar from '@/components/layout/Sidebar.vue';
 import { defineComponent } from 'vue';
-definePageMeta({
-  middleware: 'auth' // this should match the name of the file inside the middleware directory 
-})
+
 import { useAuthStore } from '@/store/auth';
 
 

@@ -165,7 +165,7 @@ export const newCivilStore = defineStore('newscivil', {
 
             return response;
           } else {
-            console.log('error');
+           
             return response;
           }
 
@@ -202,7 +202,7 @@ export const newCivilStore = defineStore('newscivil', {
 
     async DelImage(id) {
       ApiService.delete('/news/image/delete/' + id).then(response => {
-        console.log('response', response);
+        
       });
     },
 
@@ -256,7 +256,6 @@ export const newCivilStore = defineStore('newscivil', {
             body: this.formNewsImage,
           });
 
-          console.log(data);
 
         }
 
@@ -457,10 +456,10 @@ export const newCivilStore = defineStore('newscivil', {
  
     async InsertImageNews(obj1) {
       setTimeout(function () {
-        console.log(obj1);
+        
         const SaveDataImage = ApiService.post('/news/image/create', obj1).then(response => {
           if (response.status == 200) {
-            console.log(response.data);
+           
           }
         });
 

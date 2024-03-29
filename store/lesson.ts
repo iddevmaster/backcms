@@ -231,7 +231,7 @@ return false;
 
    //   this.formcreatelessonedit.cg_id = this.myselect_group.cg_id;
    //   console.log(this.formcreatelessonedit);
-   console.log(this.formcreatelessonedit);
+  
     
       try {
         const data = await ApiService.put('/course/lesson/update/'+ this.cs_id, this.formcreatelessonedit).then(response => {
@@ -274,7 +274,7 @@ try {
       let formData = new FormData();
       formData.append('files', this.imagelist);
       if (this.imagelist) {
-        console.log('ມີีupload');
+   
         try {
           const data = await ApiService.upload('/media_file/upload/file', formData);
           //  this.path = data.data[0].path

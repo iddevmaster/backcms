@@ -28,11 +28,11 @@
     </div>
     <div class="col-sm-5">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_name") }}</label> <span class="text-xs text-red-500" style="color:red"> * </span>
-      <input type="text" class="form-control" id="inputEmail3"
+      <input type="text" class="form-control" id="inputEmail3" @input="filterInputFirst"
         v-model="store.formDataregister.user_firstname" :class="{
           'border-red-500 focus:border-red-500': v$.user_firstname.$error,
           'border-[#42d392] ': !v$.user_firstname.$invalid,
-        }" @change="v$.user_firstname.$touch" autocomplete="off"   placeholder="ຊື່​ແທ້" maxlength="20">
+        }" @change="v$.user_firstname.$touch" autocomplete="off"   placeholder="ຊື່​" maxlength="20">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.user_firstname.$error">{{
         v$.user_firstname.$errors[0].$message
       }}</span>
@@ -42,7 +42,7 @@
 
     <div class="col-sm-5">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_lname") }}</label> <span class="text-xs text-red-500" style="color:red"> * </span>
-      <input type="text" class="form-control" id="inputEmail3" maxlength="20"
+      <input type="text" class="form-control" id="inputEmail3" maxlength="20" @input="filterInputLast"
         v-model="store.formDataregister.user_lastname" :class="{
           'border-red-500 focus:border-red-500': v$.user_lastname.$error,
           'border-[#42d392] ': !v$.user_lastname.$invalid,
@@ -57,19 +57,19 @@
   <div class="row mb-4">
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">{{ $t("menu_user_c_username") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
-      <input type="text" class="form-control" id="inputPassword3" 
+      <label for="exampleFormControlInput1">Username</label><span class="text-xs text-red-500" style="color:red"> * </span>
+      <input type="text" class="form-control" id="inputPassword3"   @input="filterInputUser"
         v-model="store.formDataregister.user_name" :class="{
           'border-red-500 focus:border-red-500': v$.user_name.$error,
           'border-[#42d392] ': !v$.user_name.$invalid,
-        }" @change="v$.user_name.$touch" autocomplete="off" placeholder="ຜູ້ໃຊ້" maxlength="20">
+        }" @change="v$.user_name.$touch" autocomplete="off" placeholder="Username" maxlength="20">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.user_name.$error">{{
         v$.user_name.$errors[0].$message
       }}</span>
     </div>
 
     <div class="col-sm-6">
-      <label for="exampleFormControlInput1">{{ $t("menu_user_c_pass") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
+      <label for="exampleFormControlInput1">ລະຫັດຜ່ານ</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input type="text" class="form-control" id="inputPassword3"
       placeholder="ລະຫັດຜ່ານ" maxlength="20"
         v-model="store.formDataregister.user_password" :class="{
@@ -92,11 +92,12 @@
     </div>
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_tel") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
-      <input type="text" class="form-control" id="inputPassword3"  @input="onInput" maxlength="20"
+      <input type="text" class="form-control" id="inputPassword3"  @input="filterInput" maxlength="10" 
         v-model="store.formDataregister.user_phone" :class="{
           'border-red-500 focus:border-red-500': v$.user_phone.$error,
           'border-[#42d392] ': !v$.user_phone.$invalid, 
-        }" @change="v$.user_phone.$touch" autocomplete="off" placeholder="85620xxxxxxxx">
+        }" @change="v$.user_phone.$touch" autocomplete="off" placeholder="20XXXXXXXX"
+        >
       <span class="text-xs text-red-500" style="color:red" v-if="v$.user_phone.$error">{{
         v$.user_phone.$errors[0].$message 
       }}</span>
@@ -170,25 +171,25 @@ await store.Country();
 const rules = computed(() => {
   return {
     user_name: {
-      required: helpers.withMessage('ຕ້ອງໃສ່ຊ່ອງໃສ່ຊື່ຜູ້ໃຊ້', required),
+      required: helpers.withMessage('Username ຕ້ອງມີຢ່າງໜ້ອຍ 1 ຕົວອັກສອນ', required),
       minLength: minLength(1),
     },
     user_password: {
-      required: helpers.withMessage('ປ່ອງລະຫັດຜ່ານແມ່ນຕ້ອງການ', required),
-      minLength: minLength(1),
+      required: helpers.withMessage('Password ຕ້ອງມີຢ່າງໜ້ອຍ 1 ຕົວອັກສອນ', required),
+      minLength: minLength(6),
     },
     user_firstname: {
-      required: helpers.withMessage('ຕ້ອງມີຊ່ອງໃສ່ຊື່ທໍາອິດ', required),
+      required: helpers.withMessage('ຊື່ ຕ້ອງມີຢ່າງໜ້ອຍ 1 ຕົວອັກສອນ', required),
       minLength: minLength(1),
     },
     user_lastname: {
-      required: helpers.withMessage('ຕ້ອງມີຊ່ອງໃສ່ນາມສະກຸນ', required),
+      required: helpers.withMessage('ນາມສະກຸນ ຕ້ອງມີຢ່າງໜ້ອຍ 1 ຕົວອັກສອນ', required),
       minLength: minLength(1),
     },
 
     user_phone: {
-      required: helpers.withMessage('ຊ່ອງຂໍ້ມູນໂທລະສັບແມ່ນຕ້ອງການ', required),
-      minLength: minLength(1),
+      required: helpers.withMessage('ເບີໂທ ຕ້ອງມີຢ່າງໜ້ອຍ 10 ຕົວອັກສອນ', required),
+      minLength: minLength(10),
     },
     user_prefrix: {
       required: helpers.withMessage('ຊ່ອງຂໍ້ມູນແມ່ນຕ້ອງການ', required),
@@ -247,6 +248,53 @@ const input = document.querySelector('input[type="file"]');
 const onInput = async (event) => {
     store.formDataregister.user_phone = event.target.value.replace(/\D/g, '');
 }
+
+
+const filterInput = async (event) => {
+
+  const key = event.data;
+      if (event.data === ' ') {
+        store.formDataregister.user_phone = store.formDataregister.user_phone.substring(0, store.formDataregister.user_phone.length - 1);
+        return;
+      }
+      if (store.formDataregister.user_phone.charAt(0) !== '2') {
+        store.formDataregister.user_phone = "";
+        return;
+      } 
+      if  (store.formDataregister.user_phone.charAt(1) !== '0') {
+       store.formDataregister.user_phone = "2";
+        return;
+      } 
+  store.formDataregister.user_phone = event.target.value.replace(/\D/g, "");
+};
+
+const filterInputUser = async (event) => {
+  const key = event.data;
+      if (event.data === ' ') {
+        store.formDataregister.user_name = store.formDataregister.user_name.substring(0, store.formDataregister.user_name.length - 1);
+        return;
+      }
+      store.formDataregister.user_name = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
+const filterInputFirst = async (event) => {
+  const key = event.data;
+      if (event.data === ' ') {
+        store.formDataregister.user_firstname = store.formDataregister.user_firstname.substring(0, store.formDataregister.user_firstname.length - 1);
+        return;
+      }
+      store.formDataregister.user_firstname = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
+const filterInputLast = async (event) => {
+  const key = event.data;
+      if (event.data === ' ') {
+        store.formDataregister.user_lastname = store.formDataregister.user_lastname.substring(0, store.formDataregister.user_lastname.length - 1);
+        return;
+      }
+      store.formDataregister.user_lastname = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
 
 
 </script>

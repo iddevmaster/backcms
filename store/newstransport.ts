@@ -255,7 +255,7 @@ this.formsearchnews.search = ''
             body: this.formNewsImage,
           });
 
-          console.log(data);
+      
 
         }
 
@@ -340,7 +340,7 @@ this.formsearchnews.search = ''
           const formData = new FormData();
           for (const i of Object.keys(counterStorage.formi)) {
             formData.append('files', counterStorage.formi[i])
-            console.log("File has content", counterStorage.formi[i]);
+           
           }
 
           axios.post('https://oasapi.iddriver.com/media_file/upload/file',
@@ -351,7 +351,7 @@ this.formsearchnews.search = ''
             }
           }
           ).then(function (response) {
-            console.log(response.data);
+           
             const TransportStorage = newTransportStore();
             TransportStorage.SaveData(response.data);
             //  TransportStorage.SaveImageData(x);
@@ -470,8 +470,7 @@ this.formsearchnews.search = ''
 
 
         ////////////////////////////////// Inser อันไหม//////////////////////////////
-        console.log(mergedArray.length);
-
+     
 
         if (mergedArray) {
           for (var i = 0; i < mergedArray.length; i++) {
@@ -556,10 +555,10 @@ this.formsearchnews.search = ''
 
           const Alert = AlertStore();
           Alert.AlertSuccess();
-          console.log('ok');
+         
           ////////////// delete new Image เดิม
           const Upload = UploadStore();
-          console.log('data ลบ', Upload.data_list_image_same);
+        
 
           for (var j = 0; j < Upload.data_list_image_same.length; j++) {
 
@@ -580,7 +579,7 @@ this.formsearchnews.search = ''
 
           /////////////
         } else {
-          console.log('error');
+     
         }
 
 
@@ -607,7 +606,7 @@ this.formsearchnews.search = ''
       ////////////////ลบ อันเดิมก่อนน/////////////////////////
 
       const UploadImage = UploadStore();
-      console.log(UploadImage.data_list_image_same)
+     
       if (UploadImage.data_list_image_same) {
         for (var i = 0; i < UploadImage.data_list_image_same.length; i++) {
           const item_image = UploadImage.data_list_image_same[i].ni_id;
@@ -692,12 +691,12 @@ this.formsearchnews.search = ''
 
 
         for (var i = 0; i < counterStorage.preview_list.length; i++) {
-          console.log(counterStorage.preview_list[i]);
+          
           //Do something
         }
       })
         .catch(function () {
-          console.log('FAILURE!!');
+        
         });
 
     },

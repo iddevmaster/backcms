@@ -46,16 +46,16 @@
   <div class="table-responsive">
     <table id="example" class="table table-bordered" style="width:100%">
       <thead>
-        <tr>
-          <th>
-            {{ $t("menu_user_index") }}
+        <tr class="cours_move">
+          <th  @click="sortList('user_id')">
+            {{ $t("menu_user_index") }}   &#8597;
             <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
           </th>
-          <th >{{ $t("menu_user_name") }}</th>
+          <th  @click="sortList('user_firstname')">{{ $t("menu_user_name") }} &#8597;</th>
           <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
-          <th >{{ $t("menu_user_type") }}</th>
-          <th >{{ $t("menu_user_tel") }}</th>
+          <th  @click="sortList('user_type')">{{ $t("menu_user_type") }} &#8597;</th>
+          <th @click="sortList('user_phone')">{{ $t("menu_user_tel") }} &#8597;</th>
           <th>{{ $t("menu_user_dlt") }}</th>
           <th>{{ $t("menu_user_time") }}</th>
           <th class="no-content">{{ $t("menu_user_c_action") }}</th>
@@ -344,8 +344,15 @@ const validatePNumberUp = async () => {
 }
 
 
-
 </script>
 <style>.dt--pagination {
   float: right;
-}</style>
+}
+
+.cours_move{
+
+cursor: pointer;
+}
+
+
+</style>

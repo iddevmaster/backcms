@@ -14,6 +14,7 @@ export const CourseStore = defineStore('course', {
     AlertA:false,
     AlertCondition:false,
     condition_id:null,
+    sortedbyASC: true,
     fileInputRef: ref(null),
     image: null,
     isLoading:true,
@@ -261,7 +262,7 @@ Storage.item = checkpag.data.data
       const Storage = LessonStore();
 
    Storage.selected = Storage.selected.slice(0, 2);
-      console.log(Storage.selected);
+      
     },
 
     async SaveLessoncluster() {
@@ -442,7 +443,7 @@ return true;
           const daa = {cd_name:this.pdf[i].originalname,cd_path:this.pdf[i].path,course_id:this.course_id}
           this.filepdf.push(daa);
           const savepdf = await ApiService.post('/course/document/create', daa)
-          console.log(savepdf);
+       
             }
       }
 
@@ -498,7 +499,7 @@ return true;
               for(let i = 0; i < data.data.data.length; i++){
                 this.delless.push(data.data.data[i]);
               }
-              console.log('>1',this.delless);
+            
           }
           ///////////////del ต่อ///////////////////////
           for (var i = 0; i < this.delless.length; i++) {
@@ -642,6 +643,18 @@ return false;
     });
   
   }, 
+
+
+  sortLists(sortBy) {
+    
+    if (this.sortedbyASC) {
+      this.courselist.sort((x, y) => (x[sortBy] > y[sortBy] ? -1 : 1));
+      this.sortedbyASC = false;
+    } else {
+      this.courselist.sort((x, y) => (x[sortBy] < y[sortBy] ? -1 : 1));
+      this.sortedbyASC = true;
+    }
+  },
     
 
   },

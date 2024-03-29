@@ -125,7 +125,7 @@ export const useAuthStore = defineStore('auth', {
 
         return true;
       } catch (error) {
-        console.log('getProfile');
+  
     //    abortNavigation();
     
       return false;
