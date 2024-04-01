@@ -111,7 +111,6 @@ export const ExamquestionStore = defineStore('examquestion', {
           const examdata = ApiService.post('/exam/main/list', this.formsearchexam).then(exam => {  /////////////ดึง หลักสูตร
             this.examlist = exam.data.data
             this.exam = this.examlist.filter(item => item.em_id == this.em_id);
-            console.log(this.formsearchexam);
             this.formExamq.em_id = this.exam[0].em_id
           });
 

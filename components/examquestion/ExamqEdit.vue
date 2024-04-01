@@ -92,8 +92,11 @@
             </td>
             <td class="rate">
               <input type="file" id="input" @change="handleFiles($event, index)">
-              <div class="video-container">
+              <div class="video-container" v-if="item.ec_image">
                 <img :src="image(item.ec_image)" class="img-fluid" width="40" height="40" />
+              </div>
+                  <div class="video-container" v-else>
+                   <img src="../../assets/images/no_photo.jpg" class="img-fluid" width="40" height="40" >
               </div>
             </td>
           </tr>
@@ -226,11 +229,24 @@ const onFileChange = async (event) => {
 
 const handleFiles = async (event,x) => {
 
+
+
+const file = event.target.files[0];
+   const idxDot = file.name.lastIndexOf(".") + 1;
+  const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+const extFile = file.name.substr(idxDot, file.name.length).toLowerCase();
+if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
   let formData = new FormData();
   formData.append('files', event.target.files[0]);
  const image = await uploadfileexam(formData);
 const index = store.choicelist;
   index[x].ec_image = image.data[0].path;
+} else {
+          
+  
+
+ }
+
 }
 
 

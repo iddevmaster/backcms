@@ -27,7 +27,7 @@
                 style="color: red">ต้องระบุฟิลด์รหัสหลักสูตร</span>
             </div>
 
-            <input type="text" class="form-control" id="recipient-name" v-model="store.formexam.em_code">
+            <input type="text" class="form-control" id="recipient-name" v-model="store.formexam.em_code" @input="filterInputCode">
           </div>
 
           <div class="mb-3">
@@ -47,7 +47,7 @@
             <div v-if="locale == 'th'">
               <span v-if="v$.em_name.$error" class="text-xs text-red-500" style="color: red">ต้องระบุฟิลด์ชื่อ</span>
             </div>
-            <input type="text" class="form-control" id="recipient-name" v-model="store.formexam.em_name">
+            <input type="text" class="form-control" id="recipient-name" v-model="store.formexam.em_name" @input="filterInputName">
           </div>
 
           <div class="mb-3">
@@ -68,7 +68,7 @@
                 style="color: red">ต้องระบุฟิลด์รายละเอียด</span>
             </div>
 
-            <input type="text" class="form-control" id="recipient-name" v-model="store.formexam.em_description">
+            <input type="text" class="form-control" id="recipient-name" v-model="store.formexam.em_description" @input="filterInputDes">
           </div>
 
           <div class="mb-3">
@@ -357,6 +357,22 @@ const onInputmeasure = async (event) => {
       } 
   store.formexam.em_measure = event.target.value.replace(/\D/g, "");
 }
+
+const filterInputCode = async (event) => {
+ 
+      store.formexam.em_code = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
+const filterInputName = async (event) => {
+ 
+      store.formexam.em_name = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+const filterInputDes = async (event) => {
+ 
+      store.formexam.em_description = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
+
 
 const onPressEnter = async (e) => {
 console.log(e);

@@ -28,7 +28,7 @@
             </div>
 
 
-            <input type="text" class="form-control" id="recipient-name" v-model="store.formexamedit.em_code">
+            <input type="text" class="form-control" id="recipient-name" v-model="store.formexamedit.em_code" @input="filterInputCode">
           </div>
 
           <div class="mb-3">
@@ -48,7 +48,7 @@
               <span v-if="v$.em_name.$error" class="text-xs text-red-500" style="color: red">ต้องระบุฟิลด์ชื่อ</span>
             </div>
 
-            <input type="text" class="form-control" id="recipient-name" v-model="store.formexamedit.em_name">
+            <input type="text" class="form-control" id="recipient-name" v-model="store.formexamedit.em_name" @input="filterInputName">
           </div>
 
           <div class="mb-3">
@@ -70,7 +70,7 @@
                 style="color: red">ต้องระบุฟิลด์รายละเอียด</span>
             </div>
 
-            <input type="text" class="form-control" id="recipient-name" v-model="store.formexamedit.em_description">
+            <input type="text" class="form-control" id="recipient-name" v-model="store.formexamedit.em_description" @input="filterInputDes">
           </div>
 
 
@@ -334,6 +334,21 @@ const removeImage = async () => {
   input.value = '';
 }
 
+
+
+const filterInputCode = async (event) => {
+ 
+      store.formexamedit.em_code = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
+const filterInputName = async (event) => {
+ 
+      store.formexamedit.em_name = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+const filterInputDes = async (event) => {
+ 
+      store.formexamedit.em_description = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
 
 
 const formatTime = async () => {

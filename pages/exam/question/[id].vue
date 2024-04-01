@@ -197,9 +197,13 @@ function image(i) {
                                     <tr v-for="(item, index) in store.choicelist" :key="index">
                                       <td>{{ index + 1 }}</td>
                                       <td>{{ item.ec_name }}</td>
-                                      <td class="text-end">
+                                      <td class="text-end" v-if="item.ec_image">
                                    
                                         <img :src="image(item.ec_image)" class="img-fluid" width="80" height="80" />
+                                      </td>
+                                         <td class="text-end" v-else>
+              
+                                          <img src="../../../assets/images/no_photo.jpg" class="img-fluid" width="80" height="80" >
                                       </td>
                                     </tr>
                                   </tbody>
