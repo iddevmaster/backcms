@@ -178,14 +178,17 @@ export const ReportStore = defineStore('report', {
       this.formreport.start_date = startdate
       this.formreport.end_date = enddate
       this.formreport.search = this.search
-      const data = await ApiService.post('/report/register', this.formreport).then(response => {
-        this.reportregister = response.data.data;
-        this.current_page = response.data.current_page;
-        this.limit_page = response.data.limit_page;
-        this.total = response.data.total;
-        this.total_filter = response.data.total_filter;
-        this.total_page = response.data.total_page;
-      });
+
+    
+
+      // const data = await ApiService.post('/report/register', this.formreport).then(response => {
+      //   this.reportregister = response.data.data;
+      //   this.current_page = response.data.current_page;
+      //   this.limit_page = response.data.limit_page;
+      //   this.total = response.data.total;
+      //   this.total_filter = response.data.total_filter;
+      //   this.total_page = response.data.total_page;
+      // });
     },
 
     async FitterAppoint(){

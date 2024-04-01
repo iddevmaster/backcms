@@ -70,12 +70,12 @@
 
     <div class="border p-2 mt-3">
       <p>{{ $t("menu_new_display_img") }}:</p>
-      <template v-if="storeupload.preview_list.length">
+      <template v-if="store.formDataNewsEdit.images_list.length">
         <div class="row">
-          <div id="image-container" class="col-md-3 col-sm-4 col-6" v-for="item, index in storeupload.preview_list" :key="index">
+          <div id="image-container" class="col-md-3 col-sm-4 col-6" v-for="item, index in store.formDataNewsEdit.images_list" :key="index">
             <div class="image-wrapper">
-              <img :src="CoverImage(item)" class="img-fluid" />
-              <button @click="removeImage(index)" class="delete-button"><i class="bi bi-x-lg"></i></button>
+              <img :src="CoverImage(item.ni_path_file)" class="img-fluid" />
+              <button @click="removeImage(item.ni_id)" class="delete-button"><i class="bi bi-x-lg"></i></button>
             </div>
           </div>
         </div>
@@ -100,6 +100,7 @@ import { AlertStore } from '@/store/alert'; // import the auth store we just cre
 import { ref } from "vue";
 import { useToast } from 'vue-toastification'
 import { useI18n } from "vue-i18n";
+import ApiService from '../../services/api.service';
 const { locale, setLocale } = useI18n();
 
 const toast = useToast()
@@ -143,21 +144,23 @@ const backToNews = async () => {
 
 ////////////////ใส่ Url///////////
 
-const CoverImage = (img) => {
-  let result = img.slice(0, 6);
-  if (result === "static") {
-    return 'https://oasapi.iddriver.com/media_file/file/?f=' + img;
-  } else {
-    return img;
-  }
+
+
+function CoverImage(i) {
+  let im =  ApiService.image(i);
+  return im;
 }
 
 const v$ = useVuelidate(rules, getFormEditNews);
 
 const removeImage = async (remove) => {
-  storeupload.preview_list.splice(remove, 1)
-  storeupload.formi.splice(remove, 1)
-  storeupload.data_list_image.splice(remove, 1)
+//  store.formDataNewsEdit.images_list.splice(remove, 1)
+  const objWithIdIndex = store.formDataNewsEdit.images_list.findIndex((obj) => obj.ni_id === remove);
+  store.formDataNewsEdit.images_list.splice(objWithIdIndex, 1);
+  await store.deleteimageNew(remove);
+
+//  storeupload.formi.splice(remove, 1)
+//  storeupload.data_list_image.splice(remove, 1)
 
 }
 
@@ -167,7 +170,7 @@ const edit = async () => {
 
   v$.value.$validate();
 
-  if(storeupload.preview_list.length == 0){
+  if(store.formDataNewsEdit.images_list.length == 0){
     store.imageReq = true;
     return false;
   }
@@ -176,74 +179,110 @@ const edit = async () => {
   timeout: 2000,
     });
     try {
-      await UpdateFormNews();
+    
+   await store.UpdateFormNewsEdit();
+
+      
       await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
 
-      setTimeout(() => {
-      router.push('/news/transport');
-    }, 2000);
+    //   setTimeout(() => {
+    //   router.push('/news/transport');
+    // }, 2000);
     } catch (e) {
       await toast.error('ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ')
     }
   }
 }
 
+
 const onFileChange = async (event) => {
-
-
-
   var input = event.target;
   var count = input.files.length;
   var index = 0;
-  const maxSize = 1024 * 1024; // 2 MB in bytes
-
-  for (let x = 0; x < count; x++) {
-    if (event.target.files[x].size > maxSize) {    ///////////////////////File size ดักก่อน ///////////
-      store.getFile = true;
-      await toast.error('Can not Upload File')
-      const input = document.querySelector('input[type="file"]');
-      input.value = '';
-      return false;
-    }
-    store.getFile = false; ///////////////////////ถ้า ผ่านข้างบนให้ปิด alert ///////////
-  }
-
-  for (let i = 0; i < count; i++)     ///////////////////////เก็บ data ไปไว้ใน state ///////////
-  {
-    storeupload.formi.push(event.target.files[i]);
-  }
-
-  const formData = new FormData();
-  for (const i of Object.keys(storeupload.formi)) {
-    setTimeout(function (scope) {
-      formData.append('files', storeupload.formi[i])
-    }, 500);
-  }
+  for (let i = 0; i < count; i++) {
+   const file = event.target.files[i];
+   const idxDot = file.name.lastIndexOf(".") + 1;
+  const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+const extFile = file.name.substr(idxDot, file.name.length).toLowerCase();
+if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
+  store.selectedFiles.push(event.target.files[i])
+} else {
+          
 
 
-  // await Saveimages();
-
-  
-  if (input.files) {
-    console.log(input.files)
-    while (count--) {
-      var reader = new FileReader();
-      console.log(reader)
-      
-      reader.onload = (e) => {
-        
-        storeupload.preview_list.push(e.target.result); ///////////////////////จับ Data ใส่ array ///////////
-        let a = { ni_name_file: e.target.result, ni_path_file: e.target.result }
-        storeupload.data_list_image.push(a);
-       
-      }
-      storeupload.image_list.push(input.files[index]); ///////////////////////จับ Data ใส่ array ///////////
-      reader.readAsDataURL(input.files[index]); ///////////////////////อ่านไฟล์ภาพ ///////////
-      index++;
-    }
-  }
-  
 }
+
+
+
+  }
+
+
+
+  await store.UploadImageNewEdit();
+  await store.SaveEditNewImage();
+  await store.fetchNewsIdUpload()
+  v$.value.$reset();
+input.value = '';
+
+}
+
+
+
+
+// const onFileChange = async (event) => {
+
+//   var input = event.target;
+//   var count = input.files.length;
+//   var index = 0;
+//   const maxSize = 1024 * 1024; // 2 MB in bytes
+
+//   for (let x = 0; x < count; x++) {
+//     if (event.target.files[x].size > maxSize) {    ///////////////////////File size ดักก่อน ///////////
+//       store.getFile = true;
+//       await toast.error('Can not Upload File')
+//       const input = document.querySelector('input[type="file"]');
+//       input.value = '';
+//       return false;
+//     }
+//     store.getFile = false; ///////////////////////ถ้า ผ่านข้างบนให้ปิด alert ///////////
+//   }
+
+//   for (let i = 0; i < count; i++)     ///////////////////////เก็บ data ไปไว้ใน state ///////////
+//   {
+//     storeupload.formi.push(event.target.files[i]);
+//   }
+
+//   const formData = new FormData();
+//   for (const i of Object.keys(storeupload.formi)) {
+//     setTimeout(function (scope) {
+//       formData.append('files', storeupload.formi[i])
+//     }, 500);
+//   }
+
+
+//   // await Saveimages();
+
+  
+//   if (input.files) {
+//     console.log(input.files)
+//     while (count--) {
+//       var reader = new FileReader();
+//       console.log(reader)
+      
+//       reader.onload = (e) => {
+        
+//         storeupload.preview_list.push(e.target.result); ///////////////////////จับ Data ใส่ array ///////////
+//         let a = { ni_name_file: e.target.result, ni_path_file: e.target.result }
+//         storeupload.data_list_image.push(a);
+       
+//       }
+//       storeupload.image_list.push(input.files[index]); ///////////////////////จับ Data ใส่ array ///////////
+//       reader.readAsDataURL(input.files[index]); ///////////////////////อ่านไฟล์ภาพ ///////////
+//       index++;
+//     }
+//   }
+  
+// }
 
 
 

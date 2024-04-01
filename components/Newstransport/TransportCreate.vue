@@ -58,7 +58,6 @@
           style="color: red">ต้องระบุฟิลด์รายละเอียด</span>
       </div>
 
-
     </div>
     <div class="form-group mb-4 mt-3">
       <label for="exampleFormControlFile1">{{ $t("menu_new_image") }}</label> <span class="text-xs text-red-500"
@@ -126,6 +125,17 @@ const { Saveimages } = UploadStore(); // use authenticateUser action from  auth 
 store.ClearData();
 storealert.Clear()
 
+
+
+
+
+    store.formDataNews.news_cover = "";
+    store.formDataNews.news_title = "";
+    store.formDataNews.news_description = "";
+    store.selectedFiles = [];
+    storeupload.preview_list = [];
+ 
+
 const rules = computed(() => {
   return {
     news_title: {
@@ -157,24 +167,32 @@ const save = async () => {
   if (!v$.value.$error) {
 
     try {
-      await SaveSubmitForm(); //save form  ส่งไป Store User
+    
+
+      await store.UploadImageNew()
+      await store.SaveSubmitFormNew()
+      await store.SaveNewImage()
+
+      v$.value.$reset();
+
+const input = document.querySelector('input[type="file"]');
+input.value = '';
+      
       await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
-      await router.push('/news/transport');
+    //  await store.fetchNewTransport();
+       await router.push('/news/transport');
     } catch (e) {
       await toast.error('ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ')
     }
 
-    v$.value.$reset();
 
-    const input = document.querySelector('input[type="file"]');
-    input.value = '';
 
   }
 }
 
 const removeImage = async (remove) => {
   storeupload.preview_list.splice(remove, 1)
-  storeupload.formi.splice(remove, 1)
+  store.selectedFiles.splice(remove, 1)
 
 }
 const onFileChange = async (event) => {
@@ -182,32 +200,83 @@ const onFileChange = async (event) => {
   var count = input.files.length;
   var index = 0;
   for (let i = 0; i < count; i++) {
-    storeupload.formi.push(event.target.files[i]);
-  }
+   const file = event.target.files[i];
+   const idxDot = file.name.lastIndexOf(".") + 1;
+  const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+const extFile = file.name.substr(idxDot, file.name.length).toLowerCase();
+if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
+            //TO DO
 
+            store.selectedFiles.push(event.target.files[i])
 
-  //const formData = new FormData();
-  const formData = new FormData();
-  for (const i of Object.keys(storeupload.formi)) {
-    const aaaa = storeupload.formi[i];
-    formData.append('files', storeupload.formi[i])
-  }
-
-
-  // Saveimages(formData);
-
-  if (input.files) {
-    while (count--) {
-      var reader = new FileReader();
-      reader.onload = (e) => {
-        storeupload.preview_list.push(e.target.result);
+          var reader = new FileReader();
+      reader.onload = (event) => {
+        storeupload.preview_list.push(event.target.result);
       }
-      storeupload.image_list.push(input.files[index]);
-      reader.readAsDataURL(input.files[index]);
-      index++;
+ //   store.imagelist = input.files[0];
+    reader.readAsDataURL(file);
+} else {
+          
+  
+
+ }
+
+
+  }
+
+}
+
+
+
+
+
+const onFileChangeBack = async (event) => {
+  var input = event.target;
+  const file = event.target.files[0];
+  const idxDot = file.name.lastIndexOf(".") + 1;
+  const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+const extFile = file.name.substr(idxDot, file.name.length).toLowerCase();
+
+if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
+            //TO DO
+            const reader = new FileReader();
+    reader.onload = () => {
+      //  this.imageUrl = reader.result;
+      store.formDataCourse.course_cover = reader.result;
+    };
+    store.imagelist = input.files[0];
+    reader.readAsDataURL(file);
+} else {
+          
+  const input = document.querySelector('input[type="file"]');
+  input.value = "";
+    Swal.fire({
+      text: 'Upload File Image PNG JPG!',
+      icon: 'error',
+    });
+ }
+
+
+
+
+
+ var input = event.target;
+  if(event.target.files.length > 0){
+    for (var i = 0; i < event.target.files.length; i++) {
+    
+    const file = event.target.files[i];
+      if (file && file.type.startsWith('application/pdf')) {
+        store.selectedFiles.push(event.target.files[i])
+      }else {
+        
+
+      }
     }
   }
-}
+
+};
+
+
 
 
 

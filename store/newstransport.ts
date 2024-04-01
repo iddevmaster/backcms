@@ -18,6 +18,9 @@ export const newTransportStore = defineStore('newstransport', {
     getFile: false,
     selected: [],
     samefile: [],
+    selectedFiles:[],
+    deleteFiles:[],
+    images_list:[],
     checkboxes: [], // Array to store checkbox values
     isAllSelected: false,
     count: 0,
@@ -136,6 +139,7 @@ this.formsearchnews.search = ''
       try {
         this.pending = true
         const response = await ApiService.post('/news/list?news_type=1', this.formsearchnews).then(response => {
+          console.log(response);
           if (response) {
             this.datanewstransport = response.data
             this.total_page = response.data.total_page
@@ -381,29 +385,109 @@ this.formsearchnews.search = ''
 
     },
 
+    async SaveSubmitFormNew() {
+
+      this.formDataNews.news_cover = this.imagesfilenew[0].path;
+
+      try {
+        const data = await ApiService.post('/news/create', this.formDataNews).then(response => {
+          this.formNewsImage.news_id = response.data.insertId;
+
+return true;
+        });
+        return data;
+      } catch (error) {
+
+        return false
+      }
+      
+
+    },
+
+
+    async SaveNewImage() {
+
+      for (var j = 0; j < this.imagesfilenew.length; j++) {
+const news = {ni_path_file:this.imagesfilenew[j].path,ni_name_file:this.imagesfilenew[j].originalname,news_id:this.formNewsImage.news_id}
+const data = await ApiService.post('/news/image/create',news)
+      }
+
+    },
+
+
+    async SaveEditNewImage() {
+      for (var j = 0; j < this.imagesfilenew.length; j++) {
+const news = {ni_path_file:this.imagesfilenew[j].path,ni_name_file:this.imagesfilenew[j].originalname,news_id:this.news_id}
+const data = await ApiService.post('/news/image/create',news)
+      }
+    },
+
+    async deleteimageNew(id) {
+      const del = await ApiService.delete('/news/image/delete/' + id);
+      console.log(del);
+    },
+
+    async UploadImageNew() { 
+      if(this.selectedFiles){
+        const formData = new FormData();
+        Array.from(this.selectedFiles).forEach(file => {
+          formData.append('files', file);
+        });
+        const imagefilenew = await ApiService.upload('/media_file/upload/file',formData);
+        this.imagesfilenew = imagefilenew.data;
+      
+        }
+    },
+
+
+    async UploadImageNewEdit() { 
+      this.imagesfilenew = [];
+      if(this.selectedFiles){
+        const formData = new FormData();
+        Array.from(this.selectedFiles).forEach(file => {
+          formData.append('files', file);
+        });
+        const imagefilenew = await ApiService.upload('/media_file/upload/file',formData);
+        this.imagesfilenew = imagefilenew.data;
+        }
+    },
+
     async fetchNewsId(id) {
 
       this.news_id = id;
-console.log(this.news_id);
       try {
         const dat = await ApiService.get('/news/get/' + id);
-
         this.formDataNewsEdit.news_cover = dat.data.news_cover
         this.formDataNewsEdit.news_title = dat.data.news_title
         this.formDataNewsEdit.news_description = dat.data.news_description
         this.formDataNewsEdit.news_type = dat.data.news_type
         this.formDataNewsEdit.user_id = user_id.value
         this.formDataNewsEdit.images_list = dat.data?.images_list
-
-
-        const ImageUpload = UploadStore();
-        ImageUpload.imagedisplay(this.formDataNewsEdit.images_list);
-
-
       } catch (error) {
 
-      } finally {
+      } 
+    },
 
+
+    async fetchNewsIdUpload() {
+
+      
+      try {
+        const dat = await ApiService.get('/news/get/' + this.news_id);
+        this.formDataNewsEdit.images_list = dat.data?.images_list
+      } catch (error) {
+
+      } 
+    },
+
+    async UpdateFormNewsEdit() {
+      try {
+        const data = await ApiService.put('/news/update/' + this.news_id, this.formDataNewsEdit).then(response => {
+          return true;
+        });
+        return data
+      } catch (error) {
+        return false;
       }
     },
 
@@ -413,8 +497,6 @@ console.log(this.news_id);
 
 
     async UpdateFormNews() {
-
-
       const counterStorage = UploadStore();
       counterStorage.formi
 
@@ -632,36 +714,6 @@ console.log(this.news_id);
 
 
 
-      //  const savedata = await ApiService.post('/news/image/create', this.formDataNews).then(response => {
-
-      // });
-
-
-      // try {
-      //   const { pending, error, data } = await useFetch('/news/update/' + this.news_id, {
-      //     method: 'PUT',
-      //     baseURL: useEnvStore().apidev,
-      //     headers: new Headers({
-      //       'Authorization': 'ZeBuphebrltl3uthIFraspubroST80Atr9tHuw5bODowi26p',
-      //       'Content-Type': 'application/json'
-      //     }),
-      //     body: this.formDataNewsEdit,
-      //   });
-      //   const TransportStorage = newTransportStore();
-
-
-      //   const Alert = AlertStore();
-      //   await Alert.AlertSuccess();
-
-
-      //   this.pending_form = true;
-      // } catch (error) {
-      //   const Alert = AlertStore();
-      //   Alert.AlertError();
-      // } finally {
-      //   this.pending = false;
-      // }
-
 
     },
     async UpdateFormNewsUpload() {
@@ -682,12 +734,8 @@ console.log(this.news_id);
         }
       }
       ).then(function (response) {
-
-
         const counterStorage = UploadStore();
         counterStorage.preview_list.length
-
-
         for (var i = 0; i < counterStorage.preview_list.length; i++) {
           
           //Do something
