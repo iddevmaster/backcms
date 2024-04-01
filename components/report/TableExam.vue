@@ -90,8 +90,11 @@
         <td>
           {{exa.identification_number}}
         </td>
-        <td >
-                                        <img :src="coverimage(exa.user_img)" class="img-fluid" width="120" height="120" />
+        <td  v-if="exa.user_img">
+                                        <img :src="coverimage(exa.user_img)" class="img-fluid" width="80" height="80" />
+                                      </td>
+        <td  v-else>
+                                        <img src="../../assets/images/no_photo.jpg" class="img-fluid" width="80" height="80" >
                                       </td>
       </tr>
       
