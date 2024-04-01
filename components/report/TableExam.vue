@@ -19,7 +19,10 @@
     <table id="example" class="table table-bordered" style="width:100%">
       <thead>
         <tr>
-
+ <th>
+        
+          #
+          </th>
 
           <th>
         
@@ -34,9 +37,9 @@
             <th>
               {{ $t("table_em_code") }}
           </th>
-            <th>
+            <!-- <th>
               {{ $t("table_em_name") }}
-          </th>
+          </th> -->
             <th>
               {{ $t("table_em_user_name") }}
           </th>
@@ -59,7 +62,10 @@
       </thead>
       <tbody>
  
-      <tr v-for="exa in store.reportexam" :key="exa.er_id">
+      <tr v-for="(exa ,index) in store.reportexam" :key="exa.er_id">
+      <td>
+            {{ (store.formreport.page * store.formreport.per_page) - (store.formreport.per_page -  index) +  1 }}
+        </td>
         <td>
           {{exa.er_score_total}}
         </td>
@@ -72,9 +78,9 @@
         <td>
           {{exa.em_code}}
         </td>
-        <td>
+        <!-- <td>
           {{exa.em_name}}
-        </td>
+        </td> -->
         <td>
           {{exa.user_firstname}} {{exa.user_lastname}} 
         </td>
@@ -84,7 +90,7 @@
         <td>
           {{exa.identification_number}}
         </td>
-        <td class="text-end">
+        <td >
                                         <img :src="coverimage(exa.user_img)" class="img-fluid" width="120" height="120" />
                                       </td>
       </tr>

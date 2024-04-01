@@ -25,7 +25,7 @@ export const ReportStore = defineStore('report', {
     minEndDate: '',
     formreport: {
       page: 1,
-      per_page: 50,
+      per_page: 10,
       search: "",
       start_date: "",
       end_date: "",
@@ -181,14 +181,14 @@ export const ReportStore = defineStore('report', {
 
     
 
-      // const data = await ApiService.post('/report/register', this.formreport).then(response => {
-      //   this.reportregister = response.data.data;
-      //   this.current_page = response.data.current_page;
-      //   this.limit_page = response.data.limit_page;
-      //   this.total = response.data.total;
-      //   this.total_filter = response.data.total_filter;
-      //   this.total_page = response.data.total_page;
-      // });
+      const data = await ApiService.post('/report/register', this.formreport).then(response => {
+        this.reportregister = response.data.data;
+        this.current_page = response.data.current_page;
+        this.limit_page = response.data.limit_page;
+        this.total = response.data.total;
+        this.total_filter = response.data.total_filter;
+        this.total_page = response.data.total_page;
+      });
     },
 
     async FitterAppoint(){
@@ -227,6 +227,7 @@ export const ReportStore = defineStore('report', {
       this.formreport.end_date = enddate.value
       this.formreport.dlt_code = this.dlt_code
       this.formreport.search = this.search
+
       const data = await ApiService.post('/report/exam', this.formreport).then(response => {
         
         this.reportexam = response.data.data

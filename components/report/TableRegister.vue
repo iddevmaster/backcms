@@ -9,8 +9,8 @@
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <select class="form-select form-select" aria-label="Default select example" @change="selectshowdata($event)">
+        <option value="10">10</option>
         <option value="20">20</option>
-        <option value="40">40</option>
         <option value="50">50</option>
       </select>
     </div>
@@ -29,9 +29,9 @@
         {{ $t("table_register_user_firstname") }} 
           </th>
             
-            <th>
+            <!-- <th>
         {{ $t("table_register_user_email") }}
-          </th>
+          </th> -->
             <th>
         {{ $t("table_register_user_phone") }}
           </th>
@@ -51,9 +51,9 @@
         {{ $t("table_register_identification_number") }}
           </th>
 
-          <th>
+          <!-- <th>
         {{ $t("table_ap_user_image") }}
-          </th>
+          </th> -->
             <!-- <th>
         user_img
           </th> -->
@@ -61,22 +61,23 @@
         </tr>
       </thead>
       <tbody>
-      <tr v-for="user in store.reportregister" :key="user.user_id">
+      <tr v-for="(user ,index) in store.reportregister" :key="user.user_id">
         <td>
-          {{user.user_id}}
+     
+          {{ (store.formreport.page * store.formreport.per_page) - (store.formreport.per_page -  index) +  1 }}
         </td>
          <!-- <td>
           {{user.user_name}}
         </td> -->
          <td>
-          {{user.user_firstname}}
+          {{user.user_firstname}}  {{user.user_lastname}}
         </td>
          <!-- <td>
           {{user.user_lastname}}
         </td> -->
-         <td>
+         <!-- <td>
           {{user.user_email}}
-        </td>
+        </td> -->
          <td>
           {{user.user_phone}}
         </td>
@@ -89,17 +90,20 @@
           <td>
           {{user.udp_date}}
         </td>
-         <td>
-          {{user.verify_account}}
-        </td>
+    
+          <td v-if="user.verify_account == 'system_active'"><button type="button" class="btn btn-success"> {{ $t("system_active") }}</button> </td>
+          <td v-else-if="user.verify_account == 'phone_active'"><button type="button" class="btn btn-primary"> {{ $t("phone_active") }}</button> </td>      
+           <td v-else-if="user.verify_account == 'system_unactive'"><button type="button" class="btn btn-danger"> {{ $t("phone_active") }}</button> </td>    
+            <td v-else-if="user.verify_account == 'phone_unactive'"><button type="button" class="btn btn-danger"> {{ $t("phone_active") }}</button> </td>    
+          <td v-else><button type="button" class="btn btn-danger"> {{ $t("unactive") }}</button> </td>
          <td>
           {{user.identification_number}}
         </td>
 
      
-        <td class="text-end">
+        <!-- <td class="text-end">
                                         <img :src="coverimage(user.user_img)" id="appUserImg" width="120" height="120" />
-                                      </td>
+                                      </td> -->
 
         
          <!-- <td>

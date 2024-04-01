@@ -53,11 +53,11 @@
   <div class="row mb-4">
     <div class="col-sm-12">
       <label for="exampleFormControlInput1">{{ $t("menu_user_village") }}</label>
-      <input type="text" class="form-control" id="add" placeholder="ທີ່ຢູ່ *"  v-model="store.formDetailEdit.user_village" maxlength="30"
+      <input type="text" class="form-control" id="add" placeholder="ທີ່ຢູ່ *"  v-model="store.formDetailEdit.user_village" maxlength="100"
       :class="{
           'border-red-500 focus:border-red-500': v$.user_village.$error,
           'border-[#42d392] ': !v$.user_village.$invalid,
-        }" @change="v$.user_village.$touch" autocomplete="off"
+        }" @change="v$.user_village.$touch" autocomplete="off" 
       >
       <span class="text-xs text-red-500" style="color:red" v-if="v$.user_village.$error">{{
         v$.user_village.$errors[0].$message
