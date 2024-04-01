@@ -16,7 +16,7 @@
         v-model="store.formDataNewsEdit.news_title" :class="{
           'border-red-500 focus:border-red-500': v$.news_title.$error,
           'border-[#42d392] ': !v$.news_title.$invalid,
-        }" @change="v$.news_title.$touch">
+        }" @change="v$.news_title.$touch" maxlength="100">
      <div v-if="locale == 'la'">
         <span v-if="v$.news_title.$error" class="text-xs text-red-500" style="color: red">
           ຕ້ອງໃສ່ຊ່ອງຫົວຂໍ້ຂ່າວ</span>

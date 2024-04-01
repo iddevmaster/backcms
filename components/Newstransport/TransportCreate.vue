@@ -17,7 +17,7 @@
         v-model="store.formDataNews.news_title" :class="{
           'border-red-500 focus:border-red-500': v$.news_title.$error,
           'border-[#42d392] ': !v$.news_title.$invalid,
-        }" @change="v$.news_title.$touch">
+        }" @change="v$.news_title.$touch" maxlength="100">
 
       <div v-if="locale == 'la'">
         <span v-if="v$.news_title.$error" class="text-xs text-red-500" style="color: red">
@@ -159,6 +159,7 @@ const save = async () => {
     try {
       await SaveSubmitForm(); //save form  ส่งไป Store User
       await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
+      await router.push('/news/transport');
     } catch (e) {
       await toast.error('ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ')
     }

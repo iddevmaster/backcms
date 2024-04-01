@@ -336,11 +336,9 @@ this.formsearchnews.search = ''
 
 
         try {
-
           const formData = new FormData();
           for (const i of Object.keys(counterStorage.formi)) {
             formData.append('files', counterStorage.formi[i])
-           
           }
 
           axios.post('https://oasapi.iddriver.com/media_file/upload/file',
@@ -386,7 +384,7 @@ this.formsearchnews.search = ''
     async fetchNewsId(id) {
 
       this.news_id = id;
-
+console.log(this.news_id);
       try {
         const dat = await ApiService.get('/news/get/' + id);
 
