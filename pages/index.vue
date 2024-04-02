@@ -353,7 +353,7 @@
                   </div>
 
 
-                  <div class="col-sm-12">
+                  <!-- <div class="col-sm-12">
                     <label for="exampleFormControlInput1">
 
                       <span v-if="locale == 'en'">{{ $t("fitter_province") }}</span>
@@ -375,7 +375,7 @@
                   <span v-if="locale == 'th'">{{ item.dlt_description }}</span>
                       </option>
                     </select>
-                  </div>
+                  </div> -->
                 </div>
 
                 <button
@@ -464,7 +464,7 @@
                   </div>
 
 
-                  <div class="col-sm-12">
+                  <!-- <div class="col-sm-12">
                     <label for="exampleFormControlInput1">
 
                       <span v-if="locale == 'en'">{{ $t("fitter_province") }}</span>
@@ -486,7 +486,7 @@
                   <span v-if="locale == 'th'">{{ item.dlt_description }}</span>
                       </option>
                     </select>
-                  </div>
+                  </div> -->
                 </div>
 
                 <button
