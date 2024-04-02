@@ -71,19 +71,45 @@
 
       <!-- <vue-date-picker  v-model="store.formedit.ap_date_start"   type="datetime"  ></vue-date-picker> -->
 
-      <VueDatePicker v-model="store.formedit.ap_date_start" :format="format_start" required></VueDatePicker>
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_date_start.$error">{{
-        v$.ap_date_start.$errors[0].$message
-      }}</span>
+      <VueDatePicker v-model="store.formedit.ap_date_start" :format="format_start"  :disabled-dates="isDateDisabled" required></VueDatePicker>
+      <div v-if="locale == 'la'">
+              <span v-if="v$.ap_date_start.$error" class="text-xs text-red-500" style="color: red">
+                ຊ່ອງເວລາເລີ່ມຕົ້ນແມ່ນຕ້ອງການ..</span>
+            </div>
+
+            <div v-if="locale == 'en'">
+              <span v-if="v$.ap_date_start.$error" class="text-xs text-red-500" style="color: red">
+                The Start time field is required</span>
+            </div>
+
+            <div v-if="locale == 'th'">
+              <span v-if="v$.ap_date_start.$error" class="text-xs text-red-500"
+                style="color: red">ต้องระบุช่องช่วงเวลาเริ่ม</span>
+            </div>
     </div>
 
+
+   
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_end") }}</label>
 
-      <VueDatePicker v-model="store.formedit.ap_date_end" :format="format_end" required></VueDatePicker>
-      <span class="text-xs text-red-500" style="color:red" v-if="v$.ap_date_end.$error">{{
-        v$.ap_date_end.$errors[0].$message
-      }}</span>
+      <VueDatePicker v-model="store.formedit.ap_date_end" :format="format_end" required   :disabled-dates="isDateDisabledEnd" ></VueDatePicker>
+
+      <div v-if="locale == 'la'">
+              <span v-if="v$.ap_date_end.$error" class="text-xs text-red-500" style="color: red">
+                ຕ້ອງລະບຸຊ່ອງຂໍ້ມູນໄລຍະເວລາໝົດ.</span>
+            </div>
+
+            <div v-if="locale == 'en'">
+              <span v-if="v$.ap_date_end.$error" class="text-xs text-red-500" style="color: red">
+                The End time field is required</span>
+            </div>
+
+            <div v-if="locale == 'th'">
+              <span v-if="v$.ap_date_end.$error" class="text-xs text-red-500"
+                style="color: red">ต้องระบุช่องช่วงเวลาหมด</span>
+            </div>
+
     </div>
   </div>
 
@@ -134,13 +160,20 @@ const { FormEdit } = storeToRefs(store);
 const date = ref(new Date());
 
 const update = async () => {
-  let data = await store.Update();
-  if (data == true) {
+
+
+  v$.value.$validate();
+  if (!v$.value.$error) {
+    let data = await store.Update();
+    if (data == true) {
     await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດ');
     await router.push('/appointment');
   } else {
     toast.error('ບັນທຶກຂໍ້ມູນລົ້ມເຫລວ')
   }
+  }
+
+
 }
 
 
@@ -155,10 +188,12 @@ const rules = computed(() => {
       minLength: minLength(1),
     },
     ap_date_start: {
-      required
+      required: helpers.withMessage('The Remark field is required', required),
+      minLength: minLength(1),
     },
     ap_date_end: {
-      required
+      required: helpers.withMessage('The Remark field is required', required),
+      minLength: minLength(1),
     },
 
 
@@ -235,6 +270,32 @@ const save = async () => {
   }
 
 }
+
+
+const isDateDisabled = (date) => {
+
+
+
+const currentDate = new Date();
+    const disableBeforeDate = new Date(); // Adjust the date as needed
+    store.formedit.ap_date_end = null
+    return date < currentDate || date < disableBeforeDate;
+// return date < store.disabledDates;
+  };
+
+const isDateDisabledEnd = (date) => {
+
+const currentDate = new Date();
+    const disableBeforeDate = new Date(store.formedit.ap_date_start); // Adjust the date as needed
+   // return date < currentDate || date < disableBeforeDate;
+//return false;
+
+if(!store.formedit.ap_date_start){
+return true;
+}
+return date < currentDate || date < disableBeforeDate;
+
+};    
 
 
 const onInput = async (event) => {

@@ -11,6 +11,7 @@ export const AppointStore = defineStore('appoint', {
     isOpen: false,
     isDelAP: false,
     isDelUser: false,
+    ChooseBefore: false,
     searchData: "",
     event: [],
     user: [],
@@ -34,6 +35,8 @@ export const AppointStore = defineStore('appoint', {
     current_page: null,
     total_filter: null,
     total: null,
+    disabledDates: new Date(), 
+    disabledDatesEnd: new Date(), 
     itemsPerPage: 3,
     del_ap: null,
     deluser_id: null,
@@ -347,12 +350,16 @@ export const AppointStore = defineStore('appoint', {
 
       try {
         const data = await ApiService.post('/appointment/create', savet).then(response => {
-
+if(!response){
+  return 204
+}else {
+  return 200
+}
 
         });
-        return true
+        return data
       } catch (error) {
-        return false;
+        return 502;
       }
 
 

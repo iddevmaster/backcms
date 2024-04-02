@@ -433,7 +433,10 @@ return true;
           formData.append('files', file);
         });
         const pdf = await ApiService.upload('/media_file/upload/file',formData);
-        this.pdf = pdf.data;
+        this.pdf = pdf.data
+        this.selectedFiles = [];
+        console.log(this.selectedFiles);
+
         }
     },
     async Savepdf() { 

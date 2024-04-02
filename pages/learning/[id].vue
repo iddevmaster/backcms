@@ -261,8 +261,11 @@ const onFileChangeBackPdf = async (event) => {
     }
 
 await store.UploadfileCoursePdfEdit();
+ input.value = "";
 await store.Savepdf();
 await store.fetchGetPdf(router.currentRoute.value.params.id);
+
+
   }
   
 
@@ -302,6 +305,7 @@ if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
 
 const remove = async (e,id) => {
  store.selectedEditFiles.splice(e, 1); // Remove the file at the specified index
+ store.selectedFiles.splice(e, 1); // Remove the file at the specified index
  store.deletepdf(id);
 };
 
@@ -453,7 +457,7 @@ The Course Name field is required.</span>
 
 
     
-
+{{ store.selectedFiles }}
     <div class="form-group mb-4 mt-3">
       <label for="exampleFormControlFile1">  {{ $t("menu_couse_f_title_picture") }}</label>
       <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="onFileChangeBack" ref="fileupload" />

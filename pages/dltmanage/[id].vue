@@ -273,6 +273,7 @@ const DelDlT = async () => {
                             :key="index"
                             v-bind:value="item.dlt_code"
                           >
+                          
                             <span v-if="locale == 'la'">{{
                               item.dlt_description_loas
                             }}</span>
@@ -476,7 +477,7 @@ const DelDlT = async () => {
                           <a
                             href="javascript:void(0);"
                             class="btn btn-primary btn-send _effect--ripple waves-effect waves-light"
-                            >{{ item.dlt_description }}</a
+                            >{{ item.dlt_description_loas }}</a
                           >
                         </div>
                       </div>

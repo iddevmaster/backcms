@@ -9,7 +9,7 @@
         class="form-control"
         required=""
         v-model="store.formsearchlesson.search"
-        @keyup="searchData"
+         maxlength="50"    @input="searchData"
       />
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
@@ -340,8 +340,13 @@ const selectshowdata = async (sel) => {
   await store.fetchLessonlist() 
 };
 
-const searchData = async () => {
-  await store.fetchLessonlist() 
+// const searchData = async () => {
+//   await store.fetchLessonlist() 
+// };
+
+const searchData = async (event) => {
+      store.formsearchlesson.search = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+    await store.fetchLessonlist() 
 };
 
 const openmodal = async () => {

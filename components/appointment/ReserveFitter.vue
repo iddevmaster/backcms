@@ -9,7 +9,7 @@
         class="form-control"
         required=""
         v-model="store.formuser.search"
-        @keyup="searchData"
+        @keyup="searchData" maxlength="20"
       />
     </div>
   </div>

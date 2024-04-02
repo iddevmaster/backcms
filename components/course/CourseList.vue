@@ -9,7 +9,8 @@
         class="form-control"
         required=""
         v-model="store.formsearchcourse.search"
-        @keyup="searchData"
+        @input="searchData"
+        maxlength="30"
       />
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto"></div>
@@ -226,8 +227,11 @@ const selchk = async (x) => {
 const selectAll = async () => {
   // await selectall();
 };
-const searchData = async () => {
-  await store.fetchCourslist();
+
+
+const searchData = async (event) => {
+      store.formsearchcourse.search = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+      await store.fetchCourslist();
 };
 
 function goToPage(page) {

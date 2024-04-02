@@ -3,7 +3,7 @@
   <div class="row layout-top-spacing">
     <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
       <input id="t-text" type="text" name="txt" placeholder="ຊອກຫາ" class="form-control" required=""
-      v-model="store.searchDa" @keyup="searchData" />
+      v-model="store.searchDa" @keyup="searchData"  maxlength="20"/>
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
       <select class="form-select form-select" aria-label="Default select example" @change="selecttype($event)">

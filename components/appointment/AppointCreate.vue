@@ -70,7 +70,7 @@
   <div class="row mb-4">
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_start") }}</label>
-            <VueDatePicker v-model="store.forminsert.ap_date_start"   :format="format_start"   required></VueDatePicker>
+            <VueDatePicker v-model="store.forminsert.ap_date_start"   :format="format_start"   :disabled-dates="isDateDisabled"    required></VueDatePicker>
   
 
 
@@ -93,7 +93,8 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_end") }}</label>
  
-          <VueDatePicker v-model="store.forminsert.ap_date_end" required  :format="format_end"></VueDatePicker>
+          <VueDatePicker v-model="store.forminsert.ap_date_end" required  :format="format_end"    :disabled-dates="isDateDisabledEnd" 
+   ></VueDatePicker>
      
 
 <div v-if="locale == 'la'">
@@ -163,7 +164,6 @@ const date = ref(new Date());
 
 
 
-
 // In case of a range picker, you'll receive [Date, Date]
 const format_start = (date) => {
 const isoFormatInUTC = date.toISOString();
@@ -200,6 +200,30 @@ const rules = computed(() => {
   };
 });
 
+const isDateDisabled = (date) => {
+
+
+
+  const currentDate = new Date();
+      const disableBeforeDate = new Date(); // Adjust the date as needed
+      store.forminsert.ap_date_end = null
+      return date < currentDate || date < disableBeforeDate;
+  // return date < store.disabledDates;
+    };
+
+const isDateDisabledEnd = (date) => {
+
+  const currentDate = new Date();
+      const disableBeforeDate = new Date(store.forminsert.ap_date_start); // Adjust the date as needed
+     // return date < currentDate || date < disableBeforeDate;
+//return false;
+
+if(!store.forminsert.ap_date_start){
+  return true;
+}
+return date < currentDate || date < disableBeforeDate;
+
+ };    
 
 
 const backToUser = async () => {
@@ -213,8 +237,7 @@ const save = async () => {
   v$.value.$validate();
     if (!v$.value.$error) {
        const data = await store.SaveFormAPP();
-     
-    if (data == true) {
+    if (data == 200) {
     await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
      await   store.ResetForm();
      await router.push('/appointment');
@@ -227,6 +250,14 @@ const save = async () => {
 
 }
 
+
+
+const disabledDates = (date) => {
+  const currentDate = new Date();
+      // Disable dates before the current date
+      return date < currentDate;
+
+}
 
 const onInput = async (event) => {
     store.forminsert.ap_quota = event.target.value.replace(/\D/g, '');
