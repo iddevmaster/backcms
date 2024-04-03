@@ -20,7 +20,7 @@
       <input type="text" class="form-control" id="inputEmail4" v-model="store.formExamq.eq_name" placeholder="ຄໍາຖາມ *" :class="{
         'border-red-500 focus:border-red-500': v$.eq_name.$error,
         'border-[#42d392] ': !v$.eq_name.$invalid, 
-      }" @change="v$.eq_name.$touch">
+      }" @change="v$.eq_name.$touch" maxlength="200" @input="filterInputT">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.eq_name.$error">{{
         v$.eq_name.$errors[0].$message
       }}</span>
@@ -91,8 +91,13 @@
             </td>
             <td class="rate">
               <input type="file" id="input" @change="handleFiles($event, index)">
-              <div class="video-container">
+      
+
+              <div class="video-container" v-if="item.ec_image">
                 <img :src="image(item.ec_image)" class="img-fluid" width="40" height="40" />
+              </div>
+                  <div class="video-container" v-else>
+                   <img src="../../assets/images/no_photo.jpg" class="img-fluid" width="40" height="40" >
               </div>
             </td>
           </tr>
@@ -231,6 +236,12 @@ const onFileChange = async (event) => {
     reader.readAsDataURL(input.files[0]);
   }
 }
+
+const filterInputT = async (event) => {
+  const key = event.data;
+      store.formExamq.eq_name = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
+
 
 const handleFiles = async (event, x) => {
   let formData = new FormData();

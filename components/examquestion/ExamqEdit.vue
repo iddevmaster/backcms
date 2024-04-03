@@ -19,8 +19,8 @@
       <label for="inputEmail4" class="form-label">{{ $t("menu_exam_proposition") }}</label>
       <input type="text" class="form-control" id="inputEmail4" v-model="store.formEditExamq.eq_name" :class="{
         'border-red-500 focus:border-red-500': v$.eq_name.$error,
-        'border-[#42d392] ': !v$.eq_name.$invalid,
-      }" @change="v$.eq_name.$touch">
+        'border-[#42d392] ': !v$.eq_name.$invalid, 
+      }" @change="v$.eq_name.$touch" @input="filterInputT">
       <span class="text-xs text-red-500" style="color:red" v-if="v$.eq_name.$error">{{
         v$.eq_name.$errors[0].$message
       }}</span>
@@ -170,6 +170,11 @@ const validatePNumber = async (evt) => {
 const backToquestion = async () => {
   router.go(-1);
 }  
+
+const filterInputT = async (event) => {
+  const key = event.data;
+      store.formEditExamq.eq_name = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+};
 
 const v$ = useVuelidate(rules, FormEditExamq);
 const save = async () => {
