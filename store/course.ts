@@ -548,7 +548,7 @@ return true;
       try {
 
         const delcs_id = await ApiService.delete('/course/lesson/delete/' + this.cs_id).then(response => {
-          console.log(response);
+       
 
           return true
         });
