@@ -179,15 +179,13 @@ const edit = async () => {
   timeout: 2000,
     });
     try {
-    
+   await store.fetchNewsIdUpload();
    await store.UpdateFormNewsEdit();
+   await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
 
-      
-      await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
-
-    //   setTimeout(() => {
-    //   router.push('/news/transport');
-    // }, 2000);
+      setTimeout(() => {
+      router.push('/news/transport');
+    }, 2000);
     } catch (e) {
       await toast.error('ບັນທຶກຂໍ້ມູນບໍ່ສຳເລັດ')
     }

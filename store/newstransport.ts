@@ -481,6 +481,8 @@ const data = await ApiService.post('/news/image/create',news)
     },
 
     async UpdateFormNewsEdit() {
+
+      this.formDataNewsEdit.news_cover = this.formDataNewsEdit.images_list[0].ni_path_file
       try {
         const data = await ApiService.put('/news/update/' + this.news_id, this.formDataNewsEdit).then(response => {
           return true;
