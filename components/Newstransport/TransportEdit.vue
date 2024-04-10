@@ -224,6 +224,8 @@ if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
   v$.value.$reset();
 input.value = '';
 
+store.selectedFiles = [];
+
 }
 
 
