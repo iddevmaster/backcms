@@ -64,8 +64,8 @@
 
 
     <div class="form-group mb-4">
-      <label for="formGroupExampleInput">youtube</label>
-      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="youtube *"
+      <label for="formGroupExampleInput">ວິດີໂອ</label>
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="ວິດີໂອ *"
         v-model="store.formDataNewsEdit.news_video" maxlength="100">
     </div>
     <div class="form-group mb-4 mt-3">
