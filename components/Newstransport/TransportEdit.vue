@@ -32,6 +32,8 @@
       </div>
 
     </div>
+
+   
     <div class="form-group mb-4">
       <label for="exampleFormControlTextarea1">{{ $t("menu_new_detail") }}</label>
       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" :class="{
@@ -58,6 +60,13 @@
         <span v-if="v$.news_description.$error" class="text-xs text-red-500"
           style="color: red">ต้องระบุฟิลด์รายละเอียด</span>
       </div>
+    </div>
+
+
+    <div class="form-group mb-4">
+      <label for="formGroupExampleInput">youtube</label>
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="youtube *"
+        v-model="store.formDataNewsEdit.news_video" maxlength="100">
     </div>
     <div class="form-group mb-4 mt-3">
       <label for="exampleFormControlFile1">{{ $t("menu_new_image") }}</label><span class="text-xs text-red-500" style="color:red" v-if="store.imageReq == true"> Image field is required</span>

@@ -59,6 +59,12 @@
       </div>
 
     </div>
+
+    <div class="form-group mb-4">
+      <label for="formGroupExampleInput">youtube</label>
+      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="ຫົວຂໍ້ຂ່າວ *"
+        v-model="store.formDataNews.news_video" maxlength="100">
+    </div>
     <div class="form-group mb-4 mt-3">
       <label for="exampleFormControlFile1">{{ $t("menu_new_image") }}</label> <span class="text-xs text-red-500"
         style="color:red" v-if="store.imageReq == true"> Invalid file selected</span> <span style="color: red;">{{

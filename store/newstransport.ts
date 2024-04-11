@@ -38,6 +38,7 @@ export const newTransportStore = defineStore('newstransport', {
       news_cover: "",
       news_title: "",
       news_description: "",
+      news_video:"",
       news_type: "1",
       images_list: [],
       user_id: user_id.value
@@ -48,6 +49,7 @@ export const newTransportStore = defineStore('newstransport', {
       news_description: "",
       news_type: "1",
       images_list: [],
+      news_video:"",
       user_id: user_id.value
     },
     formNewsImage: {
@@ -461,6 +463,7 @@ const data = await ApiService.post('/news/image/create',news)
         this.formDataNewsEdit.news_title = dat.data.news_title
         this.formDataNewsEdit.news_description = dat.data.news_description
         this.formDataNewsEdit.news_type = dat.data.news_type
+        this.formDataNewsEdit.news_video = dat.data.news_video
         this.formDataNewsEdit.user_id = user_id.value
         this.formDataNewsEdit.images_list = dat.data?.images_list
       } catch (error) {
