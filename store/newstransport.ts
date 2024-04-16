@@ -43,6 +43,7 @@ export const newTransportStore = defineStore('newstransport', {
       images_list: [],
       user_id: user_id.value
     },
+    imageconver:null,
     formDataNewsEdit: {
       news_cover: "",
       news_title: "",
@@ -389,8 +390,6 @@ this.formsearchnews.search = ''
 
     async SaveSubmitFormNew() {
 
-      this.formDataNews.news_cover = this.imagesfilenew[0].path;
-
       try {
         const data = await ApiService.post('/news/create', this.formDataNews).then(response => {
           this.formNewsImage.news_id = response.data.insertId;
@@ -441,6 +440,26 @@ const data = await ApiService.post('/news/image/create',news)
         }
     },
 
+    async UploadfileNewCover() {  
+      if(this.imageconver){
+        let formData = new FormData();
+     formData.append('files', this.imageconver);
+        const data = await ApiService.upload('/media_file/upload/file',formData);
+       this.formDataNews.news_cover = data.data[0].path
+        //   this.formDataEditCourse.course_cover = data.data[0].path
+      }
+    },
+
+    async UploadfileNewCoverEdit() {  
+      if(this.imageconver){
+        let formData = new FormData();
+     formData.append('files', this.imageconver);
+        const data = await ApiService.upload('/media_file/upload/file',formData);
+       this.formDataNewsEdit.news_cover = data.data[0].path
+        //   this.formDataEditCourse.course_cover = data.data[0].path
+      }
+    },
+
 
     async UploadImageNewEdit() { 
       this.imagesfilenew = [];
@@ -485,7 +504,7 @@ const data = await ApiService.post('/news/image/create',news)
 
     async UpdateFormNewsEdit() {
 
-      this.formDataNewsEdit.news_cover = this.formDataNewsEdit.images_list[0].ni_path_file
+     
       try {
         const data = await ApiService.put('/news/update/' + this.news_id, this.formDataNewsEdit).then(response => {
           return true;
@@ -715,9 +734,6 @@ const data = await ApiService.post('/news/image/create',news)
 
 
       const data = await ApiService.put('/news/update/' + this.news_id, this.formDataNewsEdit)
-
-
-
 
 
     },

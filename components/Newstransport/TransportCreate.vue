@@ -61,14 +61,58 @@
     </div>
 
     <div class="form-group mb-4">
-      <label for="formGroupExampleInput">ວິດີໂອ</label>
+      <label for="formGroupExampleInput">{{ $t("menu_new_link") }}</label>
       <input type="text" class="form-control" id="formGroupExampleInput" placeholder="ວິດີໂອ *"
         v-model="store.formDataNews.news_video" maxlength="100">
     </div>
-    <div class="form-group mb-4 mt-3">
-      <label for="exampleFormControlFile1">{{ $t("menu_new_image") }}</label> <span class="text-xs text-red-500"
+
+ <div v-if="locale == 'la'" >
+      <span v-if="v$.news_cover.$error" class="text-xs text-red-500"
+        style="color: red" >
+        ອັບໂຫຼດຮູບ.</span>
+  </div>
+
+  <div v-if="locale == 'en'" >
+      <span v-if="v$.news_cover.$error" class="text-xs text-red-500"
+        style="color: red" >
+        Upload photo.</span>
+  </div>
+
+  <div v-if="locale == 'th'" >
+      <span v-if="v$.news_cover.$error" class="text-xs text-red-500"
+        style="color: red" >อัพโหลดรูปภาพ</span>
+  </div>
+
+      <div class="form-group mb-4 mt-3">
+      <label for="exampleFormControlFile1">{{ $t("menu_new_cover") }}</label> 
+      <!-- <span class="text-xs text-red-500"
         style="color:red" v-if="store.imageReq == true"> Invalid file selected</span> <span style="color: red;">{{
-          $t("menu_page_new_tra_recomend_size") }}</span>
+          $t("menu_page_new_tra_recomend_size") }}</span> -->
+      <input type="file" class="form-control-file" id="exampleFormControlFileCorver"  @change="onFileChangeCorver"
+        ref="fileupload" accept="image/*">
+    </div>
+    <div class="border p-2 mt-3">
+      <p>{{ $t("menu_new_display_img") }}:</p>
+ 
+     <template v-if="store.formDataNews.news_cover">
+          <div class="row">
+            <div id="image-container" class="col-md-3 col-sm-4 col-6">
+              <div class="image-wrapper">
+                <img  :src="coverimage(store.formDataNews.news_cover)" class="img-fluid" />
+                <button @click="removeImageConver()" class="delete-button"><i class="bi bi-x-lg"></i></button>
+              </div>
+            </div>
+          </div>
+        </template>
+    </div>
+
+
+    
+    <div class="form-group mb-4 mt-3">
+      <label for="exampleFormControlFile1">{{ $t("menu_new_image") }}</label> 
+      <!-- <span class="text-xs text-red-500"
+        style="color:red" v-if="store.imageReq == true"> Invalid file selected</span> <span style="color: red;">{{
+          $t("menu_page_new_tra_recomend_size") }}</span> -->
       <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple @change="onFileChange"
         ref="fileupload" accept="image/*">
     </div>
@@ -109,8 +153,10 @@ import { required, email, sameAs, minLength, helpers } from '@vuelidate/validato
 import { UploadStore } from '@/store/upload'; // import the auth store we just created
 import { AlertStore } from '@/store/alert'; // import the auth store we just created
 import { ref } from "vue";
-import { useToast } from 'vue-toastification'
+import Swal from "sweetalert2";
 import { useI18n } from "vue-i18n";
+import { useToast } from "vue-toastification";
+import ApiService  from "../../services/api.service";
 const { locale, setLocale } = useI18n();
 
 
@@ -151,7 +197,15 @@ const rules = computed(() => {
     news_description: {
       required: helpers.withMessage('The News Description is required', required),
       minLength: minLength(6),
+    }, 
+    news_cover: {
+      required: helpers.withMessage(
+        "The  Image  field is required",
+        required
+      ),
+      minLength: minLength(1),
     },
+
 
   };
 });
@@ -164,11 +218,13 @@ const v$ = useVuelidate(rules, getFormNews);
 
 const save = async () => {
 
+ 
+
   v$.value.$validate();
-  if (storeupload.preview_list.length == 0) {/////////////////// req image  ใช้ rules ไม่ได้ 
-    store.imageReq = true;
-    return false;
-  }
+  // if (storeupload.preview_list.length == 0) {/////////////////// req image  ใช้ rules ไม่ได้ 
+  //   store.imageReq = true;
+  //   return false;
+  // }
 
   if (!v$.value.$error) {
 
@@ -176,8 +232,11 @@ const save = async () => {
     
 
       await store.UploadImageNew()
+      await store.UploadfileNewCover()
+    
       await store.SaveSubmitFormNew()
       await store.SaveNewImage()
+      
 
       v$.value.$reset();
 
@@ -201,7 +260,23 @@ const removeImage = async (remove) => {
   store.selectedFiles.splice(remove, 1)
 
 }
+
+const removeImageConver = async (remove) => {
+  store.formDataNews.news_cover = ""
+   store.imageconver = null
+    const input = document.querySelector('input[type="file"]');
+  input.value = "";
+
+}
 const onFileChange = async (event) => {
+
+      Swal.fire({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading()
+    },
+  });
   var input = event.target;
   var count = input.files.length;
   var index = 0;
@@ -230,7 +305,52 @@ if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
 
   }
 
+    setTimeout(() => Swal.close(), 500);
+
 }
+
+
+
+
+
+const onFileChangeCorver = async (event) => {
+
+    Swal.fire({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading()
+    },
+  });
+  var input = event.target;
+  const file = event.target.files[0];
+  const idxDot = file.name.lastIndexOf(".") + 1;
+  const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+const extFile = file.name.substr(idxDot, file.name.length).toLowerCase();
+
+if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
+            //TO DO
+            const reader = new FileReader();
+    reader.onload = () => {
+      //  this.imageUrl = reader.result;
+      store.formDataNews.news_cover = reader.result;
+    };
+    store.imageconver = input.files[0];
+    
+    reader.readAsDataURL(file);
+
+      setTimeout(() => Swal.close(), 500);
+} else {
+          
+  const input = document.querySelector('input[type="file"]');
+  input.value = "";
+    Swal.fire({
+      text: 'Upload File Image PNG JPG!',
+      icon: 'error',
+    });
+ }
+
+};
 
 
 
@@ -282,6 +402,15 @@ if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
 
 };
 
+function coverimage(i) {
+  let result = i.slice(0, 6);
+  if (result === "static") {
+    let im = ApiService.image(i);
+    return im;
+  } else {
+    return i;
+  }
+}
 
 
 

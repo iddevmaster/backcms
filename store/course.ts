@@ -8,6 +8,7 @@ export const CourseStore = defineStore('course', {
   state: () => ({
     courselist: [],
     openModalCreateCon:false,
+    openModalError:false,
     openCreateConEdit:false,
     openEditConEdit:false,
     AlertB:false,
@@ -29,6 +30,7 @@ export const CourseStore = defineStore('course', {
     isOpen: false,
     cs_id:null,
     selectedFiles:[],
+    selectedFilesError:[],
     selectedEditFiles:[],
     savepd:[],
     GetopenModalLesson:false,
@@ -435,7 +437,7 @@ return true;
         const pdf = await ApiService.upload('/media_file/upload/file',formData);
         this.pdf = pdf.data
         this.selectedFiles = [];
-        console.log(this.selectedFiles);
+       
 
         }
     },

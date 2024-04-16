@@ -9,6 +9,8 @@ import ListLesson from "@/components/course/ListLesson.vue";
 import SelectListLesson from "@/components/course/SelectListLesson.vue";
 import ConditionListLesson from "@/components/course/ConditionListLesson .vue";
 import ConditionCreate from "@/components/course/ConditionCreate.vue";
+import ErrorUpload from "@/components/course/ErrorUpload.vue";
+
 import { useVuelidate } from "@vuelidate/core";
 import { useToast } from "vue-toastification";
 import ApiService  from "../../services/api.service";
@@ -63,6 +65,8 @@ store.formDatalesson.user_id = auth.user_id
 store.formDataeditlesson.user_id = auth.user_id
 store.user_id = auth.user_id
 storelesson.item = [];
+store.selectedFilesError = []
+store.selectedFiles = []
 store.ResetForm()
 
 const { Pending } = storeToRefs(store); //Get Getter
@@ -89,8 +93,6 @@ storelesson.selectlesson_form_menu_course.search = "";
 storelesson.cg_id = 0
 
 const grouplist = await storelesson.fetchGrouplist();
-
-
 
 
  onMounted(async()  => {
@@ -177,6 +179,13 @@ console.log('data');
 const save = async () => {
   v$.value.$validate();
   if (!v$.value.$error) {
+      Swal.fire({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading()
+    },
+  });
     let uploadfile = await UploadfileCourse();
     try {
       store.isLoaddingsave = true;
@@ -191,7 +200,7 @@ const save = async () => {
               store.isLoaddingsave = false;
             const input = document.querySelector('input[type="file"]');
       input.value = "";
-     
+     setTimeout(() => Swal.close(), 500);
       v$.value.$reset();
         await setTimeout(() => {
         toast.success("ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ");
@@ -309,6 +318,14 @@ if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
 
 
 const onFileChangeBackPdf = async (event) => {
+
+      Swal.fire({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading()
+    },
+  });
   var input = event.target;
 
 
@@ -320,9 +337,15 @@ const onFileChangeBackPdf = async (event) => {
         store.selectedFiles.push(event.target.files[i])
       }else {
         
-
+ store.selectedFilesError.push(event.target.files[i])
       }
     }
+  }
+
+  setTimeout(() => Swal.close(), 500);
+
+  if(store.selectedFilesError.length > 0){
+    store.openModalError = true;
   }
   
 
@@ -517,9 +540,7 @@ The Course Name field is required.</span>
       />
     </div>
 
-
-
-            <div v-if="locale == 'la'" >
+ <div v-if="locale == 'la'" >
       <span v-if="v$.course_cover.$error" class="text-xs text-red-500"
         style="color: red" >
         ອັບໂຫຼດຮູບ.</span>
@@ -554,7 +575,7 @@ The Course Name field is required.</span>
 
     
   <br>
-    
+   
     <div class="form-group" >
   
   <input  
@@ -686,6 +707,7 @@ The Course Name field is required.</span>
       </div>
     </div>
     <ConditionCreate></ConditionCreate>
+     <ErrorUpload></ErrorUpload>
   </div>
 
 

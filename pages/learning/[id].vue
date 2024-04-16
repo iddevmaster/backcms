@@ -8,7 +8,7 @@ import ListLesson from "@/components/course/ListLesson.vue";
 import ConditionEditListLesson from "@/components/course/ConditionEditListLesson.vue";
 import ConditionCreateEdit from "@/components/course/ConditionCreateEdit.vue";
 import ConditionEditEdit from "@/components/course/ConditionEditEdit.vue";
-
+import ErrorUpload from "@/components/course/ErrorUpload.vue";
 import { useAuthStore } from '@/store/auth'
 import { CourseStore } from '@/store/course'
 import { LessonStore } from '@/store/lesson'
@@ -152,6 +152,14 @@ const v$ = useVuelidate(rules, FormDataEditCourse);
 const save = async () => {
   v$.value.$validate();
   if (!v$.value.$error) {
+
+          Swal.fire({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading()
+    },
+  });
     store.isLoaddingsave = true;
     try {
       let updatefile = await UploadfileCourse()
@@ -163,6 +171,7 @@ const save = async () => {
 
 
       if(updatedata === true){
+         setTimeout(() => Swal.close(), 500);
         await setTimeout(() => {
         toast.success("ແກ້ໄຂສຳເລັດແລ້ວ");
       }, 500);
@@ -170,6 +179,7 @@ const save = async () => {
       await router.push('/learning');
       }
       if(updatedata === false){
+         setTimeout(() => Swal.close(), 500);
         await setTimeout(() => {
            toast.error("ແກ້ໄຂບໍ່ສຳເລັດ");
       }, 500);
@@ -245,7 +255,13 @@ const removeImage = async () => {
 
 const onFileChangeBackPdf = async (event) => {
   var input = event.target;
-
+          Swal.fire({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading()
+    },
+  });
 
   if(event.target.files.length > 0){
     for (var i = 0; i < event.target.files.length; i++) {
@@ -256,7 +272,7 @@ const onFileChangeBackPdf = async (event) => {
 
       }else {
         
-
+ store.selectedFilesError.push(event.target.files[i])
       }
     }
 
@@ -267,6 +283,12 @@ await store.fetchGetPdf(router.currentRoute.value.params.id);
 
 
   }
+
+    setTimeout(() => Swal.close(), 500);
+
+  if(store.selectedFilesError.length > 0){
+    store.openModalError = true;
+  }
   
 
 
@@ -275,14 +297,25 @@ await store.fetchGetPdf(router.currentRoute.value.params.id);
 
 
 const onFileChangeBack = async (event) => {
+
+  
   var input = event.target;
   const file = event.target.files[0];
   const idxDot = file.name.lastIndexOf(".") + 1;
   const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
 const extFile = file.name.substr(idxDot, file.name.length).toLowerCase();
 
+                    Swal.fire({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading()
+    },
+  });
+
 if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
             //TO DO
+ 
             const reader = new FileReader();
     reader.onload = () => {
       //  this.imageUrl = reader.result;
@@ -299,6 +332,8 @@ if (extFile == "jpg" || extFile == "jpeg" || extFile == "png") {
       icon: 'error',
     });
  }
+
+ setTimeout(() => Swal.close(), 500);
 
 };
 
@@ -631,6 +666,7 @@ The Course Name field is required.</span>
         </div>
         <ConditionCreateEdit></ConditionCreateEdit>
         <ConditionEditEdit></ConditionEditEdit>
+         <ErrorUpload></ErrorUpload>
     </div>
 </template>
 

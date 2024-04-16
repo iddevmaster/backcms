@@ -289,6 +289,14 @@ const save = async () => {///////////// บันทึก
 
 
 const onFileChange = async (event) => {
+
+      Swal.fire({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading()
+    },
+  });
   var input = event.target;
   const file = event.target.files[0];
 
@@ -312,6 +320,7 @@ const onFileChange = async (event) => {
       icon: 'error',
     });
   }
+  setTimeout(() => Swal.close(), 500);
 };
 
 const removeImage = async () => {
