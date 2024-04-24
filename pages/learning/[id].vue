@@ -542,6 +542,7 @@ The Course Name field is required.</span>
         ref="fileInputRef"
         multiple
         style="display: none;"
+        accept=".pdf"
       />
      
     
