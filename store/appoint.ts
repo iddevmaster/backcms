@@ -42,7 +42,7 @@ export const AppointStore = defineStore('appoint', {
     deluser_id: null,
     ardel_id: null,
     form: {
-      ap_learn_type: "1",
+      ap_learn_type: "2",
       date_event: 0,
       dlt_code: "A1",
     },
@@ -77,7 +77,7 @@ export const AppointStore = defineStore('appoint', {
     locale: 'en',
     dateFormat: 'yyyy-MM-dd HH:mm:ss',
     forminsert: {
-      ap_learn_type: 1,
+      ap_learn_type: '2',
       ap_quota: "",
       ap_date_start: null,
       ap_date_end: null,
@@ -228,7 +228,7 @@ export const AppointStore = defineStore('appoint', {
 
     async ResetFetch() {
 
-      this.forminsert.ap_learn_type = 1
+      this.forminsert.ap_learn_type = 2
       this.forminsert.ap_quota = ""
       this.forminsert.ap_date_start = null
       this.forminsert.ap_date_end = null

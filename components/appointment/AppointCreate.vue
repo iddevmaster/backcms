@@ -93,7 +93,7 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_end") }}</label>
  
-          <VueDatePicker v-model="store.forminsert.ap_date_end" required  :format="format_end"    :disabled-dates="isDateDisabledEnd" 
+          <VueDatePicker v-model="store.forminsert.ap_date_end" required  :format="format_end"    :disabled-dates="isDateDisabledEnd"
    ></VueDatePicker>
      
 
@@ -118,8 +118,8 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_type") }}</label>
       <select class="form-control" v-model="store.forminsert.ap_learn_type">
-    <option value="1">{{ $t("menu_learn_theory") }}</option>
-    <option value="2">{{ $t("menu_learn_practice") }}</option>
+    <!-- <option value="1">{{ $t("menu_learn_theory") }}</option> -->
+    <option value="2" selected>{{ $t("menu_learn_practice") }}</option>
     </select>
     </div>
 
@@ -131,7 +131,6 @@
           <span v-if="locale == 'la'" >{{item.dlt_description_loas}}</span>
       <span v-if="locale == 'en'" >{{item.dlt_description_english}}</span>
       <span v-if="locale == 'th'" >{{item.dlt_description}}</span>
-        
         </option>
       </select>
     </div>
@@ -215,15 +214,17 @@ const isDateDisabledEnd = (date) => {
 
   const currentDate = new Date();
       const disableBeforeDate = new Date(store.forminsert.ap_date_start); // Adjust the date as needed
-     // return date < currentDate || date < disableBeforeDate;
-//return false;
 
 if(!store.forminsert.ap_date_start){
   return true;
 }
-return date < currentDate || date < disableBeforeDate;
+return  date <= currentDate;
 
  };    
+
+
+
+ 
 
 
 const backToUser = async () => {
@@ -235,7 +236,15 @@ const v$ = useVuelidate(rules, FormInsert);
 
 const save = async () => {
   v$.value.$validate();
+
+
     if (!v$.value.$error) {
+    let checktime = await disabledDates()
+    if(checktime == false){
+      toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
+return false;
+    }
+ 
        const data = await store.SaveFormAPP();
     if (data == 200) {
     await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
@@ -252,11 +261,31 @@ const save = async () => {
 
 
 
-const disabledDates = (date) => {
-  const currentDate = new Date();
-      // Disable dates before the current date
-      return date < currentDate;
+const disabledDates = () => {
 
+  // const start = new Date(store.forminsert.ap_date_start).fo;
+  // const end = new Date(store.forminsert.ap_date_end);
+  // const selectedHourstart = start.getHours();
+  // const selectedHourend = end.getHours();
+  const currentDate = new Date(store.forminsert.ap_date_start);
+  const currentDateEnd = new Date(store.forminsert.ap_date_end);
+  const isoFormatInUTC = currentDate.toISOString();
+  const isoFormatInUTCend = currentDateEnd.toISOString();
+     let start = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD');
+     let end = moment.utc(isoFormatInUTCend).tz('Asia/Bangkok').format('YYYY-MM-DD');
+  
+
+ if(start == end){
+  const selectedHourstart = currentDate.getHours();
+  const selectedHourend = currentDateEnd.getHours();
+  if(selectedHourstart > selectedHourend){
+    return false;
+  }
+  return true;
+ 
+  //return false;
+ }
+// return true;
 }
 
 const onInput = async (event) => {
