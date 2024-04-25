@@ -7,13 +7,13 @@
         v-model="store.form.dlt_code" @change="SearchApp()"
       >
         <option
-          v-for="(item, index) in store.dtl"
+          v-for="(item, index) in store.dlt"
           :key="item.dlt_code"
           :value="item.dlt_code"
         >
-        <span v-if="locale == 'la'" >{{item.dlt_description_loas}}</span>
-      <span v-if="locale == 'en'" >{{item.dlt_description_english}}</span>
-      <span v-if="locale == 'th'" >{{item.dlt_description}}</span>
+        <span v-if="locale == 'la'" >{{item.dlt_code}} : {{item.dlt_description_loas}}</span>
+      <span v-if="locale == 'en'" >{{item.dlt_code}} : {{item.dlt_description_english}}</span>
+     
         </option>
       </select>
     </div>

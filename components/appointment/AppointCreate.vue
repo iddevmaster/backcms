@@ -128,10 +128,10 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_result_form_type_dlt") }}</label>
      <select class="form-select form-select" aria-label="Default select example" v-model="store.forminsert.dlt_code">
-         <option   v-for="(item, index) in store.dtl" :key="item.dlt_code" :value="item.dlt_code" >
-          <span v-if="locale == 'la'" >{{item.dlt_description_loas}}</span>
-      <span v-if="locale == 'en'" >{{item.dlt_description_english}}</span>
-      <span v-if="locale == 'th'" >{{item.dlt_description}}</span>
+         <option   v-for="(item, index) in store.dlt" :key="item.dlt_code" :value="item.dlt_code" >
+          <span v-if="locale == 'la'" >{{item.dlt_code}} : {{item.dlt_description_loas}}</span>
+      <span v-if="locale == 'en'" >{{item.dlt_code}} : {{item.dlt_description_english}}</span>
+
         </option>
       </select>
     </div>
