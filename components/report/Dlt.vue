@@ -2,11 +2,11 @@
  <div>
       <label>{{ $t("dlt_fitter") }}:</label>
       <select class="form-control" v-model="store.dlt_code">
-        <option :value="dlt_i.dlt_code" v-for="(dlt_i,index) in store.dlt">
+        <option :value="dlt_i.dlt_code" v-for="(dlt_i,index) in storeapp.dlt">
         
-          <span v-if="locale == 'la'" >{{dlt_i.dlt_description_loas}}</span>
-      <span v-if="locale == 'en'" >{{dlt_i.dlt_description_english}}</span>
-      <span v-if="locale == 'th'" >{{dlt_i.dlt_description}}</span>
+          <span v-if="locale == 'la'" >{{dlt_i.dlt_code}} : {{dlt_i.dlt_description_loas}}</span>
+      <span v-if="locale == 'en'" >{{dlt_i.dlt_code}} : {{dlt_i.dlt_description_english}}</span>
+ 
         </option>
       </select>
     </div>
@@ -34,6 +34,7 @@ import '@vuepic/vue-datepicker/dist/main.css'
 const toast = useToast()
 const router = useRouter();
 const store = ReportStore();
+const storeapp = AppointStore()
 
 
 const startDate = ref("");

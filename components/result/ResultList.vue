@@ -7,19 +7,13 @@
         v-model="store.dlt_code"
       >
         <option
-          v-for="(item, index) in store.dlt"
+          v-for="(item, index) in storeapp.dlt"
           :key="item.dlt_code"
           :value="item.dlt_code"
         >
-        <span v-if="locale == 'la'">{{
-                              item.dlt_description_loas
-                            }}</span>
-                            <span v-if="locale == 'en'">{{
-                              item.dlt_description_english
-                            }}</span>
-                            <span v-if="locale == 'th'">{{
-                              item.dlt_description
-                            }}</span>
+        <span v-if="locale == 'la'">{{item.dlt_code }} : {{item.dlt_description_loas }}</span>
+                            <span v-if="locale == 'en'">{{item.dlt_code }} : {{  item.dlt_description_english }}</span>
+                           
         </option>
       </select>
     </div>
@@ -150,6 +144,7 @@ const picked = ref(new Date());
 const router = useRouter();
 const toast = useToast();
 const store = ResultStore();
+const storeapp = AppointStore()
 
 //await store.fetchDlt()
 

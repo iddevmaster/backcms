@@ -59,11 +59,11 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_result_form_type_dlt") }}</label>
       <select class="form-control" v-model="store.formresult.dlt_code">
-        <option v-for="(itemd, i) in store.dlt" :value="itemd.dlt_code">
+        <option v-for="(itemd, i) in storeapp.dlt" :value="itemd.dlt_code">
          
-          <span v-if="locale == 'la'" >{{itemd.dlt_description_loas}}</span>
-      <span v-if="locale == 'en'" >{{itemd.dlt_description_english}}</span>
-      <span v-if="locale == 'th'" >{{itemd.dlt_description}}</span>
+          <span v-if="locale == 'la'" >{{itemd.dlt_code}} : {{itemd.dlt_description_loas}}</span>
+      <span v-if="locale == 'en'" >{{itemd.dlt_code}} : {{itemd.dlt_description_english}}</span>
+ 
         </option>
       </select>
       <span class="text-xs text-red-500" style="color:red" v-if="v$.dlt_code.$error">{{
@@ -105,6 +105,7 @@ const { locale, setLocale } = useI18n();
 const toast = useToast()
 const router = useRouter();
 const store = ResultStore();
+const storeapp = AppointStore()
 
 // await store.fetchDlt()
 await store.fetchUser()

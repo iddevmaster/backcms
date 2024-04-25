@@ -39,6 +39,7 @@ const route = useRoute();
 const store = DltStore();
 const auth = useAuthStore();
 const profile = await auth.getProfile();
+const storeapp = AppointStore()
 store.formadddtl.user_id = route.params.id;
 await store.ResetForm();
 
@@ -269,20 +270,14 @@ const DelDlT = async () => {
                             ກະລຸນາເລືອກປະເພດໃບຂັບຂີ່ຂອງເຈົ້າ.
                           </option>
                           <option
-                            v-for="(item, index) in store.dtla"
+                            v-for="(item, index) in storeapp.dlt"
                             :key="index"
                             v-bind:value="item.dlt_code"
                           >
-                          
-                            <span v-if="locale == 'la'">{{
-                              item.dlt_description_loas
-                            }}</span>
-                            <span v-if="locale == 'en'">{{
-                              item.dlt_description_english
-                            }}</span>
-                            <span v-if="locale == 'th'">{{
-                              item.dlt_description
-                            }}</span>
+                    
+                            <span v-if="locale == 'la'">{{ item.dlt_code }} : {{ item.dlt_description_loas }}</span>
+                            <span v-if="locale == 'en'">{{ item.dlt_code }} : {{item.dlt_description_english  }}</span>
+                     
                           </option>
                         </select>
                       </div>
@@ -477,7 +472,7 @@ const DelDlT = async () => {
                           <a
                             href="javascript:void(0);"
                             class="btn btn-primary btn-send _effect--ripple waves-effect waves-light"
-                            >{{ item.dlt_description_loas }}</a
+                            >{{ item.dlt_code }} : {{ item.dlt_description_loas }}</a
                           >
                         </div>
                       </div>

@@ -14,19 +14,17 @@
           >
             <option selected disabled>ກະລຸນາເລືອກປະເພດໃບຂັບຂີ່ຂອງເຈົ້າ</option>
             <option
-              v-for="(item, index) in store.dtla"
+              v-for="(item, index) in storeapp.dlt"
               :key="index"
               v-bind:value="item.dlt_code"
             >
-               <span v-if="locale == 'la'">{{
+               <span v-if="locale == 'la'"> {{ item.dlt_code }} : {{
                               item.dlt_description_loas
                             }}</span>
-                            <span v-if="locale == 'en'">{{
+                            <span v-if="locale == 'en'">{{ item.dlt_code }} : {{
                               item.dlt_description_english
                             }}</span>
-                            <span v-if="locale == 'th'">{{
-                              item.dlt_description
-                            }}</span>
+                         
             </option>
           </select>
         </div>
@@ -226,6 +224,7 @@ const toast = useToast();
 
 const store = DltStore();
 const route = useRoute();
+const storeapp = AppointStore()
 
 const { FormDLTadd } = storeToRefs(store);
 

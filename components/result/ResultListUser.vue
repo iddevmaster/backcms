@@ -30,7 +30,7 @@
             <span v-else> {{ $t("menu_learn_practice") }} </span>
           </td>
           <td>
-            {{ format_dlt(event.dlt_code) }}
+            {{ event.dlt_code }} : {{ format_dlt(event.dlt_code) }}
           </td>
          
           <td v-if="event.mr_status == 'fail'">{{ $t("menu_fail") }}</td>
@@ -88,6 +88,7 @@ import moment from "moment-timezone";
 const router = useRouter();
 const toast = useToast();
 const store = ResultStore();
+const storeapp = AppointStore()
 
 
 const { deleteItem } = ResultStore(); //Action
@@ -117,8 +118,8 @@ const edit = async (item) => {
 
 const format_dlt = (evnet_dlt) => {
 
-let obj = store.dtla.find(o => o.dlt_code === evnet_dlt);
-return obj.dlt_description;
+let obj = storeapp.dlt.find(o => o.dlt_code === evnet_dlt);
+return obj.dlt_description_loas;
 };
 const format = (time) => {
   return moment(time).utc().format("DD/MM/YYYY HH:mm");

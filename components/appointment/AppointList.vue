@@ -171,21 +171,9 @@ const { deleteItem } = AppointStore(); //Action
 
 const date = ref(new Date());
 
-const format_start = (date) => {
-  store.form.date_event = moment(date).format("YYYY-MM-DD");
-  return moment(date).format("YYYY-MM-DD");
-};
 
-const format_end = (date) => {
-  store.form.end_date = moment(date).format("YYYY-MM-DD");
-  return moment(date).format("YYYY-MM-DD");
-};
 
-const format_dlt = (evnet_dlt) => {
 
-  let obj = store.dtl.find(o => o.dlt_code === evnet_dlt);
-  return obj.dlt_description;
-};
 
 const format = (time) => {
   return moment(time).format("DD/MM/YYYY HH:mm");
@@ -205,34 +193,15 @@ const SearchApp = async () => {
 };
 
 
-const choose = async (id) => {
-  router.push({ path: "dltmanage/" + id });
-};
 
-const searchData = async () => {};
 
-const selchk = async (x) => {};
 
-const selectAll = async () => {
-  await selectall();
-};
 
-const setCurrentPageclick = async (page) => {
-  await setCurrentPage(page);
-  await store.fetchUsers();
-};
 
-const selectshowdata = async (x) => {
-  await selectentires(x.target.value);
-};
 
-const selecttype = async (item) => {
-  await selecttypes(item.target.value);
-};
 
-const sortList = async (sortBy) => {
-  await sortLists(sortBy);
-};
+
+
 
 function coverttime(date) {
   const datetime = new Date(date);

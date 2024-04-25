@@ -9,6 +9,8 @@ import { defineComponent } from 'vue';
 import ResultList from '@/components/result/ResultList.vue';
 import { ResultStore } from '@/store/result';
 
+
+
 import { useToast } from 'vue-toastification'
 definePageMeta({
   middleware: ['auth','roles'],

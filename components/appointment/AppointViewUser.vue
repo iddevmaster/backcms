@@ -25,6 +25,8 @@
               }}</span
             >
             <span v-if="locale == 'en'">
+
+              
               {{
                 covertdtl(item.appointment_detail.dlt_code)
                   .dlt_description_english
@@ -113,14 +115,9 @@ const backToUser = async () => {
   router.go(-1);
 };
 
-const searchData = async () => {
-  await store.FetchAP();
-};
 
-const selectshowdata = async (x) => {
-  await selectentiresap(x.target.value);
-  await store.FetchAP();
-};
+
+
 
 const del = async (item) => {
   store.ardel_id = item.ar_id;
@@ -134,7 +131,7 @@ const format = (time) => {
 };
 
 const covertdtl = (x) => {
-  let item = store.dtl.filter((o) => o.dlt_code == x);
+  let item = store.dlt.filter((o) => o.dlt_code == x);
   return item[0];
 };
 </script>

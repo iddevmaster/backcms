@@ -36,11 +36,22 @@ await store.closeModal()
  };
 
  const deletel = async () => {
-await store.deleteRerve()
-await store.FetchAPUser();
-store.isDelUser = false;
+let delte = await store.deleteRerve()
 
+if(delte == 200){
+  await store.FetchAPUser();
+store.isDelUser = false;
 toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
+}
+if(delte == 204){
+  store.isDelUser = false;
+  toast.error('ບໍ່​ສາ​ມາດ​ຖືກ​ລົບ​ໄດ້​ເນື່ອງ​ຈາກ​ວ່າ​ມັນ​ຜ່ານ​ເວ​ລາ​ທີ່​ກໍາ​ນົດ​ໄວ້​.');
+}
+if(delte == 500){
+  store.isDelUser = false;
+  toast.error('ຕິດຕໍ່ admin.');
+}
+
 
 //await store.fetchUse();
  };

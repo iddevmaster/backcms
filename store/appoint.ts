@@ -655,12 +655,17 @@ if(!response){
       const del = { user_id: this.deluser_id, ap_id: this.del_ap }
       try {
         const data = await ApiService.delete('appointment/reserve/delete/' + this.ardel_id, del).then(response => {
-          return true
+          if(response.status == 200){
+            return 200
+          }
+          if(response.status == 204){
+            return 204
+          }
         });
         return data;
       } catch (error) {
 
-        return false
+        return 500
       }
     },
 
