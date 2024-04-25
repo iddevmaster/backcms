@@ -4,6 +4,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
   ssr: false,
+  spaLoadingTemplate: false ,
   css: [
   '~/assets/src/bootstrap/css/bootstrap.min.css',
   '~/assets/layouts/modern-light-menu/css/light/plugins.css',
