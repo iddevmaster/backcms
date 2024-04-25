@@ -94,14 +94,7 @@ const del = async (item) => {
     (store.isDelUser = true);
 };
 
-const format = (time) => {
-  return moment(time).format("DD/MM/YYYY HH:mm");
-};
 
-const covertdtl = (x) => {
-  let item = store.dtl.filter((o) => o.dlt_code == x);
-  return item[0];
-};
 </script>
 
 <style>

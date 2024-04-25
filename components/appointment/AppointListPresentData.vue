@@ -95,20 +95,10 @@ const format_end = (date) => {
   return moment(date).format("HH:mm");
 };
 
-const format_present = (date) => {
-  store.formreserve.present_day = moment(date).format("YYYY-MM-DD");
-  return moment(date).format("YYYY-MM-DD");
-};
 
-const format_dlt = (evnet_dlt) => {
 
-  let obj = store.dtl.find(o => o.dlt_code === evnet_dlt);
-  return obj.dlt_description;
-};
 
-const format = (time) => {
-  return moment(time).utc().format("DD/MM/YYYY HH:mm");
-};
+
 // store.fetchAppointment()
 
 const del = async (id) => {
