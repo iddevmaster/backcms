@@ -425,7 +425,7 @@ const data = await ApiService.post('/news/image/create',news)
 
     async deleteimageNew(id) {
       const del = await ApiService.delete('/news/image/delete/' + id);
-      console.log(del);
+   
     },
 
     async UploadImageNew() { 

@@ -249,7 +249,7 @@ for (var i = 0; i < c.length; i++) {
      this.choicelist.push({ id:i+1, ec_id: c[i].ec_id, ec_image: c[i].ec_image, ec_index:c[i].ec_index, ec_name:c[i].ec_name, em_id:c[i].em_id,eq_id:c[i].eq_id });
 }
 
-console.log(x);
+
 
 
 this.formEditExamq = {
@@ -277,7 +277,7 @@ this.formEditExamq = {
 
     async UpdateExamq() {
    
-  console.log(this.formEditExamq);
+
       if(this.image == null){
         this.formEditExamq.eq_image = "";
       }/////////////clear image 

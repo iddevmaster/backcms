@@ -189,9 +189,9 @@ export const newCivilStore = defineStore('newscivil', {
         if (response.data.images_list?.length > 0) {
           ///////////// วนลูป ลบรูปภาพก่อน 
           for (let i = 0; i < response.data.images_list.length; i++) {
-            console.log('newsdata', response.data.images_list[i]);
+      
             const delimage = ApiService.delete('media_file/file/?f=' + response.data.images_list[i].ni_path_file).then(delimage => {
-              console.log('del', delimage);
+         
             });
 
           }
@@ -468,7 +468,7 @@ export const newCivilStore = defineStore('newscivil', {
     async UpdateFormNewsNoUpload() {
       ////////////////ลบ อันเดิมก่อนน/////////////////////////
       const UploadImage = UploadStore();
-      console.log(UploadImage.data_list_image_same)
+  
       if (UploadImage.data_list_image_same) {
         for (var i = 0; i < UploadImage.data_list_image_same.length; i++) {
           const item_image = UploadImage.data_list_image_same[i].ni_id;
@@ -566,7 +566,7 @@ export const newCivilStore = defineStore('newscivil', {
         UploadStorage.image_list = [],
         UploadStorage.formi = []
 
-      console.log('reset upload');
+
     },
 
 
@@ -591,7 +591,7 @@ export const newCivilStore = defineStore('newscivil', {
       this.page = 1;
     },
     async UploadImage(image) {
-      console.log(image);
+    
 
     },
 
