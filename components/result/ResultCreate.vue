@@ -111,7 +111,7 @@ const storeapp = AppointStore()
 await store.fetchUser()
 
 const { FormResult } = ResultStore();
-const myOptions = JSON.parse(JSON.stringify(store.dlt));
+const myOptions = JSON.parse(JSON.stringify(storeapp.dlt));
 const myValue = ref();
 
 const myOptionsUser = JSON.parse(JSON.stringify(store.users));
