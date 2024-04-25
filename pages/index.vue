@@ -341,13 +341,13 @@
                       <option disabled :value="null">ເລືອກ</option>
 
                       <option
-                        v-for="(item, i) in store.dlt"
+                        v-for="(item, i) in storeapp.dlt"
                         :value="item.dlt_code"
                       >
                     
-                          <span v-if="locale == 'la'">{{ item.dlt_description_loas }}</span>
-                  <span v-if="locale == 'en'">{{ item.dlt_description_english }}</span>
-                  <span v-if="locale == 'th'">{{ item.dlt_description }}</span>
+                          <span v-if="locale == 'la'">{{ item.dlt_code }} :{{ item.dlt_description_loas }}</span>
+                  <span v-if="locale == 'en'">{{ item.dlt_code }} : {{ item.dlt_description_english }}</span>
+                  <span v-if="locale == 'th'">{{ item.dlt_code }} : {{ item.dlt_description }}</span>
                       </option>
                     </select>
                   </div>
@@ -452,13 +452,13 @@
                     >
                       <option  :value="null">ທັງໝົດ</option>
                       <option
-                        v-for="(item, i) in store.dlt"
+                        v-for="(item, i) in storeapp.dlt"
                         :value="item.dlt_code"
                       >
                   
-                  <span v-if="locale == 'la'">{{ item.dlt_description_loas }}</span>
-                  <span v-if="locale == 'en'">{{ item.dlt_description_english }}</span>
-                  <span v-if="locale == 'th'">{{ item.dlt_description }}</span>
+                  <span v-if="locale == 'la'">{{ item.dlt_code }} : {{ item.dlt_description_loas }}</span>
+                  <span v-if="locale == 'en'">{{ item.dlt_code }} : {{ item.dlt_description_english }}</span>
+                  <span v-if="locale == 'th'">{{ item.dlt_code }} : {{ item.dlt_description }}</span>
                       </option>
                     </select>
                   </div>
@@ -697,7 +697,7 @@ ChartJS.register(
 );
 const { locale, setLocale } = useI18n();
 const store = LogStore();
-
+const storeapp = AppointStore()
 
 
 onMounted(async () => {
