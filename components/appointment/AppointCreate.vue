@@ -96,7 +96,8 @@
           <VueDatePicker v-model="store.forminsert.ap_date_end" required  :format="format_end"    :disabled-dates="isDateDisabledEnd"
    ></VueDatePicker>
      
-
+   <span  class="text-xs text-red-500" style="color: red" v-if="store.AlertEndtime">
+        The end time cannot be greater than the start time.</span>
 <div v-if="locale == 'la'">
               <span v-if="v$.ap_date_end.$error" class="text-xs text-red-500" style="color: red">
                 ຕ້ອງລະບຸຊ່ອງຂໍ້ມູນໄລຍະເວລາໝົດ.</span>
@@ -134,7 +135,12 @@
         </option>
       </select>
     </div>
+
+   
   </div>
+
+
+
 
   <button type="button" class="btn btn-primary" @click="save()">{{ $t("menu_app_app_save") }}</button>
 </template>
@@ -211,7 +217,6 @@ const isDateDisabled = (date) => {
     };
 
 const isDateDisabledEnd = (date) => {
-
   const currentDate = new Date();
       const disableBeforeDate = new Date(store.forminsert.ap_date_start); // Adjust the date as needed
 
@@ -241,12 +246,14 @@ const save = async () => {
     if (!v$.value.$error) {
     let checktime = await disabledDates()
     if(checktime == false){
-      toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
+      store.AlertEndtime  = true
+     
 return false;
     }
  
        const data = await store.SaveFormAPP();
     if (data == 200) {
+      store.AlertEndtime  = false;
     await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
      await   store.ResetForm();
      await router.push('/appointment');
@@ -263,10 +270,7 @@ return false;
 
 const disabledDates = () => {
 
-  // const start = new Date(store.forminsert.ap_date_start).fo;
-  // const end = new Date(store.forminsert.ap_date_end);
-  // const selectedHourstart = start.getHours();
-  // const selectedHourend = end.getHours();
+
   const currentDate = new Date(store.forminsert.ap_date_start);
   const currentDateEnd = new Date(store.forminsert.ap_date_end);
   const isoFormatInUTC = currentDate.toISOString();

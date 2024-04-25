@@ -94,7 +94,8 @@
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_end") }}</label>
 
       <VueDatePicker v-model="store.formedit.ap_date_end" :format="format_end" required   :disabled-dates="isDateDisabledEnd" ></VueDatePicker>
-
+      <span  class="text-xs text-red-500" style="color: red" v-if="store.AlertEndtime">
+        The end time cannot be greater than the start time.</span>
       <div v-if="locale == 'la'">
               <span v-if="v$.ap_date_end.$error" class="text-xs text-red-500" style="color: red">
                 ຕ້ອງລະບຸຊ່ອງຂໍ້ມູນໄລຍະເວລາໝົດ.</span>
@@ -164,8 +165,16 @@ const update = async () => {
 
   v$.value.$validate();
   if (!v$.value.$error) {
+    let checktime = await disabledDates()
+    if(checktime == false){
+      store.AlertEndtime  = true
+     
+return false;
+    }
     let data = await store.Update();
+  
     if (data == true) {
+      store.AlertEndtime  = false;
     await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດ');
     await router.push('/appointment');
   } else {
@@ -174,6 +183,30 @@ const update = async () => {
   }
 
 
+}
+
+const disabledDates = () => {
+
+
+const currentDate = new Date(store.formedit.ap_date_start);
+const currentDateEnd = new Date(store.formedit.ap_date_end);
+const isoFormatInUTC = currentDate.toISOString();
+const isoFormatInUTCend = currentDateEnd.toISOString();
+   let start = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD');
+   let end = moment.utc(isoFormatInUTCend).tz('Asia/Bangkok').format('YYYY-MM-DD');
+
+
+if(start == end){
+const selectedHourstart = currentDate.getHours();
+const selectedHourend = currentDateEnd.getHours();
+if(selectedHourstart > selectedHourend){
+  return false;
+}
+return true;
+
+//return false;
+}
+// return true;
 }
 
 
@@ -293,8 +326,8 @@ const currentDate = new Date();
 if(!store.formedit.ap_date_start){
 return true;
 }
-return date < currentDate || date < disableBeforeDate;
 
+return  date <= currentDate;
 };    
 
 

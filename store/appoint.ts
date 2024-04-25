@@ -10,6 +10,7 @@ export const AppointStore = defineStore('appoint', {
   state: () => ({
     isOpen: false,
     isDelAP: false,
+    AlertEndtime: false,
     isDelUser: false,
     ChooseBefore: false,
     searchData: "",
@@ -378,9 +379,10 @@ if(!response){
         ap_learn_type: learn_type, ap_quota: this.formedit.ap_quota, ap_date_start: this.formedit.ap_date_start, ap_date_end: this.formedit.ap_date_end, ap_remark: this.formedit.ap_remark,
         dlt_code: this.formedit.dlt_code, user_id: this.formedit.user_id
       }
+   
       try {
         const data = await ApiService.put('/appointment/update/' + this.ap_id, upd).then(response => {
-
+          // console.log(response);
           if (response.data == '') {
             return false;
           }
