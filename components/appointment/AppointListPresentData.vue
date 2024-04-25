@@ -20,7 +20,7 @@
       
         <tr v-for="(event, index) in store.app_present">
           <td>{{ index + 1 }}</td>
-          <td>{{ format_start(event.appointment_detail.ap_date_start) }}</td>
+          <td>{{ format_start(event.appointment_detail.ap_date_start) }} - {{ format_end(event.appointment_detail.ap_date_end) }}</td>
           <td>{{ event.user_reserve.user_prefrix }} {{ event.user_reserve.user_firstname }} {{ event.user_reserve.user_lastname }}</td>
           <td>{{ event.user_reserve.user_phone }}</td>
           <td>{{ event.user_reserve.identification_number }}</td>
@@ -88,7 +88,10 @@ store.formreserve.present_day = date
 
 await store.fetchAppPresent()
 const format_start = (date) => {
- 
+  return moment(date).format("YYYY-MM-DD HH:mm");
+};
+
+const format_end = (date) => {
   return moment(date).format("HH:mm");
 };
 
