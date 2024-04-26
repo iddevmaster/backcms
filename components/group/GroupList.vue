@@ -51,7 +51,7 @@ style="
         <thead>
             <tr>
                 <th scope="col">{{ $t("table_id_group") }}</th>
-                <th scope="col">CG ID</th>
+                <th scope="col">ໝວດ</th>
                 
                 <th class="text-center" scope="col">{{ $t("table_id_name") }}</th>
                 
