@@ -97,7 +97,7 @@
               
                 <td><p class="disctext">{{item.cs_name}}</p></td>
                 <td><p class="disctext">{{item.cs_description}}</p></td>
-                <td><p class="disctext_cgname">{{item.cg_name}}</p></td>
+                <td> <p class="disctext_cgname">{{item.cg_name}}</p></td>
 
               
                 <td> 
@@ -413,14 +413,14 @@ const validatePNumberSelect = async (evt) => {
     <style scoped>
     p.disctext {
   white-space: nowrap; 
-  width: 380px; 
+  width: 320px; 
   overflow: hidden;
   text-overflow: ellipsis;
 }
     
-p.disctext_cgname{
+p.disctext_cgname {
   white-space: nowrap; 
-  width: 100; 
+  width: 120px; 
   overflow: hidden;
   text-overflow: ellipsis;
 }

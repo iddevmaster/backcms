@@ -107,7 +107,8 @@
             <a v-if="item.cs_video" :href="item.cs_video" target="_blank"><span class="badge badge-success">ກົດເພື່ອເປີດເບິ່ງ</span></a>
             <a v-else><span class="badge badge-danger">ບໍ່ມີວິດີໂອ</span></a>
           </td>
-          <td>{{item.cg_name}}</td>    
+           
+          <td><p class="disctext_cgname">{{item.cg_name}}</p></td> 
                 <td class="text-center">
                   <img :src="coverimage(item.cs_cover)" class="img-fluid" width="80" height="80" v-if="item.cs_cover">
                   <img src="../../assets/images/no_photo.jpg" class="img-fluid" width="80" height="80" v-else>
@@ -467,7 +468,12 @@ function image(i) {
 }
 </script>
     <style>
-
+p.disctext_cgname {
+  white-space: nowrap; 
+  width: 150px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 p.disctext {
   white-space: nowrap; 
   width: 300px; 
