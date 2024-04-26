@@ -97,7 +97,7 @@
               
                 <td><p class="disctext">{{item.cs_name}}</p></td>
                 <td><p class="disctext">{{item.cs_description}}</p></td>
-                <td>{{item.cg_name}}</td>
+                <td><p class="disctext_cgname">{{item.cg_name}}</p></td>
 
               
                 <td> 
@@ -418,6 +418,12 @@ const validatePNumberSelect = async (evt) => {
   text-overflow: ellipsis;
 }
     
+p.disctext_cgname{
+  white-space: nowrap; 
+  width: 200; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
     .video-container {
       position: relative;
       width: 100%;
