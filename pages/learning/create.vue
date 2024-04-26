@@ -506,7 +506,7 @@ The Course Name field is required.</span>
         }"
         @change="v$.course_description.$touch"
         v-model="store.formDataCourse.course_description"
-        maxlength="500"
+        maxlength="1000"
    
       >
       </textarea>
