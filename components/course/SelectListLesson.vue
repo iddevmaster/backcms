@@ -413,7 +413,7 @@ const validatePNumberSelect = async (evt) => {
     <style scoped>
     p.disctext {
   white-space: nowrap; 
-  width: 400px; 
+  width: 380px; 
   overflow: hidden;
   text-overflow: ellipsis;
 }
