@@ -63,7 +63,7 @@
           :key="item.cg_id"
           :value="item.cg_id"
         >
-        {{ item.cg_name }}
+        {{ item.cg_id }} - {{ item.cg_name }}
       </option>
       </select>
     </div>
