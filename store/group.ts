@@ -128,10 +128,10 @@ export const GroupStore = defineStore('group', {
 
     sortLists(sortBy) {
       if (this.sortedbyASC) {
-        this.group.data.sort((x, y) => (x[sortBy] > y[sortBy] ? -1 : 1));
+        this.group.sort((x, y) => (x[sortBy] > y[sortBy] ? -1 : 1));
         this.sortedbyASC = false;
       } else {
-        this.group.data.sort((x, y) => (x[sortBy] < y[sortBy] ? -1 : 1));
+        this.group.sort((x, y) => (x[sortBy] < y[sortBy] ? -1 : 1));
         this.sortedbyASC = true;
       }
     },
