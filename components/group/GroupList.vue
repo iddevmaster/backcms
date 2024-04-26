@@ -51,10 +51,8 @@ style="
         <thead>
             <tr>
                 <th scope="col">{{ $t("table_id_group") }}</th>
-                <th scope="col">ໝວດ</th>
-                
-                <th class="text-center" scope="col">{{ $t("table_id_name") }}</th>
-                
+                <th class="text-center" scope="col" @click="sortList('cg_id')">ໝວດ  &#8597;</th>
+                <th class="text-center" scope="col" @click="sortList('cg_name')">{{ $t("table_id_name") }}  &#8597;</th>
                 <th class="text-center" scope="col">{{ $t("table_id_create") }}</th>
                 <th class="text-center" scope="col">{{ $t("table_id_action") }}</th>
             </tr>
@@ -290,7 +288,9 @@ await store.fetchGrouplist();
   }
 
 };
-
+const sortList = async (sortBy) => {
+  await sortLists(sortBy)
+};
 
 </script>
 <style>
