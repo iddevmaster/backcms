@@ -51,7 +51,7 @@ style="
         <thead>
             <tr>
                 <th scope="col">{{ $t("table_id_group") }}</th>
-              
+                <th class="text-center" scope="col" @click="sortList('cg_id')">ໝວດ  &#8597;</th>
                 <th class="text-center" scope="col" @click="sortList('cg_name')">{{ $t("table_id_name") }}  &#8597;</th>
                 <th class="text-center" scope="col">{{ $t("table_id_create") }}</th>
                 <th class="text-center" scope="col">{{ $t("table_id_action") }}</th>
@@ -62,7 +62,7 @@ style="
         <tbody> 
             <tr  v-for="(item,index) in store.group" :key="item.cg_id">
                 <td>{{ (store.formsearchgroup.page * store.formsearchgroup.per_page) - (store.formsearchgroup.per_page -  index) +  1 }}</td>
-              
+                <td>{{item.cg_id}}</td>
                 <td>
                   <span class="table-inner-text">
                     {{item.cg_id}} - {{item.cg_name}}
