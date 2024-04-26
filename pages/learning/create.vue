@@ -256,13 +256,13 @@ const filterInputCourse = async (event) => {
       store.formDataCourse.course_name = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
 };
 
-const filterInputCourseDes = async (event) => {
+const filterInputCourseCourse = async (event) => {
   const key = event.data;
       if (event.data === ' ') {
-        store.formDataCourse.course_description = store.formDataCourse.course_description.substring(0, store.formDataCourse.course_description.length - 1);
+        store.formDataCourse.course_code = store.formDataCourse.course_code.substring(0, store.formDataCourse.course_code.length - 1);
         return;
       }
-      store.formDataCourse.course_description = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+      store.formDataCourse.course_code = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
 };
 
 const filterInputCourseremarkA = async (event) => {
@@ -419,6 +419,7 @@ const onFileChangeBackPdf = async (event) => {
         }"
         @change="v$.course_code.$touch"
         maxlength="20"
+        @input="filterInputCourseCourse"
   
       />
 
@@ -506,7 +507,7 @@ The Course Name field is required.</span>
         @change="v$.course_description.$touch"
         v-model="store.formDataCourse.course_description"
         maxlength="500"
-        @input="filterInputCourseDes"
+   
       >
       </textarea>
 

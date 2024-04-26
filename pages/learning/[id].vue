@@ -223,13 +223,13 @@ const filterInputCourse = async (event) => {
       store.formDataEditCourse.course_name = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
 };
 
-const filterInputCourseDes = async (event) => {
+const filterInputCourseCourse = async (event) => {
   const key = event.data;
       if (event.data === ' ') {
-        store.formDataEditCourse.course_description = store.formDataEditCourse.course_description.substring(0, store.formDataEditCourse.course_description.length - 1);
+        store.formDataEditCourse.course_code = store.formDataEditCourse.course_code.substring(0, store.formDataEditCourse.course_code.length - 1);
         return;
       }
-      store.formDataEditCourse.course_description = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
+      store.formDataEditCourse.course_code = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
 };
 
 const filterInputCourseremarkA = async (event) => {
@@ -402,6 +402,7 @@ function coverimage(i) {
         'border-[#42d392] ': !v$.course_code.$invalid,
       }" @change="v$.course_code.$touch"
        maxlength="20"
+       @input="filterInputCourseCourse"
       />
  
  <div v-if="locale == 'la'" >
@@ -469,7 +470,7 @@ The Course Name field is required.</span>
         'border-[#42d392] ': !v$.course_description.$invalid,
       }" @change="v$.course_description.$touch" v-model="store.formDataEditCourse.course_description"
           maxlength="500"
-          @input="filterInputCourseDes"
+         
       >
       </textarea>
       <div v-if="locale == 'la'" >
