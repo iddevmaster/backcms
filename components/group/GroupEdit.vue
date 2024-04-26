@@ -21,7 +21,7 @@
               class="form-control"
               id="recipient-name"
               v-model="store.formeditgroup.cg_name"
-              maxlength="50"
+              maxlength="100"
             />
 
             <span
