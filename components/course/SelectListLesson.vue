@@ -420,7 +420,7 @@ const validatePNumberSelect = async (evt) => {
     
 p.disctext_cgname{
   white-space: nowrap; 
-  width: 200; 
+  width: 100; 
   overflow: hidden;
   text-overflow: ellipsis;
 }
