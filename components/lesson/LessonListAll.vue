@@ -73,8 +73,8 @@ style="
       <tbody>
         <tr v-for="(item, index) in store.lessonlist" :key="item.cs_id">
           <td>{{ (store.formsearchlesson.page * store.formsearchlesson.per_page) - (store.formsearchlesson.per_page -  index) +  1 }}</td>
-             <td>{{ item.cs_name }}</td>
-               <td>{{ item.cs_description }}</td>
+             <td><p class="test2">{{ item.cs_name }}</p></td>
+               <td><p class="test2">{{ item.cs_description }}</p></td>
             <td>{{ item.cg_name }}</td>
           <td class="text-center">
             
@@ -520,5 +520,12 @@ function image(i) {
   object-fit: cover;
   height: 200px;
   width: 100%;
+}
+
+p.test2 {
+  white-space: nowrap; 
+  width: 400px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
