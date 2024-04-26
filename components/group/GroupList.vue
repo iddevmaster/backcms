@@ -51,7 +51,10 @@ style="
         <thead>
             <tr>
                 <th scope="col">{{ $t("table_id_group") }}</th>
+                <th scope="col">CG ID</th>
+                
                 <th class="text-center" scope="col">{{ $t("table_id_name") }}</th>
+                
                 <th class="text-center" scope="col">{{ $t("table_id_create") }}</th>
                 <th class="text-center" scope="col">{{ $t("table_id_action") }}</th>
             </tr>
@@ -61,7 +64,7 @@ style="
         <tbody> 
             <tr  v-for="(item,index) in store.group" :key="item.cg_id">
                 <td>{{ (store.formsearchgroup.page * store.formsearchgroup.per_page) - (store.formsearchgroup.per_page -  index) +  1 }}</td>
-                
+                <td>{{item.cg_id}}</td>
                 <td>
                   <span class="table-inner-text">
                     {{item.cg_name}}
