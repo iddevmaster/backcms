@@ -197,7 +197,7 @@ const router = useRouter();
 const toast = useToast();
 const store = GroupStore();
 const auth = useAuthStore()
-
+const { sortLists } = GroupStore();//Action
 
 
 
