@@ -100,9 +100,9 @@
                 />
               </div>
             </td>
-            <td>{{item.cs_name}}</td>
-            <td>{{item.cs_description}}</td>   
          
+            <td><p class="disctext">{{item.cs_name}}</p></td>
+                <td><p class="disctext">{{item.cs_description}}</p></td>
           <td> 
             <a v-if="item.cs_video" :href="item.cs_video" target="_blank"><span class="badge badge-success">ກົດເພື່ອເປີດເບິ່ງ</span></a>
             <a v-else><span class="badge badge-danger">ບໍ່ມີວິດີໂອ</span></a>
@@ -467,6 +467,13 @@ function image(i) {
 }
 </script>
     <style>
+
+p.disctext {
+  white-space: nowrap; 
+  width: 300px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .seperator-headerx {
   background: transparent;
   box-shadow: none;

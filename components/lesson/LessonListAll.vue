@@ -39,7 +39,7 @@ style="
       
       >
         <option :value="0">ທັງໝົດ</option>
-        <option v-for="item in store.group" :value="item.cg_id" :key="item.cg_id"   >{{item.cg_name}}</option>
+        <option v-for="item in store.group" :value="item.cg_id" :key="item.cg_id"   >{{item.cg_id}} : {{item.cg_name}}</option>
       </select>
     </div>
        <div class="col-xl- col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
@@ -73,8 +73,8 @@ style="
       <tbody>
         <tr v-for="(item, index) in store.lessonlist" :key="item.cs_id">
           <td>{{ (store.formsearchlesson.page * store.formsearchlesson.per_page) - (store.formsearchlesson.per_page -  index) +  1 }}</td>
-             <td><p class="test2">{{ item.cs_name }}</p></td>
-               <td><p class="test2">{{ item.cs_description }}</p></td>
+             <td><p class="disctext">{{ item.cs_name }}</p></td>
+               <td><p class="disctext">{{ item.cs_description }}</p></td>
             <td>{{ item.cg_name }}</td>
           <td class="text-center">
             
@@ -522,7 +522,7 @@ function image(i) {
   width: 100%;
 }
 
-p.test2 {
+p.disctext {
   white-space: nowrap; 
   width: 400px; 
   overflow: hidden;
