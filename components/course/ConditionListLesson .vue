@@ -6,14 +6,14 @@
 
                     <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12">
-      <h4 class="">ເນື້ອໃນອົງປະກອບ</h4>
+      <h4 class="">{{$t('course_subjects')}}</h4>
     </div>
   </div>
 
   <div class="row layout-top-spacing">
     <div class="col-lg-4 col-md-3 col-sm-3 mb-4">
  <button type="button" class="btn btn-primary" style="width: 100%; height: 100%; margin-top: auto;
-" @click="ShowModalAdd">ເພິ່ມ ເນື້ອໃນອົງປະກອບ</button>
+" @click="ShowModalAdd">{{$t('course_subject_add')}}</button>
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
      
@@ -39,9 +39,9 @@
                        #
                     </div>
                 </th>
-                <th scope="col">ໝວດວິຊາ</th>
-                <th scope="col">ຈຳນວນບົດຮຽນ</th>
-                <th scope="col">ຈຳນວນ ຄຳຖາມເສັງ </th>
+                <th scope="col">{{$t('course_subject')}}</th>
+                <th scope="col">{{$t('course_num_lesson')}}</th>
+                <th scope="col">{{$t('course_num_question')}} </th>
 
                 <th scope="col"> - </th>
             </tr>

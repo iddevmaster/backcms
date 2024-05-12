@@ -56,7 +56,7 @@
                 <td class="text-center">
   <img :src="image(item.em_cover)" class="img-fluid" width="80" height="80" />
                 </td>
-                <td>
+                <td style="white-space:unset;">
                   <span class="table-inner-text">
                     {{item.em_name}}
                   </span>

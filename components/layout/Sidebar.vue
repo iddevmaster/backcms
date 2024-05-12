@@ -295,7 +295,7 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/news/transport">{{ $t("menu_new_tra") }}</nuxt-link>
+              <nuxt-link to="/news/transport">{{ $t("menu_page_new_tra_all") }}</nuxt-link>
             </li>
             <li>
               <nuxt-link to="/news/transport/create"
@@ -442,9 +442,9 @@
             <li>
               <nuxt-link to="/appointment/create">{{ $t("menu_app_app_create") }}</nuxt-link>
             </li>
-             <li>
+             <!-- <li>
               <nuxt-link to="/appointment/apppresent">{{ $t("menu_app_view_present") }}</nuxt-link>
-            </li>
+            </li> -->
 
              <li>
               <nuxt-link to="/appointment/user">{{ $t("menu_app_view_by_user") }}</nuxt-link>

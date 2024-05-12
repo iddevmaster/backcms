@@ -52,23 +52,21 @@
       <thead>
         <tr>
           <th>{{ $t("menu_app_view_list_index") }}</th>
-          <th>{{ $t("menu_app_view_list_email") }}</th>
           <th>{{ $t("menu_app_view_list_name") }}</th>
           <th>{{ $t("menu_app_view_list_phone") }}</th>
           <th>{{ $t("menu_app_view_iden") }}</th>
+          <th>{{ $t("menu_app_view_list_email") }}</th>
           <th>{{ $t("menu_app_view_action") }}</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(item, index) in store.reservebyap">
           <td>{{ index + 1 }}</td>
-          <td>{{ item.user_reserve.user_email }}</td>
           <td> {{item.user_reserve.user_prefrix}} {{ item.user_reserve.user_firstname }} {{ item.user_reserve.user_lastname }}
-         
-         
           </td>
           <td>{{ item.user_reserve.user_phone }}</td>
           <td>{{ item.user_reserve.identification_number }}</td>
+          <td>{{ item.user_reserve.user_email }}</td>
           <td>
             <button
               type="button"

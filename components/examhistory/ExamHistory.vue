@@ -49,13 +49,13 @@
                 <td class="text-center">
   <img :src="image(item.em_cover)" class="img-fluid" width="80" height="80" />
                 </td>
-                <td>
+                <td style="white-space:unset;">
                   <span class="table-inner-text">
                     {{item.em_name}}
                   </span>
                 </td>
               
-                <td class="text-center">
+                <td class="text-center" style="white-space:unset;">
                   {{item.em_description}}
                 </td>
                 <td class="text-center">

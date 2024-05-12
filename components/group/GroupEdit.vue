@@ -13,7 +13,7 @@
         <form>
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">
-              {{ $t("lesson_qui") }}:</label
+              {{ $t("group_name") }}:</label
             >
 
             <input

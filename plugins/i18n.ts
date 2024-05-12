@@ -9,6 +9,7 @@ import la from '../locales/la.json'
      legacy: false,
      globalInjection: true,
      locale: 'la',
+     fallbackLng: 'en',
      messages: {
       en,
       th,

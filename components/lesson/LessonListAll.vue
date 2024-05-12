@@ -5,7 +5,7 @@
         id="t-text"
         type="text"
         name="txt"
-        placeholder="ຊອກຫາ"
+        :placeholder="$t('search')"
         class="form-control"
         required=""
         v-model="store.formsearchlesson.search"
@@ -17,9 +17,9 @@
         id="t-text"
         type="button"
         name="txt"
-        placeholder="ຊອກຫາ"
+        :placeholder="$t('search')"
         class="form-control"
-        value="+ ເພີ່ມບົດຮຽນ"
+        :value="$t('menu_couse_f_add_lesson')"
 style="
     background-color: rgb(15, 119, 223);
     color: white;
@@ -38,7 +38,7 @@ style="
         aria-label="Default select example" @change="selectshowdata_ch($event)"
       
       >
-        <option :value="0">ທັງໝົດ</option>
+        <option :value="0">{{ $t('all_subject') }}</option>
         <option v-for="item in store.group" :value="item.cg_id" :key="item.cg_id"   >{{item.cg_name}}</option>
       </select>
     </div>
@@ -62,8 +62,8 @@ style="
       <thead>
             <tr>
                 <th scope="col">#</th>
-                <th class="text-center" scope="col">{{ $t("lesson_qui") }}</th>
-                <th class="text-center" scope="col">{{ $t("lesson_ans") }}</th>
+                <th class="text-center" scope="col">{{ $t("lesson_title") }}</th>
+                <th class="text-center" scope="col">{{ $t("lesson_content") }}</th>
                  <th scope="col">{{ $t("lesson_group") }}</th>
                 <th scope="col">{{ $t("lesson_pic") }}</th>
                   <th class="text-center" scope="col">{{ $t("less_ac") }}</th>
@@ -73,10 +73,10 @@ style="
       <tbody>
         <tr v-for="(item, index) in store.lessonlist" :key="item.cs_id">
           <td>{{ (store.formsearchlesson.page * store.formsearchlesson.per_page) - (store.formsearchlesson.per_page -  index) +  1 }}</td>
-             <td>{{ item.cs_name }}</td>
-               <td>{{ item.cs_description }}</td>
+            <td style="white-space:unset;">{{ item.cs_name }}</td>
+            <td  style="white-space:unset;">{{ item.cs_description }}</td>
             <td>{{ item.cg_name }}</td>
-          <td class="text-center">
+            <td class="text-center">
             
             <img :src="image(item.cs_cover)" class="img-fluid" width="80" height="80" v-if="item.cs_cover">
                   <img src="../../assets/images/no_photo.jpg" class="img-fluid" width="80" height="80" v-else>

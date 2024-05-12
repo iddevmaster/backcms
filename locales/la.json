@@ -252,9 +252,10 @@
   "menu_app_view_iden": "ໝາຍເລກບັດປະຈຳຕົວ",
   "menu_app_view_action": "ຈັດການ",
   "menu_app_view_re": "ລາຍການນັດໝາຍ",
-
   "menu_app_view_present": "ເບິ່ງນັດໝາຍ ປະຈຳວັນ",
   "menu_app_view_by_user": "ນັດໝາຍຜູ້ໃຊ້",
+  "menu_app_view_add_reserve" : "ນັດໝາຍຜູ້ໃຊ້",
+
 
 
   "menu_result": "ຜົນການສອບເສັງ",
@@ -289,7 +290,7 @@
   "menu_pass": "ຜ່ານ",
   "l_thai": "ໄທ",
   "l_loas": "ລາວ",
-  "l_eng": "ອັງກິດ",
+  "l_eng": "English",
 
   "resultall": "ຜົນສອບເສັງ​ທັງ​ຫມົດ​",
   "resultadd": "ເພີ່ມຜົນສອບເສັງ",
@@ -417,8 +418,10 @@
   "lesson_select_record":"ເລືອກ",
   "lesson_head":"ບົດຮຽນ",
   "lesson_qui":"ຫົວຂໍ້",
-  "lesson_group":"ໝວດ",
+  "lesson_group":"ໝວດວິຊາ",
   "lesson_ans":"ເນື້ອໃນ",
+  "lesson_title":"ຫົວຂໍ້",
+  "lesson_content":"ເນື້ອໃນ",
   "lesson_yout":"ວິດີໂອ",
   "lesson_pic":"ຮູບ",
   "add_lesson":"ເພີ່ມບົດຮຽນ",
@@ -443,17 +446,34 @@
   "fitter_dlt":"ປະເພດໃບຂັບຂີ່",
   "fitter_province":"ແຂວງ",
   "backto_lean":"ກັບໄປຫຼັກສູດທັງໝົດ",
-  "title_group":"ບົດຮຽນ",
-  "title_group_t":"ບົດຮຽນທັງໝົດ",
+  "title_group":"ໝວດວິຊາ",
+  "title_group_t":"ໝວດວິຊາທັງໝົດ",
   "table_id_group" :"#",
   "table_id_name" :"ຊື່ໝວດ",
   "table_id_create" :"ສ້າງ",
   "table_id_action" :"ຈັດການ",
 
-  "group_title" :"ກຸ່ມ",
-  "group_name" :"ຊື່ໝວດ",
-  "group_add" :"ເພີ່ມກຸ່ມ",
-  "group_edit" :"ແກ້ໄຂກຸ່ມ"
+  "group_title" :"ໝວດວິຊາ",
+  "group_name" :"ຊື່ໝວດວິຊາ",
+  "group_add" :"ເພີ່ມໝວດວິຊາ",
+  "group_edit" :"ແກ້ໄຂໝວດວິຊາ",
+
+  "select" : "ເລືອກ",
+  "save_reserve_appointment" : "ບັນທຶກ ຈອງນັດ",
+  "course_title" : "ຫົວຂໍ້",
+  "exam_condition" : "ເງືອນໄຂການເສັງທິດສະດີ",
+  "course_subjects" : "ໝວດວິຊາ",
+  "course_subject_add" : "ເພິ່ມໝວດວິຊາ",
+  "course_subject" : "ໝວດວິຊາ",
+  "course_num_lesson" : "ຈຳນວນບົດຮຽນ",
+  "course_num_question" : "ຈຳນວນຄຳຖາມ",
+  "all_subject" : "ວິຊາທັງໝົດ",
+
+
+
+
+  "" : ""
+
   
 }
 

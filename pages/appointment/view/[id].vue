@@ -57,15 +57,16 @@ await store.fetchAppointment();
             </div>
             <div class="middle-content container-xxl p-0">
                 <div class="row layout-top-spacing">
-                      <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-                        <div class="widget-content widget-content-area br-8 p-3">
-                            <ReserveCreate></ReserveCreate>
-                        </div>
-                    </div>
+                    
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                         <div class="widget-content widget-content-area br-8 p-3">
                             <AppointView></AppointView>
                   
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                        <div class="widget-content widget-content-area br-8 p-3">
+                            <ReserveCreate></ReserveCreate>
                         </div>
                     </div>
                 </div>

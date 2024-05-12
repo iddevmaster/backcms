@@ -5,7 +5,7 @@
         id="t-text"
         type="text"
         name="txt"
-        placeholder="ຊອກຫາ"
+        :placeholder="$t('search')"
         class="form-control"
         required=""
         v-model="store.formsearchgroup.search"
@@ -17,9 +17,9 @@
         id="t-text"
         type="button"
         name="txt"
-        placeholder="ຊອກຫາ"
+        :placeholder="$t('search')"
         class="form-control"
-        value="+ ເພີ່ມໝວດ"
+        :value="$t('group_add')"
 style="
     background-color: rgb(15, 119, 223);
     color: white;

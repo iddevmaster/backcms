@@ -1,4 +1,9 @@
 <template>
+
+<div class="seperator-header">
+        <h4 class="">{{ $t("menu_app_view_add_reserve") }}</h4>
+      </div>
+
   <div class="row layout-top-spacing">
     <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
       <input
@@ -144,7 +149,7 @@
     </div>
   </div>
   
-  <button type="button" class="btn btn-primary" @click="save()">บันทึก</button>
+  <button type="button" class="btn btn-primary" @click="save()">{{ $t('save_reserve_appointment') }}</button>
 </template>
 <script setup lang="ts">
 import { storeToRefs } from "pinia";

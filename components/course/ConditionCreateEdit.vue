@@ -6,7 +6,7 @@
     >
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          ເພິ່ມ ເນື້ອໃນອົງປະກອບ
+          {{$t('course_subject_add')}}
         </h5>
       </div>
       <div class="modal-body">
@@ -33,7 +33,7 @@ v-model="store.mycondition_group"
 
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4">
       <label for="recipient-name" class="col-form-label">
-        ຈຳນວນບົດຮຽນ </label
+        {{$t('course_num_lesson')}} </label
             >
       <input
               type="text"
@@ -42,7 +42,7 @@ v-model="store.mycondition_group"
               v-model="store.formDataCondit.cc_value_a"
               maxlength="2"
               @input="filterInputCgNameA"
-              placeholder="ຈຳນວນບົດຮຽນ"
+              :placeholder="$t('course_num_lesson')"
             />
             <span  class="text-xs text-red-500" v-if="store.AlertA"
         style="color: red" >ຕ້ອງມີຊ່ອງຂໍ້ມູນ</span>
@@ -52,14 +52,14 @@ v-model="store.mycondition_group"
 
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4">
        <label for="recipient-name" class="col-form-label">
-      ຈຳນວນ ຄຳຖາມເສັງ </label>
+        {{$t('course_num_question')}}</label>
       <input
               type="text"
               class="form-control"
               id="recipient-name"
               v-model="store.formDataCondit.cc_value_b"
               maxlength="2"
-              placeholder="ຈຳນວນ ຄຳຖາມເສັງ"
+              :placeholder="$t('course_num_question')"
               @input="filterInputCgNameB"
             />
 

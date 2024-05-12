@@ -152,7 +152,7 @@ import { doesNotReject } from 'assert';
 import { ref, onMounted, onUnmounted } from 'vue';
 import { useI18n } from "vue-i18n";
 import Swal from 'sweetalert2';
-const { locale, setLocale } = useI18n();
+const { locale, setLocale, t } = useI18n();
 
  
 
@@ -210,7 +210,7 @@ const Fitter = async () => {
   }else {
 
     Swal.fire({
-      text: 'ຂ້ອຍຍັງບໍ່ໄດ້ຢືນຢັນຕົວຕົນຂອງຂ້ອຍເທື່ອ!',
+      text: 'Please select a user',
       icon: 'error',
     });
 

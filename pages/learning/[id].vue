@@ -446,7 +446,7 @@ The Course Name field is required.</span>
     </div>
 
     <div class="col-md-12 mt-3">
-      <label for="inputPassword4" class="form-label">  ຫົວຂໍ້ </label><span class="text-xs text-red-500" style="color:red">  </span> 
+      <label for="inputPassword4" class="form-label">  {{ $t('course_title') }}  </label><span class="text-xs text-red-500" style="color:red">  </span> 
       <input type="text" class="form-control" id="inputPassword4"  placeholder="ຊື່ຫຼັກສູດ" v-model="store.formDataEditCourse.course_remark_a"   @input="filterInputCourseremarkA"
       maxlength="200" 
       />
@@ -455,8 +455,8 @@ The Course Name field is required.</span>
     </div>
 
     <div class="col-md-12 mt-3">
-      <label for="inputPassword4" class="form-label">  ເງືອນໄຂສອບເສັງທິດສະດ </label>
-      <input type="text" class="form-control" id="inputPassword4"  placeholder="ເງືອນໄຂສອບເສັງທິດສະດ" v-model="store.formDataEditCourse.course_remark_b" @input="filterInputCourseremarkB"
+      <label for="inputPassword4" class="form-label">  {{ $t('exam_condition') }}   </label>
+      <input type="text" class="form-control" id="inputPassword4"  placeholder="ເງືອນໄຂສອບເສັງທິດສະດີ" v-model="store.formDataEditCourse.course_remark_b" @input="filterInputCourseremarkB"
          maxlength="200"   
       />
       <span v-if="v$.course_remark_b.$error" class="text-xs text-red-500"
