@@ -55,7 +55,7 @@
           :key="item.cg_id"
           :value="item.cg_name"
         >
-        {{ item.cg_name }}
+        {{ item.cg_id }} - {{ item.cg_name }}
       </option>
       </select>
     </div>
@@ -95,9 +95,9 @@
             <tr v-for="(item, index) in store.selected" :key="item.cs_id">
               <td>{{ (store.formselect.page * store.formselect.per_page) - (store.formselect.per_page -  index) +  1 }}</td>
               
-                <td>{{item.cs_name}}</td>
-                <td>{{item.cs_description}}</td>
-                <td>{{item.cg_name}}</td>
+                <td><p class="disctext">{{item.cs_name}}</p></td>
+                <td><p class="disctext">{{item.cs_description}}</p></td>
+                <td> <p class="disctext_cgname">{{item.cg_name}}</p></td>
 
               
                 <td> 
@@ -410,9 +410,20 @@ const validatePNumberSelect = async (evt) => {
     
     
     </script>
-    <style>
+    <style scoped>
+    p.disctext {
+  white-space: nowrap; 
+  width: 320px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
     
-    
+p.disctext_cgname {
+  white-space: nowrap; 
+  width: 120px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
     .video-container {
       position: relative;
       width: 100%;

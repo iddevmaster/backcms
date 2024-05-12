@@ -10,6 +10,7 @@ export const GroupStore = defineStore('group', {
     GetopenModalCreate:false,
     GetopenModalEdit:false,
     GetopenModal:false,
+    sortedbyASC: true,
     cg_id:null,
     myValue: null,
     formgroup:{
@@ -124,6 +125,17 @@ export const GroupStore = defineStore('group', {
     async fitter() {
 
     },
+
+    sortLists(sortBy) {
+      if (this.sortedbyASC) {
+        this.group.sort((x, y) => (x[sortBy] > y[sortBy] ? -1 : 1));
+        this.sortedbyASC = false;
+      } else {
+        this.group.sort((x, y) => (x[sortBy] < y[sortBy] ? -1 : 1));
+        this.sortedbyASC = true;
+      }
+    },
+
 
 
   },

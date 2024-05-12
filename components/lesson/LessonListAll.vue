@@ -521,4 +521,11 @@ function image(i) {
   height: 200px;
   width: 100%;
 }
+
+p.disctext {
+  white-space: nowrap; 
+  width: 400px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 </style>

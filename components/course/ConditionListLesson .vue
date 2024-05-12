@@ -51,7 +51,7 @@
             <tr v-for="(item, index) in stores.mycondition" :key="item.cg_id">
               <td>{{ index + 1 }}</td>
               
-                <td>{{item.cg_name}}</td>
+                <td>{{ item.cg_id }} - {{item.cg_name}}</td>
                 <td>{{item.cc_value_a}}</td>
                 <td>{{item.cc_value_b}}</td>
                 <td>

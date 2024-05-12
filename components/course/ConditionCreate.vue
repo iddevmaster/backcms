@@ -24,10 +24,19 @@
       <v-select
 v-model="store.mycondition_group"
     :options=" stores.group"
+
     label="cg_name"
      placeholder="ເລືອກ"
+     
+
        
-  ></v-select>
+  >
+  <template v-slot:option="option">
+   
+    {{ option.cg_id }} - {{ option.cg_name }}
+  </template>
+   
+</v-select>
 
   <span  class="text-xs text-red-500" v-if="store.AlertCondition"
         style="color: red" >ຕ້ອງມີຊ່ອງຂໍ້ມູນ</span>
