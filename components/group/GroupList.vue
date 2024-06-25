@@ -51,28 +51,49 @@ style="
         <thead>
             <tr>
                 <th scope="col">{{ $t("table_id_group") }}</th>
-                <th class="text-center" scope="col" @click="sortList('cg_id')">ໝວດ  &#8597;</th>
-                <th class="text-center" scope="col" @click="sortList('cg_name')">{{ $t("table_id_name") }}  &#8597;</th>
+                <th class="text-center" scope="col" @click="sortList('cg_id')">{{ $t("table_id_name_lo") }}   &#8597;</th>
+                <th class="text-center" scope="col" @click="sortList('cg_name')">{{ $t("table_id_name_en") }}  &#8597;</th>
                 <th class="text-center" scope="col">{{ $t("table_id_create") }}</th>
+                <th class="text-center" scope="col">{{ $t("table_id_status") }}</th>
                 <th class="text-center" scope="col">{{ $t("table_id_action") }}</th>
             </tr>
         </thead>
 
+ 
 
         <tbody> 
             <tr  v-for="(item,index) in store.group" :key="item.cg_id">
                 <td>{{ (store.formsearchgroup.page * store.formsearchgroup.per_page) - (store.formsearchgroup.per_page -  index) +  1 }}</td>
-                <td>{{item.cg_id}}</td>
+                <td>{{item.cg_name_lo}}</td>
                 <td>
                   <span class="table-inner-text">
-                    {{item.cg_id}} - {{item.cg_name}}
+                   {{item.cg_name_eng}}
                   </span>
                 </td>
+
+                
+                
                 <td>
                   <span class="table-inner-text">
                     {{item.crt_date}}
                   </span>
                 </td>
+                <td>
+              
+                  <div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" :checked="item.active" @change="toggleItem(index)">
+ <span class="form-check-label"> <p>{{ item.active === 1 ? 'Active' : 'UnActive' }}</p></span>
+ 
+ 
+</div>
+
+
+
+
+
+                </td>
+
+                
       
       
 
@@ -222,6 +243,14 @@ function coverttime(date) {
 const searchData = async () => {
   await store.fetchGrouplist();
 };
+const toggleItem = async (index) => {
+  store.group[index].active = store.group[index].active === 1 ? 0 : 1;
+  
+ // await store.ActiveGroup(store.group[index]);
+};
+
+
+
 const openmodal = async () => {
 store.GetopenModalCreate = true;
 };
@@ -233,9 +262,10 @@ store.GetopenModal = true;
 };
 
 const edit = async (item) => {
-
+console.log(item);
   store.formeditgroup.cg_id = item.cg_id
-  store.formeditgroup.cg_name = item.cg_name
+  store.formeditgroup.cg_name_lo = item.cg_name_lo
+  store.formeditgroup.cg_name_eng = item.cg_name_eng
   store.formeditgroup.user_id = auth.user_id
 store.GetopenModalEdit = true;
 };
@@ -293,7 +323,9 @@ const sortList = async (sortBy) => {
 };
 
 </script>
-<style>
+<style scoped>
+
+
 .dt--pagination {
   float: right;
 }
@@ -339,6 +371,131 @@ width: 100%;
   border-radius: 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   position: relative;
+}
+
+input:checked {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+
+/*----------- BUTTON ----------*/
+.btn-holder {
+  width: 400px;
+  height: 300px;
+  margin: 50px auto 0;
+}
+.btn-lg.btn-toggle {
+  padding: 0;
+  margin: 0 5rem;
+  position: relative;
+  height: 2.5rem;
+  width: 6rem;
+  border-radius: 3rem;
+  color: #6b7381;
+  background: #bdc1c8;
+  margin-bottom: 30px;
+}
+.btn-toggle.btn-lg > .switch {
+    position: absolute;
+    top: 0.2rem;
+    left: 0.1rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1.875rem;
+    background: #fff;
+    transition: left .25s;
+}
+.btn-toggle.active {
+    background-color: #ff8800;
+}
+.btn-toggle.btn-lg.active > .switch {
+    left: 3.75rem;
+    transition: left .25s;
+}
+
+.btn-lg.btn-toggle:after {
+    content: "Active";
+    right: -5rem;
+    opacity: 0.5;
+    line-height: 2.5rem;
+    width: 5rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    position: absolute;
+    bottom: 0;
+    transition: opacity .25s;
+}
+
+.btn-lg.btn-toggle.active:after {
+  opacity: 1;
+}
+
+/*------------ CHECKBOX -------------*/
+.toggle-switch {
+  margin: 0 auto;
+  width: 241px;
+  margin-top: 20px;
+  position: relative;
+}
+.toggle-switch label {
+  padding: 0;
+}
+input#cb-switch {
+  display: none;
+}
+.toggle-switch label input + span {
+      position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    width: 6rem;
+    height: 2.5rem;
+    background: #bdc1c8;
+    border: 1px solid #eee;
+    border-radius: 50px;
+    transition: all 0.3s ease-in-out;
+    box-shadow: inset 0 0 5px #828282;
+}
+.toggle-switch label input + span small {
+    position: absolute;
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1.875rem;
+    background: #fff;
+    transition: all 0.3s ease-in-out;
+    top: 0.2rem;
+    left: 0.2rem;
+}
+.toggle-switch label input:checked + span {
+  background-color: #ff8800;
+}
+.toggle-switch label input:checked + span small{
+    left: 3.7rem;
+    transition: left .25s;
+}
+.toggle-switch span:after {
+  content: "Active";
+  line-height: 2.5rem;
+    width: 5rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    position: absolute;
+    bottom: 0;
+    transition: opacity .25s;
+    left: 6rem;
+    opacity: 0.5;
+    color: #6b7381;
+}
+.toggle-switch label input:checked + span:after {
+  opacity: 1;
 }
 
 </style>

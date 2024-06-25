@@ -20,6 +20,10 @@ export const GroupStore = defineStore('group', {
       page: 1,
       per_page: 5,
       search: '',
+      active_include: [
+        0,
+        1
+    ]
     },
     formcreategroup: {
       cg_name:"",
@@ -105,6 +109,20 @@ export const GroupStore = defineStore('group', {
           }else {
             return false;
           }
+        });
+        return data
+      } catch (error) {
+        return false;
+      }
+
+    },
+
+    async ActiveGroup(item) {
+      console.log(item);
+
+      try {
+        const data = await ApiService.get('/course/group/active/'+ item.active +'/'+item.cg_id).then(response => {
+     console.log(response);
         });
         return data
       } catch (error) {

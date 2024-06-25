@@ -20,7 +20,7 @@ import 'vue-loading-overlay/dist/css/index.css';
 
 definePageMeta({
   middleware: ['auth','roles'],
-  allowedRoles: [1,2]
+  allowedRoles: [1]
 })
 
 const auth = useAuthStore()

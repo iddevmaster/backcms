@@ -449,12 +449,16 @@
   "title_group":"ໝວດວິຊາ",
   "title_group_t":"ໝວດວິຊາທັງໝົດ",
   "table_id_group" :"#",
-  "table_id_name" :"ຊື່ໝວດ",
+
+  "table_id_name_lo" :"ຊື່ໝວດວິຊາ(Lo)",
+  "table_id_name_en" :"ຊື່ໝວດວິຊາ(En)",
+
   "table_id_create" :"ສ້າງ",
   "table_id_action" :"ຈັດການ",
-
+  "table_id_status" :"ສະຖານະ",
   "group_title" :"ໝວດວິຊາ",
-  "group_name" :"ຊື່ໝວດວິຊາ",
+  "group_name" :"ຊື່ໝວດວິຊາ(Lo)",
+  "group_name_en" :"ຊື່ໝວດວິຊາ(En)",
   "group_add" :"ເພີ່ມໝວດວິຊາ",
   "group_edit" :"ແກ້ໄຂໝວດວິຊາ",
 
@@ -468,7 +472,7 @@
   "course_num_lesson" : "ຈຳນວນບົດຮຽນ",
   "course_num_question" : "ຈຳນວນຄຳຖາມ",
   "all_subject" : "ວິຊາທັງໝົດ",
-
+  "search":"ຊອກຫາ",
 
 
 

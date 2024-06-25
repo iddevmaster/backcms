@@ -89,14 +89,13 @@ const delete_userid = async (id) => {
                             </ol>
                         </nav>
                     </div>
-          
                 <Loading v-if="Pending"></Loading>
             <LessonListAll></LessonListAll>
             </div>
           </div>
 
-   <LessonCreate></LessonCreate>
-    <LessonEdit></LessonEdit>
+   <!-- <LessonCreate></LessonCreate>
+    <LessonEdit></LessonEdit> -->
 </template>
 
 <style>

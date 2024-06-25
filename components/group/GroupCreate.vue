@@ -20,18 +20,43 @@
               type="text"
               class="form-control"
               id="recipient-name"
-              v-model="store.formcreategroup.cg_name"
+              v-model="store.formcreategroup.cg_name_lo"
               maxlength="100"
               @input="filterInputCgName"
             />
 
             <span
-              v-if="v$.cg_name.$error"
+              v-if="v$.cg_name_lo.$error"
               class="text-xs text-red-500"
               style="color: red"
             >
               ຕ້ອງໃສ່ຂໍ້ຄວາມ.</span
             >
+
+          </div>
+
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">
+              {{ $t("group_name_en") }}:</label
+            >
+       
+            <input
+              type="text"
+              class="form-control"
+              id="recipient-name"
+              v-model="store.formcreategroup.cg_name_eng"
+              maxlength="100"
+              @input="filterInputCgName"
+            />
+
+            <span
+              v-if="v$.cg_name_eng.$error"
+              class="text-xs text-red-500"
+              style="color: red"
+            >
+              ຕ້ອງໃສ່ຂໍ້ຄວາມ.</span
+            >
+            
           </div>
         </form>
       </div>
@@ -82,7 +107,11 @@ const { FormGroup } = storeToRefs(store);
 
 const rules = computed(() => {
   return {
-    cg_name: {
+    cg_name_lo: {
+      required: helpers.withMessage("Exam code field is required", required),
+      minLength: minLength(1),
+    },
+    cg_name_eng: {
       required: helpers.withMessage("Exam code field is required", required),
       minLength: minLength(1),
     },

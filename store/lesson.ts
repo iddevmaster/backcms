@@ -132,15 +132,16 @@ export const LessonStore = defineStore('lesson', {
     async fetchLessonlist() {
       this.lessonlist = [];
 
-      if(this.cg_id == 0){
-        this.urlt = '/course/lesson/all?';
-      }
-      if(this.cg_id != 0){
-        this.urlt = '/course/lesson/all?cg_id='+this.cg_id;
-      }
+      // if(this.cg_id == 0){
+      //   this.urlt = '/course/lesson/all?';
+      // }
+      // if(this.cg_id != 0){
+      //   this.urlt = '/course/lesson/all?cg_id='+this.cg_id;
+      // }
 
       try {
-        const data = await ApiService.post(this.urlt, this.formsearchlesson).then(response => {
+        const data = await ApiService.post('course/group/all', this.formsearchlesson).then(response => {
+      
           this.lessonlist = response.data.data
           this.lesson_total_page = response.data.total_page
           this.lesson_limit_page = response.data.limit_page
@@ -151,7 +152,7 @@ export const LessonStore = defineStore('lesson', {
         this.isLoading = false;
         return true;
       } catch (error) {
-        return navigateTo('/maintenance');
+       // return navigateTo('/maintenance');
       }
     },
 
