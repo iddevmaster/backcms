@@ -94,8 +94,8 @@ const delete_userid = async (id) => {
             </div>
           </div>
 
-   <!-- <LessonCreate></LessonCreate>
-    <LessonEdit></LessonEdit> -->
+   <LessonCreate></LessonCreate>
+    <LessonEdit></LessonEdit>
 </template>
 
 <style>
