@@ -19,19 +19,16 @@
     </div>
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
-
 <select
   class="form-select form-select"
   aria-label="Default select example"
-  @change="selectshowdata($event)"
+  @change="selectactive($event)"
 >
-  <option value="5">ทั้งหมด</option>
-  <option value="10">ใช้งาน</option>
-  <option value="20">ไม่ใช้งาน</option>
-
+  <option :value="[0,1]">ทั้งหมด</option>
+  <option :value="[1]">ใช้งาน</option>
+  <option :value="[0]">ไม่ใช้งาน</option>
 </select>
 </div>
-
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <select
         class="form-select form-select"
@@ -317,6 +314,13 @@ const selectshowdata = async (sel) => {
   await selectentires(sel.target.value);
   await store.fetchCourslist();
 };
+
+const selectactive = async (sec) => {
+  store.formsearchcourse.active_include = [sec.target.value];
+  await store.fetchCourslist();
+};
+
+
 
 const selchk = async (x) => {
   // await selectone(x);
