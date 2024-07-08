@@ -16,6 +16,8 @@
   "menu_couse_f_title_code": "Code",
   "menu_couse_e_title": "Edit Course",
   "menu_couse_f_title_name": "Name",
+  "menu_couse_f_title_name_lo": "Name(Lo)",
+  "menu_couse_f_title_name_eng": "Name(Eng)",
   "menu_couse_f_title_detail": "Course description",
   "menu_couse_f_title_picture": "Image Cover",
   "menu_couse_f_title_display_picture": "Image Display here",

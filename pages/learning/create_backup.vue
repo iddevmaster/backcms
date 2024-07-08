@@ -5,7 +5,10 @@ import { CourseStore } from "@/store/course";
 import { LessonStore } from "@/store/lesson";
 import { useAuthStore } from '@/store/auth';
 import CourseCreate from "@/components/course/CourseCreate.vue";
-
+import ListLesson from "@/components/course/ListLesson.vue";
+import SelectListLesson from "@/components/course/SelectListLesson.vue";
+import ConditionListLesson from "@/components/course/ConditionListLesson .vue";
+import ConditionCreate from "@/components/course/ConditionCreate.vue";
 import ErrorUpload from "@/components/course/ErrorUpload.vue";
 
 import { useVuelidate } from "@vuelidate/core";
@@ -39,19 +42,67 @@ const { locale, setLocale } = useI18n();
 
 const auth = useAuthStore()
 const store = CourseStore();
-store.formDataCourse.user_id = auth.user_id
-store.isLoading = false;
-const toast = useToast();
-const router = useRouter();
+
+
 
 const storelesson = LessonStore();
 const { FormDataCourse } = storeToRefs(store);
 const { SaveCourse } = CourseStore();
+const { SaveLessoncluster } = CourseStore();
+const { SaveCondition } = CourseStore();
+const { SaveLesson } = CourseStore();
+const { ResetForm } = CourseStore();
 const { UploadfileCourse } = CourseStore();
+const { deletelesson } = CourseStore();
+const { Adlesson } = CourseStore();
+const { uploadfilecourse } = CourseStore();
 const { Savepdf } = CourseStore();
 const { UploadfileCoursePdf } = CourseStore();
 
+store.formDataCourse.user_id = auth.user_id
+store.formDataEditCourse.user_id = auth.user_id
+store.formDatalesson.user_id = auth.user_id
+store.formDataeditlesson.user_id = auth.user_id
+store.user_id = auth.user_id
+storelesson.item = [];
+store.selectedFilesError = []
+store.selectedFiles = []
+store.ResetForm()
 
+const { Pending } = storeToRefs(store); //Get Getter
+
+
+store.isLoading = true;
+const toast = useToast();
+const router = useRouter();
+storelesson.formcreatelesson.user_id = auth.user_id
+storelesson.user_id = auth.user_id
+
+
+storelesson.formsearchlesson.per_page = 10
+storelesson.formsearchlesson.page = 1
+storelesson.formsearchlesson.search = "";
+
+storelesson.formselect.per_page = 5
+storelesson.formselect.page = 1
+storelesson.formselect.total_page = 0;
+
+storelesson.selectlesson_form_menu_course.page = 1;
+storelesson.selectlesson_form_menu_course.per_page = 5;
+storelesson.selectlesson_form_menu_course.search = "";
+storelesson.cg_id = 0
+
+const grouplist = await storelesson.fetchGrouplist();
+
+
+ onMounted(async()  => {
+      // Fetch items when the component is mounted
+    
+      const lessonlist = await storelesson.fetchLessonlist();
+   //  await storelesson.paginatedItemsCourse();
+    store.isLoading = false;
+
+    })
 // fetchdata();
 
 const rules = computed(() => {
@@ -63,14 +114,7 @@ const rules = computed(() => {
       ),
       minLength: minLength(1),
     },
-    course_name_lo: {
-      required: helpers.withMessage(
-        "The Course Name is required",
-        required
-      ),
-      minLength: minLength(1),
-    },
-    course_name_eng: {
+    course_name: {
       required: helpers.withMessage(
         "The Course Name is required",
         required
@@ -86,6 +130,13 @@ const rules = computed(() => {
     },
 
     course_description: {
+      required: helpers.withMessage(
+        "The Course Description is required",
+        required
+      ),
+      minLength: minLength(1),
+    },
+    course_remark_a: {
       required: helpers.withMessage(
         "The Course Description is required",
         required
@@ -122,7 +173,9 @@ const openFileInput = async () => {
 }
 
 
-
+const fetchdata = async () => {
+console.log('data');
+}
 const save = async () => {
   v$.value.$validate();
   if (!v$.value.$error) {
@@ -133,15 +186,16 @@ const save = async () => {
       Swal.showLoading()
     },
   });
-
     let uploadfile = await UploadfileCourse();
     try {
       store.isLoaddingsave = true;
       let uploadfile = await UploadfileCourse();
       let updateCourse = await SaveCourse();
-     let uploadpdf = await UploadfileCoursePdf();
+      let uploadpdf = await UploadfileCoursePdf();
       let savepdf = await Savepdf();
-
+   let savelesson = await SaveLessoncluster();
+  let savecondition = await SaveCondition();
+  
       if(updateCourse === true){
               store.isLoaddingsave = false;
             const input = document.querySelector('input[type="file"]');
@@ -195,6 +249,10 @@ function coverimage(i) {
 
 const filterInputCourse = async (event) => {
   const key = event.data;
+      // if (event.data === ' ') {
+      //   store.formDataCourse.course_name = store.formDataCourse.course_name.substring(0, store.formDataCourse.course_name.length - 1);
+      //   return;
+      // }
       store.formDataCourse.course_name = event.target.value.replace(/[!@#$%^&*(),.?":{}|<>]/g, '');
 };
 
@@ -331,11 +389,11 @@ const onFileChangeBackPdf = async (event) => {
                 <div class="widget-content widget-content-area br-8 p-4">
                   <div class="widget-header">                                
                                     <div class="row">
-                                        <div class="col-xl-10 col-sm-12 col-10">
+                                        <div class="col-xl-10 col-md-10 col-sm-10 col-10">
                                             <h4>{{ $t("menu_couse_p_title") }}</h4>
                                         </div>
-                                        <div class="col-xl-2 col-sm-12 col-12" style="text-align: center;">
-                                          <button type="button" class="btn btn-primary additem _effect--ripple waves-effect waves-light bt-back-mo" @click="backtoLean()">
+                                        <div class="col-xl-2 col-md-2 col-sm-12 col-2" style="text-align: center;">
+                                          <button type="button" class="btn btn-primary additem _effect--ripple waves-effect waves-light" @click="backtoLean()">
       {{ $t("backto_lean") }}
     </button>   
    </div> 
@@ -381,69 +439,35 @@ const onFileChangeBackPdf = async (event) => {
   </div>
 
     </div>
-
-
     <div class="col-md-12 mt-3">
-      <label for="inputPassword4" class="form-label">{{ $t("menu_couse_f_title_name_lo") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
+      <label for="inputPassword4" class="form-label">{{ $t("menu_couse_f_title_name") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
       <input
         type="text"
         class="form-control"
         id="inputPassword4"
         placeholder="ຊື່ຫຼັກສູດ"
-        v-model="store.formDataCourse.course_name_lo"
+        v-model="store.formDataCourse.course_name"
         :class="{
-          'border-red-500 focus:border-red-500': v$.course_name_lo.$error,
-          'border-[#42d392] ': !v$.course_name_lo.$invalid,
+          'border-red-500 focus:border-red-500': v$.course_name.$error,
+          'border-[#42d392] ': !v$.course_name.$invalid,
         }"
-        @change="v$.course_name_lo.$touch"
+        @change="v$.course_name.$touch"
         maxlength="100"
         @input="filterInputCourse"
       />
    <div v-if="locale == 'la'" >
-      <span v-if="v$.course_name_lo.$error" class="text-xs text-red-500"
+      <span v-if="v$.course_name.$error" class="text-xs text-red-500"
         style="color: red" >ຕ້ອງມີຊ່ອງໃສ່ຊື່ຫຼັກສູດ.</span>
   </div>
 
   <div v-if="locale == 'en'" >
-      <span v-if="v$.course_name_lo.$error" class="text-xs text-red-500"
+      <span v-if="v$.course_name.$error" class="text-xs text-red-500"
         style="color: red" >
 The Course Name field is required.</span>
   </div>
 
   <div v-if="locale == 'th'" >
-      <span v-if="v$.course_name_lo.$error" class="text-xs text-red-500"
-        style="color: red" >ต้องระบุฟิลด์ชื่อหลักสูตร</span>
-  </div>
-    </div>
-    <div class="col-md-12 mt-3">
-      <label for="inputPassword4" class="form-label">{{ $t("menu_couse_f_title_name_eng") }}</label><span class="text-xs text-red-500" style="color:red"> * </span>
-      <input
-        type="text"
-        class="form-control"
-        id="inputPassword4"
-        placeholder="ຊື່ຫຼັກສູດ"
-        v-model="store.formDataCourse.course_name_eng"
-        :class="{
-          'border-red-500 focus:border-red-500': v$.course_name_eng.$error,
-          'border-[#42d392] ': !v$.course_name_eng.$invalid,
-        }"
-        @change="v$.course_name_eng.$touch"
-        maxlength="100"
-        @input="filterInputCourse"
-      />
-   <div v-if="locale == 'la'" >
-      <span v-if="v$.course_name_eng.$error" class="text-xs text-red-500"
-        style="color: red" >ຕ້ອງມີຊ່ອງໃສ່ຊື່ຫຼັກສູດ.</span>
-  </div>
-
-  <div v-if="locale == 'en'" >
-      <span v-if="v$.course_name_eng.$error" class="text-xs text-red-500"
-        style="color: red" >
-The Course Name field is required.</span>
-  </div>
-
-  <div v-if="locale == 'th'" >
-      <span v-if="v$.course_name_eng.$error" class="text-xs text-red-500"
+      <span v-if="v$.course_name.$error" class="text-xs text-red-500"
         style="color: red" >ต้องระบุฟิลด์ชื่อหลักสูตร</span>
   </div>
 
@@ -451,14 +475,14 @@ The Course Name field is required.</span>
 
     </div>
 
-    <!-- <div class="col-md-12 mt-3">
+    <div class="col-md-12 mt-3">
       <label for="inputPassword4" class="form-label">  {{ $t('course_title') }} </label><span class="text-xs text-red-500" style="color:red">  </span>
       <input type="text" class="form-control" id="inputPassword4"  :placeholder="$t('course_title')" v-model="store.formDataCourse.course_remark_a" @input="filterInputCourseremarkA"
       maxlength="200" 
       />
       <span v-if="v$.course_remark_a.$error" class="text-xs text-red-500"
         style="color: red" >ຕ້ອງມີຊ່ອງຂໍ້ມູນ</span>
-    </div> -->
+    </div>
 
     <div class="col-md-12 mt-3">
       <label for="inputPassword4" class="form-label">  {{ $t('exam_condition') }} </label>
@@ -514,7 +538,6 @@ The Course Name field is required.</span>
         id="exampleFormControlFile1"
         @change="onFileChangeBack"
         ref="fileupload"
-        accept="image/png, image/jpeg" 
       />
     </div>
 
@@ -576,7 +599,7 @@ The Course Name field is required.</span>
 </div>
  
 
-<div class="row mb-4 g-3" v-if="store.selectedFiles.length > 0">
+     <div class="row mb-4 g-3" v-if="store.selectedFiles.length > 0">
     <div class="table-responsive">
       <table class="table table-hover table-bordered">
         <thead>
@@ -656,12 +679,36 @@ The Course Name field is required.</span>
             </div>
             <br>
 
-         
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="widget-content widget-content-area br-8 p-4">
+                  <ConditionListLesson></ConditionListLesson>
+                </div>
+              </div>
+            </div>
+              <br>
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="widget-content widget-content-area br-8 p-4">
+                  <SelectListLesson></SelectListLesson>
+                </div>
+              </div>
+            </div>
+<br>
+            <div class="row">
+              <div class="col-xl-12">
+                <div class="widget-content widget-content-area br-8 p-4">
+                  <ListLesson></ListLesson>
+                </div>
+              </div>
+            </div>
+            <br>
+
           </div>
         </div>
       </div>
     </div>
-    
+    <ConditionCreate></ConditionCreate>
      <ErrorUpload></ErrorUpload>
   </div>
 
@@ -697,9 +744,4 @@ The Course Name field is required.</span>
   position: relative;
 }
 
-@media (min-width: 400px) { 
-  .bt-back-mo{
-  width: 100%;
-}
-}
 </style>

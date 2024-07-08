@@ -49,7 +49,8 @@ export const CourseStore = defineStore('course', {
     formDataCourse: {
       course_cover: "",
       course_code: "",
-      course_name: "",
+      course_name_lo: "",
+      course_name_eng: "",
       course_description: "",
       course_remark_a:"",
       course_remark_b:"",
@@ -58,7 +59,8 @@ export const CourseStore = defineStore('course', {
     formDataEditCourse: {
       course_cover: "",
       course_code: "",
-      course_name: "",
+      course_name_lo: "",
+      course_name_eng: "",
       course_description: "",
       course_file_pdf:"",
       course_remark_a:"",
@@ -197,9 +199,11 @@ export const CourseStore = defineStore('course', {
     async fetchCourseId(id) {
       this.course_id = id;
       const data = await ApiService.get('/course/get/' + this.course_id).then(response => {
+        console.log(response);
         this.formDataEditCourse.course_cover = response.data.course_cover
         this.formDataEditCourse.course_code = response.data.course_code
-        this.formDataEditCourse.course_name = response.data.course_name
+        this.formDataEditCourse.course_name_lo = response.data.course_name_lo
+        this.formDataEditCourse.course_name_eng = response.data.course_name_eng
         this.formDataEditCourse.course_remark_a = response.data.course_remark_a
         this.formDataEditCourse.course_remark_b = response.data.course_remark_b
         this.formDataEditCourse.course_description = response.data.course_description
@@ -249,15 +253,20 @@ Storage.item = checkpag.data.data
     },
 
     async SaveCourse() {
-      
+      this.formDataCourse.course_remark_a = '-';
+
       try {
         const data = await ApiService.post('/course/create', this.formDataCourse).then(response => {
-       
-          this.formDatalesson.course_id = response.data.insertId
-          this.course_id = response.data.insertId;
+          if(response.status == 200){
+            this.course_id = response.data.insertId;
+            return true
+          }else {
+            return false
+          }
+  
 
         });
-        return true;
+        return data;
       } catch (error) {
         return false;
       } 
@@ -435,6 +444,7 @@ return true;
 
     },
     async UploadfileCoursePdf() { 
+      console.log(this.selectedFiles);
       if(this.selectedFiles){
         const formData = new FormData();
         Array.from(this.selectedFiles).forEach(file => {
@@ -442,6 +452,7 @@ return true;
         });
         const pdf = await ApiService.upload('/media_file/upload/file',formData);
         this.pdf = pdf.data;
+        
         }
     },
 
@@ -454,6 +465,7 @@ return true;
         });
         const pdf = await ApiService.upload('/media_file/upload/file',formData);
         this.pdf = pdf.data
+   
         this.selectedFiles = [];
        
 
@@ -461,12 +473,14 @@ return true;
     },
     async Savepdf() { 
       this.filepdf = [];
+      console.log(this.pdf);
       if(this.pdf.length > 0){
+        
         for (var i = 0; i < this.pdf.length; i++) {
           const daa = {cd_name:this.pdf[i].originalname,cd_path:this.pdf[i].path,course_id:this.course_id}
           this.filepdf.push(daa);
           const savepdf = await ApiService.post('/course/document/create', daa)
-       
+       console.log(savepdf);
             }
       }
 
