@@ -93,6 +93,7 @@ export const CourseStore = defineStore('course', {
       page: 1,
       per_page: 5,
       search: '',
+      active_include:[0,1],
     },
     formsearchlesson: {
       page: 1,
@@ -149,6 +150,8 @@ export const CourseStore = defineStore('course', {
       this.formsearchcourse.page = 1
       this.formsearchcourse.per_page = 5
       this.formsearchcourse.search = ''
+      this.formsearchcourse.active_include = [0,1];
+
 
       
     },
@@ -157,6 +160,7 @@ export const CourseStore = defineStore('course', {
   
       try {
         const data = await ApiService.post('/course/list', this.formsearchcourse).then(response => {
+        
           this.courselist = response.data.data
           this.total_page = response.data.total_page
           this.limit_page = response.data.limit_page
@@ -174,6 +178,20 @@ export const CourseStore = defineStore('course', {
       }
     },
 
+    async fetchCoursActive(item) { 
+      try {
+        const data = await ApiService.get('/course/active/'+ item.active +'/'+ item.course_id).then(response => {
+          if(response.status == 200) {
+            return true;
+          }
+        return false;
+        });
+        return data;
+      } catch (error) {
+       
+      } 
+
+    },
 
 
     async fetchCourseId(id) {

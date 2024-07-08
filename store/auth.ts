@@ -18,6 +18,10 @@ export const useAuthStore = defineStore('auth', {
     status_login: true,
     count:11,
     user_id:null,
+    body:{
+      username:null,
+      user_password:null
+    },
     users: {
       user_id: null,
       user_name: null,
@@ -44,6 +48,21 @@ export const useAuthStore = defineStore('auth', {
   
   actions: {
     async authenticateUser({ username, password }: UserPayloadInterface) {
+
+
+  
+    
+// this.body.user_name = username
+// this.body.user_password = password
+//       try {
+//         const data = await ApiService.post('/user/login',this.body)
+
+
+
+//       } catch (error) {
+    
+//         this.status_login = false;
+//       }
 
       try {
         const { data } = await useFetch('/user/login', {
