@@ -27,9 +27,9 @@
   aria-label="Default select example"
   @change="selectactive($event)"
 >
-  <option :value="[0,1]">ทั้งหมด</option>
-  <option :value="[1]">ใช้งาน</option>
-  <option :value="[0]">ไม่ใช้งาน</option>
+  <option :value="[0,1]">ທັງໝົດ</option>
+  <option :value="[1]">ໃຊ້</option>
+  <option :value="[0]">ບໍ່ໄດ້ໃຊ້</option>
 </select>
 </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
@@ -80,7 +80,9 @@
               1
             }}
           </td>
-          <td>{{ item.course_code }}</td>
+          <td>
+            {{ item.course_code }}
+          </td>
           <td>
             {{ locale == "la" ? item.course_name_lo : item.course_name_eng }}
           </td>
@@ -217,8 +219,7 @@
                 class="feather feather-arrow-left"
               >
                 <line x1="19" y1="12" x2="5" y2="12"></line>
-                <polyline points="12 19 5 12 12 5"></polyline></svg
-            ></a>
+                <polyline points="12 19 5 12 12 5"></polyline></svg ></a>
           </li>
           <li
             class="paginate_button page-item"
@@ -258,8 +259,7 @@
                 class="feather feather-arrow-right"
               >
                 <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline></svg
-            ></a>
+                <polyline points="12 5 19 12 12 19"></polyline></svg ></a>
           </li>
         </ul>
       </div>

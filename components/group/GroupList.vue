@@ -29,16 +29,34 @@ style="
   
     </div>
 
+    
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
+  
+      
+</div>
+
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
+<select
+  class="form-select form-select"
+  aria-label="Default select example"
+  @change="selectactive($event)"
+>
+  <option :value="[0,1]">ທັງໝົດ</option>
+  <option :value="[1]">ໃຊ້</option>
+  <option :value="[0]">ບໍ່ໄດ້ໃຊ້</option>
+</select>
+</div>
+
+    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
       <select
         class="form-select form-select"
         aria-label="Default select example"
           @change="selectshowdata($event)"
      
       >
-        <option :value="5">5</option>
+        <!-- <option :value="5">5</option>
         <option :value="10">10</option>
-        <option :value="20">20</option>
+        <option :value="20">20</option> -->
         <option :value="50">50</option>
      
       </select>
@@ -51,8 +69,11 @@ style="
         <thead>
             <tr>
                 <th scope="col">{{ $t("table_id_group") }}</th>
-                <th class="text-center" scope="col" @click="sortList('cg_id')">{{ $t("table_id_name_lo") }}   &#8597;</th>
-                <th class="text-center" scope="col" @click="sortList('cg_name')">{{ $t("table_id_name_en") }}  &#8597;</th>
+                <th class="text-center" scope="col" @click="sortList('cg_id')"> {{ $t("group_title") }} &#8597;</th>
+                <th class="text-center" scope="col" @click="sortList('cg_name_lo')">
+                  {{ locale == "la" ? $t("table_id_name_lo") : $t("table_id_name_en") }}
+         
+                   &#8597;</th>
                 <th class="text-center" scope="col">{{ $t("table_id_create") }}</th>
                 <th class="text-center" scope="col">{{ $t("table_id_status") }}</th>
                 <th class="text-center" scope="col">{{ $t("table_id_action") }}</th>
@@ -64,15 +85,15 @@ style="
         <tbody> 
             <tr  v-for="(item,index) in store.group" :key="item.cg_id">
                 <td>{{ (store.formsearchgroup.page * store.formsearchgroup.per_page) - (store.formsearchgroup.per_page -  index) +  1 }}</td>
-                <td>{{item.cg_name_lo}}</td>
+                <td>{{item.cg_id}}</td>
                 <td>
-                  <span class="table-inner-text">
-                   {{item.cg_name_eng}}
-                  </span>
+
+                  {{ locale == "la" ? item.cg_name_lo : item.cg_name_eng }}
                 </td>
+              
 
                 
-                
+
                 <td>
                   <span class="table-inner-text">
                     {{item.crt_date}}
@@ -212,6 +233,8 @@ import { useToast } from "vue-toastification";
 import moment from "moment-timezone";
 import { GroupStore } from '@/store/group'
 import { useAuthStore } from '@/store/auth'
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
 
 const router = useRouter();
 
@@ -246,7 +269,7 @@ const searchData = async () => {
 const toggleItem = async (index) => {
   store.group[index].active = store.group[index].active === 1 ? 0 : 1;
   
- // await store.ActiveGroup(store.group[index]);
+ await store.ActiveGroup(store.group[index]);
 };
 
 
@@ -262,13 +285,20 @@ store.GetopenModal = true;
 };
 
 const edit = async (item) => {
-console.log(item);
+
   store.formeditgroup.cg_id = item.cg_id
   store.formeditgroup.cg_name_lo = item.cg_name_lo
   store.formeditgroup.cg_name_eng = item.cg_name_eng
   store.formeditgroup.user_id = auth.user_id
 store.GetopenModalEdit = true;
 };
+
+
+const selectactive = async (sec) => {
+  store.formsearchgroup.active_include = [sec.target.value];
+  await store.fetchGrouplist();
+};
+
 
 
 const setCurrentPageclick = async (page) => {

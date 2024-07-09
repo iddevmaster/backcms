@@ -38,8 +38,8 @@ style="
         aria-label="Default select example" @change="selectshowdata_ch($event)"
       
       >
-        <option :value="0">{{ $t('all_subject') }}</option>
-        <option v-for="item in store.group" :value="item.cg_id" :key="item.cg_id"   >{{item.cg_name}}</option>
+        <!-- <option :value="0">{{ $t('all_subject') }}</option> -->
+        <option v-for="item in store.group" :value="item.cg_id" :key="item.cg_id"   >{{item.cg_name_lo}}</option>
       </select>
     </div>
        <div class="col-xl- col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
@@ -48,10 +48,10 @@ style="
         aria-label="Default select example"
         @change="selectshowdata($event)"
       >
-        <option :value="10">10</option>
-        <option :value="20">20</option>
-        <option :value="30">30</option>
         <option :value="50">50</option>
+        <option :value="100">100</option>
+        <option :value="150">150</option>
+   
      
       </select>
     </div>
@@ -73,9 +73,12 @@ style="
       <tbody>
         <tr v-for="(item, index) in store.lessonlist" :key="item.cs_id">
           <td>{{ (store.formsearchlesson.page * store.formsearchlesson.per_page) - (store.formsearchlesson.per_page -  index) +  1 }}</td>
-            <td style="white-space:unset;">{{ item.cs_name }}</td>
+            <td style="white-space:unset;">
+          
+              {{ locale == "la" ? item.cs_name_lo : item.cs_name_eng }}
+            </td>
             <td  style="white-space:unset;">{{ item.cs_description }}</td>
-            <td>{{ item.cg_name }}</td>
+            <td>{{ item.cg_name_lo }}</td>
             <td class="text-center">
             
             <img :src="image(item.cs_cover)" class="img-fluid" width="80" height="80" v-if="item.cs_cover">
@@ -215,13 +218,90 @@ style="
     </div>
   </div> -->
 
+  <div>
+    <div class="dt--pagination" v-if="store.lesson_total_page > 1">
+      <div
+        class="dataTables_paginate paging_simple_numbers"
+        id="zero-config_paginate"
+      >
+        <ul class="pagination">
+          <li
+            class="paginate_button page-item previous"
+            id="zero-config_previous"
+          @click="Prev()"
+          >
+            <a
+              href="#"
+              aria-controls="zero-config"
+              data-dt-idx="0"
+              tabindex="0"
+              class="page-link"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-arrow-left"
+              >
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline></svg ></a>
+          </li>
+          <li
+            class="paginate_button page-item"
+            v-for="page in store.lesson_total_page"
+            :key="page"
+          >
+            <a
+              href="#"
+              aria-controls="zero-config"
+              data-dt-idx="1"
+              tabindex="0"
+              class="page-link"
+              :class="{ bgcx: page === store.formsearchlesson.page }"
+            @click="setCurrentPageclick(page)"
+            >
+              {{ page }}</a
+            >
+          </li>
+          <li class="paginate_button page-item next" id="zero-config_next">
+            <a
+              href="#"
+              aria-controls="zero-config"
+             @click="Next()"
+              data-dt-idx="4"
+              tabindex="0"
+              class="page-link"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-arrow-right"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline></svg ></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-xl-12 col-lg-12">
       <div class="pagination-no_spacing" v-if="store.lesson_total_page > 1">
         <ul class="pagination">
-          <li>
-            <a href="javascript:void(0);" class="prev"
+          <li> <a href="javascript:void(0);" class="prev"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -311,18 +391,23 @@ import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
 import { LessonStore } from "@/store/lesson";
 import { useAuthStore } from "@/store/auth";
+import { GroupStore } from '@/store/group'
 import "jquery/dist/jquery.min.js";
 //Datatable Modules
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 import $ from "jquery";
 import Paginate from "vuejs-paginate-next";
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
+
 import { useToast } from "vue-toastification";
 import ApiService from "../../services/api.service";
 
 const toast = useToast();
 const router = useRouter();
-const store = LessonStore();;
+const store = LessonStore();
+const storegroup = GroupStore()
 store.isLoading == true;
 
 const { deleteItem } = LessonStore(); //Action
@@ -355,26 +440,59 @@ const openmodal = async () => {
 };
 
 const selectshowdata_ch = async (cg) => {
-store.cg_id = cg.target.value
-store.formsearchlesson.page = 1;
+store.group_id = cg.target.value
+console.log(store.group_id);
  await store.fetchLessonlist() 
 };
 
 
-
+const setCurrentPageclick = async (page) => {
+ 
+  await store.setCurrentPage(page);
+  await store.fetchLessonlist() 
+};
 function goToPage(page) {
   console.log(page);
 }
 
 
-const setCurrentPageLessonclick = async (page) => {
-  await selectentireslesson(page);
-  await store.fetchLessonlist();
+const Prev = async () => {
+  if (store.formsearchlesson.page == 1) {
+    await store.fetchLessonlist();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else {
+    store.formsearchlesson.page -= 1;
+    await store.fetchLessonlist();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  }
 };
 
-const sortList = async (sortBy) => {
-  //await sortLists (sortBy)
+const Next = async () => {
+  if (store.formsearchlesson.page == store.total_page) {
+    store.formsearchlesson.page = store.total_page;
+    await store.fetchLessonlist();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else {
+    store.formsearchlesson.page += 1;
+    await store.fetchLessonlist();
+  }
 };
+
+
+// const setCurrentPageLessonclick = async (page) => {
+//   await selectentireslesson(page);
+//   await store.fetchLessonlist();
+// };
+
+// const sortList = async (sortBy) => {
+//   //await sortLists (sortBy)
+// };
 
 function coverttime(date) {
   const datetime = new Date(date);

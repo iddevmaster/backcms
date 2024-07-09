@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import ApiService from '@/services/api.service';
 import axios from "axios";
-
+import Table from '@ckeditor/ckeditor5-table/src/table';
 
 
 export const LessonStore = defineStore('lesson', {
@@ -17,6 +17,72 @@ export const LessonStore = defineStore('lesson', {
       { age: 21, first_name: 'Larsen', last_name: 'Shaw' },
       { age: 89, first_name: 'Geneva', last_name: 'Wilson' }
     ],
+    editorConfig:{
+     
+    //   toolbar: {
+    //     items: [
+    //         'heading',
+    //         '|',
+    //         'htmlEmbed',
+    //         // 'pageBreak',
+    //         'fontSize',
+    //         'fontFamily',
+    //         'fontColor',
+    //         'fontBackgroundColor',
+    //         '|',
+    //         'bold',
+    //         'italic',
+    //         'underline',
+    //         'strikethrough',
+    //         '|',
+    //         'alignment',
+    //         '|',
+    //         'numberedList',
+    //         'bulletedList',
+    //         '|',
+    //         'indent',
+    //         'outdent',
+    //         '|',
+    //         'link',
+    //         'blockQuote',
+    //         'imageUpload',
+    //         'insertTable',
+    //         'mediaEmbed',
+    //         '|',
+    //         'undo',
+    //         'redo',
+    //     ]
+    // },
+    //   image: {
+    //     toolbar: [
+    //       'imageTextAlternative',
+    //       'imageStyle:full',
+    //       'imageStyle:side'
+    //     ]
+    //   },
+    //   table: {
+    //     contentToolbar: [
+    //       'tableColumn',
+    //       'tableRow',
+    //       'mergeTableCells'
+    //     ]
+    //   },
+    //   fontSize: {
+    //     options: [
+    //       10,
+    //       12,
+    //       14,
+    //       'default',
+    //       18,
+    //       20,
+    //       24,
+    //       28
+    //     ]
+    //   },
+    //     language: 'en',
+    },
+    htmlContent: '<p>ລະຫັດຫຼັກສູດ</p>',
+    htmlContent2: '<p>ລະຫັດຫຼັກສູດ2</p>',
     course_del:null,
     pending: false,
     lessonlist: [],
@@ -61,7 +127,8 @@ export const LessonStore = defineStore('lesson', {
     },
     formcreatelesson: {
       cs_cover:"",
-      cs_name: "",
+      cs_name_en: "",
+      cs_name_lo: "",
       cs_video: "",
       cs_description: "",
       user_id: null,
@@ -69,7 +136,8 @@ export const LessonStore = defineStore('lesson', {
     },
     formcreatelessonedit: {
       cs_cover: "",
-      cs_name: "",
+      cs_name_en: "",
+      cs_name_lo: "",
       cs_video: "",
       cs_description: "",
       user_id: null,
@@ -79,12 +147,12 @@ export const LessonStore = defineStore('lesson', {
       page: 1,
       per_page: 50,
       search: '',
-      exclude:[]
     },
     formsearchlessongroup:{
       page: 1,
       per_page: 50,
       search: '',
+      active_include: [1]
     },
     selected: [],
     lesson_item:[],
@@ -93,6 +161,7 @@ export const LessonStore = defineStore('lesson', {
     itemselect:[],
     group:[],
     cg_id:0,
+    group_id:null,
     imagelist: null,
     imageReq: false,
     GetopenModalCreate: false,
@@ -114,6 +183,18 @@ export const LessonStore = defineStore('lesson', {
   },
 
   actions: {
+    setHtmlContent(content) {
+      this.htmlContent = content;
+    },
+
+    setHtmlContent2(content2) {
+      console.log(content2);
+   
+    },
+
+    getData(){
+console.log('getData');
+ },
 
     async fetchCourse(course_id) {
       this.course_id = course_id
@@ -129,19 +210,17 @@ export const LessonStore = defineStore('lesson', {
       }
     },
 
+  
+
     async fetchLessonlist() {
+
+  
       this.lessonlist = [];
 
-      // if(this.cg_id == 0){
-      //   this.urlt = '/course/lesson/all?';
-      // }
-      // if(this.cg_id != 0){
-      //   this.urlt = '/course/lesson/all?cg_id='+this.cg_id;
-      // }
 
+ 
       try {
-        const data = await ApiService.post('course/group/all', this.formsearchlesson).then(response => {
-      
+        const data = await ApiService.post('course/lesson/all/'+this.group_id, this.formsearchlesson).then(response => {
           this.lessonlist = response.data.data
           this.lesson_total_page = response.data.total_page
           this.lesson_limit_page = response.data.limit_page
@@ -175,7 +254,10 @@ export const LessonStore = defineStore('lesson', {
       }
     },
 
-    
+    // setCurrentPage(page) {
+    //   this.formsearchlesson.page = page
+    // },
+
 
     async selectlessId(cs_id) {
       this.cs_id = cs_id
@@ -349,8 +431,8 @@ try {
       },
 
     
-    setCurrentPage(page) {
-      this.formlesson.page = page
+    async setCurrentPage(page) {
+      this.formsearchlesson.page = page
     },
     async SeleectAllLessonlist() {
  
@@ -395,29 +477,26 @@ if (objWithIdIndex > -1) {
     },
 
     async fetchGrouplist() {
-      this.group = [];
-      const checkpag =  await ApiService.post('/course/group/all',this.formsearchlessongroup)
+      try {
+        const data = await ApiService.post('/course/group/all', this.formsearchlessongroup).then(response => {
+          this.group = response.data.data
+          this.group_total_page = response.data.total_page
+          this.group_limit_page = response.data.limit_page
+          this.group_current_page = response.data.current_page
+          this.group_total_filter = response.data.total_filter
+          this.group_total = response.data.total
+          this.group.sort((a, b) => a.cg_id - b.cg_id);
 
-
-    if(checkpag){
-      if(checkpag.data.total_page > 1){
-        for(let i = 0; i < checkpag.data.total_page; i++){
-          this.formsearchlessongroup.page = i + 1;
-          const data =  await ApiService.post('/course/group/all',this.formsearchlessongroup)
-          // const Storage = LessonStore();
-          for(let i = 0; i < data.data.data.length; i++){
-            this.group.push(data.data.data[i]);
-          }
-      }
+          if(this.group.length > 0){
+            this.group_id = this.group[0].cg_id
+           }
   
-      }else {
-        const data =  await ApiService.post('/course/group/all',this.formsearchlessongroup)
-        this.group = data.data.data
+        });
+        this.isLoading = false;
+        return true;
+      } catch (error) {
+       // return navigateTo('/maintenance');
       }
-
-    }
-  
-      
     },
 
     async paginatedItems() {

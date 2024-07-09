@@ -425,7 +425,10 @@
   "lesson_select_all":"Selected All",
   "lesson_unselect_all":"UnSelected",
   "lesson_head":"Lesson",
-  "lesson_qui":"Lesson Title",
+  "lesson_head_add":"Add Lesson",
+ 
+  "lesson_qui_lo":"Lesson Title (Lo)",
+  "lesson_qui_en":"Lesson Title (Th)",
   "lesson_title":"Lesson Title",
   "lesson_group":"Subject",
   "lesson_ans":"Lesson Content",

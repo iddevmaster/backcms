@@ -18,13 +18,14 @@ export const GroupStore = defineStore('group', {
     },
     formsearchgroup: {
       page: 1,
-      per_page: 5,
+      per_page: 50,
       search: '',
       active_include: [
         0,
         1
     ]
     },
+    
     formcreategroup: {
       cg_name:"",
       user_id:null,
@@ -50,8 +51,6 @@ export const GroupStore = defineStore('group', {
   },
 
   actions: {
-
-
     async fetchGrouplist() {
       try {
         const data = await ApiService.post('/course/group/all', this.formsearchgroup).then(response => {
@@ -118,11 +117,11 @@ export const GroupStore = defineStore('group', {
     },
 
     async ActiveGroup(item) {
-      console.log(item);
+ 
 
       try {
         const data = await ApiService.get('/course/group/active/'+ item.active +'/'+item.cg_id).then(response => {
-     console.log(response);
+   return true
         });
         return data
       } catch (error) {
@@ -145,6 +144,7 @@ export const GroupStore = defineStore('group', {
     },
 
     sortLists(sortBy) {
+ 
       if (this.sortedbyASC) {
         this.group.sort((x, y) => (x[sortBy] > y[sortBy] ? -1 : 1));
         this.sortedbyASC = false;

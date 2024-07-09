@@ -19,6 +19,7 @@ import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
 import { onMounted } from 'vue'
 
+
 definePageMeta({
   middleware: ['auth','roles'],
   allowedRoles: [1,2]
@@ -26,6 +27,7 @@ definePageMeta({
 
 const auth = useAuthStore()
 const store = LessonStore()
+const storegroup = GroupStore()
 
 store.isLoading = true;
 const toast = useToast();
@@ -33,21 +35,14 @@ store.formcreatelesson.user_id = auth.user_id
 store.user_id = auth.user_id
 store.myselect_group = null
 const group = await store.fetchGrouplist();
-
-store.formsearchlesson.per_page = 10
-store.formsearchlesson.page = 1
-store.formsearchlesson.search = "";
+const lessonlist = await store.fetchLessonlist();
 
 
-store.cg_id = 0;
+
+
 
 onMounted(async()  => {
-      // Fetch items when the component is mounted
-      const lessonlist = await store.fetchLessonlist();
-
-//await store.paginatedItems() 
 store.isLoading = false;
-     
     })
 
 

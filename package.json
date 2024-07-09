@@ -27,7 +27,11 @@
     "vue": "^3.3.4"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^42.0.0",
+    "@ckeditor/ckeditor5-table": "^42.0.0",
+    "@ckeditor/ckeditor5-vue": "^6.0.0",
     "@devindex/vue-mask": "^2.0.3",
+    "@gecharita/ckeditor5-super-build": "^1.1.1-0.4-link",
     "@nuxt/devtools": "^0.0.1",
     "@types/node": "^18",
     "@vuepic/vue-datepicker": "^5.4.0",
@@ -35,6 +39,8 @@
     "bootstrap-icons": "^1.10.5",
     "bootstrap-vue": "^2.23.1",
     "chart.js": "^4.4.0",
+    "ckeditor5": "^42.0.0",
+    "ckeditor5-premium-features": "^42.0.0",
     "datatables.net-dt": "^1.13.5",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.0",
