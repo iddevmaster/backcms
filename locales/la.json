@@ -42,6 +42,42 @@
   "menu_couse_f_edit_title_picture": "ຮູບໜ້າປົກຂອງຫຼັກສູດ",
   "menu_couse_f_edit_title_display_picture": "ຮູບທີ່ເລືອກຈະສະແດງທີ່ນີ້",
 
+
+"menu_couse_view_table_header_c": "ຫຼັກສູດ​",
+"menu_couse_view_table_course": "ຫຼັກສູດ​",
+"menu_couse_view_table_lesson": "ບົດຮຽນ :",
+"menu_couse_view_table_status": "ສະຖານະ",
+"menu_couse_view_table_name_lo": "ຊື່ຫຼັກສູດ(Lo):",
+"menu_couse_view_table_name_eng": "ຊື່ຫຼັກສູດ(En):",
+"menu_couse_view_table_des": "ລາຍລະອຽດ:",
+"menu_couse_view_table_if_exam": "ເງືອນໄຂສອບ:",
+"menu_couse_view_table_total": "ຈຳນວນບົດຮຽນ:",
+"menu_couse_view_table_group": "ຈຳນວນໝວດວິຊາ",
+"menu_couse_view_table_lesson_": "ຈຳນວນບົດຮຽນ",
+"menu_couse_view_table_video": "ຈຳນວນ Video",
+"menu_couse_view_c_is_notcomplete": "ບໍ່ມີບົດຮຽນ.",
+"menu_couse_view_c_is_complete": "ມີບົດຮຽນ",
+
+"menu_couse_view_c_is_active": "Active",
+"menu_couse_view_c_is_unactive": "Unactive",
+
+
+"menu_couse_view_table_header_d": "ລາຍລະອຽດ",
+
+"menu_couse_view_d_code": "ລະຫັດ:",
+"menu_couse_view_d_name_lo": "ຊື່ແບບທົດສອບ(Lo):",
+"menu_couse_view_d_name_eng": "ຊື່ແບບທົດສອບ(Eng):",
+"menu_couse_view_d_name_dlt": "ປະເພດ:",
+"menu_couse_view_d_name_des": "ລາຍລະອຽດ:",
+"menu_couse_view_d_name_ex_time": "ເວລາສອບ:",
+"menu_couse_view_d_name_em_e": "ຄະແນນທີ່ຄາດຫວັງ:",
+"menu_couse_view_d_name_bt_": "จัดการ",
+
+
+
+
+"menu_couse_view_table_header_g": "ໝວດວິຊາ",
+
   
 
   "menu_page_course": "ຄວາມຮູ້ອອນໄລນ໌",
@@ -420,8 +456,11 @@
   "lesson_select_record":"ເລືອກ",
   "lesson_head":"ບົດຮຽນ",
   "lesson_head_add":"ເພີ່ມ​ບົດຮຽນ",
+  "lesson_head_edit":"ແກ້ໄຂ​ບົດຮຽນ",
   "lesson_qui_lo":"ຫົວຂໍ້(Lo)",
   "lesson_qui_en":"ຫົວຂໍ້(En)",
+  "lesson_answer_lo":"ເນື້ອໃນ (Lo)",
+  "lesson_answer_en":"ເນື້ອໃນ (En)",
   "lesson_group":"ໝວດວິຊາ",
   "lesson_ans":"ເນື້ອໃນ",
   "lesson_title":"ຫົວຂໍ້",

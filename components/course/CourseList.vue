@@ -112,7 +112,7 @@
           </td>
           <td>
             <div class="action-btns">
-              <NuxtLink :to="'/learning/' + item.course_id">
+              <NuxtLink :to="'/learning/view/' + item.course_id">
                 <a
                   href="javascript:void(0);"
                   class="action-btn btn-edit bs-tooltip me-2"

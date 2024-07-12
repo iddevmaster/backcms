@@ -38,6 +38,34 @@
 
   "menu_group_all" :"All Subjects",
 
+
+"menu_couse_view_table_header_c":"Course",
+"menu_couse_view_table_course": "Course",
+"menu_couse_view_table_lesson": "Lesson :",
+"menu_couse_view_table_status": "Status :",
+"menu_couse_view_table_name_lo": "Name(Lo):",
+"menu_couse_view_table_name_eng": "Name(En):",
+"menu_couse_view_table_des": "Description:",
+"menu_couse_view_table_if_exam": "Condition:",
+"menu_couse_view_table_total": "Total Lesson:",
+
+
+
+
+"menu_couse_view_table_header_d": "Details",
+"menu_couse_view_d_code": "Code:",
+"menu_couse_view_d_name_lo": "Exam Name(Lo):",
+"menu_couse_view_d_name_eng": "Exam Name(Eng):",
+"menu_couse_view_d_name_dlt": "Dlt:",
+"menu_couse_view_d_name_des": "Description:",
+"menu_couse_view_d_name_ex_time": "Exam time:",
+"menu_couse_view_d_name_em_e": "Expected score:",
+"menu_couse_view_d_name_bt_": "Manage",
+
+
+"menu_couse_view_table_header_g": "ໝວດວິຊາ",
+
+
   "table_course_code": "Code",
   "table_course_name": "Name",
   "table_course_user_create": "Create by",
@@ -426,9 +454,11 @@
   "lesson_unselect_all":"UnSelected",
   "lesson_head":"Lesson",
   "lesson_head_add":"Add Lesson",
- 
+"lesson_head_edit":"Edit Lesson", 
   "lesson_qui_lo":"Lesson Title (Lo)",
-  "lesson_qui_en":"Lesson Title (Th)",
+  "lesson_qui_en":"Lesson Title (En)",
+  "lesson_answer_lo":"Lesson Content (En)",
+  "lesson_answer_en":"Lesson Content (En)",
   "lesson_title":"Lesson Title",
   "lesson_group":"Subject",
   "lesson_ans":"Lesson Content",

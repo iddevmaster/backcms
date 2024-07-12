@@ -572,11 +572,17 @@ await store.paginatedItems()
  // await toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
 };
 const edit = async (item) => {
-store.formcreatelessonedit.user_id = auth.user_id
-store.GetopenModalEdit = true
-store.myselect_group = item.cg_id
-store.formcreatelessonedit.cg_id = item.cg_id;
- await store.fetchLessonIdedit(item)
+  console.log(item);
+
+  /////////* เวอร์ชั่น V1 ////////////////
+// store.formcreatelessonedit.user_id = auth.user_id
+// store.GetopenModalEdit = true
+// store.myselect_group = item.cg_id
+// store.formcreatelessonedit.cg_id = item.cg_id;
+await store.fetchLessonIdedit(item)
+
+
+ await router.push('/lesson/edit/'+item.cs_id);
 };
 
 

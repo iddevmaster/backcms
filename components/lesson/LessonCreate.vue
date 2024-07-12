@@ -95,7 +95,7 @@
             <v-select
               v-model="store.myselect_group"
               :options="store.group"
-              label="cg_name"
+              label="cg_name_lo"
               placeholder="ເລືອກ"
               @change="changedLabelCounrt($event)"
             ></v-select>
@@ -168,6 +168,7 @@ import { LessonStore } from "@/store/lesson";
 import ExamList from "@/components/exam/ExamList.vue";
 import { useToast } from "vue-toastification";
 import { useVuelidate } from "@vuelidate/core";
+
 import {
   required,
   email,

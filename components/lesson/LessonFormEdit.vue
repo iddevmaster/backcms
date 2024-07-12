@@ -1,18 +1,5 @@
 <template>
-  <div id="content" class="main-content">
-    <div class="layout-px-spacing">
-      <div class="page-meta">
-        <nav class="breadcrumb-style-one" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <a href="#"> {{ $t("lesson_head") }} </a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">
-              {{ $t("lesson_head_add") }}
-            </li>
-          </ol>
-        </nav>
-      </div>
+
 
       <div class="middle-content container-xxl p-0 mb-4">
         <div class="row layout-top-spacing">
@@ -23,7 +10,7 @@
                   <div class="widget-header">
                     <div class="row">
                       <div class="col-xl-10 col-sm-12 col-10">
-                        <h4>{{ $t("lesson_head_add") }}</h4>
+                        <h4>{{ $t("lesson_head_edit") }}</h4>
                       </div>
                       <div
                         class="col-xl-2 col-sm-12 col-12"
@@ -40,7 +27,7 @@
                     </div>
                   </div>
                   <br />
-
+                  {{cs_id}}
                   <div class="row">
                     <div class="col-md-12 mt-3">
                       <label for="inputEmail4" class="form-label">
@@ -55,7 +42,7 @@
                           class="form-control"
                           id="inputEmail4"
                           placeholder="ຄໍາຖາມ(Lo) *"
-                          v-model="Formcreatelesson.cs_name_lo"
+                          v-model="FormcreateEditlesson.cs_name_lo"
                           maxlength="20"
                           @input="validateField('cs_name_lo')"
                         />
@@ -82,7 +69,7 @@
                           class="form-control"
                           id="inputEmail4"
                           placeholder="ຄໍາຖາມ (En) *"
-                          v-model="Formcreatelesson.cs_name_eng"
+                          v-model="FormcreateEditlesson.cs_name_eng"
                           maxlength="20"
                           @input="validateField('cs_name_eng')"
                         />
@@ -128,7 +115,7 @@
 
                     <div class="col-md-12 mt-3">
                       <v-select
-                        v-model="store.formcreatelesson.cg_id"
+                        v-model="store.formcreatelessonedit.cg_id"
                         :options="Group"
                         label="cg_name_lo"
                         placeholder="ເລືອກ"
@@ -288,7 +275,7 @@
 
 
  
- {{ store.formcreatelesson }}
+ {{ store.formcreatelessonedit }}
 
                     
  <span
@@ -332,8 +319,7 @@
         </div>
         <br />
       </div>
-    </div>
-  </div>
+  
 </template>
 <style scoped>
 /* Bootstrap 4 styling for CKEditor content area */
@@ -435,6 +421,12 @@ export default defineComponent({
   components: {
     ckeditor: CKEditor.component,
     "v-select": vSelect,
+  },
+  props: {
+    cs_id: {
+      type: String,
+      required: true
+    }
   },
 
   setup() {
@@ -571,22 +563,22 @@ export default defineComponent({
 
     const editor = ClassicEditor;
 
-    const content = store.htmlContent; // assuming you have htmlContent in your store
-    const content2 = store.htmlContent2; // assuming you have htmlContent in your store
+    const content = store.EdithtmlContent; // assuming you have htmlContent in your store
+    const content2 = store.EdithtmlContent; // assuming you have htmlContent in your store
 
     const onReadyTh = (editorInstance) => {
       editorInstance.model.document.on("change:data", () => {
         store.setHtmlContent2(editorInstance.getData());
       });
     };
-
+    
     const onReadyLo = (editorInstance) => {
       editorInstance.model.document.on("change:data", () => {
         store.setHtmlContent(editorInstance.getData());
       });
     };
 
-    const Formcreatelesson = computed(() => store.formcreatelesson);
+    const FormcreateEditlesson = computed(() => store.formcreatelessonedit);
     const rules = computed(() => store.rules);
 
     const Group = store.group;
@@ -605,13 +597,13 @@ export default defineComponent({
       const validators = rules.value[field];
       formErrors[field] =
         validators
-          .map((validator) => validator(store.formcreatelesson[field]))
+          .map((validator) => validator(store.formcreatelessonedit[field]))
           .find((error) => error) || "";
           
     };
 
     const validateAllFields = () => {
-      Object.keys(Formcreatelesson.value).forEach((field) =>
+      Object.keys(FormcreateEditlesson.value).forEach((field) =>
         validateField(field)
       );
     };
@@ -726,7 +718,7 @@ function coverimage(i) {
       formErrors,
       Mygroup,
       rules,
-      Formcreatelesson,
+      FormcreateEditlesson,
       validateField,
       Group,
       vSelect,

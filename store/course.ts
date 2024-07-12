@@ -65,6 +65,7 @@ export const CourseStore = defineStore('course', {
       course_file_pdf:"",
       course_remark_a:"",
       course_remark_b:"",
+      exam_desc:{},
       user_id: null
     },
 
@@ -106,6 +107,9 @@ export const CourseStore = defineStore('course', {
       page: 1,
       per_page: 50,
       search: '',
+    },
+    clustercourse:{
+     
     },
     savelesson: [],
     vdo: "/assets/images/sample-5.mp4"
@@ -199,7 +203,7 @@ export const CourseStore = defineStore('course', {
     async fetchCourseId(id) {
       this.course_id = id;
       const data = await ApiService.get('/course/get/' + this.course_id).then(response => {
-        console.log(response);
+    
         this.formDataEditCourse.course_cover = response.data.course_cover
         this.formDataEditCourse.course_code = response.data.course_code
         this.formDataEditCourse.course_name_lo = response.data.course_name_lo
@@ -207,7 +211,23 @@ export const CourseStore = defineStore('course', {
         this.formDataEditCourse.course_remark_a = response.data.course_remark_a
         this.formDataEditCourse.course_remark_b = response.data.course_remark_b
         this.formDataEditCourse.course_description = response.data.course_description
+
+        this.formDataEditCourse.is_complete = response.data.is_complete
+        this.formDataEditCourse.total_course_group = response.data.total_course_group
+        this.formDataEditCourse.total_lesson = response.data.total_lesson
+        this.formDataEditCourse.total_video = response.data.total_video
+        this.formDataEditCourse.exam_desc = response.data.exam_desc
         this.image = response.data.course_cover
+      });
+    },
+
+
+    
+    async fetchCourseCgId(id) {
+  
+      const data = await ApiService.get('/course/cluster/get/' + id).then(response => {
+        this.clustercourse = response.data;
+        console.log(this.clustercourse);
       });
     },
 

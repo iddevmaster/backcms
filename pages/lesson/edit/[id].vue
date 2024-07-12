@@ -9,7 +9,7 @@ import { defineComponent } from 'vue';
 import { LessonStore } from '@/store/lesson'
 import { GroupStore } from '@/store/group'
 import { useAuthStore } from '@/store/auth'
-import LessonFormCreate from '@/components/lesson/LessonFormCreate.vue'
+import LessonFormEdit from '@/components/lesson/LessonFormEdit.vue'
 
 import { useToast } from 'vue-toastification';
 import { ref } from 'vue';
@@ -26,6 +26,7 @@ definePageMeta({
 const auth = useAuthStore()
 const store = LessonStore()
 const storegroup = GroupStore()
+const router = useRouter();
 
 store.isLoading = true;
 const toast = useToast();
@@ -33,10 +34,11 @@ const toast = useToast();
 store.user_id = auth.user_id
 const group = await store.fetchGrouplist();
 
+await store.fetchLessonId(router.currentRoute.value.params.id);
 
 onMounted(async()  => {
 store.isLoading = false;
-    })
+})
 
 
 
@@ -45,7 +47,26 @@ store.isLoading = false;
 
 <template>
 
-<LessonFormCreate></LessonFormCreate>
+<div id="content" class="main-content">
+    <div class="layout-px-spacing">
+      <div class="page-meta">
+        <nav class="breadcrumb-style-one" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="#"> {{ $t("lesson_head") }} </a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              {{ $t("lesson_head_edit") }}
+            </li>
+          </ol>
+        </nav>
+        <LessonFormEdit :cs_id="store.cs_id"></LessonFormEdit>
+      </div>
+    </div>
+  </div>
+  
+
+
 </template>
 
 <style>
