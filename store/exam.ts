@@ -288,6 +288,25 @@ this.formsearchexam.search = ''
       return true;
     },
 
+    async SaveExamNewFormate() {
+
+
+      if(this.status_exam == 'insert'){
+
+        console.log('insert');
+
+      }else {
+        console.log('update');
+      }
+      // try {
+      //   const data = await ApiService.post('/exam/main/create', this.formexam).then(response => {
+      //     return true;
+      //   });
+      // } catch (error) {
+      //   return false
+      // } 
+    },
+
     async ResetForm() {
 
       this.image = null;

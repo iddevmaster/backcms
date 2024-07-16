@@ -152,8 +152,8 @@ const save = async () => {
 
 
   if (!v$.value.$error) {
-
-    console.log(store.formexam);
+await store.SaveExamNewFormate();
+   
   }
 
 };
