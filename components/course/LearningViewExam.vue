@@ -5,8 +5,8 @@
         <div class="col-xl-10 col-sm-8 col-8">
           <h3>{{ $t("menu_couse_view_table_header_d") }}</h3>
         </div>
-        <div class="col-xl-2 col-sm-2 col-4" style="text-align: center">
-          <button type="button" class="btn btn-primary">
+        <div class="col-xl-2 col-sm-2 col-4" >
+          <button type="button" class="btn btn-primary" @click="MyExam(id)">
             {{ $t("menu_couse_view_d_name_bt_") }}
           </button>
         </div>
@@ -34,12 +34,12 @@
             for="company-name"
             class="col-sm-12 col-form-label col-form-label-sm"
           >
-            {{ exam.em_code }}</label
+          </label
           >
         </div>
       </div>
     </div>
-
+{{ id }}
     <div class="row pl-3">
       <div class="col-xl-4 col-sm-12 col-12">
         <div class="form-group row">
@@ -211,10 +211,21 @@ defineProps({
     required: false,
     default: () => ({}),
   },
+  id: {
+    type: Number,
+    required: false,
+    default: () => ({}),
+  },
 });
 
 const toast = useToast();
 const store = CourseStore();
+const router = useRouter();
+
+const MyExam = async (id) => {
+  await router.push("/learning/exam/" + id);
+}
+
 </script>
 
 

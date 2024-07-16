@@ -74,7 +74,7 @@ onMounted(async () => {
          
           </div>
           <div class="col-xl-6 col-lg-6 col-sm-12 layout-spacing">
-            <LearningViewExam  :exam="store.formDataEditCourse.exam_desc"></LearningViewExam>
+            <LearningViewExam  :exam="store.formDataEditCourse.exam_desc" :id="router.currentRoute.value.params.id"></LearningViewExam>
             <br />
             <LearningViewCate></LearningViewCate>
           </div>

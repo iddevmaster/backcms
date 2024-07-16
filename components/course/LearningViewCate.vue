@@ -31,7 +31,11 @@
                     <tbody>
                       <tr  v-for="(item, index) in store.clustercourse">
                         <td>{{index + 1}}</td>
-                        <td>ກົດຈະລາຈອນ</td>
+                        <td>
+                          
+                       
+                          {{ locale == "la" ? item.cg_name_lo : item.cg_name_eng }}
+                        </td>
                         <td class="text-center">{{item.cg_amount_random}}</td>
                       </tr> 
                     </tbody>
