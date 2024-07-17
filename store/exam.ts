@@ -193,8 +193,6 @@ this.formsearchexam.search = ''
 
 
     async fetchExamId(id) {
-      console.log(id);
- 
       try {
         const data = await ApiService.get('/exam/main/get/'+id).then(response => {
         
@@ -288,12 +286,51 @@ this.formsearchexam.search = ''
       return true;
     },
 
-    async SaveExamNewFormate() {
+    async SaveExamNewFormate(id) {
 
 
       if(this.status_exam == 'insert'){
 
-        console.log('insert');
+        console.log('insert',this.formexam.em_time);
+
+
+        // formexam: {
+        //   em_code: "",
+        //   em_name_lo: "",
+        //   em_name_eng: "",
+        //   em_cover: "",
+        //   em_description: "",
+        //   em_random_amount: "50",
+        //   em_measure:"47",
+        //   dlt_code:"A",
+        //   em_time: ref({
+        //     hours: '00',
+        //     minutes: '59',
+        //     seconds: '00'
+        //   }),
+        //   user_id: null
+
+  await this.ChangeFormateTime('add');
+        const saveexame = await {em_code:this.formexam.em_code,
+          em_name_lo:this.formexam.em_name_lo,
+          em_name_eng:this.formexam.em_name_eng,
+          em_cover:this.formexam.em_cover,
+          em_description:this.formexam.em_description,
+          em_random_amount:0,
+          em_time:this.formexam.em_time,
+          em_measure:this.formexam.em_measure,
+          dlt_code:this.formexam.dlt_code,
+          user_id:this.formexam.user_id,
+        }
+
+              try {
+        const data = await ApiService.post('/exam/main/create/'+id, saveexame).then(response => {
+          console.log(response.status);
+          return true;
+        });
+      } catch (error) {
+        return false
+      } 
 
       }else {
         console.log('update');
@@ -366,7 +403,7 @@ this.formsearchexam.search = ''
     },
 
     getDateFromHours(time) {
-
+console.log(time);
       const timed = time.split(':');
       const timeedit = ref({
         hours: timed[0],
@@ -385,7 +422,7 @@ this.formsearchexam.search = ''
           const data = await ApiService.upload('/media_file/upload/file', formData);
           //  this.path = data.data[0].path
           this.formexam.em_cover = data.data[0].path
-          this.formexamedit.em_cover = data.data[0].path
+          // this.formexamedit.em_cover = data.data[0].path
           return true;
         } catch (error) {
           return false;

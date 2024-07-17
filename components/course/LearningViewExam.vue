@@ -212,7 +212,7 @@ defineProps({
     default: () => ({}),
   },
   id: {
-    type: Number,
+    type: String,
     required: false,
     default: () => ({}),
   },

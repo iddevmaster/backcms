@@ -46,7 +46,7 @@ const toast = useToast();
 const router = useRouter();
 
 await store.fetchExamId(router.currentRoute.value.params.id);
-
+store.formexam.user_id = auth.user_id;
 
 const { FormExam } = storeToRefs(store);
 
@@ -96,7 +96,8 @@ const v$ = useVuelidate(rules, FormExam);
 
 
 const backtoLean = async () => {
-  await router.push('/learning');
+  await router.push('/learning/view/');
+  // /learning/view/13
 }
 
 const fileInputRef = ref(null);
@@ -152,7 +153,12 @@ const save = async () => {
 
 
   if (!v$.value.$error) {
-await store.SaveExamNewFormate();
+await store.UploadfileExam();   ///////////upload รูป
+let save = await store.SaveExamNewFormate(router.currentRoute.value.params.id);
+console.log(save);
+
+//await router.push('/learning/view/'+router.currentRoute.value.params.id);
+// /learning/view/13
    
   }
 
