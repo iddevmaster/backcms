@@ -195,9 +195,7 @@ this.formsearchexam.search = ''
     async fetchExamId(id) {
       try {
         const data = await ApiService.get('/exam/main/get/'+id).then(response => {
-        
           if(response.status == 204){
-            console.log(response.status);
             this.status_exam = 'insert';
           }
           if(response.status == 200){
@@ -207,18 +205,15 @@ this.formsearchexam.search = ''
             this.formexam.em_name_lo = response.data.em_name_lo
             this.formexam.em_description = response.data.em_description
             this.formexam.em_measure = response.data.em_measure
+            this.formexam.dlt_code = "B"
             this.formexam.em_time = timeedit
             this.status_exam = 'update';
-         
           }
-          
-    
         });
-        this.isLoading = false;
         return true
 
       } catch (error) {
-        console.log('error');
+
         return false;
       } 
 
@@ -322,10 +317,8 @@ this.formsearchexam.search = ''
           dlt_code:this.formexam.dlt_code,
           user_id:this.formexam.user_id,
         }
-
-              try {
+        try {
         const data = await ApiService.post('/exam/main/create/'+id, saveexame).then(response => {
-          console.log(response.status);
           return true;
         });
       } catch (error) {
@@ -333,7 +326,31 @@ this.formsearchexam.search = ''
       } 
 
       }else {
-        console.log('update');
+        await this.ChangeFormateTime('edit');
+
+
+        const updateexame = await {em_code:this.formexam.em_code,
+          em_name_lo:this.formexam.em_name_lo,
+          em_name_eng:this.formexam.em_name_eng,
+          em_cover:this.formexam.em_cover,
+          em_description:this.formexam.em_description,
+          em_random_amount:0,
+          em_time:this.formexam.em_time,
+          em_measure:this.formexam.em_measure,
+          dlt_code:this.formexam.dlt_code,
+          user_id:this.formexam.user_id,
+        }
+
+      console.log(updateexame);
+        // try {
+        //   const updateexam = await ApiService.put('/exam/main/update/' + id, updateexame);
+        //   return true;
+        // } catch (error) {
+        //   return false;
+        // } 
+
+        
+       
       }
       // try {
       //   const data = await ApiService.post('/exam/main/create', this.formexam).then(response => {
@@ -439,7 +456,7 @@ console.log(time);
 
       } else {
         const time = this.formexamedit.em_time.hours + ':' + this.formexamedit.em_time.minutes + ':' + this.formexamedit.em_time.seconds
-        this.formexamedit.em_time = time;
+        this.formexam.em_time = time;
 
       }
     },

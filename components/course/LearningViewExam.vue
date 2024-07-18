@@ -39,7 +39,7 @@
         </div>
       </div>
     </div>
-{{ id }}
+
     <div class="row pl-3">
       <div class="col-xl-4 col-sm-12 col-12">
         <div class="form-group row">

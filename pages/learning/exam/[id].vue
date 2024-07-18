@@ -96,7 +96,7 @@ const v$ = useVuelidate(rules, FormExam);
 
 
 const backtoLean = async () => {
-  await router.push('/learning/view/');
+  await router.push('/learning/view/'+router.currentRoute.value.params.id);
   // /learning/view/13
 }
 

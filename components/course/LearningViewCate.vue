@@ -8,11 +8,13 @@
                   <div class="col-xl-4 col-sm-12 col-5" style="
     text-align: right;
 ">
-                    <button type="button" class="btn btn-primary" >
+                    <button type="button" class="btn btn-primary"   @click="MyGroup(id)">
                       กำหนดหมวดหมู่
                     </button>
                   </div>       
                 </div>
+
+                {{ id }}
                 <div class="row pt-3">
                   <span class="border-bottom"></span>
                 </div>
@@ -73,6 +75,19 @@ const { locale, setLocale } = useI18n();
 
 const toast = useToast();
 const store = CourseStore();
+defineProps({
+  id: {
+    type: String,
+    required: false,
+    default: () => ({}),
+  },
+});
+
+const router = useRouter();
+
+const MyGroup = async (id) => {
+  await router.push("/learning/group/" + id);
+}
 
 
 </script>

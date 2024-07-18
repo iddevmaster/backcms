@@ -4,10 +4,9 @@ import { defineComponent } from "vue";
 import ErrorUpload from "@/components/course/ErrorUpload.vue";
 import { useAuthStore } from "@/store/auth";
 import { CourseStore } from "@/store/course";
-import { LessonStore } from "@/store/lesson";
 
-import LearningViewCourse from "@/components/course/LearningViewCourse.vue";
-import LearningViewExam from "@/components/course/LearningViewExam.vue";
+import { GroupStore } from '@/store/group'
+import LearningAddGroup from "@/components/course/LearningAddGroup.vue";
 import LearningViewCate from "@/components/course/LearningViewCate.vue";
 import { useToast } from "vue-toastification";
 import ApiService from "../../../services/api.service";
@@ -32,17 +31,16 @@ definePageMeta({
 
 const auth = useAuthStore();
 const store = CourseStore();
-
-const storelesson = LessonStore();
-store.isLoading = true;
 const router = useRouter();
-const toast = useToast();
+const storegroup = GroupStore()
 
-store.formDataEditCourse.user_id = auth.user_id;
+
 store.user_id = auth.user_id;
-
-await store.fetchCourseId(router.currentRoute.value.params.id);
 await store.fetchCourseCgId(router.currentRoute.value.params.id);
+await storegroup.fetchGrouplist();
+
+
+
 
 onMounted(async () => {
   store.isLoading = false;
@@ -68,13 +66,13 @@ onMounted(async () => {
       <div class="middle-content container-xxl">
         <div class="row layout-top-spacing">
          
-          <div class="col-xl-6 col-lg-6 col-sm-12 layout-spacing">
-            <LearningViewCourse :course="store.formDataEditCourse"></LearningViewCourse>
+          <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+            <LearningAddGroup></LearningAddGroup>
+         
+         
           </div>
-          <div class="col-xl-6 col-lg-6 col-sm-12 layout-spacing">
-            <LearningViewExam  :exam="store.formDataEditCourse.exam_desc" :id="router.currentRoute.value.params.id"></LearningViewExam>
-            <br />
-            <LearningViewCate  :id="router.currentRoute.value.params.id"></LearningViewCate>
+          <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+            <LearningViewCate></LearningViewCate>
           </div>
         </div>
         <br />

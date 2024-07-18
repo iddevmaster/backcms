@@ -14,7 +14,6 @@ export const GroupStore = defineStore('group', {
     cg_id:null,
     myValue: null,
     formgroup:{
-
     },
     formsearchgroup: {
       page: 1,
@@ -25,7 +24,6 @@ export const GroupStore = defineStore('group', {
         1
     ]
     },
-    
     formcreategroup: {
       cg_name:"",
       user_id:null,
@@ -36,7 +34,7 @@ export const GroupStore = defineStore('group', {
       cg_id:null
     },
     group:[],
-
+    total_group:"",
   }
   ),
 
