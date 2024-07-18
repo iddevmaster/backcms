@@ -15,7 +15,7 @@
 
     <div class="row pt-3">
       <div class="col-xl-8 col-md-8 mt-3">
-        <label for="inputEmail4" class="form-label">{{ $t("menu_exam_all_code") }}:</label><span
+        <label for="inputEmail4" class="form-label">ໝວດວິຊາ:</label><span
           class="text-xs text-red-500" style="color:red"> * </span>
         <select class="form-control">
           <option v-for="(item, index) in storegroup.group" :key="item.cg_id">
@@ -27,7 +27,7 @@
       </div>
 
       <div class="col-xl-4 col-md-4 mt-3">
-        <label for="inputEmail4" class="form-label">ປະລິມານ:</label><span
+        <label for="inputEmail4" class="form-label">ຈຳນວນຄຳຖາມ:</label><span
           class="text-xs text-red-500" style="color:red"> * </span>
           <input type="text" class="form-control" id="inputEmail4" placeholder="Number"   @input="filterInput" v-model="storegroup.total_group" maxlength="2"
                       />
