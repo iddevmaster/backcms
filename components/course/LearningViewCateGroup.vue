@@ -160,6 +160,7 @@ store.cct_id = item.cct_id;
 const edit = async (item) => {
  
   store.cct_id = item.cct_id;
+  store.cg_amount_random = item.cg_amount_random;
   store.GetopenModalGEdit = true;
 
 }

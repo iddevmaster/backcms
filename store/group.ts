@@ -44,6 +44,7 @@ export const GroupStore = defineStore('group', {
     clustercourse:[],
     cct_id:null,
     GetopenModalGEdit:false,
+    cg_amount_random:""
   }
   ),
 

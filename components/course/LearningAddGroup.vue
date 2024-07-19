@@ -174,7 +174,7 @@ const filterInput = async (event) => {
         storegroup.formclustersingle.cg_amount_random = storegroup.formclustersingle.cg_amount_random.substring(0, storegroup.formclustersingle.cg_amount_random.length - 1);
         return;
       }
-      if (storegroup.total_group.charAt(0) == '0') {
+      if (storegroup.formclustersingle.cg_amount_random.charAt(0) == '0') {
         storegroup.formclustersingle.cg_amount_random = "";
         return;
       } 

@@ -59,7 +59,32 @@ storegroup.GetopenModalGEdit = false;
 storegroup.GetopenModalDe = false;
   };
 
+    const update_d = async () => {
+
+storegroup.GetopenModalGEdit = false;
+storegroup.GetopenModalDe = false;
+  };
+
   
+const filterInput = async (event) => {
+  // stores.form.user_phone = event.target.value.replace(/\D/g, "");
+
+
+  const key = event.data;
+      if (event.data === ' ') {
+        storegroup.cg_amount_random = storegroup.cg_amount_random.substring(0, storegroup.cg_amount_random.length - 1);
+        return;
+      }
+      if (storegroup.cg_amount_random.charAt(0) == '0') {
+        storegroup.cg_amount_random = "";
+        return;
+      } 
+      // if ((storegroup.total_group.charAt(1) !== '') && (storegroup.total_group.charAt(1) !== '0')) {
+      //   storegroup.total_group = "2";
+      //   return;
+      // } 
+      storegroup.cg_amount_random = event.target.value.replace(/\D/g, "");
+};
 
 
 onMounted(async () => {
@@ -124,20 +149,19 @@ onMounted(async () => {
       <div class="modal" v-if="storegroup.GetopenModalGEdit" >
 <div class="modal-content" id="deleteConformationLabel">
                                 <div class="modal-header">
-                                    <div class="icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                    <div class="icon"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                                     </div>
-                                    <h5 class="modal-title" id="exampleModalLabel">{{ $t("delete_record") }}</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">แก้ไข</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="closeModal">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <p class="">{{ $t("delete_record_t") }}</p>
+                                   <input type="text" class="form-control" id="recipient-name" v-model="storegroup.cg_amount_random" @input="filterInput" maxlength="2">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal" >{{ $t("cancel") }}</button>
-                                    <button type="button" class="btn btn-danger" data-remove="task"  @click="delete_userid()">{{ $t("delete") }} </button>
+                                    <button type="button" class="btn btn-danger" data-remove="task"  @click="update_d()">Save</button>
                                 </div>
                             </div>
   </div>
