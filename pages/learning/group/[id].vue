@@ -7,7 +7,7 @@ import { CourseStore } from "@/store/course";
 
 import { GroupStore } from '@/store/group'
 import LearningAddGroup from "@/components/course/LearningAddGroup.vue";
-import LearningViewCate from "@/components/course/LearningViewCate.vue";
+import LearningViewCateGroup from "@/components/course/LearningViewCateGroup.vue";
 import { useToast } from "vue-toastification";
 import ApiService from "../../../services/api.service";
 import { useI18n } from "vue-i18n";
@@ -31,15 +31,35 @@ definePageMeta({
 
 const auth = useAuthStore();
 const store = CourseStore();
+const toast = useToast();
 const router = useRouter();
-const storegroup = GroupStore()
+const storegroup = GroupStore();
 
 
 store.user_id = auth.user_id;
-await store.fetchCourseCgId(router.currentRoute.value.params.id);
+await storegroup.fetchCourseCgIdGroup(router.currentRoute.value.params.id);
 await storegroup.fetchGrouplist();
 
+const delete_userid = async () => {
 
+  const delc = await storegroup.DeleClusterSingle();
+  if(delc){
+   await toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
+ await storegroup.fetchCourseCgIdGroup(router.currentRoute.value.params.id);
+ storegroup.GetopenModalDe = false;
+      }else{
+   toast.error('ລຶບຂໍ້ມູນລົ້ມເຫລວ')
+      }
+
+  };
+
+  const closeModal = async () => {
+
+storegroup.GetopenModalGEdit = false;
+storegroup.GetopenModalDe = false;
+  };
+
+  
 
 
 onMounted(async () => {
@@ -72,12 +92,54 @@ onMounted(async () => {
          
           </div>
           <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-            <LearningViewCate :id="router.currentRoute.value.params.id"></LearningViewCate>
+            <LearningViewCateGroup :id="router.currentRoute.value.params.id"></LearningViewCateGroup>
           </div>
         </div>
         <br />
       </div>
     </div>
+  </div>
+
+    <div class="modal" v-if="storegroup.GetopenModalDe" >
+<div class="modal-content" id="deleteConformationLabel">
+                                <div class="modal-header">
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                    </div>
+                                    <h5 class="modal-title" id="exampleModalLabel">{{ $t("delete_record") }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="closeModal">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="">{{ $t("delete_record_t") }}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal" >{{ $t("cancel") }}</button>
+                                    <button type="button" class="btn btn-danger" data-remove="task"  @click="delete_userid()">{{ $t("delete") }} </button>
+                                </div>
+                            </div>
+  </div>
+
+      <div class="modal" v-if="storegroup.GetopenModalGEdit" >
+<div class="modal-content" id="deleteConformationLabel">
+                                <div class="modal-header">
+                                    <div class="icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                    </div>
+                                    <h5 class="modal-title" id="exampleModalLabel">{{ $t("delete_record") }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" @click="closeModal">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="">{{ $t("delete_record_t") }}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn" data-bs-dismiss="modal" @click="closeModal" >{{ $t("cancel") }}</button>
+                                    <button type="button" class="btn btn-danger" data-remove="task"  @click="delete_userid()">{{ $t("delete") }} </button>
+                                </div>
+                            </div>
   </div>
 </template>
 
@@ -85,4 +147,23 @@ onMounted(async () => {
 .fot-bl{
   font-weight: bold;
 }
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  width: 50%;
+}
+
 </style>

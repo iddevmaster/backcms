@@ -119,7 +119,7 @@ const store = CourseStore();
 const storegroup = GroupStore()
 await storegroup.fetchGrouplist();
 const { FormGroupCluster } = storeToRefs(storegroup);
-console.log(router.currentRoute.value.params.id);
+
 
 const rules = computed(() => {
   return {
@@ -141,8 +141,14 @@ const save = async () => {
 
   if (!v$.value.$error) {
     let check = await storegroup.CheckdupicateGroup()
+ console.log(check);
 if(check == false){
   toast.error('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
+}else {
+
+ await storegroup.SaveClusterSingle(router.currentRoute.value.params.id);
+ await toast.success("ບັນທຶກສຳເລັດແລ້ວ");
+ await storegroup.fetchCourseCgIdGroup(router.currentRoute.value.params.id);
 }
   }
 

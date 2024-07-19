@@ -37,8 +37,13 @@ export const GroupStore = defineStore('group', {
       user_id:null,
       cg_id:null
     },
+    GetopenModalDe:false,
     group:[],
     total_group:"",
+    clus:[],
+    clustercourse:[],
+    cct_id:null,
+    GetopenModalGEdit:false,
   }
   ),
 
@@ -91,7 +96,7 @@ export const GroupStore = defineStore('group', {
     async SaveGroupCluster() {
    
       try {
-        const data = await ApiService.post('/course/cluster/create/single/', this.formcreategroup).then(response => {
+        const data = await ApiService.post('/course/cluster/create/single/', this.formclustersingle).then(response => {
           return true;
         });
        
@@ -102,13 +107,52 @@ export const GroupStore = defineStore('group', {
       }
     },
 
+    async fetchCourseCgIdGroup(id) {
+      const data = await ApiService.get('/course/cluster/get/' + id).then(response => {
+        this.clustercourse = response.data;
+
+       
+      });
+    },
+
     async CheckdupicateGroup() {
 
-      const Cours = CourseStore();
-      console.log(Cours.clustercourse);
-   
-
+      const index = await this.clustercourse.findIndex(item => item.cg_id === this.formclustersingle.cg_id)
+      if (index > -1) {
+        return false
+      }
+      return true
     },
+
+    async SaveClusterSingle(id) {
+      try {
+        const data = await ApiService.post('/course/cluster/create/single/'+id, this.formclustersingle).then(response => {
+          return true;
+        });
+       
+        return true;
+      } catch (error) {
+       // return navigateTo('/maintenance');
+       return false;
+      }
+ 
+    },
+
+    async DeleClusterSingle() {
+
+
+      try {
+        const data = await ApiService.delete('/course/cluster/view/' + this.cct_id).then(response => {
+         
+          return true;
+          });
+          return data;
+      } catch (error) {
+        return false;
+      }
+ 
+    },
+
 
     async UpdateGroup() {
 
