@@ -72,7 +72,7 @@ onMounted(async () => {
          
           </div>
           <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-            <LearningViewCate></LearningViewCate>
+            <LearningViewCate :id="router.currentRoute.value.params.id"></LearningViewCate>
           </div>
         </div>
         <br />

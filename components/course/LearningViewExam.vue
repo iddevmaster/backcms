@@ -34,6 +34,7 @@
             for="company-name"
             class="col-sm-12 col-form-label col-form-label-sm"
           >
+          {{ exam.em_code }}
           </label
           >
         </div>

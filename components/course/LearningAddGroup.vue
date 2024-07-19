@@ -17,8 +17,9 @@
       <div class="col-xl-8 col-md-8 mt-3">
         <label for="inputEmail4" class="form-label">ໝວດວິຊາ:</label><span
           class="text-xs text-red-500" style="color:red"> * </span>
-        <select class="form-control">
-          <option v-for="(item, index) in storegroup.group" :key="item.cg_id">
+          {{ storegroup.cg_id }}
+        <select class="form-control" v-model="storegroup.formclustersingle.cg_id" >
+          <option v-for="(item, index) in storegroup.group" :key="item.cg_id" :value="item.cg_id" >
             {{ locale == "la" ? item.cg_name_lo : item.cg_name_eng }}
           </option>
         </select>
@@ -29,12 +30,32 @@
       <div class="col-xl-4 col-md-4 mt-3">
         <label for="inputEmail4" class="form-label">ຈຳນວນຄຳຖາມ:</label><span
           class="text-xs text-red-500" style="color:red"> * </span>
-          <input type="text" class="form-control" id="inputEmail4" placeholder="Number"   @input="filterInput" v-model="storegroup.total_group" maxlength="2"
+          <input type="text" class="form-control" id="inputEmail4" placeholder="Number" 
+          
+          v-model="storegroup.formclustersingle.cg_amount_random"  @input="filterInput"  maxlength="2"
+
+        :class="{
+          'border-red-500 focus:border-red-500': v$.cg_amount_random.$error,
+          'border-[#42d392] ': !v$.cg_amount_random.$invalid,
+        }"
+        @change="v$.cg_amount_random.$touch"
                       />
+
+                      <div v-if="locale == 'la'" >
+      <span v-if="v$.cg_amount_random.$error" class="text-xs text-red-500"
+        style="color: red" >ຕ້ອງມີຊ່ອງຂໍ້ມູນລະຫັດຫຼັກສູດ</span>
+  </div>
+
+  <div v-if="locale == 'en'" >
+      <span v-if="v$.cg_amount_random.$error" class="text-xs text-red-500"
+        style="color: red" >The Course Code field is required</span>
+  </div>
+
+
 
       </div>
 
-
+      
     </div>
 
 
@@ -87,26 +108,44 @@ import ApiService from "../../services/api.service";
 
 const { locale, setLocale } = useI18n();
 
-defineProps({
-  is: {
-    type: Object,
-    required: false,
-    default: () => ({}),
-  },
-});
 
+
+
+const router = useRouter();
 const toast = useToast();
 const store = CourseStore();
 
 
 const storegroup = GroupStore()
 await storegroup.fetchGrouplist();
+const { FormGroupCluster } = storeToRefs(storegroup);
+console.log(router.currentRoute.value.params.id);
 
+const rules = computed(() => {
+  return {
+    cg_amount_random: {
+      required: helpers.withMessage(
+        "The Course Code field is required",
+        required
+      ),
+      minLength: minLength(1),
+    },
+   
+  };
+});
 
+const v$ = useVuelidate(rules, FormGroupCluster);
 
 const save = async () => {
+  v$.value.$validate();
 
-alert('save');
+  if (!v$.value.$error) {
+    let check = await storegroup.CheckdupicateGroup()
+if(check == false){
+  toast.error('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
+}
+  }
+
 }
 
 const validatePNumber = async (evt) => {
@@ -126,18 +165,18 @@ const filterInput = async (event) => {
 
   const key = event.data;
       if (event.data === ' ') {
-        storegroup.total_group= storegroup.total_group.substring(0, storegroup.total_group.length - 1);
+        storegroup.formclustersingle.cg_amount_random = storegroup.formclustersingle.cg_amount_random.substring(0, storegroup.formclustersingle.cg_amount_random.length - 1);
         return;
       }
       if (storegroup.total_group.charAt(0) == '0') {
-        storegroup.total_group = "";
+        storegroup.formclustersingle.cg_amount_random = "";
         return;
       } 
       // if ((storegroup.total_group.charAt(1) !== '') && (storegroup.total_group.charAt(1) !== '0')) {
       //   storegroup.total_group = "2";
       //   return;
       // } 
-      storegroup.total_group = event.target.value.replace(/\D/g, "");
+      storegroup.formclustersingle.cg_amount_random = event.target.value.replace(/\D/g, "");
 };
 
 function coverimage(i) {

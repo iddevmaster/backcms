@@ -11,7 +11,7 @@ export const GroupStore = defineStore('group', {
     GetopenModalEdit:false,
     GetopenModal:false,
     sortedbyASC: true,
-    cg_id:null,
+    cg_id:1,
     myValue: null,
     formgroup:{
     },
@@ -27,6 +27,10 @@ export const GroupStore = defineStore('group', {
     formcreategroup: {
       cg_name:"",
       user_id:null,
+    },
+    formclustersingle: {
+      cg_amount_random:"",
+      cg_id:1,
     },
     formeditgroup: {
       cg_name:"",
@@ -44,6 +48,9 @@ export const GroupStore = defineStore('group', {
     },
     FormEditGroup(state) {
       return state.formeditgroup;
+    },
+    FormGroupCluster(state) {
+      return state.formclustersingle;
     },
   
   },
@@ -78,6 +85,29 @@ export const GroupStore = defineStore('group', {
       } catch (error) {
        // return navigateTo('/maintenance');
       }
+    },
+
+
+    async SaveGroupCluster() {
+   
+      try {
+        const data = await ApiService.post('/course/cluster/create/single/', this.formcreategroup).then(response => {
+          return true;
+        });
+       
+        return true;
+      } catch (error) {
+       // return navigateTo('/maintenance');
+       return false;
+      }
+    },
+
+    async CheckdupicateGroup() {
+
+      const Cours = CourseStore();
+      console.log(Cours.clustercourse);
+   
+
     },
 
     async UpdateGroup() {

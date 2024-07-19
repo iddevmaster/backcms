@@ -205,6 +205,7 @@ this.formsearchexam.search = ''
             this.formexam.em_name_lo = response.data.em_name_lo
             this.formexam.em_description = response.data.em_description
             this.formexam.em_measure = response.data.em_measure
+            this.formexam.em_cover = response.data.em_cover
             this.formexam.dlt_code = "B"
             this.formexam.em_time = timeedit
             this.status_exam = 'update';
@@ -327,7 +328,7 @@ this.formsearchexam.search = ''
 
       }else {
         await this.ChangeFormateTime('edit');
-
+   
 
         const updateexame = await {em_code:this.formexam.em_code,
           em_name_lo:this.formexam.em_name_lo,
@@ -339,15 +340,26 @@ this.formsearchexam.search = ''
           em_measure:this.formexam.em_measure,
           dlt_code:this.formexam.dlt_code,
           user_id:this.formexam.user_id,
+          course_id:id
         }
 
-      console.log(updateexame);
-        // try {
-        //   const updateexam = await ApiService.put('/exam/main/update/' + id, updateexame);
-        //   return true;
-        // } catch (error) {
-        //   return false;
-        // } 
+
+    
+
+        try {
+          const data = await ApiService.put('/exam/main/update/'+this.em_id, updateexame).then(response => {
+        
+          if(response.status == 200){
+            return true
+          }else {
+            return false;
+          }
+          
+          });
+          return data;
+        } catch (error) {
+          return false
+        } 
 
         
        
@@ -360,6 +372,16 @@ this.formsearchexam.search = ''
       //   return false
       // } 
     },
+
+    
+
+    async getEMID(id) {
+      const data = await ApiService.get('/course/get/' + id).then(response => {
+        this.em_id = response.data.exam_desc.em_id;
+      });
+     },
+      
+    
 
     async ResetForm() {
 

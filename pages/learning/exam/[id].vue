@@ -48,6 +48,10 @@ const router = useRouter();
 await store.fetchExamId(router.currentRoute.value.params.id);
 store.formexam.user_id = auth.user_id;
 
+if(store.status_exam == 'update'){
+  await store.getEMID(router.currentRoute.value.params.id);
+}
+
 const { FormExam } = storeToRefs(store);
 
 
@@ -111,6 +115,28 @@ const openFileInput = async () => {
 }
 
 
+const filterInput = async (event) => {
+  // stores.form.user_phone = event.target.value.replace(/\D/g, "");
+
+
+  const key = event.data;
+      if (event.data === ' ') {
+        store.formexam.em_measure = store.formexam.em_measure.substring(0, store.formexam.em_measure.length - 1);
+        return;
+      }
+      if (store.formexam.em_measure.charAt(0) == '0') {
+        store.formexam.em_measure = "";
+        return;
+      } 
+      // if ((storegroup.total_group.charAt(1) !== '') && (storegroup.total_group.charAt(1) !== '0')) {
+      //   storegroup.total_group = "2";
+      //   return;
+      // } 
+      store.formexam.em_measure = event.target.value.replace(/\D/g, "");
+};
+
+
+
 const onFileChange = async (event) => {
 
 Swal.fire({
@@ -149,14 +175,18 @@ setTimeout(() => Swal.close(), 500);
 
 const save = async () => {
   v$.value.$validate();
-
-
-
   if (!v$.value.$error) {
 await store.UploadfileExam();   ///////////upload รูป
-let save = await store.SaveExamNewFormate(router.currentRoute.value.params.id);
-console.log(save);
 
+let save = await store.SaveExamNewFormate(router.currentRoute.value.params.id);
+
+if(save == true){
+await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
+
+ await router.push('/learning/view/'+router.currentRoute.value.params.id);
+}else {
+  toast.error('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
+}
 //await router.push('/learning/view/'+router.currentRoute.value.params.id);
 // /learning/view/13
    
@@ -476,7 +506,7 @@ const onFileChangeBackPdf = async (event) => {
                         v-model="store.formexam.em_measure" :class="{
               'border-red-500 focus:border-red-500': v$.em_measure.$error,
               'border-[#42d392] ': !v$.em_measure.$invalid,
-            }" @change="v$.em_measure.$touch" maxlength="100" />
+            }" @change="v$.em_measure.$touch" maxlength="100"  @input="filterInput"/>
                       <div v-if="locale == 'la'">
                         <span v-if="v$.em_measure.$error" class="text-xs text-red-500"
                           style="color: red">ຕ້ອງມີຊ່ອງໃສ່ຊື່ຫຼັກສູດ.</span>
@@ -489,7 +519,7 @@ const onFileChangeBackPdf = async (event) => {
 
                    
                     </div>
-
+                   
                     <div class="form-group mb-4 mt-3">
                       <label for="exampleFormControlFile1">{{ $t("menu_couse_f_title_picture") }}</label>
                       <input type="file" class="form-control-file" id="exampleFormControlFile1"

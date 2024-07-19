@@ -44,6 +44,8 @@ store.user_id = auth.user_id;
 await store.fetchCourseId(router.currentRoute.value.params.id);
 await store.fetchCourseCgId(router.currentRoute.value.params.id);
 
+
+
 onMounted(async () => {
   store.isLoading = false;
 });
