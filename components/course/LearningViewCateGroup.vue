@@ -277,15 +277,17 @@ const onDragOver = (event, index) => {
 };
 
 
-const onDrop = (event, index) => {
+const onDrop = async (event, index) => {
   event.preventDefault();
   const draggedItem = store.clustercourse[draggedItemIndex];
  
   store.clustercourse.splice(draggedItemIndex, 1);
  
   store.clustercourse.splice(index, 0, draggedItem);
+  const delc = await store.fetchCourseCgIdGroupEmtry(router.currentRoute.value.params.id);
+  const insertgroup = await store.SaveClusterGroup(router.currentRoute.value.params.id);
 
-  console.log(store.clustercourse);
+  
 };
 
   

@@ -139,6 +139,22 @@ export const GroupStore = defineStore('group', {
  
     },
 
+    async SaveClusterGroup(id) {
+      
+      try {
+        const data = await ApiService.post('/course/cluster/create/'+id, this.clustercourse).then(response => {
+          console.log(response);
+          return true;
+        });
+       
+        return true;
+      } catch (error) {
+       // return navigateTo('/maintenance');
+       return false;
+      }
+ 
+    },
+
     async fetchCourseCgIdGroupUpdate(){
 
       const cg_random = {cg_amount_random:this.cg_amount_random}
@@ -155,6 +171,21 @@ return true;
       } catch (error) {
       
         return false
+      }
+   
+    },
+
+    async fetchCourseCgIdGroupEmtry(id){
+
+  
+
+      try {
+        const data = await ApiService.delete('/course/cluster/empty/' + id).then(response => {
+          return true;
+          });
+          return data;
+      } catch (error) {
+        return false;
       }
    
     },
