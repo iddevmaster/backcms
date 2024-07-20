@@ -140,10 +140,9 @@ export const GroupStore = defineStore('group', {
     },
 
     async SaveClusterGroup(id) {
-      
+  
       try {
         const data = await ApiService.post('/course/cluster/create/'+id, this.clustercourse).then(response => {
-          console.log(response);
           return true;
         });
        
@@ -158,13 +157,11 @@ export const GroupStore = defineStore('group', {
     async fetchCourseCgIdGroupUpdate(){
 
       const cg_random = {cg_amount_random:this.cg_amount_random}
-      console.log(this.cct_id);
-
       const cg = this.cct_id;
 
       try {
         const data = await ApiService.put('/course/cluster/view/'+cg,cg_random).then(response => {
-    
+   
 return true;
         });
         return true;

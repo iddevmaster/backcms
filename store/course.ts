@@ -227,8 +227,6 @@ export const CourseStore = defineStore('course', {
       const data = await ApiService.get('/course/cluster/get/' + id).then(response => {
         this.clustercourse = response.data;
 
-       
-       
       });
     },
 

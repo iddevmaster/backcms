@@ -149,7 +149,6 @@ const save = async () => {
 
   if (!v$.value.$error) {
     let check = await storegroup.CheckdupicateGroup()
- console.log(check);
 if(check == false){
   toast.error('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ')
 }else {
