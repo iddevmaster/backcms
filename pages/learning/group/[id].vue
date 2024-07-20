@@ -16,6 +16,7 @@ import "vue-loading-overlay/dist/css/index.css";
 import Swal from "sweetalert2";
 import { useVuelidate } from "@vuelidate/core";
 import { onMounted } from "vue";
+import { ref } from 'vue';
 import {
   required,
   email,
@@ -60,12 +61,14 @@ storegroup.GetopenModalDe = false;
   };
 
     const update_d = async () => {
-
 storegroup.GetopenModalGEdit = false;
 storegroup.GetopenModalDe = false;
+
+await storegroup.fetchCourseCgIdGroupUpdate();
+await storegroup.fetchCourseCgIdGroup(router.currentRoute.value.params.id);
   };
 
-  
+
 const filterInput = async (event) => {
   // stores.form.user_phone = event.target.value.replace(/\D/g, "");
 

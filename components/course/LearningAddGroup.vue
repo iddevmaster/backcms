@@ -5,7 +5,11 @@
         <div class="col-xl-10 col-sm-8 col-8">
           <h3>{{ $t("menu_couse_view_table_header_c") }}</h3>
         </div>
-        <div class="col-xl-2 col-sm-2 col-4" style="text-align: center"></div>
+        <div class="col-xl-2 col-sm-2 col-4" style="text-align: center">
+          <button type="button" class="btn btn-primary"   @click="backtoLean()">
+                      กลับก่อนหน้านี้
+                    </button>
+        </div>
       </div>
 
       <div class="row pt-3">
@@ -17,7 +21,6 @@
       <div class="col-xl-8 col-md-8 mt-3">
         <label for="inputEmail4" class="form-label">ໝວດວິຊາ:</label><span
           class="text-xs text-red-500" style="color:red"> * </span>
-          {{ storegroup.cg_id }}
         <select class="form-control" v-model="storegroup.formclustersingle.cg_id" >
           <option v-for="(item, index) in storegroup.group" :key="item.cg_id" :value="item.cg_id" >
             {{ locale == "la" ? item.cg_name_lo : item.cg_name_eng }}
@@ -133,6 +136,11 @@ const rules = computed(() => {
    
   };
 });
+
+const backtoLean = async () => {
+  await router.push('/learning/view/'+router.currentRoute.value.params.id);
+};
+
 
 const v$ = useVuelidate(rules, FormGroupCluster);
 
