@@ -30,12 +30,11 @@ export const ExamquestionStore = defineStore('examquestion', {
     total: null,
     choicelist: [],
     formExamq: {
-      eq_name: "",
-      eq_image: "",
+      eq_name_lo: "",
+      eq_name_eng: "",
       eq_answer: null,
-      em_id: 0,
-      id: 0,
     },
+
     formChoice: {
       ec_index: null,
       ec_name: "",

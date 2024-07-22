@@ -40,17 +40,6 @@ const { deleteExam } = ExamStore();//Action
 
 
 
-// const closeModal = async () => {
-//     await store.closeModal()
-//     store.isOpen = false;
-// };
-
-// const Deleteexam = async (item) => {
-//     const a = await deleteExam(item);
-//     await store.fetchExamlist()
-
-//     toast.success("ລຶບຂໍ້ມູນສຳເລັດ");
-// };
 
 
 </script>

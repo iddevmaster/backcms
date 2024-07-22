@@ -12,7 +12,7 @@
     </div>
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ">
-      <button class="btn btn-primary mb-2 me-4" style="width: 100%;height: 100%;margin-top: auto;" @click="OpenFormInsert()" >{{ $t("menu_exam_add") }}</button>
+      <button class="btn btn-primary mb-2 me-4" style="width: 100%;height: 100%;margin-top: auto;" @click="GotoPage('exam/create')" >{{ $t("menu_exam_add") }}</button>
     </div>
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ">
@@ -239,6 +239,13 @@ const OpenFormInsert = async () => {
 const format = (time) => {
   return moment(time).format("DD/MM/YYYY HH:mm");
 };
+
+const GotoPage = (item) => {
+
+   router.push(item);
+};
+
+
 
 const selectAll = async () => {
   // await selectall();
