@@ -57,11 +57,30 @@ export const ExamStore = defineStore('exam', {
       }),
       user_id: null
     },
+    cg_id:1,
     formsearchexam: {
       page: 1,
       per_page: 10,
       search: '',
     },
+
+    formsearchexamques: {
+      page: 1,
+      per_page: 10,
+      search: '',
+    },
+    formsearchgroup: {
+      page: 1,
+      per_page: 50,
+      search: '',
+      active_include: [
+        0,
+        1
+    ]
+    },
+    examques: [],
+    seletype:null,
+    group:[],
      dlt:[
       {
           "dlt_code": "A",
@@ -167,6 +186,57 @@ this.formsearchexam.per_page = 10
 this.formsearchexam.search = ''
 
     },
+
+    
+    async selectfirstGroupId() {
+       this.cg_id = 1
+    },
+    async fetchGrouplist() {
+      try {
+        const data = await ApiService.post('/course/group/all', this.formsearchgroup).then(response => {
+          this.group = response.data.data
+          this.group_total_page = response.data.total_page
+          this.group_limit_page = response.data.limit_page
+          this.group_current_page = response.data.current_page
+          this.group_total_filter = response.data.total_filter
+          this.group_total = response.data.total
+        });
+        this.isLoading = false;
+        return true;
+      } catch (error) {
+       // return navigateTo('/maintenance');
+      }
+    },
+
+    async fetchExamlistQuest() {
+  
+try {
+  const data = await ApiService.post('/exam/question/'+this.cg_id+'/list', this.formsearchexamques).then(response => {
+this.examques = response.data.data;
+this.examques_total_page = response.data.total_page
+
+console.log(response.data.total_page);
+this.examques_limit_page = response.data.limit_page
+this.examques_current_page = response.data.current_page
+this.examques_total_filter = response.data.total_filter
+this.examques_total = response.data.total
+  });
+  this.isLoading = false;
+  return true
+
+} catch (error) {
+  return false;
+} 
+    },
+
+    async selecttypes(item) {
+
+this.cg_id = item
+this.seletype = this.group.find(items => items.cg_id == item);
+
+    },
+
+
     async fetchExamlist() {
 
       await this.ResetForm();
@@ -185,10 +255,7 @@ this.formsearchexam.search = ''
       } catch (error) {
         console.log('error');
         return false;
-      } finally {
-
-      }
-
+      } 
     },
 
 
@@ -239,6 +306,16 @@ this.formsearchexam.search = ''
     setCurrentPage(page) {
       this.formsearchexam.page = page
     },
+
+    async selectentiresq(data_entires) {
+
+      this.formsearchexamques.per_page = data_entires;
+      this.formsearchexamques.page = 1;
+    },
+    setCurrentPageq(page) {
+      this.formsearchexamques.page = page
+    },
+
     async SaveExam() {
       this.ChangeFormateTime('add');
       try {
@@ -442,7 +519,7 @@ this.formsearchexam.search = ''
     },
 
     getDateFromHours(time) {
-console.log(time);
+
       const timed = time.split(':');
       const timeedit = ref({
         hours: timed[0],

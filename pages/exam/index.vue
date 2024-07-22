@@ -7,9 +7,8 @@ import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import { ExamStore } from '@/store/exam'
 import { useAuthStore } from '@/store/auth'
-import ExamList from '@/components/exam/ExamList.vue'
-import ExamCreate from '@/components/exam/ExamCreate.vue'
-import ExamEdit from '@/components/exam/ExamEdit.vue'
+import ExamList from '@/components/examination/ExamList.vue'
+
 import { useToast } from 'vue-toastification';
 import { required, email, sameAs, minLength, helpers, } from '@vuelidate/validators';
 import Loading from 'vue-loading-overlay';import 'vue-loading-overlay/dist/css/index.css';
@@ -41,17 +40,17 @@ const { deleteExam } = ExamStore();//Action
 
 
 
-const closeModal = async () => {
-    await store.closeModal()
-    store.isOpen = false;
-};
+// const closeModal = async () => {
+//     await store.closeModal()
+//     store.isOpen = false;
+// };
 
-const Deleteexam = async (item) => {
-    const a = await deleteExam(item);
-    await store.fetchExamlist()
+// const Deleteexam = async (item) => {
+//     const a = await deleteExam(item);
+//     await store.fetchExamlist()
 
-    toast.success("ລຶບຂໍ້ມູນສຳເລັດ");
-};
+//     toast.success("ລຶບຂໍ້ມູນສຳເລັດ");
+// };
 
 
 </script>
@@ -76,11 +75,6 @@ const Deleteexam = async (item) => {
                     <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                         <div class="widget-content widget-content-area br-8 p-3">
                             <div class="widget-header">
-                                <!-- <div class="row">
-                                    <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                        <button class="btn btn-primary mb-2 me-4" @click="OpenFormInsert()">{{ $t("menu_exam_add") }}</button>
-                                    </div>
-                                </div> -->
                             </div>
                             <ExamList></ExamList>
                         </div>
@@ -91,7 +85,7 @@ const Deleteexam = async (item) => {
     </div>
 
 
-    <div v-if="GetopenModal" class="modal">
+    <!-- <div v-if="GetopenModal" class="modal">
         <div class="modal-content" id="deleteConformationLabel">
             <div class="modal-header">
                 <div class="icon">
@@ -118,9 +112,9 @@ const Deleteexam = async (item) => {
                     @click="Deleteexam(GetExamDelId)">{{ $t("delete_record_modal") }}</button>
             </div>
         </div>
-    </div>
-    <ExamCreate></ExamCreate>
-    <ExamEdit></ExamEdit>
+    </div> -->
+    <!-- <ExamCreate></ExamCreate>
+    <ExamEdit></ExamEdit> -->
 </template>
 
 <style></style>

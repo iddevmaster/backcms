@@ -63,7 +63,16 @@
 "menu_couse_view_d_name_bt_": "Manage",
 
 
-"menu_couse_view_table_header_g": "ໝວດວິຊາ",
+"menu_couse_view_table_header_g": "Group",
+"menu_view_table_title_permi": "Group Manage",
+"menu_view_table_name_group": "Group Manage",
+"menu_view_table_total_group": "Group Manage",
+
+"menu_group_add": "ໝວດວິຊາ",
+"menu_group_add_name": "ໝວດວິຊາ",
+"menu_group_add_total": "ຈຳນວນຄຳຖາມ",
+"menu_group_add_back": "ກັບ​ຄືນ​ໄປ",
+"menu_group_add_g": "ເພີ່ມ​ຂຶ້ນ",
 
 
   "table_course_code": "Code",

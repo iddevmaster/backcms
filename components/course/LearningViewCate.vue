@@ -3,18 +3,19 @@
               <div class="widget-header">
                 <div class="row pt-3">
                   <div class="col-xl-8 col-sm-12 col-7">
-                    <h3>{{ $t("menu_couse_view_table_header_g") }}</h3>
+                    <h3>{{ $t("menu_group_add") }}</h3>
                   </div>
                   <div class="col-xl-4 col-sm-12 col-5" style="
     text-align: right;
 ">
                     <button type="button" class="btn btn-primary"   @click="MyGroup(id)">
-                      กำหนดหมวดหมู่
+                      
+                      {{ $t("menu_view_table_title_permi") }}
                     </button>
                   </div>       
                 </div>
 
-                {{ id }}
+               
                 <div class="row pt-3">
                   <span class="border-bottom"></span>
                 </div>
@@ -26,8 +27,8 @@
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">ໝວດວິຊາ</th>
-                        <th class="text-center" scope="col">จำนวน</th>
+                        <th scope="col">  {{ $t("menu_view_table_name_group") }}</th>
+                        <th class="text-center" scope="col">  {{ $t("menu_view_table_total_group") }}</th>
                       </tr>
                     </thead>
                     <tbody>

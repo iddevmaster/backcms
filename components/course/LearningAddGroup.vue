@@ -3,11 +3,11 @@
     <div class="widget-header">
       <div class="row pt-3">
         <div class="col-xl-10 col-sm-8 col-8">
-          <h3>{{ $t("menu_couse_view_table_header_c") }}</h3>
+          <h3>{{ $t("menu_group_add") }}</h3>
         </div>
         <div class="col-xl-2 col-sm-2 col-4" style="text-align: center">
           <button type="button" class="btn btn-primary"   @click="backtoLean()">
-                      กลับก่อนหน้านี้
+            {{ $t("menu_group_add_back") }}
                     </button>
         </div>
       </div>
@@ -19,7 +19,7 @@
 
     <div class="row pt-3">
       <div class="col-xl-8 col-md-8 mt-3">
-        <label for="inputEmail4" class="form-label">ໝວດວິຊາ:</label><span
+        <label for="inputEmail4" class="form-label">{{ $t("menu_group_add_name") }}</label><span
           class="text-xs text-red-500" style="color:red"> * </span>
         <select class="form-control" v-model="storegroup.formclustersingle.cg_id" >
           <option v-for="(item, index) in storegroup.group" :key="item.cg_id" :value="item.cg_id" >
@@ -31,7 +31,7 @@
       </div>
 
       <div class="col-xl-4 col-md-4 mt-3">
-        <label for="inputEmail4" class="form-label">ຈຳນວນຄຳຖາມ:</label><span
+        <label for="inputEmail4" class="form-label">{{ $t("menu_group_add_total") }}</label><span
           class="text-xs text-red-500" style="color:red"> * </span>
           <input type="text" class="form-control" id="inputEmail4" placeholder="Number" 
           
@@ -66,7 +66,7 @@
     <div class="row pt-3">
       <div class="col-xl-12 col-md-12 mt-3">
         <button type="button" class="btn btn-primary"   @click="save()">
-                      เพิ่ม
+          {{ $t("menu_group_add_g") }}
      </button>
       
       </div>

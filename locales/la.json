@@ -63,6 +63,9 @@
 
 
 "menu_couse_view_table_header_d": "ລາຍລະອຽດ",
+"menu_view_table_title_permi": "ກໍານົດໝວດວິຊາ",
+"menu_view_table_name_group": "ໝວດວິຊາ",
+"menu_view_table_total_group": "ທັງໝົດ",
 
 "menu_couse_view_d_code": "ລະຫັດ:",
 "menu_couse_view_d_name_lo": "ຊື່ແບບທົດສອບ(Lo):",
@@ -71,12 +74,18 @@
 "menu_couse_view_d_name_des": "ລາຍລະອຽດ:",
 "menu_couse_view_d_name_ex_time": "ເວລາສອບ:",
 "menu_couse_view_d_name_em_e": "ຄະແນນທີ່ຄາດຫວັງ:",
-"menu_couse_view_d_name_bt_": "จัดการ",
+"menu_couse_view_d_name_bt_": "ຈັດການ",
 
 
 
 
-"menu_couse_view_table_header_g": "ໝວດວິຊາ",
+"menu_group_add": "ໝວດວິຊາ",
+"menu_group_add_name": "ໝວດວິຊາ",
+"menu_group_add_total": "ຈຳນວນຄຳຖາມ",
+"menu_group_add_back": "ກັບ​ຄືນ​ໄປ",
+"menu_group_add_g": "ເພີ່ມ​ຂຶ້ນ",
+
+
 
   
 
