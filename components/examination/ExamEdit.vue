@@ -40,9 +40,25 @@ const router = useRouter();
 const { formExamqedit } = storeToRefs(store);
 
 // fetchdata();
+Swal.fire({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading()
+      
+    },
+  });
+
 await store.fetchGrouplist();
 await store.fetchExamquestionlistEdit(router.currentRoute.value.params.id);
 await store.RemoveChoice();
+
+
+
+
+
+
+ await setTimeout(() => Swal.close(), 500);
 // await store.ManageChoice();
 
 
@@ -106,14 +122,24 @@ const upda = async () => {
   v$.value.$validate();
 
   if (!v$.value.$error) {
-   // let uploadfile = await store.UploadfileExamq();   ///////////upload รูป
-   // let save = await store.SaveExamquest();  ///////////save 
-   let updatechoice = await store.fetchExamquUpdateChoice();  ///////////save 
-
-   if(updatechoice == true){
+    Swal.fire({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading()
+    },
+  });
+ // let uploadfile = await store.UploadfileExamq();   ///////////upload รูป
+   let updateeq = await store.ExamquestionlistEditUpdate();  ///////////save 
+ //  let updatechoice = await store.fetchExamquUpdateChoice();  ///////////save 
+console.log(updateeq);
+   if(updateeq == true){
  //   await store.ResetFormChoice();
 //    await store.fetchExamquestionlistEdit(router.currentRoute.value.params.id);
 // await store.RemoveChoice();
+
+
+setTimeout(() => Swal.close(), 500);
 
    }
 

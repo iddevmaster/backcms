@@ -174,6 +174,27 @@ export const ExamquestionStore = defineStore('examquestion', {
       } 
       // formExamqedit
     },
+
+
+
+    async ExamquestionlistEditUpdate() {
+      
+
+const upda = {eq_name_lo:this.formExamqedit.eq_name_lo,eq_name_eng:this.formExamqedit.eq_name_eng,eq_image:'',eq_answer:this.formExamqedit.eq_answer,cg_id:this.cg_id}
+
+try {
+        const data = await ApiService.put('/exam/question/update/'+ this.eq,upda).then(response => {
+        
+        return true;
+        });
+
+        return data;
+    
+      } catch (error) {
+        return false;
+      } 
+      // formExamqedit
+    },
     
     async ResetFormChoice() {
 
