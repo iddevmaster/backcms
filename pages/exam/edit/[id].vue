@@ -6,7 +6,7 @@ import { storeToRefs } from "pinia";
 import { defineComponent } from "vue";
 
 import { useAuthStore } from "@/store/auth";
-import ExamCreate from "@/components/examination/ExamCreate.vue";
+import ExamEdit from "@/components/examination/ExamEdit.vue";
 
 import { useToast } from "vue-toastification";
 import {
@@ -26,7 +26,7 @@ definePageMeta({
 </script>
 
 <template>
-  <ExamCreate></ExamCreate>
+  <ExamEdit></ExamEdit>
  
 </template>
 

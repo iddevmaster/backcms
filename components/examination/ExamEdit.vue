@@ -14,6 +14,7 @@ import "vue-loading-overlay/dist/css/index.css";
 import Swal from "sweetalert2";
 
 import { ref, computed, watch, onMounted } from "vue";
+import 'vue-loading-overlay/dist/css/index.css';
 
 import {
   required,
@@ -36,11 +37,14 @@ const store = ExamquestionStore();
 const toast = useToast();
 const router = useRouter();
 
-const { FormExamq } = storeToRefs(store);
+const { formExamqedit } = storeToRefs(store);
 
 // fetchdata();
-
 await store.fetchGrouplist();
+await store.fetchExamquestionlistEdit(router.currentRoute.value.params.id);
+await store.RemoveChoice();
+// await store.ManageChoice();
+
 
 const rules = computed(() => {
   return {
@@ -68,7 +72,7 @@ const rules = computed(() => {
   };
 });
 
-const v$ = useVuelidate(rules, FormExamq);
+const v$ = useVuelidate(rules, formExamqedit);
 
 const backtoLean = async () => {
   await router.push("/learning");
@@ -82,16 +86,45 @@ const openFileInput = async () => {
   }
 };
 
-const save = async () => {
+// const save = async () => {
+//   v$.value.$validate();
+
+//   if (!v$.value.$error) {
+//     let uploadfile = await store.UploadfileExamq();   ///////////upload รูป
+//     let save = await store.SaveExamquest();  ///////////save 
+  
+//     if(save == true){
+//       console.log('save chioc ต่อ',save);
+//       let savechoice = await store.SaveExamquestChoice();  ///////////save 
+//     }
+
+
+//   }
+// };
+
+const upda = async () => {
   v$.value.$validate();
 
   if (!v$.value.$error) {
-    let uploadfile = await store.UploadfileExamq();   ///////////upload รูป
-    let save = await store.SaveExamquest();  ///////////save 
-  
-    if(save == true){
-      let savechoice = await store.SaveExamquestChoice();  ///////////save 
-    }
+   // let uploadfile = await store.UploadfileExamq();   ///////////upload รูป
+   // let save = await store.SaveExamquest();  ///////////save 
+   let updatechoice = await store.fetchExamquUpdateChoice();  ///////////save 
+
+   if(updatechoice == true){
+ //   await store.ResetFormChoice();
+//    await store.fetchExamquestionlistEdit(router.currentRoute.value.params.id);
+// await store.RemoveChoice();
+
+   }
+
+
+
+    // if(save == true){
+    //   console.log('save chioc ต่อ',save);
+    //   let savechoice = await store.SaveExamquestChoice();  ///////////save 
+    // }
+
+
   }
 };
 
@@ -200,6 +233,8 @@ const onFileChangeBackPdf = async (event) => {
 
 <template>
   <div id="content" class="main-content">
+    <loading v-model:active="store.isLoading" :can-cancel="true"
+    />
     <div class="layout-px-spacing">
       <div class="page-meta">
         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
@@ -223,7 +258,7 @@ const onFileChangeBackPdf = async (event) => {
                   <div class="widget-header">
                     <div class="row">
                       <div class="col-xl-10 col-sm-12 col-10">
-                        <h4>ເພີ່ມແບບທົດສອບ</h4>
+                        <h4>ແກ້ໄຂແບບທົດສອບ</h4>
                       </div>
                       <div
                         class="col-xl-2 col-sm-12 col-12"
@@ -269,7 +304,7 @@ const onFileChangeBackPdf = async (event) => {
                         class="form-control"
                         id="inputEmail4"
                         placeholder="ຄໍາຖາມ(Lo)"
-                        v-model="store.formExamq.eq_name_lo"
+                        v-model="store.formExamqedit.eq_name_lo"
                         :class="{
                           'border-red-500 focus:border-red-500':
                             v$.eq_name_lo.$error,
@@ -308,7 +343,7 @@ const onFileChangeBackPdf = async (event) => {
                         class="form-control"
                         id="inputPassword4"
                         placeholder="ຄໍາຖາມ(En)"
-                        v-model="store.formExamq.eq_name_eng"
+                        v-model="store.formExamqedit.eq_name_eng"
                         :class="{
                           'border-red-500 focus:border-red-500':
                             v$.eq_name_eng.$error,
@@ -343,8 +378,8 @@ const onFileChangeBackPdf = async (event) => {
                       ><span class="text-xs text-red-500" style="color: red">
                         *
                       </span>
-               {{ store.formExamq.eq_answer }}
-                      <select class="form-control" v-model="store.formExamq.eq_answer"   >
+               {{ store.formExamqedit.eq_answer }}
+                      <select class="form-control" v-model="store.formExamqedit.eq_answer"   >
           <option :value="1">
             ກ
           </option>
@@ -378,7 +413,7 @@ const onFileChangeBackPdf = async (event) => {
 
                     <div class="border p-2 mt-3">
                       <p>{{ $t("menu_couse_f_title_display_picture") }}:</p>
-                      <template v-if="store.formExamq.eq_image">
+                      <template v-if="store.formExamqedit.eq_image">
                         <div class="row">
                           <div
                             id="image-container"
@@ -386,7 +421,7 @@ const onFileChangeBackPdf = async (event) => {
                           >
                             <div class="image-wrapper">
                               <img
-                                :src="coverimage(store.formExamq.eq_image)"
+                                :src="coverimage(store.formExamqedit.eq_image)"
                                 class="img-fluid"
                               />
                               <button
@@ -406,7 +441,7 @@ const onFileChangeBackPdf = async (event) => {
                         <button
                           type="button"
                           class="btn btn-success"
-                          @click="save()"
+                          @click="upda()"
                         >
                           {{ $t("menu_couse_f_save") }}
                         </button>

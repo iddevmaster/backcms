@@ -214,8 +214,6 @@ try {
   const data = await ApiService.post('/exam/question/'+this.cg_id+'/list', this.formsearchexamques).then(response => {
 this.examques = response.data.data;
 this.examques_total_page = response.data.total_page
-
-console.log(response.data.total_page);
 this.examques_limit_page = response.data.limit_page
 this.examques_current_page = response.data.current_page
 this.examques_total_filter = response.data.total_filter
@@ -253,7 +251,7 @@ this.seletype = this.group.find(items => items.cg_id == item);
         return true
 
       } catch (error) {
-        console.log('error');
+ 
         return false;
       } 
     },
