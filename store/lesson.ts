@@ -58,7 +58,6 @@ export const LessonStore = defineStore('lesson', {
       page: 1,
     },
     formcreatelesson: {
-      cs_cover: "",
       cs_name_eng: "",
       cs_name_lo: "",
       cs_description:"",
@@ -66,7 +65,6 @@ export const LessonStore = defineStore('lesson', {
     },
     cs_video:"",
     formcreatelessonedit: {
-      cs_cover: "",
       cs_name_eng: "",
       cs_name_lo: "",
       cs_description:"",
@@ -97,14 +95,15 @@ export const LessonStore = defineStore('lesson', {
     GetopenModalEdit: false,
     GetopenModal: false,
     rules: {
-      cs_cover: [(value) => !!value || 'ອັບໂຫຼດຮູບ'],
       cs_name_lo: [(value) => !!value || 'ຕ້ອງໃສ່ຂໍ້ຄໍາຖາມ(Lo).'],
       cs_name_eng: [(value) => !!value || 'ຕ້ອງໃສ່ຂໍ້ຄໍາຖາມ(En)'],
       cs_description: [(value) => !!value || 'ຕ້ອງໃສ່ເນື້ອໃນ'],
       cg_id: [(value) => !!value || ' ຕ້ອງໃສ່ໝວດວິຊາ']
     },
     selectedFiles:[],
+    selectedEditFiles:[],
     selectedFilesError:[],
+    obgroup:null,
   }
 
 ),
@@ -124,6 +123,11 @@ actions: {
   setHtmlContent(content) {
     this.htmlContent = content;
     this.formcreatelesson.cs_description = this.htmlContent
+  },
+
+  setHtmlEditContent(content) {
+    this.htmlContent = content;
+    this.formcreatelessonedit.cs_description = this.htmlContent
   },
 
   setHtmlContent2(content2) {
@@ -150,7 +154,9 @@ actions: {
   },
 
   
-
+  async fetchGroupName() {
+  this.obgroup = this.group.find(item => item.cg_id === parseInt(this.group_id))
+  },
     async fetchLessonlist() {
 
 
@@ -199,9 +205,19 @@ actions: {
       this.formcreatelessonedit.cs_description = response.data.cs_description
       this.formcreatelessonedit.cs_name_eng = response.data.cs_name_eng
       this.formcreatelessonedit.cs_name_lo = response.data.cs_name_lo
-      this.formcreatelessonedit.cs_cover = response.data.cs_cover
+      this.cs_cover = response.data.cs_cover
+      this.cs_video = response.data.cs_video
+      
+      
+      if(response.data.file_path != ''){
+        this.selectedEditFiles = [response.data.file_path];
+      }
+  
+    
       this.EdithtmlContent = response.data.cs_description;
        this.formcreatelessonedit.cg_id = this.group.find(item => item.cg_id === response.data.cg_id);
+
+
     });
       return true
     } catch (error) {
@@ -238,19 +254,37 @@ actions: {
   },
 
   async UploadfileLessonPdf() { 
-   
-    if(this.selectedFiles){
+
+    if(this.selectedFiles.length > 0){
       const formData = new FormData();
       Array.from(this.selectedFiles).forEach(file => {
         formData.append('files', file);
       });
       const pdf = await ApiService.upload('/media_file/upload/file',formData);
       this.pdf = pdf.data[0].path;
-      
+      }else {
+        this.pdf = "";
       }
+      
   },
+
+  async UploadfileLessonEditPdf() { 
+
+    if(this.selectedFiles.length > 0){
+      const formData = new FormData();
+      Array.from(this.selectedFiles).forEach(file => {
+        formData.append('files', file);
+      });
+      const pdf = await ApiService.upload('/media_file/upload/file',formData);
+      this.pdf = pdf.data[0].path;
+      }else {
+        
+      }
+      
+  },
+
     async saveformLesson() {
-      const savelesson = {cs_cover:this.formcreatelesson.cs_cover,cs_name_lo:this.formcreatelesson.cs_name_lo,cs_name_eng:this.formcreatelesson.cs_name_eng,cs_description:this.formcreatelesson.cs_description,cg_id:this.formcreatelesson.cg_id.cg_id,file_path:this.pdf,cs_video:this.cs_video,user_id:this.user_id }
+      const savelesson = {cs_cover:this.cs_cover,cs_name_lo:this.formcreatelesson.cs_name_lo,cs_name_eng:this.formcreatelesson.cs_name_eng,cs_description:this.formcreatelesson.cs_description,cg_id:this.formcreatelesson.cg_id.cg_id,file_path:this.pdf,cs_video:this.cs_video,user_id:this.user_id }
 
     try {
       const data = await ApiService.post('/course/lesson/create', savelesson).then(response => {
@@ -265,6 +299,26 @@ return true
     }
 
   },
+
+
+  async updateformnewLesson() {
+
+   
+  const updated = {cs_cover:this.cs_cover,cs_name_lo:this.formcreatelessonedit.cs_name_lo,cs_name_eng:this.formcreatelessonedit.cs_name_eng,cs_description:this.formcreatelessonedit.cs_description,cg_id:this.formcreatelessonedit.cg_id.cg_id,file_path:this.pdf,cs_video:this.cs_video,user_id:this.user_id }
+console.log(updated);
+  try {
+    const data = await ApiService.put('/course/lesson/update/'+this.cs_id, updated).then(response => {
+return true
+    });
+
+    return data
+
+  } catch (error) {
+
+    return false;
+  }
+
+},
 
     async updateformLesson() {
 
@@ -318,17 +372,41 @@ return true
     async UploadfileLesson() {
     let formData = new FormData();
     formData.append('files', this.imagelist);
+    this.cs_cover = ""
     if (this.imagelist) {
       try {
         const data = await ApiService.upload('/media_file/upload/file', formData);
         //  this.path = data.data[0].path
-        this.formcreatelesson.cs_cover = data.data[0].path
-        this.formcreatelessonedit.cs_cover = data.data[0].path
+        this.cs_cover = data.data[0].path
+        this.cs_cover = data.data[0].path
         // this.formexamedit.em_cover = data.data[0].path
         return true;
       } catch (error) {
         return false;
       }
+    }else {
+      this.cs_cover = ""
+      this.cs_cover = ""
+    }
+  },
+
+  async UploadfileLessonEdit() {
+    let formData = new FormData();
+    formData.append('files', this.imagelist);
+   
+    if (this.imagelist) {
+      try {
+        const data = await ApiService.upload('/media_file/upload/file', formData);
+        //  this.path = data.data[0].path
+        this.cs_cover = data.data[0].path
+        this.cs_cover = data.data[0].path
+        // this.formexamedit.em_cover = data.data[0].path
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }else {
+      
     }
   },
 
@@ -374,12 +452,23 @@ return true
     this.image = null;
     this.imagelist = null;
 
-    this.formcreatelesson.cs_cover = '',
+    this.cs_cover = '',
       this.formcreatelesson.cs_name_lo = '',
       this.formcreatelesson.cs_name_eng = '',
       this.cs_video = '',
       this.formcreatelesson.cs_description = ''
       this.formcreatelesson.cg_id = ''
+      
+      this.content = '';
+      this.htmlContent = '';
+      this.selectedFiles = [];
+
+      // this.rules = {
+      //   cs_name_lo: [(value) => !!value || 'ຕ້ອງໃສ່ຂໍ້ຄໍາຖາມ(Lo).'],
+      //   cs_name_eng: [(value) => !!value || 'ຕ້ອງໃສ່ຂໍ້ຄໍາຖາມ(En)'],
+      //   cs_description: [(value) => !!value || 'ຕ້ອງໃສ່ເນື້ອໃນ'],
+      //   cg_id: [(value) => !!value || ' ຕ້ອງໃສ່ໝວດວິຊາ']
+      // }
    
   },
 

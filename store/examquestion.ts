@@ -87,7 +87,6 @@ export const ExamquestionStore = defineStore('examquestion', {
     },
     eq: null,
     modaldelete: false,
-
     rows: [
       {ec_id:0,eq_id:0,ec_in:'ກ',ec_index: 0, ec_name_lo: '',ec_name_eng: '',ec_image:''},
       {ec_id:0,eq_id:0,ec_in:'ຂ',ec_index: 1, ec_name_lo: '',ec_name_eng: '',ec_image:''},
@@ -163,7 +162,7 @@ export const ExamquestionStore = defineStore('examquestion', {
          this.formExamqedit.eq_answer = response.data.eq_answer
          this.formExamqedit.eq_name_eng = response.data.eq_name_eng
          this.formExamqedit.eq_name_lo = response.data.eq_name_lo
-
+         this.formExamqedit.eq_image = response.data.eq_image
          this.choicelist = response.data.choices
         
         return true;
@@ -180,7 +179,7 @@ export const ExamquestionStore = defineStore('examquestion', {
     async ExamquestionlistEditUpdate() {
       
 
-const upda = {eq_name_lo:this.formExamqedit.eq_name_lo,eq_name_eng:this.formExamqedit.eq_name_eng,eq_image:'',eq_answer:this.formExamqedit.eq_answer,cg_id:this.cg_id}
+const upda = {eq_name_lo:this.formExamqedit.eq_name_lo,eq_name_eng:this.formExamqedit.eq_name_eng,eq_image:this.formExamqedit.eq_image,eq_answer:this.formExamqedit.eq_answer,cg_id:this.cg_id}
 
 try {
         const data = await ApiService.put('/exam/question/update/'+ this.eq,upda).then(response => {
@@ -297,7 +296,7 @@ this.fetchExamquDelChoice(this.rows[i]);
         
           const index = this.rows.findIndex(items => items.ec_index === item.ec_index);
           const newItem =   {ec_id:response.data.insertId,eq_id:this.eq,ec_in:ch[item.ec_index],ec_index: item.ec_index, ec_name_lo: item.ec_name_lo,ec_name_eng:item.ec_name_eng,ec_image:item.ec_image};
-          console.log(newItem)
+         
           if (index !== -1) {
             this.rows[index] = newItem
           }
@@ -308,7 +307,7 @@ this.fetchExamquDelChoice(this.rows[i]);
 
 
     async fetchExamquSaveUpChoice(item) {
-      console.log('checkupdate',item);
+     
       const data = await ApiService.put('/exam/choice/update/'+item.ec_id, item).then(response => { 
       
       });
@@ -660,8 +659,9 @@ return true;
         try {
           const data = await ApiService.upload('/media_file/upload/file', formData);
           //  this.path = data.data[0].path
-   
+
           this.formExamq.eq_image = data.data[0].path
+          this.formExamqedit.eq_image = data.data[0].path
           return true;
         } catch (error) {
           return false;

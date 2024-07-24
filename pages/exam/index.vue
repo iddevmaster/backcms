@@ -47,31 +47,23 @@ const { deleteExam } = ExamStore();//Action
 <template>
        <loading v-model:active="store.isLoading" :can-cancel="true" 
                 />
+
+
+
     <div id="content" class="main-content">
-        <div class="layout-px-spacing">
-            <div class="page-meta">
+            <div class="layout-px-spacing">
+              <div class="page-meta">
                 <nav class="breadcrumb-style-one" aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">{{ $t("menu_page_exam") }} </a></li>
                         <li class="breadcrumb-item active" aria-current="page">{{ $t("menu_page_exam_all") }}</li>
                     </ol>
                 </nav>
-            </div>
-         
-
-            <div class="middle-content container-xxl p-0">
-                <div class="row layout-top-spacing">
-                    <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-                        <div class="widget-content widget-content-area br-8 p-3">
-                            <div class="widget-header">
-                            </div>
-                            <ExamList></ExamList>
-                        </div>
                     </div>
-                </div>
+                    <ExamList></ExamList>
+        
             </div>
-        </div>
-    </div>
+          </div>
 
 
     <!-- <div v-if="GetopenModal" class="modal">

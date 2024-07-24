@@ -10,8 +10,7 @@ import { LessonStore } from '@/store/lesson'
 import { GroupStore } from '@/store/group'
 import { useAuthStore } from '@/store/auth'
 import LessonListAll from '@/components/lesson/LessonListAll.vue'
-import LessonCreate from '@/components/lesson/LessonCreate.vue'
-import LessonEdit from '@/components/lesson/LessonEdit.vue'
+
 
 import { useToast } from 'vue-toastification';
 import { ref } from 'vue';
@@ -31,12 +30,12 @@ const storegroup = GroupStore()
 
 store.isLoading = true;
 const toast = useToast();
-store.formcreatelesson.user_id = auth.user_id
+
 store.user_id = auth.user_id
 store.myselect_group = null
 const group = await store.fetchGrouplist();
 const lessonlist = await store.fetchLessonlist();
-
+await store.fetchGroupName();
 
 
 
@@ -89,8 +88,6 @@ const delete_userid = async (id) => {
             </div>
           </div>
 
-   <LessonCreate></LessonCreate>
-    <LessonEdit></LessonEdit>
 </template>
 
 <style>

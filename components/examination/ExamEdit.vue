@@ -24,10 +24,6 @@ import {
   helpers,
 } from "@vuelidate/validators";
 
-definePageMeta({
-  middleware: ["auth", "roles"],
-  allowedRoles: [1, 2],
-});
 
 const { locale, setLocale } = useI18n();
 
@@ -91,7 +87,7 @@ const rules = computed(() => {
 const v$ = useVuelidate(rules, formExamqedit);
 
 const backtoLean = async () => {
-  await router.push("/learning");
+  await router.push("/exam");
 };
 
 const fileInputRef = ref(null);
@@ -129,18 +125,21 @@ const upda = async () => {
       Swal.showLoading()
     },
   });
- // let uploadfile = await store.UploadfileExamq();   ///////////upload รูป
-   let updateeq = await store.ExamquestionlistEditUpdate();  ///////////save 
+ let uploadfile = await store.UploadfileExamq();   ///////////upload รูป
+ 
+   let updatechoice = await store.fetchExamquUpdateChoice();  ///////////save 
  //  let updatechoice = await store.fetchExamquUpdateChoice();  ///////////save 
-console.log(updateeq);
-   if(updateeq == true){
- //   await store.ResetFormChoice();
-//    await store.fetchExamquestionlistEdit(router.currentRoute.value.params.id);
-// await store.RemoveChoice();
 
+   if(updatechoice == true){
 
-setTimeout(() => Swal.close(), 500);
+let updateeq = await store.ExamquestionlistEditUpdate();  ///////////save 
+if(updateeq == true){
+  setTimeout(() => Swal.close(), 500);
+  toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
+}else {
+  toast.error("ບັນທຶກລົ້ມເຫລວ.");
 
+}
    }
 
 
@@ -208,7 +207,7 @@ const onFileChangeBack = async (event) => {
     const reader = new FileReader();
     reader.onload = () => {
       //  this.imageUrl = reader.result;
-      store.formExamq.eq_image = reader.result;
+      store.formExamqedit.eq_image = reader.result;
     };
     store.imagelist = input.files[0];
     reader.readAsDataURL(file);
@@ -274,9 +273,7 @@ const onFileChangeBackPdf = async (event) => {
           </ol>
         </nav>
       </div>
-
-      <div class="middle-content container-xxl p-0 mb-4">
-        <div class="row layout-top-spacing">
+      <div class="row layout-top-spacing">
           <div class="doc-container">
             <div class="row">
               <div class="col-xl-12">
@@ -404,7 +401,7 @@ const onFileChangeBackPdf = async (event) => {
                       ><span class="text-xs text-red-500" style="color: red">
                         *
                       </span>
-               {{ store.formExamqedit.eq_answer }}
+          
                       <select class="form-control" v-model="store.formExamqedit.eq_answer"   >
           <option :value="1">
             ກ
@@ -480,7 +477,8 @@ const onFileChangeBackPdf = async (event) => {
             <br />
           </div>
         </div>
-      </div>
+
+
     </div>
   </div>
 </template>

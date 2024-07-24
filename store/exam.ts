@@ -187,6 +187,7 @@ this.formsearchexam.search = ''
 
     },
 
+
     
     async selectfirstGroupId() {
        this.cg_id = 1

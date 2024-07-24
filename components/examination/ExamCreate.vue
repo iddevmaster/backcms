@@ -23,10 +23,6 @@ import {
   helpers,
 } from "@vuelidate/validators";
 
-definePageMeta({
-  middleware: ["auth", "roles"],
-  allowedRoles: [1, 2],
-});
 
 const { locale, setLocale } = useI18n();
 
@@ -40,6 +36,7 @@ const { FormExamq } = storeToRefs(store);
 
 // fetchdata();
 
+await store.ResetFormChoice();
 await store.fetchGrouplist();
 
 const rules = computed(() => {
@@ -71,7 +68,7 @@ const rules = computed(() => {
 const v$ = useVuelidate(rules, FormExamq);
 
 const backtoLean = async () => {
-  await router.push("/learning");
+  await router.push("/exam");
 };
 
 const fileInputRef = ref(null);
@@ -84,12 +81,22 @@ const openFileInput = async () => {
 
 const save = async () => {
   v$.value.$validate();
-
   if (!v$.value.$error) {
+
+    Swal.fire({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading()
+    },
+    
+  });
     let uploadfile = await store.UploadfileExamq();   ///////////upload รูป
     let save = await store.SaveExamquest();  ///////////save 
   
     if(save == true){
+      setTimeout(() => Swal.close(), 500);
+      toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
       let savechoice = await store.SaveExamquestChoice();  ///////////save 
     }
   }
@@ -199,6 +206,10 @@ const onFileChangeBackPdf = async (event) => {
 </script>
 
 <template>
+
+
+
+
   <div id="content" class="main-content">
     <div class="layout-px-spacing">
       <div class="page-meta">
@@ -214,8 +225,7 @@ const onFileChangeBackPdf = async (event) => {
         </nav>
       </div>
 
-      <div class="middle-content container-xxl p-0 mb-4">
-        <div class="row layout-top-spacing">
+      <div class="row layout-top-spacing">
           <div class="doc-container">
             <div class="row">
               <div class="col-xl-12">
@@ -276,7 +286,7 @@ const onFileChangeBackPdf = async (event) => {
                           'border-[#42d392] ': !v$.eq_name_lo.$invalid,
                         }"
                         @change="v$.eq_name_lo.$touch"
-                        maxlength="20"
+                        maxlength="500"
                       />
 
                       <div v-if="locale == 'la'">
@@ -315,7 +325,7 @@ const onFileChangeBackPdf = async (event) => {
                           'border-[#42d392] ': !v$.eq_name_eng.$invalid,
                         }"
                         @change="v$.eq_name_eng.$touch"
-                        maxlength="100"
+                          maxlength="500"
                       />
                       <div v-if="locale == 'la'">
                         <span
@@ -419,7 +429,10 @@ const onFileChangeBackPdf = async (event) => {
             <br />
           </div>
         </div>
-      </div>
+
+      
+
+   
     </div>
   </div>
 </template>

@@ -10,7 +10,7 @@
       ຕົວເລືອກຂອງຄຳຕອບ
     </div>
   </div>
-{{ store.rows }}
+
   <div class="table-responsive">
     <table class="table table-bordered">
         <thead>

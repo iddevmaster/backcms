@@ -57,6 +57,16 @@ style="
     </div>
   </div>
 
+
+  <div class="row layout-top-spacing">
+
+
+<div class="col-xl-12 col-lg-3 col-md-3 col-sm-3 mb-4">
+<span style="font-weight: bolder;">{{ $t("menu_group_add") }} -> 
+{{ locale == "la" ? store.obgroup.cg_name_lo : store.obgroup.cg_name_eng }}
+</span>
+</div>
+</div>
   <div class="table-responsive">
     <table id="example" class="table table-bordered" style="width: 100%">
       <thead>
@@ -435,14 +445,14 @@ const searchData = async (event) => {
 };
 
 const openmodal = async () => {
-  store.myselect_group = null
-  store.GetopenModalCreate = true;
+  router.push("/lesson/create");
 };
 
 const selectshowdata_ch = async (cg) => {
 store.group_id = cg.target.value
-console.log(store.group_id);
- await store.fetchLessonlist() 
+
+ await store.fetchLessonlist();
+ await store.fetchGroupName();
 };
 
 
