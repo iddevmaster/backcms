@@ -67,6 +67,7 @@ export const LogStore = defineStore('log', {
       page: 1,
       per_page: 50,
       search: '',
+      active_include:[0,1]
     },
   }
   ),

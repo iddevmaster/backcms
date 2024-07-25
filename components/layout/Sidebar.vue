@@ -62,10 +62,8 @@
             class="dropdown-toggle" @click="GotoPage"
           >
             <div class="">
-           
               <i class="bi bi-bar-chart menu-icon"></i>
               <span>Dashboard</span>
-         
             </div>
          
           </a>
@@ -656,15 +654,15 @@
             <li>
               <nuxt-link to="/report/register">{{ $t("report_register") }}</nuxt-link>
             </li>
-            <li>
+            <!-- <li>
               <nuxt-link to="/report/appointment">{{ $t("report_app") }}</nuxt-link>
-            </li>
-            <li>
+            </li> -->
+            <!-- <li>
               <nuxt-link to="/report/exam">{{ $t("report_exam") }}</nuxt-link>
-            </li>
-            <li>
+            </li> -->
+            <!-- <li>
               <nuxt-link to="/report/result">{{ $t("report_result") }}</nuxt-link>
-            </li>
+            </li> -->
           </ul>
         </li>
 

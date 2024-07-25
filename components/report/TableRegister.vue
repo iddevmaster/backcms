@@ -1,20 +1,6 @@
 <template>
 
-  <div class="row layout-top-spacing">
-    <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
-      <input id="t-text" type="text" name="txt" placeholder="ຊອກຫາ" class="form-control"
-      v-model="store.search" @keyup="searchData" />
-    </div>
-  
 
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
-      <select class="form-select form-select" aria-label="Default select example" @change="selectshowdata($event)">
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="50">50</option>
-      </select>
-    </div>
-  </div>
   <div class="table-responsive">
     <table id="example" class="table table-bordered" style="width:100%">
       <thead>

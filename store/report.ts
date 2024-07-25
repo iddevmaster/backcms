@@ -86,8 +86,8 @@ export const ReportStore = defineStore('report', {
       this.formreport.search = this.search
 
     
-
       const data = await ApiService.post('/report/register', this.formreport).then(response => {
+        
         this.reportregister = response.data.data;
         this.current_page = response.data.current_page;
         this.limit_page = response.data.limit_page;
