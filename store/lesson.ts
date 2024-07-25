@@ -44,6 +44,7 @@ export const LessonStore = defineStore('lesson', {
       search: '',
       cg_id: 0,
     },
+    reportcourse:[],
     formselect: {
       per_page: 5,
       total_page: 0,
@@ -62,6 +63,22 @@ export const LessonStore = defineStore('lesson', {
       cs_name_lo: "",
       cs_description:"",
       cg_id: ""
+    },
+    formreport: {
+      page: 1,
+      per_page: 50,
+      search: ''
+    },
+    formreportexam: {
+      page: 1,
+      per_page: 5,
+      search: ''
+    },
+    formreportcourse: {
+      page: 1,
+      per_page: 50,
+      search: '',
+      active_include:[0,1]
     },
     cs_video:"",
     formcreatelessonedit: {
@@ -104,6 +121,7 @@ export const LessonStore = defineStore('lesson', {
     selectedEditFiles:[],
     selectedFilesError:[],
     obgroup:null,
+    reportexam:[],
   }
 
 ),
@@ -743,10 +761,77 @@ return true
     }
     this.formselect.page = 1
 
-  }
+  },
+  
+  async ReportCourseExam() {
+ 
+      try {
+        const data = await ApiService.post('/report/exam/' + this.course_id,this.formreportexam).then(response => {
+          this.reportexam = [];
+        
+  this.reportexam = response.data.data
+  this.reportexam_total_page = response.data.total_page
+  this.reportexam_limit_page = response.data.limit_page
+  this.reportexam_current_page = response.data.current_page
+  this.reportexam_total_filter = response.data.total_filter
+  this.reportexam_total = response.data.total
+          return true
+        });
+        return data
+      } catch (error) {
+  
+     
+  
+    }
+  },
+  async ReportCourse() {
+    try {
+      const data = await ApiService.post('/report/course/' + this.course_id,this.formreport).then(response => {
+this.reportcourse = response.data.data
+this.reportcourse_total_page = response.data.total_page
+this.reportcourse_limit_page = response.data.limit_page
+this.reportcourse_current_page = response.data.current_page
+this.reportcourse_total_filter = response.data.total_filter
+this.reportcourse_total = response.data.total
+        return true
+      });
+      return data
 
+    } catch (error) {
+
+      return false;
+    }
+  },
+
+  async fetchCourseAll() {
+
+    try {
+      const data = await ApiService.post('/course/list/',this.formreportcourse).then(response => {
+this.course = response.data.data
+
+this.course_id = response.data.data[0].course_id
+
+
+        return true
+      });
+      return data
+
+    } catch (error) {
+
+      return false;
+    }
+
+  },
+  async selectentirescourse(value) {
+    this.course_id = value
+  },
+
+  async setCurrentPageReport (value) {
+    this.formreport.page = value
+  },
+  async setCurrentPageReportExam (value) {
+    this.formreportexam.page = value
+  }
 },
 
-
-  
 });

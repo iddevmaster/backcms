@@ -73,7 +73,7 @@ style="
             <tr>
                 <th scope="col">#</th>
                 <th class="text-center" scope="col">{{ $t("lesson_title") }}</th>
-                <th class="text-center" scope="col">{{ $t("lesson_content") }}</th>
+                <!-- <th class="text-center" scope="col">{{ $t("lesson_content") }}</th> -->
                  <th scope="col">{{ $t("lesson_group") }}</th>
                 <th scope="col">{{ $t("lesson_pic") }}</th>
                   <th class="text-center" scope="col">{{ $t("less_ac") }}</th>
@@ -87,7 +87,7 @@ style="
           
               {{ locale == "la" ? item.cs_name_lo : item.cs_name_eng }}
             </td>
-            <td  style="white-space:unset;">{{ item.cs_description }}</td>
+            <!-- <td  style="white-space:unset;">{{ item.cs_description }}</td> -->
             <td>{{ item.cg_name_lo }}</td>
             <td class="text-center">
             
@@ -229,6 +229,10 @@ style="
   </div> -->
 
   <div>
+
+
+    <span>Showing {{ (store.lesson_current_page - 1 ) * store.formsearchlesson.per_page + 1}}  to {{ Math.min(store.lesson_current_page * store.formsearchlesson.per_page, store.lesson_total)}}  of {{store.lesson_total}} entries</span>
+
     <div class="dt--pagination" v-if="store.lesson_total_page > 1">
       <div
         class="dataTables_paginate paging_simple_numbers"
@@ -307,7 +311,7 @@ style="
     </div>
   </div>
 
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-xl-12 col-lg-12">
       <div class="pagination-no_spacing" v-if="store.lesson_total_page > 1">
         <ul class="pagination">
@@ -367,7 +371,7 @@ style="
         </ul>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
 <br>

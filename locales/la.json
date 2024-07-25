@@ -10,6 +10,9 @@
   "menu_new_resul": "ຜົນການສອບເສັງ",
   "menu_new_user": "ຈັດການຜູ້ໃຊ້",
   "menu_dlt": "ຈັດການ ຮູບໃບຂັບຂີ່",
+  "menu_report": "ລາຍງານ",
+  "menu_report_lesson": "ລາຍງານ ການຮຽນຮູ້",
+  "menu_report_exam": "ລາຍງານ ການເຮັດແບບທົດສອບ",
   "menu_couse_all": "ຫຼັກສູດ​ທັງໝົດ", 
   "menu_couse_add": "ເພີ່ມຫຼັກສູດ",
   "menu_couse_p_title": "ເພິ່ມຫຼັກສູດ",
@@ -526,7 +529,26 @@
   "all_subject" : "ວິຊາທັງໝົດ",
   "search":"ຊອກຫາ",
 
+  "table_report_learn" : "ເລືອກ",
+  "table_report_learn_fullname_learning" : "ຊື່",
+  "table_report_learn_course_code" : "ຫຼັກສູດ",
+  "table_report_learn_course_name_lo" : "ຊື່ຫຼັກສູດ(Lo)",
+  "table_report_learn_course_name_eng" : "ຊື່ຫຼັກສູດ(Eng)",
+  "table_report_learn_total_learn_lesson" : "ຮຽນ​ຮູ້",
+  "table_report_learn_total_lesson" : "ບົດຮຽນ",
+  "table_report_learn_lesson_completion_percentage" : "ເປີເຊັນ",
 
+
+
+  "table_report_exam" : "ເລືອກ",
+  "table_report_exam_fullname_learning" : "ຊື່",
+  "table_report_exam_course_code" : "ຫຼັກສູດ",
+  "table_report_exam_course_name_lo" : "ຊື່ແບບທົດສອບ (Lo)",
+  "table_report_exam_course_name_eng" : "ຊື່ແບບທົດສອບ(Eng)",
+  "table_report_exam_total_score" : "ຄະແນນ",
+  "table_report_exam_total_qus_total" : "ຄະແນນທັງໝົດ",
+  "table_report_exam_time" : "ເວລາສອບເສັງ",
+  "table_report_exam_status" : "ສະຖານະ",
 
   "" : ""
 

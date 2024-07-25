@@ -36,6 +36,9 @@ const group = await store.fetchGrouplist();
 
 await store.fetchLessonId(router.currentRoute.value.params.id);
 
+
+
+
 onMounted(async()  => {
 store.isLoading = false;
 })

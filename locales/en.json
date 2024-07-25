@@ -10,6 +10,9 @@
   "menu_new_resul": "Exam results",
   "menu_new_user": "Manage User",
   "menu_dlt": "Manage Driving license image",
+  "menu_report": "Report",
+  "menu_report_lesson": "Report Learning",
+  "menu_report_exam": "Report Exam",
   "menu_couse_all": "ALL Course", 
   "menu_couse_add": "Add a Course",
   "menu_couse_p_title": "Form Add Course",
@@ -523,6 +526,26 @@
   "course_num_question" : "# Question",
   "all_subject" : "All subjects",
   
+
+
+  "table_report_learn" : "ເລືອກ",
+  "table_report_learn_fullname_learning" : "Full Name",
+  "table_report_learn_course_code" : "Course",
+  "table_report_learn_course_name_lo" : "Name(Lo)",
+  "table_report_learn_course_name_eng" : "Name(Eng)",
+  "table_report_learn_total_learn_lesson" : "Learn",
+  "table_report_learn_total_lesson" : "Lesson",
+  "table_report_learn_lesson_completion_percentage" : "Percentage",
+
+  "table_report_exam" : "ເລືອກ",
+  "table_report_exam_fullname_learning" : "Full Name",
+  "table_report_exam_course_code" : "Course",
+  "table_report_exam_course_name_lo" : "Name(Lo)",
+  "table_report_exam_course_name_eng" : "Name(Eng)",
+  "table_report_exam_total_learn_lesson" : "Learn",
+  "table_report_exam_total_lesson" : "Lesson",
+  "table_report_exam_lesson_completion_percentage" : "Exam Time",
+  "table_report_exam_status" : "Status",
 
   "" : ""
 

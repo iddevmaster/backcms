@@ -88,6 +88,7 @@
     </table>
 
     <div>
+      
       <div class="dt--pagination" v-if="store.total_page > 1">
         <div class="dataTables_paginate paging_simple_numbers" id="zero-config_paginate">
           <ul class="pagination">

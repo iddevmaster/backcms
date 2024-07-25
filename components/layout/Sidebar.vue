@@ -51,26 +51,7 @@
 
       <div class="shadow-bottom"></div>
       <ul class="list-unstyled menu-categories" id="accordionExample">
-        <!-- <li class="menu active">
-                        <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
-                            <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                                <span>Dashboard</span>
-                            </div>
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                            </div>
-                        </a>
-                        <ul class="collapse submenu list-unstyled show" id="dashboard" data-bs-parent="#accordionExample">
-                            <li class="active">
-                                <nuxt-link to="/learning">Analytics</nuxt-link>
-                            </li>
-                            <li>
-                                <nuxt-link to="/dashboard/report">Report</nuxt-link>
-                            </li>
-                        </ul>
-                    </li> -->
-
+      
 
   
                   
@@ -86,22 +67,7 @@
               <span>Dashboard</span>
          
             </div>
-            <!-- <div>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </div> -->
+         
           </a>
           
           <!-- <ul
@@ -137,13 +103,12 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="feather feather-zap"
+                class="feather feather-layers"
               >
-                <polygon
-                  points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
-                ></polygon>
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
               </svg>
-
               <span>{{ $t("menu_couse") }}</span>
             </div>
             <div>
@@ -172,18 +137,81 @@
               <nuxt-link to="/learning">{{ $t("menu_couse_all") }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/learning/create">{{ $t("menu_couse_add") }}</nuxt-link>
+              <nuxt-link to="/learning/reportlearn">{{ $t("menu_report_lesson") }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/lesson">{{ $t("lesson_all") }}</nuxt-link>
+              <nuxt-link to="/learning/reportexam">{{ $t("menu_report_exam") }}</nuxt-link>
             </li>
-            <li>
-              <nuxt-link to="/group">{{ $t("menu_group_all") }}</nuxt-link>
-            </li>
+         
           </ul>
         </li>
 
-        <li class="menu">
+
+        <li class="menu" >
+          <a
+            href="#group"
+            data-bs-toggle="collapse"
+            aria-expanded="false"
+            class="dropdown-toggle"
+          >
+            <div class="">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-zap"
+              >
+                <polygon
+                  points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
+                ></polygon>
+              </svg>
+
+              <span>ໝວດວິຊາ </span>
+            </div>
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-chevron-right"
+              >
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </div>
+          </a>
+          <ul
+            class="collapse submenu list-unstyled"
+            id="group"
+            data-bs-parent="#accordionExample"
+          >
+            <li>
+              <nuxt-link to="/group">ໝວດວິຊາທັງໝົດ</nuxt-link>
+            </li>
+          
+            <li>
+              <nuxt-link to="/lesson">ບົດຮຽນ</nuxt-link>
+            </li>
+
+            <li>
+              <nuxt-link to="/exam">ຄຳຖາມ ຄຳຕອບ</nuxt-link>
+            </li>
+           
+          </ul>
+        </li>
+
+        <!-- <li class="menu">
           <a
             href="#exam"
             data-bs-toggle="collapse"
@@ -241,7 +269,7 @@
               <nuxt-link to="/examhistory/user">{{ $t("menu_exam_history_byuser_menu") }}</nuxt-link>
             </li>
           </ul>
-        </li>
+        </li> -->
 
         <li class="menu" v-if="user_type == 1 || 2">
           <a

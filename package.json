@@ -68,6 +68,7 @@
     "vue3-select2-component": "^0.1.7",
     "vue3-timepicker": "^1.0.0-beta.2",
     "vuejs-paginate-next": "^1.0.2",
-    "vuejs3-datepicker": "^1.0.19"
+    "vuejs3-datepicker": "^1.0.19",
+    "xlsx": "^0.18.5"
   }
 }

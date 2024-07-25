@@ -41,7 +41,7 @@ store.user_id = auth.user_id
 
 
 await store.fetchCourseId(router.currentRoute.value.params.id);
- await store.fetchGetPdf(router.currentRoute.value.params.id);
+
 
 
 
