@@ -85,7 +85,7 @@
                 </td>
      
                 <td class="text-center">
-  <img :src="image(item.eq_image)" class="img-fluid" width="80" height="80" />
+  <img   :src="image(item.eq_image)" class="img-fluid" width="80" height="80" />
                 </td>
     
                 <td >
@@ -195,6 +195,7 @@ import { useToast } from "vue-toastification";
 import ApiService from '../../services/api.service';
 import moment from "moment-timezone";
 import { useI18n } from "vue-i18n";
+import exampleImage from '~/assets/images/no_photo.jpg'
 const { locale, setLocale } = useI18n();
 const router = useRouter();
 
@@ -213,7 +214,7 @@ await store.selectfirstGroupId()
 await store.fetchExamlistQuest()
 await store.selecttypes(store.cg_id)
 
-
+const imageSrc = exampleImage
 const del = async (item) => {
 const deleExam =  await Openmodaldelete(item);
 };
@@ -306,11 +307,12 @@ function image(i) {
       if (i) {
         const usingSplit = i.split(",");
         var x = usingSplit[0];
+        let im =  ApiService.image(x);
+        return im;
       } else {
-        var x = "static/upload/2023/9/files-riRE6hEnHI.jpg";
+        return exampleImage;
       }
-      let im =  ApiService.image(x);
-      return im;
+    
     }
 </script>
 <style>
