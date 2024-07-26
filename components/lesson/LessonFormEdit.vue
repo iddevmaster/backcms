@@ -98,11 +98,7 @@
                           @ready="onReadyLo"
                         ></ckeditor>
                       </div>
-                      <span
-                        v-if="formErrors.cs_description != true"
-                        style="color: red"
-                        >{{ formErrors.cs_description }}</span
-                      >
+                     
                     </div>
                   </div>
 
@@ -120,9 +116,9 @@
                         label="cg_name_lo"
                         placeholder="ເລືອກ"
                       ></v-select>
-                      <span v-if="formErrors.cg_id" style="color: red">{{
-                        formErrors.cg_id
-                      }}</span>
+                      <span v-if="formErrors.cg_id" style="color: red">
+                        ເຊລັທ
+                      </span>
                     </div>
                   </div>
 
@@ -617,7 +613,7 @@ export default defineComponent({
 
     const validateField = (field) => {
       const validators = rules.value[field];
-      console.log(field);
+    
       formErrors[field] =
         validators
           .map((validator) => validator(store.formcreatelessonedit[field]))
@@ -655,6 +651,7 @@ export default defineComponent({
       setTimeout(() => Swal.close(), 500);
       router.push("/lesson");
       }else {
+        setTimeout(() => Swal.close(), 500);
         toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
       }
     
