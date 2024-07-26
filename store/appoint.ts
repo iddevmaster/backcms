@@ -26,7 +26,7 @@ export const AppointStore = defineStore('appoint', {
     usersall: [],
     user_id: null,
     end_date: '',
-    dlt_code: 'A',
+    dlt_code: [ "A", "A1", "A2", "A3", "B", "C1", "C", "C2" ],
     myChoose: null,
     ap_id: null,
     user_id_fitter: null,
@@ -95,180 +95,70 @@ export const AppointStore = defineStore('appoint', {
     // end_date:moment(String(null)).format('YYYY-mm-dd'),
     dlt: [
       {
-        dlt_code: "A",
-        dlt_description_loas:
-          "ລົດຈັກສອງລໍ້ ຄວາມແຮງບໍ່ເກີນ 125 cc",
-        dlt_description_english:
-          "A Two-wheels motocycle engine not exceed 125cc", 
+          "dlt_code": "A",
+          "dlt_name_lo": "ລົດຈັກສອງລໍ້ ຄວາມແຮງບໍ່ເກີນ 125 cc",
+          "dlt_name_eng": "Two-wheels motocycle engine not exceed 125 cc"
       },
       {
-        dlt_code: "A1",
-        dlt_description_loas:
-          "ລົດຈັກສອງລໍ້ ຄວາມແຮງ ແຕ່ 125 cc ຂື້ນໄປ",
-        dlt_description_english:
-          "A1 Two-wheels motorcycle engine 125 cc and above",    
+          "dlt_code": "A1",
+          "dlt_name_lo": "ລົດຈັກສອງລໍ້ ຄວາມແຮງ ແຕ່ 125 cc ຂື້ນໄປ",
+          "dlt_name_eng": "Two-wheels motorcycle engine 125 cc and above"
       },
       {
-        dlt_code: "A2",
-          dlt_description_loas:
-          "ລົດຈັກສາມລໍ້ສ່ວນຕົວ, ລົດສອງລໍ້ ແລະ ສາມລໍ້ໂດຍສານ",
-        dlt_description_english:
-          "A2 Private three-wheels vehicle Passenger vehicle with two-wheels and three-wheels",   
+          "dlt_code": "A2",
+          "dlt_name_lo": "ລົດຈັກສາມລໍ້ສ່ວນຕົວ, ລົດສອງລໍ້ ແລະ ສາມລໍ້ໂດຍສານ",
+          "dlt_name_eng": "Private three-wheels vehicle, Passenger vehicle with two-wheels and three-wheels"
       },
       {
-        dlt_code: "A3",
-          dlt_description_loas:
-          "ລົດໄຖນາທີ່ແກ່ລໍ້ ແລະ ລົດຕ໋ອກໆ",
-        dlt_description_english:
-          "A3 Two-wheels tractor with trailer and Walk-behide Tractor",   
+          "dlt_code": "A3",
+          "dlt_name_lo": "ລົດໄຖນາທີ່ແກ່ລໍ້ ແລະ ລົດຕ໋ອກໆ",
+          "dlt_name_eng": "Two-wheels tractor with trailer and Walk-behide Tractor"
       },
       {
-        dlt_code: "B",
-          dlt_description_loas:
-          "ລົດເບົາ ສີ່ລໍ້ ທີ່ມີນ້ຳໜັກລວມບໍ່ເກີນ 3.500 ກິໂລກຣາມ ແລະ ບໍ່ເກີນ 9 ບ່ອນນັ່ງ ລວມທັງຜູ້ຂັບຂີ່",
-        dlt_description_english:
-          "B Car with four-wheels total weight not exceed 3500 kilograms and not more than 9 seats including driver",   
+          "dlt_code": "B",
+          "dlt_name_lo": "ລົດເບົາ ສີ່ລໍ້ ທີ່ມີນ້ຳໜັກລວມບໍ່ເກີນ 3.500 ກິໂລກຣາມ ແລະ ບໍ່ເກີນ 9 ບ່ອນນັ່ງ ລວມທັງຜູ້ຂັບຂີ່",
+          "dlt_name_eng": "Car with four-wheels, total weight not exceed 3,500 kilograms, and not more than 9 seats including driver"
       },
       {
-        dlt_code: "C",
-          dlt_description_loas:
-          "ລົດຂົນສົ່ງສິນຄ້ານ້ຳໜັກລວມ ແຕ່ 3.500 ກິໂລກຣາມ ຫາ 7.500 ກິໂລກຣາມ",
-        dlt_description_english:
-          "C Cargo truck total weight from 3500 to 7500 kilograms",
+          "dlt_code": "C",
+          "dlt_name_lo": "ລົດຂົນສົ່ງສິນຄ້ານ້ຳໜັກລວມ ແຕ່ 3.500 ກິໂລກຣາມ ຫາ 7.500 ກິໂລກຣາມ",
+          "dlt_name_eng": "Cargo truck, total weight from 3,500 to 7,500 kilograms"
       },
       {
-        dlt_code: "C1",
-          dlt_description_loas:
-          "ລົດຂົນສົ່ງສິນຄ້ານ້ຳໜັກລວມ ເກີນກວ່າ 7.500ກິໂລກຣາມ ຫາ 15.000 ກິໂລກຣາມ",
-        dlt_description_english:
-          "C1 Cargo truck total weight exceed 7500 kilogram up to 15000 kilograms",   
+          "dlt_code": "C1",
+          "dlt_name_lo": "ລົດຂົນສົ່ງສິນຄ້ານ້ຳໜັກລວມ ເກີນກວ່າ 7.500ກິໂລກຣາມ ຫາ 15.000 ກິໂລກຣາມ",
+          "dlt_name_eng": "Cargo truck, total weight exceed 7,500 kilogram up to 15,000 kilograms"
       },
       {
-        dlt_code: "C2",
-          dlt_description_loas:
-          "ລົດຂົນສົ່ງສິນຄ້ານ້ຳໜັກລວມ ເກີນກວ່າ 15.000 ກິໂລກຣາມ.",
-        dlt_description_english:
-          "C2 Cargo truck total weight exceed 15000 kilograms",   
+          "dlt_code": "C2",
+          "dlt_name_lo": "ລົດຂົນສົ່ງສິນຄ້ານ້ຳໜັກລວມ ເກີນກວ່າ 15.000 ກິໂລກຣາມ",
+          "dlt_name_eng": "Cargo truck, total weight exceed 15,000 kilograms"
       },
       {
-        dlt_code: "D",
-          dlt_description_loas:
-          "ລົດຂົນສົ່ງຜູ້ໂດຍສານປະເພດ 4 ລໍ້ ຂຶ້ນໄປ, ບໍ່ເກີນ ສິບຫ້າ ບ່ອນນັ່ງ",
-        dlt_description_english:
-          "D Passenger vehicle with 4 wheels or more not more than 15 seats",   
+          "dlt_code": "D",
+          "dlt_name_lo": "ລົດຂົນສົ່ງຜູ້ໂດຍສານປະເພດ 4 ລໍ້ ຂຶ້ນໄປ, ບໍ່ເກີນ ສິບຫ້າ ບ່ອນນັ່ງ",
+          "dlt_name_eng": "Passenger vehicle with 4 wheels or more, not more than 15 seats"
       },
       {
-        dlt_code: "D1",
-          dlt_description_loas:
-          "ລົດຂົນສົ່ງຜູ້ໂດຍສານ ແຕ່ ສິບຫົກ ຫາ ສາມສິບຫ້າ ບ່ອນນັ່ງ",
-        dlt_description_english:
-          "D1 Passenger vehicle from 16 seats to 35 seats",   
+          "dlt_code": "D1",
+          "dlt_name_lo": "ລົດຂົນສົ່ງຜູ້ໂດຍສານ ແຕ່ ສິບຫົກ ຫາ ສາມສິບຫ້າ ບ່ອນນັ່ງ",
+          "dlt_name_eng": "Passenger vehicle from 16 seats to 35 seats"
       },
       {
-        dlt_code: "D2",
-          dlt_description_loas:
-          "ລົດຂົນສົ່ງຜູ້ໂດຍສານ ແຕ່ ສາມສິບຫົກ ບ່ອນນັ່ງ ຂຶ້ນໄປ",
-        dlt_description_english:
-          "D2 Passenger vehicle from 36 seats or more",   
+          "dlt_code": "D2",
+          "dlt_name_lo": "ລົດຂົນສົ່ງຜູ້ໂດຍສານ ແຕ່ ສາມສິບຫົກ ບ່ອນນັ່ງ ຂຶ້ນໄປ",
+          "dlt_name_eng": "Passenger vehicle from 36 seats or more"
       },
       {
-        dlt_code: "E",
-          dlt_description_loas:
-          "ລົດເບົາ (B), ລົດຂົນສົ່ງສິນຄ້າ (C) ແລະ ລົດຂົນສົ່ງຜູ້ໂດຍສານ (D) ທີ່ແກ່ຫາງລາກນ້ຳໜັກລວມບໍ່ເກີນ 750 ກິໂລກຣາມ",
-        dlt_description_english:
-          "E Car B Cargo truck C and Passenger vehicle D having trailer total weight not exceed 750 kilograms",   
+          "dlt_code": "E",
+          "dlt_name_lo": "ລົດເບົາ (B), ລົດຂົນສົ່ງສິນຄ້າ (C) ແລະ ລົດຂົນສົ່ງຜູ້ໂດຍສານ (D) ທີ່ແກ່ຫາງລາກນ້ຳໜັກລວມບໍ່ເກີນ 750 ກິໂລກຣາມ",
+          "dlt_name_eng": "Car (B), Cargo truck (C) and Passenger vehicle (D), having trailer total weight not exceed 750 kilograms"
       },
       {
-        dlt_code: "E1",
-          dlt_description_loas:
-          "ລົດຂົນສົ່ງສິນຄ້າ (C2) ແກ່ຫາງລາກນ້ຳໜັກລວມເກີນກວ່າ 750 ກິໂລກຣາມ",
-        dlt_description_english:
-          "E1 Cargo truck C2 having trailer total weight exceed 750 kilograms",   
-      },
-    ],
-    dtl: [
-      {
-        dlt_code: "A",
-        dlt_description:
-          "ใบอนุญาตขับรถประเภท A รถจักรยานยนต์สองล้อ เครื่องยนต์ไม่เกิน 125 cc.",
-        dlt_description_loas:
-          "ໃບຂັບຂີ່ປະເພດ A, ລົດຈັກສອງລໍ້ ເຄື່ອງຈັກບໍ່ເກີນ 125 ຊີຊີ.",
-        dlt_description_english:
-          "Driving license, type A, two -wheel motorcycle Engine not more than 125 cc.",
-
-      },
-      {
-        dlt_code: "A1",
-        dlt_description:
-          "ใบอนุญาตขับรถประเภท A1 รถจักรยานยนต์สองล้อ เครื่องยนต์ 125 cc. ขึ้นไป",
-        dlt_description_loas:
-          "ໃບຂັບຂີ່ປະເພດ A1, ລົດຈັກສອງລໍ້, ເຄື່ອງຈັກ 125 ຊີຊີ ຫຼື ຫຼາຍກວ່ານັ້ນ.",
-        dlt_description_english:
-          "Driving license, type A1, two -wheel motorcycle, 125 cc.",
-      },
-      {
-        dlt_code: "A2",
-        dlt_description:
-          "ใบอนุญาตขับรถประเภท A2 รถสามล้อส่วนตัว, รถสองล้อ และรถสามล้อโดยสาร",
-        dlt_description_loas:
-          "ໃບອະນຸຍາດຂັບຂີ່ປະເພດ A2 ສາມລໍ້ເອກະຊົນ, ພາຫະນະສອງລໍ້, ແລະສາມລໍ້ຜູ້ໂດຍສານ.",
-        dlt_description_english:
-          "Driving license, type A2, private tricycle, two -wheeled vehicles and tricycle",
-      },
-      {
-        dlt_code: "A3",
-        dlt_description:
-          "ใบอนุญาตขับรถประเภท A3 รถแทรกเตอร์แบบมีล้อ และรถปราบดิน",
-        dlt_description_loas:
-          "ໃບ​ອະ​ນຸ​ຍາດ​ໃຫ້​ຂັບ Class A3​, ລົດ​ໄຖ​ນາ​ລໍ້​ແລະ bulldozers​.",
-        dlt_description_english:
-          "A3 driving license with wheel tractor and soil suppression vehicles",
-      },
-      {
-        dlt_code: "B",
-        dlt_description:
-          "ใบอนุญาตขับรถประเภท B รถยนต์ที่น้าหนักรวมน้อยกว่า 3,500 กิโลกรัม ไม่เกิน 9 ที่นั่ง รวมผู้ขับรถ",
-        dlt_description_loas:
-          "ໃບຂັບຂີ່ປະເພດ B: ພາຫະນະທີ່ມີນໍ້າໜັກທັງໝົດບໍ່ເກີນ 3,500 ກິໂລກຣາມ, ບໍ່ເກີນ 9 ບ່ອນນັ່ງ ລວມທັງຜູ້ຂັບຂີ່.",
-        dlt_description_english:
-          "Driving license B type, a car with a heavy water, less than 3,500 kilograms, not more than 9 seats, including the driver",
-      },
-      {
-        dlt_code: "C",
-        dlt_description:
-          "ใบอนุญาตขับรถประเภท C รถขนส่งสินค้าน้าหนักรวมตั้งแต่ 3,500 ถึง 7,500 กิโลกรัม",
-        dlt_description_loas:
-          "ປະເພດໃບຂັບຂີ່ C, ພາຫະນະຂົນສົ່ງສິນຄ້າທີ່ມີນໍ້າໜັກລວມແຕ່ 3,500 – 15,000 ກິໂລກຣາມ.",
-        dlt_description_english:
-          "Driving license C, a total of 3,500 to 15,000 kilograms",
-      },
-      {
-        dlt_code: "C1",
-        dlt_description:
-          "ใบอนุญาตขับรถประเภท C1 รถขนส่งสินค้าน้าหนักรวมตั้งแต่ 7,500 ถึง 15,000 กิโลกรัม",
-        dlt_description_loas:
-          "ປະເພດໃບຂັບຂີ່ C1, ພາຫະນະຂົນສົ່ງສິນຄ້າທີ່ມີນໍ້າໜັກລວມແຕ່ 7,500 – 15,000 ກິໂລກຣາມ.",
-        dlt_description_english:
-          "Driving license C1, a total of 7,500 to 15,000 kilograms",
-      },
-      {
-        dlt_code: "C2",
-        dlt_description:
-          "ใบอนุญาตขับรถประเภท C2 รถขนส่งสินค้า น้าหนักรวม 15,000 กิโลกรัม ขึ้นไป",
-        dlt_description_loas:
-          "ໃບຂັບຂີ່ປະເພດ C2, ພາຫະນະຂົນສົ່ງສິນຄ້າ, ນ້ຳໜັກທັງໝົດ 15,000 ກິໂລກຣາມຂຶ້ນໄປ.",
-        dlt_description_english:
-          "Driving license, C2, transportation vehicles, weighing 15,000 kilograms or more",
-      },
-      {
-        dlt_code: "D",
-        dlt_description:
-          "ใบอนุญาตขับรถประเภท D รถขนส่งผู้โดยสาร ประเภท 4 ล้อขึ้นไป ไม่เกิน 15 ที่นั่ง",
-        dlt_description_loas:
-          "ໃບຂັບຂີ່ປະເພດ D, ພາຫະນະຂົນສົ່ງຜູ້ໂດຍສານ, 4 ລໍ້ຂຶ້ນໄປ, ບໍ່ເກີນ 15 ບ່ອນນັ່ງ.",
-        dlt_description_english:
-          "Driving license, type D, a 4 -wheel passenger car, no more than 15 seats",
-      },
+          "dlt_code": "E1",
+          "dlt_name_lo": "ລົດຂົນສົ່ງສິນຄ້າ (C2) ແກ່ຫາງລາກນ້ຳໜັກລວມເກີນກວ່າ 750 ກິໂລກຣາມ",
+          "dlt_name_eng": "Cargo truck (C2) having trailer total weight exceed 750 kilograms"
+      }
     ]
   }
 
