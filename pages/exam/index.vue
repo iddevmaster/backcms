@@ -18,7 +18,7 @@ definePageMeta({
   middleware: ['auth','roles'],
   allowedRoles: [1,2],
 })
-
+const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
 
 const toast = useToast()
 const store = ExamStore()
@@ -60,7 +60,7 @@ const { deleteExam } = ExamStore();//Action
                     </ol>
                 </nav>
                     </div>
-                    <ExamList></ExamList>
+                    <ExamList :user_type="user_type"></ExamList>
         
             </div>
           </div>

@@ -148,24 +148,7 @@
               </div>
             </div>
 
-            <!-- <div class="row">
-                    <div class="col-md-12 mt-3">
-                      <label for="inputEmail4" class="form-label">
-                        {{ $t("menu_couse_f_title_code") }}</label
-                      ><span class="text-xs text-red-500" style="color: red">
-                        *
-                      </span>
-
-                      <div class="col-md-12 mt-3">
-                        <ckeditor
-                          :editor="editor"
-                          v-model="content2"
-                          :config="editorConfig"
-                        @ready="onReadyTh"
-                        ></ckeditor>
-                      </div>
-                    </div>
-                  </div> -->
+          
 
             <div class="form-group">
               <input
@@ -304,7 +287,7 @@
 <style scoped>
 /* Bootstrap 4 styling for CKEditor content area */
 .ck.ck-editor__editable {
-  min-height: 200px; /* Example height */
+  min-height: 400px; /* Example height */
   padding: 10px;
   border: 1px solid #ced4da;
   border-radius: 4px;
@@ -533,6 +516,7 @@ export default defineComponent({
         options: [10, 12, 14, 16, 18, 20, 22],
         supportAllValues: true,
       },
+      height: 400 // Set the height of the editor
     };
 
     const editor = ClassicEditor;

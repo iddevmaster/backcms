@@ -333,10 +333,13 @@
 <style scoped>
 /* Bootstrap 4 styling for CKEditor content area */
 .ck.ck-editor__editable {
-  min-height: 200px; /* Example height */
+ 
   padding: 10px;
   border: 1px solid #ced4da;
   border-radius: 4px;
+  min-height: 300px; /* Set minimum height */
+  max-height: 600px; /* Set maximum height */
+  height: 500px; /* Set specific height */
 }
 </style>
 
@@ -576,6 +579,7 @@ export default defineComponent({
         options: [10, 12, 14, 16, 18, 20, 22],
         supportAllValues: true,
       },
+      height: 400 // Set the height of the editor
     };
 
     const editor = ClassicEditor;

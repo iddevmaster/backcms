@@ -20,9 +20,7 @@
           <tr      v-for="(item, index) in store.rows">
         <td style="width: 10%;">{{ item.ec_in }}</td>
         <td><input type="text" class="form-control" :placeholder="item.ec" v-model="store.rows[index].ec_name_lo"  maxlength="200"></td>
-      
       </tr>
-   
         </tbody>
     </table>
 </div>
@@ -47,7 +45,7 @@ const router = useRouter();
 const toast = useToast();
 const store = ExamquestionStore();
 
-
+const user_type = useCookie('user_type'); 
 
 </script>
 <style>
