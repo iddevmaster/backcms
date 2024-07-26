@@ -22,9 +22,14 @@ import { onMounted } from 'vue'
 definePageMeta({
   middleware: ['auth','roles'],
   allowedRoles: [1,2]
-})
+});
+
+
 
 const auth = useAuthStore()
+
+const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
+
 const store = LessonStore()
 const storegroup = GroupStore()
 
@@ -61,7 +66,6 @@ const delete_userid = async (id) => {
 
   const delc = await store.selectlessId(id);
   if(delc){
-
       }else{
    toast.error('ລຶບຂໍ້ມູນລົ້ມເຫລວ')
       }
@@ -84,7 +88,7 @@ const delete_userid = async (id) => {
                         </nav>
                     </div>
                 <Loading v-if="Pending"></Loading>
-            <LessonListAll></LessonListAll>
+            <LessonListAll :user_type="user_type"></LessonListAll>
             </div>
           </div>
 

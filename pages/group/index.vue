@@ -20,7 +20,7 @@ import 'vue-loading-overlay/dist/css/index.css';
 
 definePageMeta({
   middleware: ['auth','roles'],
-  allowedRoles: [1]
+  allowedRoles: [1,2]
 })
 
 const auth = useAuthStore()
@@ -28,7 +28,7 @@ const store = GroupStore()
 const toast = useToast();
 store.formcreategroup.user_id = auth.user_id
 
-
+const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
 
  store.fetchGrouplist();
   const closeModal = () => {
@@ -68,7 +68,7 @@ store.formcreategroup.user_id = auth.user_id
                             </ol>
                         </nav>
                     </div>
-            <GroupList></GroupList>
+            <GroupList :user_type="user_type"></GroupList>
             </div>
           </div>
 

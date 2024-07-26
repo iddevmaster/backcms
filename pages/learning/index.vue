@@ -22,6 +22,8 @@ definePageMeta({
   allowedRoles: [1,2]
 })
 
+
+const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
 const auth = useAuthStore()
 const store = CourseStore()
 store.ResetFetch()
@@ -79,7 +81,7 @@ const delete_userid = async (id) => {
                         </nav>
                     </div>
                 <Loading v-if="Pending"></Loading>
-            <CourseList></CourseList>
+            <CourseList  :user_type="user_type"></CourseList>
             </div>
           </div>
   <div class="modal"  v-if="GetopenModal">

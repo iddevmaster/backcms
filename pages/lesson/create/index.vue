@@ -20,7 +20,7 @@ import { onMounted } from 'vue'
 
 definePageMeta({
   middleware: ['auth','roles'],
-  allowedRoles: [1,2]
+  allowedRoles: [1]
 })
 
 const auth = useAuthStore()

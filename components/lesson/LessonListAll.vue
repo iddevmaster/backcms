@@ -57,7 +57,6 @@ style="
     </div>
   </div>
 
-
   <div class="row layout-top-spacing">
 
 
@@ -95,7 +94,7 @@ style="
                   <img src="../../assets/images/no_photo.jpg" class="img-fluid" width="80" height="80" v-else>
           </td>
           <td>    
-             <div class="action-btns">
+             <div class="action-btns" v-if="user_type == '1'">
 
                 <NuxtLink>
                   <a
@@ -154,7 +153,8 @@ style="
                     <line x1="14" y1="11" x2="14" y2="17"></line>
                   </svg>
                 </a>
-              </div></td>
+              </div>
+            </td>
       
         </tr>
       </tbody>
@@ -418,6 +418,14 @@ const { locale, setLocale } = useI18n();
 import { useToast } from "vue-toastification";
 import ApiService from "../../services/api.service";
 
+defineProps({
+  user_type: {
+    type: Number,
+    required: false,
+    default: () => ({}),
+  },
+});
+
 const toast = useToast();
 const router = useRouter();
 const store = LessonStore();
@@ -432,7 +440,8 @@ const { selectentiresentires } = LessonStore(); //Action
 const auth = useAuthStore();
 
 
-
+const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
+console.log(user_type.value);
 
 const selectshowdata = async (sel) => {
   await selectentiresentires(sel.target.value);

@@ -119,7 +119,7 @@ style="
       
 
            <td>    
-             <div class="action-btns">
+             <div class="action-btns" v-if="user_type == '1'">
 
                 <NuxtLink>
                   <a

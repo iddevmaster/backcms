@@ -111,7 +111,7 @@
     
           </td>
           <td>
-            <div class="action-btns">
+            <div class="action-btns" v-if="user_type == '1'">
               <NuxtLink :to="'/learning/view/' + item.course_id">
                 <a
                   href="javascript:void(0);"
@@ -298,6 +298,15 @@ const { setCurrentPage } = CourseStore(); //Action
 const auth = useAuthStore();
 
 const courselist = await store.fetchCourslist();
+
+defineProps({
+  user_type: {
+    type: Number,
+    required: false,
+    default: () => ({}),
+  },
+});
+
 
 if (courselist === false) {
   await toast.error("Error Data Contact Admin", {

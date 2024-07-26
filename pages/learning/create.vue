@@ -32,7 +32,7 @@ import {
 
 definePageMeta({
   middleware: ['auth','roles'],
-  allowedRoles: [1,2],
+  allowedRoles: [1],
 })
 
 const { locale, setLocale } = useI18n();
