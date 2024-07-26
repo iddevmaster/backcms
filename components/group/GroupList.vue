@@ -245,6 +245,13 @@ const { sortLists } = GroupStore();//Action
 
 
 
+defineProps({
+  user_type: {
+    type: Number,
+    required: false,
+    default: () => ({}),
+  },
+});
 
 
 

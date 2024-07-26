@@ -8,7 +8,7 @@
                   <div class="col-xl-4 col-sm-12 col-5" style="
     text-align: right;
 ">
-                    <button type="button" class="btn btn-primary"   @click="MyGroup(id)">
+                    <button type="button" class="btn btn-primary"   @click="MyGroup(id)" v-if="user_type == '1'">
                       
                       {{ $t("menu_view_table_title_permi") }}
                     </button>
@@ -82,7 +82,14 @@ defineProps({
     required: false,
     default: () => ({}),
   },
+  user_type: {
+    type: Number,
+    required: false,
+    default: () => ({}),
+  },
 });
+
+
 
 const router = useRouter();
 

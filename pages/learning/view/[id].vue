@@ -27,12 +27,13 @@ import {
 const { locale, setLocale } = useI18n();
 definePageMeta({
   middleware: ["auth", "roles"],
-  allowedRoles: [1, 2],
+  allowedRoles: [1,2],
 });
 
 const auth = useAuthStore();
 const store = CourseStore();
 
+const user_type = useCookie('user_type'); 
 const storelesson = LessonStore();
 store.isLoading = true;
 const router = useRouter();
@@ -71,12 +72,12 @@ onMounted(async () => {
         <div class="row layout-top-spacing">
          
           <div class="col-xl-6 col-lg-6 col-sm-12 layout-spacing">
-            <LearningViewCourse :course="store.formDataEditCourse"></LearningViewCourse>
+            <LearningViewCourse :course="store.formDataEditCourse" ></LearningViewCourse>
           </div>
           <div class="col-xl-6 col-lg-6 col-sm-12 layout-spacing">
-            <LearningViewExam  :exam="store.formDataEditCourse.exam_desc" :id="router.currentRoute.value.params.id"></LearningViewExam>
+            <LearningViewExam  :exam="store.formDataEditCourse.exam_desc" :id="router.currentRoute.value.params.id"  :user_type="user_type"></LearningViewExam>
             <br />
-            <LearningViewCate  :id="router.currentRoute.value.params.id"></LearningViewCate>
+            <LearningViewCate  :id="router.currentRoute.value.params.id"  :user_type="user_type"></LearningViewCate>
           </div>
         </div>
         <br />

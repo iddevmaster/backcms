@@ -418,13 +418,7 @@ const { locale, setLocale } = useI18n();
 import { useToast } from "vue-toastification";
 import ApiService from "../../services/api.service";
 
-defineProps({
-  user_type: {
-    type: Number,
-    required: false,
-    default: () => ({}),
-  },
-});
+
 
 const toast = useToast();
 const router = useRouter();
@@ -440,8 +434,8 @@ const { selectentiresentires } = LessonStore(); //Action
 const auth = useAuthStore();
 
 
-const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
-console.log(user_type.value);
+const user_type = useCookie('user_type'); 
+
 
 const selectshowdata = async (sel) => {
   await selectentiresentires(sel.target.value);

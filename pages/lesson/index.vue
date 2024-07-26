@@ -28,7 +28,7 @@ definePageMeta({
 
 const auth = useAuthStore()
 
-const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
+const user_type = useCookie('user_type');
 
 const store = LessonStore()
 const storegroup = GroupStore()

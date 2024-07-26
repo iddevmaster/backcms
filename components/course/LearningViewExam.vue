@@ -6,7 +6,7 @@
           <h3>{{ $t("menu_couse_view_table_header_d") }}</h3>
         </div>
         <div class="col-xl-2 col-sm-2 col-4" >
-          <button type="button" class="btn btn-primary" @click="MyExam(id)">
+          <button type="button" class="btn btn-primary" @click="MyExam(id)" v-if="user_type == '1'">
             {{ $t("menu_couse_view_d_name_bt_") }}
           </button>
         </div>
@@ -214,6 +214,11 @@ defineProps({
   },
   id: {
     type: String,
+    required: false,
+    default: () => ({}),
+  },
+  user_type: {
+    type: Number,
     required: false,
     default: () => ({}),
   },
