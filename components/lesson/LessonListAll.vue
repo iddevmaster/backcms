@@ -419,7 +419,13 @@ import { useToast } from "vue-toastification";
 import ApiService from "../../services/api.service";
 
 
-
+defineProps({
+  user_type: {
+    type: Number,
+    required: false,
+    default: () => ({}),
+  },
+});
 const toast = useToast();
 const router = useRouter();
 const store = LessonStore();

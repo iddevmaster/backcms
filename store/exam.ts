@@ -57,6 +57,7 @@ export const ExamStore = defineStore('exam', {
       }),
       user_id: null
     },
+    seletype:"",
     cg_id:1,
     formsearchexam: {
       page: 1,
@@ -79,7 +80,6 @@ export const ExamStore = defineStore('exam', {
     ]
     },
     examques: [],
-    seletype:null,
     group:[],
      dlt:[
       {
@@ -190,11 +190,12 @@ this.formsearchexam.search = ''
 
     
     async selectfirstGroupId() {
-       this.cg_id = 1
+       this.cg_id = this.group[0].cg_id;
     },
     async fetchGrouplist() {
       try {
         const data = await ApiService.post('/course/group/all', this.formsearchgroup).then(response => {
+         
           this.group = response.data.data
           this.group_total_page = response.data.total_page
           this.group_limit_page = response.data.limit_page
@@ -229,7 +230,8 @@ this.examques_total = response.data.total
     },
 
     async selecttypes(item) {
-
+ 
+      this.seletype = "";
 this.cg_id = item
 this.seletype = this.group.find(items => items.cg_id == item);
 
