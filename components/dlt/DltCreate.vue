@@ -29,7 +29,7 @@
             <div class="row">
               <div class="col-md-12 mt-3">
                 <label for="exampleFormControlFile1" class="fw-bold text-nowrap">
-                ประเภทบัตร</label
+                  ປະເພດອະນຸຍາດ:</label
                 ><span class="text-xs text-red-500" style="color: red">
                   *
                 </span>
@@ -48,7 +48,7 @@
     {{item.dlt_code}}
 </label>
 </div>
-{{store.formadddtl.dlt_code}}
+
                 </div>
 
                 <div v-if="locale == 'la'">
@@ -120,7 +120,7 @@
           </div>
 
           <div class="border p-2 mt-3">
-            <p>บัตรประชาชน:</p>
+            <p>ເລກບັດປະຈຳຕົວ</p>
             <template v-if="store.formadddtl.full_name">
               <div class="row">
                 <div id="image-container" class="col-md-9 col-sm-9 col-">
@@ -149,7 +149,8 @@
              <div class="col-md-6 mt-3">
               <div class="form-group mb-4 mt-3 d-flex">
             <label for="exampleFormControlFile1" class="fw-bold text-nowrap"
-              >ที่อยู่</label
+              >ທີ່ຢູ່
+              </label
             >
             <input
               type="file"
@@ -188,7 +189,8 @@
              <div class="col-md-6 mt-3">
               <div class="form-group mb-4 mt-3 d-flex">
             <label for="exampleFormControlFile1" class="fw-bold text-nowrap"
-              >หน้า</label
+              >ດ້ານໜ້າ
+              </label
             >
             <input
               type="file"
@@ -229,7 +231,7 @@
              <div class="col-md-6 mt-3">
               <div class="form-group mb-4 mt-3 d-flex">
             <label for="exampleFormControlFile1" class="fw-bold text-nowrap"
-              >หลัง</label
+              >ຫລັງ</label
             >
             <input
               type="file"
@@ -298,7 +300,7 @@ const toast = useToast();
 
 const store = DltStore();
 const route = useRoute();
-
+const router = useRouter();
 const auth = useAuthStore()
 store.user_create = auth.user_id
 const { FormDLTadd } = storeToRefs(store);
@@ -339,7 +341,6 @@ const Add = async () => {
 
 
     if(store.StatusMethod === 'update'){
-console.log('update');
    let full = await store.UploadfileFull();
     let add = await store.UploadfileAdd();
     let back = await store.UploadfileFullBack();
@@ -483,6 +484,11 @@ const format_end = (date) => {
 
 
 
+
+const backtoLean = async () => {
+
+await router.push('/dltmanage');
+}
 
 const onFileChangeBack = async (event) => {
   var input = event.target;
