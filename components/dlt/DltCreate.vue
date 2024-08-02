@@ -337,7 +337,6 @@ const v$ = useVuelidate(rules, FormDLTadd);
 const Add = async () => {
   v$.value.$validate();
    if (!v$.value.$error) {
- 
 
 
     if(store.StatusMethod === 'update'){
@@ -346,6 +345,14 @@ const Add = async () => {
     let back = await store.UploadfileFullBack();
     let front = await store.UploadfileFullFront();
     const updated = await store.UpdateFormDlt();
+
+    if(updated === true){
+      toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດ');
+    }else {
+      toast.error('ບັນທຶກຂໍ້ມູນລົ້ມເຫລວ')
+    }
+
+
     }
 
     if(store.StatusMethod === 'insert'){
@@ -354,7 +361,14 @@ const Add = async () => {
     let back = await store.UploadfileFullBack();
     let front = await store.UploadfileFullFront();
     const save = await store.SaveFormDlt();
+    
 
+    if(save === true){
+      toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດ');
+    }
+    else {
+      toast.error('ບັນທຶກຂໍ້ມູນລົ້ມເຫລວ')
+    }
     }
 
   // const save = await store.SaveFormDlt();

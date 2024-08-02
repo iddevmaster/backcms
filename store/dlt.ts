@@ -40,7 +40,7 @@ export const DltStore = defineStore('dlt', {
       expiry_date: "",
       user_id: null
     },
-
+    id_tran:"",
     formadddtl: {
       full_name: "",
       address: "",
@@ -182,11 +182,12 @@ export const DltStore = defineStore('dlt', {
     },
 
     async getDLT() {
-
       try {
-        const data = await ApiService.get('/dlt_card/list/?user_id=' + this.user_id).then(response => {
+        const data = await ApiService.get('/dlt_card/list/?user_id=' + this.formadddtl.user_id).then(response => {
+       console.log(response);
        if(response.data.length > 0){
         this.StatusMethod = 'update';
+        this.id_tran = response.data[0].id
         this.formadddtl.full_name = response.data[0].full_name
         this.formadddtl.address = response.data[0].address
         this.formadddtl.front_img = response.data[0].front_img
@@ -200,9 +201,13 @@ for (var j = 0; j < response.data[0].dlt_types.length; j++) {
 this.formadddtl.dlt_code.push(response.data[0].dlt_types[j].dlt_code);
 }
 
+return true;
+
 
        }else {
         this.StatusMethod = 'insert';
+        return true;
+
        }
          
        
@@ -258,7 +263,20 @@ this.disabledDates.from = new Date(this.formdtl.expiry_date);
         user_id:this.formadddtl.user_id,
         user_create:this.user_create,
       }
-      console.log(update);
+ 
+
+
+      try {
+        const data = await ApiService.put('/dlt_card/update/'+this.id_tran, update).then(response => {
+        
+        return true;
+        });
+
+        return data;
+    
+      } catch (error) {
+        return false;
+      } 
 
     },
 

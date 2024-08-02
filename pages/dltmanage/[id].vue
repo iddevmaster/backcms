@@ -42,8 +42,9 @@ const profile = await auth.getProfile();
 const storeapp = AppointStore()
 store.formadddtl.user_id = route.params.id;
 await store.ResetForm();
+console.log(route.params.id);
+let finddtl = await store.getDLT();
 
-let finddtl = await store.fetchDlt(route.params.id);
 if (finddtl == true) {
 } else {
   toast.error("Can not Data");
