@@ -24,8 +24,6 @@
             </div>
             <br />
 
-            
-
             <div class="row">
               <div class="col-md-12 mt-3">
                 <label for="exampleFormControlFile1" class="fw-bold text-nowrap">
@@ -64,7 +62,7 @@
 
               <div class="col-md-6 mt-3">
                 <label for="exampleFormControlFile1" class="fw-bold text-nowrap">
-                 วันที่เริ่มต้น</label
+                 ວັນທີອອກບັດ</label
                 >
 
                 <div class="col-md-3 mt-3">
@@ -83,7 +81,7 @@
               </div>
               <div class="col-md-3 mt-3">
                 <label for="exampleFormControlFile1" class="fw-bold text-nowrap">
-                 วันที่หมดอายุ</label
+                 ວັນ​ຫມົດ​ອາ​ຍຸ</label
                 >
 
                 <div class="col-md-3 mt-3">
@@ -108,7 +106,7 @@
               <div class="col-md-6 mt-3">
               <div class="form-group mb-4 mt-3 d-flex">
             <label for="exampleFormControlFile1" class="fw-bold text-nowrap"
-              >บัตรประชาชน</label
+              >ບັດ​ປະ​ຈໍາ​ຕົວ</label
             >
             <input
               type="file"
@@ -340,11 +338,12 @@ const Add = async () => {
 
 
     if(store.StatusMethod === 'update'){
+     
    let full = await store.UploadfileFull();
     let add = await store.UploadfileAdd();
     let back = await store.UploadfileFullBack();
     let front = await store.UploadfileFullFront();
-    const updated = await store.UpdateFormDlt();
+  const updated = await store.UpdateFormDlt();
 
     if(updated === true){
       toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດ');
@@ -356,6 +355,7 @@ const Add = async () => {
     }
 
     if(store.StatusMethod === 'insert'){
+       
     let full = await store.UploadfileFull();
     let add = await store.UploadfileAdd();
     let back = await store.UploadfileFullBack();
@@ -486,7 +486,7 @@ const onFileChangeFull = async (event) => {
 const format_start = (date) => {
   store.formadddtl.issue_date = moment(date).format("YYYY-MM-DD");
 
-  store.disabledDatesEnd.to = new Date(store.formadddtl.issue_date)
+  store.disabledDatesEnd.to = new Date(store.formadddtl.issue_date + 1)
   return moment(date).format("YYYY-MM-DD");
 };
 

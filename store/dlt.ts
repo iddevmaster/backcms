@@ -259,16 +259,15 @@ this.disabledDates.from = new Date(this.formdtl.expiry_date);
         back_img:this.formadddtl.back_img,
         dlt_code:this.formadddtl.dlt_code,
         issue_date: this.formadddtl.issue_date,
-        expiry_date:this.formadddtl.issue_date,
-        user_id:this.formadddtl.user_id,
+        expiry_date:this.formadddtl.expiry_date,
+        user_id:parseInt(this.formadddtl.user_id),
         user_create:this.user_create,
       }
- 
-
+      
 
       try {
         const data = await ApiService.put('/dlt_card/update/'+this.id_tran, update).then(response => {
-        
+        console.log(response)
         return true;
         });
 
@@ -289,11 +288,13 @@ this.disabledDates.from = new Date(this.formdtl.expiry_date);
       back_img:this.formadddtl.back_img,
       dlt_code:this.formadddtl.dlt_code,
       issue_date: this.formadddtl.issue_date,
-      expiry_date:this.formadddtl.issue_date,
-      user_id:this.formadddtl.user_id,
+      expiry_date:this.formadddtl.expiry_date,
+      user_id:parseInt(this.formadddtl.user_id),
       user_create:this.user_create,
     }
    
+
+    console.log(JSON.stringify(formsave));
       try {
         const data = await ApiService.post('/dlt_card/create/', this.formadddtl).then(response => {
           console.log(response)
@@ -417,17 +418,17 @@ this.formadddtl.expiry_date = "";
       return new Promise((resolve) => setTimeout(resolve, ms));
     },
    async delete(){
-      try {
-        const data = await ApiService.delete('/dlt_card/delete/' + this.id).then(response => {
-          this.isAdd = false;
-          this.isEdit = false;
-          this.isDelete = true;
-          return true;
-        });
-        return data;
-      } catch (error) {
-        return false
-      }
+      // try {
+      //   const data = await ApiService.delete('/dlt_card/delete/' + this.id).then(response => {
+      //     this.isAdd = false;
+      //     this.isEdit = false;
+      //     this.isDelete = true;
+      //     return true;
+      //   });
+      //   return data;
+      // } catch (error) {
+      //   return false
+      // }
     },
 
 
