@@ -127,17 +127,17 @@
             </div>
           </a>
           <ul
-            class="collapse submenu list-unstyled"
+            class="collapse submenu list-unstyled" :class="{ show:isActiveMenu('/learning') }"
             id="learning"
             data-bs-parent="#accordionExample"
           >
-            <li>
+            <li :class="{ active: isActive('/learning') }">
               <nuxt-link to="/learning">{{ $t("menu_couse_all") }}</nuxt-link>
             </li>
-            <li>
+            <li :class="{ active: isActive('/learning/reportlearn') }">
               <nuxt-link to="/learning/reportlearn">{{ $t("menu_report_lesson") }}</nuxt-link>
             </li>
-            <li>
+            <li :class="{ active: isActive('/learning/reportexam') }">
               <nuxt-link to="/learning/reportexam">{{ $t("menu_report_exam") }}</nuxt-link>
             </li>
          
@@ -145,7 +145,7 @@
         </li>
 
 
-        <li class="menu" >
+        <li class="menu">
           <a
             href="#group"
             data-bs-toggle="collapse"
@@ -192,17 +192,17 @@
           <ul
             class="collapse submenu list-unstyled"
             id="group"
-            data-bs-parent="#accordionExample"
+            data-bs-parent="#accordionExample"  :class="{ show:isActiveMenu2('/group') }"
           >
-            <li>
+            <li :class="{ active: isActive('/group') }">
               <nuxt-link to="/group">ໝວດວິຊາທັງໝົດ</nuxt-link>
             </li>
           
-            <li>
+            <li  :class="{ active: isActive('/lesson') }">
               <nuxt-link to="/lesson">ບົດຮຽນ</nuxt-link>
             </li>
 
-            <li>
+            <li :class="{ active: isActive('/exam') }">
               <nuxt-link to="/exam">ຄຳຖາມ ຄຳຕອບ</nuxt-link>
             </li>
            
@@ -318,12 +318,12 @@
           <ul
             class="collapse submenu list-unstyled"
             id="transport"
-            data-bs-parent="#accordionExample"
+            data-bs-parent="#accordionExample"   :class="{ show:isActiveMenuNew('/new') }"
           >
-            <li>
+            <li :class="{ active: isActive('/news/transport') }">
               <nuxt-link to="/news/transport">{{ $t("menu_page_new_tra_all") }}</nuxt-link>
             </li>
-            <li>
+            <li :class="{ active: isActive('/news/transport/create') }">
               <nuxt-link to="/news/transport/create"
                 >{{ $t("menu_new_tra_add") }}</nuxt-link
               >
@@ -420,9 +420,9 @@
           <ul
             class="collapse submenu list-unstyled"
             id="menu_dlt"
-            data-bs-parent="#accordionExample"
+            data-bs-parent="#accordionExample"   :class="{ show:isActiveMenuNewDLT('/dltmanage') }"
           >
-            <li>
+            <li :class="{ active: isActive('/dltmanage') }">
               <nuxt-link to="/dltmanage">{{ $t("menu_user_dlt") }}</nuxt-link>
             </li>
           
@@ -508,15 +508,15 @@
           <ul
             class="collapse submenu list-unstyled"
             id="result"
-            data-bs-parent="#accordionExample"
+            data-bs-parent="#accordionExample"  :class="{ show:isActiveMenuResult('/result') }"
           >
-            <li>
-              <nuxt-link to="/result">{{ $t("resultall") }}</nuxt-link>
+            <li :class="{ active: isActive('/result') }">
+              <nuxt-link to="/result" >{{ $t("resultall") }}</nuxt-link>
             </li>
-            <li>
-              <nuxt-link to="/result/create">{{ $t("resultadd") }}</nuxt-link>
+            <li :class="{ active: isActive('/result/create') }">
+              <nuxt-link to="/result/create" >{{ $t("resultadd") }}</nuxt-link>
             </li>
-            <li>
+            <li  :class="{ active: isActive('/result/edit') }">
               <nuxt-link to="/result/edit">{{ $t("resultedit") }}</nuxt-link>
             </li>
           </ul>
@@ -688,6 +688,7 @@ const data = localStorage.getItem('user');
 let user = JSON.parse(data);
 const router = useRouter();
 const store = useAuthStore();
+const route = useRoute()
 
 
 const users = await store.getProfile();
@@ -699,6 +700,45 @@ const users = await store.getProfile();
 const GotoPage = async () => {
   router.push('/');
 }
+
+const currentPath = computed(() => router.path)
+
+const isActive = (path) => {
+ return router.currentRoute.value.path === path
+}
+const isActiveMenu = () => {
+  if((router.currentRoute.value.path == '/learning') || (router.currentRoute.value.path == '/learning/reportlearn') || (router.currentRoute.value.path == '/learning/reportexam')){ 
+    return true;
+  }else {
+  return false;
+  }
+}
+const isActiveMenu2 = () => {
+  if((router.currentRoute.value.path == '/group') || (router.currentRoute.value.path == '/learning/reportlearn') || (router.currentRoute.value.path == '/learning/reportexam')){ 
+    return true;
+  }
+}
+
+const isActiveMenuNew = () => {
+  if((router.currentRoute.value.path == '/news/transport') || (router.currentRoute.value.path == '/news/transport/create')){ 
+    return true;
+  }
+}
+
+const isActiveMenuNewDLT = () => {
+  if((router.currentRoute.value.path == '/dltmanage')){ 
+    return true;
+  }
+}
+
+const isActiveMenuResult = () => {
+  if((router.currentRoute.value.path == '/result') || (router.currentRoute.value.path == '/result/create') || (router.currentRoute.value.path == '/result/edit')){ 
+    return true;
+  }
+}
+
+
+
 
 const ShowColl = async () => {
   store.isActiveSide = !store.isActiveSide
@@ -719,6 +759,12 @@ function image(i) {
   #sidebar ul.menu-categories li.menu > .dropdown-toggle[aria-expanded=true] .menu-icon {
     color: white;
   }
+
+
+
+ li.active a {
+  color: red; /* เปลี่ยนสีข้อความเมื่อเมนูอยู่ในสถานะ active */
+}
 </style>
   
   
