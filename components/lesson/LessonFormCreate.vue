@@ -596,6 +596,7 @@ export default defineComponent({
         });
 
         let save = await store.saveformLesson();
+    
         if (save == true) {
           toast.success("ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ");
           store.ResetForm();
@@ -607,9 +608,11 @@ export default defineComponent({
           setTimeout(() => Swal.close(), 500);
           router.push("/lesson");
         } else {
+          setTimeout(() => Swal.close(), 500);
           toast.error("ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ");
         }
       } else {
+      
         console.log("saveไม่ได้");
       }
     };

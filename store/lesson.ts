@@ -71,7 +71,7 @@ export const LessonStore = defineStore('lesson', {
     },
     formreportexam: {
       page: 1,
-      per_page: 5,
+      per_page: 50,
       search: ''
     },
     formreportcourse: {
@@ -232,7 +232,7 @@ actions: {
       }
   
     
-      this.EdithtmlContent = response.data.cs_description;
+      this.EdithtmlContent = this.decodeHTML(response.data.cs_description);
        this.formcreatelessonedit.cg_id = this.group.find(item => item.cg_id === response.data.cg_id);
 
 
@@ -241,6 +241,18 @@ actions: {
     } catch (error) {
       return false;
     }
+  },
+
+  decodeHTML(str) {
+    const map = {
+      '&amp;': '&',
+      '&lt;': '<',
+      '&gt;': '>',
+      '&quot;': '"',
+      '&#39;': "'",
+      '&#x2F;': '/'
+    };
+    return str.replace(/&(amp|lt|gt|quot|#39|#x2F);/g, function(m) { return map[m]; });
   },
 
 
@@ -301,12 +313,34 @@ actions: {
       
   },
 
-    async saveformLesson() {
-      const savelesson = {cs_cover:this.cs_cover,cs_name_lo:this.formcreatelesson.cs_name_lo,cs_name_eng:this.formcreatelesson.cs_name_eng,cs_description:this.formcreatelesson.cs_description,cg_id:this.formcreatelesson.cg_id.cg_id,file_path:this.pdf,cs_video:this.cs_video,user_id:this.user_id }
+  encodeHTML(str) {
+    const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+      '/': '&#x2F;',
+    };
+    return str.replace(/[&<>"'/]/g, function(m) {
+      return map[m];
+    });
+  },
 
+
+  
+
+    async saveformLesson() {
+    
+      const savelesson = {cs_cover:this.cs_cover,cs_name_lo:this.formcreatelesson.cs_name_lo,cs_name_eng:this.formcreatelesson.cs_name_eng,cs_description:this.encodeHTML(this.formcreatelesson.cs_description),cg_id:this.formcreatelesson.cg_id.cg_id,file_path:this.pdf,cs_video:this.cs_video,user_id:this.user_id }
     try {
       const data = await ApiService.post('/course/lesson/create', savelesson).then(response => {
-return true
+  
+        if(response){
+          return true;
+        }else {
+          return false ;
+        }
       });
 
       return data
@@ -321,9 +355,8 @@ return true
 
   async updateformnewLesson() {
 
-   
-  const updated = {cs_cover:this.cs_cover,cs_name_lo:this.formcreatelessonedit.cs_name_lo,cs_name_eng:this.formcreatelessonedit.cs_name_eng,cs_description:this.formcreatelessonedit.cs_description,cg_id:this.formcreatelessonedit.cg_id.cg_id,file_path:this.pdf,cs_video:this.cs_video,user_id:this.user_id }
-console.log(updated);
+    
+  const updated = {cs_cover:this.cs_cover,cs_name_lo:this.formcreatelessonedit.cs_name_lo,cs_name_eng:this.formcreatelessonedit.cs_name_eng,cs_description:this.encodeHTML(this.formcreatelessonedit.cs_description),cg_id:this.formcreatelessonedit.cg_id.cg_id,file_path:this.pdf,cs_video:this.cs_video,user_id:this.user_id }
   try {
     const data = await ApiService.put('/course/lesson/update/'+this.cs_id, updated).then(response => {
 return true
