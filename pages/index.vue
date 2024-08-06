@@ -87,6 +87,48 @@
                   </div>
                 </div>
               </div>
+
+                <div
+                class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing clickable"
+                @click="choose('lesson')"
+              >
+                <div class="widget widget-one_hybrid widget-referral">
+                  <div class="widget-heading">
+                    <div class="w-title">
+                      <div class="w-icon">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="feather feather-link"
+                        >
+                          <path
+                            d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+                          ></path>
+                          <path
+                            d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+                          ></path>
+                        </svg>
+                      </div>
+                      <div class="">
+                        <p class="w-value">{{ $t("menu_dashboard_lesson") }}</p>
+                        <h5 class="">{{ $t("menu_dashboard_course_t") }}</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="widget-content">
+                    <div class="w-chart">
+                      <div id="hybrid_followers1"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div
                 class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-12 layout-spacing clickable"
                 @click="choose('reserve')"
@@ -318,7 +360,7 @@
                     <span v-if="locale == 'la'">{{ $t("fitter_year") }}</span>
                     </label>
                     <select class="form-control" v-model="store.formrev.year">
-                      <option value="2023">2023</option>
+                   
                       <option value="2024">2024</option>
                       <option value="2025">2025</option>
                       <option value="2026">2026</option>
@@ -345,37 +387,14 @@
                         :value="item.dlt_code"
                       >
                     
-                          <span v-if="locale == 'la'">{{ item.dlt_code }} :{{ item.dlt_description_loas }}</span>
-                  <span v-if="locale == 'en'">{{ item.dlt_code }} : {{ item.dlt_description_english }}</span>
-                  <span v-if="locale == 'th'">{{ item.dlt_code }} : {{ item.dlt_description }}</span>
+                           <span v-if="locale == 'la'">{{ item.dlt_code }} : {{ item.dlt_name_lo }}</span>
+                  <span v-if="locale == 'en'">{{ item.dlt_code }} : {{ item.dlt_name_eng }}</span>
                       </option>
                     </select>
                   </div>
 
 
-                  <!-- <div class="col-sm-12">
-                    <label for="exampleFormControlInput1">
-
-                      <span v-if="locale == 'en'">{{ $t("fitter_province") }}</span>
-                    <span v-if="locale == 'la'">{{ $t("fitter_province") }}</span>
-                    </label>
-                    <select
-                      class="form-control"
-                      @change="onChange($event)"
-                      v-model="store.formexam.dlt_code"
-                    >
-                      <option  :value="null">ທັງໝົດ</option>
-                      <option
-                        v-for="(item, i) in store.dlt"
-                        :value="item.dlt_code"
-                      >
-                  
-                  <span v-if="locale == 'la'">{{ item.dlt_description_loas }}</span>
-                  <span v-if="locale == 'en'">{{ item.dlt_description_english }}</span>
-                  <span v-if="locale == 'th'">{{ item.dlt_description }}</span>
-                      </option>
-                    </select>
-                  </div> -->
+               
                 </div>
 
                 <button
@@ -430,7 +449,7 @@
                     <span v-if="locale == 'la'">{{ $t("fitter_year") }}</span>
                     </label>
                     <select class="form-control" v-model="store.formexam.year">
-                      <option value="2023">2023</option>
+              
                       <option value="2024">2024</option>
                       <option value="2025">2025</option>
                       <option value="2026">2026</option>
@@ -450,43 +469,19 @@
                       @change="onChange($event)"
                       v-model="store.formexam.dlt_code"
                     >
-                      <option  :value="null">ທັງໝົດ</option>
+                      <option  :value="null" disabled>เลือก</option>
                       <option
                         v-for="(item, i) in storeapp.dlt"
                         :value="item.dlt_code"
                       >
                   
-                  <span v-if="locale == 'la'">{{ item.dlt_code }} : {{ item.dlt_description_loas }}</span>
-                  <span v-if="locale == 'en'">{{ item.dlt_code }} : {{ item.dlt_description_english }}</span>
-                  <span v-if="locale == 'th'">{{ item.dlt_code }} : {{ item.dlt_description }}</span>
+                  <span v-if="locale == 'la'">{{ item.dlt_code }} : {{ item.dlt_name_lo }}</span>
+                  <span v-if="locale == 'en'">{{ item.dlt_code }} : {{ item.dlt_name_eng }}</span>
+                
                       </option>
                     </select>
                   </div>
 
-
-                  <!-- <div class="col-sm-12">
-                    <label for="exampleFormControlInput1">
-
-                      <span v-if="locale == 'en'">{{ $t("fitter_province") }}</span>
-                    <span v-if="locale == 'la'">{{ $t("fitter_province") }}</span>
-                    </label>
-                    <select
-                      class="form-control"
-                      @change="onChange($event)"
-                      v-model="store.formexam.dlt_code"
-                    >
-                      <option  :value="null">ທັງໝົດ</option>
-                      <option
-                        v-for="(item, i) in store.dlt"
-                        :value="item.dlt_code"
-                      >
-                  
-                  <span v-if="locale == 'la'">{{ item.dlt_description_loas }}</span>
-                  <span v-if="locale == 'en'">{{ item.dlt_description_english }}</span>
-                  <span v-if="locale == 'th'">{{ item.dlt_description }}</span>
-                      </option>
-                    </select>
-                  </div> -->
                 </div>
 
                 <button
@@ -535,7 +530,7 @@
                     </div>
                   </div>
 
-                  <div class="col-sm-12">
+                  <!-- <div class="col-sm-12">
                     <label for="exampleFormControlInput1">Fiiter Type</label>
                     <select
                       class="form-control"
@@ -545,14 +540,14 @@
                       <option value="2">Course</option>
                       <option value="3">Course && User</option>
                     </select>
-                  </div>
+                  </div> -->
                   <div class="col-sm-12">
                     <label for="exampleFormControlInput1">Year</label>
                     <select
                       class="form-control"
                       v-model="store.formfitter.year"
                     >
-                      <option value="2023">2023</option>
+                  
                       <option value="2024">2024</option>
                       <option value="2025">2025</option>
                       <option value="2026">2026</option>
@@ -573,12 +568,14 @@
                         v-for="(item, i) in store.courselist"
                         :value="item.course_id"
                       >
-                        {{ item.course_name }}
+                      
+
+                          {{ locale == "la" ? item.course_name_lo : item.course_name_eng }}
                       </option>
                     </select>
                   </div>
 
-                  <div
+                  <!-- <div
                     class="col-sm-12"
                     v-if="
                       store.formfitter.type != '2' &&
@@ -599,7 +596,7 @@
                         {{ less.cs_name }}
                       </option>
                     </select>
-                  </div>
+                  </div> -->
                 </div>
                 <div
                   class="row layout-top-spacing"
@@ -657,6 +654,182 @@
             </div>
           </div>
         </div>
+
+      <div
+          class="row layout-top-spacing"
+          v-if="store.type == 'all' || store.type == 'lesson'"
+        >
+          <div
+            class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-12 layout-spacing"
+          >
+            <div class="widget widget-five">
+              <div class="widget-heading">
+                <h5 class="">{{ $t("chart_log_lesson") }}</h5>
+              </div>
+
+              <div class="widget-content">
+                <!-- <button @click="loadNewData">Load New Data</button> -->
+
+                <Bar :data="store.datacollectionlesson" />
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12 layout-spacing"
+          >
+            <div class="widget widget-card-four">
+              <div class="widget-content">
+                <!-- <LogFitter></LogFitter> -->
+
+                <div class="row mb-4">
+                  <div id="form_grid_layouts" class="col-lg-10">
+                    <div class="seperator-header">
+                      <h4 class="">{{ $t("fitter_dashboard_course") }}</h4>
+                    </div>
+                  </div>
+
+                  <!-- <div class="col-sm-12">
+                    <label for="exampleFormControlInput1">Fiiter Type</label>
+                    <select
+                      class="form-control"
+                      v-model="store.formfitter.type"
+                    >
+                      <option value="1">Lesson</option>
+                      <option value="2">Course</option>
+                      <option value="3">Course && User</option>
+                    </select>
+                  </div> -->
+                  <div class="col-sm-12">
+                    <label for="exampleFormControlInput1">Year</label>
+                    <select
+                      class="form-control"
+                      v-model="store.formfitter.year"
+                    >
+                  
+                      <option value="2024">2024</option>
+                      <option value="2025">2025</option>
+                      <option value="2026">2026</option>
+                      <option value="2027">2027</option>
+                      <option value="2028">2028</option>
+                    </select>
+                  </div>
+
+                  <div class="col-sm-12">
+                    <label for="exampleFormControlInput1">Course</label>
+                    <select
+                      class="form-control"
+                      v-model="store.formfitter.course_id"
+                      @change="onChange($event)"
+                    >
+                      <option disabled :value="null">​ເລືອກ</option>
+                      <option
+                        v-for="(item, i) in store.courselist"
+                        :value="item.course_id"
+                      >
+                          {{ locale == "la" ? item.course_name_lo : item.course_name_eng }}
+                      </option>
+                    </select>
+                  </div>
+
+                     <div class="col-sm-12">
+                    <label for="exampleFormControlInput1">Lesson</label>
+                    <select
+                      class="form-control"
+                      v-model="store.formfitter.cs_id"
+                    
+                    >
+                      <option  :value="0" disabled>​ເລືອກ</option>
+                      <option
+                        v-for="(item, i) in store.lessonlist"
+                        :value="item"
+                      >
+                          {{ locale == "la" ? item.cs_name_lo : item.cs_name_eng }}
+                      </option>
+                    </select>
+                  </div>
+
+
+                  <!-- <div
+                    class="col-sm-12"
+                    v-if="
+                      store.formfitter.type != '2' &&
+                      store.formfitter.type != '3'
+                    "
+                  >
+                    <label for="exampleFormControlInput1">Lesson ID</label>
+                    <select
+                      class="form-control"
+                      v-model="store.formfitter.cs_id"
+                    >
+                      <option disabled :value="null">ທັງໝົດ</option>
+                      <option
+                        v-for="(less, i) in store.lessonlist"
+                        :value="less.cs_id"
+                        v-if="store.lessonlist"
+                      >
+                        {{ less.cs_name }}
+                      </option>
+                    </select>
+                  </div> -->
+                </div>
+                <div
+                  class="row layout-top-spacing"
+                  v-if="store.formfitter.type == '3'"
+                >
+                  <div class="col-lg-12 col-md-12 col-sm-12 mb-4">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inputEmail3"
+                      placeholder="ຄົ້ນຫາຜູ້ໃຊ້ *"
+                      maxlength="10"
+                      v-model="store.formuser.search"
+                      @keyup="searchData"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-sm-12" v-if="store.formfitter.type == '3'">
+                  <div class="table-responsive">
+                    <table
+                      id="example"
+                      class="table table-bordered"
+                      style="width: 100%"
+                    >
+                      <thead>
+                        <tr>
+                          <th>{{ $t("menu_result_name") }} &#8597;</th>
+                          <th>{{ $t("menu_result_phone") }} &#8597;</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr
+                          v-for="(users, index) in store.userall"
+                          :key="users.user_id"
+                          @click="Sel(users.user_id)"
+                          :class="{
+                            'table-success': store.myChoose === users.user_id,
+                          }"
+                        >
+                          <td>
+                            {{ users.user_firstname }} {{ users.user_lastname }}
+                          </td>
+                          <td>{{ users.user_phone }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <button type="button" class="btn btn-primary" @click="searchLesson()">
+                  {{ $t("fitter_search") }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
     <!--  BEGIN FOOTER  -->
@@ -738,43 +911,18 @@ const loadNewData = async () => {
 };
 
 const search = async () => {
-  if (store.formfitter.type == "1") {
-    if (store.formfitter.cs_id == null) {
-      Swal.fire({
-        text: "ກະ​ລຸ​ນາ​ເລືອກ Lesson ທີ່ມີບົດຮຽນ !",
-        icon: "error",
-      });
-    } else {
-      await store.fetchReport();
-
+       await store.fetchReport();
       await updatechart();
-    }
-  }
-  if (store.formfitter.type == "2") {
-    if (store.formfitter.course_id == null) {
-      Swal.fire({
-        text: "ກະ​ລຸ​ນາ​ເລືອກ ຫຼັກສູດ!",
-        icon: "error",
-      });
-    } else {
-      await store.fetchReport();
 
-      await updatechart();
-    }
-  }
-  if (store.formfitter.type == "3") {
-    if (store.formfitter.user_id == null) {
-      Swal.fire({
-        text: "ກະ​ລຸ​ນາ​ເລືອກ Users!",
-        icon: "error",
-      });
-    } else {
-      await store.fetchReport();
-
-      await updatechart();
-    }
-  }
 };
+
+const searchLesson = async () => {
+
+          await store.fetchReportLesson();
+      await updatechartLesson();
+
+};
+
 
 const searchExam = async () => {
   await store.fetchLogExam();
@@ -788,7 +936,8 @@ const searchReserve = async () => {
 };
 
 const onChange = async (event) => {
-  store.formfitter.cs_id = null;
+  store.formfitter.cs_id = 0;
+  store.formfitter.course_id = event.target.value;
   await store.fetchLesson();
 };
 
@@ -903,6 +1052,45 @@ const updatechartexam = async () => {
           store.reportexam[9],
           store.reportexam[10],
           store.reportexam[11],
+        ],
+      },
+    ],
+  };
+};
+
+const updatechartLesson= async () => {
+  store.datacollectionlesson = {
+    labels: [
+      "ມັງກອນ",
+      "ກຸມພາ",
+      "ມີນາ",
+      "ເມສາ",
+      "ພຶດສະພາ",
+      "ມິຖຸນາ",
+      "ກໍລະກົດ",
+      "ສິງຫາ",
+      "ກັນຍາ",
+      "ຕຸລາ",
+      "ພະຈິກ",
+      "ທັນວາ",
+    ],
+    datasets: [
+      {
+        label: "Log Lesson",
+        backgroundColor: "#E63946",
+        data: [
+          store.reportlesson[0],
+          store.reportlesson[1],
+          store.reportlesson[2],
+          store.reportlesson[3],
+          store.reportlesson[4],
+          store.reportlesson[5],
+          store.reportlesson[6],
+          store.reportlesson[7],
+          store.reportlesson[8],
+          store.reportlesson[9],
+          store.reportlesson[10],
+          store.reportlesson[11],
         ],
       },
     ],

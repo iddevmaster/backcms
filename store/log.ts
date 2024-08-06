@@ -30,6 +30,14 @@ export const LogStore = defineStore('log', {
         data: [0, 0, 0,0,0,0,0,0,0,0,0,0]
       }]
     },
+    datacollectionlesson: {
+      labels: ['ມັງກອນ', 'ກຸມພາ', 'ມີນາ.','ເມສາ','ພຶດສະພາ','ມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'],
+      datasets: [{
+        label: 'Report Lesson',
+        backgroundColor: '#7979f8',
+        data: [0, 0, 0,0,0,0,0,0,0,0,0,0]
+      }]
+    },
     type:'all',
     user_id: null,
     modaldelete:false,
@@ -40,6 +48,7 @@ export const LogStore = defineStore('log', {
     reportlog:[],
     reportrev:[],
     reportexam:[],
+    reportlesson:[],
     users: [],
     user:[],
     userall:[],
@@ -50,7 +59,7 @@ export const LogStore = defineStore('log', {
     },
     formfitter:{
       course_id:null,
-      cs_id:null,
+      cs_id:0,
       user_id:null,
       year:new Date().getFullYear(),
       type:1
@@ -65,7 +74,7 @@ export const LogStore = defineStore('log', {
     },
     formsearchcourse: {
       page: 1,
-      per_page: 50,
+      per_page: 150,
       search: '',
       active_include:[0,1]
     },
@@ -119,6 +128,21 @@ export const LogStore = defineStore('log', {
       }
     },
 
+    async fetchReportLesson() {
+      const data = await ApiService.get('/log/lesson/'+this.formfitter.cs_id+'/'+this.formfitter.year).then(response => {
+       
+        const report = [];
+        for (var i = 0; i < response.data.length; i++) {
+          report.push(response.data[i].total);
+        }
+        this.reportlesson = report
+   
+      }); 
+    },
+
+
+
+    
 
     async fetchCourslistLog() {
       try {
@@ -135,8 +159,9 @@ export const LogStore = defineStore('log', {
 
     async fetchLesson() {
       try {
-        const data = await ApiService.post('/course/lesson/list/'+this.formfitter.course_id, this.formsearchcourse).then(response => {
+        const data = await ApiService.post('/course/lesson/all/'+this.formfitter.course_id, this.formsearchcourse).then(response => {
           this.lessonlist = response.data.data;
+        
         });
         return true;
       } catch (error) {
