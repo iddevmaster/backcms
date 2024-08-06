@@ -11,8 +11,8 @@
           :key="item.dlt_code"
           :value="item.dlt_code"
         >
-        <span v-if="locale == 'la'">{{item.dlt_code }} : {{item.dlt_description_loas }}</span>
-                            <span v-if="locale == 'en'">{{item.dlt_code }} : {{  item.dlt_description_english }}</span>
+        <span v-if="locale == 'la'">{{item.dlt_code }} : {{item.dlt_name_lo }}</span>
+                            <span v-if="locale == 'en'">{{item.dlt_code }} : {{  item.dlt_name_eng }}</span>
                            
         </option>
       </select>

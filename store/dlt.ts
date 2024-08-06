@@ -267,7 +267,7 @@ this.disabledDates.from = new Date(this.formdtl.expiry_date);
 
       try {
         const data = await ApiService.put('/dlt_card/update/'+this.id_tran, update).then(response => {
-        console.log(response)
+   
         return true;
         });
 

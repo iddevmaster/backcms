@@ -347,6 +347,8 @@ const Add = async () => {
 
     if(updated === true){
       toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດ');
+
+      router.push("/dltmanage");
     }else {
       toast.error('ບັນທຶກຂໍ້ມູນລົ້ມເຫລວ')
     }
@@ -365,6 +367,8 @@ const Add = async () => {
 
     if(save === true){
       toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດ');
+
+      router.push("/dltmanage");
     }
     else {
       toast.error('ບັນທຶກຂໍ້ມູນລົ້ມເຫລວ')

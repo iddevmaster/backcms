@@ -119,7 +119,7 @@ const edit = async (item) => {
 const format_dlt = (evnet_dlt) => {
 
 let obj = storeapp.dlt.find(o => o.dlt_code === evnet_dlt);
-return obj.dlt_description_loas;
+return obj?.dlt_name_lo;
 };
 const format = (time) => {
   return moment(time).utc().format("DD/MM/YYYY HH:mm");

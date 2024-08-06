@@ -61,8 +61,8 @@
       <select class="form-control" v-model="store.formresult.dlt_code">
         <option v-for="(itemd, i) in storeapp.dlt" :value="itemd.dlt_code">
          
-          <span v-if="locale == 'la'" >{{itemd.dlt_code}} : {{itemd.dlt_description_loas}}</span>
-      <span v-if="locale == 'en'" >{{itemd.dlt_code}} : {{itemd.dlt_description_english}}</span>
+          <span v-if="locale == 'la'" >{{itemd.dlt_code}} : {{itemd.dlt_name_lo}}</span>
+      <span v-if="locale == 'en'" >{{itemd.dlt_code}} : {{itemd.dlt_name_eng}}</span>
  
         </option>
       </select>

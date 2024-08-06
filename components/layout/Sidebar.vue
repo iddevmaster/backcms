@@ -428,7 +428,7 @@
           
           </ul>
         </li>
-
+<!-- 
            <li class="menu">
           <a
             href="#appointment"
@@ -468,15 +468,12 @@
             <li>
               <nuxt-link to="/appointment/create">{{ $t("menu_app_app_create") }}</nuxt-link>
             </li>
-             <!-- <li>
-              <nuxt-link to="/appointment/apppresent">{{ $t("menu_app_view_present") }}</nuxt-link>
-            </li> -->
-
+         
              <li>
               <nuxt-link to="/appointment/user">{{ $t("menu_app_view_by_user") }}</nuxt-link>
             </li>
           </ul>
-        </li>
+        </li> -->
 
         
         <li class="menu">
