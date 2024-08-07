@@ -48,7 +48,7 @@
               >{{ $t("menu_couse_view_c_is_complete") }}
             </span>
 
-            <span style="color: green" v-else
+            <span style="color: red" v-else
               >{{ $t("menu_couse_view_c_is_notcomplete") }}
             </span>
           </label>

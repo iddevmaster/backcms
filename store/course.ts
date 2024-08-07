@@ -211,7 +211,9 @@ export const CourseStore = defineStore('course', {
         this.formDataEditCourse.course_remark_a = response.data.course_remark_a
         this.formDataEditCourse.course_remark_b = response.data.course_remark_b
         this.formDataEditCourse.course_description = response.data.course_description
+        this.formDataEditCourse.active = response.data.active
 
+        
         this.formDataEditCourse.is_complete = response.data.is_complete
         this.formDataEditCourse.total_course_group = response.data.total_course_group
         this.formDataEditCourse.total_lesson = response.data.total_lesson
