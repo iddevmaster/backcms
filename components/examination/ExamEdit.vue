@@ -136,6 +136,8 @@ let updateeq = await store.ExamquestionlistEditUpdate();  ///////////save
 if(updateeq == true){
   setTimeout(() => Swal.close(), 500);
   toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
+  await router.push('/exam');
+  
 }else {
   toast.error("ບັນທຶກລົ້ມເຫລວ.");
 
@@ -303,7 +305,7 @@ const onFileChangeBackPdf = async (event) => {
 
                     <div class="col-md-12 mt-3">
                       <label for="inputEmail4" class="form-label">
-                        {{ $t("menu_couse_f_title_code") }}</label
+                        ໝວດວິຊາ</label
                       ><span class="text-xs text-red-500" style="color: red">
                         *
                       </span>

@@ -7,7 +7,7 @@
 
 
     <div class="col-xl-12 col-lg-3 col-md-3 col-sm-3 mb-4">
-      ຕົວເລືອກຂອງຄຳຕອບ
+      {{ $t("form_exam_new_select_choici") }}
     </div>
   </div>
 

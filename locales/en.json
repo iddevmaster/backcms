@@ -551,6 +551,15 @@
   "table_report_exam_lesson_completion_percentage" : "Exam Time",
   "table_report_exam_status" : "Status",
 
+
+  "form_exam_new_group" : "Group",
+  "form_exam_new_ans_lo" : "Question(Lo)",
+  "form_exam_new_ans_en" : "Question(En)",
+  "form_exam_new_text_iamge" : "Picture",
+  "form_exam_new_select_image" : "Selected picture",
+  "form_exam_new_select_choici" : "Choice of answers",
+  "form_exam_new_save" : "Save",
+
   "" : ""
 
 }

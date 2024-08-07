@@ -80,7 +80,7 @@
 
                 <td style="white-space:unset;">
                   <span class="table-inner-text">
-                    {{item.eq_answer}}
+                    {{chagetextchoice(item.eq_answer)}}
                   </span>
                 </td>
      
@@ -242,7 +242,14 @@ await store.selecttypes(store.cg_id)
 
 const imageSrc = exampleImage
 const del = async (item) => {
-const deleExam =  await Openmodaldelete(item);
+
+ await store.deleteExam(item)
+ await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
+ await store.fetchGrouplist()
+await store.selectfirstGroupId()
+await store.fetchExamlistQuest()
+await store.selecttypes(store.cg_id)
+// const deleExam =  await Openmodaldelete(item);
 };
 const edit = async (item) => {
 
@@ -339,6 +346,13 @@ function image(i) {
         return exampleImage;
       }
     
+    }
+
+
+    function chagetextchoice(i) {
+      let a = i - 1;
+      const choi = ['ກ','ຂ','ຄ','ງ']
+    return choi[a];
     }
 </script>
 <style>

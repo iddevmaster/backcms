@@ -214,6 +214,7 @@ this.formsearchexam.search = ''
   
 try {
   const data = await ApiService.post('/exam/question/'+this.cg_id+'/list', this.formsearchexamques).then(response => {
+
 this.examques = response.data.data;
 this.examques_total_page = response.data.total_page
 this.examques_limit_page = response.data.limit_page
@@ -344,15 +345,16 @@ this.seletype = this.group.find(items => items.cg_id == item);
     },
 
     async deleteExam(item) {
+    
       try {
-        await this.deleteImage(item.em_cover);
-        const del = await ApiService.delete('/exam/main/delete/' + item.em_id);
-        this.isOpen = false;
-        return true;
+     
+        const del = await ApiService.delete('/exam/question/delete/' + item.eq_id).then(response => {
+     return true;
+      
+        }); 
       } catch (error) {
         return false;
       }
-
     },
 
     async deleteImage(image) {
@@ -364,8 +366,6 @@ this.seletype = this.group.find(items => items.cg_id == item);
 
 
       if(this.status_exam == 'insert'){
-
-        console.log('insert',this.formexam.em_time);
 
 
         // formexam: {

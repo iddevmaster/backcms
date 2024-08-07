@@ -130,13 +130,11 @@ export const LogStore = defineStore('log', {
 
     async fetchReportLesson() {
       const data = await ApiService.get('/log/lesson/'+this.formfitter.cs_id+'/'+this.formfitter.year).then(response => {
-       
         const report = [];
         for (var i = 0; i < response.data.length; i++) {
           report.push(response.data[i].total);
         }
         this.reportlesson = report
-   
       }); 
     },
 

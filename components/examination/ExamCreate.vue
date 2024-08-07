@@ -98,6 +98,8 @@ const save = async () => {
       setTimeout(() => Swal.close(), 500);
       toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
       let savechoice = await store.SaveExamquestChoice();  ///////////save 
+
+      await router.push('/exam');
     }
   }
 };
@@ -255,7 +257,7 @@ const onFileChangeBackPdf = async (event) => {
 
                     <div class="col-md-12 mt-3">
                       <label for="inputEmail4" class="form-label">
-                        {{ $t("menu_couse_f_title_code") }}</label
+                        {{ $t("form_exam_new_group") }}</label
                       ><span class="text-xs text-red-500" style="color: red">
                         *
                       </span>
@@ -270,7 +272,7 @@ const onFileChangeBackPdf = async (event) => {
 
                     <div class="col-md-12 mt-3">
                       <label for="inputEmail4" class="form-label">
-                        ຄໍາຖາມ(Lo)</label
+                        {{ $t("form_exam_new_ans_lo") }}</label
                       ><span class="text-xs text-red-500" style="color: red">
                         *
                       </span>
@@ -309,7 +311,7 @@ const onFileChangeBackPdf = async (event) => {
                     </div>
 
                     <div class="col-md-12 mt-3">
-                      <label for="inputPassword4" class="form-label">ຄໍາຖາມ(En)</label
+                      <label for="inputPassword4" class="form-label">{{ $t("form_exam_new_ans_en") }}</label
                       ><span class="text-xs text-red-500" style="color: red">
                         *
                       </span>
@@ -373,9 +375,10 @@ const onFileChangeBackPdf = async (event) => {
 
 
                     <div class="form-group mb-4 mt-3">
-                      <label for="exampleFormControlFile1">{{
-                        $t("menu_couse_f_title_picture")
-                      }}</label>
+                      <label for="exampleFormControlFile1">
+
+                        {{ $t("form_exam_new_text_iamge") }}
+                      </label>
                       <input
                         type="file"
                         class="form-control-file"
@@ -387,7 +390,7 @@ const onFileChangeBackPdf = async (event) => {
                     </div>
 
                     <div class="border p-2 mt-3">
-                      <p>{{ $t("menu_couse_f_title_display_picture") }}:</p>
+                      <p>{{ $t("form_exam_new_select_image") }}:</p>
                       <template v-if="store.formExamq.eq_image">
                         <div class="row">
                           <div
@@ -418,7 +421,7 @@ const onFileChangeBackPdf = async (event) => {
                           class="btn btn-success"
                           @click="save()"
                         >
-                          {{ $t("menu_couse_f_save") }}
+                        {{ $t("form_exam_new_save") }}
                         </button>
                       </div>
                     </div>

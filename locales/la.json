@@ -554,6 +554,17 @@
   "table_report_exam_time" : "ເວລາສອບເສັງ",
   "table_report_exam_status" : "ສະຖານະ",
 
+  "form_exam_new_group" : "ໝວດວິຊາ",
+  "form_exam_new_ans_lo" : "ຄໍາຖາມ(Lo)",
+  "form_exam_new_ans_en" : "ຄໍາຖາມ(En)",
+  "form_exam_new_text_iamge" : "ຮູບໜ້າປົກຂອງຫຼັກສູດ",
+  "form_exam_new_select_image" : "ຮູບທີ່ເລືອກຈະສະແດງທີ່ນີ້",
+  "form_exam_new_select_choici" : "ຕົວເລືອກຂອງຄຳຕອບ",
+  "form_exam_new_save" : "ບັນທຶກ",
+
+
+
+
   "" : ""
 
   
