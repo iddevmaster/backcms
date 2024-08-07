@@ -45,7 +45,7 @@ store.isLoading = false;
 
 <template>
 
-<LessonFormCreate></LessonFormCreate>
+
 </template>
 
 <style>

@@ -26,7 +26,7 @@ style="
 "
         @click="openmodal"
       />
-      xxxxxxxxxxxx
+      
     </div>
         <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
      
