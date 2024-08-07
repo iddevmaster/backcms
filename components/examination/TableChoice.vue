@@ -17,7 +17,7 @@
        
         </thead>
         <tbody>
-          <tr      v-for="(item, index) in store.rows">
+          <tr  v-for="(item, index) in store.rows">
         <td style="width: 10%;">{{ item.ec_in }}</td>
         <td><input type="text" class="form-control" :placeholder="item.ec" v-model="store.rows[index].ec_name_lo"  maxlength="200"></td>
       </tr>
