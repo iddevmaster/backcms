@@ -37,14 +37,9 @@ const group = await store.fetchGrouplist();
 onMounted(async()  => {
 store.isLoading = false;
     })
-
-
-
-  
 </script>
 
 <template>
-
 <LessonFormCreate></LessonFormCreate>
 </template>
 

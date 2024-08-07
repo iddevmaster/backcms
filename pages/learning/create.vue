@@ -463,7 +463,7 @@ The Course Name field is required.</span>
     <div class="col-md-12 mt-3">
       <label for="inputPassword4" class="form-label">  {{ $t('exam_condition') }} </label>
       <input type="text" class="form-control" id="inputPassword4"  :placeholder=" $t('exam_condition')" v-model="store.formDataCourse.course_remark_b"    @input="filterInputCourseremarkB"
-         maxlength="200"   
+         maxlength="100"   
       />
       <span v-if="v$.course_remark_b.$error" class="text-xs text-red-500"
         style="color: red" >ຕ້ອງມີຊ່ອງຂໍ້ມູນ</span>
