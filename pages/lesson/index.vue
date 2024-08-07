@@ -13,7 +13,7 @@ import LessonListAll from '@/components/lesson/LessonListAll.vue'
 
 
 import { useToast } from 'vue-toastification';
-import { ref } from 'vue';
+
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
 import { onMounted } from 'vue'
@@ -57,20 +57,8 @@ store.isLoading = false;
 
   const { Pending } = storeToRefs(store); //Get Getter
 
-  const closeModal = () => {
-    //store.closeModal();
-  };
 
 
-const delete_userid = async (id) => {
-
-  const delc = await store.selectlessId(id);
-  if(delc){
-      }else{
-   toast.error('ລຶບຂໍ້ມູນລົ້ມເຫລວ')
-      }
-
-  };
   
 </script>
 
