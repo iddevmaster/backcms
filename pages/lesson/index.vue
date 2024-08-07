@@ -13,7 +13,6 @@ import LessonListAll from '@/components/lesson/LessonListAll.vue'
 
 
 import { useToast } from 'vue-toastification';
-
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
 import { onMounted } from 'vue'
@@ -57,9 +56,6 @@ store.isLoading = false;
 
   const { Pending } = storeToRefs(store); //Get Getter
 
-
-
-  
 </script>
 
 <template>
