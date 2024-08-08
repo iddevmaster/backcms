@@ -21,11 +21,23 @@
       <div class="col-xl-8 col-md-8 mt-3">
         <label for="inputEmail4" class="form-label">{{ $t("menu_group_add_name") }}</label><span
           class="text-xs text-red-500" style="color:red"> * </span>
+          
         <select class="form-control" v-model="storegroup.formclustersingle.cg_id" >
+           <option selected disabled value="">ເລືອກ</option>
           <option v-for="(item, index) in storegroup.group" :key="item.cg_id" :value="item.cg_id" >
             {{ locale == "la" ? item.cg_name_lo : item.cg_name_eng }}
           </option>
         </select>
+
+        <div v-if="locale == 'la'" >
+      <span v-if="v$.cg_id.$error" class="text-xs text-red-500"
+        style="color: red" >ຕ້ອງມີຊ່ອງຂໍ້ມູນລະຫັດຫຼັກສູດ</span>
+  </div>
+
+  <div v-if="locale == 'en'" >
+      <span v-if="v$.cg_id.$error" class="text-xs text-red-500"
+        style="color: red" >The Course Code field is required</span>
+  </div>
 
 
       </div>
@@ -53,16 +65,8 @@
       <span v-if="v$.cg_amount_random.$error" class="text-xs text-red-500"
         style="color: red" >The Course Code field is required</span>
   </div>
-
-
-
       </div>
-
-      
     </div>
-
-
-
     <div class="row pt-3">
       <div class="col-xl-12 col-md-12 mt-3">
         <button type="button" class="btn btn-primary"   @click="save()">
@@ -127,6 +131,13 @@ const { FormGroupCluster } = storeToRefs(storegroup);
 const rules = computed(() => {
   return {
     cg_amount_random: {
+      required: helpers.withMessage(
+        "The Course Code field is required",
+        required
+      ),
+      minLength: minLength(1),
+    },
+     cg_id: {
       required: helpers.withMessage(
         "The Course Code field is required",
         required

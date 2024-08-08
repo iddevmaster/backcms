@@ -30,7 +30,7 @@ export const GroupStore = defineStore('group', {
     },
     formclustersingle: {
       cg_amount_random:"",
-      cg_id:1,
+      cg_id:"",
     },
     formeditgroup: {
       cg_name:"",

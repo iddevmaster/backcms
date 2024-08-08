@@ -400,6 +400,7 @@ this.seletype = this.group.find(items => items.cg_id == item);
         const data = await ApiService.post('/exam/main/create/'+id, saveexame).then(response => {
           return true;
         });
+        return data;
       } catch (error) {
         return false
       } 

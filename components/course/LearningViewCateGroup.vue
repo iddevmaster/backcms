@@ -187,7 +187,7 @@
 
               <td>
                 {{ locale == "la" ? item.cg_name_lo : item.cg_name_eng }}
-                {{ item.cct_id }}
+        
               </td>
               <td class="text-center">{{ item.cg_amount_random }}</td>
               <td>

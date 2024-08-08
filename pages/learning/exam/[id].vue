@@ -179,7 +179,6 @@ const save = async () => {
 await store.UploadfileExam();   ///////////upload รูป
 
 let save = await store.SaveExamNewFormate(router.currentRoute.value.params.id);
-
 if(save == true){
 await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
 
@@ -405,10 +404,10 @@ const onFileChangeBackPdf = async (event) => {
 
 
                     <div class="col-xl-8 col-md-8 mt-3">
-                      <label for="inputEmail4" class="form-label">{{ $t("menu_exam_all_code") }}:</label><span
+                      <label for="inputEmail4" class="form-label">{{ $t("menu_couse_p_title_gruop") }}:</label><span
                         class="text-xs text-red-500" style="color:red"> * </span>
               
-{{ store.formexam.dlt_code }}
+
                         <select class="form-control" v-if="store.dlt" v-model="store.formexam.dlt_code">
 
 <option v-for="(item, index) in store.dlt" :key="item.dlt_code" :value="item.dlt_code">
@@ -444,7 +443,7 @@ const onFileChangeBackPdf = async (event) => {
                   
                     </div>
                     <div class="col-md-12 mt-3">
-                      <label for="inputPassword4" class="form-label">{{ $t("menu_exam_all_name") }}:</label><span class="text-xs text-red-500" style="color:red"> * </span>
+                      <label for="inputPassword4" class="form-label">{{ $t("menu_exam__name_lo") }}:</label><span class="text-xs text-red-500" style="color:red"> * </span>
                       <input type="text" class="form-control" id="inputPassword4" placeholder="ຊື່ຫຼັກສູດ"
                         v-model="store.formexam.em_name_eng" :class="{
               'border-red-500 focus:border-red-500': v$.em_name_eng.$error,
@@ -463,7 +462,7 @@ const onFileChangeBackPdf = async (event) => {
                    
                     </div>
                     <div class="col-12 mt-3">
-                      <label for="inputAddress" class="form-label">{{ $t("menu_exam_all_detail") }}:</label><span
+                      <label for="inputAddress" class="form-label">{{ $t("menu_exam__name_eng") }}:</label><span
                         class="text-xs text-red-500" style="color:red"> * </span>
                       <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
                         placeholder="ຄຳອະທິບາຍຫຼັກສູດ" :class="{

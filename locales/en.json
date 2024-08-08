@@ -16,6 +16,8 @@
   "menu_couse_all": "ALL Course", 
   "menu_couse_add": "Add a Course",
   "menu_couse_p_title": "Form Add Course",
+  "menu_couse_p_title_update": "Form Edit Course",
+  "menu_couse_p_title_gruop": "Group",
   "menu_couse_f_title_code": "Code",
   "menu_couse_e_title": "Edit Course",
   "menu_couse_f_title_name": "Name",
@@ -89,6 +91,8 @@
   "menu_page_course_page": "Course All",
 
   "menu_exam_all": "All Tests",
+  "menu_exam__name_lo": "Name Exam(Lo)",
+  "menu_exam__name_eng": "Name Exam(En)",
   "menu_exam_create": "Create a Test",
   "menu_exam_add": "Create a Test",
   "menu_exam_all_history": "History Tests",
