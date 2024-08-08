@@ -315,7 +315,10 @@ if (courselist === false) {
 }
 
 const del = async (id) => {
+  const getexm = await store.getMainExam(id);
   const delecourse = await deleteItem(id);
+
+ 
 };
 
 const lesson = async (id) => {

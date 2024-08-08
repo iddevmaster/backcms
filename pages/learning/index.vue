@@ -56,6 +56,7 @@ const toast = useToast()
 const delete_userid = async (id) => {
 
   const delc = await store.deleteItem_id(id);
+
   if(delc){
     toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
     await store.fetchCourslist()

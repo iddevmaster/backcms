@@ -24,6 +24,7 @@ export const CourseStore = defineStore('course', {
     imagelist_pdf: null,
     mycondition_group:null,
     path: "",
+    exa_id:0,
     pdf:null,
     course_id: null,
     pending: false,
@@ -511,14 +512,35 @@ return true;
       const deletepdf = await ApiService.delete('/course/document/delete/'+id)
     },
 
+    async getMainExam(id){
+      
+      const data = await ApiService.get('/course/get/' + id.course_id).then(response => {
+ 
+       if(response.data.exam_desc){
+    
+        this.exa_id = response.data.exam_desc.em_id;
+      }
+        });
+    },
+
     async deleteItem(course) {
       this.isOpen = true;
       this.course_id = course.course_id;
     },
+    async deleteexam() {
+
+      try {
+         const del = await ApiService.delete('/exam/main/delete/' + this.exa_id);
+        return true;
+      } catch (error) {
+
+        return false;
+      }
+    },
     async deleteItem_id(course_id) {
 
       try {
-        const getlesson = await this.Dellessons(course_id);
+        const deleexam = await this.deleteexam();
          const del = await ApiService.delete('/course/delete/' + course_id);
 
         this.isOpen = false;
@@ -542,8 +564,6 @@ return true;
     },
     
     async Dellessons(id) {
-
-
 
       const getid = await ApiService.post('/course/lesson/list/' + id, this.formsearchcourse)
         if(getid){
