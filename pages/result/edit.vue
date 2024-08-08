@@ -14,7 +14,7 @@ import { useToast } from 'vue-toastification'
 import { AlertStore } from '@/store/alert'; // import the auth store we just created
 definePageMeta({
   middleware: ['auth','roles'],
-  allowedRoles: [1,2],
+  allowedRoles: [1],
 })
 
 

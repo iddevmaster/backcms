@@ -20,6 +20,7 @@ definePageMeta({
 const toast = useToast()
 const store = ResultStore()
 
+const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
 
 </script>
 
@@ -38,7 +39,7 @@ const store = ResultStore()
         <div class="row layout-top-spacing">
           <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
             <div class="widget-content widget-content-area br-8 p-3">
-              <ResultList></ResultList>
+              <ResultList  :user_type="user_type"></ResultList>
             </div>
           </div>
         </div>

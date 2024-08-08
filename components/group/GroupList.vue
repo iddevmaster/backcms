@@ -13,7 +13,7 @@
       />
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
-      <input
+      <input  v-if="user_type == '1'"
         id="t-text"
         type="button"
         name="txt"

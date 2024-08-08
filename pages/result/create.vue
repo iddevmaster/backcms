@@ -13,7 +13,7 @@ import ResultNodata from '@/components/result/ResultNodata.vue'
 import { AlertStore } from '@/store/alert'; // import the auth store we just created
 definePageMeta({
   middleware: ['auth','roles'],
-  allowedRoles: [1,2],
+  allowedRoles: [1],
 })
 
 

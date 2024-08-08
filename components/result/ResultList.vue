@@ -78,7 +78,7 @@
   
           <td>{{ format(event.crt_date) }}</td>
            <td>
-            <button
+            <button  v-if="user_type == '1'"
               type="button"
               class="btn btn-success mt-0"
               style="background-color: #ce0000" @click="del(event.mr_id)"
@@ -138,9 +138,18 @@ import Datepicker from "vuejs3-datepicker";
 import moment from "moment";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
+defineProps({
+  user_type: {
+    type: Number,
+    required: false,
+    default: () => ({}),
+  },
+});
+
+
 const { locale, setLocale } = useI18n();
 const picked = ref(new Date());
-
+const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
 const router = useRouter();
 const toast = useToast();
 const store = ResultStore();
@@ -170,6 +179,8 @@ const format_end = (date) => {
 const format = (time) => {
   return moment(time).format("DD/MM/YYYY HH:mm");
 };
+
+
 // store.fetchAppointment()
 
 const del = async (id) => {
