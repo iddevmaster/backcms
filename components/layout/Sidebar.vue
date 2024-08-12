@@ -657,7 +657,7 @@ const isActiveMenu = () => {
   }
 }
 const isActiveMenu2 = () => {
-  if((router.currentRoute.value.path == '/group') || (router.currentRoute.value.path == '/learning/reportlearn') || (router.currentRoute.value.path == '/learning/reportexam')){ 
+  if((router.currentRoute.value.path == '/group') || (router.currentRoute.value.path == '/lesson') || (router.currentRoute.value.path == '/exam')){ 
     return true;
   }
 }
