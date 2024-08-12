@@ -29,6 +29,11 @@
   "menu_couse_f_title_pdf":"ແນບເອກະສານ",
   "menu_couse_f_add_lesson": "ເພີ່ມບົດຮຽນ",
   "menu_couse_f_save": "ບັນທຶກ",
+
+  "menu_group": "ໝວດວິຊາ",
+  "menu_group_alla": "ໝວດວິຊາທັງໝົດ",
+  "menu_group_lesson": "ບົດຮຽນ",
+  "menu_group_lesson_anws": "ຄຳຖາມ ຄຳຕອບ",
   
   "table_course_code": "ຫຼັກສູດ",
   "table_course_name": "ຊື່ຫຼັກສູດ",
@@ -92,7 +97,7 @@
 
 
 
-  
+"menu_course_add": "ເພິ່ມຫຼັກສູດ",
 
   "menu_page_course": "ຄວາມຮູ້ອອນໄລນ໌",
   "menu_page_course_page": "ຄວາມຮູ້ອອນໄລນ໌​ທັງໝົດ",
@@ -100,6 +105,8 @@
   "menu_exam_all": "ຜົນສອບເສັງທັງໝົດ",
   "menu_exam_create": "ສ້າງຫຼັກສູດ",
   "menu_exam_add": "ເພິ່ມຜົນສອບເສັງ",
+
+  
   "menu_exam_all_history": "ປະຫວັດການສອບເສັງ",
   "menu_menu_exam_dlt": "ໃບຂັບຂີ່",
   "menu_exam_all_code": "ລະ​ຫັດແບບທົດສອບ",

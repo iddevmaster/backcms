@@ -359,7 +359,7 @@ var App = function() {
                     // let GET_CURRENT_SIDEBAR_ANCHORS = this.querySelector('.dropdown-toggle');
                     let GET_CURRENT_SIDEBAR_ANCHORS = this.querySelector('[data-bs-toggle="dropdown"]');
 
-                    console.log(GET_CURRENT_SIDEBAR_ANCHORS)
+                  
                     
                     // console.log(GET_CURRENT_SIDEBAR_ANCHORS)
                     if (GET_CURRENT_SIDEBAR_ANCHORS != null) {

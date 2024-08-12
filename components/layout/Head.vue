@@ -307,7 +307,7 @@ const changeLocale = (newLocale) => {
 const le = ['la','en','th']
 locale.value = le[newLocale];
 users.loc = newLocale;
-console.log(users.loc);
+
 users.selectLan();
 };
 

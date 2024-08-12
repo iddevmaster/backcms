@@ -466,7 +466,7 @@ return true;
 
     },
     async UploadfileCoursePdf() { 
-      console.log(this.selectedFiles);
+    
       if(this.selectedFiles){
         const formData = new FormData();
         Array.from(this.selectedFiles).forEach(file => {
@@ -495,14 +495,14 @@ return true;
     },
     async Savepdf() { 
       this.filepdf = [];
-      console.log(this.pdf);
+
       if(this.pdf.length > 0){
         
         for (var i = 0; i < this.pdf.length; i++) {
           const daa = {cd_name:this.pdf[i].originalname,cd_path:this.pdf[i].path,course_id:this.course_id}
           this.filepdf.push(daa);
           const savepdf = await ApiService.post('/course/document/create', daa)
-       console.log(savepdf);
+    
             }
       }
 
@@ -668,7 +668,7 @@ return true;
     },
     async AddCondition() {
 
-      console.log(this.formDataCondit);
+   
    //   this.mycondition.push(this.formDataCondit)
 
 

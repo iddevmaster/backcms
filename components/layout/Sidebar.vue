@@ -170,7 +170,7 @@
                 ></polygon>
               </svg>
 
-              <span>ໝວດວິຊາ </span>
+              <span>{{ $t("menu_group") }} </span>
             </div>
             <div>
               <svg
@@ -189,21 +189,23 @@
               </svg>
             </div>
           </a>
+
+         
           <ul
             class="collapse submenu list-unstyled"
             id="group"
             data-bs-parent="#accordionExample"  :class="{ show:isActiveMenu2('/group') }"
           >
             <li :class="{ active: isActive('/group') }">
-              <nuxt-link to="/group">ໝວດວິຊາທັງໝົດ</nuxt-link>
+              <nuxt-link to="/group">{{ $t("menu_group_alla") }} </nuxt-link>
             </li>
           
             <li  :class="{ active: isActive('/lesson') }">
-              <nuxt-link to="/lesson">ບົດຮຽນ</nuxt-link>
+              <nuxt-link to="/lesson">{{ $t("menu_group_lesson") }} </nuxt-link>
             </li>
 
             <li :class="{ active: isActive('/exam') }">
-              <nuxt-link to="/exam">ຄຳຖາມ ຄຳຕອບ</nuxt-link>
+              <nuxt-link to="/exam">{{ $t("menu_group_lesson_anws") }} </nuxt-link>
             </li>
            
           </ul>

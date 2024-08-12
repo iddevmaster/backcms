@@ -462,7 +462,7 @@ this.fetchExamquDelChoice(this.rows[i]);
         if(this.rows[i].ec_name_lo != ''){
        
           const data = await ApiService.post('/exam/choice/create', newItem).then(response => { 
-         console.log(response);
+      
           });
         }
       }

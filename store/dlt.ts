@@ -184,7 +184,7 @@ export const DltStore = defineStore('dlt', {
     async getDLT() {
       try {
         const data = await ApiService.get('/dlt_card/list/?user_id=' + this.formadddtl.user_id).then(response => {
-       console.log(response);
+      
        if(response.data.length > 0){
         this.StatusMethod = 'update';
         this.id_tran = response.data[0].id
@@ -294,10 +294,10 @@ this.disabledDates.from = new Date(this.formdtl.expiry_date);
     }
    
 
-    console.log(JSON.stringify(formsave));
+    
       try {
         const data = await ApiService.post('/dlt_card/create/', this.formadddtl).then(response => {
-          console.log(response)
+       
           
         });
 
@@ -404,7 +404,7 @@ this.formadddtl.expiry_date = "";
     },
     async UploadfileFull() {
       if (this.imagelistFull) {
-        console.log('Full');
+      
         let formData = new FormData();
         formData.append('files', this.imagelistFull);
         const data = await ApiService.upload('/media_file/upload/file', formData);

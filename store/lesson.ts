@@ -149,12 +149,12 @@ actions: {
   },
 
   setHtmlContent2(content2) {
-    console.log(content2);
+  
 
   },
 
   getData(){
-    console.log('getData');
+    
   },
 
     async fetchCourse(course_id) {

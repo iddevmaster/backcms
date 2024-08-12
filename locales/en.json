@@ -32,6 +32,8 @@
   "menu_lesson_name_and_detail": "Question && Answer",
   "menu_lesson_f_title_picture": "Image Cover",
   "menu_lesson_f_video": "Video",
+
+
  
   "menu_couse_edit": "Edit Course",
   "menu_couse_p_edit_title": "Form Edit Course",
@@ -43,6 +45,10 @@
 
   "menu_group_all" :"All Subjects",
 
+  "menu_group": "Subjects",
+  "menu_group_alla": "Subjects All",
+  "menu_group_lesson": "Lesson",
+  "menu_group_lesson_anws": "Question & Answer",
 
 "menu_couse_view_table_header_c":"Course",
 "menu_couse_view_table_course": "Course",
@@ -89,6 +95,8 @@
 
   "menu_page_course": "Course",
   "menu_page_course_page": "Course All",
+
+  "menu_course_add": "Create Course",
 
   "menu_exam_all": "All Tests",
   "menu_exam__name_lo": "Name Exam(Lo)",
