@@ -204,7 +204,7 @@ export const CourseStore = defineStore('course', {
     async fetchCourseId(id) {
       this.course_id = id;
       const data = await ApiService.get('/course/get/' + this.course_id).then(response => {
-    
+  
         this.formDataEditCourse.course_cover = response.data.course_cover
         this.formDataEditCourse.course_code = response.data.course_code
         this.formDataEditCourse.course_name_lo = response.data.course_name_lo
