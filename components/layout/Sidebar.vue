@@ -652,14 +652,15 @@ const isActive = (path) => {
  return router.currentRoute.value.path === path
 }
 const isActiveMenu = () => {
-  if((router.currentRoute.value.path == '/learning') || (router.currentRoute.value.path == '/learning/reportlearn') || (router.currentRoute.value.path == '/learning/reportexam')){ 
+
+  if((router.currentRoute.value.path == '/learning') || (router.currentRoute.value.path == '/learning/create') || (router.currentRoute.value.path == router.currentRoute.value.path) || (router.currentRoute.value.path == '/learning/reportlearn') || (router.currentRoute.value.path == '/learning/reportexam')){ 
     return true;
   }else {
   return false;
   }
 }
 const isActiveMenu2 = () => {
-  if((router.currentRoute.value.path == '/group') || (router.currentRoute.value.path == '/lesson') || (router.currentRoute.value.path == '/exam')){ 
+  if((router.currentRoute.value.path == '/group') || (router.currentRoute.value.path == '/lesson') || (router.currentRoute.value.path == '/exam') || (router.currentRoute.value.path == '/exam/create')){ 
     return true;
   }
 }
