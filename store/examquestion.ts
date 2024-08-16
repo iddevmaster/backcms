@@ -88,10 +88,10 @@ export const ExamquestionStore = defineStore('examquestion', {
     eq: null,
     modaldelete: false,
     rows: [
-      {ec_id:0,eq_id:0,ec_in:'ກ',ec_index: 0, ec_name_lo: '',ec_name_eng: '',ec_image:''},
-      {ec_id:0,eq_id:0,ec_in:'ຂ',ec_index: 1, ec_name_lo: '',ec_name_eng: '',ec_image:''},
-      {ec_id:0,eq_id:0,ec_in:'ຄ',ec_index: 2, ec_name_lo: '',ec_name_eng: '',ec_image:''},
-      {ec_id:0,eq_id:0,ec_in:'ງ',ec_index: 3, ec_name_lo: '',ec_name_eng: '',ec_image:''},
+      {ec_id:0,eq_id:0,ec_in:'ກ',ec_index: 1, ec_name_lo: '',ec_name_eng: '',ec_image:''},
+      {ec_id:0,eq_id:0,ec_in:'ຂ',ec_index: 2, ec_name_lo: '',ec_name_eng: '',ec_image:''},
+      {ec_id:0,eq_id:0,ec_in:'ຄ',ec_index: 3, ec_name_lo: '',ec_name_eng: '',ec_image:''},
+      {ec_id:0,eq_id:0,ec_in:'ງ',ec_index: 4, ec_name_lo: '',ec_name_eng: '',ec_image:''},
   ]
   }
 
@@ -164,6 +164,7 @@ export const ExamquestionStore = defineStore('examquestion', {
          this.formExamqedit.eq_name_lo = response.data.eq_name_lo
          this.formExamqedit.eq_image = response.data.eq_image
          this.choicelist = response.data.choices
+         console.log(this.choicelist);
         
         return true;
         });
@@ -199,10 +200,10 @@ try {
 
 
       this.rows = [
-        {ec_id:0,eq_id:0,ec_in:'ກ',ec_index: 0, ec_name_lo: '',ec_name_eng: '',ec_image:''},
-        {ec_id:0,eq_id:0,ec_in:'ຂ',ec_index: 1, ec_name_lo: '',ec_name_eng: '',ec_image:''},
-        {ec_id:0,eq_id:0,ec_in:'ຄ',ec_index: 2, ec_name_lo: '',ec_name_eng: '',ec_image:''},
-        {ec_id:0,eq_id:0,ec_in:'ງ',ec_index: 3, ec_name_lo: '',ec_name_eng: '',ec_image:''},
+        {ec_id:0,eq_id:0,ec_in:'ກ',ec_index: 1, ec_name_lo: '',ec_name_eng: '',ec_image:''},
+        {ec_id:0,eq_id:0,ec_in:'ຂ',ec_index: 2, ec_name_lo: '',ec_name_eng: '',ec_image:''},
+        {ec_id:0,eq_id:0,ec_in:'ຄ',ec_index: 3, ec_name_lo: '',ec_name_eng: '',ec_image:''},
+        {ec_id:0,eq_id:0,ec_in:'ງ',ec_index: 4, ec_name_lo: '',ec_name_eng: '',ec_image:''},
     ]
 
     },
@@ -457,14 +458,14 @@ this.fetchExamquDelChoice(this.rows[i]);
     },
     async SaveExamquestChoice() {
       for (var i = 0; i < this.rows.length; i++) {
-        const newItem =   {ec_index:i,eq_id:this.eq_id,ec_name_lo:this.rows[i].ec_name_lo,ec_name_eng:this.rows[i].ec_name_lo, ec_image:''};
-        
-        if(this.rows[i].ec_name_lo != ''){
+        const newItem =   {ec_index:i+1,eq_id:this.eq_id,ec_name_lo:this.rows[i].ec_name_lo,ec_name_eng:this.rows[i].ec_name_lo, ec_image:''};
+        console.log(newItem);
+        // if(this.rows[i].ec_name_lo != ''){
        
-          const data = await ApiService.post('/exam/choice/create', newItem).then(response => { 
+        //   const data = await ApiService.post('/exam/choice/create', newItem).then(response => { 
       
-          });
-        }
+        //   });
+        // }
       }
 
     },

@@ -18,7 +18,7 @@
         </thead>
         <tbody>
           <tr  v-for="(item, index) in store.rows">
-        <td style="width: 10%;">{{ item.ec_in }}</td>
+        <td style="width: 10%;">{{ changechoice(item.ec_index) }}</td>
         <td><input type="text" class="form-control" :placeholder="item.ec" v-model="store.rows[index].ec_name_lo"  maxlength="200"></td>
       </tr>
         </tbody>
@@ -45,6 +45,12 @@ const toast = useToast();
 const store = ExamquestionStore();
 
 const user_type = useCookie('user_type'); 
+
+
+const changechoice = (a) => {
+let ch = ['ກ','ຂ','ຄ','ງ'];
+return ch[a - 1];
+};
 
 </script>
 <style>

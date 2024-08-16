@@ -41,7 +41,7 @@ store.user_id = auth.user_id
 
 
 await store.fetchCourseId(router.currentRoute.value.params.id);
-
+await store.fetchGetPdf(router.currentRoute.value.params.id);
 
 
 
@@ -534,7 +534,7 @@ The Course Name field is required.</span>
     <div class="form-group" >
       <button class="btn btn-warning" @click="openFileInput">{{ $t("menu_couse_f_title_pdf") }}</button>
     </div>
-  
+
    
      <div class="row mb-4 g-3" v-if="store.selectedEditFiles.length > 0">
     <div class="table-responsive">
