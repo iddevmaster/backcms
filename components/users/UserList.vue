@@ -64,7 +64,7 @@
       <tbody>
         <tr v-for="(user,index) in posts.data" :key="user.user_id">
           <!-- <td><input type="checkbox" v-model="store.selected" :value="user" number></td> -->
-          <td>{{ index + 1 }}</td>
+          <td>{{ (store.formsearch.page * store.formsearch.per_page) - (store.formsearch.per_page -  index) +  1 }}</td>
           <td>{{ user.user_firstname }} {{ user.user_lastname }}</td>
           <!-- <td>{{ user.user_name }}</td> -->
           <!-- <td>{{ user.user_email }}</td> -->
@@ -145,9 +145,23 @@
 
     </div> -->
 
-    <div class="row">
+    <div>
+
+
+
+
+</div>
+
+ 
+    
+  </div>
+  <div class="row">
+    <span>Showing {{ (store.current_page - 1 ) * store.formsearch.per_page + 1}}  to {{ Math.min(store.current_page * store.formsearch.per_page, store.total)}}  of {{store.total}} entries</span>
+
     <div class="col-xl-12 col-lg-12">
+      
       <div class="pagination-no_spacing"  v-if="posts.total_page > 1">
+
         <ul class="pagination">
           <li> <a href="javascript:void(0);" class="prev" @click="validatePNumberDown()" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -173,8 +187,6 @@
     </div>
   </div>
 
-    
-  </div>
 </template>
 
 

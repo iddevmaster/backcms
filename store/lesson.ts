@@ -820,6 +820,7 @@ return true
   async ReportCourse() {
     try {
       const data = await ApiService.post('/report/course/' + this.course_id,this.formreport).then(response => {
+       
 this.reportcourse = response.data.data
 this.reportcourse_total_page = response.data.total_page
 this.reportcourse_limit_page = response.data.limit_page
