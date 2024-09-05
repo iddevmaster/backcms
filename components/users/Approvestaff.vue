@@ -131,7 +131,7 @@ const { getSelectALL } = storeToRefs(store); //Get Getter
 const { getPaginate } = storeToRefs(store); //Get Getter
 const { search } = storeToRefs(store); //Get Getter
 
-let a  = await store.fetchUsersApprovePedding()
+let a  = await store.fetchUsersApprovePeddingstaff()
 
 
 const del = async (id) => {

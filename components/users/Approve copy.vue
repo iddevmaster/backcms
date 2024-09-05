@@ -2,7 +2,7 @@
 
   <div class="row layout-top-spacing">
     <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
-      <input id="t-text" type="text" name="txt" placeholder="ຊື່ / ບັດປະຈຳຕົວ/ Passport / ເບີໂທ" class="form-control" required=""
+      <input id="t-text" type="text" name="txt" placeholder="ຊອກຫາ" class="form-control" required=""
       v-model="store.formapprove.search" @keyup="searchData" />
     </div>
 
@@ -14,47 +14,42 @@
     <table id="example" class="table table-bordered" style="width:100%">
       <thead>
         <tr>
-          <th >{{ $t("approve_table_indexnew") }}</th>
-          <th   @click="sortListApp('send_approve')">
-            {{ $t("approve_table_senddate") }}  &#8597;
-          </th>
           <th>
-            {{ $t("approve_table_fullname") }}
+            {{ $t("approve_table_index") }}
+            <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
           </th>
-          <th>
-            {{ $t("approve_table_tel") }}
-          </th>
-          <th>
-            {{ $t("approve_table_pass") }}
-          </th>
-          <th>
-            {{ $t("approve_table_prov") }}
-          </th>
-          <th>
-            {{ $t("approve_table_act") }}
-          </th>
+        
+          <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
+          <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
+          <th @click="sortList('user_phone')">{{ $t("approve_table_name") }}</th>
+          <th >{{ $t("approve_table_phone") }}&#8597;</th>
+          <th @click="sortList('id')">{{ $t("approve_table_email") }}</th>
+          <th>{{ $t("approve_table_view") }}</th>
+       
+          <th class="no-content">{{ $t("approve_table_action") }}</th>
         </tr>
       </thead>
       <tbody>
-       
-        <tr v-for="(user ,index) in store.appr" :key="user.identification_number">
+        <tr v-for="(user ,index) in store.userapprove" :key="user.identification_number">
           <!-- <td><input type="checkbox" v-model="store.selected" :value="user" number></td> -->
           <td>  {{ index+ 1 }}</td>
         
-          <td>  {{ user.send_approve }}</td>
-          <td>   {{ user.user_firstname }} {{ user.user_lastname }}</td>
+          <td>  {{ user.user_firstname }} {{ user.user_lastname }}</td>
           <td>  {{ user.user_phone }}</td>
-          <td>  {{ user.identification_number }}</td>
-          <td> {{ user.amphur_name }} - {{ user.province_name }}</td>
-        
+          <td>  {{ user.user_email }}</td>
+          <td><button type="button" class="btn btn-primary btn-sm" @click="view(user.user_id)">{{ $t("approve_table_view_b") }}</button> </td>
           <td>
             <div class="d-flex flex-row gap-2">
-              <button type="button" class="btn btn-primary btn-sm" @click="viewuser(user.user_id)">{{ $t("approve_table_view_ap") }}</button>
-          
+              <button type="button" class="btn btn-success btn-sm" @click="approve(user.user_id)">{{ $t("approve_table_view_ap") }}</button>
+            <button type="button" class="btn btn-danger btn-sm"  @click="notapproved(user.user_id)">{{ $t("approve_table_view_unapp") }}</button>
             </div>
            </td>
           
- 
+   
+          <!-- <td>{{ user.user_name }}</td> -->
+          <!-- <td>{{ user.user_email }}</td> -->
+          
+         
 
         </tr>
       </tbody>
@@ -121,8 +116,6 @@ const { selectall } = usersStore(); //Action
 const { selectone } = usersStore();//Action
 const { setCurrentPage } = usersStore();//Action
 const { sortLists } = usersStore();//Action
-const { sortListsApp } = usersStore();//Action
- 
 const { selectentires } = usersStore();//Action
 const { selecttypes } = usersStore();//Action
 
@@ -131,7 +124,7 @@ const { getSelectALL } = storeToRefs(store); //Get Getter
 const { getPaginate } = storeToRefs(store); //Get Getter
 const { search } = storeToRefs(store); //Get Getter
 
-let a  = await store.fetchUsersApprovePedding()
+let a  = await store.fetchUsersApprove()
 
 
 const del = async (id) => {
@@ -149,24 +142,16 @@ const approve = async (item) => {
   await store.fetchUsersApprove()
 };
 
-const viewuser = async (item) => {
-  router.push({ path: '/users/approve/view/'+item})
-};
-
-
 const notapproved = async (item) => {
   await store.Notapprove(item);
   await toast.success('ອະນຸມັດບໍ່ສຳເລັດ');
   await store.fetchUsersApprove()
 };
 
-const sortListApp = async (sortBy) => {
-  await sortListsApp(sortBy)
 
-};
 
 const searchData = async () => {
-  await store.fetchUsersApprovePedding()
+  await store.fetchUsersApprove()
 };
 
 const selchk = async (x) => {

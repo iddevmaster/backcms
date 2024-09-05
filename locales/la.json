@@ -384,7 +384,7 @@
   "approve_table_view":"ລາຍລະອຽດ",
   "approve_table_action":"ຈັດການ",
   "approve_table_view_b":"ເບິ່ງ​ລາຍ​ລະ​ອຽດ",
-  "approve_table_view_ap":"ອະນຸມັດ",
+  "approve_table_view_ap":"ກວດເບິ່ງ",
   "approve_table_view_unapp":"ບໍ່ໄດ້ຮັບການອະນຸມັດ",
   "approve_table_view_name":"ຊື່",
   "approve_table_view_address":"ທີ່ຢູ່",
@@ -573,8 +573,13 @@
   "form_exam_new_select_choici" : "ຕົວເລືອກຂອງຄຳຕອບ",
   "form_exam_new_save" : "ບັນທຶກ",
 
-
-
+  "approve_table_indexnew":"#",
+  "approve_table_senddate":"ວັນທີ ສົ່ງເຂົ້າມາ",
+  "approve_table_fullname":"ຊື່  ນາມສະກຸນ",
+  "approve_table_tel":"ເບີໂທ",
+  "approve_table_pass":"ບັດປະຈຳຕົວ/Passport",
+  "approve_table_prov":"ເມືອງ-ແຂວງ",
+  "approve_table_act":"Action",
 
   "" : ""
 

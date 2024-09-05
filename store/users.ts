@@ -49,11 +49,16 @@ export const usersStore = defineStore('users', {
       page: 1,
       per_page: 1000,
       search: '',
+      user_id: '',
     },
     formszipcode: {
       page: 1,
       per_page: 200,
       search: '',
+    },
+    formsearchUser: {
+      user_admin_id:null,
+      user_search_id:null
     },
     formscount: {
       page: 1,
@@ -371,6 +376,17 @@ user_id:this.formDetailEdit.user_id,user_village:this.formDetailEdit.user_villag
       }
     },
 
+    sortListsApp(sortBy) {
+  
+      if (this.sortedbyASC) {
+        this.appr.sort((x, y) => (x[sortBy] > y[sortBy] ? -1 : 1));
+        this.sortedbyASC = false;
+      } else {
+        this.appr.sort((x, y) => (x[sortBy] < y[sortBy] ? -1 : 1));
+        this.sortedbyASC = true;
+      }
+    },
+
     selectentires(data_entires) {
       this.per_page = data_entires;
       this.page = 1;
@@ -542,7 +558,29 @@ const a = {verify_account:'system_active',identification_number:response.data[0]
       }
     },
 
+    async fetchUsersApprovePedding() {
+      const data = await ApiService.post('/user/approve/list', this.formapprove).then(response => {
+        this.appr = response.data.data
+
+      });
+      },
+
+      async fetchUsersApprovePeddingstaff() {
+        const data = await ApiService.post('/user/approvestaff/list', this.formapprove).then(response => {
+          this.appr = response.data.data
+      });
+        },  
+
+      async fetchUsersByOne(item) {
+     
+        this.formsearchUser.user_admin_id = this.user_id;
+        this.formsearchUser.user_search_id = item;
     
+        const data = await ApiService.post('/user/list/get', this.formsearchUser).then(response => {
+     this.profile_by_one = response.data;
+
+      });
+    },  
   },
 
 });

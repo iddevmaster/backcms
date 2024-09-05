@@ -572,6 +572,14 @@
   "form_exam_new_select_choici" : "Choice of answers",
   "form_exam_new_save" : "Save",
 
+  "approve_table_indexnew":"#",
+  "approve_table_senddate":"ວັນທີ ສົ່ງເຂົ້າມາ",
+  "approve_table_fullname":"ຊື່  ນາມສະກຸນ",
+  "approve_table_tel":"ເບີໂທ",
+  "approve_table_pass":"ບັດປະຈຳຕົວ/Passport",
+  "approve_table_prov":"ເມືອງ-ແຂວງ",
+  "approve_table_act":"Action",
+
   "" : ""
 
 }

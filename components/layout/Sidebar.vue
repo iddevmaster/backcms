@@ -132,10 +132,10 @@
             data-bs-parent="#accordionExample"
           >
             <li :class="{ active: isActive('/learning') }">
-              <nuxt-link to="/learning">ຊ່ວງເວລານັດໝາຍທັງໝົດ</nuxt-link>
+              <nuxt-link to="/appointmenttoday">ຊ່ວງເວລານັດໝາຍທັງໝົດ</nuxt-link>
             </li>
             <li :class="{ active: isActive('/learning/reportlearn') }">
-              <nuxt-link to="/learning/reportlearn">ເພິ່ມຊ່ວງເວລານັດໝາຍ</nuxt-link>
+              <nuxt-link to="/add/appointment">ເພິ່ມຊ່ວງເວລານັດໝາຍ</nuxt-link>
             </li>
             <li :class="{ active: isActive('/learning/reportexam') }">
               <nuxt-link to="/learning/reportexam">ເບິ່ງນັດໝາຍ ປະຈຳວັນ</nuxt-link>
@@ -612,6 +612,12 @@
             </li>
             <li>
               <nuxt-link to="/users/create">{{ $t("menu_user_page_create") }}</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/users/approve">ຜູ້ໃຊ້ ລໍຖ້າຢືນຢັນຕົວຕົນ</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/users/approvestaff">ຜູ້ໃຊ້ ລໍຖ້າຢືນຢັນຕົວຕົນ staff</nuxt-link>
             </li>
             <!-- <li>
               <nuxt-link to="/users/approve">{{ $t("page_menu_approve") }}</nuxt-link>
