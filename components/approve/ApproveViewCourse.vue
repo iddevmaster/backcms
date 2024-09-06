@@ -13,7 +13,7 @@
       </div>
       <hr style="margin-top: 1px" />
       <div class="row">
-        <div class="col-7">
+        <div class="col-12  col-sm-7 col-xl-7 col-lg-7 your-element">
           <div class="row">
             <div class="col-3 col-sm-12 col-md-3">
               <div class="form-group row">
@@ -22,7 +22,7 @@
                     <div class="profile-image">
                       <div class="img-uploader-content" style="padding: 5px">
                         <img
-                          src="../../assets/images/thai.png"
+                          src="../../assets/images/person-avatar.jpg"
                           alt="avatar"
                           class="img-fluid"
                           width="200"
@@ -35,7 +35,7 @@
               </div>
             </div>
 
-            <div class="col-9 col-sm-6 col-md-9">
+            <div class="col-12 col-sm-7 col-xl-9 col-lg-9">
               <div class="form-group row">
                 <h3>ທ້າວ ສົມສັກ ຈ່າງດາບຸດ</h3>
               </div>
@@ -66,7 +66,7 @@
               </div>
             </div>
 
-            <div class="row">
+            <div class="row m-1">
               <div class="col-4 col-sm-12 col-md-4">
                 <div class="form-group row">
                   <label
@@ -158,7 +158,7 @@
               </div>
             </div>
             <hr />
-            <div class="row">
+            <div class="row m-1">
               <div class="col-4 col-sm-12 col-md-4">
                 <div class="form-group row">
                   <label
@@ -182,14 +182,14 @@
               </div>
             </div>
 
-            <div class="row">
+            <div class="row m-1">
               <div class="col-4 col-sm-12 col-md-4">
                 <div class="form-group row">
                   <label
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                  ຮູບຕົວຈິງ:
+                    ຮູບຕົວຈິງ:
                   </label>
                 </div>
               </div>
@@ -207,8 +207,8 @@
             </div>
           </div>
         </div>
-        <div class="col-5">
-          <div class="form-group row">
+        <div class="col-12 col-lg-5 col-xl-5">
+          <div class="form-group row m-1">
             <label
               for="company-name"
               class="col-sm-12 col-form-label col-form-label-sm fot-bl"
@@ -219,25 +219,103 @@
             >
           </div>
 
-          <div class="form-group row">
-            <label
-              for="company-name"
-              class="col-sm-12 col-form-label col-form-label-sm fot-bl"
-              style="font-size: 30px"
-            >
-              ສະຖານະ:
-              <span style="color: yellow">ລໍຖ້າຢືນຢັນຕົວຕົນ</span></label
-            >
-          </div>
+ 
 
           <div class="form-group row">
             <hr style="margin-top: 1px" />
+          </div>
+
+          <div class="form-group row m-1">
+            <label
+              for="company-name"
+              class="col-sm-12 col-form-label col-form-label-sm fot-bl"
+              style="font-size: 30px"
+            >
+              ການອະນຸມັດ
+            </label>
+          </div>
+
+
+          <div class="row m-1">
+            <div class="col-4 col-sm-12 col-md-4">
+              <div class="form-group row">
+                <label
+                  for="company-name"
+                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
+                >
+                ຄຳເຫັນຄັ້ງກ່ອນ
+                </label>
+              </div>
+
+              
+            </div>
+            <div class="col-8 col-sm-12 col-md-8">
+        
+
+         
+              <div class="form-group row">
+                <label
+                  for="company-name"
+                  class="col-sm-12 col-form-label col-form-label-sm"
+                >
+                -ເວລາຖ່າຍຮູບ ບໍ່ໃຫ້ປິດໜ້າ</label
+                >
+              </div>
+
+              <div class="form-group row">
+                <label
+                  for="company-name"
+                  class="col-sm-12 col-form-label col-form-label-sm"
+                >
+                -ເລກບັດປະຈຳຕົວ ທີ່ພິມມາບໍ່ກົງກັບ ເລກໃນບັດ</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="row m-1">
+            <div class="col-4 col-sm-12 col-md-4">
+              <div class="form-group row">
+                <label
+                  for="company-name"
+                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
+                >
+                ຄຳເຫັນຄັ້ງກ່ອນ
+                </label>
+              </div>
+
+              
+            </div>
+            <div class="col-8 col-sm-12 col-md-8">
+      
+         
+              <div class="form-group row">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+              </div>
+
+      
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<style  scoped>
+
+@media (min-width:1025px) {
+
+
+ }
+@media (min-width:1281px) { 
+  .your-element {
+  border-right: 2px solid rgb(241, 241, 241);
+}
+
+
+ }
+</style>
 
 
 
