@@ -280,7 +280,7 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                 >
-                ຄຳເຫັນຄັ້ງກ່ອນ
+                ຄຳເຫັນ *:
                 </label>
               </div>
 
@@ -295,6 +295,35 @@
 
       
             </div>
+
+            
+          </div>
+
+
+          <div class="row m-1">
+            <div class="col-4 col-sm-12 col-md-4">
+              <div class="form-group row">
+          
+              </div>
+
+              
+            </div>
+            <div class="col-4 col-sm-12 col-md-4">
+      
+              <div class="form-group">
+                <button type="button" class="btn btn-success">ອະນຸມັດ</button>
+              </div>
+
+            </div>
+            <div class="col-4 col-sm-12 col-md-4">
+      
+      <div class="form-group">
+        <button type="button" class="btn btn-danger">ປະຕິເສດ</button>
+      </div>
+
+    </div>
+
+            
           </div>
         </div>
       </div>
