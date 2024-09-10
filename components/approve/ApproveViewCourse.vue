@@ -12,7 +12,7 @@
         </div>
       </div>
       <hr style="margin-top: 1px" />
-    
+    <br>
       <div class="row">
         <div class="col-12  col-sm-7 col-xl-7 col-lg-7 your-element">
           <div class="row">
@@ -279,7 +279,7 @@
             </div>
             <div class="col-8 col-sm-12 col-md-8">
       
-              <div class="form-group row"    v-for="(item, index) in store.comment">
+              <div v-for="(item, index) in store.comment">
                 <label
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm"
