@@ -13,6 +13,8 @@ export const usersStore = defineStore('users', {
     lng:'static/upload/2023/11/files-jQHyakITaP.png',
     load: true,
     isOpen: false,
+    ModalApp: false,
+    status_app:null,
     AlertText: null,
     posts: {},
     pending: false,
@@ -588,9 +590,9 @@ const a = {verify_account:'system_active',identification_number:response.data[0]
     });
   }, 
 
-  async UpdatePeddingByOneComment(item) {
+  async UpdatePeddingByOneComment() {
   
-    this.formsearchUser.approve = item;
+    this.formsearchUser.approve = this.status_app;
     this.formsearchUser.comment_details = this.comment_details;
     
     const data = await ApiService.post('/user/update/approve/pedding', this.formsearchUser).then(response => {

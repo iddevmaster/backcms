@@ -338,12 +338,47 @@
       <div class="form-group">
         <button type="button" class="btn btn-danger"  @click="CheckApp('N')">ປະຕິເສດ</button>
       </div>
-
     </div>
-
-            
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" v-if="store.ModalApp">
+    <div class="modal-content" id="deleteConformationLabel">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">ຢືນຢັນ ?</h1>
+      </div>
+        <div class="modal-body">
+          <div class="form-group row">
+<h4>ກະລຸນາຢືນຢັນອີກຄັ້ງ</h4>
+  </div>
+
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-4 col-form-label">ກະລຸນາຢືນຢັນອີກຄັ້ງ :</label>
+    <label for="inputEmail3" class="col-sm-8 col-form-label" v-if="store.status_app == 'Y'" style="color: chartreuse;">
+      ອະນຸມັດ
+    </label>
+    <label for="inputEmail3" class="col-sm-8 col-form-label" v-else style="color:red;">
+      ປະຕິເສດ
+    </label>
+  </div>
+
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-4 col-form-label">ຄຳເຫັນ :</label>
+    <label for="inputEmail3" class="col-sm-8 col-form-label">{{store.comment_details}}</label>
+  </div>
+
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-4 col-form-label">ອະນຸມັດໂດຍ :</label>
+    <label for="inputEmail3" class="col-sm-8 col-form-label">{{auth.users.user_name}}</label>
+  </div>
+      </div>
+      <div class="modal-footer">
+      
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="Hide()">ຍົກເລີກ</button>
+        <button type="button" class="btn btn-primary"  @click="Save()">ຢືນຢັນ</button>
       </div>
     </div>
   </div>
@@ -395,10 +430,20 @@ const toast = useToast();
 const store = usersStore()
 const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
 const router = useRouter();
+const auth = useAuthStore()
 
 const CheckApp = async (item) => {
+store.ModalApp = true
+store.status_app = item
 
-  await store.UpdatePeddingByOneComment(item);
+ // await router.push("/users/approvestaff");
+};
+
+const Hide = async () => {
+  store.ModalApp = false;
+}
+const Save = async () => {
+  await store.UpdatePeddingByOneComment();
   toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
   if(user_type.value == '1'){
  await router.push("/users/approve");
@@ -406,8 +451,8 @@ const CheckApp = async (item) => {
   if(user_type.value == '2'){
  await router.push("/users/approvestaff");
   }
- // await router.push("/users/approvestaff");
-};
+}
+
 
 function coverimage(i) {
   let result = i.slice(0, 6);

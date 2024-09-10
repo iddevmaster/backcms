@@ -56,7 +56,9 @@ await store.fetchUsersByOneComment();
   </div>
 </template>
 
-<style>
+<style  scoped>
+
+
 .modal {
   position: fixed;
   top: 0;
