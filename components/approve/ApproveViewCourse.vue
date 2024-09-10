@@ -12,6 +12,7 @@
         </div>
       </div>
       <hr style="margin-top: 1px" />
+    
       <div class="row">
         <div class="col-12  col-sm-7 col-xl-7 col-lg-7 your-element">
           <div class="row">
@@ -20,7 +21,16 @@
                 <div class="invoice-detail-title">
                   <div class="invoice-logo">
                     <div class="profile-image">
-                      <div class="img-uploader-content" style="padding: 5px">
+                      <div class="img-uploader-content" style="padding: 5px" v-if="store.profile_by_one[0].user_img">
+                        <img
+                          :src="coverimage(store.profile_by_one[0].user_img)"
+                          alt="avatar"
+                          class="img-fluid"
+                          width="200"
+                          height="200"
+                        />
+                      </div>
+                      <div class="img-uploader-content" style="padding: 5px" v-else>
                         <img
                           src="../../assets/images/person-avatar.jpg"
                           alt="avatar"
@@ -37,14 +47,14 @@
 
             <div class="col-12 col-sm-7 col-xl-9 col-lg-9">
               <div class="form-group row">
-                <h3>ທ້າວ ສົມສັກ ຈ່າງດາບຸດ</h3>
+                <h3>{{store.profile_by_one[0].user_prefrix}} {{store.profile_by_one[0].user_firstname}}  {{store.profile_by_one[0].user_lastname}} </h3>
               </div>
               <div class="form-group row">
                 <label
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm"
                 >
-                  Mr. Somsak Jangdaboud
+                {{store.profile_by_one[0].user_full_name}} 
                 </label>
               </div>
 
@@ -53,7 +63,7 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                 >
-                  ເບີໂທ: 85620 12345678</label
+                ອີເມລ:  {{store.profile_by_one[0].user_email}}</label
                 >
               </div>
               <div class="form-group row">
@@ -61,7 +71,15 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                 >
-                  Username: somsakj</label
+                  ເບີໂທ:  {{store.profile_by_one[0].user_phone}}</label
+                >
+              </div>
+              <div class="form-group row">
+                <label
+                  for="company-name"
+                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
+                >
+                  Username:  {{store.profile_by_one[0].user_name}}</label
                 >
               </div>
             </div>
@@ -120,7 +138,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm"
                   >
-                    01-231234567</label
+                  {{store.profile_by_one[0].identification_number}}</label
                   >
                 </div>
                 <div class="form-group row">
@@ -128,7 +146,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm"
                   >
-                    13/11/2028</label
+                  {{store.profile_by_one[0].exp_date}}</label
                   >
                 </div>
                 <div class="form-group row">
@@ -136,7 +154,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm"
                   >
-                    13/11/2028</label
+                  {{store.profile_by_one[0].user_birthday}}</label
                   >
                 </div>
                 <div class="form-group row">
@@ -152,7 +170,17 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm"
                   >
-                    102, ຮ່ອມ 19 ເມືອງ ໄຊເສດຖາ - ແຂວງ ນະຄອນຫຼວງວຽງຈັນ</label
+                  {{store.profile_by_one[0].user_address}}
+                </label
+                  >
+                </div>
+                <div class="form-group row">
+                  <label
+                    for="company-name"
+                    class="col-sm-12 col-form-label col-form-label-sm"
+                  >
+                  {{store.profile_by_one[0].amphur_name}} -  {{store.profile_by_one[0].province_name}}
+                </label
                   >
                 </div>
               </div>
@@ -173,7 +201,7 @@
               <div class="col-8 col-sm-12 col-md-8">
                 <div class="form-group row">
                   <img
-                    src="../../assets/images/back.JPG"
+                     :src="coverimage(store.profile_by_one[0].passpost_image)"
                     class="img-fluid"
                     width="80"
                     height="80"
@@ -197,7 +225,7 @@
               <div class="col-8 col-sm-12 col-md-8">
                 <div class="form-group row">
                   <img
-                    src="../../assets/images/back.JPG"
+                     :src="coverimage(store.profile_by_one[0].real_image)"
                     class="img-fluid"
                     width="80"
                     height="80"
@@ -207,7 +235,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-lg-5 col-xl-5">
+        <div class="col-12 col-lg-5 col-xl-5" v-if="store.profile_by_one[0].status == 'W'">
           <div class="form-group row m-1">
             <label
               for="company-name"
@@ -250,24 +278,14 @@
               
             </div>
             <div class="col-8 col-sm-12 col-md-8">
-        
-
-         
-              <div class="form-group row">
+      
+              <div class="form-group row"    v-for="(item, index) in store.comment">
                 <label
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm"
                 >
-                -ເວລາຖ່າຍຮູບ ບໍ່ໃຫ້ປິດໜ້າ</label
-                >
-              </div>
-
-              <div class="form-group row">
-                <label
-                  for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm"
-                >
-                -ເລກບັດປະຈຳຕົວ ທີ່ພິມມາບໍ່ກົງກັບ ເລກໃນບັດ</label
+                {{ item.comment_details }}
+                </label
                 >
               </div>
             </div>
@@ -290,7 +308,7 @@
       
          
               <div class="form-group row">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" v-model="store.comment_details"></textarea>
               </div>
 
       
@@ -311,14 +329,14 @@
             <div class="col-4 col-sm-12 col-md-4">
       
               <div class="form-group">
-                <button type="button" class="btn btn-success">ອະນຸມັດ</button>
+                <button type="button" class="btn btn-success" @click="CheckApp('Y')">ອະນຸມັດ</button>
               </div>
 
             </div>
             <div class="col-4 col-sm-12 col-md-4">
       
       <div class="form-group">
-        <button type="button" class="btn btn-danger">ປະຕິເສດ</button>
+        <button type="button" class="btn btn-danger"  @click="CheckApp('N')">ປະຕິເສດ</button>
       </div>
 
     </div>
@@ -374,6 +392,22 @@ import ApiService from "../../services/api.service";
 const { locale, setLocale } = useI18n();
 
 const toast = useToast();
+const store = usersStore()
+const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
+const router = useRouter();
+
+const CheckApp = async (item) => {
+
+  await store.UpdatePeddingByOneComment(item);
+  toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
+  if(user_type.value == '1'){
+ await router.push("/users/approve");
+  }
+  if(user_type.value == '2'){
+ await router.push("/users/approvestaff");
+  }
+ // await router.push("/users/approvestaff");
+};
 
 function coverimage(i) {
   let result = i.slice(0, 6);

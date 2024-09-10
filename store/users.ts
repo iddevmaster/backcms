@@ -31,6 +31,7 @@ export const usersStore = defineStore('users', {
     page: 1,
     per_page: 10,
     searchDa: '',
+    comment_details:'',
     total_page: null,
     limit_page: null,
     current_page: null,
@@ -40,6 +41,7 @@ export const usersStore = defineStore('users', {
     user_id_del: null,
     location_id:1,
     country_id:1,
+    comment:[],
     formsearch: {
       page: 1,
       per_page: 20,
@@ -572,15 +574,31 @@ const a = {verify_account:'system_active',identification_number:response.data[0]
         },  
 
       async fetchUsersByOne(item) {
-     
         this.formsearchUser.user_admin_id = this.user_id;
         this.formsearchUser.user_search_id = item;
-    
+        
         const data = await ApiService.post('/user/list/get', this.formsearchUser).then(response => {
      this.profile_by_one = response.data;
-
       });
     },  
+
+    async fetchUsersByOneComment() {
+      const data = await ApiService.post('/user/list/get/comment', this.formsearchUser).then(response => {
+   this.comment = response.data.data;
+    });
+  }, 
+
+  async UpdatePeddingByOneComment(item) {
+  
+    this.formsearchUser.approve = item;
+    this.formsearchUser.comment_details = this.comment_details;
+    
+    const data = await ApiService.post('/user/update/approve/pedding', this.formsearchUser).then(response => {
+
+  });
+
+return true;
+}, 
   },
 
 });

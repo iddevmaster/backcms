@@ -10,8 +10,6 @@ import { usersStore } from '@/store/users'
 
 import { useModalStore } from '@/store/modal';
 import ApproveViewCourse from "@/components/approve/ApproveViewCourse.vue";
-import ApproveViewExam from "@/components/approve/ApproveViewExam.vue";
-import ApproveViewCate from "@/components/approve/ApproveViewCate.vue";
 
 
 import Alert from '@/components/layout/Alert.vue';
@@ -27,6 +25,11 @@ const auth = useAuthStore()
 const router = useRouter();
 store.user_id = auth.user_id
 await store.fetchUsersByOne(router.currentRoute.value.params.id);
+await store.fetchUsersByOneComment();
+
+
+
+
 
 </script>
 
