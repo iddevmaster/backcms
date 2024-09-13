@@ -15,7 +15,7 @@ import { useToast } from 'vue-toastification'
 import ApiService  from "../../../services/api.service";
 definePageMeta({
   middleware: ['auth','roles'],
-  allowedRoles: [1]
+  allowedRoles: [2]
 })
 const toast = useToast()
 const store = usersStore()

@@ -150,7 +150,7 @@ const approve = async (item) => {
 };
 
 const viewuser = async (item) => {
-  router.push({ path: '/users/approve/view/'+item})
+  router.push({ path: '/users/approvestaff/view/'+item})
 };
 
 
