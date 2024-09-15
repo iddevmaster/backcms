@@ -573,10 +573,10 @@
   "form_exam_new_save" : "Save",
 
   "approve_table_indexnew":"#",
-  "approve_table_senddate":"ວັນທີ ສົ່ງເຂົ້າມາ",
-  "approve_table_fullname":"ຊື່  ນາມສະກຸນ",
-  "approve_table_tel":"ເບີໂທ",
-  "approve_table_pass":"ບັດປະຈຳຕົວ/Passport",
+  "approve_table_senddate":"Date Approve",
+  "approve_table_fullname":"Full Name",
+  "approve_table_tel":"Tel",
+  "approve_table_pass":"Passport",
   "approve_table_prov":"ເມືອງ-ແຂວງ",
   "approve_table_act":"Action",
 

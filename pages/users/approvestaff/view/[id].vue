@@ -9,6 +9,8 @@ import { defineComponent } from 'vue';
 import { usersStore } from '@/store/users'
 
 import { useModalStore } from '@/store/modal';
+import ApproveViewCourse from "@/components/approve/ApproveViewCourse.vue";
+
 
 import Alert from '@/components/layout/Alert.vue';
 import { useToast } from 'vue-toastification'
@@ -19,39 +21,44 @@ definePageMeta({
 })
 const toast = useToast()
 const store = usersStore()
+const auth = useAuthStore()
+const router = useRouter();
+store.user_id = auth.user_id
+await store.fetchUsersByOne(router.currentRoute.value.params.id);
+await store.fetchUsersByOneComment();
+
+
 
 
 
 </script>
 
+
+
+
+
 <template>
   <div id="content" class="main-content">
     <div class="layout-px-spacing">
-      <div class="page-meta">
-        <nav class="breadcrumb-style-one" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">{{ $t("menu_approve") }}</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ $t("page_menu_approve") }}</li>
-          </ol>
-        </nav>
-      </div>
-   <div class="middle-content container-xxl p-0">
+
+   
+      <div class="middle-content container-xxl">
         <div class="row layout-top-spacing">
-          <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-            <div class="widget-content widget-content-area br-8 p-3">
-              
-            </div>
+         
+          <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
+            <ApproveViewCourse  ></ApproveViewCourse>
           </div>
+          
         </div>
+        <br />
       </div>
     </div>
   </div>
-
-
-
 </template>
 
-<style>
+<style  scoped>
+
+
 .modal {
   position: fixed;
   top: 0;
