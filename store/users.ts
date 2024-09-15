@@ -114,7 +114,24 @@ export const usersStore = defineStore('users', {
     user_img:null,
     lan:[
       '../../assets/images/loas.png','static/upload/2023/11/files-QrkYdiAou9.png','static/upload/2023/9/files-JWOxjtiwsQ.png',
-     ]
+     ],
+     formapeple: {
+      full_name: '',
+      first_name: '',
+      last_name: '',
+      user_prefrix: '',
+      identification_number: '',
+      user_birthday: '',
+      expire: '',
+      user_village: '',
+      user_address: '',
+      location_id: null,
+      country_id: 33,
+    },
+    passpost_image:'',
+    image_pas:'',
+    real_image:'',
+    image_real:''
   }
 
   ),
@@ -123,6 +140,9 @@ export const usersStore = defineStore('users', {
   getters: {
     data(state) {
 
+    },
+    getFormPeple(state) {
+      return state.formapeple;
     },
 
 
@@ -601,6 +621,46 @@ const a = {verify_account:'system_active',identification_number:response.data[0]
 
 return true;
 }, 
+
+async UploadImage() {
+
+  if (this.passpost_image) {
+   let formData = new FormData();
+   formData.append('files', this.passpost_image);
+   try {
+     const data = await ApiService.upload('/media_file/upload/file', formData);
+     this.image_pas = data.data[0].path
+
+     return true;
+   } catch (error) {
+     return false;
+   }
+ }
+
+
+   },
+
+
+   
+   async UploadImage2() {
+
+
+    if (this.real_image) {
+   
+      let formDatas = new FormData();
+      formDatas.append('files', this.real_image);
+      try {
+        const data = await ApiService.upload('/media_file/upload/file', formDatas);
+        this.image_real = data.data[0].path
+      
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+   
+      },
+
   },
 
 });
