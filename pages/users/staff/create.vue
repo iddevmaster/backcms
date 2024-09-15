@@ -37,8 +37,12 @@ const fileInputFont = ref(null);
 const fileInputBack = ref(null);
 
 onMounted(() => {
-  fileInputFont.value.addEventListener("change", changeFileFont);
+      if (process.client) {
+          fileInputFont.value.addEventListener("change", changeFileFont);
   fileInputBack.value.addEventListener("change", changeFileBack);
+
+      }
+
 
   store.zipcode.map(function (x) {
     return (x.item_data = x.zipcode_name + " - " + x.province_name);
@@ -540,15 +544,6 @@ const format = (date) => {
                
              
               </div>
-
-                 <div class="card-body">
-                 <p class="card-text">
-                  ຕ້ອງເປັນຮູບທີ່ແຈ້ງດີ ສາມາດອ່ານຄຳສັບຢູ່ໜ້າບັດໄດ້.
-                </p>
-               
-              </div>
-
-
               <div class="card-body" v-if="store.image_pas">
                <img class="aboutimg__1" :src="coverimage(store.image_pas)" alt="aboutimg" style="
     width: 100%;
@@ -583,13 +578,6 @@ const format = (date) => {
                
               </div>
 
-             <div class="card-body">
-                    <p class="card-text">
-                  ຖ່າຍຮູບຕົນເອງ ພ້ອມກັບບັດປະຈຳຕົວ / passport. ຮູບຕ້ອງແຈ້ງດີ,
-                  ບໍ່ມີຜູ້ອື່ນຢູ່ດ້ານຫຼັງ.
-                </p>
-               
-              </div>
       
   <div class="card-body" v-if="store.image_real">
                <img class="aboutimg__1" :src="coverimage(store.image_real)" alt="aboutimg" style="
