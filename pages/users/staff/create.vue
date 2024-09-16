@@ -37,7 +37,7 @@ await store.Country();
 await auth.getProfileDetails();
 store.formapeple.location_id = auth.profiledetails.location_id;
 const toast = useToast()
-await store.CheckTypeLocation();
+
 const fileInputFont = ref(null);
 const fileInputBack = ref(null);
 

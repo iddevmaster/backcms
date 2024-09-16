@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import apiClient from '~/services/api.service';
 import ApiService from '@/services/api.service';
 
-
+import moment from "moment";
 
 
 
@@ -473,9 +473,7 @@ this.country = country.data.data
       }
     },
 
-    async CheckTypeLocation() {
-      console.log(this.formapeple.location_id);
-    },
+   
 
     async UploadfileProfile() {
       let formData = new FormData();
@@ -697,6 +695,14 @@ async UploadImage() {
         this.formapeple.verify_account = 'system_active';
         this.formapeple.email = this.email;
 
+        const currentDate = new Date(this.formapeple.user_birthday);
+        const currentEnd = new Date(this.formapeple.expire);
+        const birth = await this.changeFormate(currentDate)
+        const exp = await this.changeFormate(currentEnd)
+
+        this.formapeple.expire = exp
+        this.formapeple.user_birthday = birth
+
 
         try {
           const data = await ApiService.post('/user/createuserpopulation',this.formapeple).then(response => {
@@ -731,6 +737,15 @@ async UploadImage() {
         this.checkphone = false,
         this.checkusername = false
       },
+
+      async changeFormate(a) {
+
+        if (a) {
+        
+          return moment(a).format("YYYY-MM-DD");
+         }
+      },
+
 
   },
 
