@@ -33,6 +33,10 @@ export const useAuthStore = defineStore('auth', {
     },
     detail: {
       user_img: null,
+    },
+    profiledetails:{},
+    formadmin: {
+      user_id: null,
     }
   }),
 
@@ -138,8 +142,6 @@ export const useAuthStore = defineStore('auth', {
    this.users.user_phone = response.data.user_phone
    this.users.user_type = response.data.user_type
    this.detail.user_img = response.data.detail.user_img
-
-
         });
 
         return true;
@@ -151,6 +153,22 @@ export const useAuthStore = defineStore('auth', {
       }
 
       
+    },
+
+    async getProfileDetails(){
+    
+       this.formadmin.user_id = this.user_id;
+      try {
+        const data = await ApiService.post('/user/list/get/profile',this.formadmin).then(response => {
+          this.profiledetails = response.data[0];
+        });
+
+        return true;
+      } catch (error) {
+  
+    //    abortNavigation();
+      return false;
+      }
     }
   },
 });

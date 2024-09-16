@@ -618,6 +618,39 @@
 "cou_update_acc_pehol": "ສັນຊາດ",
 
 
+"pleho_user_phone": "85620 12345678",
+"pleho_user_email": "admin@gmail.com",
+"pleho_user_users": "staff",
+
+
+"profile_alert_title":"ໃສ່ຄຳນຳໜ້າ",
+"profile_alert_name":"ໃສ່ຊື່",
+"profile_alert_lname":"ໃສ່ນາມສະກຸນ",
+"profile_alert_usersname":"ໃສ່ຊື່ຜູ້ໃຊ້",
+"profile_alert_email":"ໃສ່ອີເມວ",
+"profile_alert_phone":"ໃສ່ເບີໂທລະສັບ",
+"profile_alert_password":"ໃສ່ລະຫັດຜ່ານ",
+
+"form_d_full_name":"ກະລຸນາໃສ່Full name",
+"form_d_first_name":"ກະລຸນາໃສ່ຊື່",
+"form_d_last_name":"ກະລຸນາໃສ່ເລກນາມສະກຸນ",
+"form_d_iden":"ກະລຸນາໃສ່ເລກບັດປະຈຳຕົວ ຫຼື passport",
+"form_d_exp":"ກະລຸນາໃສ່ ວັນໝົດອາຍຸຂອງບັດ",
+"form_d_bird":"ກະລຸນາໃສ່ ວັນເດືອນປີເກີດ",
+"form_d_dob":"ກະລຸນາໃສ່ ວັນເກີດ",
+"form_d_add":"ກະລຸນາໃສ່ ທີ່ຢູ່",
+"form_d_vil":"ກະລຸນາໃສ່ ບ້ານ",
+"form_d_district":"ກະລຸນາໃສ່ ເມືອງ",
+"form_d_nationality":"ກະລຸນາໃສ່ ສັນຊາດ",
+"form_d_image":"ໃສ່ຮູບພາບບັດປະຈຳຕົວ",
+
+
+"alert_checkIden":"หมายเลขบัตรซ้ำ",
+"alert_checkemail":"Email ซ้ำ",
+"alert_checkphone":"เบอร์โทรซ้ำ",
+"alert_checkusername":"Username ซ้ำ",
+
+
   "" : ""
 
   

@@ -116,6 +116,9 @@ export const usersStore = defineStore('users', {
       '../../assets/images/loas.png','static/upload/2023/11/files-QrkYdiAou9.png','static/upload/2023/9/files-JWOxjtiwsQ.png',
      ],
      formapeple: {
+    
+      username: '',
+      user_phone: '',
       full_name: '',
       first_name: '',
       last_name: '',
@@ -127,11 +130,19 @@ export const usersStore = defineStore('users', {
       user_address: '',
       location_id: null,
       country_id: 33,
+      passpost_image:'',
+      real_image:'',
     },
     passpost_image:'',
     image_pas:'',
     real_image:'',
-    image_real:''
+    image_real:'',
+    email:'',
+    checkIden: false,
+checkemail: false,
+checkphone: false,
+checkusername: false,
+
   }
 
   ),
@@ -463,6 +474,10 @@ this.country = country.data.data
       }
     },
 
+    async CheckTypeLocation() {
+      console.log(this.formapeple.location_id);
+    },
+
     async UploadfileProfile() {
       let formData = new FormData();
       formData.append('files', this.imagelist);
@@ -624,12 +639,12 @@ return true;
 
 async UploadImage() {
 
-  if (this.passpost_image) {
+  if (this.formapeple.passpost_image) {
    let formData = new FormData();
-   formData.append('files', this.passpost_image);
+   formData.append('files', this.formapeple.passpost_image);
    try {
      const data = await ApiService.upload('/media_file/upload/file', formData);
-     this.image_pas = data.data[0].path
+     this.formapeple.passpost_image = data.data[0].path
 
      return true;
    } catch (error) {
@@ -645,20 +660,61 @@ async UploadImage() {
    async UploadImage2() {
 
 
-    if (this.real_image) {
+    if (this.formapeple.real_image) {
    
       let formDatas = new FormData();
-      formDatas.append('files', this.real_image);
+      formDatas.append('files', this.formapeple.real_image);
       try {
         const data = await ApiService.upload('/media_file/upload/file', formDatas);
-        this.image_real = data.data[0].path
-      
+        this.formapeple.real_image = data.data[0].path
         return true;
       } catch (error) {
         return false;
       }
     }
    
+      },
+      async CheckPeople() {
+        try {
+          const data = await ApiService.post('/user/checkuserpopulation',this.formapeple).then(response => {
+            this.checkIden = response.data.checkIden
+            this.checkemail = response.data.checkemail
+            this.checkphone = response.data.checkphone
+            this.checkusername = response.data.checkusername
+
+  
+          });
+        } catch (error) {
+          return false;
+        }
+        
+      },
+      async SavePeople() {
+        console.log('save');
+      },
+      async ResetFormStaff() {   ////reset Form
+        this.formapeple = {
+          username: '',
+          user_phone: '',
+          full_name: '',
+          first_name: '',
+          last_name: '',
+          user_prefrix: '',
+          identification_number: '',
+          user_birthday: '',
+          expire: '',
+          user_village: '',
+          user_address: '',
+          location_id: null,
+          country_id: 33,
+          passpost_image:'',
+          real_image:'',
+        },
+        this.email ='',
+        this.checkIden = false,
+        this.checkemail = false,
+        this.checkphone = false,
+        this.checkusername = false
       },
 
   },

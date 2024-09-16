@@ -15,16 +15,18 @@ import {
   helpers,
 } from "@vuelidate/validators";
 import { usersStore } from "@/store/users";
+import { useAuthStore } from "@/store/auth";
 import ApiService from "../../../services/api.service";
 import "vue-select/dist/vue-select.css";
 import vSelect from "vue-select";
 import { ref, onMounted } from "vue";
+import { useToast } from 'vue-toastification';
 
 definePageMeta({
   middleware: ["auth", "roles"],
   allowedRoles: [1, 2],
 });
-
+const auth = useAuthStore();
 const store = usersStore();
 
 const router = useRouter();
@@ -32,17 +34,18 @@ const { getFormPeple } = storeToRefs(store);
 
 await store.Zipcode();
 await store.Country();
-
+await auth.getProfileDetails();
+store.formapeple.location_id = auth.profiledetails.location_id;
+const toast = useToast()
+await store.CheckTypeLocation();
 const fileInputFont = ref(null);
 const fileInputBack = ref(null);
 
 onMounted(() => {
-      if (process.client) {
-          fileInputFont.value.addEventListener("change", changeFileFont);
-  fileInputBack.value.addEventListener("change", changeFileBack);
-
-      }
-
+  if (process.client) {
+    fileInputFont.value.addEventListener("change", changeFileFont);
+    fileInputBack.value.addEventListener("change", changeFileBack);
+  }
 
   store.zipcode.map(function (x) {
     return (x.item_data = x.zipcode_name + " - " + x.province_name);
@@ -112,6 +115,18 @@ const rules = computed(() => {
     expire: {
       required: helpers.withMessage("expire field is required", required),
     },
+    user_phone: {
+      required: helpers.withMessage("expire field is required", required),
+    },
+    username: {
+      required: helpers.withMessage("expire field is required", required),
+    },
+    passpost_image: {
+      required: helpers.withMessage("expire field is required", required),
+    },
+    real_image: {
+      required: helpers.withMessage("expire field is required", required),
+    },
   };
 });
 
@@ -119,6 +134,33 @@ const changeFont = () => {
   // Trigger a click event on the file input element
   fileInputFont.value.click();
 };
+
+
+const save = async () => {
+  v$.value.$validate();
+  if (!v$.value.$error) {
+  let check = await store.CheckPeople();
+//await store.SavePeople();
+if((store.checkIden == false) && (store.checkIden == false) && (store.checkIden == false) && (store.checkIden == false)){
+ 
+  await store.SavePeople();
+  await store.ResetFormStaff();
+  toast.success("ບັນທຶກສຳເລັດແລ້ວ");
+}else {
+
+  console.log('checkUser');
+}
+
+// this.checkIden = response.data.checkIden
+//             this.checkemail = response.data.checkemail
+//             this.checkphone = response.data.checkphone
+//             this.checkusername = response.data.checkusername
+  }
+}
+
+
+
+
 
 const changeBack = () => {
   // Trigger a click event on the file input element
@@ -138,7 +180,7 @@ const changeFileFont = async (event) => {
     // store.image_pas = inputs.files[0];
     // reader.readAsDataURL(file);
 
-    store.passpost_image = inputs.files[0];
+    store.formapeple.passpost_image = inputs.files[0];
     // console.log(store.passpost_image);
     store.UploadImage();
   } else {
@@ -162,7 +204,7 @@ const changeFileBack = async (event) => {
     // store.image_pas = inputs.files[0];
     // reader.readAsDataURL(file);
 
-    store.real_image = inputs.files[0];
+    store.formapeple.real_image = inputs.files[0];
 
     store.UploadImage2();
   } else {
@@ -207,7 +249,7 @@ const format = (date) => {
           </ol>
         </nav>
       </div>
-
+{{ store.formapeple }}
       <div class="middle-content container-xxl p-0">
         <div class="row layout-top-spacing">
           <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
@@ -331,6 +373,97 @@ const format = (date) => {
                 <div class="col-xl-12 mt-3">
                   <div class="login__form">
                     <label class="form__label"
+                      >username
+                      <span class="text-xs text-red-500" style="color: red"
+                        >*</span
+                      >
+                    </label>
+                    <input
+                      class="common__login__input form-control"
+                      type="text"
+                      :placeholder="$t('pleho_user_users')"
+                      v-model="store.formapeple.username"
+                      :class="{
+                        'border-red-500 focus:border-red-500':
+                          v$.username.$error,
+                        'border-[#42d392] ': !v$.username.$invalid,
+                      }"
+                      @change="v$.username.$touch"
+                    />
+                    <span
+                      class="text-xs text-red-500"
+                      style="color: red"
+                      v-if="v$.username.$error"
+                      >{{ $t("profile_alert_usersname") }}</span
+                    >
+
+
+                    <span
+                      class="text-xs text-red-500"
+                      style="color: red"
+                      v-if="store.checkusername"
+                      >{{ $t("alert_checkusername") }}</span
+                    >
+                  </div>
+                </div>
+
+                <div class="col-xl-12 mt-3">
+                  <div class="login__form">
+                    <label class="form__label"
+                      >ເບີໂທ
+                      <span class="text-xs text-red-500" style="color: red"
+                        >*</span
+                      >
+                    </label>
+                    <input
+                      class="common__login__input form-control"
+                      type="text"
+                      :placeholder="$t('pleho_user_phone')"
+                      v-model="store.formapeple.user_phone"
+                      :class="{
+                        'border-red-500 focus:border-red-500':
+                          v$.user_phone.$error,
+                        'border-[#42d392] ': !v$.user_phone.$invalid,
+                      }"
+                      @change="v$.user_phone.$touch"
+                    />
+                    <span
+                      class="text-xs text-red-500"
+                      style="color: red"
+                      v-if="v$.user_phone.$error"
+                      >{{ $t("profile_alert_phone") }}</span
+                    >
+
+                    <span
+                      class="text-xs text-red-500"
+                      style="color: red"
+                      v-if="store.checkphone"
+                      >{{ $t("alert_checkphone") }}</span
+                    >
+                  </div>
+                </div>
+
+                <div class="col-xl-12 mt-3">
+                  <div class="login__form">
+                    <label class="form__label">Email </label>
+                    <input
+                      class="common__login__input form-control"
+                      type="text"
+                      placeholder="admin@gmail.com"
+                      v-model="store.email"
+                    />
+                  </div>
+                  <span
+                      class="text-xs text-red-500"
+                      style="color: red"
+                      v-if="store.checkemail"
+                      >{{ $t("alert_checkemail") }}</span
+                    >
+                </div>
+
+                <div class="col-xl-12 mt-3">
+                  <div class="login__form">
+                    <label class="form__label"
                       >{{ $t("form_approve_passport")
                       }}<span class="text-xs text-red-500" style="color: red"
                         >*</span
@@ -354,6 +487,12 @@ const format = (date) => {
                       style="color: red"
                       v-if="v$.identification_number.$error"
                       >{{ $t("form_d_iden") }}</span
+                    >
+                    <span
+                      class="text-xs text-red-500"
+                      style="color: red"
+                      v-if="store.checkIden"
+                      >{{ $t("alert_checkIden") }}</span
                     >
                   </div>
                 </div>
@@ -472,17 +611,9 @@ const format = (date) => {
                         >*</span
                       ></label
                     >
-                    <!-- <select
-                class="common__login__input px-2"
-                aria-label="Default select example"
-              >
-                <option selected :value="null" disabled>
-                  {{ $t("choose") }}
-                </option>
-               <option  v-for="(item, index) in store.zipcode">{{item.zipcode_name}} - {{item.province_name}}</option>
-              </select> -->
 
                     <v-select
+                      disabled
                       :options="store.zipcode"
                       label="item_data"
                       placeholder="ເລືອກ"
@@ -522,78 +653,108 @@ const format = (date) => {
                   </div>
                 </div>
 
+                <div class="row mt-4">
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <span
+                          >{{ $t("form_approve_pass_image") }}
+                          <span class="text-xs text-red-500" style="color: red"
+                            >*</span
+                          ></span
+                        >
+                        <span style="float: inline-end">
+                          <input
+                            type="file"
+                            ref="fileInputFont"
+                            style="display: none"
+                          />
+                          <button
+                            class="changeImg btn btn-success"
+                            @click="changeFont"
+                          >
+                            Browse
+                          </button>
+                        </span>
+                      </div>
+                      <div class="card-body" v-if="store.formapeple.passpost_image">
+                        <img
+                          class="aboutimg__1"
+                          :src="coverimage(store.formapeple.passpost_image)"
+                          alt="aboutimg"
+                          style="width: 100%"
+                        />
+                      </div>
+                      <div class="card-body" v-else>
+                        <img
+                          class="aboutimg__1"
+                          src="../../../assets/img/ppt.JPG"
+                          alt="aboutimg"
+                          style="width: 100%"
+                        />
+                      </div>
+                    </div>
+                    <span
+                     
+                     style="color: red"
+                     v-if="v$.passpost_image.$error"
+                     >{{ $t("form_approve_pass_image") }}</span
+                   >
+                  </div>
+                  
+                  <div class="col-sm-6">
+                    <div class="card">
+                      <div class="card-body">
+                        <span>{{ $t("form_approve_real_image") }}</span
+                        ><span class="text-xs text-red-500" style="color: red"
+                          >*</span
+                        >
+                        <span style="float: inline-end">
+                          <input
+                            type="file"
+                            ref="fileInputBack"
+                            style="display: none"
+                          />
+                          <button
+                            class="changeImg btn btn-success"
+                            @click="changeBack"
+                          >
+                            Browse
+                          </button>
+                        </span>
+                      </div>
 
-                      <div class="row mt-4">
-          <div class="col-sm-6">
-            <div class="card">
-              <div class="card-body">
-              <span>{{ $t('form_approve_pass_image') }} <span
-                    class="text-xs text-red-500"
-                    style="color: red"
-                
-                    >*</span
-                  ></span>
-               <span style="float: inline-end;">
-         
-                <input type="file" ref="fileInputFont" style="display: none;">
-        <button class="changeImg btn btn-success"  @click="changeFont" >
-                Browse
-              </button>
-              
-              </span>
-               
-             
-              </div>
-              <div class="card-body" v-if="store.image_pas">
-               <img class="aboutimg__1" :src="coverimage(store.image_pas)" alt="aboutimg" style="
-    width: 100%;
-">
-        
-              </div>
-              <div class="card-body" v-else>
-               <img class="aboutimg__1" src="../../../assets/img/ppt.JPG" alt="aboutimg" style="
-    width: 100%;
-">
-        
-              </div>
-          
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="card">
-              <div class="card-body">
-                 <span>{{ $t('form_approve_real_image') }}</span><span
-                    class="text-xs text-red-500"
-                    style="color: red"
-                
-                    >*</span
-                  >
-               <span style="float: inline-end;">
-                <input type="file" ref="fileInputBack" style="display: none;">
-        <button class="changeImg btn btn-success"  @click="changeBack" >
-                Browse
-              </button>
-            
-               </span>
-               
-              </div>
-
-      
-  <div class="card-body" v-if="store.image_real">
-               <img class="aboutimg__1" :src="coverimage(store.image_real)" alt="aboutimg" style="
-    width: 100%;
-">
-        
-              </div>
-              <div class="card-body" v-else>
-               <img class="aboutimg__1" src="../../../assets/img/ppt.JPG" alt="aboutimg" style="
-    width: 100%;
-">
-        
-              </div>
-            </div>
-          </div>
-        </div>
+                   
+                      <div class="card-body" v-if="store.formapeple.real_image">
+                        <img
+                          class="aboutimg__1"
+                          :src="coverimage(store.formapeple.real_image)"
+                          alt="aboutimg"
+                          style="width: 100%"
+                        />
+                      </div>
+                      <div class="card-body" v-else>
+                        <img
+                          class="aboutimg__1"
+                          src="../../../assets/img/ppt.JPG"
+                          alt="aboutimg"
+                          style="width: 100%"
+                        />
+                      </div>
+                    </div>
+                    <span
+                     
+                     style="color: red"
+                     v-if="v$.real_image.$error"
+                     >{{ $t("form_approve_real_image") }}</span
+                   >
+                  </div>
+                </div>
+                <div class="col-xl-12 mt-3">
+                  <div class="login__form">
+                    <button type="button" class="btn btn-primary" style="width: 100%;" @click="save()">Save</button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
