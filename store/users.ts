@@ -116,7 +116,6 @@ export const usersStore = defineStore('users', {
       '../../assets/images/loas.png','static/upload/2023/11/files-QrkYdiAou9.png','static/upload/2023/9/files-JWOxjtiwsQ.png',
      ],
      formapeple: {
-    
       username: '',
       user_phone: '',
       full_name: '',
@@ -690,7 +689,23 @@ async UploadImage() {
         
       },
       async SavePeople() {
-        console.log('save');
+    
+
+        this.formapeple.user_password = '12345678';
+        this.formapeple.user_type = 3;
+        this.formapeple.active = 1;
+        this.formapeple.verify_account = 'system_active';
+        this.formapeple.email = this.email;
+
+
+        try {
+          const data = await ApiService.post('/user/createuserpopulation',this.formapeple).then(response => {
+    console.log(response);
+  
+          });
+        } catch (error) {
+          return false;
+        }
       },
       async ResetFormStaff() {   ////reset Form
         this.formapeple = {
