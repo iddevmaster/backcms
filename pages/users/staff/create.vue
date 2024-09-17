@@ -127,6 +127,13 @@ const rules = computed(() => {
     real_image: {
       required: helpers.withMessage("expire field is required", required),
     },
+    user_password: {
+      required: helpers.withMessage(
+        "Select location field is required",
+        required
+      ),
+      minLength: minLength(5),
+    },
   };
 });
 
@@ -158,7 +165,34 @@ if((store.checkIden == false) && (store.checkIden == false) && (store.checkIden 
   }
 }
 
+const RandomPassword = () => {
+  let r = (Math.random() + 1).toString(36).substring(6);
+  store.formapeple.user_password = r;
+};
+const filterInput = async (event) => {
+  // stores.form.user_phone = event.target.value.replace(/\D/g, "");
 
+
+  const key = event.data;
+      if (event.data === ' ') {
+        store.formapeple.user_phone= store.formapeple.user_phone.substring(0, store.formapeple.user_phone.length - 1);
+        return;
+      }
+      if (store.formapeple.user_phone.charAt(0) !== '2') {
+        store.formapeple.user_phone = "";
+        return;
+      } 
+      if ((store.formapeple.user_phone.charAt(1) !== '') && (store.formapeple.user_phone.charAt(1) !== '0')) {
+        store.formapeple.user_phone = "2";
+        return;
+      } 
+      store.formapeple.user_phone = event.target.value.replace(/\D/g, "");
+};
+
+
+const onInput = async (event) => {
+  store.formapeple.identification_number = event.target.value.replace(/\D/g, '');
+}
 
 
 
@@ -295,7 +329,7 @@ const format = (date) => {
                       class="common__login__input form-control"
                       type="text"
                       :placeholder="$t('fname')"
-                      maxlength="20"
+                      maxlength="50"
                       v-model="store.formapeple.first_name"
                       :class="{
                         'border-red-500 focus:border-red-500':
@@ -324,7 +358,7 @@ const format = (date) => {
                       class="common__login__input form-control"
                       type="text"
                       :placeholder="$t('lname')"
-                      maxlength="20"
+                      maxlength="50"
                       v-model="store.formapeple.last_name"
                       :class="{
                         'border-red-500 focus:border-red-500':
@@ -360,6 +394,7 @@ const format = (date) => {
                         'border-[#42d392] ': !v$.full_name.$invalid,
                       }"
                       @change="v$.full_name.$touch"
+                       maxlength="100"
                     />
                     <span
                       class="text-xs text-red-500"
@@ -389,6 +424,7 @@ const format = (date) => {
                         'border-[#42d392] ': !v$.username.$invalid,
                       }"
                       @change="v$.username.$touch"
+                       maxlength="30"
                     />
                     <span
                       class="text-xs text-red-500"
@@ -406,6 +442,44 @@ const format = (date) => {
                     >
                   </div>
                 </div>
+
+
+                <div class="col-xl-12 mt-3">
+                  <div class="login__form">
+                    <label class="form__label"
+                      >{{ $t("form_password") }}
+                      <span class="text-xs text-red-500" style="color: red"
+                        >*</span
+                      >
+                    </label>
+                    <input
+                      class="common__login__input form-control"
+                      type="text"
+                      :placeholder="$t('pleho_user_password')" 
+                      v-model="store.formapeple.user_password"
+                      :class="{
+                        'border-red-500 focus:border-red-500':
+                          v$.user_password.$error,
+                        'border-[#42d392] ': !v$.user_password.$invalid,
+                      }"
+                      @change="v$.user_password.$touch"
+                       maxlength="12"
+                    />
+                    <button
+                            class="changeImg btn btn-outline-dark"
+                         @click="RandomPassword"
+                          >
+                            Generate
+                          </button>
+                    <span
+                      class="text-xs text-red-500"
+                      style="color: red"
+                      v-if="v$.user_password.$error"
+                      >{{ $t("profile_alert_password") }}</span
+                    >
+                  </div>
+                </div>
+
 
                 <div class="col-xl-12 mt-3">
                   <div class="login__form">
@@ -425,6 +499,8 @@ const format = (date) => {
                           v$.user_phone.$error,
                         'border-[#42d392] ': !v$.user_phone.$invalid,
                       }"
+                         maxlength="10"
+                          @input="filterInput"
                       @change="v$.user_phone.$touch"
                     />
                     <span
@@ -433,6 +509,14 @@ const format = (date) => {
                       v-if="v$.user_phone.$error"
                       >{{ $t("profile_alert_phone") }}</span
                     >
+
+                    <span
+                      class="text-xs text-red-500"
+                      style="color: #FFA927"
+                      > ແນະນຳ: ເບີໂທ ຕ້ອງບໍ່ຊ້ຳກັນກັບຜູ້ອື່ນ ແລະ ຕ້ອງຢືນຢັນວ່າລາວເປັນເຈົ້າຂອງແທ້ (ຕຢ: ອາດຈະລອງໂທໃສ່)</span
+                    >
+
+                   
 
                     <span
                       class="text-xs text-red-500"
@@ -451,6 +535,7 @@ const format = (date) => {
                       type="text"
                       placeholder="admin@gmail.com"
                       v-model="store.email"
+                       maxlength="50"
                     />
                   </div>
                   <span
@@ -479,6 +564,8 @@ const format = (date) => {
                           v$.identification_number.$error,
                         'border-[#42d392] ': !v$.identification_number.$invalid,
                       }"
+                         maxlength="13"
+                       @input="onInput"
                       @change="v$.identification_number.$touch"
                     />
 
@@ -519,7 +606,6 @@ const format = (date) => {
                     >{{ $t("form_d_exp") }}</span
                   >
                 </div>
-
                 <div class="col-xl-12 mt-3">
                   <div class="login__form">
                     <label class="form__label"

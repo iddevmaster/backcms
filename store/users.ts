@@ -131,6 +131,7 @@ export const usersStore = defineStore('users', {
       country_id: 33,
       passpost_image:'',
       real_image:'',
+      user_password:'',
     },
     passpost_image:'',
     image_pas:'',
@@ -212,7 +213,7 @@ checkusername: false,
       this.formsearch.per_page = this.per_page;
       this.formsearch.search = this.searchDa;
 
-
+console.log(this.formsearch);
       try {
         this.pending = true
         const data = await ApiService.post('/user/list?'+this.type, this.formsearch).then(response => {

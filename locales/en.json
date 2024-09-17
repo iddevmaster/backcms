@@ -581,6 +581,7 @@
   "approve_table_act":"Action",
 
   "form_approve_full_name": "*ຊື່ເຕັມ ເປັນພາສາອັງກິດ",
+  "form_password": "Password",
 "form_approve_passport": "ເລກບັດປະຈຳຕົວ",
 "form_approve_passport_exp": "ວັນໝົດອາຍຸຂອງບັດ",
 "form_approve_birth_day": "ວັນເດືອນປີເກີດ",
@@ -623,6 +624,11 @@
 "profile_alert_email":"ໃສ່ອີເມວ",
 "profile_alert_phone":"ໃສ່ເບີໂທລະສັບ",
 "profile_alert_password":"ໃສ່ລະຫັດຜ່ານ",
+
+"pleho_user_phone": "85620 12345678",
+"pleho_user_email": "admin@gmail.com",
+"pleho_user_users": "staff",
+"pleho_user_password": "XXXXXX",
 
 "form_d_full_name":"ກະລຸນາໃສ່Full name",
 "form_d_phone":"ກະລຸນາໃສ່ຊື່",
