@@ -240,7 +240,7 @@
 
 
 
-  "menu_user_iden": "ID Card",
+  "menu_user_iden": "Passport",
   "menu_user_address": "Address",
   "menu_user_village": "Ban",
   "menu_user_birdday": "Birthday",
@@ -249,6 +249,8 @@
   "menu_user_verify": "Status",
   "menu_user_image": "Image",
   "menu_user_bt_save": "Save",
+  "menu_user_status": "Status",
+  "menu_user_login_last": "ເຂົ້າລະບົບຫຼ້າສຸດ",
 
   "menu_user_detail": "Detail",
   "menu_user_account": "Account",

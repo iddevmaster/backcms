@@ -7,25 +7,30 @@
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import { usersStore } from '@/store/users'
-import UserList from '@/components/users/UserList.vue'
+import UserStaff from '@/components/users/UserStaff.vue'
 import { useModalStore } from '@/store/modal';
 import Loading from '@/components/layout/Success.vue';
 import Alert from '@/components/layout/Alert.vue';
 import { useToast } from 'vue-toastification'
+import { useAuthStore } from '@/store/auth'
 definePageMeta({
   middleware: ['auth','roles'],
   allowedRoles: [2]
 })
 const toast = useToast()
 const store = usersStore()
+const auth = useAuthStore()
 
+
+
+store.user_id = auth.user_id;
 const { getSelect } = storeToRefs(store); //Get Getter
 const { getSelectALL } = storeToRefs(store); //Get Getter
 const modalStore = useModalStore();
 const { GetopenModal } = storeToRefs(store); //Get Getter
 const { GetopenModal_ID } = storeToRefs(store); //Get Getter
 const { Pending } = storeToRefs(store); //Get Getter
-
+store.type = 3;
 
 const closeModal = () => {
   store.closeModal();
@@ -60,7 +65,7 @@ const delete_userid = async (id) => {
         <div class="row layout-top-spacing">
           <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
             <div class="widget-content widget-content-area br-8 p-3">
-              <UserList></UserList>
+              <UserStaff></UserStaff>
             </div>
           </div>
         </div>

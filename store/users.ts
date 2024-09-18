@@ -17,6 +17,7 @@ export const usersStore = defineStore('users', {
     status_app:null,
     AlertText: null,
     posts: {},
+    posts_statff:{},
     pending: false,
     pending_form: false,
     sortedbyASC: true,
@@ -28,7 +29,7 @@ export const usersStore = defineStore('users', {
     appr:[],
     userapprove:null,
     checkuserotp:null,
-    type:null,
+    type:0,
     count: 0,
     page: 1,
     per_page: 10,
@@ -41,13 +42,15 @@ export const usersStore = defineStore('users', {
     total: null,
     itemsPerPage: 3,
     user_id_del: null,
+    user_id:null,
     location_id:1,
     country_id:1,
     comment:[],
     formsearch: {
       page: 1,
       per_page: 20,
-      searchDa: '',
+      search: '',
+      verify_account:''
     },
     formapprove: {
       page: 1,
@@ -116,6 +119,27 @@ export const usersStore = defineStore('users', {
       '../../assets/images/loas.png','static/upload/2023/11/files-QrkYdiAou9.png','static/upload/2023/9/files-JWOxjtiwsQ.png',
      ],
      formapeple: {
+      user_id:null,
+      username: '',
+      user_phone: '',
+      full_name: '',
+      first_name: '',
+      last_name: '',
+      user_prefrix: '',
+      identification_number: '',
+      user_birthday: '',
+      expire: '',
+      user_village: '',
+      user_address: '',
+      location_id: null,
+      country_id: 33,
+      passpost_image:'',
+      real_image:'',
+      user_password:'',
+      user_email:''
+    },
+    formeditapeple: {
+      user_id:null,
       username: '',
       user_phone: '',
       full_name: '',
@@ -156,6 +180,9 @@ checkusername: false,
       return state.formapeple;
     },
 
+    EditFormPeple(state) {
+      return state.formeditapeple;
+    },
 
     FormEdit(state) {
       return state.formDataEdit;
@@ -212,12 +239,12 @@ checkusername: false,
 
       this.formsearch.per_page = this.per_page;
       this.formsearch.search = this.searchDa;
-
-console.log(this.formsearch);
       try {
         this.pending = true
         const data = await ApiService.post('/user/list?'+this.type, this.formsearch).then(response => {
+          console.log(response)
           this.posts = response.data
+      
           this.total_page = response.data.total_page
           this.limit_page = response.data.limit_page
           this.current_page = response.data.current_page
@@ -232,6 +259,38 @@ console.log(this.formsearch);
         this.pending = false
       }
     },
+
+    async fetchUsersStaff() {
+      this.selected = [];
+      this.isAllSelected = false;
+
+      this.formsearch.per_page = this.per_page;
+      this.formsearch.search = this.searchDa;
+      this.formsearch.user_id = this.user_id;
+
+    
+      try {
+        this.pending = true
+        const data = await ApiService.post('/user/list?user_type='+this.type, this.formsearch).then(response => {
+         
+          this.posts_statff = response.data
+
+      
+          this.total_page = response.data.total_page
+          this.limit_page = response.data.limit_page
+          this.current_page = response.data.current_page
+          this.total_filter = response.data.total_filter
+          this.total = response.data.total
+        });
+
+      } catch (error) {
+       return false
+      } finally {
+        this.loading = false
+        this.pending = false
+      }
+    },
+
 
     async fetchUsersId(user_id) {
   
@@ -438,6 +497,13 @@ user_id:this.formDetailEdit.user_id,user_village:this.formDetailEdit.user_villag
      
     },
 
+
+    async selectstatus(item) {
+
+    
+     console.log(item);
+    },
+
   
     async search() {
       this.fetchUsers();
@@ -611,11 +677,68 @@ const a = {verify_account:'system_active',identification_number:response.data[0]
       async fetchUsersByOne(item) {
         this.formsearchUser.user_admin_id = this.user_id;
         this.formsearchUser.user_search_id = item;
-        
+
+      
         const data = await ApiService.post('/user/list/get', this.formsearchUser).then(response => {
      this.profile_by_one = response.data;
+  
       });
     },  
+
+    async fetchUsersByOneAdmin(item) {
+      this.formsearchUser.user_admin_id = this.user_id;
+      this.formsearchUser.user_search_id = item;
+
+
+  
+      const data = await ApiService.post('/user/list/getone/profile', this.formsearchUser).then(response => {
+        console.log(response);
+        this.formeditapeple.user_id = response.data[0].user_id
+this.formeditapeple.username = response.data[0].user_name
+this.formeditapeple.user_phone = response.data[0].user_phone
+this.formeditapeple.full_name = response.data[0].user_full_name
+this.formeditapeple.first_name = response.data[0].user_firstname
+this.formeditapeple.last_name = response.data[0].user_lastname
+this.formeditapeple.user_prefrix = response.data[0].user_prefrix
+this.formeditapeple.identification_number = response.data[0].identification_number
+this.formeditapeple.user_birthday = response.data[0].user_birthday
+this.formeditapeple.expire = response.data[0].exp_date
+this.formeditapeple.user_village = response.data[0].user_village
+this.formeditapeple.user_address = response.data[0].user_address
+this.formeditapeple.passpost_image = response.data[0].passpost_image
+this.formeditapeple.real_image = response.data[0].real_image
+this.formeditapeple.location_id = response.data[0].location_id
+this.formeditapeple.user_type = response.data[0].user_type
+this.formeditapeple.active = response.data[0].active
+this.formeditapeple.verify_account = response.data[0].verify_account
+
+
+    });
+  },  
+
+  async UpdateUsersByOneAdmin() {
+    this.formeditapeple.user_email = '';
+    console.log(JSON.stringify(this.formeditapeple));
+
+
+    try {
+      const data = await ApiService.put('/user/update/renew/'+this.formeditapeple.user_id, this.formeditapeple).then(response => {
+       
+        if(response.status == 200){
+          return true
+        }else {
+          return false;
+        }
+        
+  });
+ 
+      return data;
+    } catch (error) {
+      return false;
+    }
+
+
+  },
 
     async fetchUsersByOneComment() {
       const data = await ApiService.post('/user/list/get/comment', this.formsearchUser).then(response => {
@@ -635,6 +758,18 @@ const a = {verify_account:'system_active',identification_number:response.data[0]
 return true;
 }, 
 
+
+async UpdateUserByAdmin() {
+  
+  const data = await ApiService.put('/user/update/renew'+this.formeditapeple.user_id, this.formeditapeple).then(response => {
+    console.log(response);
+});
+
+
+
+return true;
+}, 
+
 async UploadImage() {
 
   if (this.formapeple.passpost_image) {
@@ -649,6 +784,19 @@ async UploadImage() {
      return false;
    }
  }
+
+ if (this.formeditapeple.passpost_image) {
+  let formData = new FormData();
+  formData.append('files', this.formeditapeple.passpost_image);
+  try {
+    const data = await ApiService.upload('/media_file/upload/file', formData);
+    this.formeditapeple.passpost_image = data.data[0].path
+
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
 
 
    },
@@ -670,6 +818,19 @@ async UploadImage() {
         return false;
       }
     }
+
+    if (this.formeditapeple.real_image) {
+   
+      let formDatas = new FormData();
+      formDatas.append('files', this.formeditapeple.real_image);
+      try {
+        const data = await ApiService.upload('/media_file/upload/file', formDatas);
+        this.formeditapeple.real_image = data.data[0].path
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
    
       },
       async CheckPeople() {
@@ -679,6 +840,8 @@ async UploadImage() {
             this.checkemail = response.data.checkemail
             this.checkphone = response.data.checkphone
             this.checkusername = response.data.checkusername
+
+            console.log(response.data);
 
   
           });

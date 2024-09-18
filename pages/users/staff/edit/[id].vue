@@ -16,12 +16,11 @@ import {
 } from "@vuelidate/validators";
 import { usersStore } from "@/store/users";
 import { useAuthStore } from "@/store/auth";
-import ApiService from "../../../services/api.service";
+import ApiService from "../../../../services/api.service";
 import "vue-select/dist/vue-select.css";
 import vSelect from "vue-select";
 import { ref, onMounted } from "vue";
 import { useToast } from 'vue-toastification';
-const { locale, setLocale , t} = useI18n();
 
 definePageMeta({
   middleware: ["auth", "roles"],
@@ -31,17 +30,20 @@ const auth = useAuthStore();
 const store = usersStore();
 
 const router = useRouter();
-const { getFormPeple } = storeToRefs(store);
+const { EditFormPeple } = storeToRefs(store);
 
 await store.Zipcode();
 await store.Country();
 await auth.getProfileDetails();
 store.formapeple.location_id = auth.profiledetails.location_id;
+store.user_id = auth.user_id;
+
+await store.fetchUsersByOneAdmin(router.currentRoute.value.params.id);
+
 const toast = useToast()
 
 const fileInputFont = ref(null);
 const fileInputBack = ref(null);
-const isAtTop = ref(false);
 
 onMounted(() => {
   if (process.client) {
@@ -52,18 +54,7 @@ onMounted(() => {
   store.zipcode.map(function (x) {
     return (x.item_data = x.zipcode_name + " - " + x.province_name);
   });
-  scrollToTop();
-
 });
-
-function scrollToTop() {
-  if (process.client) {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth' // This makes the scroll smooth
-    });
-  }
-}
 
 const rules = computed(() => {
   return {
@@ -140,13 +131,7 @@ const rules = computed(() => {
     real_image: {
       required: helpers.withMessage("expire field is required", required),
     },
-    user_password: {
-      required: helpers.withMessage(
-        "Select location field is required",
-        required
-      ),
-      minLength: minLength(5),
-    },
+
   };
 });
 
@@ -156,26 +141,14 @@ const changeFont = () => {
 };
 
 
-const save = async () => {
-
- 
+const updated = async () => {
   v$.value.$validate();
   if (!v$.value.$error) {
-  let check = await store.CheckPeople();
 
-  
-//await store.SavePeople();
-if((store.checkphone == false) && (store.checkemail == false) && (store.checkusername == false) && (store.checkIden == false)){
- 
-  await store.SavePeople();
-  await store.ResetFormStaff();
-  toast.success("ບັນທຶກສຳເລັດແລ້ວ");
-}else {
-  scrollToTop()
+let  t  = await store.UpdateUsersByOneAdmin();
+console.log('update',t) ;
 
-}
   }
-  scrollToTop()
 }
 
 const RandomPassword = () => {
@@ -227,7 +200,7 @@ const changeFileFont = async (event) => {
     // store.image_pas = inputs.files[0];
     // reader.readAsDataURL(file);
 
-    store.formapeple.passpost_image = inputs.files[0];
+    store.formeditapeple.passpost_image = inputs.files[0];
     // console.log(store.passpost_image);
     store.UploadImage();
   } else {
@@ -251,7 +224,7 @@ const changeFileBack = async (event) => {
     // store.image_pas = inputs.files[0];
     // reader.readAsDataURL(file);
 
-    store.formapeple.real_image = inputs.files[0];
+    store.formeditapeple.real_image = inputs.files[0];
 
     store.UploadImage2();
   } else {
@@ -262,7 +235,7 @@ const changeFileBack = async (event) => {
   }
 };
 
-const v$ = useVuelidate(rules, getFormPeple);
+const v$ = useVuelidate(rules, EditFormPeple);
 
 function coverimage(i) {
   let result = i.slice(0, 6);
@@ -296,7 +269,7 @@ const format = (date) => {
           </ol>
         </nav>
       </div>
-{{ store.formapeple }}
+{{ store.formeditapeple }}
       <div class="middle-content container-xxl p-0">
         <div class="row layout-top-spacing">
           <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
@@ -314,7 +287,7 @@ const format = (date) => {
                     <select
                       class="common__login__input px-2 form-control"
                       aria-label="Default select example"
-                      v-model="store.formapeple.user_prefrix"
+                      v-model="store.formeditapeple.user_prefrix"
                     >
                       <option selected value="" disabled>
                         {{ $t("choose") }}
@@ -343,7 +316,7 @@ const format = (date) => {
                       type="text"
                       :placeholder="$t('fname')"
                       maxlength="50"
-                      v-model="store.formapeple.first_name"
+                      v-model="store.formeditapeple.first_name"
                       :class="{
                         'border-red-500 focus:border-red-500':
                           v$.first_name.$error,
@@ -372,7 +345,7 @@ const format = (date) => {
                       type="text"
                       :placeholder="$t('lname')"
                       maxlength="50"
-                      v-model="store.formapeple.last_name"
+                      v-model="store.formeditapeple.last_name"
                       :class="{
                         'border-red-500 focus:border-red-500':
                           v$.last_name.$error,
@@ -400,7 +373,7 @@ const format = (date) => {
                       class="common__login__input form-control"
                       type="text"
                       :placeholder="$t('full_name_update_acc_pehol')"
-                      v-model="store.formapeple.full_name"
+                      v-model="store.formeditapeple.full_name"
                       :class="{
                         'border-red-500 focus:border-red-500':
                           v$.full_name.$error,
@@ -430,7 +403,7 @@ const format = (date) => {
                       class="common__login__input form-control"
                       type="text"
                       :placeholder="$t('pleho_user_users')"
-                      v-model="store.formapeple.username"
+                      v-model="store.formeditapeple.username"
                       :class="{
                         'border-red-500 focus:border-red-500':
                           v$.username.$error,
@@ -461,21 +434,15 @@ const format = (date) => {
                   <div class="login__form">
                     <label class="form__label"
                       >{{ $t("form_password") }}
-                      <span class="text-xs text-red-500" style="color: red"
-                        >*</span
-                      >
+                     
                     </label>
                     <input
                       class="common__login__input form-control"
                       type="text"
                       :placeholder="$t('pleho_user_password')" 
-                      v-model="store.formapeple.user_password"
-                      :class="{
-                        'border-red-500 focus:border-red-500':
-                          v$.user_password.$error,
-                        'border-[#42d392] ': !v$.user_password.$invalid,
-                      }"
-                      @change="v$.user_password.$touch"
+                      v-model="store.formeditapeple.user_password"
+               
+                     
                        maxlength="12"
                     />
                     <button
@@ -484,12 +451,6 @@ const format = (date) => {
                           >
                             Generate
                           </button>
-                    <span
-                      class="text-xs text-red-500"
-                      style="color: red"
-                      v-if="v$.user_password.$error"
-                      >{{ $t("profile_alert_password") }}</span
-                    >
                   </div>
                 </div>
 
@@ -506,7 +467,7 @@ const format = (date) => {
                       class="common__login__input form-control"
                       type="text"
                       :placeholder="$t('pleho_user_phone')"
-                      v-model="store.formapeple.user_phone"
+                      v-model="store.formeditapeple.user_phone"
                       :class="{
                         'border-red-500 focus:border-red-500':
                           v$.user_phone.$error,
@@ -547,7 +508,7 @@ const format = (date) => {
                       class="common__login__input form-control"
                       type="text"
                       placeholder="admin@gmail.com"
-                      v-model="store.formapeple.user_email"
+                      v-model="store.email"
                        maxlength="50"
                     />
                   </div>
@@ -571,7 +532,7 @@ const format = (date) => {
                       class="common__login__input form-control"
                       type="text"
                       :placeholder="$t('passport_update_acc_pehol')"
-                      v-model="store.formapeple.identification_number"
+                      v-model="store.formeditapeple.identification_number"
                       :class="{
                         'border-red-500 focus:border-red-500':
                           v$.identification_number.$error,
@@ -607,7 +568,7 @@ const format = (date) => {
                     </label>
                     <VueDatePicker
                       :format="format"
-                      v-model="store.formapeple.expire"
+                      v-model="store.formeditapeple.expire"
                       :enable-time-picker="false"
                       :placeholder="$t('exp_update_acc_pehol')"
                     ></VueDatePicker>
@@ -630,7 +591,7 @@ const format = (date) => {
 
                     <VueDatePicker
                       :format="format"
-                      v-model="store.formapeple.user_birthday"
+                      v-model="store.formeditapeple.user_birthday"
                       :enable-time-picker="false"
                       :placeholder="$t('bird_update_acc_pehol')"
                     ></VueDatePicker>
@@ -655,7 +616,7 @@ const format = (date) => {
                       class="common__login__input form-control"
                       type="text"
                       :placeholder="$t('add_update_acc_pehol')"
-                      v-model="store.formapeple.user_address"
+                      v-model="store.formeditapeple.user_address"
                       :class="{
                         'border-red-500 focus:border-red-500':
                           v$.user_address.$error,
@@ -685,7 +646,7 @@ const format = (date) => {
                       class="common__login__input form-control"
                       type="text"
                       :placeholder="$t('home_update_acc_pehol')"
-                      v-model="store.formapeple.user_village"
+                      v-model="store.formeditapeple.user_village"
                       :class="{
                         'border-red-500 focus:border-red-500':
                           v$.user_village.$error,
@@ -716,7 +677,7 @@ const format = (date) => {
                       :options="store.zipcode"
                       label="item_data"
                       placeholder="ເລືອກ"
-                      v-model="store.formapeple.location_id"
+                      v-model="store.formeditapeple.location_id"
                       :reduce="(item_data) => item_data.id"
                     ></v-select>
                     <span
@@ -734,7 +695,7 @@ const format = (date) => {
                       $t("form_approve_cou")
                     }}</label>
                     <select
-                      v-model="store.formapeple.country_id"
+                      v-model="store.formeditapeple.country_id"
                       class="common__login__input px-2 form-control"
                       aria-label="Default select example"
                       disabled
@@ -776,10 +737,10 @@ const format = (date) => {
                           </button>
                         </span>
                       </div>
-                      <div class="card-body" v-if="store.formapeple.passpost_image">
+                      <div class="card-body" v-if="store.formeditapeple.passpost_image">
                         <img
                           class="aboutimg__1"
-                          :src="coverimage(store.formapeple.passpost_image)"
+                          :src="coverimage(store.formeditapeple.passpost_image)"
                           alt="aboutimg"
                           style="width: 100%"
                         />
@@ -824,10 +785,10 @@ const format = (date) => {
                       </div>
 
                    
-                      <div class="card-body" v-if="store.formapeple.real_image">
+                      <div class="card-body" v-if="store.formeditapeple.real_image">
                         <img
                           class="aboutimg__1"
-                          :src="coverimage(store.formapeple.real_image)"
+                          :src="coverimage(store.formeditapeple.real_image)"
                           alt="aboutimg"
                           style="width: 100%"
                         />
@@ -851,7 +812,7 @@ const format = (date) => {
                 </div>
                 <div class="col-xl-12 mt-3">
                   <div class="login__form">
-                    <button type="button" class="btn btn-primary" style="width: 100%;" @click="save()">Save</button>
+                    <button type="button" class="btn btn-primary" style="width: 100%;" @click="updated()">Save</button>
                   </div>
                 </div>
               </div>
@@ -863,8 +824,4 @@ const format = (date) => {
   </div>
 </template>
 
-<style  scoped>
-
-
-</style>
-
+<style></style>

@@ -217,6 +217,7 @@
   "menu_user_index": "#",
   "menu_user_name": "ຊື່ - ນາມສະກຸນ",
   "menu_user_type": "ປະເພດຜູ້ໃຊ້",
+  
   "menu_user_tel": "ເບີ​ໂທ",
   "menu_user_time": "ລ່າ​ສຸດ",
   "menu_user_dlt": "ຈັດການໃບຂັບຂີ່ຂອງເຈົ້າ",
@@ -242,7 +243,7 @@
 
 
 
-  "menu_user_iden": "ໝາຍເລກບັດປະຈຳຕົວ",
+  "menu_user_iden": "ບັດປະຈຳຕົວ",
   "menu_user_address": "ທີ່ຢູ່",
   "menu_user_village": "ບ້ານ",
   "menu_user_birdday": "ວັນເດືອນປີເກີດ",
@@ -251,7 +252,9 @@
   "menu_user_verify": "ສະຖານະต",
   "menu_user_image": "ຮູບ",
   "menu_user_bt_save": "ບັນທຶກ",
-
+  "menu_user_status": "ສະຖານະ",
+  "menu_user_login_last": "ເຂົ້າລະບົບຫຼ້າສຸດ",
+  
   "menu_user_detail": "ລາຍລະອຽດ",
   "menu_user_account": "ບັນຊີ",
 
@@ -373,8 +376,8 @@
   "unactive":"ບໍ່ໄດ້ຢືນຢັນ",
   "phone_unactive":"ຢືນຢັນ OTP ບໍ່​ສໍາ​ເລັດ",
   "phone_active":"ຢືນຢັນ OTP ສໍາເລັດ",
-  "system_unactive":"ຢືນຢັນຂໍ້ມູນທີ່ບໍ່ຖືກຕ້ອງ",
-  "system_active":"ກວດເບິ່ງຂໍ້ມູນຖືກຕ້ອງ",
+  "system_unactive":"ຢື້ນຢັນຕົວຕົນບໍ່​ສຳເລັດ",
+  "system_active":"ຢື້ນຢັນຕົວຕົນສຳເລັດ",
   "menu_approve":"ບັນຊີລາຍຊື່ການອະນຸມັດ",
   "page_menu_approve":"ອະນຸມັດ",
   "approve_table_index":"#",
