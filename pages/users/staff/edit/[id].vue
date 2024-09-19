@@ -147,7 +147,7 @@ const updated = async () => {
   if (!v$.value.$error) {
 
     let check = await store.CheckPeopleEdit();
-
+    let  t  = await store.UpdateUsersByOneAdmin();
 
     if (
       store.checkphone == false &&
@@ -155,6 +155,9 @@ const updated = async () => {
       store.checkusername == false &&
       store.checkIden == false
     ) {
+
+      let  t  = await store.UpdateUsersByOneAdmin();
+      toast.success("ບັນທຶກສຳເລັດແລ້ວ");
       
     } else {
       scrollToTop();

@@ -159,7 +159,7 @@ const save = async () => {
   if (!v$.value.$error) {
     let check = await store.CheckPeople();
 
-    //await store.SavePeople();
+   
     if (
       store.checkphone == false &&
       store.checkemail == false &&
@@ -338,7 +338,7 @@ const format = (date) => {
                 <div class="col-xl-5">
                   <div class="login__form">
                     <label class="form__label"
-                      >{{ $t("fname") }}
+                      >{{ $t("table_register_user_firstname") }}
                       <span class="text-xs text-red-500" style="color: red"
                         >*</span
                       ></label
@@ -367,7 +367,7 @@ const format = (date) => {
                 <div class="col-xl-5">
                   <div class="login__form">
                     <label class="form__label"
-                      >{{ $t("lname")
+                      >{{ $t("table_register_user_lastname")
                       }}<span class="text-xs text-red-500" style="color: red"
                         >*</span
                       ></label
@@ -426,7 +426,7 @@ const format = (date) => {
                 <div class="col-xl-12 mt-3">
                   <div class="login__form">
                     <label class="form__label"
-                      >username
+                      >Username
                       <span class="text-xs text-red-500" style="color: red"
                         >*</span
                       >
@@ -499,7 +499,7 @@ const format = (date) => {
                 <div class="col-xl-12 mt-3">
                   <div class="login__form">
                     <label class="form__label"
-                      >ເບີໂທ
+                      >{{ $t("approve_table_tel") }}
                       <span class="text-xs text-red-500" style="color: red"
                         >*</span
                       >
@@ -753,7 +753,8 @@ const format = (date) => {
 
                 <div class="col-xl-12 mt-3">
                   <div class="login__form">
-                    <label class="form__label">ສະຖານະ</label>
+                    <label class="form__label">{{ $t("form_approve_status")
+                      }}</label>
                     <select
                       class="common__login__input px-2 form-control"
                       aria-label="Default select example"

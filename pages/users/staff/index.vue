@@ -24,6 +24,7 @@ const auth = useAuthStore()
 
 
 store.user_id = auth.user_id;
+store.formsearch.verify_account = '';
 const { getSelect } = storeToRefs(store); //Get Getter
 const { getSelectALL } = storeToRefs(store); //Get Getter
 const modalStore = useModalStore();

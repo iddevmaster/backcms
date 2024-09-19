@@ -407,7 +407,7 @@
   "status_fitter":"Status",
   "table_register_id":"#",
   "table_register_name":"Name",
-  "table_register_user_firstname":"Name",
+  "table_register_user_firstname":"First Name",
   "table_register_user_lastname":"Last Name",
   "table_register_user_email":"Email",
   "table_register_user_phone":"Phone",
@@ -424,7 +424,7 @@
   "table_ap_date_start":"Start Date",
   "table_ap_date_end":"End Date",
   "table_ap_remark":"Remark",
-  "table_ap_user_f":"Name",
+  "table_ap_user_f":" Name",
   "table_ap_user_l":"Last Name",
   "table_ap_user_email":"Email",
   "table_ap_user_phone":"Phone",
@@ -582,18 +582,19 @@
   "approve_table_prov":"ເມືອງ-ແຂວງ",
   "approve_table_act":"Action",
 
-  "form_approve_full_name": "*ຊື່ເຕັມ ເປັນພາສາອັງກິດ",
+  "form_approve_full_name": "*Full Name (English)",
   "form_password": "Password",
-"form_approve_passport": "ເລກບັດປະຈຳຕົວ",
-"form_approve_passport_exp": "ວັນໝົດອາຍຸຂອງບັດ",
-"form_approve_birth_day": "ວັນເດືອນປີເກີດ",
-"form_approve_address": "*ທີ່ຢູ່ປັດຈຸບັນ",
-"form_approve_vil": "*ບ້ານ",
-"form_approve_prov": "*ເມືອງ - ແຂວງ",
-"form_approve_cou": "*ສັນຊາດ",
-"form_approve_pass_image": "ຮູບບັດ / Passport",
-"form_approve_real_image": "ຮູບຕົວຈິງ",
-"form_approve_save": "ສົ່ງ",
+"form_approve_passport": "Passport",
+"form_approve_passport_exp": "Passport Exp",
+"form_approve_birth_day": "Birthday",
+"form_approve_address": "*Address",
+"form_approve_vil": "Village",
+"form_approve_prov": "ເມືອງ - ແຂວງ",
+"form_approve_cou": "Country",
+"form_approve_pass_image": "Passport Image",
+"form_approve_real_image": "Real Image",
+"form_approve_save": "Send",
+"form_approve_status": "Status",
 "email": "ອີເມວ",
 "tel": "ເບີ​ໂທ",
 "tel_placeholder": "ເບີ​ໂທ 20xxxxxxxx",
@@ -650,6 +651,9 @@
 "alert_checkemail":"Email ซ้ำ",
 "alert_checkphone":"เบอร์โทรซ้ำ",
 "alert_checkusername":"Username ซ้ำ",
+
+
+
 
   "" : ""
 

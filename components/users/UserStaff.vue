@@ -1,28 +1,15 @@
 <template>
   <div class="row layout-top-spacing">
     <div class="col-lg-6 col-md-4 col-sm-4 mb-4">
-      <input
-        id="t-text"
-        type="text"
-        name="txt"
-        placeholder="ຊື່ / username / ບັດປະຈຳຕົວ/ Passport / ເບີໂທ"
-        class="form-control"
-        required=""
-        v-model="store.searchDa"
-        @keyup="searchData"
-        maxlength="30"
-      />
+      <input id="t-text" type="text" name="txt" placeholder="ຊື່ / username / ບັດປະຈຳຕົວ/ Passport / ເບີໂທ"
+        class="form-control" required="" v-model="store.searchDa" @keyup="searchData" maxlength="30" />
     </div>
 
     <div class="col-xl-1 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
       <label for="inputEmail3" class="col-sm-12 col-form-label">ສະຖານະ</label>
     </div>
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
-      <select
-        class="form-select form-select"
-        aria-label="Default select example"
-        @change="selecttype($event)"
-      >
+      <select class="form-select form-select" aria-label="Default select example" @change="selecttype($event)">
         <option value="">ທັງໝົດ</option>
         <option value="unactive">{{ $t("unactive") }}</option>
         <option value="phone_active">{{ $t("phone_active") }}</option>
@@ -32,11 +19,7 @@
     </div>
 
     <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
-      <select
-        class="form-select form-select"
-        aria-label="Default select example"
-        @change="selectshowdata($event)"
-      >
+      <select class="form-select form-select" aria-label="Default select example" @change="selectshowdata($event)">
         <option value="10">10</option>
         <option value="20">20</option>
         <option value="50">50</option>
@@ -73,10 +56,10 @@
           <!-- <td><input type="checkbox" v-model="store.selected" :value="user" number></td> -->
           <td>
             {{
-              store.formsearch.page * store.formsearch.per_page -
-              (store.formsearch.per_page - index) +
-              1
-            }}
+          store.formsearch.page * store.formsearch.per_page -
+          (store.formsearch.per_page - index) +
+          1
+        }}
           </td>
           <td>{{ user.user_firstname }} {{ user.user_lastname }}</td>
           <td>{{ user.user_name }}</td>
@@ -84,8 +67,6 @@
 
           <td>{{ user.user_phone }}</td>
           <td>{{ user.identification_number }}</td>
-          <td>{{ user.verify_account }}</td>
-
           <td v-if="user.verify_account == 'system_active'">
             <span style="color:#059814 ;">{{ $t("system_active") }}</span>
           </td>
@@ -100,48 +81,24 @@
           <td v-else-if="user.verify_account == 'system_unactive'">
             <span style="color: #AA4A44;">{{ $t("system_unactive") }}</span>
           </td>
-
           <td>{{ user.login_last_date }}</td>
-          <td>{{ user.user_type }}</td>
           <td>
             <NuxtLink :to="'/users/staff/edit/' + user.user_id">
               <a class="badge badge-light-primary text-start me-2 action-edit">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="feather feather-edit-3"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="feather feather-edit-3">
                   <path d="M12 20h9"></path>
-                  <path
-                    d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"
-                  ></path></svg  ></a>
+                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg></a>
             </NuxtLink>
-            <a
-              class="badge badge-light-danger text-start action-delete"
-              @click="del(user.user_id)"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-trash"
-              >
+            <a class="badge badge-light-danger text-start action-delete" @click="del(user.user_id)"><svg
+                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-trash">
                 <polyline points="3 6 5 6 21 6"></polyline>
-                <path
-                  d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                ></path></svg ></a>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg></a>
           </td>
         </tr>
       </tbody>
@@ -153,42 +110,25 @@
   <div class="row">
     <span>Showing {{ (store.current_page - 1) * store.formsearch.per_page + 1 }} to
       {{
-        Math.min(store.current_page * store.formsearch.per_page, store.total)
-      }}
-      of {{ store.total }} entries</span
-    >
+          Math.min(store.current_page * store.formsearch.per_page, store.total)
+        }}
+      of {{ store.total }} entries</span>
 
     <div class="col-xl-12 col-lg-12">
       <div class="pagination-no_spacing" v-if="posts_statff.total_page > 1">
         <ul class="pagination">
           <li>
-            <a
-              href="javascript:void(0);"
-              class="prev"
-              @click="validatePNumberDown()"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-chevron-left"
-              >
-                <polyline points="15 18 9 12 15 6"></polyline></svg  ></a>
+            <a href="javascript:void(0);" class="prev" @click="validatePNumberDown()"><svg
+                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-chevron-left">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg></a>
           </li>
           <li>
             <div class="col-xs-1">
-              <input
-                id="ex1"
-                type="number"
-                style="width: 50px"
-                v-model="store.formsearch.page"
-                @input="validatePNumber($event)"
-              />
+              <input id="ex1" type="number" style="width: 50px" v-model="store.formsearch.page"
+                @input="validatePNumber($event)" />
             </div>
           </li>
           <li><a href="javascript:void(0);">/</a></li>
@@ -196,23 +136,12 @@
             <a href="javascript:void(0);">{{ store.total_page }}</a>
           </li>
           <li>
-            <a
-              href="javascript:void(0);"
-              class="next"
-              @click="validatePNumberUp()"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline></svg  ></a>
+            <a href="javascript:void(0);" class="next" @click="validatePNumberUp()"><svg
+                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-chevron-right">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg></a>
           </li>
         </ul>
       </div>

@@ -138,6 +138,8 @@ export const usersStore = defineStore('users', {
       user_password:'',
       user_email:'',
       verify_account:"system_active",
+      user_type:"3",
+      active:1
     },
     formeditapeple: {
       user_id:null,
@@ -157,7 +159,9 @@ export const usersStore = defineStore('users', {
       passpost_image:'',
       real_image:'',
       user_password:'',
-      user_email:'' 
+      user_email:'',
+      user_type:"3",
+      active:1
     },
     passpost_image:'',
     image_pas:'',
@@ -235,17 +239,43 @@ checkusername: false,
       this.formsearch.search = '';
       this.searchDa = '';
     },
+ 
     async fetchUsers() {
       this.selected = [];
       this.isAllSelected = false;
 
       this.formsearch.per_page = this.per_page;
       this.formsearch.search = this.searchDa;
+      this.formsearch.user_id = this.user_id;
+
+    if(this.type == 0){
       try {
         this.pending = true
-        const data = await ApiService.post('/user/list?'+this.type, this.formsearch).then(response => {
-          console.log(response)
-          this.posts = response.data
+        const data = await ApiService.post('/user/list?', this.formsearch).then(response => {
+         
+          this.posts_statff = response.data
+          this.total_page = response.data.total_page
+          this.limit_page = response.data.limit_page
+          this.current_page = response.data.current_page
+          this.total_filter = response.data.total_filter
+          this.total = response.data.total
+        });
+
+      } catch (error) {
+       return false
+      } finally {
+        this.loading = false
+        this.pending = false
+      }
+    }
+    if(this.type == 1){
+      console.log('1');
+      try {
+        this.pending = true
+        const data = await ApiService.post('/user/list?user_type='+this.type, this.formsearch).then(response => {
+         
+          this.posts_statff = response.data
+
       
           this.total_page = response.data.total_page
           this.limit_page = response.data.limit_page
@@ -260,7 +290,56 @@ checkusername: false,
         this.loading = false
         this.pending = false
       }
+    }
+    if(this.type == 2){
+      console.log('2');
+      try {
+        this.pending = true
+        const data = await ApiService.post('/user/list?user_type='+this.type, this.formsearch).then(response => {
+         
+          this.posts_statff = response.data
+
+      
+          this.total_page = response.data.total_page
+          this.limit_page = response.data.limit_page
+          this.current_page = response.data.current_page
+          this.total_filter = response.data.total_filter
+          this.total = response.data.total
+        });
+
+      } catch (error) {
+       return false
+      } finally {
+        this.loading = false
+        this.pending = false
+      }
+    }
+    if(this.type == 3){
+      console.log('3');
+      try {
+        this.pending = true
+        const data = await ApiService.post('/user/list?user_type='+this.type, this.formsearch).then(response => {
+         
+          this.posts_statff = response.data
+
+      
+          this.total_page = response.data.total_page
+          this.limit_page = response.data.limit_page
+          this.current_page = response.data.current_page
+          this.total_filter = response.data.total_filter
+          this.total = response.data.total
+        });
+
+      } catch (error) {
+       return false
+      } finally {
+        this.loading = false
+        this.pending = false
+      }
+    }
+  
     },
+
 
     async fetchUsersStaff() {
       this.selected = [];
@@ -490,12 +569,7 @@ user_id:this.formDetailEdit.user_id,user_village:this.formDetailEdit.user_villag
 
     selecttypes(item) {
 
-      // const a = 'user_type=' + this.type
-      if(item){
-        this.type = 'user_type=' + item
-      }else{
-        this.type = null
-      }
+ this.type = item
      
     },
 
@@ -721,8 +795,6 @@ this.formeditapeple.user_email = response.data[0].user_email
 
   async UpdateUsersByOneAdmin() {
 
-    console.log(JSON.stringify(this.formeditapeple));
-
 
     try {
       const data = await ApiService.put('/user/update/renew/'+this.formeditapeple.user_id, this.formeditapeple).then(response => {
@@ -873,9 +945,7 @@ async UploadImage() {
       },
       async SavePeople() {
     
-        this.formapeple.user_type = 3;
-        this.formapeple.active = 1;
-        this.formapeple.email = this.email;
+
 
         const currentDate = new Date(this.formapeple.user_birthday);
         const currentEnd = new Date(this.formapeple.expire);
@@ -885,8 +955,9 @@ async UploadImage() {
         this.formapeple.expire = exp
         this.formapeple.user_birthday = birth
 
-
+       
         try {
+          
           const data = await ApiService.post('/user/createuserpopulation',this.formapeple).then(response => {
     if(response.status == 200){
 return true;
@@ -919,6 +990,9 @@ return true;
           user_password:'',
           user_email:'',
           verify_account:'system_active',
+          user_type:'3',
+          active:1,
+      
           
         },
         this.email ='',
