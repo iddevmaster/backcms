@@ -20,8 +20,8 @@ import ApiService from "../../../services/api.service";
 import "vue-select/dist/vue-select.css";
 import vSelect from "vue-select";
 import { ref, onMounted } from "vue";
-import { useToast } from 'vue-toastification';
-const { locale, setLocale , t} = useI18n();
+import { useToast } from "vue-toastification";
+const { locale, setLocale, t } = useI18n();
 
 definePageMeta({
   middleware: ["auth", "roles"],
@@ -37,7 +37,7 @@ await store.Zipcode();
 await store.Country();
 await auth.getProfileDetails();
 store.formapeple.location_id = auth.profiledetails.location_id;
-const toast = useToast()
+const toast = useToast();
 
 const fileInputFont = ref(null);
 const fileInputBack = ref(null);
@@ -53,14 +53,13 @@ onMounted(() => {
     return (x.item_data = x.zipcode_name + " - " + x.province_name);
   });
   scrollToTop();
-
 });
 
 function scrollToTop() {
   if (process.client) {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth' // This makes the scroll smooth
+      behavior: "smooth", // This makes the scroll smooth
     });
   }
 }
@@ -155,28 +154,29 @@ const changeFont = () => {
   fileInputFont.value.click();
 };
 
-
 const save = async () => {
-
- 
   v$.value.$validate();
   if (!v$.value.$error) {
-  let check = await store.CheckPeople();
+    let check = await store.CheckPeople();
 
-  
-//await store.SavePeople();
-if((store.checkphone == false) && (store.checkemail == false) && (store.checkusername == false) && (store.checkIden == false)){
- 
-  await store.SavePeople();
-  await store.ResetFormStaff();
-  toast.success("ບັນທຶກສຳເລັດແລ້ວ");
-}else {
-  scrollToTop()
-
-}
+    //await store.SavePeople();
+    if (
+      store.checkphone == false &&
+      store.checkemail == false &&
+      store.checkusername == false &&
+      store.checkIden == false
+    ) {
+      await store.SavePeople();
+      await store.ResetFormStaff();
+      v$.value.$reset();
+      store.formapeple.location_id = auth.profiledetails.location_id;
+      toast.success("ບັນທຶກສຳເລັດແລ້ວ");
+    } else {
+      scrollToTop();
+    }
   }
-  scrollToTop()
-}
+  scrollToTop();
+};
 
 const RandomPassword = () => {
   let r = (Math.random() + 1).toString(36).substring(6);
@@ -185,29 +185,34 @@ const RandomPassword = () => {
 const filterInput = async (event) => {
   // stores.form.user_phone = event.target.value.replace(/\D/g, "");
 
-
   const key = event.data;
-      if (event.data === ' ') {
-        store.formapeple.user_phone= store.formapeple.user_phone.substring(0, store.formapeple.user_phone.length - 1);
-        return;
-      }
-      if (store.formapeple.user_phone.charAt(0) !== '2') {
-        store.formapeple.user_phone = "";
-        return;
-      } 
-      if ((store.formapeple.user_phone.charAt(1) !== '') && (store.formapeple.user_phone.charAt(1) !== '0')) {
-        store.formapeple.user_phone = "2";
-        return;
-      } 
-      store.formapeple.user_phone = event.target.value.replace(/\D/g, "");
+  if (event.data === " ") {
+    store.formapeple.user_phone = store.formapeple.user_phone.substring(
+      0,
+      store.formapeple.user_phone.length - 1
+    );
+    return;
+  }
+  if (store.formapeple.user_phone.charAt(0) !== "2") {
+    store.formapeple.user_phone = "";
+    return;
+  }
+  if (
+    store.formapeple.user_phone.charAt(1) !== "" &&
+    store.formapeple.user_phone.charAt(1) !== "0"
+  ) {
+    store.formapeple.user_phone = "2";
+    return;
+  }
+  store.formapeple.user_phone = event.target.value.replace(/\D/g, "");
 };
 
-
 const onInput = async (event) => {
-  store.formapeple.identification_number = event.target.value.replace(/\D/g, '');
-}
-
-
+  store.formapeple.identification_number = event.target.value.replace(
+    /\D/g,
+    ""
+  );
+};
 
 const changeBack = () => {
   // Trigger a click event on the file input element
@@ -296,7 +301,7 @@ const format = (date) => {
           </ol>
         </nav>
       </div>
-{{ store.formapeple }}
+      {{ store.formapeple }}
       <div class="middle-content container-xxl p-0">
         <div class="row layout-top-spacing">
           <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
@@ -407,7 +412,7 @@ const format = (date) => {
                         'border-[#42d392] ': !v$.full_name.$invalid,
                       }"
                       @change="v$.full_name.$touch"
-                       maxlength="100"
+                      maxlength="100"
                     />
                     <span
                       class="text-xs text-red-500"
@@ -437,7 +442,7 @@ const format = (date) => {
                         'border-[#42d392] ': !v$.username.$invalid,
                       }"
                       @change="v$.username.$touch"
-                       maxlength="30"
+                      maxlength="30"
                     />
                     <span
                       class="text-xs text-red-500"
@@ -445,7 +450,6 @@ const format = (date) => {
                       v-if="v$.username.$error"
                       >{{ $t("profile_alert_usersname") }}</span
                     >
-
 
                     <span
                       class="text-xs text-red-500"
@@ -455,7 +459,6 @@ const format = (date) => {
                     >
                   </div>
                 </div>
-
 
                 <div class="col-xl-12 mt-3">
                   <div class="login__form">
@@ -468,7 +471,7 @@ const format = (date) => {
                     <input
                       class="common__login__input form-control"
                       type="text"
-                      :placeholder="$t('pleho_user_password')" 
+                      :placeholder="$t('pleho_user_password')"
                       v-model="store.formapeple.user_password"
                       :class="{
                         'border-red-500 focus:border-red-500':
@@ -476,14 +479,14 @@ const format = (date) => {
                         'border-[#42d392] ': !v$.user_password.$invalid,
                       }"
                       @change="v$.user_password.$touch"
-                       maxlength="12"
+                      maxlength="12"
                     />
                     <button
-                            class="changeImg btn btn-outline-dark"
-                         @click="RandomPassword"
-                          >
-                            Generate
-                          </button>
+                      class="changeImg btn btn-outline-dark"
+                      @click="RandomPassword"
+                    >
+                      Generate
+                    </button>
                     <span
                       class="text-xs text-red-500"
                       style="color: red"
@@ -492,7 +495,6 @@ const format = (date) => {
                     >
                   </div>
                 </div>
-
 
                 <div class="col-xl-12 mt-3">
                   <div class="login__form">
@@ -512,8 +514,8 @@ const format = (date) => {
                           v$.user_phone.$error,
                         'border-[#42d392] ': !v$.user_phone.$invalid,
                       }"
-                         maxlength="10"
-                          @input="filterInput"
+                      maxlength="10"
+                      @input="filterInput"
                       @change="v$.user_phone.$touch"
                     />
                     <span
@@ -523,13 +525,10 @@ const format = (date) => {
                       >{{ $t("profile_alert_phone") }}</span
                     >
 
-                    <span
-                      class="text-xs text-red-500"
-                      style="color: #FFA927"
-                      > ແນະນຳ: ເບີໂທ ຕ້ອງບໍ່ຊ້ຳກັນກັບຜູ້ອື່ນ ແລະ ຕ້ອງຢືນຢັນວ່າລາວເປັນເຈົ້າຂອງແທ້ (ຕຢ: ອາດຈະລອງໂທໃສ່)</span
+                    <span class="text-xs text-red-500" style="color: #ffa927">
+                      ແນະນຳ: ເບີໂທ ຕ້ອງບໍ່ຊ້ຳກັນກັບຜູ້ອື່ນ ແລະ
+                      ຕ້ອງຢືນຢັນວ່າລາວເປັນເຈົ້າຂອງແທ້ (ຕຢ: ອາດຈະລອງໂທໃສ່)</span
                     >
-
-                   
 
                     <span
                       class="text-xs text-red-500"
@@ -548,15 +547,15 @@ const format = (date) => {
                       type="text"
                       placeholder="admin@gmail.com"
                       v-model="store.formapeple.user_email"
-                       maxlength="50"
+                      maxlength="50"
                     />
                   </div>
                   <span
-                      class="text-xs text-red-500"
-                      style="color: red"
-                      v-if="store.checkemail"
-                      >{{ $t("alert_checkemail") }}</span
-                    >
+                    class="text-xs text-red-500"
+                    style="color: red"
+                    v-if="store.checkemail"
+                    >{{ $t("alert_checkemail") }}</span
+                  >
                 </div>
 
                 <div class="col-xl-12 mt-3">
@@ -577,8 +576,8 @@ const format = (date) => {
                           v$.identification_number.$error,
                         'border-[#42d392] ': !v$.identification_number.$invalid,
                       }"
-                         maxlength="13"
-                       @input="onInput"
+                      maxlength="13"
+                      @input="onInput"
                       @change="v$.identification_number.$touch"
                     />
 
@@ -752,6 +751,34 @@ const format = (date) => {
                   </div>
                 </div>
 
+                <div class="col-xl-12 mt-3">
+                  <div class="login__form">
+                    <label class="form__label">ສະຖານະ</label>
+                    <select
+                      class="common__login__input px-2 form-control"
+                      aria-label="Default select example"
+                      v-model="store.formapeple.verify_account"
+                    >
+                      <option selected value="" disabled>
+                        {{ $t("choose") }}
+                      </option>
+                      <option value="unactive">{{ $t("unactive") }}</option>
+                      <option value="phone_unactive">
+                        {{ $t("phone_unactive") }}
+                      </option>
+                      <option value="phone_active">
+                        {{ $t("phone_active") }}
+                      </option>
+                      <option value="system_unactive">
+                        {{ $t("system_unactive") }}
+                      </option>
+                      <option value="system_active">
+                        {{ $t("system_active") }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
                 <div class="row mt-4">
                   <div class="col-sm-6">
                     <div class="card">
@@ -776,7 +803,10 @@ const format = (date) => {
                           </button>
                         </span>
                       </div>
-                      <div class="card-body" v-if="store.formapeple.passpost_image">
+                      <div
+                        class="card-body"
+                        v-if="store.formapeple.passpost_image"
+                      >
                         <img
                           class="aboutimg__1"
                           :src="coverimage(store.formapeple.passpost_image)"
@@ -793,14 +823,11 @@ const format = (date) => {
                         />
                       </div>
                     </div>
-                    <span
-                     
-                     style="color: red"
-                     v-if="v$.passpost_image.$error"
-                     >{{ $t("form_approve_pass_image") }}</span
-                   >
+                    <span style="color: red" v-if="v$.passpost_image.$error">{{
+                      $t("form_approve_pass_image")
+                    }}</span>
                   </div>
-                  
+
                   <div class="col-sm-6">
                     <div class="card">
                       <div class="card-body">
@@ -823,7 +850,6 @@ const format = (date) => {
                         </span>
                       </div>
 
-                   
                       <div class="card-body" v-if="store.formapeple.real_image">
                         <img
                           class="aboutimg__1"
@@ -841,17 +867,21 @@ const format = (date) => {
                         />
                       </div>
                     </div>
-                    <span
-                     
-                     style="color: red"
-                     v-if="v$.real_image.$error"
-                     >{{ $t("form_approve_real_image") }}</span
-                   >
+                    <span style="color: red" v-if="v$.real_image.$error">{{
+                      $t("form_approve_real_image")
+                    }}</span>
                   </div>
                 </div>
                 <div class="col-xl-12 mt-3">
                   <div class="login__form">
-                    <button type="button" class="btn btn-primary" style="width: 100%;" @click="save()">Save</button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      style="width: 100%"
+                      @click="save()"
+                    >
+                      Save
+                    </button>
                   </div>
                 </div>
               </div>
@@ -864,7 +894,5 @@ const format = (date) => {
 </template>
 
 <style  scoped>
-
-
 </style>
 

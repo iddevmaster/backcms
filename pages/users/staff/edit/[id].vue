@@ -54,6 +54,7 @@ onMounted(() => {
   store.zipcode.map(function (x) {
     return (x.item_data = x.zipcode_name + " - " + x.province_name);
   });
+  scrollToTop();
 });
 
 const rules = computed(() => {
@@ -145,9 +146,21 @@ const updated = async () => {
   v$.value.$validate();
   if (!v$.value.$error) {
 
-let  t  = await store.UpdateUsersByOneAdmin();
-console.log('update',t) ;
+    let check = await store.CheckPeopleEdit();
 
+
+    if (
+      store.checkphone == false &&
+      store.checkemail == false &&
+      store.checkusername == false &&
+      store.checkIden == false
+    ) {
+      
+    } else {
+      scrollToTop();
+    }
+// let  t  = await store.UpdateUsersByOneAdmin();
+// toast.success("ບັນທຶກສຳເລັດແລ້ວ");
   }
 }
 
@@ -246,6 +259,16 @@ function coverimage(i) {
     return i;
   }
 }
+
+function scrollToTop() {
+  if (process.client) {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth", // This makes the scroll smooth
+    });
+  }
+}
+
 const date = ref(new Date());
 const format = (date) => {
   const day = date.getDate();
@@ -508,7 +531,7 @@ const format = (date) => {
                       class="common__login__input form-control"
                       type="text"
                       placeholder="admin@gmail.com"
-                      v-model="store.email"
+                      v-model="store.formeditapeple.user_email"
                        maxlength="50"
                     />
                   </div>
@@ -708,6 +731,35 @@ const format = (date) => {
                         :value="item.country_id"
                       >
                         {{ item.country_name_eng }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+
+
+                <div class="col-xl-12 mt-3">
+                  <div class="login__form">
+                    <label class="form__label">ສະຖານະ</label>
+                    <select
+                      class="common__login__input px-2 form-control"
+                      aria-label="Default select example"
+                      v-model="store.formeditapeple.verify_account"
+                    >
+                      <option selected value="" disabled>
+                        {{ $t("choose") }}
+                      </option>
+                      <option value="unactive">{{ $t("unactive") }}</option>
+                      <option value="phone_unactive">
+                        {{ $t("phone_unactive") }}
+                      </option>
+                      <option value="phone_active">
+                        {{ $t("phone_active") }}
+                      </option>
+                      <option value="system_unactive">
+                        {{ $t("system_unactive") }}
+                      </option>
+                      <option value="system_active">
+                        {{ $t("system_active") }}
                       </option>
                     </select>
                   </div>

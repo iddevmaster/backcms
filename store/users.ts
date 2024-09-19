@@ -136,7 +136,8 @@ export const usersStore = defineStore('users', {
       passpost_image:'',
       real_image:'',
       user_password:'',
-      user_email:''
+      user_email:'',
+      verify_account:"system_active",
     },
     formeditapeple: {
       user_id:null,
@@ -156,6 +157,7 @@ export const usersStore = defineStore('users', {
       passpost_image:'',
       real_image:'',
       user_password:'',
+      user_email:'' 
     },
     passpost_image:'',
     image_pas:'',
@@ -692,7 +694,7 @@ const a = {verify_account:'system_active',identification_number:response.data[0]
 
   
       const data = await ApiService.post('/user/list/getone/profile', this.formsearchUser).then(response => {
-        console.log(response);
+       
         this.formeditapeple.user_id = response.data[0].user_id
 this.formeditapeple.username = response.data[0].user_name
 this.formeditapeple.user_phone = response.data[0].user_phone
@@ -711,13 +713,14 @@ this.formeditapeple.location_id = response.data[0].location_id
 this.formeditapeple.user_type = response.data[0].user_type
 this.formeditapeple.active = response.data[0].active
 this.formeditapeple.verify_account = response.data[0].verify_account
+this.formeditapeple.user_email = response.data[0].user_email
 
 
     });
   },  
 
   async UpdateUsersByOneAdmin() {
-    this.formeditapeple.user_email = '';
+
     console.log(JSON.stringify(this.formeditapeple));
 
 
@@ -850,13 +853,28 @@ async UploadImage() {
         }
         
       },
+
+      async CheckPeopleEdit() {
+        try {
+          const data = await ApiService.post('/user/checkuserpopulation',this.formeditapeple).then(response => {
+            this.checkIden = response.data.checkIden
+            this.checkemail = response.data.checkemail
+            this.checkphone = response.data.checkphone
+            this.checkusername = response.data.checkusername
+
+            console.log(response.data);
+
+  
+          });
+        } catch (error) {
+          return false;
+        }
+        
+      },
       async SavePeople() {
     
-
-        this.formapeple.user_password = '12345678';
         this.formapeple.user_type = 3;
         this.formapeple.active = 1;
-        this.formapeple.verify_account = 'system_active';
         this.formapeple.email = this.email;
 
         const currentDate = new Date(this.formapeple.user_birthday);
@@ -870,7 +888,10 @@ async UploadImage() {
 
         try {
           const data = await ApiService.post('/user/createuserpopulation',this.formapeple).then(response => {
-    console.log(response);
+    if(response.status == 200){
+return true;
+    }
+    return data
   
           });
         } catch (error) {
@@ -879,6 +900,7 @@ async UploadImage() {
       },
       async ResetFormStaff() {   ////reset Form
         this.formapeple = {
+          user_id: null,
           username: '',
           user_phone: '',
           full_name: '',
@@ -894,12 +916,19 @@ async UploadImage() {
           country_id: 33,
           passpost_image:'',
           real_image:'',
+          user_password:'',
+          user_email:'',
+          verify_account:'system_active',
+          
         },
         this.email ='',
         this.checkIden = false,
         this.checkemail = false,
         this.checkphone = false,
         this.checkusername = false
+
+
+        
       },
 
       async changeFormate(a) {
