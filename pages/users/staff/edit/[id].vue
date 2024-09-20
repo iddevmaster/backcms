@@ -20,7 +20,7 @@ import ApiService from "../../../../services/api.service";
 import "vue-select/dist/vue-select.css";
 import vSelect from "vue-select";
 import { ref, onMounted } from "vue";
-import { useToast } from 'vue-toastification';
+import { useToast } from "vue-toastification";
 
 definePageMeta({
   middleware: ["auth", "roles"],
@@ -40,7 +40,7 @@ store.user_id = auth.user_id;
 
 await store.fetchUsersByOneAdmin(router.currentRoute.value.params.id);
 
-const toast = useToast()
+const toast = useToast();
 
 const fileInputFont = ref(null);
 const fileInputBack = ref(null);
@@ -71,21 +71,18 @@ const rules = computed(() => {
         "The Identification number field is required",
         required
       ),
-      minLength: minLength(5),
     },
     last_name: {
       required: helpers.withMessage(
         "The Identification number field is required",
         required
       ),
-      minLength: minLength(5),
     },
     full_name: {
       required: helpers.withMessage(
         "The Identification number field is required",
         required
       ),
-      minLength: minLength(5),
     },
     identification_number: {
       required: helpers.withMessage(
@@ -132,7 +129,6 @@ const rules = computed(() => {
     real_image: {
       required: helpers.withMessage("expire field is required", required),
     },
-
   };
 });
 
@@ -141,13 +137,11 @@ const changeFont = () => {
   fileInputFont.value.click();
 };
 
-
 const updated = async () => {
   v$.value.$validate();
   if (!v$.value.$error) {
-
     let check = await store.CheckPeopleEdit();
-    let  t  = await store.UpdateUsersByOneAdmin();
+    let t = await store.UpdateUsersByOneAdmin();
 
     if (
       store.checkphone == false &&
@@ -155,17 +149,15 @@ const updated = async () => {
       store.checkusername == false &&
       store.checkIden == false
     ) {
-
-      let  t  = await store.UpdateUsersByOneAdmin();
+      let t = await store.UpdateUsersByOneAdmin();
       toast.success("ບັນທຶກສຳເລັດແລ້ວ");
-      
     } else {
       scrollToTop();
     }
-// let  t  = await store.UpdateUsersByOneAdmin();
-// toast.success("ບັນທຶກສຳເລັດແລ້ວ");
+    // let  t  = await store.UpdateUsersByOneAdmin();
+    // toast.success("ບັນທຶກສຳເລັດແລ້ວ");
   }
-}
+};
 
 const RandomPassword = () => {
   let r = (Math.random() + 1).toString(36).substring(6);
@@ -174,29 +166,34 @@ const RandomPassword = () => {
 const filterInput = async (event) => {
   // stores.form.user_phone = event.target.value.replace(/\D/g, "");
 
-
   const key = event.data;
-      if (event.data === ' ') {
-        store.formapeple.user_phone= store.formapeple.user_phone.substring(0, store.formapeple.user_phone.length - 1);
-        return;
-      }
-      if (store.formapeple.user_phone.charAt(0) !== '2') {
-        store.formapeple.user_phone = "";
-        return;
-      } 
-      if ((store.formapeple.user_phone.charAt(1) !== '') && (store.formapeple.user_phone.charAt(1) !== '0')) {
-        store.formapeple.user_phone = "2";
-        return;
-      } 
-      store.formapeple.user_phone = event.target.value.replace(/\D/g, "");
+  if (event.data === " ") {
+    store.formapeple.user_phone = store.formapeple.user_phone.substring(
+      0,
+      store.formapeple.user_phone.length - 1
+    );
+    return;
+  }
+  if (store.formapeple.user_phone.charAt(0) !== "2") {
+    store.formapeple.user_phone = "";
+    return;
+  }
+  if (
+    store.formapeple.user_phone.charAt(1) !== "" &&
+    store.formapeple.user_phone.charAt(1) !== "0"
+  ) {
+    store.formapeple.user_phone = "2";
+    return;
+  }
+  store.formapeple.user_phone = event.target.value.replace(/\D/g, "");
 };
 
-
 const onInput = async (event) => {
-  store.formapeple.identification_number = event.target.value.replace(/\D/g, '');
-}
-
-
+  store.formapeple.identification_number = event.target.value.replace(
+    /\D/g,
+    ""
+  );
+};
 
 const changeBack = () => {
   // Trigger a click event on the file input element
@@ -288,18 +285,40 @@ const format = (date) => {
       <div class="page-meta">
         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">ເພິ່ມຂໍ້ມູນ </a></li>
+            <li class="breadcrumb-item"><a href="#">ແກ້ໄຂຂໍ້ມູນ </a></li>
             <li class="breadcrumb-item active" aria-current="page">
-              ເພິ່ມຂໍ້ມູນ ຜູ້ໃຊ້ (ປະຊາຊົນ)
+              ແກ້ໄຂຂໍ້ມູນ ຜູ້ໃຊ້ (ປະຊາຊົນ)
             </li>
           </ol>
         </nav>
       </div>
-{{ store.formeditapeple }}
+
       <div class="middle-content container-xxl p-0">
         <div class="row layout-top-spacing">
           <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
             <div class="widget-content widget-content-area br-8 p-3">
+              <div class="row">
+                <div class="col-sm-12 col-xl-10 mb-3" style="line-height: 50px">
+                  <div>
+                    <span class="text-xs text-red-500" style="color: red"
+                      >ແນະນຳ: * ໝາຍຄວາມວ່າ ຈຳເປັນຕ້ອງໃສ່</span
+                    >
+                  </div>
+                </div>
+
+                <div class="col-sm-12 col-xl-2 mb-3" style="text-align: right">
+                  <div>
+                    <button
+                      style="width: 100%"
+                      @click="Reback()"
+                      class="changeImg btn btn btn-primary"
+                    >
+                      Back
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <hr>
               <div class="row mt-3">
                 <div class="col-xl-2">
                   <div class="login__form">
@@ -406,7 +425,7 @@ const format = (date) => {
                         'border-[#42d392] ': !v$.full_name.$invalid,
                       }"
                       @change="v$.full_name.$touch"
-                       maxlength="100"
+                      maxlength="100"
                     />
                     <span
                       class="text-xs text-red-500"
@@ -436,7 +455,7 @@ const format = (date) => {
                         'border-[#42d392] ': !v$.username.$invalid,
                       }"
                       @change="v$.username.$touch"
-                       maxlength="30"
+                      maxlength="30"
                     />
                     <span
                       class="text-xs text-red-500"
@@ -444,7 +463,6 @@ const format = (date) => {
                       v-if="v$.username.$error"
                       >{{ $t("profile_alert_usersname") }}</span
                     >
-
 
                     <span
                       class="text-xs text-red-500"
@@ -455,31 +473,26 @@ const format = (date) => {
                   </div>
                 </div>
 
-
                 <div class="col-xl-12 mt-3">
                   <div class="login__form">
                     <label class="form__label"
                       >{{ $t("form_password") }}
-                     
                     </label>
                     <input
                       class="common__login__input form-control"
                       type="text"
-                      :placeholder="$t('pleho_user_password')" 
+                      :placeholder="$t('pleho_user_password')"
                       v-model="store.formeditapeple.user_password"
-               
-                     
-                       maxlength="12"
+                      maxlength="12"
                     />
                     <button
-                            class="changeImg btn btn-outline-dark"
-                         @click="RandomPassword"
-                          >
-                            Generate
-                          </button>
+                      class="changeImg btn btn-outline-dark"
+                      @click="RandomPassword"
+                    >
+                      Generate
+                    </button>
                   </div>
                 </div>
-
 
                 <div class="col-xl-12 mt-3">
                   <div class="login__form">
@@ -499,8 +512,8 @@ const format = (date) => {
                           v$.user_phone.$error,
                         'border-[#42d392] ': !v$.user_phone.$invalid,
                       }"
-                         maxlength="10"
-                          @input="filterInput"
+                      maxlength="10"
+                      @input="filterInput"
                       @change="v$.user_phone.$touch"
                     />
                     <span
@@ -510,13 +523,10 @@ const format = (date) => {
                       >{{ $t("profile_alert_phone") }}</span
                     >
 
-                    <span
-                      class="text-xs text-red-500"
-                      style="color: #FFA927"
-                      > ແນະນຳ: ເບີໂທ ຕ້ອງບໍ່ຊ້ຳກັນກັບຜູ້ອື່ນ ແລະ ຕ້ອງຢືນຢັນວ່າລາວເປັນເຈົ້າຂອງແທ້ (ຕຢ: ອາດຈະລອງໂທໃສ່)</span
+                    <span class="text-xs text-red-500" style="color: #ffa927">
+                      ແນະນຳ: ເບີໂທ ຕ້ອງບໍ່ຊ້ຳກັນກັບຜູ້ອື່ນ ແລະ
+                      ຕ້ອງຢືນຢັນວ່າລາວເປັນເຈົ້າຂອງແທ້ (ຕຢ: ອາດຈະລອງໂທໃສ່)</span
                     >
-
-                   
 
                     <span
                       class="text-xs text-red-500"
@@ -535,15 +545,15 @@ const format = (date) => {
                       type="text"
                       placeholder="admin@gmail.com"
                       v-model="store.formeditapeple.user_email"
-                       maxlength="50"
+                      maxlength="50"
                     />
                   </div>
                   <span
-                      class="text-xs text-red-500"
-                      style="color: red"
-                      v-if="store.checkemail"
-                      >{{ $t("alert_checkemail") }}</span
-                    >
+                    class="text-xs text-red-500"
+                    style="color: red"
+                    v-if="store.checkemail"
+                    >{{ $t("alert_checkemail") }}</span
+                  >
                 </div>
 
                 <div class="col-xl-12 mt-3">
@@ -564,8 +574,8 @@ const format = (date) => {
                           v$.identification_number.$error,
                         'border-[#42d392] ': !v$.identification_number.$invalid,
                       }"
-                         maxlength="13"
-                       @input="onInput"
+                      maxlength="13"
+                      @input="onInput"
                       @change="v$.identification_number.$touch"
                     />
 
@@ -739,7 +749,6 @@ const format = (date) => {
                   </div>
                 </div>
 
-
                 <div class="col-xl-12 mt-3">
                   <div class="login__form">
                     <label class="form__label">ສະຖານະ</label>
@@ -792,7 +801,10 @@ const format = (date) => {
                           </button>
                         </span>
                       </div>
-                      <div class="card-body" v-if="store.formeditapeple.passpost_image">
+                      <div
+                        class="card-body"
+                        v-if="store.formeditapeple.passpost_image"
+                      >
                         <img
                           class="aboutimg__1"
                           :src="coverimage(store.formeditapeple.passpost_image)"
@@ -809,14 +821,11 @@ const format = (date) => {
                         />
                       </div>
                     </div>
-                    <span
-                     
-                     style="color: red"
-                     v-if="v$.passpost_image.$error"
-                     >{{ $t("form_approve_pass_image") }}</span
-                   >
+                    <span style="color: red" v-if="v$.passpost_image.$error">{{
+                      $t("form_approve_pass_image")
+                    }}</span>
                   </div>
-                  
+
                   <div class="col-sm-6">
                     <div class="card">
                       <div class="card-body">
@@ -839,8 +848,10 @@ const format = (date) => {
                         </span>
                       </div>
 
-                   
-                      <div class="card-body" v-if="store.formeditapeple.real_image">
+                      <div
+                        class="card-body"
+                        v-if="store.formeditapeple.real_image"
+                      >
                         <img
                           class="aboutimg__1"
                           :src="coverimage(store.formeditapeple.real_image)"
@@ -857,17 +868,21 @@ const format = (date) => {
                         />
                       </div>
                     </div>
-                    <span
-                     
-                     style="color: red"
-                     v-if="v$.real_image.$error"
-                     >{{ $t("form_approve_real_image") }}</span
-                   >
+                    <span style="color: red" v-if="v$.real_image.$error">{{
+                      $t("form_approve_real_image")
+                    }}</span>
                   </div>
                 </div>
                 <div class="col-xl-12 mt-3">
                   <div class="login__form">
-                    <button type="button" class="btn btn-primary" style="width: 100%;" @click="updated()">Save</button>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      style="width: 100%"
+                      @click="updated()"
+                    >
+                      {{ $t("form_approve_save_ad") }}
+                    </button>
                   </div>
                 </div>
               </div>

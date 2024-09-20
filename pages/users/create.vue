@@ -78,21 +78,18 @@ const rules = computed(() => {
         "The Identification number field is required",
         required
       ),
-      minLength: minLength(5),
     },
     last_name: {
       required: helpers.withMessage(
         "The Identification number field is required",
         required
       ),
-      minLength: minLength(5),
     },
     full_name: {
       required: helpers.withMessage(
         "The Identification number field is required",
         required
       ),
-      minLength: minLength(5),
     },
     identification_number: {
       required: helpers.withMessage(
@@ -167,9 +164,9 @@ const save = async () => {
       store.checkIden == false
     ) {
       await store.SavePeople();
-      await store.ResetFormStaff();
+      await store.ResetFormAdmin();
       v$.value.$reset();
-      store.formapeple.location_id = auth.profiledetails.location_id;
+
       toast.success("ບັນທຶກສຳເລັດແລ້ວ");
     } else {
       scrollToTop();
@@ -301,11 +298,36 @@ const format = (date) => {
           </ol>
         </nav>
       </div>
-      {{ store.formapeple }}
+ 
       <div class="middle-content container-xxl p-0">
         <div class="row layout-top-spacing">
           <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
             <div class="widget-content widget-content-area br-8 p-3">
+
+              <div class="row">
+                <div class="col-sm-12 col-xl-10 mb-3" style="
+    line-height: 50px;
+">
+                  <div>
+                   <span class="text-xs text-red-500" style="color: red"
+                        >ແນະນຳ: * ໝາຍຄວາມວ່າ ຈຳເປັນຕ້ອງໃສ່</span
+                      >
+          
+                  </div>
+                </div>
+
+                <div class="col-sm-12 col-xl-2 mb-3" style="text-align: right;">
+                  <div >
+                    <button style="width:100% ;" @click="Reback()"
+                            class="changeImg btn btn btn-primary"
+                          >
+                            Back
+                          </button>
+          
+                  </div>
+                </div>
+                </div>
+                <hr>
               <div class="row mt-3">
                 <div class="col-xl-2">
                   <div class="login__form">
@@ -732,6 +754,9 @@ const format = (date) => {
                     <label class="form__label">{{
                       $t("form_approve_cou")
                     }}</label>
+                     <span class="text-xs text-red-500" style="color: red"
+                        >*</span
+                      >
                     <select
                       v-model="store.formapeple.country_id"
                       class="common__login__input px-2 form-control"
@@ -751,10 +776,13 @@ const format = (date) => {
                   </div>
                 </div>
 
-                <div class="col-xl-12 mt-3">
+                <div class="col-xl-3 mt-3">
                   <div class="login__form">
                     <label class="form__label">{{ $t("form_approve_status")
                       }}</label>
+                      <span class="text-xs text-red-500" style="color: red"
+                        >*</span
+                      >
                     <select
                       class="common__login__input px-2 form-control"
                       aria-label="Default select example"
@@ -781,10 +809,12 @@ const format = (date) => {
                 </div>
 
 
-                <div class="col-xl-12 mt-3">
+                <div class="col-xl-6 mt-3">
                   <div class="login__form">
-                    <label class="form__label">{{ $t("form_approve_status")
-                      }}</label>
+                    <label class="form__label">{{ $t("menu_user_c_type") }} </label>
+                      <span class="text-xs text-red-500" style="color: red"
+                        >*</span
+                      >
                     <select
                       class="common__login__input px-2 form-control"
                       aria-label="Default select example"
@@ -794,6 +824,27 @@ const format = (date) => {
     <option value="2">{{ $t("menu_user_c_type_user_admin") }}</option>
     <option value="3">{{ $t("menu_user_c_type_user_user") }}</option>
                     </select>
+                  </div>
+                </div>
+
+                <div class="col-xl-3  mt-3">
+                  <div class="login__form">
+                    <label class="form__label"
+                      >Active<span class="text-xs text-red-500" style="color: red"
+                        >*</span
+                      ></label
+                    >
+
+                    <select
+                      class="common__login__input px-2 form-control"
+                      aria-label="Default select example"
+                      v-model="store.formapeple.active"
+                    >
+            
+                      <option value="0">{{ $t("notactive") }}</option>
+                      <option value="1">{{ $t("active") }}</option>
+                    </select>
+        
                   </div>
                 </div>
 
@@ -899,7 +950,9 @@ const format = (date) => {
                       style="width: 100%"
                       @click="save()"
                     >
-                      Save
+                    {{
+                      $t("form_approve_save_ad")
+                    }}
                     </button>
                   </div>
                 </div>

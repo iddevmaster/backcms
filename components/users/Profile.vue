@@ -22,7 +22,9 @@
         <div class="col-12  col-sm-12 col-xl-7 col-lg-7 mb-3">
 
 
-
+<div class="form-group" style="text-align: right;">
+                  <button type="button" class="btn btn-danger">ແກ້ໄຂ</button>
+ </div>
         </div>
         <br>
         
@@ -33,7 +35,7 @@
             <div class="col-12 col-sm-7 col-xl-12 col-lg-12">
 
               <div class="form-group row">
-                <div class="col-12 col-sm-7 col-xl-4 col-lg-4">
+                <div class="col-12 col-sm-7 col-xl-3 col-lg-3">
                   <div class="col-12 col-sm-12 col-md-12">
               <div class="form-group row">
                 <div class="invoice-detail-title">
@@ -44,8 +46,8 @@
                         <img
                           :src="coverimage(store.profile_by_one[0].user_img)"
                           alt="avatar"
-                          height="150"
-                          width="200"
+                          class="img-fluid"
+                     
                         />
                       </div>
                       <div class="img-uploader-content" style="padding: 5px" v-else>
@@ -64,7 +66,7 @@
             </div>
 
                 </div>
-                <div class="col-12 col-sm-7 col-xl-8 col-lg-8">
+                <div class="col-12 col-sm-7 col-xl-9 col-lg-9">
 
                   <div class="form-group row">
                 <h3>{{store.profile_by_one[0].user_prefrix}} {{store.profile_by_one[0].user_firstname}}  {{store.profile_by_one[0].user_lastname}} </h3>
@@ -271,8 +273,49 @@
             </div>
 
 
+            <div class="row mt-5">
+              <div class="col-12 col-sm-12 col-md-7">
+                <div class="form-group row">
+                  <label
+                    for="company-name"
+                    class="col-sm-12 col-form-label col-form-label-sm fot-bl" style="font-size: 24px;"
+                  >
+                  ສະຖານະ:
+                  
+                  <span style="color: #11901E;" v-if="store.profile_by_one[0].verify_account == 'system_active'"> {{ $t("system_active") }}</span>
+                  <span style="color: #FFA927;" v-else-if="store.profile_by_one[0].verify_account == 'phone_active'"> {{ $t("phone_active") }}</span>
+                
+                  <span style="color: #FF0000;" v-else-if="store.profile_by_one[0].verify_account == 'system_unactive'"> {{ $t("system_unactive") }}</span>
+                  <span style="color: #FF0000;" v-else> {{store.profile_by_one[0].verify_account}}</span>
+                  </label>
+                </div>
+              </div>
+     
 
-<br>
+              <div class="col-12 col-sm-12 col-md-5">
+                <div class="form-group row">
+                  <button type="button" class="btn btn-danger">ແກ້ໄຂ ສະຖານະ</button>
+                </div>
+              </div>
+            </div>
+
+            
+            <div class="row mb-5">
+              <div class="col-12 col-sm-12 col-md-12">
+                <div class="form-group row">
+                  <label
+                    for="company-name"
+                    class="col-sm-12 col-form-label col-form-label-sm fot-bl" style="font-size: 18px;"
+                  >
+                  ໝາຍເຫດ:  ເຈົ້າໜ້າທີ່ຢືນຢັນໃຫ້
+                  </label>
+                </div>
+              </div>
+     
+
+      
+            </div>
+
 
 
             
@@ -309,13 +352,54 @@
             </div>
 
 
+            <div class="row mt-5">
+              <div class="col-12 col-sm-12 col-md-12">
+                <div class="form-group row">
+                  <label
+                    for="company-name"
+                    class="col-sm-12 col-form-label col-form-label-sm fot-bl" v-if="store.log_user.length > 0" style="font-size: 24px;"
+                  >
+                  ແກ້ໄຂຫຼ້າສຸດ:  {{store.log_user[0].udp_date}}   ໂດຍ: {{store.profile_by_one[0].user_firstname}} 
+
+                  </label>
+
+                  <label
+                    for="company-name" style="font-size: 24px;"
+                    class="col-sm-12 col-form-label col-form-label-sm fot-bl" v-else
+                  >
+                  ແກ້ໄຂຫຼ້າສຸດ: - 
+
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-sm-12 col-md-12">
+                <div class="form-group row">
+                  <label v-if="store.log_admin.length > 0"
+                    for="company-name"
+                    class="col-sm-12 col-form-label col-form-label-sm fot-bl" style="font-size: 20px;"
+                  >
+                  ອະນຸມັດ / ແກ້ໄຂ ສະຖານະຫຼ້າສຸດ:{{  store.log_admin[0].update_data}}   ໂດຍ: {{  store.log_admin[0].user_firstname}}
+                  </label>
+
+                  <label v-else
+                    for="company-name"
+                    class="col-sm-12 col-form-label col-form-label-sm fot-bl" style="font-size: 20px;"
+                  >
+                  ອະນຸມັດ / ແກ້ໄຂ ສະຖານະຫຼ້າສຸດ:  2024-04-16 13:30:43   ໂດຍ: cps.01
+                  </label>
+                </div>
+              </div>
+            </div>
          
         </div>
         <div class="col-12 col-lg-5 col-xl-5" v-if="store.profile_by_one[0].status == 'W'">
           <div class="col-12 col-sm-12 col-lg-5 col-xl-5">
-        
+          <button class="btn btn-danger">ແກ້ໄຂ</button>
         </div>
-          <div class="form-group row m-1">
+          <!-- <div class="form-group row m-1">
             <label
               for="company-name"
               class="col-sm-12 col-form-label col-form-label-sm fot-bl"
@@ -417,7 +501,7 @@
         <button type="button" class="btn btn-danger"  @click="CheckApp('N')">ປະຕິເສດ</button>
       </div>
     </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -509,7 +593,6 @@ const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
 const router = useRouter();
 const auth = useAuthStore()
 
-store.formlog.user_admin = auth.user_id;
 const CheckApp = async (item) => {
 store.ModalApp = true
 store.status_app = item
@@ -521,10 +604,7 @@ const Hide = async () => {
   store.ModalApp = false;
 }
 const Save = async () => {
-store.formlog.des = 'Approve';
   await store.UpdatePeddingByOneComment();
-  await store.UpdateLogDataInsert();
-  store.ModalApp = false;
   toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
   if(user_type.value == '1'){
  await router.push("/users/approve");

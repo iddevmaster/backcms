@@ -58,6 +58,9 @@ export const usersStore = defineStore('users', {
       search: '',
       user_id: '',
     },
+    formsearchUserlog:{
+      user_id: '',
+    },
     formszipcode: {
       page: 1,
       per_page: 200,
@@ -132,7 +135,7 @@ export const usersStore = defineStore('users', {
       user_village: '',
       user_address: '',
       location_id: null,
-      country_id: 33,
+      country_id: null,
       passpost_image:'',
       real_image:'',
       user_password:'',
@@ -172,6 +175,12 @@ export const usersStore = defineStore('users', {
 checkemail: false,
 checkphone: false,
 checkusername: false,
+log_user :[],
+log_admin :[],
+formlog:{
+  user_id:null,
+  user_admin:null
+},
 
   }
 
@@ -269,14 +278,10 @@ checkusername: false,
       }
     }
     if(this.type == 1){
-      console.log('1');
       try {
         this.pending = true
         const data = await ApiService.post('/user/list?user_type='+this.type, this.formsearch).then(response => {
-         
           this.posts_statff = response.data
-
-      
           this.total_page = response.data.total_page
           this.limit_page = response.data.limit_page
           this.current_page = response.data.current_page
@@ -292,7 +297,6 @@ checkusername: false,
       }
     }
     if(this.type == 2){
-      console.log('2');
       try {
         this.pending = true
         const data = await ApiService.post('/user/list?user_type='+this.type, this.formsearch).then(response => {
@@ -315,14 +319,11 @@ checkusername: false,
       }
     }
     if(this.type == 3){
-      console.log('3');
       try {
         this.pending = true
         const data = await ApiService.post('/user/list?user_type='+this.type, this.formsearch).then(response => {
          
           this.posts_statff = response.data
-
-      
           this.total_page = response.data.total_page
           this.limit_page = response.data.limit_page
           this.current_page = response.data.current_page
@@ -753,22 +754,66 @@ const a = {verify_account:'system_active',identification_number:response.data[0]
       async fetchUsersByOne(item) {
         this.formsearchUser.user_admin_id = this.user_id;
         this.formsearchUser.user_search_id = item;
-
+      
+  
       
         const data = await ApiService.post('/user/list/get', this.formsearchUser).then(response => {
+         
      this.profile_by_one = response.data;
   
       });
-    },  
+    }, 
+    
+    async fetchUsersByOneAdminProfile(item) {
+      this.formsearchUser.user_admin_id = this.user_id;
+      this.formsearchUser.user_search_id = item;
 
+  
+      const data = await ApiService.post('/user/list/getone/profile', this.formsearchUser).then(response => {
+
+        this.profile_by_one = response.data;
+        console.log(this.profile_by_one);
+
+
+    });
+  },  
+
+
+  async fetchUsersLog(id) {
+    this.formsearchUserlog.user_id = id
+    this.formsearchUserlog.type = 2
+
+    try {
+      const data = await ApiService.post('/user/log/updatedata/', this.formsearchUserlog).then(response => {
+        this.log_user = response.data;    
+  });
+      return data;
+    } catch (error) {
+      return false;
+    }
+
+  },
+  async fetchUsersLogApporv(id) {
+    this.formsearchUserlog.user_id = id
+    this.formsearchUserlog.type = 1
+
+   try {
+      const data = await ApiService.post('/user/log/updatedata/', this.formsearchUserlog).then(response => {
+        this.log_admin = response.data;    
+  });
+      return data;
+    } catch (error) {
+      return false;
+    }
+
+  },
     async fetchUsersByOneAdmin(item) {
       this.formsearchUser.user_admin_id = this.user_id;
       this.formsearchUser.user_search_id = item;
 
-
   
       const data = await ApiService.post('/user/list/getone/profile', this.formsearchUser).then(response => {
-       
+
         this.formeditapeple.user_id = response.data[0].user_id
 this.formeditapeple.username = response.data[0].user_name
 this.formeditapeple.user_phone = response.data[0].user_phone
@@ -788,12 +833,27 @@ this.formeditapeple.user_type = response.data[0].user_type
 this.formeditapeple.active = response.data[0].active
 this.formeditapeple.verify_account = response.data[0].verify_account
 this.formeditapeple.user_email = response.data[0].user_email
+this.formeditapeple.user_img = response.data[0].user_img
 
 
     });
   },  
 
   async UpdateUsersByOneAdmin() {
+
+
+
+    const currentDate = new Date(this.formeditapeple.user_birthday);
+    
+    const currentEnd = new Date(this.formeditapeple.expire);
+
+    const birth = await this.changeFormate(currentDate)
+    const exp = await this.changeFormate(currentEnd)
+
+    this.formeditapeple.expire = exp
+    this.formeditapeple.user_birthday = birth
+
+     this.formeditapeple.user_admin = this.user_id;
 
 
     try {
@@ -832,6 +892,22 @@ this.formeditapeple.user_email = response.data[0].user_email
 
 return true;
 }, 
+
+async UpdateLogDataInsert() {
+
+  this.formlog.user_admin = this.user_id;
+  this.formlog.type = 1;
+  
+
+  try {
+    const data = await ApiService.post('/user/updatedata/log',this.formlog).then(response => {
+    });
+  return data;
+  } catch (error) {
+    return false;
+  }
+
+},
 
 
 async UpdateUserByAdmin() {
@@ -985,6 +1061,42 @@ return true;
           user_address: '',
           location_id: null,
           country_id: 33,
+          passpost_image:'',
+          real_image:'',
+          user_password:'',
+          user_email:'',
+          verify_account:'system_active',
+          user_type:'3',
+          active:1,
+      
+          
+        },
+        this.email ='',
+        this.checkIden = false,
+        this.checkemail = false,
+        this.checkphone = false,
+        this.checkusername = false
+
+
+        
+      },
+
+      async ResetFormAdmin() {   ////reset Form
+        this.formapeple = {
+          user_id: null,
+          username: '',
+          user_phone: '',
+          full_name: '',
+          first_name: '',
+          last_name: '',
+          user_prefrix: '',
+          identification_number: '',
+          user_birthday: '',
+          expire: '',
+          user_village: '',
+          user_address: '',
+          location_id: null,
+          country_id: null,
           passpost_image:'',
           real_image:'',
           user_password:'',
