@@ -167,7 +167,8 @@ const save = async () => {
       await store.ResetFormAdmin();
       v$.value.$reset();
 
-      toast.success("ບັນທຶກສຳເລັດແລ້ວ");
+      await toast.success("ບັນທຶກສຳເລັດແລ້ວ");
+      await router.push('/users/staff');
     } else {
       scrollToTop();
     }
