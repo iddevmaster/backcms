@@ -4,11 +4,11 @@
       <div class="row p-3">
         <div class="col-10 col-sm-12 col-md-10">
           <div class="form-group row">
-            <h5>ລາຍລະອຽດ ຜູ້ໃຊ້ (ປະຊາຊົນ) ສົ່ງເຂົ້າມາ</h5>
+            <h5>{{ $t("profile_details_de") }}</h5>
           </div>
         </div>
         <div class="col-12 col-md-2">
-          <div class="row"><button class="btn btn-primary">Back</button></div>
+          <div class="row"><button class="btn btn-primary" @click="BackUser()">{{ $t("user_profile_button_back") }} </button></div>
 
          
         </div>
@@ -23,7 +23,7 @@
 
 
 <div class="form-group" style="text-align: right;">
-                  <button type="button" class="btn btn-danger">ແກ້ໄຂ</button>
+                  <button type="button" class="btn btn-danger">{{ $t("user_profile_button_edit") }}</button>
  </div>
         </div>
         <br>
@@ -35,7 +35,7 @@
             <div class="col-12 col-sm-7 col-xl-12 col-lg-12">
 
               <div class="form-group row">
-                <div class="col-12 col-sm-7 col-xl-3 col-lg-3">
+                <div class="col-12 col-sm-7 col-xl-4 col-lg-4">
                   <div class="col-12 col-sm-12 col-md-12">
               <div class="form-group row">
                 <div class="invoice-detail-title">
@@ -66,7 +66,7 @@
             </div>
 
                 </div>
-                <div class="col-12 col-sm-7 col-xl-9 col-lg-9">
+                <div class="col-12 col-sm-7 col-xl-8 col-lg-8">
 
                   <div class="form-group row">
                 <h3>{{store.profile_by_one[0].user_prefrix}} {{store.profile_by_one[0].user_firstname}}  {{store.profile_by_one[0].user_lastname}} </h3>
@@ -84,7 +84,7 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                 >
-                  ເບີໂທ:  {{store.profile_by_one[0].user_phone}}</label
+                  {{ $t("tel") }} :  {{store.profile_by_one[0].user_phone}}</label
                 >
               </div>
               <div class="form-group row">
@@ -92,7 +92,7 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                 >
-                ອີເມລ:  {{store.profile_by_one[0].user_email}}</label
+                {{ $t("email") }} :  {{store.profile_by_one[0].user_email}}</label
                 >
               </div>
               <div class="form-group row">
@@ -118,7 +118,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                    ເລກບັດປະຈຳຕົວ / Passport:
+                    {{ $t("form_approve_passport") }}:
                   </label>
                 </div>
 
@@ -127,7 +127,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                    ວັນໝົດອາຍຸຂອງບັດ:
+                    {{ $t("form_approve_birth_day") }} :
                   </label>
                 </div>
 
@@ -136,7 +136,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                    ວັນເດືອນປີເກີດ:
+                    {{ $t("form_approve_passport_exp") }} :
                   </label>
                 </div>
 
@@ -145,7 +145,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                    ສັນຊາດ:
+                    {{ $t("form_approve_cou") }} :
                   </label>
                 </div>
 
@@ -154,7 +154,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                    ທີ່ຢູ່ປັດຈຸບັນ:
+                    {{ $t("form_approve_address") }} :
                   </label>
                 </div>
               </div>
@@ -246,7 +246,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                    ຮູບບັດ / passport:
+                    {{ $t("form_approve_pass_image") }} :
                   </label>
                 </div>
               </div>
@@ -280,7 +280,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl" style="font-size: 24px;"
                   >
-                  ສະຖານະ:
+                   {{ $t("form_approve_status") }}: 
                   
                   <span style="color: #11901E;" v-if="store.profile_by_one[0].verify_account == 'system_active'"> {{ $t("system_active") }}</span>
                   <span style="color: #FFA927;" v-else-if="store.profile_by_one[0].verify_account == 'phone_active'"> {{ $t("phone_active") }}</span>
@@ -294,7 +294,7 @@
 
               <div class="col-12 col-sm-12 col-md-5">
                 <div class="form-group row">
-                  <button type="button" class="btn btn-danger">ແກ້ໄຂ ສະຖານະ</button>
+                  <button type="button" class="btn btn-danger">{{ $t("user_profile_button_edit_status") }}</button>
                 </div>
               </div>
             </div>
@@ -326,7 +326,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                    ຮູບຕົວຈິງ:
+                     {{ $t("form_approve_real_image") }} :
                   </label>
                 </div>
               </div>
@@ -359,7 +359,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl" v-if="store.log_user.length > 0" style="font-size: 24px;"
                   >
-                  ແກ້ໄຂຫຼ້າສຸດ:  {{store.log_user[0].udp_date}}   ໂດຍ: {{store.profile_by_one[0].user_firstname}} 
+                   {{ $t("log_edit_date") }}:  {{store.log_user[0].udp_date}}   ໂດຍ: {{store.profile_by_one[0].user_firstname}} 
 
                   </label>
 
@@ -367,7 +367,7 @@
                     for="company-name" style="font-size: 24px;"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl" v-else
                   >
-                  ແກ້ໄຂຫຼ້າສຸດ: - 
+                   {{ $t("log_edit_date") }}: - 
 
                   </label>
                 </div>
@@ -381,128 +381,26 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl" style="font-size: 20px;"
                   >
-                  ອະນຸມັດ / ແກ້ໄຂ ສະຖານະຫຼ້າສຸດ:{{  store.log_admin[0].update_data}}   ໂດຍ: {{  store.log_admin[0].user_firstname}}
+                  {{ $t("log_edit_approve_date") }}:{{  store.log_admin[0].update_data}}   ໂດຍ: {{  store.log_admin[0].user_firstname}}
                   </label>
 
                   <label v-else
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl" style="font-size: 20px;"
                   >
-                  ອະນຸມັດ / ແກ້ໄຂ ສະຖານະຫຼ້າສຸດ:  2024-04-16 13:30:43   ໂດຍ: cps.01
+                 {{ $t("log_edit_approve_date") }}:  -
                   </label>
                 </div>
               </div>
             </div>
          
         </div>
-        <div class="col-12 col-lg-5 col-xl-5" v-if="store.profile_by_one[0].status == 'W'">
+        <!-- <div class="col-12 col-lg-5 col-xl-5" v-if="store.profile_by_one[0].status == 'W'">
           <div class="col-12 col-sm-12 col-lg-5 col-xl-5">
-          <button class="btn btn-danger">ແກ້ໄຂ</button>
+          <button class="btn btn-danger">{{ $t("user_profile_button_edit") }}</button>
         </div>
-          <!-- <div class="form-group row m-1">
-            <label
-              for="company-name"
-              class="col-sm-12 col-form-label col-form-label-sm fot-bl"
-              style="font-size: 30px"
-            >
-              ສະຖານະ:
-              <span style="color: yellow">ລໍຖ້າຢືນຢັນຕົວຕົນ</span></label
-            >
-          </div>
-
-
-          <div class="form-group row">
-            <hr style="margin-top: 1px" />
-          </div>
-
-          <div class="form-group row m-1">
-            <label
-              for="company-name"
-              class="col-sm-12 col-form-label col-form-label-sm fot-bl"
-              style="font-size: 30px"
-            >
-              ການອະນຸມັດ
-            </label>
-          </div>
-
-
-          <div class="row m-1">
-            <div class="col-4 col-sm-12 col-md-4">
-              <div class="form-group row">
-                <label
-                  for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
-                >
-                ຄຳເຫັນຄັ້ງກ່ອນ
-                </label>
-              </div>
-
-              
-            </div>
-            <div class="col-8 col-sm-12 col-md-8">
       
-              <div v-for="(item, index) in store.comment">
-                <label
-                  for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm"
-                >
-                {{ item.comment_details }}
-                </label
-                >
-              </div>
-            </div>
-          </div>
-
-          <div class="row m-1">
-            <div class="col-4 col-sm-12 col-md-4">
-              <div class="form-group row">
-                <label
-                  for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
-                >
-                ຄຳເຫັນ *:
-                </label>
-              </div>
-
-              
-            </div>
-            <div class="col-8 col-sm-12 col-md-8">
-      
-         
-              <div class="form-group row">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" v-model="store.comment_details"></textarea>
-              </div>
-
-      
-            </div>
-
-            
-          </div>
-
-
-          <div class="row m-1">
-            <div class="col-4 col-sm-12 col-md-4">
-              <div class="form-group row">
-          
-              </div>
-
-              
-            </div>
-            <div class="col-4 col-sm-12 col-md-4">
-      
-              <div class="form-group">
-                <button type="button" class="btn btn-success" @click="CheckApp('Y')">ອະນຸມັດ</button>
-              </div>
-
-            </div>
-            <div class="col-4 col-sm-12 col-md-4">
-      
-      <div class="form-group">
-        <button type="button" class="btn btn-danger"  @click="CheckApp('N')">ປະຕິເສດ</button>
-      </div>
-    </div>
-          </div> -->
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -603,6 +501,12 @@ store.status_app = item
 const Hide = async () => {
   store.ModalApp = false;
 }
+
+const BackUser = async () => {
+ await router.push("/users");
+}
+
+
 const Save = async () => {
   await store.UpdatePeddingByOneComment();
   toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');

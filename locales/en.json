@@ -596,6 +596,7 @@
 "form_approve_save": "Send",
 "form_approve_status": "Status",
 "form_approve_save_ad": "Save",
+
 "email": "ອີເມວ",
 "tel": "ເບີ​ໂທ",
 "tel_placeholder": "ເບີ​ໂທ 20xxxxxxxx",
@@ -654,7 +655,21 @@
 "alert_checkusername":"Username ซ้ำ",
 
 
+"profile_details_de":"Users Details",
+"log_edit_date":"Last edited",
+"log_edit_approve_date":"Last editted Status",
 
+"user_profile_button_back":"Back",
+
+"user_profile_button_edit":"Edit",
+"user_profile_button_edit_status":"Edit Status",
+"by":"By",
+
+"comments":"Comments",
+"Previous_comment":"Previous",
+"Approval":"Approval",
+
+"user_details_people":"User details Approval",
 
   "" : ""
 

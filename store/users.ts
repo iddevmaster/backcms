@@ -800,6 +800,7 @@ const a = {verify_account:'system_active',identification_number:response.data[0]
    try {
       const data = await ApiService.post('/user/log/updatedata/', this.formsearchUserlog).then(response => {
         this.log_admin = response.data;    
+      
   });
       return data;
     } catch (error) {

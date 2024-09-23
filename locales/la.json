@@ -658,7 +658,18 @@
 "alert_checkphone":"เบอร์โทรซ้ำ",
 "alert_checkusername":"Username ซ้ำ",
 
+"profile_details_de":"ລາຍລະອຽດ ຜູ້ໃຊ້",
+"log_edit_date":"ແກ້ໄຂຫຼ້າສຸດ",
+"log_edit_approve_date":"ອະນຸມັດ / ແກ້ໄຂ ສະຖານະຫຼ້າສຸດ",
+"user_profile_button_back":"ກັບຄືນ",
+"user_profile_button_edit":"ແກ້ໄຂ",
+"user_profile_button_edit_status":"ແກ້ໄຂ ສະຖານະ",
+"by":"ໂດຍ",
 
+"comments":"ຄຳເຫັນ",
+"Previous_comment":"ຄຳເຫັນຄັ້ງກ່ອນ",
+"Approval":"ການອະນຸມັດ",
+"user_details_people":"ລາຍລະອຽດ ຜູ້ໃຊ້ (ປະຊາຊົນ) ສົ່ງເຂົ້າມາ",
   "" : ""
 
   

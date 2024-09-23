@@ -4,11 +4,11 @@
       <div class="row p-3">
         <div class="col-10 col-sm-12 col-md-10">
           <div class="form-group row">
-            <h5>ລາຍລະອຽດ ຜູ້ໃຊ້ (ປະຊາຊົນ) ສົ່ງເຂົ້າມາ</h5>
+            <h5>{{ $t("user_details_people") }}</h5>
           </div>
         </div>
         <div class="col-12 col-md-2">
-          <div class="row"><button class="btn btn-primary">Back</button></div>
+          <div class="row"><button class="btn btn-primary">{{ $t("user_profile_button_back") }}</button></div>
 
          
         </div>
@@ -82,7 +82,7 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                 >
-                  ເບີໂທ:  {{store.profile_by_one[0].user_phone}}</label
+                  {{ $t("tel") }}:  {{store.profile_by_one[0].user_phone}}</label
                 >
               </div>
               <div class="form-group row">
@@ -90,7 +90,7 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                 >
-                ອີເມລ:  {{store.profile_by_one[0].user_email}}</label
+                {{ $t("email") }}:  {{store.profile_by_one[0].user_email}}</label
                 >
               </div>
               <div class="form-group row">
@@ -116,7 +116,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                    ເລກບັດປະຈຳຕົວ / Passport:
+                    {{ $t("passport_update_acc_label") }}:
                   </label>
                 </div>
 
@@ -125,7 +125,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                    ວັນໝົດອາຍຸຂອງບັດ:
+                    {{ $t("form_approve_passport_exp") }}:
                   </label>
                 </div>
 
@@ -134,7 +134,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                    ວັນເດືອນປີເກີດ:
+                    {{ $t("form_approve_birth_day") }}:
                   </label>
                 </div>
 
@@ -143,7 +143,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                    ສັນຊາດ:
+                     {{ $t("form_approve_cou") }}:
                   </label>
                 </div>
 
@@ -152,7 +152,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                    ທີ່ຢູ່ປັດຈຸບັນ:
+                    {{ $t("form_approve_address") }}:
                   </label>
                 </div>
               </div>
@@ -244,7 +244,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                    ຮູບບັດ / passport:
+                    {{ $t("form_approve_pass_image") }}:
                   </label>
                 </div>
               </div>
@@ -283,7 +283,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                    ຮູບຕົວຈິງ:
+                    {{ $t("form_approve_real_image") }}:
                   </label>
                 </div>
               </div>
@@ -321,7 +321,7 @@
               class="col-sm-12 col-form-label col-form-label-sm fot-bl"
               style="font-size: 30px"
             >
-              ສະຖານະ:
+              {{ $t("form_approve_status") }}:
               <span style="color: yellow">ລໍຖ້າຢືນຢັນຕົວຕົນ</span></label
             >
           </div>
@@ -337,7 +337,7 @@
               class="col-sm-12 col-form-label col-form-label-sm fot-bl"
               style="font-size: 30px"
             >
-              ການອະນຸມັດ
+              {{ $t("Approval") }}
             </label>
           </div>
 
@@ -349,7 +349,7 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                 >
-                ຄຳເຫັນຄັ້ງກ່ອນ
+                {{ $t("Previous_comment") }}
                 </label>
               </div>
 
@@ -376,20 +376,15 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                 >
-                ຄຳເຫັນ *:
+                {{ $t("comments") }} <span style="color:red">*</span>:
                 </label>
-              </div>
-
-              
+              </div>        
             </div>
             <div class="col-8 col-sm-12 col-md-8">
-      
-         
               <div class="form-group row">
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" v-model="store.comment_details"></textarea>
               </div>
 
-      
             </div>
 
             
