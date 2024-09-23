@@ -539,7 +539,10 @@
               <nuxt-link to="/users/create">{{ $t("menu_user_page_create") }}</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/users/approve">ຜູ້ໃຊ້ ລໍຖ້າຢືນຢັນຕົວຕົນ</nuxt-link>
+              <nuxt-link to="/users/approve">
+              
+              {{ $t("menu_users_padding") }}
+              </nuxt-link>
             </li>
           
             <!-- <li>
