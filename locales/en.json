@@ -250,10 +250,11 @@
   "menu_user_image": "Image",
   "menu_user_bt_save": "Save",
   "menu_user_status": "Status",
-  "menu_user_login_last": "ເຂົ້າລະບົບຫຼ້າສຸດ",
+  "menu_user_login_last": "Last Login",
 
   "menu_user_detail": "Detail",
   "menu_user_account": "Account",
+  "button_record": "Record",
 
   "menu_dlt_title_manage": "Manage DLT",
   "menu_dlt_title_manage_all": "ALL Manage DLT",

@@ -180,7 +180,7 @@
                 ></path></svg  ></a>
             
         
-                <button class="button2 m-1" @click="viewProfile(user.user_id)">ປະຫວັດຮຽນ</button>
+                <button class="button2 m-1" @click="viewProfile(user.user_id)">{{ $t("button_record") }}</button>
               
           </td>
         </tr>
