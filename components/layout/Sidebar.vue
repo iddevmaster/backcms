@@ -1065,11 +1065,11 @@
             <li>
               <nuxt-link to="/users/staff">{{ $t("menu_user_page_all") }}</nuxt-link>
             </li>
-            <!-- <li>
-              <nuxt-link to="/users/create">{{ $t("menu_user_page_create") }}</nuxt-link>
-            </li> -->
             <li>
-              <nuxt-link to="/users/approvestaff">ຜູ້ໃຊ້ ລໍຖ້າຢືນຢັນຕົວຕົນ </nuxt-link>
+              <nuxt-link to="/users/staff/create">{{ $t("menu_user_page_create") }}</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/users/approvestaff"> {{ $t("menu_users_padding") }} </nuxt-link>
             </li>
             <!-- <li>
               <nuxt-link to="/users/approve">{{ $t("page_menu_approve") }}</nuxt-link>
