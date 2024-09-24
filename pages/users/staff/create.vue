@@ -156,6 +156,11 @@ const changeFont = () => {
   fileInputFont.value.click();
 };
 
+const Reback = async () => {
+  await router.push('/users');
+};
+
+
 const save = async () => {
   v$.value.$validate();
   if (!v$.value.$error) {
@@ -325,7 +330,8 @@ const format = (date) => {
                     <button style="width:100% ;" @click="Reback()"
                             class="changeImg btn btn btn-primary"
                           >
-                            Back
+                          {{ $t("user_profile_button_back")
+                      }}
                           </button>
           
                   </div>

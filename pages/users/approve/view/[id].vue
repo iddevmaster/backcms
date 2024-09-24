@@ -24,6 +24,7 @@ const store = usersStore()
 const auth = useAuthStore()
 const router = useRouter();
 store.user_id = auth.user_id
+store.formlog.user_id = router.currentRoute.value.params.id;
 await store.fetchUsersByOne(router.currentRoute.value.params.id);
 await store.fetchUsersByOneComment();
 

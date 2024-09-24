@@ -502,10 +502,16 @@ const Hide = async () => {
   store.ModalApp = false;
 }
 
-const BackUser = async () => {
- await router.push("/users");
-}
 
+const BackUser = async () => {
+  if(user_type.value == '1'){
+ await router.push("/users");
+  }
+  if(user_type.value == '2'){
+ await router.push("/users/staff");
+  }
+ 
+};
 
 const Save = async () => {
   await store.UpdatePeddingByOneComment();

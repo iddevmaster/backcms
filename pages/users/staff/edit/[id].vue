@@ -136,6 +136,20 @@ const changeFont = () => {
   // Trigger a click event on the file input element
   fileInputFont.value.click();
 };
+const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
+const Reback = async () => {
+
+  if(user_type.value == '1'){
+ await router.push("/users");
+  }
+  if(user_type.value == '2'){
+ await router.push("/users/staff");
+  }
+ 
+};
+
+
+
 
 const updated = async () => {
   v$.value.$validate();
@@ -313,7 +327,8 @@ const format = (date) => {
                       @click="Reback()"
                       class="changeImg btn btn btn-primary"
                     >
-                      Back
+                    {{ $t("user_profile_button_back")
+                      }}
                     </button>
                   </div>
                 </div>

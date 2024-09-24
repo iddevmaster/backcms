@@ -350,6 +350,9 @@ formlog:{
       this.formsearch.search = this.searchDa;
       this.formsearch.user_id = this.user_id;
 
+
+      console.log(this.formsearch);
+
     
       try {
         this.pending = true

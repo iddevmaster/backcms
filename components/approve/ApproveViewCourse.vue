@@ -8,7 +8,7 @@
           </div>
         </div>
         <div class="col-12 col-md-2">
-          <div class="row"><button class="btn btn-primary">{{ $t("user_profile_button_back") }}</button></div>
+          <div class="row"><button class="btn btn-primary" @click="Reback()">{{ $t("user_profile_button_back") }}</button></div>
 
          
         </div>
@@ -528,6 +528,15 @@ store.formlog.des = 'Approve';
  await router.push("/users/approvestaff");
   }
 }
+
+const Reback = async () => {
+  if(user_type.value == '1'){
+ await router.push("/users/approve");
+  }
+  if(user_type.value == '2'){
+ await router.push("/users/approvestaff");
+  }
+};
 
 
 function coverimage(i) {

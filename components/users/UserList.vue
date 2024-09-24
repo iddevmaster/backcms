@@ -131,7 +131,7 @@
           <td>{{ user.login_last_date }}</td>
           <td>
             
-              <a class="badge badge-light-primary text-start me-2 action-view" @click="viewProfile()" >
+              <a class="badge badge-light-primary text-start me-2 action-view" @click="viewProfile(user.user_id)" >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -395,7 +395,7 @@ const validatePNumber = async (evt) => {
   }
   if (store.formsearch.page == "") {
     store.formsearch.page = 1;
-    await store.fetchUsersStaff();
+    await store.fetchUsers();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
@@ -412,14 +412,14 @@ const validatePNumberDown = async () => {
     store.pending = true;
 
     store.formsearch.page = 1;
-    await store.fetchUsersStaff();
+    await store.fetchUsers();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   } else {
     store.formsearch.page -= 1;
     store.pending = true;
-    await store.fetchUsersStaff();
+    await store.fetchUsers();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
@@ -431,14 +431,14 @@ const validatePNumberUp = async () => {
     store.pending = true;
     store.formsearch.page = store.total_page;
 
-    await store.fetchUsersStaff();
+    await store.fetchUsers();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   } else {
     store.formsearch.page += 1;
     store.pending = true;
-    await store.fetchUsersStaff();
+    await store.fetchUsers();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
