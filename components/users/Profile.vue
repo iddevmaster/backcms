@@ -23,7 +23,7 @@
 
 
 <div class="form-group" style="text-align: right;">
-                  <button type="button" class="btn btn-danger">{{ $t("user_profile_button_edit") }}</button>
+                  <button type="button" class="btn btn-danger"  @click="EditUser(store.profile_by_one[0].user_id)">{{ $t("user_profile_button_edit") }}</button>
  </div>
         </div>
         <br>
@@ -203,7 +203,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm"
                   >
-                    ລາວ</label
+                  {{store.profile_by_one[0].country_name_eng}}</label
                   >
                 </div>
                 <div class="form-group row">
@@ -280,6 +280,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl" style="font-size: 24px;"
                   >
+              
                    {{ $t("form_approve_status") }}: 
                   
                   <span style="color: #11901E;" v-if="store.profile_by_one[0].verify_account == 'system_active'"> {{ $t("system_active") }}</span>
@@ -294,20 +295,22 @@
 
               <div class="col-12 col-sm-12 col-md-5">
                 <div class="form-group row">
-                  <button type="button" class="btn btn-danger">{{ $t("user_profile_button_edit_status") }}</button>
+                  <button type="button" class="btn btn-danger" @click="Editstatus()">{{ $t("user_profile_button_edit_status") }}</button>
                 </div>
               </div>
             </div>
 
-            
-            <div class="row mb-5">
+          
+            <div class="row mb-5" v-if="store.comment.length > 0">
               <div class="col-12 col-sm-12 col-md-12">
                 <div class="form-group row">
                   <label
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl" style="font-size: 18px;"
                   >
-                  ໝາຍເຫດ:  ເຈົ້າໜ້າທີ່ຢືນຢັນໃຫ້
+                  ໝາຍເຫດ:  {{ store.comment[0].comment_details }}
+
+        
                   </label>
                 </div>
               </div>
@@ -381,7 +384,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl" style="font-size: 20px;"
                   >
-                  {{ $t("log_edit_approve_date") }}:{{  store.log_admin[0].update_data}}   ໂດຍ: {{  store.log_admin[0].user_firstname}}
+                  {{ $t("log_edit_approve_date") }}:{{  store.log_admin[0].update_data}}   ໂດຍ: {{  store.log_admin[0].user_name}}
                   </label>
 
                   <label v-else
@@ -405,39 +408,67 @@
     </div>
   </div>
 
-  <div class="modal" v-if="store.ModalApp">
+  <div class="modal" v-if="store.modal_update_status">
     <div class="modal-content" id="deleteConformationLabel">
       <div class="modal-header">
         <h1 class="modal-title" id="exampleModalLabel">ຢືນຢັນ ?</h1>
       </div>
         <div class="modal-body">
-          <div class="form-group row">
-<h4>ກະລຸນາຢືນຢັນອີກຄັ້ງ</h4>
-  </div>
+
 
   <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-4 col-form-label">ກະລຸນາຢືນຢັນອີກຄັ້ງ :</label>
-    <label for="inputEmail3" class="col-sm-8 col-form-label" v-if="store.status_app == 'Y'" style="color: chartreuse;">
-      ອະນຸມັດ
+    <label for="inputEmail3" class="col-sm-4 col-form-label">ສະຖານະ :</label>
+    <label for="inputEmail3" class="col-sm-8 col-form-label"  style="color: chartreuse;">
+      <select
+                      class="common__login__input px-2 form-control"
+                      aria-label="Default select example"
+                      v-model="store.formupdatestatus.verify_account"
+                    >
+                      <option selected value="" disabled>
+                        {{ $t("choose") }}
+                      </option>
+                      <option value="unactive">{{ $t("unactive") }}</option>
+                      <option value="phone_unactive">
+                        {{ $t("phone_unactive") }}
+                      </option>
+                      <option value="phone_active">
+                        {{ $t("phone_active") }}
+                      </option>
+                      <option value="system_unactive">
+                        {{ $t("system_unactive") }}
+                      </option>
+                      <option value="system_active">
+                        {{ $t("system_active") }}
+                      </option>
+                    </select>
     </label>
-    <label for="inputEmail3" class="col-sm-8 col-form-label" v-else style="color:red;">
-      ປະຕິເສດ
+  
+  </div>
+
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-4 col-form-label">ໝາຍເຫດ :</label>
+    <label for="inputEmail3" class="col-sm-8 col-form-label">
+
+
+
+      <textarea
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+              placeholder="" v-model="store.comment_details"
+   
+            >
+            </textarea>
     </label>
   </div>
 
-  <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-4 col-form-label">ຄຳເຫັນ :</label>
-    <label for="inputEmail3" class="col-sm-8 col-form-label">{{store.comment_details}}</label>
-  </div>
 
-  <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-4 col-form-label">ອະນຸມັດໂດຍ :</label>
-    <label for="inputEmail3" class="col-sm-8 col-form-label">{{auth.users.user_name}}</label>
-  </div>
+
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="Hide()">ຍົກເລີກ</button>
-        <button type="button" class="btn btn-primary"  @click="Save()">ຢືນຢັນ</button>
+        <button type="button" class="btn btn-primary" @click="UpdateStatus()">ຢືນຢັນ</button>
       </div>
     </div>
   </div>
@@ -456,6 +487,11 @@
 
 
  }
+
+ textarea::placeholder {
+  color: rgb(211, 208, 208)!important;
+  opacity: 1;
+}
 </style>
 
 
@@ -490,6 +526,7 @@ const store = usersStore()
 const user_type = useCookie('user_type'); // useCookie new hook in nuxt 3
 const router = useRouter();
 const auth = useAuthStore()
+store.formupdatestatus.user_admin = auth.user_id
 
 const CheckApp = async (item) => {
 store.ModalApp = true
@@ -500,6 +537,8 @@ store.status_app = item
 
 const Hide = async () => {
   store.ModalApp = false;
+  store.modal_update_status = false;
+
 }
 
 
@@ -510,8 +549,40 @@ const BackUser = async () => {
   if(user_type.value == '2'){
  await router.push("/users/staff");
   }
- 
 };
+
+
+const EditUser = async (item) => {
+  if(user_type.value == '1'){
+    await router.push("/users/"+item);
+  }
+  if(user_type.value == '2'){
+ await router.push("/users/staff/edit/"+ item);
+  }
+};
+
+
+
+
+
+const Editstatus = async () => {
+store.modal_update_status  = true;
+
+store.formupdatestatus.verify_account = store.profile_by_one[0].verify_account
+};
+
+const UpdateStatus = async () => {
+await store.UpdateStatus()
+await store.UpdateStatusLog();
+store.modal_update_status  = false;
+await store.fetchUsersByOneAdminProfile(router.currentRoute.value.params.id);
+await store.fetchUsersByOneComment();
+await store.fetchUsersLog(router.currentRoute.value.params.id);
+await store.fetchUsersLogApporv(router.currentRoute.value.params.id);
+store.comment_details  = '';
+};
+
+
 
 const Save = async () => {
   await store.UpdatePeddingByOneComment();

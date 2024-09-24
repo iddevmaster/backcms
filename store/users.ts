@@ -20,6 +20,7 @@ export const usersStore = defineStore('users', {
     posts_statff:{},
     pending: false,
     pending_form: false,
+    modal_update_status: false,
     sortedbyASC: true,
     selected: [],
     imagelist: null,
@@ -178,6 +179,15 @@ checkusername: false,
 log_user :[],
 log_admin :[],
 formlog:{
+  user_id:null,
+  user_admin:null,
+  des:null,
+  type:1
+},
+
+formupdatestatus:{
+  verify_account:'',
+  comment_details:null,
   user_id:null,
   user_admin:null
 },
@@ -773,10 +783,7 @@ const a = {verify_account:'system_active',identification_number:response.data[0]
 
   
       const data = await ApiService.post('/user/list/getone/profile', this.formsearchUser).then(response => {
-
         this.profile_by_one = response.data;
-        console.log(this.profile_by_one);
-
 
     });
   },  
@@ -996,7 +1003,7 @@ async UploadImage() {
             this.checkphone = response.data.checkphone
             this.checkusername = response.data.checkusername
 
-            console.log(response.data);
+   
 
   
           });
@@ -1014,7 +1021,7 @@ async UploadImage() {
             this.checkphone = response.data.checkphone
             this.checkusername = response.data.checkusername
 
-            console.log(response.data);
+        
 
   
           });
@@ -1128,6 +1135,57 @@ return true;
           return moment(a).format("YYYY-MM-DD");
          }
       },
+
+      async UpdateStatus() {
+        this.formupdatestatus.user_admin = this.user_id
+        this.formupdatestatus.user_id = this.formsearchUser.user_search_id
+        this.formupdatestatus.comment_details = this.comment_details
+     
+
+
+             
+        try {
+          
+          const data = await ApiService.post('/user/update/status',this.formupdatestatus).then(response => {
+            
+    if(response.status == 200){
+return true;
+    }
+    return data
+  
+          });
+        } catch (error) {
+          return false;
+        }
+
+        
+      },
+
+      
+      async UpdateStatusLog() {
+this.formlog.user_admin = this.user_id
+this.formlog.user_id = this.formsearchUser.user_search_id
+this.formlog.des = 'Approve';
+
+console.log(this.formlog);
+             
+        try {
+          
+          const data = await ApiService.post('/user/updatedata/log',this.formlog).then(response => {
+            
+
+
+  
+          });
+        } catch (error) {
+          return false;
+        }
+
+        
+      },
+
+
+  
 
 
   },
