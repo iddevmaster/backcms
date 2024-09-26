@@ -850,7 +850,7 @@ const format = (date) => {
                       <div class="card-body" v-else>
                         <img
                           class="aboutimg__1"
-                          src="../../../assets/img/ppt.JPG"
+                          src="../../../assets/img/no_photo.jpg"
                           alt="aboutimg"
                           style="width: 100%"
                         />
@@ -894,7 +894,7 @@ const format = (date) => {
                       <div class="card-body" v-else>
                         <img
                           class="aboutimg__1"
-                          src="../../../assets/img/ppt.JPG"
+                          src="../../../assets/img/no_photo.jpg"
                           alt="aboutimg"
                           style="width: 100%"
                         />
