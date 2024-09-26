@@ -909,4 +909,7 @@ const format = (date) => {
   </div>
 </template>
 
-<style></style>
+<style scoped>
+
+
+</style>

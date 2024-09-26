@@ -440,9 +440,9 @@ formupdatestatus:{
     },
 
     async deleteItem_id(user_id) {
-      const index = this.posts.data.findIndex(item => item.user_id === user_id)
+      const index = this.posts_statff.data.findIndex(item => item.user_id === user_id)
       if (index !== -1) {
-        this.posts.data.splice(index, 1)
+        this.posts_statff.data.splice(index, 1)
       }
       try {
         const del = await ApiService.delete('/user/delete/' + user_id);
@@ -477,7 +477,7 @@ formupdatestatus:{
     async selectall() {
       this.selected = [];
       if (!this.isAllSelected) {
-        this.posts.data.forEach((value, index) => {
+        this.posts_statff.data.forEach((value, index) => {
           this.selected.push(value);
         });
       }
@@ -557,10 +557,10 @@ user_id:this.formDetailEdit.user_id,user_village:this.formDetailEdit.user_villag
     sortLists(sortBy) {
     
       if (this.sortedbyASC) {
-        this.posts.data.sort((x, y) => (x[sortBy] > y[sortBy] ? -1 : 1));
+        this.posts_statff.data.sort((x, y) => (x[sortBy] > y[sortBy] ? -1 : 1));
         this.sortedbyASC = false;
       } else {
-        this.posts.data.sort((x, y) => (x[sortBy] < y[sortBy] ? -1 : 1));
+        this.posts_statff.data.sort((x, y) => (x[sortBy] < y[sortBy] ? -1 : 1));
         this.sortedbyASC = true;
       }
     },
