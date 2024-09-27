@@ -38,6 +38,7 @@ await auth.getProfileDetails();
 store.formapeple.location_id = auth.profiledetails.location_id;
 store.user_id = auth.user_id;
 
+
 await store.fetchUsersByOneAdmin(router.currentRoute.value.params.id);
 
 const toast = useToast();
@@ -164,6 +165,7 @@ const updated = async () => {
       store.checkIden == false
     ) {
       let t = await store.UpdateUsersByOneAdmin();
+      await store.ResetFormStaff();
       toast.success("ບັນທຶກສຳເລັດແລ້ວ");
       await router.push("/users/staff");
     } else {
