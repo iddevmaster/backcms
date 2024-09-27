@@ -1056,8 +1056,34 @@ return true;
           return false;
         }
       },
-      async ResetFormStaff() {   ////reset Form
+      async ResetFormStaff() {
         this.formapeple = {
+          user_id: null,
+          username: '',
+          user_phone: '',
+          full_name: '',
+          first_name: '',
+          last_name: '',
+          user_prefrix: '',
+          identification_number: '',
+          user_birthday: '',
+          expire: '',
+          user_village: '',
+          user_address: '',
+          location_id: null,
+          country_id: 33,
+          passpost_image:'',
+          real_image:'',
+          user_password:'',
+          user_email:'',
+          verify_account:'system_active',
+          user_type:'3',
+          active:1,
+      
+          
+        },
+
+        this.formeditapeple = {
           user_id: null,
           username: '',
           user_phone: '',
