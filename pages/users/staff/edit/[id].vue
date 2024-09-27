@@ -165,6 +165,7 @@ const updated = async () => {
     ) {
       let t = await store.UpdateUsersByOneAdmin();
       toast.success("ບັນທຶກສຳເລັດແລ້ວ");
+      await router.push("/users/staff");
     } else {
       scrollToTop();
     }
