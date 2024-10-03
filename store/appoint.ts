@@ -20,6 +20,9 @@ export const AppointStore = defineStore('appoint', {
     total_page_user: 0,
     start_date: '',
     reservebyap: [],
+    selectedRow: {
+      user_id:null
+    },
     app_present: [],
     app_user: [],
     users: [],
@@ -51,7 +54,9 @@ export const AppointStore = defineStore('appoint', {
     formuser: {
       page: 1,
       per_page: 5,
-      search: ""
+      search: "",
+      verify_account: "",
+      user_id: "",
     },
     formsearch: {
       page: 1,
@@ -159,7 +164,13 @@ export const AppointStore = defineStore('appoint', {
           "dlt_name_lo": "ລົດຂົນສົ່ງສິນຄ້າ (C2) ແກ່ຫາງລາກນ້ຳໜັກລວມເກີນກວ່າ 750 ກິໂລກຣາມ",
           "dlt_name_eng": "Cargo truck (C2) having trailer total weight exceed 750 kilograms"
       }
-    ]
+    ],
+    formselectapp:{
+      user_id:null,
+      user_full_name:"",
+      identification_number:null,
+      ap_id: null
+    }
   }
 
   ),
@@ -233,7 +244,7 @@ export const AppointStore = defineStore('appoint', {
       try {
         this.event = []
         const data = await ApiService.get('/appointment/event/?ap_learn_type=' + parseInt(this.form.ap_learn_type) + '&dlt_code=' + this.form.dlt_code + '').then(response => {
-
+console.log(response.data);
           if (response.data.length > 0) {
             this.event = response.data
             //  this.form.date_event = response.data[0].event
@@ -468,6 +479,7 @@ if(!response){
     },
 
     async fetchUser() {
+      this.formuser.user_id = this.user_id;
       try {
         const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
           const user = [];
@@ -502,16 +514,20 @@ if(!response){
 
 
     async fetchUse() {
-
       await this.fetchUsers();
-      await this.checkuser();
     },
 
 
     async fetchUsers() {
       this.userall = [];
+      this.formuser.user_id = this.user_id;
+      this.formuser.verify_account = 'system_active';
+      
+
       const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
+        console.log(response);
         this.user = response.data.data;
+   
         this.total_page_user = response.data.total_page
 
       });
@@ -610,11 +626,37 @@ if(!response){
         return false;
       }
 
-    }
+    },
+
+    async SelectUserByApp(item) {
 
 
 
+this.formselectapp.user_full_name = item.user_full_name;
+this.formselectapp.identification_number = item.identification_number;
+this.formselectapp.user_id = item.user_id;
+    },
 
+    async SaveUserRerv() {
+
+      this.formselectapp.ap_id = 238;
+      try {
+        const data = await ApiService.post('/appointment/reserve/create', this.formselectapp).then(x => {
+
+     console.log(x);
+
+        });
+        return data;
+      } catch (error) {
+        return 502;
+      }
+
+
+    },
+
+
+
+    
 
 
   },

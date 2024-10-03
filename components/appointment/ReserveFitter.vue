@@ -1,13 +1,12 @@
 <template>
   <div class="row layout-top-spacing">
-    <div class="col-lg-3 col-md-3 col-sm-3 mb-4">
+    <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
       <input
         id="t-text"
         type="text"
         name="txt"
-        placeholder="ຊອກຫາ"
+           placeholder="ຊື່ / username / ບັດປະຈຳຕົວ/ Passport / ເບີໂທ"
         class="form-control"
-        required=""
         v-model="store.formuser.search"
         @keyup="searchData" maxlength="20"
       />
@@ -17,93 +16,55 @@
   <div class="table-responsive">
     <table
       id="example"
-      class="table table-bordered table-hover"
+      class="table-bordered styled-table"
       style="width: 100%"
     >
       <thead>
         <tr>
           <th>
             {{ $t("menu_app_view_list_index") }}
-            <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
+        
           </th>
           <th @click="sortList('id')">
             {{ $t("menu_app_view_list_name") }} 
           </th>
-          <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
-          <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
           <th @click="sortList('user_phone')">
-            {{ $t("menu_app_view_list_phone") }}
+            {{ $t("menu_app_view_list_username") }}
           </th>
-          <th>{{ $t("menu_app_view_list_email") }} </th>
-          <th>{{ $t("menu_user_c_status") }} </th>
-          <!-- <th class="no-content">จัดการ</th> -->
+          <th> {{ $t("menu_app_view_list_phone") }} </th>
+          <th>{{ $t("menu_app_view_list_iden") }} </th>
+        
+          <th>{{ $t("menu_app_view_list_last_login") }} </th>
+          <th> Action </th>
+      
         </tr>
       </thead>
       <tbody>
         <tr
-          v-for="(users, index) in store.userall"
+          v-for="(users, index) in store.user"
           :key="users.user_id"
-          @click="choose(users)"
-          :class="{ 'table-success': store.myChoose === users }"
+        
+ 
+          :class="{ 'selected-row': store.selectedRow.user_id === users.user_id }" 
+       
         >
          
           <td id="clickTest">{{ index + 1 }}</td>
           <td>{{ users.user_prefrix }} {{ users.user_firstname }} {{ users.user_lastname }}</td>
+          <td>{{ users.user_name }}</td>
           <td>{{ users.user_phone }}</td>
-          <td>{{ users.user_email }}</td>
+          <td>{{ users.identification_number }}</td>
+          <td>{{ users.login_last_date }}</td>
 
-
-          <td v-if="!users.detail">
-            <p class="mb-0 text-danger">
-              <span v-if="locale == 'la'">{{ $t("unactive") }}</span>
-              <span v-if="locale == 'en'">{{ $t("unactive") }}</span>
-              <span v-if="locale == 'th'">{{ $t("unactive") }}</span>
-            </p>
-          </td>
-          <td v-if="users.detail == 'unactive'">
-            <p class="mb-0 text-danger">
-              <span v-if="locale == 'la'">{{ $t("unactive") }}</span>
-              <span v-if="locale == 'en'">{{ $t("unactive") }}</span>
-              <span v-if="locale == 'th'">{{ $t("unactive") }}</span>
-            </p>
-          </td>
-          <td v-if="users.detail == 'phone_unactive'">
-            <p class="mb-0 text-danger">
-              <span v-if="locale == 'la'">{{ $t("phone_unactive") }}</span>
-              <span v-if="locale == 'en'">{{ $t("phone_unactive") }}</span>
-              <span v-if="locale == 'th'">{{ $t("phone_unactive") }}</span>
-            </p>
-          </td>
-          <td v-if="users.detail == 'phone_active'">
-            <p class="mb-0 text-danger">
-              <span v-if="locale == 'la'">{{ $t("phone_active") }}</span>
-              <span v-if="locale == 'en'">{{ $t("phone_active") }}</span>
-              <span v-if="locale == 'th'">{{ $t("phone_active") }}</span>
-            </p>
-          </td>
-          <td v-if="users.detail == 'system_unactive'">
-            <p class="mb-0 text-danger">
-              <span v-if="locale == 'la'">{{ $t("system_unactive") }}</span>
-              <span v-if="locale == 'en'">{{ $t("system_unactive") }}</span>
-              <span v-if="locale == 'th'">{{ $t("system_unactive") }}</span>
-            </p>
-          </td>
-          <td v-if="users.detail == 'system_active'">
-            <p class="mb-0 text-success">
-              <span v-if="locale == 'la'">{{ $t("system_active") }}</span>
-              <span v-if="locale == 'en'">{{ $t("system_active") }}</span>
-              <span v-if="locale == 'th'">{{ $t("system_active") }}</span>
-            </p>
-          </td>
-          <!-- <td>
+          <td>
             <button
               type="button"
               class="btn btn-success mt-0"
-              @click="choose(user)"
+              @click="selectPoint(users)"
             >
-              เลือก
+            ເລືອກ
             </button>
-          </td> -->
+          </td>
         </tr>
       </tbody>
     </table>
@@ -137,7 +98,8 @@
 
       <div class="pagination-no_spacing" v-else>
         <ul class="pagination">
-          ไม่มีข้อมูล
+          ບໍ່ມີຂໍ້ມູນ
+
         </ul>
       </div>
     </div>
@@ -226,6 +188,13 @@ const choose = async (item) => {
     });
   }
   // store.myChoose = item;
+};
+
+
+const selectPoint = async (item) => {
+await store.SelectUserByApp(item);
+store.selectedRow = item; // Store the index of the clicked row
+console.log(store.selectedRow);
 };
 
 const close = async () => {
@@ -321,7 +290,11 @@ return false;
 }
 </script>
 
-<style>
+<style scoped>
+
+
+
+
 .preview {
   display: flex;
   justify-content: center;
@@ -357,4 +330,27 @@ return false;
   max-width: 300px;
   max-height: 300px;
 }
+
+.selected-row {
+
+  background-color:#f1f1f1
+}
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px auto;
+  font-size: 18px;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+}
+
+
+
+
 </style>

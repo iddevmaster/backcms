@@ -364,7 +364,7 @@
           
           </ul>
         </li> -->
-<!-- 
+
            <li class="menu">
           <a
             href="#appointment"
@@ -409,7 +409,7 @@
               <nuxt-link to="/appointment/user">{{ $t("menu_app_view_by_user") }}</nuxt-link>
             </li>
           </ul>
-        </li> -->
+        </li>
 
         
         <li class="menu">
@@ -688,6 +688,72 @@
                         <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus"><line x1="5" y1="12" x2="19" y2="12"></line></svg><span>{{ $t("appication") }}</span></div>
                     </li>
 
+
+                    
+        <li class="menu" >
+          <a
+            href="#learning"
+            data-bs-toggle="collapse"
+            aria-expanded="false"
+            class="dropdown-toggle"
+          >
+            <div class="">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-layers"
+              >
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+              <span>ນັດໝາຍ ສອບເສັງ</span>
+            </div>
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-chevron-right"
+              >
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </div>
+          </a>
+          <ul
+            class="collapse submenu list-unstyled" :class="{ show:isActiveMenu('/appointment') }"
+            id="appointment"
+            data-bs-parent="#accordionExample"
+          >
+            <li :class="{ active: isActive('/learning') }">
+              <nuxt-link to="/learning">ຊ່ວງເວລານັດໝາຍທັງໝົດ</nuxt-link>
+            </li>
+            <li :class="{ active: isActive('/learning/reportlearn') }">
+              <nuxt-link to="/learning/reportlearn">ເພິ່ມຊ່ວງເວລານັດໝາຍ</nuxt-link>
+            </li>
+            <li :class="{ active: isActive('/learning/reportexam') }">
+              <nuxt-link to="/learning/reportexam">ເບິ່ງນັດໝາຍ ປະຈຳວັນ</nuxt-link>
+            </li>
+            <li :class="{ active: isActive('/appointment/create') }">
+              <nuxt-link to="/appointment/create">ເພິ່ມນັດໝາຍໃໝ່</nuxt-link>
+            </li>
+
+          </ul>
+        </li>
+<!-- 
         <li class="menu" >
           <a
             href="#learning"
@@ -747,11 +813,11 @@
             </li>
          
           </ul>
-        </li>
+        </li> -->
 
 
 
-        <li class="menu">
+        <!-- <li class="menu">
           <a
             href="#group"
             data-bs-toggle="collapse"
@@ -815,7 +881,7 @@
             </li>
            
           </ul>
-        </li>
+        </li> -->
 
         <!-- <li class="menu">
           <a
@@ -876,7 +942,7 @@
             </li>
           </ul>
         </li> -->
-
+<!-- 
         <li class="menu" v-if="user_type == 2">
           <a
             href="#transport"
@@ -937,10 +1003,10 @@
               >
             </li>
           </ul>
-        </li>
+        </li> -->
   
 
-
+<!-- 
         
         <li class="menu">
           <a
@@ -986,7 +1052,7 @@
               <nuxt-link to="/result/edit">{{ $t("resultedit") }}</nuxt-link>
             </li>
           </ul>
-        </li>
+        </li> -->
 
         <!-- <li class="menu">
           <a

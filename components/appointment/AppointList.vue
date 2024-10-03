@@ -11,8 +11,8 @@
           :key="item.dlt_code"
           :value="item.dlt_code"
         >
-        <span v-if="locale == 'la'" >{{item.dlt_code}} : {{item.dlt_description_loas}}</span>
-      <span v-if="locale == 'en'" >{{item.dlt_code}} : {{item.dlt_description_english}}</span>
+        <span v-if="locale == 'la'" >{{item.dlt_code}} : {{item}}</span>
+      <span v-if="locale == 'en'" >{{item.dlt_code}} : {{item}}</span>
      
         </option>
       </select>
@@ -162,7 +162,7 @@ const toast = useToast();
 const store = AppointStore();
 
 
-await store.fetchUser()
+// await store.fetchUser()
 await store.fetchAppointment();
 const myOptionsUser = JSON.parse(JSON.stringify(store.users));
 const myUser = ref();
