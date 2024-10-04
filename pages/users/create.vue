@@ -325,6 +325,9 @@ const format = (date) => {
                   </div>
                 </div>
 
+
+    
+
                 <div class="col-sm-12 col-xl-2 mb-3" style="text-align: right;">
                   <div >
                     <button style="width:100% ;" @click="Reback()"
@@ -340,7 +343,7 @@ const format = (date) => {
                 <hr>
               <div class="row mt-3">
                 <div class="col-xl-2">
-                  <div class="login__form">
+                  
                     <label class="form__label"
                       >{{ $t("form_name_title")
                       }}<span class="text-xs text-red-500" style="color: red"
@@ -349,8 +352,10 @@ const format = (date) => {
                     >
 
                     <select
-                      class="common__login__input px-2 form-control"
-                      aria-label="Default select example"
+                     class="form-select form-select"
+        aria-label="Default select example"
+                      
+                    
                       v-model="store.formapeple.user_prefrix"
                     >
                       <option selected value="" disabled>
@@ -366,7 +371,7 @@ const format = (date) => {
                       >{{ $t("profile_alert_title") }}</span
                     >
                   </div>
-                </div>
+               
                 <div class="col-xl-5">
                   <div class="login__form">
                     <label class="form__label"
@@ -425,6 +430,7 @@ const format = (date) => {
                     >
                   </div>
                 </div>
+              </div>
                 <div class="col-xl-12 mt-3">
                   <div class="login__form">
                     <label class="form__label"
@@ -760,7 +766,7 @@ const format = (date) => {
                 </div>
 
                 <div class="col-xl-12 mt-3">
-                  <div class="login__form">
+                 
                     <label class="form__label">{{
                       $t("form_approve_cou")
                     }}</label>
@@ -769,7 +775,7 @@ const format = (date) => {
                       >
                     <select
                       v-model="store.formapeple.country_id"
-                      class="common__login__input px-2 form-control"
+                      class="form-select form-select"
                       aria-label="Default select example"
                     
                     >
@@ -784,17 +790,17 @@ const format = (date) => {
                       </option>
                     </select>
                   </div>
-                </div>
-
+               
+                <div class="row mt-3">
                 <div class="col-xl-3 mt-3">
-                  <div class="login__form">
+                  
                     <label class="form__label">{{ $t("form_approve_status")
                       }}</label>
                       <span class="text-xs text-red-500" style="color: red"
                         >*</span
                       >
                     <select
-                      class="common__login__input px-2 form-control"
+                     class="form-select form-select"
                       aria-label="Default select example"
                       v-model="store.formapeple.verify_account"
                     >
@@ -815,18 +821,18 @@ const format = (date) => {
                         {{ $t("system_active") }}
                       </option>
                     </select>
-                  </div>
+               
                 </div>
 
-
+              
                 <div class="col-xl-6 mt-3">
-                  <div class="login__form">
+       
                     <label class="form__label">{{ $t("menu_user_c_type") }} </label>
                       <span class="text-xs text-red-500" style="color: red"
                         >*</span
                       >
                     <select
-                      class="common__login__input px-2 form-control"
+                       class="form-select form-select"
                       aria-label="Default select example"
                       v-model="store.formapeple.user_type"
                     >
@@ -834,11 +840,11 @@ const format = (date) => {
     <option value="2">{{ $t("menu_user_c_type_user_admin") }}</option>
     <option value="3">{{ $t("menu_user_c_type_user_user") }}</option>
                     </select>
-                  </div>
+                 
                 </div>
-
+            
                 <div class="col-xl-3  mt-3">
-                  <div class="login__form">
+                
                     <label class="form__label"
                       >Active<span class="text-xs text-red-500" style="color: red"
                         >*</span
@@ -846,7 +852,7 @@ const format = (date) => {
                     >
 
                     <select
-                      class="common__login__input px-2 form-control"
+                       class="form-select form-select"
                       aria-label="Default select example"
                       v-model="store.formapeple.active"
                     >
@@ -855,9 +861,9 @@ const format = (date) => {
                       <option value="1">{{ $t("active") }}</option>
                     </select>
         
-                  </div>
+              
                 </div>
-
+              </div>
 
                 <div class="row mt-4">
                   <div class="col-sm-6">
@@ -971,7 +977,7 @@ const format = (date) => {
           </div>
         </div>
       </div>
-    </div>
+ 
   </div>
 </template>
 

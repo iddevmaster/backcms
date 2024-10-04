@@ -336,7 +336,7 @@ const format = (date) => {
          
               
                 <div class="col-xl-2">
-                  <div class="login__form">
+                  
                     <label class="form__label"
                       >{{ $t("form_name_title")
                       }}<span class="text-xs text-red-500" style="color: red"
@@ -345,7 +345,7 @@ const format = (date) => {
                     >
 
                     <select
-                      class="common__login__input px-2 form-control"
+                       class="form-select form-select"
                       aria-label="Default select example"
                       v-model="store.formeditapeple.user_prefrix"
                     >
@@ -361,7 +361,7 @@ const format = (date) => {
                       v-if="v$.user_prefrix.$error"
                       >{{ $t("profile_alert_title") }}</span
                     >
-                  </div>
+                  
                 </div>
                 <div class="col-xl-5">
                   <div class="login__form">
@@ -778,7 +778,7 @@ const format = (date) => {
                   <div class="login__form">
                     <label class="form__label">ສະຖານະ</label>
                     <select
-                      class="common__login__input px-2 form-control"
+                       class="form-select form-select"
                       aria-label="Default select example"
                       v-model="store.formeditapeple.verify_account"
                     >
@@ -809,7 +809,7 @@ const format = (date) => {
                         >*</span
                       >
                     <select
-                      class="common__login__input px-2 form-control"
+                      class="form-select form-select"
                       aria-label="Default select example"
                       v-model="store.formeditapeple.user_type"
                     >
@@ -829,7 +829,7 @@ const format = (date) => {
                     >
 
                     <select
-                      class="common__login__input px-2 form-control"
+                       class="form-select form-select"
                       aria-label="Default select example"
                       v-model="store.formeditapeple.active"
                     >

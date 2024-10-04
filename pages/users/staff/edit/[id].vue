@@ -771,7 +771,7 @@ const format = (date) => {
                   <div class="login__form">
                     <label class="form__label">ສະຖານະ</label>
                     <select
-                      class="common__login__input px-2 form-control"
+                      class="form-select form-select"
                       aria-label="Default select example"
                       v-model="store.formeditapeple.verify_account"
                     >

@@ -74,8 +74,7 @@
     <div class="col-sm-6">
       <label for="exampleFormControlInput1">{{ $t("menu_user_c_pass") }}</label> <span class="text-xs text-red-500" style="color:red"> 
         
-   
-
+  
         <span v-if="locale == 'la'" > {{ $t("menu_user_c_pass_message") }}</span>
       <span v-if="locale == 'en'" > {{ $t("menu_user_c_pass_message") }}</span>
      

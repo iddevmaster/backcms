@@ -349,7 +349,7 @@ const format = (date) => {
                     >
 
                     <select
-                      class="common__login__input px-2 form-control"
+                    class="form-select form-select"
                       aria-label="Default select example"
                       v-model="store.formapeple.user_prefrix"
                     >
@@ -766,7 +766,7 @@ const format = (date) => {
                     }}</label>
                     <select
                       v-model="store.formapeple.country_id"
-                      class="common__login__input px-2 form-control"
+                     class="form-select form-select"
                       aria-label="Default select example"
                       disabled
                     >
@@ -788,7 +788,7 @@ const format = (date) => {
                     <label class="form__label">{{ $t("form_approve_status")
                       }}</label>
                     <select
-                      class="common__login__input px-2 form-control"
+                      class="form-select form-select"
                       aria-label="Default select example"
                       v-model="store.formapeple.verify_account"
                     >
