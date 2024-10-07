@@ -165,11 +165,38 @@ export const AppointStore = defineStore('appoint', {
           "dlt_name_eng": "Cargo truck (C2) having trailer total weight exceed 750 kilograms"
       }
     ],
+    dlt_today:{
+      A_1:[],
+      A_2:[],
+      A1_1:[],
+      A1_2:[],
+      A2_1:[],
+      A2_2:[],
+      A3_1:[],
+      A3_2:[],
+      B_1:[],
+      B_2:[],
+      C_1:[],
+      C_2:[],
+      C1_1:[],
+      C1_2:[],
+      C2_1:[],
+      C2_2:[],
+      D_1:[],
+      D_2:[],
+      D1_1:[],
+      D1_2:[],
+      E_1:[],
+      E_2:[],
+      E1_1:[],
+      E1_2:[],
+    },
     formselectapp:{
       user_id:null,
       user_full_name:"",
       identification_number:null,
-      ap_id: null
+      ap_id: null,
+      st_id:""
     }
   }
 
@@ -244,7 +271,7 @@ export const AppointStore = defineStore('appoint', {
       try {
         this.event = []
         const data = await ApiService.get('/appointment/event/?ap_learn_type=' + parseInt(this.form.ap_learn_type) + '&dlt_code=' + this.form.dlt_code + '').then(response => {
-console.log(response.data);
+
           if (response.data.length > 0) {
             this.event = response.data
             //  this.form.date_event = response.data[0].event
@@ -628,6 +655,57 @@ if(!response){
 
     },
 
+    async fetchAppPresentToday() {
+
+      console.log(this.dlt_today);
+      try {
+        const data = await ApiService.post('/appointment/dateappointment').then(response => {
+   
+        for  (let i = 0; i < response.data.length; i++) {
+          if(response.data[i].dlt_code == 'A'){
+            this.dlt_today.A_1.push(response.data[i])
+          }
+          if(response.data[i].dlt_code == 'A1'){
+            this.dlt_today.A_1.push(response.data[i])
+          }
+          if(response.data[i].dlt_code == 'A2'){
+            this.dlt_today.A_1.push(response.data[i])
+          }
+          if(response.data[i].dlt_code == 'A3'){
+            this.dlt_today.A_1.push(response.data[i])
+          }
+          if(response.data[i].dlt_code == 'B'){
+            this.dlt_today.B_1.push(response.data[i])
+          }
+          if(response.data[i].dlt_code == 'C'){
+            this.dlt_today.C_1.push(response.data[i])
+          }
+          if(response.data[i].dlt_code == 'C1'){
+            this.dlt_today.C1_1.push(response.data[i])
+          }
+          if(response.data[i].dlt_code == 'C2'){
+            this.dlt_today.C2_1.push(response.data[i])
+          }
+          if(response.data[i].dlt_code == 'D'){
+            this.dlt_today.D_1.push(response.data[i])
+          }
+          if(response.data[i].dlt_code == 'D1'){
+            this.dlt_today.D_1.push(response.data[i])
+          }
+          if(response.data[i].dlt_code == 'D2'){
+            this.dlt_today.D2_1.push(response.data[i])
+          }
+        }
+        console.log(this.dlt_today);
+        
+        });
+        return true
+      } catch (error) {
+        return false;
+      }
+
+    },
+
     async SelectUserByApp(item) {
 
 
@@ -635,15 +713,16 @@ if(!response){
 this.formselectapp.user_full_name = item.user_full_name;
 this.formselectapp.identification_number = item.identification_number;
 this.formselectapp.user_id = item.user_id;
+this.formselectapp.st_id = item.user_id;
+console.log(this.formselectapp);
     },
 
     async SaveUserRerv() {
 
       this.formselectapp.ap_id = 238;
       try {
-        const data = await ApiService.post('/appointment/reserve/create', this.formselectapp).then(x => {
+        const data = await ApiService.post('/appointment/reserve/new/create', this.formselectapp).then(x => {
 
-     console.log(x);
 
         });
         return data;

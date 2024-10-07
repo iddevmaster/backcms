@@ -396,7 +396,7 @@
           <ul
             class="collapse submenu list-unstyled"
             id="appointment_1"
-            data-bs-parent="#accordionExample"
+            data-bs-parent="#accordionExample1"
           >
             <li>
               <nuxt-link to="/appointment/dateappointment">ຜູ້ມາເສັງມື້ນີ້</nuxt-link>
@@ -439,7 +439,7 @@
             data-bs-parent="#accordionExample"
           >
             <li>
-              <nuxt-link to="/appointment">{{ $t("menu_app_manage_all") }}</nuxt-link>
+              <!-- <nuxt-link to="/appointment">{{ $t("menu_app_manage_all") }}</nuxt-link> -->
             </li>
             <li>
               <nuxt-link to="/appointment/create">{{ $t("menu_app_app_create") }}</nuxt-link>
@@ -1327,7 +1327,9 @@ function image(i) {
 
 </script>
 
-<style>
+<style scoped>
+
+
   .menu-icon {
     font-size: 20px;
     margin-right: 5px;

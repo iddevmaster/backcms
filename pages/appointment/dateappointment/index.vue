@@ -23,6 +23,8 @@ const auth = useAuthStore();
 const router = useRouter();
 store.user_id = auth.user_id;
 
+
+await store.fetchAppPresentToday();
 store.group = [];
 const closeModal = () => {
   store.closeModal();
@@ -37,6 +39,11 @@ const deletel = async () => {
     toast.error("ລຶບຂໍ້ມູນລົ້ມເຫລວ");
   }
 };
+const CreateAppo = async () => {
+ await router.push("/appointment/user/create");
+};
+
+
 </script>
 
 <template>
@@ -58,7 +65,11 @@ const deletel = async () => {
       <div class="middle-content container-xxl p-0">
         <div class="row layout-top-spacing">
           <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-            <div class="widget-content widget-content-area br-8 p-3"></div>
+                      <button @click="CreateAppo()"
+                            class="changeImg btn btn btn-primary"
+                          >
+                        ເພິ່ມນັດໝາຍ
+                          </button>
           </div>
           <div
             class="col-xl-12 col-lg-12 col-sm-12 layout-spacing"
