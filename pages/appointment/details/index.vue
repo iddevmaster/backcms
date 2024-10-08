@@ -44,7 +44,7 @@ const deletel = async () => {
 };
 
 const SearchApp = async () => {
-
+  localStorage.setItem('ap_number',store.searchapp.ap_number);
   console.log('SearchApp');
 };
 
