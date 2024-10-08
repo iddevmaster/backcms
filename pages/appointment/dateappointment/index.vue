@@ -43,6 +43,11 @@ const CreateAppo = async () => {
  await router.push("/appointment/user/create");
 };
 
+const GotoDetails = async (item) => {
+  store.searchapp.ap_number = item.ap_number
+  localStorage.setItem('ap_number', item.ap_number);
+ await router.push("/appointment/details");
+};
 
 </script>
 
@@ -79,149 +84,37 @@ const CreateAppo = async () => {
           </div>
         </div>
         <div id="toggleAccordion" class="no-icons accordion">
-          <div class="card">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionOne"
-                  aria-expanded="true"
-                  aria-controls="defaultAccordionOne"
-                >
-                ຊ່ອງເວລາ 08.00 A : Two-wheels motocycle, engine not exceed 125cc
-                
-                </div>
+     
 
-            
-          
-              </section>
-            </div>
 
-            <div
-              id="defaultAccordionOne"
-                   class="collapse"
-      
-              data-bs-parent="#toggleAccordion1"
-            >
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
-                            </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
-                            </h4>
-                            <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
-                            </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <span class="card-category mb-2">ສະຖານະ : </span
-                            ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-                            <p class="card-category mb-2 pt-2">
-                              ລຳດັບສອບເສັງ: 1
-                            </p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <br>
-          <div class="card">
+          <!-- A 1-->
+       
+     
+          <div class="card mb-1" v-if="store.dlt_today.A_1.length > 0" >
             <div class="card-header" id="...">
               <section class="mb-0 mt-0">
                 <div
                   role="menu"
                  class="collapsed accordion-buttonaa"
                   data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionTwo"
+                  data-bs-target="#defaultAccordionA1"
                   aria-expanded="false"
-                  aria-controls="defaultAccordionTwo"
+                  aria-controls="defaultAccordionA1"
                 >
-                ຊ່ອງເວລາ  16.00 - A : Two-wheels motocycle, engine not exceed 125cc
+                ຊ່ອງເວລາ   08.00 - A : Two-wheels motocycle engine not exceed 125 cc
                 </div>
               </section>
             </div>
             <div
-              id="defaultAccordionTwo"
-              class="collapse "
+              id="defaultAccordionA1"
+                  class="collapse"
               aria-labelledby="..."
-              data-bs-parent="#toggleAccordion2"
+              data-bs-parent="#toggleAccordion3"
             >
               <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="row">
+                  <div class="col-sm-6"  v-for="(item, index) in store.dlt_today.A_1" :key="item">
+                    <div class="row" @click="GotoDetails(item)">
                       <div
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
@@ -234,11 +127,11 @@ const CreateAppo = async () => {
                           />
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
+                              ID ນັດໝາຍ:  {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
+                              {{ item.user_prefrix }}  {{ item.user_firstname }}  {{ item.user_lastname }} 
                             </h5>
                             <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
                             <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
@@ -261,72 +154,146 @@ const CreateAppo = async () => {
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
-                            </h4>
-                            <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
-                            </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <span class="card-category mb-2">ສະຖານະ : </span
-                            ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-                            <p class="card-category mb-2 pt-2">
-                              ລຳດັບສອບເສັງ: 1
-                            </p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+               
                 </div>
               </div>
             </div>
           </div>
-          <br>
-          <div class="card">
+         
+
+<!-- A 2-->
+<div class="card mb-1"   v-if="store.dlt_today.A_2.length > 0 ">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionA2"
+     aria-expanded="false"
+     aria-controls="defaultAccordionA2"
+   >
+   ຊ່ອງເວລາ   16.00 - A : Two-wheels motocycle engine not exceed 125 cc
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionA2"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+             <!-- A1 1 -->
+          <div class="card mb-1"   v-if="store.dlt_today.A1_1.length > 0 ">
             <div class="card-header" id="...">
               <section class="mb-0 mt-0">
                 <div
                   role="menu"
                  class="collapsed accordion-buttonaa"
                   data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionThree"
+                  data-bs-target="#defaultAccordionA11"
                   aria-expanded="false"
-                  aria-controls="defaultAccordionThree"
+                  aria-controls="defaultAccordionA11"
                 >
-                ຊ່ອງເວລາ   08.00 - B : Car with four-wheels, total weight not exceed
-                  3500kg, not more than 9 seats including driver
+                ຊ່ອງເວລາ   08.00 - A1 : Two-wheels motorcycle engine 125 cc and above
                 </div>
               </section>
             </div>
             <div
-              id="defaultAccordionThree"
+              id="defaultAccordionA11"
                   class="collapse"
               aria-labelledby="..."
               data-bs-parent="#toggleAccordion3"
@@ -421,6 +388,2662 @@ const CreateAppo = async () => {
               </div>
             </div>
           </div>
+
+   
+
+<!-- A1 2-->
+<div class="card mb-1" v-if="store.dlt_today.A1_2.length > 0 ">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionA12"
+     aria-expanded="false"
+     aria-controls="defaultAccordionA12"
+   >
+   ຊ່ອງເວລາ   16.00 - A1 : Two-wheels motorcycle engine 125 cc and above
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionA12"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+    
+
+<!-- A2 1-->
+<div class="card mb-1" v-if="store.dlt_today.A2_1.length > 0 ">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionA21"
+     aria-expanded="false"
+     aria-controls="defaultAccordionA21"
+   >
+   ຊ່ອງເວລາ   08.00 - A2 : Private three-wheels vehicle, Passenger vehicle with two-wheels and three-wheels
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionA21"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+<!-- A2 2-->
+<div class="card mb-1"   v-if="store.dlt_today.A2_2.length > 0 ">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionA22"
+     aria-expanded="false"
+     aria-controls="defaultAccordionA22"
+   >
+   ຊ່ອງເວລາ   16.00 - A2 : Private three-wheels vehicle, Passenger vehicle with two-wheels and three-wheels
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionA22"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+<!-- A3 1-->
+<div class="card mb-1"  v-if="store.dlt_today.A3_1.length > 0">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionA31"
+     aria-expanded="false"
+     aria-controls="defaultAccordionA31"
+   >
+   ຊ່ອງເວລາ   08.00 - A3 : Two-wheels tractor with trailer and Walk-behide Tractor
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionA31"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+<!-- A3 2-->
+<div class="card mb-1"  v-if="store.dlt_today.A3_2.length > 0">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionA32"
+     aria-expanded="false"
+     aria-controls="defaultAccordionA32"
+   >
+   ຊ່ອງເວລາ   16.00 - A3 : Two-wheels tractor with trailer and Walk-behide Tractor
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionA32"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+
+
+<!-- B 1-->
+<div class="card mb-1"  v-if="store.dlt_today.B_1.length > 0" >
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionB1"
+     aria-expanded="false"
+     aria-controls="defaultAccordionB1"
+   >
+   ຊ່ອງເວລາ   08.00 - B : Car with four-wheels, total weight not exceed
+     3500kg, not more than 9 seats including driver
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionB1"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+
+<!-- B 2-->
+<div class="card mb-1"  v-if="store.dlt_today.B_2.length > 0" >
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionB2"
+     aria-expanded="false"
+     aria-controls="defaultAccordionB2"
+   >
+   ຊ່ອງເວລາ   16.00 - B : Car with four-wheels, total weight not exceed
+     3500kg, not more than 9 seats including driver
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionB2"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+
+<!-- C 1-->
+<div class="card mb-1"  v-if="store.dlt_today.C_1.length > 0">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionC1"
+     aria-expanded="false"
+     aria-controls="defaultAccordionC1"
+   >
+   ຊ່ອງເວລາ   08.00 - C : Cargo truck, total weight from 3,500 to 7,500 kilograms
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionC1"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+<!-- C 2-->
+<div class="card mb-1"  v-if="store.dlt_today.C_2.length > 0">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionC2"
+     aria-expanded="false"
+     aria-controls="defaultAccordionC2"
+   >
+   ຊ່ອງເວລາ   16.00 - C : Cargo truck, total weight from 3,500 to 7,500 kilograms
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionC2"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+<!-- C11 -->
+<div class="card mb-1"  v-if="store.dlt_today.C1_1.length > 0">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionC11"
+     aria-expanded="false"
+     aria-controls="defaultAccordionC11"
+   >
+   ຊ່ອງເວລາ   08.00 - C1 : Cargo truck, total weight exceed 7,500 kilogram up to 15,000 kilograms
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionC11"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+<!-- C1 2-->
+<div class="card mb-1"  v-if="store.dlt_today.C1_2.length > 0">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionC12"
+     aria-expanded="false"
+     aria-controls="defaultAccordionC12"
+   >
+   ຊ່ອງເວລາ   16.00 - C1 : Cargo truck, total weight exceed 7,500 kilogram up to 15,000 kilograms
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionC12"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+<!-- C2 1-->
+<div class="card mb-1"  v-if="store.dlt_today.C2_1.length > 0">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionC21"
+     aria-expanded="false"
+     aria-controls="defaultAccordionC21"
+   >
+   ຊ່ອງເວລາ   08.00 - C2 : Cargo truck, total weight exceed 15,000 kilograms
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionC21"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+<!-- C2 2-->
+<div class="card mb-1"  v-if="store.dlt_today.C2_2.length > 0" >
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionC22"
+     aria-expanded="false"
+     aria-controls="defaultAccordionC22"
+   >
+   ຊ່ອງເວລາ   16.00 - C2 : Cargo truck, total weight exceed 15,000 kilograms
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionC22"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+<!-- D 1-->
+<div class="card mb-1"  v-if="store.dlt_today.D_1.length > 0">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionD1"
+     aria-expanded="false"
+     aria-controls="defaultAccordionD1"
+   >
+   ຊ່ອງເວລາ   08.00 - D : Passenger vehicle with 4 wheels or more, not more than 15 seats
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionD1"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+<!-- D 2-->
+<div class="card mb-1"  v-if="store.dlt_today.D_2.length > 0">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionD2"
+     aria-expanded="false"
+     aria-controls="defaultAccordionD2"
+   >
+   ຊ່ອງເວລາ   16.00 - D : Passenger vehicle with 4 wheels or more, not more than 15 seats
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionD2"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+
+<!-- D1 1-->
+<div class="card mb-1"  v-if="store.dlt_today.D1_1.length > 0" >
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionD11"
+     aria-expanded="false"
+     aria-controls="defaultAccordionD11"
+   >
+   ຊ່ອງເວລາ   08.00 - D1 : Passenger vehicle from 16 seats to 35 seats
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionD11"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+
+<!--D1 2-->
+<div class="card mb-1"  v-if="store.dlt_today.D1_2.length > 0" >
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionD12"
+     aria-expanded="false"
+     aria-controls="defaultAccordionD12"
+   >
+   ຊ່ອງເວລາ   16.00 - D1 : Passenger vehicle from 16 seats to 35 seats
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionD12"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+<!-- D2 1-->
+<div class="card mb-1"  v-if="store.dlt_today.D2_1.length > 0">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionD21"
+     aria-expanded="false"
+     aria-controls="defaultAccordionD21"
+   >
+   ຊ່ອງເວລາ   08.00 - D2 : Passenger vehicle from 36 seats or more
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionD21"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+<!-- D2 2-->
+<div class="card mb-1"  v-if="store.dlt_today.D2_2.length > 0">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionD22"
+     aria-expanded="false"
+     aria-controls="defaultAccordionD22"
+   >
+   ຊ່ອງເວລາ   16.00 - D2 : Passenger vehicle from 36 seats or more
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionD22"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+<!-- E 1-->
+<div class="card mb-1"   v-if="store.dlt_today.E_1.length > 0">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionE1"
+     aria-expanded="false"
+     aria-controls="defaultAccordionE1"
+   >
+   ຊ່ອງເວລາ   08.00 - E : Car (B), Cargo truck (C) and Passenger vehicle (D), having trailer total weight not exceed 750 kilograms
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionE1"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+<!-- E 2-->
+<div class="card mb-1"   v-if="store.dlt_today.E_2.length > 0">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionE2"
+     aria-expanded="false"
+     aria-controls="defaultAccordionE2"
+   >
+   ຊ່ອງເວລາ   16.00 - E : Car (B), Cargo truck (C) and Passenger vehicle (D), having trailer total weight not exceed 750 kilograms
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionE2"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+<!-- E1 1-->
+<div class="card mb-1"   v-if="store.dlt_today.E1_1.length > 0">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionE11"
+     aria-expanded="false"
+     aria-controls="defaultAccordionE11"
+   >
+   ຊ່ອງເວລາ   08.00 - E1 : Cargo truck (C2) having trailer total weight exceed 750 kilograms
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionE11"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
+
+<!-- E1 2-->
+<div class="card mb-1"   v-if="store.dlt_today.E1_2.length > 0">
+<div class="card-header" id="...">
+ <section class="mb-0 mt-0">
+   <div
+     role="menu"
+    class="collapsed accordion-buttonaa"
+     data-bs-toggle="collapse"
+     data-bs-target="#defaultAccordionE12"
+     aria-expanded="false"
+     aria-controls="defaultAccordionE12"
+   >
+   ຊ່ອງເວລາ   16.00 - E1 : Cargo truck (C2) having trailer total weight exceed 750 kilograms
+   </div>
+ </section>
+</div>
+<div
+ id="defaultAccordionE12"
+     class="collapse"
+ aria-labelledby="..."
+ data-bs-parent="#toggleAccordion3"
+>
+ <div class="card-body">
+   <div class="row">
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+     <div class="col-sm-6">
+       <div class="row">
+         <div
+           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+         >
+           <div class="card style-3">
+             <img
+               src="../.././../public/img/logo.svg"
+               class="card-img-top"
+               alt="..."
+               style="width: 200px"
+             />
+             <div class="card-body px-0 py-0">
+               <h4 class="media-heading mb-1">
+                 ID ນັດໝາຍ: A83M100
+               </h4>
+               <h5 class="media-heading mb-1">
+                 ທ. ສົມສັກ ຈ່າງດາບຸດ
+               </h5>
+               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+               <span class="card-category mb-2">ສະຖານະ : </span
+               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
+               <p class="card-category mb-2 pt-2">
+                 ລຳດັບສອບເສັງ: 1
+               </p>
+
+               <div class="media mt-4 mb-0">
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນທິດສະດີ: 18/20
+                   </h4>
+                 </div>
+                 <div class="media-body">
+                   <h4 class="media-heading mb-1">
+                     ຜົນປະຕິບັດ: 85/100
+                   </h4>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+</div>
+
+
         </div>
       </div>
     </div>

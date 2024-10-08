@@ -186,6 +186,8 @@ export const AppointStore = defineStore('appoint', {
       D_2:[],
       D1_1:[],
       D1_2:[],
+      D2_1:[],
+      D2_2:[],
       E_1:[],
       E_2:[],
       E1_1:[],
@@ -197,6 +199,9 @@ export const AppointStore = defineStore('appoint', {
       identification_number:null,
       ap_id: null,
       st_id:""
+    },
+    searchapp:{
+      ap_number:null
     }
   }
 
@@ -695,8 +700,14 @@ if(!response){
           if(response.data[i].dlt_code == 'D2'){
             this.dlt_today.D2_1.push(response.data[i])
           }
+          if(response.data[i].dlt_code == 'E'){
+            this.dlt_today.E_1.push(response.data[i])
+          }
+          if(response.data[i].dlt_code == 'E1'){
+            this.dlt_today.E1_1.push(response.data[i])
+          }
         }
-        console.log(this.dlt_today);
+   
         
         });
         return true
