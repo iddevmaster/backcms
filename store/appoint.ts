@@ -193,6 +193,10 @@ export const AppointStore = defineStore('appoint', {
       E1_1:[],
       E1_2:[],
     },
+    cancelapp:false,
+    verify:true,
+    theoryscore:false,
+    practicalscore :false,
     formselectapp:{
       user_id:null,
       user_full_name:"",

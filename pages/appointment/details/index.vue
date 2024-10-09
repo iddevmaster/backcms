@@ -9,6 +9,7 @@ import { defineComponent } from 'vue';
 import { AppointStore } from '@/store/appoint'
 import AppointList from '@/components/appointment/AppointList.vue'
 import AppointListByGroup from '@/components/appointment/AppointListByGroup.vue'
+import APPProfile from "@/components/appointment/Profile.vue";
 
 import { useModalStore } from '@/store/modal';
 import { useToast } from 'vue-toastification'
@@ -66,42 +67,14 @@ const SearchApp = async () => {
 
       <div class="middle-content container-xxl p-0">
         <div class="row layout-top-spacing">
-          <div class="col-xl-12 col-lg-12 col-sm-12">
-            <div class="widget-content widget-content-area br-8 p-3">
-              <div class="row">
-
-                <div class="col-lg-6 col-md-4 col-sm-4">
-                 <h5> ລາຍລະອຽດນັດໝາຍ</h5>
-    </div>
-
-    <div class="col-lg-1 col-md-4 col-sm-4">
-
-     <label  for="inputEmail3" class="col-sm-12 col-form-label"> ID ນັດໝາຍ:</label>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-4">
-      <input
-        id="t-text"
-        type="text"
-        name="txt"
-        placeholder="A83M100"
-        class="form-control"
-     v-model="store.searchapp.ap_number"
-        maxlength="30"
-      />
-    </div>
-
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
-        <button type="button" class="btn btn-primary"   style="width: 100%; height: 100%; margin-top: auto;"  @click="SearchApp()">
-          Search
-        </button>
-    </div>
-            </div>
-          </div>
-          </div>
+      
           <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
-            <!-- <AppointListByGroup></AppointListByGroup> -->
+            <APPProfile  ></APPProfile>
           </div>
         </div>
+
+
+        
       </div>
     </div>
   </div>
@@ -136,26 +109,4 @@ const SearchApp = async () => {
 
 <style scoped>
 
-
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  width: 50%;
-}
-
-button {
-  margin-top: 10px;
-}
 </style>
