@@ -40,7 +40,7 @@
       <div class="row m-1">
         <div class="col-12 col-sm-12 col-xl-12 col-lg-12/ mb-3">
           <div class="form-group" style="text-align: right">
-            <button type="button" class="btn btn-danger">ຍົກເລີກ</button>
+            <button type="button" class="btn btn-danger"  @click="ModalC()">ຍົກເລີກ</button>
           </div>
         </div>
         <br />
@@ -477,7 +477,7 @@
               >
             </div>
             <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3">
-              <button type="button" class="btn btn-primary">ບັນທຶກ</button>
+              <button type="button" class="btn btn-primary" @click="Modaldiv()">ບັນທຶກ</button>
             </div>
           </div>
 
@@ -487,7 +487,7 @@
                 for="company-name"
                 class="col-sm-12 col-form-label col-form-label-sm"
               >
-                ຜົນທິດສະດີ: 19/20 :</label
+                ຜົນທິດສະດີ:   19/20: 19/20 :</label
               >
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
@@ -499,7 +499,7 @@
               >
             </div>
             <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3">
-              <button type="button" class="btn btn-primary">
+              <button type="button" class="btn btn-primary"  @click="ModalT()">
                 ບັນທຶກ ຜົນທິດສະດີ
               </button>
             </div>
@@ -511,7 +511,7 @@
                 for="company-name"
                 class="col-sm-12 col-form-label col-form-label-sm"
               >
-                ຜົນທິດສະດີ: 19/20 :</label
+              ຜົນປະຕິບັດ:  85/100 </label
               >
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
@@ -519,15 +519,17 @@
                 for="company-name"
                 class="col-sm-12 col-form-label col-form-label-sm"
               >
-                ໂດຍ: staff1 , 2024-04-01 10:22:41</label
+              ໂດຍ: E-driving ,  2024-04-01 11:32:23</label
               >
             </div>
             <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3">
-              <button type="button" class="btn btn-primary">
+              <button type="button" class="btn btn-primary"  @click="ModalP()">
                 ບັນທຶກ ຜົນທິດສະດີ
               </button>
             </div>
           </div>
+
+
 
           <div class="row">
             <div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12">
@@ -539,19 +541,19 @@
               >
             </div>
           </div>
-          <!-- <div class="row">
-            <div class="col-4 col-sm-12 col-md-4">
-              <div class="form-group row">
-                <label
-                  for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
-                >
-                  {{ $t("form_approve_real_image") }} :
-                </label>
-              </div>
-            </div>
 
-            <div class="col-8 col-sm-12 col-md-8">
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12" style="text-align: right;
+">
+         <button type="button" class="btn btn-primary"  @click="ModalP()">
+          ເພິ່ມ ໃບຂັບຂີ່ ໃຫ້ຜູ້ໃຊ້
+              </button>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+
+            <div class="col-6 col-sm-12 col-md-6">
               <div class="form-group row">
                 <img
                   src="../../assets/images/no_photo.jpg"
@@ -561,7 +563,46 @@
                 />
               </div>
             </div>
-          </div> -->
+            <div class="col-6 col-sm-12 col-md-6 p-5">
+              <div class="form-group row">
+                <span style="font-size: 24px;">
+                  ເລກທີ: ຂສ  0037730
+                </span>
+              </div>
+              <div class="form-group row">
+                
+                <span style="font-size: 24px;">
+                  ອອກຊື່: ທ້າວ ສົມສັກ ຈ່າງດາບຸດ
+                </span>
+              </div>
+              <div class="form-group row">
+                
+                <span style="font-size: 24px;">
+                  ປະເພດອະນຸຍາດ:  AB
+                </span>
+              </div>
+              <div class="form-group row">
+                
+                <span style="font-size: 24px;">
+                  ອອກວັນທີ: 28/12/2023
+                </span>
+              </div>
+              <div class="form-group row">
+                
+                <span style="font-size: 24px;">
+                  ໝົດອາຍຸ : 27/12/2028
+                </span>
+              </div>
+              <div class="form-group row">
+               
+                <span style="font-size: 24px;">
+                  ອອກທີ່: ກຄພຂ ຈຳປາສັກ
+                </span>
+              </div>
+            </div>
+
+ 
+          </div>
         </div>
       </div>
     </div>
@@ -609,6 +650,119 @@
     <div class="modal-content" id="deleteConformationLabel">
       <div class="modal-header">
         <h1 class="modal-title" id="exampleModalLabel">
+          ຢືນຢັນເອກະສານຜ່ານ : A83M100
+        </h1>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >ຊື່ :</label
+          >
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >ທ້າວ ສົມສັກ ຈ່າງດາບຸດ</label
+          >
+        </div>
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >ປະເພດ :</label
+          >
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >A</label
+          >
+        </div>
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >ຄະແນນ :</label
+          >
+          <div class="form-group col-md-2">
+
+      <input type="text" class="form-control" id="inputZip">
+      
+    </div>
+    <label for="inputEmail3" class="col-sm-1"
+            ><span style="font-size: 30px;">/</span></label
+          >
+    <div class="form-group col-md-2">
+
+<input type="text" class="form-control" id="inputZip" disabled>
+
+</div>
+    
+        </div>
+
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >ຜົນສະຫຼຸບ :</label
+          >
+          <label
+            for="inputEmail3"
+            class="col-sm-8 col-form-label"
+            style="color: chartreuse"
+          >
+            <input
+              class="common__login__input form-control"
+              type="text"
+              maxlength="50" disabled
+            />
+          </label>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >ເລກທີອ້າງອິງ ຂອງລະບົບເສັງ :</label
+          >
+          <label
+            for="inputEmail3"
+            class="col-sm-8 col-form-label"
+            style="color: chartreuse"
+          >
+            <input
+              class="common__login__input form-control"
+              type="text"
+              maxlength="50"
+            />
+          </label>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >ໝາຍເຫດ :</label
+          >
+          <label
+            for="inputEmail3"
+            class="col-sm-8 col-form-label"
+            style="color: chartreuse"
+          >
+            <input
+              class="common__login__input form-control"
+              type="text"
+              maxlength="50"
+            />
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          @click="Hide()"
+        >
+          ຍົກເລີກ
+        </button>
+        <button type="button" class="btn btn-primary" @click="UpdateStatus()">
+          ຢືນຢັນ
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <div  class="modal" v-if="store.theoryscore">
+    <div class="modal-content" id="deleteConformationLabel">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">
           ບັນທຶກຜົນເສັງ ພາກທິດສະດີ : A83M100
         </h1>
       </div>
@@ -643,7 +797,7 @@
           >
     <div class="form-group col-md-2">
 
-<input type="text" class="form-control" id="inputZip">
+<input type="text" class="form-control" id="inputZip" disabled>
 
 </div>
     
@@ -661,7 +815,120 @@
             <input
               class="common__login__input form-control"
               type="text"
+              maxlength="50" disabled
+            />
+          </label>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >ເລກທີອ້າງອິງ ຂອງລະບົບເສັງ :</label
+          >
+          <label
+            for="inputEmail3"
+            class="col-sm-8 col-form-label"
+            style="color: chartreuse"
+          >
+            <input
+              class="common__login__input form-control"
+              type="text"
               maxlength="50"
+            />
+          </label>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >ໝາຍເຫດ :</label
+          >
+          <label
+            for="inputEmail3"
+            class="col-sm-8 col-form-label"
+            style="color: chartreuse"
+          >
+            <input
+              class="common__login__input form-control"
+              type="text"
+              maxlength="50"
+            />
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          @click="Hide()"
+        >
+          ຍົກເລີກ
+        </button>
+        <button type="button" class="btn btn-primary" @click="UpdateStatus()">
+          ຢືນຢັນ
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  
+  <div  class="modal" v-if="store.practicalscore">
+    <div class="modal-content" id="deleteConformationLabel">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">
+          ແກ້ໄຂຜົນເສັງ ພາກປະຕິບັດ : A83M100
+        </h1>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >ຊື່ :</label
+          >
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >ທ້າວ ສົມສັກ ຈ່າງດາບຸດ</label
+          >
+        </div>
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >ປະເພດ :</label
+          >
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >A</label
+          >
+        </div>
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >ຄະແນນ :</label
+          >
+          <div class="form-group col-md-2">
+
+      <input type="text" class="form-control" id="inputZip">
+      
+    </div>
+    <label for="inputEmail3" class="col-sm-1"
+            ><span style="font-size: 30px;">/</span></label
+          >
+    <div class="form-group col-md-2">
+
+<input type="text" class="form-control" id="inputZip" disabled>
+
+</div>
+    
+        </div>
+
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >ຜົນສະຫຼຸບ :</label
+          >
+          <label
+            for="inputEmail3"
+            class="col-sm-8 col-form-label"
+            style="color: chartreuse"
+          >
+            <input
+              class="common__login__input form-control"
+              type="text"
+              maxlength="50" disabled
             />
           </label>
         </div>
@@ -780,6 +1047,24 @@ const Hide = async () => {
   store.verify = false;
   store.theoryscore = false;
   store.practicalscore = false;
+};
+
+const ModalC = async () => {
+  store.cancelapp = true;
+};
+
+
+const Modaldiv = async () => {
+  store.verify = true;
+};
+
+const ModalT = async () => {
+  store.theoryscore = true;
+};
+
+
+const ModalP = async () => {
+  store.practicalscore = true;
 };
 </script>
 
