@@ -37,7 +37,7 @@
       <hr style="margin-top: 1px" />
       <br />
 
-      <div class="row m-1">
+      <div class="row m-1"  v-if="store.dataapp.length > 0">
         <div class="col-12 col-sm-12 col-xl-12 col-lg-12/ mb-3">
           <div class="form-group" style="text-align: right">
             <button type="button" class="btn btn-danger"  @click="ModalC()">ຍົກເລີກ</button>
@@ -74,7 +74,7 @@
               </div>
               <div class="col-12 col-sm-7 col-xl-8 col-lg-8">
                 <div class="form-group row">
-                  <h3>-</h3>
+                  <h3>{{ store.dataapp[0].user_prefrix }} {{ store.dataapp[0].user_firstname }} {{ store.dataapp[0].user_lastname }}</h3>
                 </div>
                 <div class="form-group row">
                   <label
@@ -88,7 +88,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                    {{ $t("tel") }} :</label
+                    {{ $t("tel") }} :{{ store.dataapp[0].user_phone }}</label
                   >
                 </div>
                 <div class="form-group row">
@@ -96,7 +96,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                    {{ $t("email") }} :
+                    {{ $t("email") }} : {{ store.dataapp[0].user_email }}
                   </label>
                 </div>
                 <div class="form-group row">
@@ -104,7 +104,7 @@
                     for="company-name"
                     class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                   >
-                    Username:
+                    Username:{{ store.dataapp[0].user_name }}
                   </label>
                 </div>
               </div>
@@ -165,7 +165,7 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm"
                 >
-                  -</label
+                -{{ store.dataapp[0].identification_number }}</label
                 >
               </div>
               <div class="form-group row">
@@ -173,7 +173,7 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm"
                 >
-                  -</label
+               - {{ store.dataapp[0].user_birthday }}</label
                 >
               </div>
               <div class="form-group row">
@@ -181,6 +181,7 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm"
                 >
+               - {{ store.dataapp[0].exp_date }} 
                 </label>
               </div>
               <div class="form-group row">
@@ -188,6 +189,7 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm"
                 >
+                - {{ store.dataapp[0].country_name_th }}
                 </label>
               </div>
               <div class="form-group row">
@@ -195,7 +197,7 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm"
                 >
-                  -
+                  - {{store.dataapp[0].user_address}}
                 </label>
               </div>
               <div class="form-group row">
@@ -203,7 +205,7 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm"
                 >
-                  -
+                - ເມືອງ {{store.dataapp[0].amphur_name}} - ແຂວງ  {{store.dataapp[0].province_name}}
                 </label>
               </div>
             </div>
@@ -222,8 +224,19 @@
             </div>
 
             <div class="col-8 col-sm-12 col-md-8">
-              <div class="form-group row">
+              <div class="form-group row" v-if="store.dataapp[0].passpost_image">
                 <img
+                 :src="coverimage(store.dataapp[0].passpost_image)"
+              
+                  class="img-fluid"
+                  width="80"
+                  height="80"
+                />
+              </div>
+
+              <div class="form-group row" v-else>
+                <img
+                
                   src="../../assets/images/no_photo.jpg"
                   class="img-fluid"
                   width="80"
@@ -258,7 +271,18 @@
               </div>
             </div>
 
-            <div class="col-8 col-sm-12 col-md-8">
+            <div class="col-8 col-sm-12 col-md-8"  v-if="store.dataapp[0].real_image">
+              <div class="form-group row">
+                <img
+                  :src="coverimage(store.dataapp[0].real_image)"
+                  class="img-fluid"
+                  width="80"
+                  height="80"
+                />
+              </div>
+            </div>
+
+            <div class="col-8 col-sm-12 col-md-8"  v-else>
               <div class="form-group row">
                 <img
                   src="../../assets/images/no_photo.jpg"
@@ -1066,6 +1090,12 @@ const ModalT = async () => {
 const ModalP = async () => {
   store.practicalscore = true;
 };
+
+const SearchApp = async () => {
+await store.fetchAppNumber();
+};
+
+
 </script>
 
 

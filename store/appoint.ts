@@ -206,6 +206,9 @@ export const AppointStore = defineStore('appoint', {
     },
     searchapp:{
       ap_number:null
+    },
+    dataapp:{
+
     }
   }
 
@@ -738,6 +741,27 @@ console.log(this.formselectapp);
       try {
         const data = await ApiService.post('/appointment/reserve/new/create', this.formselectapp).then(x => {
 
+
+        });
+        return data;
+      } catch (error) {
+        return 502;
+      }
+
+
+    },
+
+    
+    async fetchAppNumber() {
+
+
+      try {
+        const data = await ApiService.post('/appointment/dateappointment/appbyuser', this.searchapp).then(rep => {
+
+
+this.dataapp = rep.data;
+
+console.log(this.dataapp.length);
 
         });
         return data;

@@ -27,6 +27,7 @@ store.user_id = auth.user_id
 const apnumber = localStorage.getItem('ap_number');
 if(apnumber){
   store.searchapp.ap_number = apnumber;
+ await store.fetchAppNumber();
 }
 
 store.group = []; 
@@ -34,19 +35,10 @@ const closeModal = () => {
   store.closeModal();
 };
 
-const deletel = async () => {
-  let del = await store.deleteApp();
-  if (del == true) {
-    toast.success('ລຶບຂໍ້ມູນສຳເລັດ');
-    store.fetchAppointment();
-  } else {
-    toast.error('ລຶບຂໍ້ມູນລົ້ມເຫລວ')
-  }
-};
 
 const SearchApp = async () => {
   localStorage.setItem('ap_number',store.searchapp.ap_number);
-  console.log('SearchApp');
+
 };
 
 
