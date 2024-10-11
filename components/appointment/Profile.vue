@@ -302,7 +302,7 @@
                 for="company-name"
                 class="col-sm-12 col-form-label col-form-label-lg fot-bl"
               >
-                A83M100
+              {{store.searchapp.ap_number}}
               </label>
             </div>
           </div>
@@ -425,7 +425,7 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                 >
-                  ຮຽນຫຼັກສູດ A ໃນ App:
+                  ຮຽນຫຼັກສູດ {{store.dataapp[0].dlt_code}} ໃນ App:
                 </label>
               </div>
 
@@ -445,7 +445,8 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm"
                 >
-                  A : ລົດຈັກສອງລໍ້ ຄວາມແຮງບໍ່ເກີນ 125 cc</label
+                {{ store.dlt_select.dlt_code }}:{{ store.dlt_select.dlt_name_lo }}
+                  </label
                 >
               </div>
               <div class="form-group row">
@@ -470,15 +471,24 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm"
                 >
-                  72.25%
+                 
+                  {{ store.history.progress }}%
                 </label>
               </div>
-              <div class="form-group row">
+              <div class="form-group row" v-if="store.score.length > 0">
                 <label
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm"
                 >
-                  19/20
+                  {{store.score[0].er_score_total}}/{{store.score[0].er_question_total}}
+                </label>
+              </div>
+              <div class="form-group row" v-else>
+                <label
+                  for="company-name"
+                  class="col-sm-12 col-form-label col-form-label-sm"
+                >
+                 -
                 </label>
               </div>
             </div>
@@ -625,7 +635,6 @@
               </div>
             </div>
 
- 
           </div>
         </div>
       </div>
@@ -674,7 +683,7 @@
     <div class="modal-content" id="deleteConformationLabel">
       <div class="modal-header">
         <h1 class="modal-title" id="exampleModalLabel">
-          ຢືນຢັນເອກະສານຜ່ານ : A83M100
+          ຢືນຢັນເອກະສານຜ່ານ : {{store.searchapp.ap_number}}
         </h1>
       </div>
       <div class="modal-body">
@@ -690,8 +699,8 @@
           <label for="inputEmail3" class="col-sm-4 col-form-label"
             >ປະເພດ :</label
           >
-          <label for="inputEmail3" class="col-sm-4 col-form-label"
-            >A</label
+          <label for="inputEmail3" class="col-sm-8 col-form-label"
+            > {{ store.dlt_select.dlt_code }}:{{ store.dlt_select.dlt_name_lo }}</label
           >
         </div>
         <div class="form-group row">
@@ -787,7 +796,7 @@
     <div class="modal-content" id="deleteConformationLabel">
       <div class="modal-header">
         <h1 class="modal-title" id="exampleModalLabel">
-          ບັນທຶກຜົນເສັງ ພາກທິດສະດີ : A83M100
+          ບັນທຶກຜົນເສັງ ພາກທິດສະດີ : {{store.searchapp.ap_number}}
         </h1>
       </div>
       <div class="modal-body">
@@ -795,16 +804,17 @@
           <label for="inputEmail3" class="col-sm-4 col-form-label"
             >ຊື່ :</label
           >
-          <label for="inputEmail3" class="col-sm-4 col-form-label"
-            >ທ້າວ ສົມສັກ ຈ່າງດາບຸດ</label
+    
+          <label for="inputEmail3" class="col-sm-4 col-form-label" v-if="store.dataapp.length > 0"
+            >{{store.dataapp[0].user_prefrix}} {{store.dataapp[0].user_firstname}} {{store.dataapp[0].user_lastname}}</label
           >
         </div>
         <div class="form-group row">
           <label for="inputEmail3" class="col-sm-4 col-form-label"
             >ປະເພດ :</label
           >
-          <label for="inputEmail3" class="col-sm-4 col-form-label"
-            >A</label
+          <label for="inputEmail3" class="col-sm-8 col-form-label"
+            > {{ store.dlt_select.dlt_code }}:{{ store.dlt_select.dlt_name_lo }}</label
           >
         </div>
         <div class="form-group row">
@@ -813,20 +823,18 @@
           >
           <div class="form-group col-md-2">
 
-      <input type="text" class="form-control" id="inputZip">
+      <input type="text" class="form-control" id="inputZip"  @input="filterIAscore" v-model="store.formscore.score" maxlength="2">
       
     </div>
     <label for="inputEmail3" class="col-sm-1"
             ><span style="font-size: 30px;">/</span></label
           >
     <div class="form-group col-md-2">
-
-<input type="text" class="form-control" id="inputZip" disabled>
+<input type="text" class="form-control" id="inputZip" disabled v-model="store.totalscore.total_question"
+>
 
 </div>
-    
         </div>
-
         <div class="form-group row">
           <label for="inputEmail3" class="col-sm-4 col-form-label"
             >ຜົນສະຫຼຸບ :</label
@@ -836,11 +844,10 @@
             class="col-sm-8 col-form-label"
             style="color: chartreuse"
           >
-            <input
-              class="common__login__input form-control"
-              type="text"
-              maxlength="50" disabled
-            />
+        <select class="form-control" v-model="store.formscore.mr_status" disabled>
+        <option value="pass">{{ $t("menu_result_pass") }}</option>
+        <option value="fail">{{ $t("menu_result_fall") }}</option>
+      </select>
           </label>
         </div>
 
@@ -900,7 +907,7 @@
     <div class="modal-content" id="deleteConformationLabel">
       <div class="modal-header">
         <h1 class="modal-title" id="exampleModalLabel">
-          ແກ້ໄຂຜົນເສັງ ພາກປະຕິບັດ : A83M100
+          ແກ້ໄຂຜົນເສັງ ພາກປະຕິບັດ : {{store.searchapp.ap_number}}
         </h1>
       </div>
       <div class="modal-body">
@@ -908,16 +915,19 @@
           <label for="inputEmail3" class="col-sm-4 col-form-label"
             >ຊື່ :</label
           >
-          <label for="inputEmail3" class="col-sm-4 col-form-label"
-            >ທ້າວ ສົມສັກ ຈ່າງດາບຸດ</label
+          <label for="inputEmail3" class="col-sm-4 col-form-label" v-if="store.dataapp.length > 0"
+            >{{store.dataapp[0].user_prefrix}} {{store.dataapp[0].user_firstname}} {{store.dataapp[0].user_lastname}}</label
+          >
+          <label for="inputEmail3" class="col-sm-4 col-form-label" v-else
+            >-</label
           >
         </div>
         <div class="form-group row">
           <label for="inputEmail3" class="col-sm-4 col-form-label"
             >ປະເພດ :</label
           >
-          <label for="inputEmail3" class="col-sm-4 col-form-label"
-            >A</label
+          <label for="inputEmail3" class="col-sm-8 col-form-label"
+            > {{ store.dlt_select.dlt_code }}:{{ store.dlt_select.dlt_name_lo }}</label
           >
         </div>
         <div class="form-group row">
@@ -1095,6 +1105,28 @@ const SearchApp = async () => {
 await store.fetchAppNumber();
 };
 
+
+
+const filterIAscore = async (event) => {
+ 
+  // stores.form.user_phone = event.target.value.replace(/\D/g, "");
+  const key = event.data;
+      if (event.data === ' ') {
+        store.formscore.score= store.formscore.score.substring(0, store.formscore.score.length - 1);
+        return;
+      }
+      if (store.formscore.score.charAt(0) == '0') {
+        store.formscore.score = "";
+        return;
+      } 
+    
+      store.formscore.score = event.target.value.replace(/\D/g, "");
+     if(store.formscore.score >= store.totalscore.total_question){
+      store.formscore.score = store.totalscore.total_question
+       store.formscore.mr_status = 'pass'
+
+     }
+};
 
 </script>
 

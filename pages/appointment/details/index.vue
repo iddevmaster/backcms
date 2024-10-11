@@ -7,6 +7,7 @@
 import { storeToRefs } from 'pinia';
 import { defineComponent } from 'vue';
 import { AppointStore } from '@/store/appoint'
+
 import AppointList from '@/components/appointment/AppointList.vue'
 import AppointListByGroup from '@/components/appointment/AppointListByGroup.vue'
 import APPProfile from "@/components/appointment/Profile.vue";
@@ -18,9 +19,10 @@ definePageMeta({
   allowedRoles: [1,2]
 })
 const toast = useToast()
-const store = AppointStore()
+const store = AppointStore();
 
-const auth = useAuthStore()
+
+const auth = useAuthStore();
 const router = useRouter();
 store.user_id = auth.user_id
 
@@ -28,6 +30,11 @@ const apnumber = localStorage.getItem('ap_number');
 if(apnumber){
   store.searchapp.ap_number = apnumber;
  await store.fetchAppNumber();
+ await store.fetchHistoryCourse();
+ await store.fetchHistoryExam();
+ await store.fetchDlt();
+ await store.fetchExamScore();
+ 
 }
 
 store.group = []; 

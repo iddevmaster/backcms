@@ -38,6 +38,7 @@ export const AppointStore = defineStore('appoint', {
     limit_page: null,
     current_page: null,
     total_filter: null,
+    history_user:0,
     total: null,
     disabledDates: new Date(), 
     disabledDatesEnd: new Date(), 
@@ -68,8 +69,7 @@ export const AppointStore = defineStore('appoint', {
       ap_learn_type: 1,
       present_day: ''
     },
-
-
+    history:null,
     formedit: {
       ap_learn_type: null,
       ap_quota: null,
@@ -98,73 +98,8 @@ export const AppointStore = defineStore('appoint', {
     },
     group: [],
     // end_date:moment(String(null)).format('YYYY-mm-dd'),
-    dlt: [
-      {
-          "dlt_code": "A",
-          "dlt_name_lo": "ລົດຈັກສອງລໍ້ ຄວາມແຮງບໍ່ເກີນ 125 cc",
-          "dlt_name_eng": "Two-wheels motocycle engine not exceed 125 cc"
-      },
-      {
-          "dlt_code": "A1",
-          "dlt_name_lo": "ລົດຈັກສອງລໍ້ ຄວາມແຮງ ແຕ່ 125 cc ຂື້ນໄປ",
-          "dlt_name_eng": "Two-wheels motorcycle engine 125 cc and above"
-      },
-      {
-          "dlt_code": "A2",
-          "dlt_name_lo": "ລົດຈັກສາມລໍ້ສ່ວນຕົວ, ລົດສອງລໍ້ ແລະ ສາມລໍ້ໂດຍສານ",
-          "dlt_name_eng": "Private three-wheels vehicle, Passenger vehicle with two-wheels and three-wheels"
-      },
-      {
-          "dlt_code": "A3",
-          "dlt_name_lo": "ລົດໄຖນາທີ່ແກ່ລໍ້ ແລະ ລົດຕ໋ອກໆ",
-          "dlt_name_eng": "Two-wheels tractor with trailer and Walk-behide Tractor"
-      },
-      {
-          "dlt_code": "B",
-          "dlt_name_lo": "ລົດເບົາ ສີ່ລໍ້ ທີ່ມີນ້ຳໜັກລວມບໍ່ເກີນ 3.500 ກິໂລກຣາມ ແລະ ບໍ່ເກີນ 9 ບ່ອນນັ່ງ ລວມທັງຜູ້ຂັບຂີ່",
-          "dlt_name_eng": "Car with four-wheels, total weight not exceed 3,500 kilograms, and not more than 9 seats including driver"
-      },
-      {
-          "dlt_code": "C",
-          "dlt_name_lo": "ລົດຂົນສົ່ງສິນຄ້ານ້ຳໜັກລວມ ແຕ່ 3.500 ກິໂລກຣາມ ຫາ 7.500 ກິໂລກຣາມ",
-          "dlt_name_eng": "Cargo truck, total weight from 3,500 to 7,500 kilograms"
-      },
-      {
-          "dlt_code": "C1",
-          "dlt_name_lo": "ລົດຂົນສົ່ງສິນຄ້ານ້ຳໜັກລວມ ເກີນກວ່າ 7.500ກິໂລກຣາມ ຫາ 15.000 ກິໂລກຣາມ",
-          "dlt_name_eng": "Cargo truck, total weight exceed 7,500 kilogram up to 15,000 kilograms"
-      },
-      {
-          "dlt_code": "C2",
-          "dlt_name_lo": "ລົດຂົນສົ່ງສິນຄ້ານ້ຳໜັກລວມ ເກີນກວ່າ 15.000 ກິໂລກຣາມ",
-          "dlt_name_eng": "Cargo truck, total weight exceed 15,000 kilograms"
-      },
-      {
-          "dlt_code": "D",
-          "dlt_name_lo": "ລົດຂົນສົ່ງຜູ້ໂດຍສານປະເພດ 4 ລໍ້ ຂຶ້ນໄປ, ບໍ່ເກີນ ສິບຫ້າ ບ່ອນນັ່ງ",
-          "dlt_name_eng": "Passenger vehicle with 4 wheels or more, not more than 15 seats"
-      },
-      {
-          "dlt_code": "D1",
-          "dlt_name_lo": "ລົດຂົນສົ່ງຜູ້ໂດຍສານ ແຕ່ ສິບຫົກ ຫາ ສາມສິບຫ້າ ບ່ອນນັ່ງ",
-          "dlt_name_eng": "Passenger vehicle from 16 seats to 35 seats"
-      },
-      {
-          "dlt_code": "D2",
-          "dlt_name_lo": "ລົດຂົນສົ່ງຜູ້ໂດຍສານ ແຕ່ ສາມສິບຫົກ ບ່ອນນັ່ງ ຂຶ້ນໄປ",
-          "dlt_name_eng": "Passenger vehicle from 36 seats or more"
-      },
-      {
-          "dlt_code": "E",
-          "dlt_name_lo": "ລົດເບົາ (B), ລົດຂົນສົ່ງສິນຄ້າ (C) ແລະ ລົດຂົນສົ່ງຜູ້ໂດຍສານ (D) ທີ່ແກ່ຫາງລາກນ້ຳໜັກລວມບໍ່ເກີນ 750 ກິໂລກຣາມ",
-          "dlt_name_eng": "Car (B), Cargo truck (C) and Passenger vehicle (D), having trailer total weight not exceed 750 kilograms"
-      },
-      {
-          "dlt_code": "E1",
-          "dlt_name_lo": "ລົດຂົນສົ່ງສິນຄ້າ (C2) ແກ່ຫາງລາກນ້ຳໜັກລວມເກີນກວ່າ 750 ກິໂລກຣາມ",
-          "dlt_name_eng": "Cargo truck (C2) having trailer total weight exceed 750 kilograms"
-      }
-    ],
+    dlt: [],
+    dlt_select: [],
     dlt_today:{
       A_1:[],
       A_2:[],
@@ -209,7 +144,22 @@ export const AppointStore = defineStore('appoint', {
     },
     dataapp:{
 
-    }
+    },
+    score:null,
+    totalscore:0,
+    formhistory:{
+      page: 1,
+      per_page: 100,
+      search: ""
+    },
+    formscorefull:{
+      course_code: '',
+    },
+    formscore:{
+      score: "",
+      mr_status: "fail",
+    },
+    
   }
 
   ),
@@ -753,16 +703,11 @@ console.log(this.formselectapp);
 
     
     async fetchAppNumber() {
-
-
       try {
         const data = await ApiService.post('/appointment/dateappointment/appbyuser', this.searchapp).then(rep => {
-
-
 this.dataapp = rep.data;
-
-console.log(this.dataapp.length);
-
+this.history_user = rep.data[0].user_id
+this.select_dlt_app = rep.data[0].dlt_code;
         });
         return data;
       } catch (error) {
@@ -771,6 +716,65 @@ console.log(this.dataapp.length);
 
 
     },
+    async fetchHistoryCourse() {
+      if(this.history_user != 0){
+        try {
+          const data = await ApiService.post('/course/learn/history/'+this.history_user, this.formhistory).then(rep => {
+
+            let d = rep.data.data;
+  let hist = d.find(obj => obj.course_code == this.select_dlt_app);
+this.history = hist;
+
+          });
+          return data;
+        } catch (error) {
+          return false;
+        }
+      }
+    },
+
+
+    async fetchHistoryExam() {
+      if(this.history_user != 0){
+        try {
+          const data = await ApiService.get('/exam/history/?course_id='+this.history.course_id+'&user_id='+this.history_user).then(reps => {
+this.score = reps.data
+          });
+          return data;
+        } catch (error) {
+          return false;
+        }
+      }
+    },
+
+    async fetchDlt() {
+      try {
+        const data = await ApiService.get('/master_data/drivinglicense_type').then(reps => {
+       
+this.dlt = reps.data;
+this.dlt_select = this.dlt.find(obj => obj.dlt_code == this.select_dlt_app);
+
+        });
+        return data;
+      } catch (error) {
+        return false;
+      }
+    },
+
+    
+    async fetchExamScore() {
+this.formscorefull.course_code = this.select_dlt_app
+
+      try {
+        const data = await ApiService.post('/exam/main/get/one',this.formscorefull).then(reps => {
+this.totalscore = reps.data[0];
+        });
+        return data;
+      } catch (error) {
+        return false;
+      }
+    },
+
 
 
 
