@@ -14,6 +14,7 @@ export const AppointStore = defineStore('appoint', {
     isDelUser: false,
     ChooseBefore: false,
     searchData: "",
+    remark: "ເຫດຜົນທີ່ຍົກເລີກໃຫ້ຂຽນໃສ່ບ່ອນນີ້",
     event: [],
     user: [],
     userall: [],
@@ -21,7 +22,7 @@ export const AppointStore = defineStore('appoint', {
     start_date: '',
     reservebyap: [],
     selectedRow: {
-      user_id:null
+      user_id: null
     },
     app_present: [],
     app_user: [],
@@ -29,7 +30,7 @@ export const AppointStore = defineStore('appoint', {
     usersall: [],
     user_id: null,
     end_date: '',
-    dlt_code: [ "A", "A1", "A2", "A3", "B", "C1", "C", "C2" ],
+    dlt_code: ["A", "A1", "A2", "A3", "B", "C1", "C", "C2"],
     myChoose: null,
     ap_id: null,
     user_id_fitter: null,
@@ -38,10 +39,10 @@ export const AppointStore = defineStore('appoint', {
     limit_page: null,
     current_page: null,
     total_filter: null,
-    history_user:0,
+    history_user: 0,
     total: null,
-    disabledDates: new Date(), 
-    disabledDatesEnd: new Date(), 
+    disabledDates: new Date(),
+    disabledDatesEnd: new Date(),
     itemsPerPage: 3,
     del_ap: null,
     deluser_id: null,
@@ -69,7 +70,7 @@ export const AppointStore = defineStore('appoint', {
       ap_learn_type: 1,
       present_day: ''
     },
-    history:null,
+    history: null,
     formedit: {
       ap_learn_type: null,
       ap_quota: null,
@@ -100,66 +101,77 @@ export const AppointStore = defineStore('appoint', {
     // end_date:moment(String(null)).format('YYYY-mm-dd'),
     dlt: [],
     dlt_select: [],
-    dlt_today:{
-      A_1:[],
-      A_2:[],
-      A1_1:[],
-      A1_2:[],
-      A2_1:[],
-      A2_2:[],
-      A3_1:[],
-      A3_2:[],
-      B_1:[],
-      B_2:[],
-      C_1:[],
-      C_2:[],
-      C1_1:[],
-      C1_2:[],
-      C2_1:[],
-      C2_2:[],
-      D_1:[],
-      D_2:[],
-      D1_1:[],
-      D1_2:[],
-      D2_1:[],
-      D2_2:[],
-      E_1:[],
-      E_2:[],
-      E1_1:[],
-      E1_2:[],
+    dlt_today: {
+      A_1: [],
+      A_2: [],
+      A1_1: [],
+      A1_2: [],
+      A2_1: [],
+      A2_2: [],
+      A3_1: [],
+      A3_2: [],
+      B_1: [],
+      B_2: [],
+      C_1: [],
+      C_2: [],
+      C1_1: [],
+      C1_2: [],
+      C2_1: [],
+      C2_2: [],
+      D_1: [],
+      D_2: [],
+      D1_1: [],
+      D1_2: [],
+      D2_1: [],
+      D2_2: [],
+      E_1: [],
+      E_2: [],
+      E1_1: [],
+      E1_2: [],
     },
-    cancelapp:false,
-    verify:false,
-    theoryscore:false,
-    practicalscore :false,
-    formselectapp:{
-      user_id:null,
-      user_full_name:"",
-      identification_number:null,
+    cancelapp: false,
+    verify: false,
+    theoryscore: false,
+    practicalscore: false,
+    formselectapp: {
+      user_id: null,
+      user_full_name: "",
+      identification_number: null,
       ap_id: null,
-      st_id:""
+      st_id: ""
     },
-    searchapp:{
-      ap_number:null
+    searchapp: {
+      ap_number: null
     },
-    dataapp:{
+    dataapp: {
 
     },
-    score:null,
-    totalscore:0,
-    formhistory:{
+    score: null,
+    totalscore: 0,
+    formhistory: {
       page: 1,
       per_page: 100,
       search: ""
     },
-    formscorefull:{
+    formscorefull: {
       course_code: '',
     },
-    formscore:{
+    formscore: {
       score: "",
       mr_status: "fail",
     },
-    
+    status_score: "create",
+    status_status: "",
+    dlt_score: [],
+    formresult: {
+      mr_score: null,
+      mr_learn_type: 1,
+      mr_status: 'pass',
+      dlt_code: "A",
+      identification_number: null,
+      user_id_staff:null
+    },
+
   }
 
   ),
@@ -334,11 +346,11 @@ export const AppointStore = defineStore('appoint', {
 
       try {
         const data = await ApiService.post('/appointment/create', savet).then(response => {
-if(!response){
-  return 204
-}else {
-  return 200
-}
+          if (!response) {
+            return 204
+          } else {
+            return 200
+          }
 
         });
         return data
@@ -362,7 +374,7 @@ if(!response){
         ap_learn_type: learn_type, ap_quota: this.formedit.ap_quota, ap_date_start: this.formedit.ap_date_start, ap_date_end: this.formedit.ap_date_end, ap_remark: this.formedit.ap_remark,
         dlt_code: this.formedit.dlt_code, user_id: this.formedit.user_id
       }
-     
+
       try {
         const data = await ApiService.put('/appointment/update/' + this.ap_id, upd).then(response => {
           // console.log(response);
@@ -511,12 +523,12 @@ if(!response){
       this.userall = [];
       this.formuser.user_id = this.user_id;
       this.formuser.verify_account = 'system_active';
-      
+
 
       const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
         console.log(response);
         this.user = response.data.data;
-   
+
         this.total_page_user = response.data.total_page
 
       });
@@ -533,7 +545,7 @@ if(!response){
 
           //   this.result = response.data;
 
-          const b = { user_prefrix:response.data.user_prefrix,user_id: response.data.user_id, user_email: response.data.user_email, user_firstname: response.data.user_firstname, user_lastname: response.data.user_lastname, user_phone: response.data.user_phone, detail: response.data.detail?.verify_account, identification_number: response.data.detail?.identification_number }
+          const b = { user_prefrix: response.data.user_prefrix, user_id: response.data.user_id, user_email: response.data.user_email, user_firstname: response.data.user_firstname, user_lastname: response.data.user_lastname, user_phone: response.data.user_phone, detail: response.data.detail?.verify_account, identification_number: response.data.detail?.identification_number }
           this.userall.push(b)
 
           this.userall.sort((a, b) => a.user_id - b.user_id).map(item => item.user_id);
@@ -550,10 +562,10 @@ if(!response){
       const del = { user_id: this.deluser_id, ap_id: this.del_ap }
       try {
         const data = await ApiService.delete('appointment/reserve/delete/' + this.ardel_id, del).then(response => {
-          if(response.status == 200){
+          if (response.status == 200) {
             return 200
           }
-          if(response.status == 204){
+          if (response.status == 204) {
             return 204
           }
         });
@@ -607,7 +619,7 @@ if(!response){
       try {
         const data = await ApiService.get('/appointment/reserve/list/?dlt_code=' + this.formreserve.dlt_code + '&ap_learn_type=' + this.formreserve.ap_learn_type + '&present_day=' + this.formreserve.present_day + '').then(response => {
           this.app_present = response.data
-        
+
         });
         return true
       } catch (error) {
@@ -622,50 +634,50 @@ if(!response){
       console.log(this.dlt_today);
       try {
         const data = await ApiService.post('/appointment/dateappointment').then(response => {
-   
-        for  (let i = 0; i < response.data.length; i++) {
-          if(response.data[i].dlt_code == 'A'){
-            this.dlt_today.A_1.push(response.data[i])
+
+          for (let i = 0; i < response.data.length; i++) {
+            if (response.data[i].dlt_code == 'A') {
+              this.dlt_today.A_1.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'A1') {
+              this.dlt_today.A_1.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'A2') {
+              this.dlt_today.A_1.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'A3') {
+              this.dlt_today.A_1.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'B') {
+              this.dlt_today.B_1.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'C') {
+              this.dlt_today.C_1.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'C1') {
+              this.dlt_today.C1_1.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'C2') {
+              this.dlt_today.C2_1.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'D') {
+              this.dlt_today.D_1.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'D1') {
+              this.dlt_today.D_1.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'D2') {
+              this.dlt_today.D2_1.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'E') {
+              this.dlt_today.E_1.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'E1') {
+              this.dlt_today.E1_1.push(response.data[i])
+            }
           }
-          if(response.data[i].dlt_code == 'A1'){
-            this.dlt_today.A_1.push(response.data[i])
-          }
-          if(response.data[i].dlt_code == 'A2'){
-            this.dlt_today.A_1.push(response.data[i])
-          }
-          if(response.data[i].dlt_code == 'A3'){
-            this.dlt_today.A_1.push(response.data[i])
-          }
-          if(response.data[i].dlt_code == 'B'){
-            this.dlt_today.B_1.push(response.data[i])
-          }
-          if(response.data[i].dlt_code == 'C'){
-            this.dlt_today.C_1.push(response.data[i])
-          }
-          if(response.data[i].dlt_code == 'C1'){
-            this.dlt_today.C1_1.push(response.data[i])
-          }
-          if(response.data[i].dlt_code == 'C2'){
-            this.dlt_today.C2_1.push(response.data[i])
-          }
-          if(response.data[i].dlt_code == 'D'){
-            this.dlt_today.D_1.push(response.data[i])
-          }
-          if(response.data[i].dlt_code == 'D1'){
-            this.dlt_today.D_1.push(response.data[i])
-          }
-          if(response.data[i].dlt_code == 'D2'){
-            this.dlt_today.D2_1.push(response.data[i])
-          }
-          if(response.data[i].dlt_code == 'E'){
-            this.dlt_today.E_1.push(response.data[i])
-          }
-          if(response.data[i].dlt_code == 'E1'){
-            this.dlt_today.E1_1.push(response.data[i])
-          }
-        }
-   
-        
+
+
         });
         return true
       } catch (error) {
@@ -678,11 +690,11 @@ if(!response){
 
 
 
-this.formselectapp.user_full_name = item.user_full_name;
-this.formselectapp.identification_number = item.identification_number;
-this.formselectapp.user_id = item.user_id;
-this.formselectapp.st_id = item.user_id;
-console.log(this.formselectapp);
+      this.formselectapp.user_full_name = item.user_full_name;
+      this.formselectapp.identification_number = item.identification_number;
+      this.formselectapp.user_id = item.user_id;
+      this.formselectapp.st_id = item.user_id;
+      console.log(this.formselectapp);
     },
 
     async SaveUserRerv() {
@@ -701,13 +713,14 @@ console.log(this.formselectapp);
 
     },
 
-    
+
     async fetchAppNumber() {
       try {
         const data = await ApiService.post('/appointment/dateappointment/appbyuser', this.searchapp).then(rep => {
-this.dataapp = rep.data;
-this.history_user = rep.data[0].user_id
-this.select_dlt_app = rep.data[0].dlt_code;
+          this.dataapp = rep.data;
+          this.history_user = rep.data[0].user_id
+          this.select_dlt_app = rep.data[0].dlt_code;
+       
         });
         return data;
       } catch (error) {
@@ -717,13 +730,16 @@ this.select_dlt_app = rep.data[0].dlt_code;
 
     },
     async fetchHistoryCourse() {
-      if(this.history_user != 0){
+      if (this.history_user != 0) {
         try {
-          const data = await ApiService.post('/course/learn/history/'+this.history_user, this.formhistory).then(rep => {
-
+          const data = await ApiService.post('/course/learn/history/' + this.history_user, this.formhistory).then(rep => {
+console.log(rep);
             let d = rep.data.data;
-  let hist = d.find(obj => obj.course_code == this.select_dlt_app);
-this.history = hist;
+          
+            let hist = d.find(obj => obj.course_code == this.select_dlt_app);
+          
+            this.history = hist;
+            
 
           });
           return data;
@@ -735,10 +751,11 @@ this.history = hist;
 
 
     async fetchHistoryExam() {
-      if(this.history_user != 0){
+      if (this.history_user != 0) {
         try {
-          const data = await ApiService.get('/exam/history/?course_id='+this.history.course_id+'&user_id='+this.history_user).then(reps => {
-this.score = reps.data
+          const data = await ApiService.get('/exam/history/?course_id=' + this.history.course_id + '&user_id=' + this.history_user).then(reps => {
+            this.score = reps.data
+           
           });
           return data;
         } catch (error) {
@@ -750,9 +767,9 @@ this.score = reps.data
     async fetchDlt() {
       try {
         const data = await ApiService.get('/master_data/drivinglicense_type').then(reps => {
-       
-this.dlt = reps.data;
-this.dlt_select = this.dlt.find(obj => obj.dlt_code == this.select_dlt_app);
+
+          this.dlt = reps.data;
+          this.dlt_select = this.dlt.find(obj => obj.dlt_code == this.select_dlt_app);
 
         });
         return data;
@@ -761,13 +778,97 @@ this.dlt_select = this.dlt.find(obj => obj.dlt_code == this.select_dlt_app);
       }
     },
 
-    
+
     async fetchExamScore() {
-this.formscorefull.course_code = this.select_dlt_app
-
+      this.formscorefull.course_code = this.select_dlt_app
       try {
-        const data = await ApiService.post('/exam/main/get/one',this.formscorefull).then(reps => {
-this.totalscore = reps.data[0];
+        const data = await ApiService.post('/exam/main/get/one', this.formscorefull).then(reps => {
+          this.totalscore = reps.data[0];
+
+        });
+        return data;
+      } catch (error) {
+        return false;
+      }
+    },
+
+    async fetchResultScore() {
+      try {
+        const data = await ApiService.get('/main_result/list/?user_id=' + this.history_user).then(reps => {
+          if (reps.data.length > 0) {
+            this.dlt_score = reps.data
+            this.dlt_score = this.dlt_score.find(obj => obj.dlt_code == "A1");
+           
+            if (this.dlt_score) {
+              this.status_score = 'update';
+              this.formscore.score = this.dlt_score.mr_score
+              this.formscore.mr_status = this.dlt_score.mr_status
+              this.status_status = this.dlt_score.mr_status;
+
+            }
+          } else {
+            this.status_score = 'create';
+          }
+        });
+        return data;
+      } catch (error) {
+        return false;
+      }
+    },
+
+
+    async SaveResultScore() {
+
+      if (this.status_score == 'update') {
+        this.formresult.mr_score = parseInt(this.formscore.score);
+        this.formresult.mr_status = this.formscore.mr_status
+        this.formresult.identification_number = this.dataapp[0].identification_number
+        this.formresult.dlt_code = this.dataapp[0].dlt_code
+        this.formresult.user_id_staff = this.user_id;
+        console.log(this.formresult);
+        try {
+          const data = await ApiService.put('/main_result/update/' + this.dlt_score.mr_id, this.formresult).then(response => {
+            console.log(response);
+            if (response.status == 200) {
+              return true;
+            }
+          });
+          return data;
+        } catch (error) {
+          return false
+        }
+
+      }
+      if (this.status_score == 'create') {
+        this.formresult.mr_score = parseInt(this.formscore.score);
+        this.formresult.mr_status = this.formscore.mr_status
+        this.formresult.identification_number = this.dataapp[0].identification_number
+        this.formresult.dlt_code = this.dataapp[0].dlt_code
+        this.formresult.user_id_staff = this.user_id;
+     
+        try {
+          const data = await ApiService.post('/main_result/create', this.formresult).then(response => {
+            if (response.status == 200) {
+              return true;
+            }
+          });
+          return data;
+        } catch (error) {
+          return false
+        }
+      }
+
+
+    },
+
+
+    async CancelAppointment() {
+     this.searchapp.remark = this.remark;
+     console.log(this.searchapp);
+      try {
+        const data = await ApiService.post('/appointment/cancelapp',this.searchapp).then(reps => {
+   
+    this.remark = "";
         });
         return data;
       } catch (error) {
@@ -778,7 +879,7 @@ this.totalscore = reps.data[0];
 
 
 
-    
+
 
 
   },

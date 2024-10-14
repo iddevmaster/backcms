@@ -466,16 +466,16 @@
                 </label>
               </div>
 
-              <div class="form-group row">
+              <div class="form-group row" v-if="store.history">
                 <label
                   for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm"
+                  class="col-sm-12 col-form-label col-form-label-sm" 
                 >
                  
                   {{ store.history.progress }}%
                 </label>
               </div>
-              <div class="form-group row" v-if="store.score.length > 0">
+              <div class="form-group row" v-if="store.score">
                 <label
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm"
@@ -519,17 +519,38 @@
             <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-6">
               <label
                 for="company-name"
-                class="col-sm-12 col-form-label col-form-label-sm"
+                class="col-sm-12 col-form-label col-form-label-sm" v-if="store.status_score == 'create'"
               >
-                ຜົນທິດສະດີ:   19/20: 19/20 :</label
+            
+                ຜົນທິດສະດີ:   -</label
+              >
+
+              <label
+                for="company-name"
+                class="col-sm-12 col-form-label col-form-label-sm" v-else
+              >
+           
+                ຜົນທິດສະດີ:  
+             
+                <span v-if="store.status_status == 'pass'" style="color: green;"> {{store.dlt_score.mr_score}}/{{store.totalscore.total_question}}</span>
+                <span v-if="store.status_status == 'fail'" style="color: red;"> {{store.dlt_score.mr_score}}/{{store.totalscore.total_question}}</span>
+  
+                </label
               >
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
               <label
                 for="company-name"
-                class="col-sm-12 col-form-label col-form-label-sm"
+                class="col-sm-12 col-form-label col-form-label-sm" v-if="store.status_score == 'create'"
               >
-                ໂດຍ: staff1 , 2024-04-01 10:22:41</label
+                </label
+              >
+
+              <label
+                for="company-name"
+                class="col-sm-12 col-form-label col-form-label-sm" v-else
+              >
+                ໂດຍ: staff1 , {{store.dlt_score.udp_date}}</label
               >
             </div>
             <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3">
@@ -645,7 +666,7 @@
     <div class="modal-content" id="deleteConformationLabel">
       <div class="modal-header">
         <h1 class="modal-title" id="exampleModalLabel">
-          ຍົກເລີກນັດໝາຍ : xxxxx ?
+          ຍົກເລີກນັດໝາຍ : {{store.searchapp.ap_number}} ?
         </h1>
       </div>
       <div class="modal-body">
@@ -658,7 +679,7 @@
             class="form-control"
             id="exampleFormControlTextarea1"
             rows="3"
-            placeholder="ຕົວຢ່າງ: ເອກະສານບໍ່ຖືກຕ້ອງ,  ຜູ້ກ່ຽວບໍ່ມາຕາມນັດ, ປະຫວັດການເຂົ້າຮຽນບໍ່ຄົບ, ຜິດລະບຽບ ປັບຕົກ. ..."
+            placeholder="ຕົວຢ່າງ: ເອກະສານບໍ່ຖືກຕ້ອງ,  ຜູ້ກ່ຽວບໍ່ມາຕາມນັດ, ປະຫວັດການເຂົ້າຮຽນບໍ່ຄົບ, ຜິດລະບຽບ ປັບຕົກ. ..." v-model="store.remark"
           >
           </textarea>
         </div>
@@ -672,7 +693,7 @@
         >
           ຍົກເລີກ
         </button>
-        <button type="button" class="btn btn-primary" @click="UpdateStatus()">
+        <button type="button" class="btn btn-primary" @click="CancelApp()">
           ບັນທຶກ
         </button>
       </div>
@@ -894,7 +915,7 @@
         >
           ຍົກເລີກ
         </button>
-        <button type="button" class="btn btn-primary" @click="UpdateStatus()">
+        <button type="button" class="btn btn-primary" @click="UpdateThero()">
           ຢືນຢັນ
         </button>
       </div>
@@ -1121,12 +1142,41 @@ const filterIAscore = async (event) => {
       } 
     
       store.formscore.score = event.target.value.replace(/\D/g, "");
-     if(store.formscore.score >= store.totalscore.total_question){
-      store.formscore.score = store.totalscore.total_question
-       store.formscore.mr_status = 'pass'
 
+
+     if(store.formscore.score >= store.totalscore.em_measure){
+      if(store.formscore.score > store.totalscore.total_question){
+      store.formscore.score = store.totalscore.total_question
+   
+     }
+         store.formscore.mr_status = 'pass'
+     }
+
+     if(store.formscore.score < store.totalscore.em_measure){
+       store.formscore.mr_status = 'fail'
      }
 };
+
+const UpdateThero = async () => {
+  store.theoryscore = false;
+  store.formresult.mr_learn_type = 1;
+  let save = await store.SaveResultScore();
+  console.log(save);
+  await store.fetchResultScore();
+}
+
+const UpdatePra= async () => {
+  store.practicalscore = false;
+  store.formresult.mr_learn_type = 2;
+ // let save = await store.SaveResultScore();
+}
+
+const CancelApp = async () => {
+  store.cancelapp = false;
+  let cancel = await store.CancelAppointment();
+}
+
+
 
 </script>
 

@@ -21,6 +21,8 @@ store.ResetFetch()
 const auth = useAuthStore()
 store.user_id = auth.user_id
 
+await store.fetchDlt();
+await store.fetchAppointmentEvent();
 
 
 </script>
