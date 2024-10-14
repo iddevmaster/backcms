@@ -631,22 +631,23 @@ export const AppointStore = defineStore('appoint', {
 
     async fetchAppPresentToday() {
 
-      console.log(this.dlt_today);
+     
       try {
         const data = await ApiService.post('/appointment/dateappointment').then(response => {
 
+          console.log(response);
           for (let i = 0; i < response.data.length; i++) {
             if (response.data[i].dlt_code == 'A') {
               this.dlt_today.A_1.push(response.data[i])
             }
             if (response.data[i].dlt_code == 'A1') {
-              this.dlt_today.A_1.push(response.data[i])
+              this.dlt_today.A1_1.push(response.data[i])
             }
             if (response.data[i].dlt_code == 'A2') {
-              this.dlt_today.A_1.push(response.data[i])
+              this.dlt_today.A2_1.push(response.data[i])
             }
             if (response.data[i].dlt_code == 'A3') {
-              this.dlt_today.A_1.push(response.data[i])
+              this.dlt_today.A3_1.push(response.data[i])
             }
             if (response.data[i].dlt_code == 'B') {
               this.dlt_today.B_1.push(response.data[i])
@@ -733,7 +734,7 @@ export const AppointStore = defineStore('appoint', {
       if (this.history_user != 0) {
         try {
           const data = await ApiService.post('/course/learn/history/' + this.history_user, this.formhistory).then(rep => {
-console.log(rep);
+
             let d = rep.data.data;
           
             let hist = d.find(obj => obj.course_code == this.select_dlt_app);
