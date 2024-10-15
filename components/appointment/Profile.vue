@@ -38,13 +38,13 @@
       <br />
 
       <div class="row m-1"  v-if="store.dataapp.length > 0">
-        <div class="col-12 col-sm-12 col-xl-12 col-lg-12/ mb-3">
+        <div class="col-12 col-sm-12 col-xl-12 col-lg-12/ mb-3"  v-if="store.dataapp[0].app_status == 'Y'">
           <div class="form-group" style="text-align: right">
             <button type="button" class="btn btn-danger"  @click="ModalC()">ຍົກເລີກ</button>
           </div>
         </div>
         <br />
-
+  
         <div class="col-12 col-sm-5 col-xl-5 col-lg-5 your-element">
           <div class="col-12 col-sm-7 col-xl-12 col-lg-12">
             <div class="form-group row">
@@ -510,7 +510,7 @@
                 1</label
               >
             </div>
-            <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3">
+            <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3"   v-if="store.dataapp[0].app_status == 'Y'">
               <button type="button" class="btn btn-primary" @click="Modaldiv()">ບັນທຶກ</button>
             </div>
           </div>
@@ -522,7 +522,7 @@
                 class="col-sm-12 col-form-label col-form-label-sm" v-if="store.status_score == 'create'"
               >
             
-                ຜົນທິດສະດີ:   -</label
+                ຜົນທິດສະດີ:   -  </label
               >
 
               <label
@@ -550,39 +550,62 @@
                 for="company-name"
                 class="col-sm-12 col-form-label col-form-label-sm" v-else
               >
-                ໂດຍ: staff1 , {{store.dlt_score.udp_date}}</label
+                ໂດຍ: {{store.dlt_score.user_name}} , {{store.dlt_score.time}}</label
               >
             </div>
-            <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3">
+            <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3" v-if="store.dataapp[0].app_status == 'Y'">
               <button type="button" class="btn btn-primary"  @click="ModalT()">
                 ບັນທຶກ ຜົນທິດສະດີ
               </button>
             </div>
           </div>
 
+
           <div class="row">
             <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-6">
               <label
                 for="company-name"
-                class="col-sm-12 col-form-label col-form-label-sm"
+                class="col-sm-12 col-form-label col-form-label-sm" v-if="store.status_scoreP == 'create'"
               >
-              ຜົນປະຕິບັດ:  85/100 </label
+            
+                ຜົນປະຕິບັດ:   - </label
+              >
+
+              <label
+                for="company-name"
+                class="col-sm-12 col-form-label col-form-label-sm" v-else
+              >
+           
+              ຜົນປະຕິບັດ:  
+             
+                <span v-if="store.status_statusP == 'pass'" style="color: green;"> {{store.dlt_scoreP.mr_score}}/100</span>
+                <span v-if="store.status_statusP == 'fail'" style="color: red;"> {{store.dlt_scoreP.mr_score}}/100</span>
+  
+                </label
               >
             </div>
             <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
               <label
                 for="company-name"
-                class="col-sm-12 col-form-label col-form-label-sm"
+                class="col-sm-12 col-form-label col-form-label-sm" v-if="store.status_scoreP == 'create'"
               >
-              ໂດຍ: E-driving ,  2024-04-01 11:32:23</label
+                </label
+              >
+
+              <label
+                for="company-name"
+                class="col-sm-12 col-form-label col-form-label-sm" v-else
+              >
+              ໂດຍ: {{store.dlt_scoreP.user_name}} ,{{store.dlt_scoreP.time}}</label
               >
             </div>
-            <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3">
+            <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3" v-if="store.dataapp[0].app_status == 'Y'">
               <button type="button" class="btn btn-primary"  @click="ModalP()">
-                ບັນທຶກ ຜົນທິດສະດີ
+                ບັນທຶກ ຜົນປະຕິບັດ
               </button>
             </div>
           </div>
+
 
 
 
@@ -592,12 +615,12 @@
                 for="company-name"
                 class="col-sm-12 col-form-label col-form-label-sm"
               >
-                ໝາຍເຫດ: ເຫດຜົນທີ່ຍົກເລີກໃຫ້ຂຽນໃສ່ບ່ອນນີ້</label
+                ໝາຍເຫດ: {{store.dataapp[0].remark}}</label
               >
             </div>
           </div>
 
-          <div class="row">
+          <div class="row" v-if="store.dataapp[0].app_status == 'Y'">
             <div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12" style="text-align: right;
 ">
          <button type="button" class="btn btn-primary"  @click="ModalP()">
@@ -707,63 +730,18 @@
           ຢືນຢັນເອກະສານຜ່ານ : {{store.searchapp.ap_number}}
         </h1>
       </div>
-      <div class="modal-body">
-        <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-4 col-form-label"
-            >ຊື່ :</label
-          >
-          <label for="inputEmail3" class="col-sm-4 col-form-label"
-            >ທ້າວ ສົມສັກ ຈ່າງດາບຸດ</label
-          >
-        </div>
-        <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-4 col-form-label"
-            >ປະເພດ :</label
-          >
-          <label for="inputEmail3" class="col-sm-8 col-form-label"
-            > {{ store.dlt_select.dlt_code }}:{{ store.dlt_select.dlt_name_lo }}</label
-          >
-        </div>
-        <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-4 col-form-label"
-            >ຄະແນນ :</label
-          >
-          <div class="form-group col-md-2">
-
-      <input type="text" class="form-control" id="inputZip">
-      
-    </div>
-    <label for="inputEmail3" class="col-sm-1"
-            ><span style="font-size: 30px;">/</span></label
-          >
-    <div class="form-group col-md-2">
-
-<input type="text" class="form-control" id="inputZip" disabled>
-
-</div>
     
+      <div class="modal-body">
+        <div class="form-group row p-3" v-for="veggie in store.veggies">
+          <div class="form-group form-check">
+    <input  type="checkbox" v-model="veggie.selected">
+    <label class="form-check-label" for="exampleCheck1">{{veggie.name}}</label>
+  </div>
         </div>
 
         <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-4 col-form-label"
-            >ຜົນສະຫຼຸບ :</label
-          >
-          <label
-            for="inputEmail3"
-            class="col-sm-8 col-form-label"
-            style="color: chartreuse"
-          >
-            <input
-              class="common__login__input form-control"
-              type="text"
-              maxlength="50" disabled
-            />
-          </label>
-        </div>
-
-        <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-4 col-form-label"
-            >ເລກທີອ້າງອິງ ຂອງລະບົບເສັງ :</label
+          <label for="inputEmail3" class="col-sm-2 col-form-label"
+            >ລຳດັບສອບເສັງ </label
           >
           <label
             for="inputEmail3"
@@ -774,26 +752,12 @@
               class="common__login__input form-control"
               type="text"
               maxlength="50"
+               v-model="store.formver.division"
             />
           </label>
         </div>
 
-        <div class="form-group row">
-          <label for="inputEmail3" class="col-sm-4 col-form-label"
-            >ໝາຍເຫດ :</label
-          >
-          <label
-            for="inputEmail3"
-            class="col-sm-8 col-form-label"
-            style="color: chartreuse"
-          >
-            <input
-              class="common__login__input form-control"
-              type="text"
-              maxlength="50"
-            />
-          </label>
-        </div>
+
       </div>
       <div class="modal-footer">
         <button
@@ -844,18 +808,37 @@
           >
           <div class="form-group col-md-2">
 
-      <input type="text" class="form-control" id="inputZip"  @input="filterIAscore" v-model="store.formscore.score" maxlength="2">
+      <input type="text" class="form-control" id="inputZip"  @input="filterIAscore" v-model="store.formscoreT.score" maxlength="2">
       
     </div>
+    
     <label for="inputEmail3" class="col-sm-1"
-            ><span style="font-size: 30px;">/</span></label
+            >
+         
+            <span style="font-size: 30px;">/</span>
+            </label
           >
+          
     <div class="form-group col-md-2">
 <input type="text" class="form-control" id="inputZip" disabled v-model="store.totalscore.total_question"
 >
 
 </div>
+
         </div>
+        <div class="form-group row" v-if="store.ScoreReqTh == true">
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            ></label
+          >
+          <label
+            for="inputEmail3"
+            class="col-sm-8 col-form-label"
+            style="color: red"
+          >
+       * ระบุ คะแนน
+          </label>
+        </div>
+
         <div class="form-group row">
           <label for="inputEmail3" class="col-sm-4 col-form-label"
             >ຜົນສະຫຼຸບ :</label
@@ -865,7 +848,7 @@
             class="col-sm-8 col-form-label"
             style="color: chartreuse"
           >
-        <select class="form-control" v-model="store.formscore.mr_status" disabled>
+        <select class="form-control" v-model="store.formscoreT.mr_status" disabled>
         <option value="pass">{{ $t("menu_result_pass") }}</option>
         <option value="fail">{{ $t("menu_result_fall") }}</option>
       </select>
@@ -885,6 +868,7 @@
               class="common__login__input form-control"
               type="text"
               maxlength="50"
+               v-model="store.formscoreT.ref_number"
             />
           </label>
         </div>
@@ -901,7 +885,8 @@
             <input
               class="common__login__input form-control"
               type="text"
-              maxlength="50"
+              maxlength="200"
+                v-model="store.formscoreT.remark"
             />
           </label>
         </div>
@@ -957,7 +942,7 @@
           >
           <div class="form-group col-md-2">
 
-      <input type="text" class="form-control" id="inputZip">
+            <input type="text" class="form-control" id="inputZip"  @input="filterIAscoreB" v-model="store.formscoreP.score" maxlength="3">
       
     </div>
     <label for="inputEmail3" class="col-sm-1"
@@ -965,7 +950,7 @@
           >
     <div class="form-group col-md-2">
 
-<input type="text" class="form-control" id="inputZip" disabled>
+<input type="text" class="form-control" id="inputZip" disabled value="100">
 
 </div>
     
@@ -980,13 +965,13 @@
             class="col-sm-8 col-form-label"
             style="color: chartreuse"
           >
-            <input
-              class="common__login__input form-control"
-              type="text"
-              maxlength="50" disabled
-            />
+        <select class="form-control" v-model="store.formscoreP.mr_status" disabled>
+        <option value="pass">{{ $t("menu_result_pass") }}</option>
+        <option value="fail">{{ $t("menu_result_fall") }}</option>
+      </select>
           </label>
         </div>
+
 
         <div class="form-group row">
           <label for="inputEmail3" class="col-sm-4 col-form-label"
@@ -1000,7 +985,10 @@
             <input
               class="common__login__input form-control"
               type="text"
-              maxlength="50"
+     
+
+                     maxlength="200"
+                v-model="store.formscoreP.ref_number"
             />
           </label>
         </div>
@@ -1017,7 +1005,9 @@
             <input
               class="common__login__input form-control"
               type="text"
-              maxlength="50"
+        
+                     maxlength="200"
+                v-model="store.formscoreP.remark"
             />
           </label>
         </div>
@@ -1031,7 +1021,7 @@
         >
           ຍົກເລີກ
         </button>
-        <button type="button" class="btn btn-primary" @click="UpdateStatus()">
+        <button type="button" class="btn btn-primary" @click="UpdatePra()">
           ຢືນຢັນ
         </button>
       </div>
@@ -1106,20 +1096,25 @@ const Hide = async () => {
 
 const ModalC = async () => {
   store.cancelapp = true;
+  store.ScoreReqTh = false
 };
 
 
 const Modaldiv = async () => {
   store.verify = true;
+  store.ScoreReqTh = false
+
 };
 
 const ModalT = async () => {
   store.theoryscore = true;
+  store.ScoreReqTh = false
 };
 
 
 const ModalP = async () => {
   store.practicalscore = true;
+  store.ScoreReqTh = false
 };
 
 const SearchApp = async () => {
@@ -1133,48 +1128,96 @@ const filterIAscore = async (event) => {
   // stores.form.user_phone = event.target.value.replace(/\D/g, "");
   const key = event.data;
       if (event.data === ' ') {
-        store.formscore.score= store.formscore.score.substring(0, store.formscore.score.length - 1);
+        store.formscoreT.score= store.formscoreT.score.substring(0, store.formscoreT.score.length - 1);
         return;
       }
-      if (store.formscore.score.charAt(0) == '0') {
-        store.formscore.score = "";
+      if (store.formscoreT.score.charAt(0) == '0') {
+        store.formscoreT.score = "";
         return;
       } 
     
-      store.formscore.score = event.target.value.replace(/\D/g, "");
+      store.formscoreT.score = event.target.value.replace(/\D/g, "");
 
 
-     if(store.formscore.score >= store.totalscore.em_measure){
-      if(store.formscore.score > store.totalscore.total_question){
-      store.formscore.score = store.totalscore.total_question
+     if(store.formscoreT.score >= store.totalscore.em_measure){
+      if(store.formscoreT.score > store.totalscore.total_question){
+      store.formscoreT.score = store.totalscore.total_question
    
      }
-         store.formscore.mr_status = 'pass'
+         store.formscoreT.mr_status = 'pass'
      }
 
-     if(store.formscore.score < store.totalscore.em_measure){
-       store.formscore.mr_status = 'fail'
+     if(store.formscoreT.score < store.totalscore.em_measure){
+       store.formscoreT.mr_status = 'fail'
      }
 };
 
+const filterIAscoreB = async (event) => {
+ 
+ // stores.form.user_phone = event.target.value.replace(/\D/g, "");
+ const key = event.data;
+     if (event.data === ' ') {
+       store.formscoreP.score= store.formscoreP.score.substring(0, store.formscoreP.score.length - 1);
+       return;
+     }
+     if (store.formscoreP.score.charAt(0) == '0') {
+       store.formscoreP.score = "";
+       return;
+     } 
+   
+     store.formscoreP.score = event.target.value.replace(/\D/g, "");
+
+
+    if(store.formscoreP.score >= 85){
+     if(store.formscoreP.score > 100){
+     store.formscoreP.score = 100
+  
+    }
+        store.formscoreP.mr_status = 'pass'
+    }
+
+    if(store.formscoreP.score < 85){
+      store.formscoreP.mr_status = 'fail'
+    }
+};
+
 const UpdateThero = async () => {
+
+ 
+ 
+  if(store.formscoreT.score == ""){
+    store.ScoreReqTh = true
+return false;
+  }
   store.theoryscore = false;
   store.formresult.mr_learn_type = 1;
+  store.ScoreReqTh = false
   let save = await store.SaveResultScore();
-  console.log(save);
+
   await store.fetchResultScore();
 }
 
 const UpdatePra= async () => {
+  if(store.formscoreP.score == ""){
+    store.ScoreReqTh = true
+return false;
+  }
   store.practicalscore = false;
   store.formresult.mr_learn_type = 2;
- // let save = await store.SaveResultScore();
+ let save = await store.SaveResultScorePra();
+ await store.fetchResultScore();
 }
 
 const CancelApp = async () => {
   store.cancelapp = false;
   let cancel = await store.CancelAppointment();
 }
+
+const UpdateStatus = async () => {
+  store.verify = false;
+  let ver = await store.UpdateStatusApp();
+}
+
 
 
 

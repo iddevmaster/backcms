@@ -156,12 +156,33 @@ export const AppointStore = defineStore('appoint', {
     formscorefull: {
       course_code: '',
     },
-    formscore: {
+    formscoreT: {
       score: "",
       mr_status: "fail",
+      ref_number:null,
+      remark:null,
     },
+    formscoreP: {
+      score: "",
+      mr_status: "fail",
+      ref_number:null,
+      remark:null,
+    },
+    formver: {
+      division:"",
+      remarkcheck:[]
+    },
+    veggies: [
+      { id: 1, name: "ຂໍ້ມູນທີ່ປ້ອນໃນລະບົບ ແລະ ເອກະສານທີ່ຍື່ນ ກົງກັນ", selected: false },
+      { id: 2, name: "ຮູບ ແລະ ຕົວຈິງ ແມ່ນຄົນດຽວກັນ", selected: false },
+      { id: 3, name: "ມີເອກະສານ ຜ່ານການຮຽນ ຈາກໂຮງຮຽນການຂັບຂີ່ (ສຳລັບ ປະເພດ B ຂື້ນໄປ)", selected: false },
+      { id: 4, name: "ຜ່ານເກນ ແລະ ເງື່ອນໄຂ (ເຊັ່ນ: ອາຍຸ, ອ່ານອອກຂຽນໄດ້, ກວດການແນມເຫັນ, ບອດສີ, ບໍ່ຖືກຍຶດຫຼືໂຈະໃບຂັບຂີ່ ...)", selected: false }
+    ],
+    ScoreReqTh:false,
     status_score: "create",
+    status_scoreP: "create",
     status_status: "",
+    status_statusP: "",
     dlt_score: [],
     formresult: {
       mr_score: null,
@@ -169,7 +190,9 @@ export const AppointStore = defineStore('appoint', {
       mr_status: 'pass',
       dlt_code: "A",
       identification_number: null,
-      user_id_staff:null
+      user_id_staff:null,
+      ref_number:null,
+      remark:null,
     },
 
   }
@@ -629,56 +652,127 @@ export const AppointStore = defineStore('appoint', {
 
     },
 
+    async fetchAppPresentTodayReset(){
+
+this.dlt_today.A_1 = []
+this.dlt_today.A_2 = []
+this.dlt_today.A1_1 = []
+this.dlt_today.A1_2 = []
+this.dlt_today.A2_1 = []
+this.dlt_today.A2_2 = []
+this.dlt_today.A3_1 = []
+this.dlt_today.A3_2 = []
+this.dlt_today.B_1 = []
+this.dlt_today.B_2 = []
+this.dlt_today.C_1 = []
+this.dlt_today.C_2 = []
+this.dlt_today.C1_1 = []
+this.dlt_today.C1_2 = []
+this.dlt_today.C2_1 = []
+this.dlt_today.C2_2 = []
+this.dlt_today.D_1 = []
+this.dlt_today.D_2 = []
+this.dlt_today.D1_1 = []
+this.dlt_today.D1_2 = []
+this.dlt_today.D2_1 = []
+this.dlt_today.D2_2 = []
+this.dlt_today.E_1 = []
+this.dlt_today.E_2 = []
+this.dlt_today.E1_1 = []
+this.dlt_today.E1_2 = []
+
+ 
+
+    },
+
     async fetchAppPresentToday() {
 
      
       try {
         const data = await ApiService.post('/appointment/dateappointment').then(response => {
 
-          console.log(response);
           for (let i = 0; i < response.data.length; i++) {
-            if (response.data[i].dlt_code == 'A') {
+            if (response.data[i].dlt_code == 'A' && response.data[i].type == 1){
               this.dlt_today.A_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'A1') {
+            if (response.data[i].dlt_code == 'A' && response.data[i].type == 2){
+              this.dlt_today.A1_2.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'A1' && response.data[i].type == 1) {
               this.dlt_today.A1_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'A2') {
+            if (response.data[i].dlt_code == 'A1' && response.data[i].type == 2) {
+              this.dlt_today.A1_2.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'A2' && response.data[i].type == 1) {
               this.dlt_today.A2_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'A3') {
+            if (response.data[i].dlt_code == 'A2' && response.data[i].type == 2) {
+              this.dlt_today.A2_2.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'A3' && response.data[i].type == 1) {
               this.dlt_today.A3_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'B') {
+            if (response.data[i].dlt_code == 'A3' && response.data[i].type == 2) {
+              this.dlt_today.A3_2.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'B' && response.data[i].type == 1) {
               this.dlt_today.B_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'C') {
+            if (response.data[i].dlt_code == 'B' && response.data[i].type == 2) {
+              this.dlt_today.B_2.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'C' && response.data[i].type == 1) {
               this.dlt_today.C_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'C1') {
+            if (response.data[i].dlt_code == 'C' && response.data[i].type == 2) {
+              this.dlt_today.C_2.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'C1' && response.data[i].type == 1) {
               this.dlt_today.C1_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'C2') {
+            if (response.data[i].dlt_code == 'C1' && response.data[i].type == 2) {
+              this.dlt_today.C1_2.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'C2' && response.data[i].type == 1) {
               this.dlt_today.C2_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'D') {
+            if (response.data[i].dlt_code == 'C2' && response.data[i].type == 2) {
+              this.dlt_today.C2_2.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'D' && response.data[i].type == 1) {
               this.dlt_today.D_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'D1') {
+            if (response.data[i].dlt_code == 'D' && response.data[i].type == 2) {
+              this.dlt_today.D_2.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'D1' && response.data[i].type == 1) {
               this.dlt_today.D_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'D2') {
+            if (response.data[i].dlt_code == 'D1' && response.data[i].type == 2) {
+              this.dlt_today.D1_2.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'D2' && response.data[i].type == 1) {
               this.dlt_today.D2_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'E') {
+            if (response.data[i].dlt_code == 'D2' && response.data[i].type == 2) {
+              this.dlt_today.D2_2.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'E' && response.data[i].type == 1) {
               this.dlt_today.E_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'E1') {
+            if (response.data[i].dlt_code == 'E' && response.data[i].type == 2) {
+              this.dlt_today.E_2.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'E1' && response.data[i].type == 1) {
               this.dlt_today.E1_1.push(response.data[i])
+            }
+            if (response.data[i].dlt_code == 'E1' && response.data[i].type == 2) {
+              this.dlt_today.E1_2.push(response.data[i])
             }
           }
 
-
+console.log(this.dlt_today);
         });
         return true
       } catch (error) {
@@ -718,6 +812,7 @@ export const AppointStore = defineStore('appoint', {
     async fetchAppNumber() {
       try {
         const data = await ApiService.post('/appointment/dateappointment/appbyuser', this.searchapp).then(rep => {
+          console.log(rep);
           this.dataapp = rep.data;
           this.history_user = rep.data[0].user_id
           this.select_dlt_app = rep.data[0].dlt_code;
@@ -796,6 +891,49 @@ export const AppointStore = defineStore('appoint', {
     async fetchResultScore() {
       try {
         const data = await ApiService.get('/main_result/list/?user_id=' + this.history_user).then(reps => {
+      
+          if (reps.data.length > 0) {
+       
+            this.dlt_score = reps.data.find((obj => obj.dlt_code == "A1") && (obj => obj.mr_learn_type == 1));
+            this.dlt_scoreP = reps.data.find((obj => obj.dlt_code == "A1") && (obj => obj.mr_learn_type == 2));
+
+c
+           
+            if (this.dlt_score) {
+              this.status_score = 'update';
+              this.formscoreT.score = this.dlt_score.mr_score
+              this.formscoreT.mr_status = this.dlt_score.mr_status
+              this.status_status = this.dlt_score.mr_status;
+           
+
+              this.formscoreT.ref_number = this.dlt_score.ref_number;
+              this.formscoreT.remark = this.dlt_score.remark;
+            }
+
+            if (this.dlt_scoreP) {
+              this.status_scoreP = 'update';
+              this.formscoreP.score = this.dlt_scoreP.mr_score
+              this.formscoreP.mr_status = this.dlt_scoreP.mr_status
+              this.status_statusP = this.dlt_scoreP.mr_status;
+
+              this.formscoreP.ref_number = this.dlt_scoreP.ref_number;
+              this.formscoreP.remark = this.dlt_scoreP.remark;
+            }
+          } else {
+            this.status_score = 'create';
+            this.status_scoreP = 'create';
+          }
+        });
+        return data;
+      } catch (error) {
+        return false;
+      }
+    },
+
+
+    async fetchResultScorePra() {
+      try {
+        const data = await ApiService.get('/main_result/list/?user_id=' + this.history_user).then(reps => {
           if (reps.data.length > 0) {
             this.dlt_score = reps.data
             this.dlt_score = this.dlt_score.find(obj => obj.dlt_code == "A1");
@@ -805,6 +943,9 @@ export const AppointStore = defineStore('appoint', {
               this.formscore.score = this.dlt_score.mr_score
               this.formscore.mr_status = this.dlt_score.mr_status
               this.status_status = this.dlt_score.mr_status;
+
+              this.formscore.ref_number = this.dlt_score.ref_number;
+              this.formscore.remark = this.dlt_score.remark;
 
             }
           } else {
@@ -819,17 +960,18 @@ export const AppointStore = defineStore('appoint', {
 
 
     async SaveResultScore() {
-
       if (this.status_score == 'update') {
-        this.formresult.mr_score = parseInt(this.formscore.score);
-        this.formresult.mr_status = this.formscore.mr_status
+        this.formresult.mr_score = parseInt(this.formscoreT.score);
+        this.formresult.mr_status = this.formscoreT.mr_status
         this.formresult.identification_number = this.dataapp[0].identification_number
         this.formresult.dlt_code = this.dataapp[0].dlt_code
         this.formresult.user_id_staff = this.user_id;
-        console.log(this.formresult);
+        this.formresult.ref_number = this.formscoreT.ref_number;
+        this.formresult.remark = this.formscoreT.remark;
+      
         try {
           const data = await ApiService.put('/main_result/update/' + this.dlt_score.mr_id, this.formresult).then(response => {
-            console.log(response);
+          
             if (response.status == 200) {
               return true;
             }
@@ -841,12 +983,14 @@ export const AppointStore = defineStore('appoint', {
 
       }
       if (this.status_score == 'create') {
-        this.formresult.mr_score = parseInt(this.formscore.score);
-        this.formresult.mr_status = this.formscore.mr_status
+        this.formresult.mr_score = parseInt(this.formscoreT.score);
+        this.formresult.mr_status = this.formscoreT.mr_status
         this.formresult.identification_number = this.dataapp[0].identification_number
         this.formresult.dlt_code = this.dataapp[0].dlt_code
         this.formresult.user_id_staff = this.user_id;
-     
+        this.formresult.ref_number = this.formscoreT.ref_number;
+        this.formresult.remark = this.formscoreT.remark;
+ 
         try {
           const data = await ApiService.post('/main_result/create', this.formresult).then(response => {
             if (response.status == 200) {
@@ -858,9 +1002,56 @@ export const AppointStore = defineStore('appoint', {
           return false
         }
       }
-
-
     },
+
+
+    async SaveResultScorePra() {
+      if (this.status_scoreP == 'update') {
+        this.formresult.mr_score = parseInt(this.formscoreP.score);
+        this.formresult.mr_status = this.formscoreP.mr_status
+        this.formresult.identification_number = this.dataapp[0].identification_number
+        this.formresult.dlt_code = this.dataapp[0].dlt_code
+        this.formresult.user_id_staff = this.user_id;
+        this.formresult.ref_number = this.formscoreP.ref_number;
+        this.formresult.remark = this.formscoreP.remark;
+      
+        // try {
+        //   const data = await ApiService.put('/main_result/update/' + this.dlt_score.mr_id, this.formresult).then(response => {
+          
+        //     if (response.status == 200) {
+        //       return true;
+        //     }
+        //   });
+        //   return data;
+        // } catch (error) {
+        //   return false
+        // }
+
+      }
+      if (this.status_scoreP == 'create') {
+        this.formresult.mr_score = parseInt(this.formscoreP.score);
+        this.formresult.mr_status = this.formscoreP.mr_status
+        this.formresult.identification_number = this.dataapp[0].identification_number
+        this.formresult.dlt_code = this.dataapp[0].dlt_code
+        this.formresult.user_id_staff = this.user_id;
+        this.formresult.ref_number = this.formscoreP.ref_number;
+        this.formresult.remark = this.formscoreP.remark;
+
+      
+ 
+        try {
+          const data = await ApiService.post('/main_result/create', this.formresult).then(response => {
+            if (response.status == 200) {
+              return true;
+            }
+          });
+          return data;
+        } catch (error) {
+          return false
+        }
+      }
+    },
+
 
 
     async CancelAppointment() {
@@ -876,7 +1067,12 @@ export const AppointStore = defineStore('appoint', {
         return false;
       }
     },
+    async UpdateStatusApp() {
 
+this.formver.remarkcheck = this.veggies;
+console.log(this.formver);
+     },
+ 
 
 
 

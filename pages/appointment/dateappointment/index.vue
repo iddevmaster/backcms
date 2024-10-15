@@ -23,7 +23,7 @@ const auth = useAuthStore();
 const router = useRouter();
 store.user_id = auth.user_id;
 
-
+await store.fetchAppPresentTodayReset();
 await store.fetchAppPresentToday();
 store.group = [];
 const closeModal = () => {
@@ -140,12 +140,12 @@ const GotoDetails = async (item) => {
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
                                 <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
+                                  ຜົນທິດສະດີ: {{ item.thero }} 
                                 </h4>
                               </div>
                               <div class="media-body">
                                 <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
+                                  ຜົນປະຕິບັດ: {{ item.pratic }} /100
                                 </h4>
                               </div>
                             </div>
@@ -185,90 +185,48 @@ const GotoDetails = async (item) => {
 >
  <div class="card-body">
    <div class="row">
-     <div class="col-sm-6">
-       <div class="row">
-         <div
-           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-         >
-           <div class="card style-3">
-             <img
-               src="../.././../public/img/logo.svg"
-               class="card-img-top"
-               alt="..."
-               style="width: 200px"
-             />
-             <div class="card-body px-0 py-0">
-               <h4 class="media-heading mb-1">
-                 ID ນັດໝາຍ: A83M100
-               </h4>
+    <div class="col-sm-6"  v-for="(item, index) in store.dlt_today.A_2" :key="item">
+                    <div class="row" @click="GotoDetails(item)">
+                      <div
+                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+                      >
+                        <div class="card style-3">
+                          <img
+                            src="../.././../public/img/logo.svg"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <div class="card-body px-0 py-0">
+                            <h4 class="media-heading mb-1">
+                              ID ນັດໝາຍ:  {{ item.ap_number }}
+                            </h4>
 
-               <h5 class="media-heading mb-1">
-                 ທ. ສົມສັກ ຈ່າງດາບຸດ
-               </h5>
-               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+                            <h5 class="media-heading mb-1">
+                              {{ item.user_prefrix }}  {{ item.user_firstname }}  {{ item.user_lastname }} 
+                            </h5>
+                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
 
-               <div class="media mt-4 mb-0">
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນທິດສະດີ: 18/20
-                   </h4>
-                 </div>
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນປະຕິບັດ: 85/100
-                   </h4>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-     <div class="col-sm-6">
-       <div class="row">
-         <div
-           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-         >
-           <div class="card style-3">
-             <img
-               src="../.././../public/img/logo.svg"
-               class="card-img-top"
-               alt="..."
-               style="width: 200px"
-             />
-             <div class="card-body px-0 py-0">
-               <h4 class="media-heading mb-1">
-                 ID ນັດໝາຍ: A83M100
-               </h4>
-               <h5 class="media-heading mb-1">
-                 ທ. ສົມສັກ ຈ່າງດາບຸດ
-               </h5>
-               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-               <span class="card-category mb-2">ສະຖານະ : </span
-               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-               <p class="card-category mb-2 pt-2">
-                 ລຳດັບສອບເສັງ: 1
-               </p>
-
-               <div class="media mt-4 mb-0">
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນທິດສະດີ: 18/20
-                   </h4>
-                 </div>
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນປະຕິບັດ: 85/100
-                   </h4>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
+                            <div class="media mt-4 mb-0">
+                              <div class="media-body">
+                                <h4 class="media-heading mb-1">
+                                  ຜົນທິດສະດີ: 18/20
+                                </h4>
+                              </div>
+                              <div class="media-body">
+                                <h4 class="media-heading mb-1">
+                                  ຜົນປະຕິບັດ: 85/100
+                                </h4>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+    
    </div>
  </div>
 </div>
@@ -300,8 +258,8 @@ const GotoDetails = async (item) => {
             >
               <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="row">
+                  <div class="col-sm-6"  v-for="(item, index) in store.dlt_today.A1_1" :key="item">
+                    <div class="row" @click="GotoDetails(item)">
                       <div
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
@@ -314,58 +272,15 @@ const GotoDetails = async (item) => {
                           />
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
+                              ID ນັດໝາຍ:  {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
+                              {{ item.user_prefrix }}  {{ item.user_firstname }}  {{ item.user_lastname }} 
                             </h5>
                             <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
                             <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
                             <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
-                            </h4>
-                            <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
-                            </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <span class="card-category mb-2">ສະຖານະ : </span
-                            ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-                            <p class="card-category mb-2 pt-2">
-                              ລຳດັບສອບເສັງ: 1
-                            </p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -415,90 +330,48 @@ const GotoDetails = async (item) => {
 >
  <div class="card-body">
    <div class="row">
-     <div class="col-sm-6">
-       <div class="row">
-         <div
-           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-         >
-           <div class="card style-3">
-             <img
-               src="../.././../public/img/logo.svg"
-               class="card-img-top"
-               alt="..."
-               style="width: 200px"
-             />
-             <div class="card-body px-0 py-0">
-               <h4 class="media-heading mb-1">
-                 ID ນັດໝາຍ: A83M100
-               </h4>
+    <div class="col-sm-6"  v-for="(item, index) in store.dlt_today.A1_2" :key="item">
+                    <div class="row" @click="GotoDetails(item)">
+                      <div
+                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+                      >
+                        <div class="card style-3">
+                          <img
+                            src="../.././../public/img/logo.svg"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <div class="card-body px-0 py-0">
+                            <h4 class="media-heading mb-1">
+                              ID ນັດໝາຍ:  {{ item.ap_number }}
+                            </h4>
 
-               <h5 class="media-heading mb-1">
-                 ທ. ສົມສັກ ຈ່າງດາບຸດ
-               </h5>
-               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+                            <h5 class="media-heading mb-1">
+                              {{ item.user_prefrix }}  {{ item.user_firstname }}  {{ item.user_lastname }} 
+                            </h5>
+                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
 
-               <div class="media mt-4 mb-0">
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນທິດສະດີ: 18/20
-                   </h4>
-                 </div>
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນປະຕິບັດ: 85/100
-                   </h4>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-     <div class="col-sm-6">
-       <div class="row">
-         <div
-           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-         >
-           <div class="card style-3">
-             <img
-               src="../.././../public/img/logo.svg"
-               class="card-img-top"
-               alt="..."
-               style="width: 200px"
-             />
-             <div class="card-body px-0 py-0">
-               <h4 class="media-heading mb-1">
-                 ID ນັດໝາຍ: A83M100
-               </h4>
-               <h5 class="media-heading mb-1">
-                 ທ. ສົມສັກ ຈ່າງດາບຸດ
-               </h5>
-               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-               <span class="card-category mb-2">ສະຖານະ : </span
-               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-               <p class="card-category mb-2 pt-2">
-                 ລຳດັບສອບເສັງ: 1
-               </p>
-
-               <div class="media mt-4 mb-0">
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນທິດສະດີ: 18/20
-                   </h4>
-                 </div>
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນປະຕິບັດ: 85/100
-                   </h4>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
+                            <div class="media mt-4 mb-0">
+                              <div class="media-body">
+                                <h4 class="media-heading mb-1">
+                                  ຜົນທິດສະດີ: 18/20
+                                </h4>
+                              </div>
+                              <div class="media-body">
+                                <h4 class="media-heading mb-1">
+                                  ຜົນປະຕິບັດ: 85/100
+                                </h4>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+     
    </div>
  </div>
 </div>
@@ -532,90 +405,48 @@ const GotoDetails = async (item) => {
 >
  <div class="card-body">
    <div class="row">
-     <div class="col-sm-6">
-       <div class="row">
-         <div
-           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-         >
-           <div class="card style-3">
-             <img
-               src="../.././../public/img/logo.svg"
-               class="card-img-top"
-               alt="..."
-               style="width: 200px"
-             />
-             <div class="card-body px-0 py-0">
-               <h4 class="media-heading mb-1">
-                 ID ນັດໝາຍ: A83M100
-               </h4>
+    <div class="col-sm-6"  v-for="(item, index) in store.dlt_today.A2_1" :key="item">
+                    <div class="row" @click="GotoDetails(item)">
+                      <div
+                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+                      >
+                        <div class="card style-3">
+                          <img
+                            src="../.././../public/img/logo.svg"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <div class="card-body px-0 py-0">
+                            <h4 class="media-heading mb-1">
+                              ID ນັດໝາຍ:  {{ item.ap_number }}
+                            </h4>
 
-               <h5 class="media-heading mb-1">
-                 ທ. ສົມສັກ ຈ່າງດາບຸດ
-               </h5>
-               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+                            <h5 class="media-heading mb-1">
+                              {{ item.user_prefrix }}  {{ item.user_firstname }}  {{ item.user_lastname }} 
+                            </h5>
+                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
 
-               <div class="media mt-4 mb-0">
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນທິດສະດີ: 18/20
-                   </h4>
-                 </div>
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນປະຕິບັດ: 85/100
-                   </h4>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-     <div class="col-sm-6">
-       <div class="row">
-         <div
-           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-         >
-           <div class="card style-3">
-             <img
-               src="../.././../public/img/logo.svg"
-               class="card-img-top"
-               alt="..."
-               style="width: 200px"
-             />
-             <div class="card-body px-0 py-0">
-               <h4 class="media-heading mb-1">
-                 ID ນັດໝາຍ: A83M100
-               </h4>
-               <h5 class="media-heading mb-1">
-                 ທ. ສົມສັກ ຈ່າງດາບຸດ
-               </h5>
-               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-               <span class="card-category mb-2">ສະຖານະ : </span
-               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-               <p class="card-category mb-2 pt-2">
-                 ລຳດັບສອບເສັງ: 1
-               </p>
-
-               <div class="media mt-4 mb-0">
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນທິດສະດີ: 18/20
-                   </h4>
-                 </div>
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນປະຕິບັດ: 85/100
-                   </h4>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
+                            <div class="media mt-4 mb-0">
+                              <div class="media-body">
+                                <h4 class="media-heading mb-1">
+                                  ຜົນທິດສະດີ: 18/20
+                                </h4>
+                              </div>
+                              <div class="media-body">
+                                <h4 class="media-heading mb-1">
+                                  ຜົນປະຕິບັດ: 85/100
+                                </h4>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+    
    </div>
  </div>
 </div>
@@ -647,90 +478,48 @@ const GotoDetails = async (item) => {
 >
  <div class="card-body">
    <div class="row">
-     <div class="col-sm-6">
-       <div class="row">
-         <div
-           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-         >
-           <div class="card style-3">
-             <img
-               src="../.././../public/img/logo.svg"
-               class="card-img-top"
-               alt="..."
-               style="width: 200px"
-             />
-             <div class="card-body px-0 py-0">
-               <h4 class="media-heading mb-1">
-                 ID ນັດໝາຍ: A83M100
-               </h4>
+    <div class="col-sm-6"  v-for="(item, index) in store.dlt_today.A2_2" :key="item">
+                    <div class="row" @click="GotoDetails(item)">
+                      <div
+                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+                      >
+                        <div class="card style-3">
+                          <img
+                            src="../.././../public/img/logo.svg"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <div class="card-body px-0 py-0">
+                            <h4 class="media-heading mb-1">
+                              ID ນັດໝາຍ:  {{ item.ap_number }}
+                            </h4>
 
-               <h5 class="media-heading mb-1">
-                 ທ. ສົມສັກ ຈ່າງດາບຸດ
-               </h5>
-               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+                            <h5 class="media-heading mb-1">
+                              {{ item.user_prefrix }}  {{ item.user_firstname }}  {{ item.user_lastname }} 
+                            </h5>
+                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
 
-               <div class="media mt-4 mb-0">
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນທິດສະດີ: 18/20
-                   </h4>
-                 </div>
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນປະຕິບັດ: 85/100
-                   </h4>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-     <div class="col-sm-6">
-       <div class="row">
-         <div
-           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-         >
-           <div class="card style-3">
-             <img
-               src="../.././../public/img/logo.svg"
-               class="card-img-top"
-               alt="..."
-               style="width: 200px"
-             />
-             <div class="card-body px-0 py-0">
-               <h4 class="media-heading mb-1">
-                 ID ນັດໝາຍ: A83M100
-               </h4>
-               <h5 class="media-heading mb-1">
-                 ທ. ສົມສັກ ຈ່າງດາບຸດ
-               </h5>
-               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-               <span class="card-category mb-2">ສະຖານະ : </span
-               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-               <p class="card-category mb-2 pt-2">
-                 ລຳດັບສອບເສັງ: 1
-               </p>
-
-               <div class="media mt-4 mb-0">
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນທິດສະດີ: 18/20
-                   </h4>
-                 </div>
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນປະຕິບັດ: 85/100
-                   </h4>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
+                            <div class="media mt-4 mb-0">
+                              <div class="media-body">
+                                <h4 class="media-heading mb-1">
+                                  ຜົນທິດສະດີ: 18/20
+                                </h4>
+                              </div>
+                              <div class="media-body">
+                                <h4 class="media-heading mb-1">
+                                  ຜົນປະຕິບັດ: 85/100
+                                </h4>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+   
    </div>
  </div>
 </div>
@@ -762,90 +551,48 @@ const GotoDetails = async (item) => {
 >
  <div class="card-body">
    <div class="row">
-     <div class="col-sm-6">
-       <div class="row">
-         <div
-           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-         >
-           <div class="card style-3">
-             <img
-               src="../.././../public/img/logo.svg"
-               class="card-img-top"
-               alt="..."
-               style="width: 200px"
-             />
-             <div class="card-body px-0 py-0">
-               <h4 class="media-heading mb-1">
-                 ID ນັດໝາຍ: A83M100
-               </h4>
+    <div class="col-sm-6"  v-for="(item, index) in store.dlt_today.A3_1" :key="item">
+                    <div class="row" @click="GotoDetails(item)">
+                      <div
+                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+                      >
+                        <div class="card style-3">
+                          <img
+                            src="../.././../public/img/logo.svg"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <div class="card-body px-0 py-0">
+                            <h4 class="media-heading mb-1">
+                              ID ນັດໝາຍ:  {{ item.ap_number }}
+                            </h4>
 
-               <h5 class="media-heading mb-1">
-                 ທ. ສົມສັກ ຈ່າງດາບຸດ
-               </h5>
-               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+                            <h5 class="media-heading mb-1">
+                              {{ item.user_prefrix }}  {{ item.user_firstname }}  {{ item.user_lastname }} 
+                            </h5>
+                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
 
-               <div class="media mt-4 mb-0">
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນທິດສະດີ: 18/20
-                   </h4>
-                 </div>
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນປະຕິບັດ: 85/100
-                   </h4>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-     <div class="col-sm-6">
-       <div class="row">
-         <div
-           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-         >
-           <div class="card style-3">
-             <img
-               src="../.././../public/img/logo.svg"
-               class="card-img-top"
-               alt="..."
-               style="width: 200px"
-             />
-             <div class="card-body px-0 py-0">
-               <h4 class="media-heading mb-1">
-                 ID ນັດໝາຍ: A83M100
-               </h4>
-               <h5 class="media-heading mb-1">
-                 ທ. ສົມສັກ ຈ່າງດາບຸດ
-               </h5>
-               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-               <span class="card-category mb-2">ສະຖານະ : </span
-               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-               <p class="card-category mb-2 pt-2">
-                 ລຳດັບສອບເສັງ: 1
-               </p>
-
-               <div class="media mt-4 mb-0">
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນທິດສະດີ: 18/20
-                   </h4>
-                 </div>
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນປະຕິບັດ: 85/100
-                   </h4>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
+                            <div class="media mt-4 mb-0">
+                              <div class="media-body">
+                                <h4 class="media-heading mb-1">
+                                  ຜົນທິດສະດີ: 18/20
+                                </h4>
+                              </div>
+                              <div class="media-body">
+                                <h4 class="media-heading mb-1">
+                                  ຜົນປະຕິບັດ: 85/100
+                                </h4>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+    
    </div>
  </div>
 </div>
@@ -877,90 +624,48 @@ const GotoDetails = async (item) => {
 >
  <div class="card-body">
    <div class="row">
-     <div class="col-sm-6">
-       <div class="row">
-         <div
-           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-         >
-           <div class="card style-3">
-             <img
-               src="../.././../public/img/logo.svg"
-               class="card-img-top"
-               alt="..."
-               style="width: 200px"
-             />
-             <div class="card-body px-0 py-0">
-               <h4 class="media-heading mb-1">
-                 ID ນັດໝາຍ: A83M100
-               </h4>
+    <div class="col-sm-6"  v-for="(item, index) in store.dlt_today.A3_2" :key="item">
+                    <div class="row" @click="GotoDetails(item)">
+                      <div
+                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+                      >
+                        <div class="card style-3">
+                          <img
+                            src="../.././../public/img/logo.svg"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <div class="card-body px-0 py-0">
+                            <h4 class="media-heading mb-1">
+                              ID ນັດໝາຍ:  {{ item.ap_number }}
+                            </h4>
 
-               <h5 class="media-heading mb-1">
-                 ທ. ສົມສັກ ຈ່າງດາບຸດ
-               </h5>
-               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+                            <h5 class="media-heading mb-1">
+                              {{ item.user_prefrix }}  {{ item.user_firstname }}  {{ item.user_lastname }} 
+                            </h5>
+                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
 
-               <div class="media mt-4 mb-0">
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນທິດສະດີ: 18/20
-                   </h4>
-                 </div>
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນປະຕິບັດ: 85/100
-                   </h4>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-     <div class="col-sm-6">
-       <div class="row">
-         <div
-           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-         >
-           <div class="card style-3">
-             <img
-               src="../.././../public/img/logo.svg"
-               class="card-img-top"
-               alt="..."
-               style="width: 200px"
-             />
-             <div class="card-body px-0 py-0">
-               <h4 class="media-heading mb-1">
-                 ID ນັດໝາຍ: A83M100
-               </h4>
-               <h5 class="media-heading mb-1">
-                 ທ. ສົມສັກ ຈ່າງດາບຸດ
-               </h5>
-               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-               <span class="card-category mb-2">ສະຖານະ : </span
-               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-               <p class="card-category mb-2 pt-2">
-                 ລຳດັບສອບເສັງ: 1
-               </p>
-
-               <div class="media mt-4 mb-0">
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນທິດສະດີ: 18/20
-                   </h4>
-                 </div>
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນປະຕິບັດ: 85/100
-                   </h4>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
+                            <div class="media mt-4 mb-0">
+                              <div class="media-body">
+                                <h4 class="media-heading mb-1">
+                                  ຜົນທິດສະດີ: 18/20
+                                </h4>
+                              </div>
+                              <div class="media-body">
+                                <h4 class="media-heading mb-1">
+                                  ຜົນປະຕິບັດ: 85/100
+                                </h4>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+    
    </div>
  </div>
 </div>
@@ -995,90 +700,48 @@ const GotoDetails = async (item) => {
 >
  <div class="card-body">
    <div class="row">
-     <div class="col-sm-6">
-       <div class="row">
-         <div
-           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-         >
-           <div class="card style-3">
-             <img
-               src="../.././../public/img/logo.svg"
-               class="card-img-top"
-               alt="..."
-               style="width: 200px"
-             />
-             <div class="card-body px-0 py-0">
-               <h4 class="media-heading mb-1">
-                 ID ນັດໝາຍ: A83M100
-               </h4>
+    <div class="col-sm-6"  v-for="(item, index) in store.dlt_today.B_1" :key="item">
+                    <div class="row" @click="GotoDetails(item)">
+                      <div
+                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+                      >
+                        <div class="card style-3">
+                          <img
+                            src="../.././../public/img/logo.svg"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <div class="card-body px-0 py-0">
+                            <h4 class="media-heading mb-1">
+                              ID ນັດໝາຍ:  {{ item.ap_number }}
+                            </h4>
 
-               <h5 class="media-heading mb-1">
-                 ທ. ສົມສັກ ຈ່າງດາບຸດ
-               </h5>
-               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+                            <h5 class="media-heading mb-1">
+                              {{ item.user_prefrix }}  {{ item.user_firstname }}  {{ item.user_lastname }} 
+                            </h5>
+                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
 
-               <div class="media mt-4 mb-0">
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນທິດສະດີ: 18/20
-                   </h4>
-                 </div>
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນປະຕິບັດ: 85/100
-                   </h4>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-     <div class="col-sm-6">
-       <div class="row">
-         <div
-           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-         >
-           <div class="card style-3">
-             <img
-               src="../.././../public/img/logo.svg"
-               class="card-img-top"
-               alt="..."
-               style="width: 200px"
-             />
-             <div class="card-body px-0 py-0">
-               <h4 class="media-heading mb-1">
-                 ID ນັດໝາຍ: A83M100
-               </h4>
-               <h5 class="media-heading mb-1">
-                 ທ. ສົມສັກ ຈ່າງດາບຸດ
-               </h5>
-               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-               <span class="card-category mb-2">ສະຖານະ : </span
-               ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-               <p class="card-category mb-2 pt-2">
-                 ລຳດັບສອບເສັງ: 1
-               </p>
-
-               <div class="media mt-4 mb-0">
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນທິດສະດີ: 18/20
-                   </h4>
-                 </div>
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນປະຕິບັດ: 85/100
-                   </h4>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
+                            <div class="media mt-4 mb-0">
+                              <div class="media-body">
+                                <h4 class="media-heading mb-1">
+                                  ຜົນທິດສະດີ: 18/20
+                                </h4>
+                              </div>
+                              <div class="media-body">
+                                <h4 class="media-heading mb-1">
+                                  ຜົນປະຕິບັດ: 85/100
+                                </h4>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+    
    </div>
  </div>
 </div>
@@ -1112,47 +775,47 @@ const GotoDetails = async (item) => {
 >
  <div class="card-body">
    <div class="row">
-     <div class="col-sm-6">
-       <div class="row">
-         <div
-           class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-         >
-           <div class="card style-3">
-             <img
-               src="../.././../public/img/logo.svg"
-               class="card-img-top"
-               alt="..."
-               style="width: 200px"
-             />
-             <div class="card-body px-0 py-0">
-               <h4 class="media-heading mb-1">
-                 ID ນັດໝາຍ: A83M100
-               </h4>
+    <div class="col-sm-6"  v-for="(item, index) in store.dlt_today.B_2" :key="item">
+                    <div class="row" @click="GotoDetails(item)">
+                      <div
+                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
+                      >
+                        <div class="card style-3">
+                          <img
+                            src="../.././../public/img/logo.svg"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <div class="card-body px-0 py-0">
+                            <h4 class="media-heading mb-1">
+                              ID ນັດໝາຍ:  {{ item.ap_number }}
+                            </h4>
 
-               <h5 class="media-heading mb-1">
-                 ທ. ສົມສັກ ຈ່າງດາບຸດ
-               </h5>
-               <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-               <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-               <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+                            <h5 class="media-heading mb-1">
+                              {{ item.user_prefrix }}  {{ item.user_firstname }}  {{ item.user_lastname }} 
+                            </h5>
+                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
 
-               <div class="media mt-4 mb-0">
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນທິດສະດີ: 18/20
-                   </h4>
-                 </div>
-                 <div class="media-body">
-                   <h4 class="media-heading mb-1">
-                     ຜົນປະຕິບັດ: 85/100
-                   </h4>
-                 </div>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
+                            <div class="media mt-4 mb-0">
+                              <div class="media-body">
+                                <h4 class="media-heading mb-1">
+                                  ຜົນທິດສະດີ: 18/20
+                                </h4>
+                              </div>
+                              <div class="media-body">
+                                <h4 class="media-heading mb-1">
+                                  ຜົນປະຕິບັດ: 85/100
+                                </h4>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
      <div class="col-sm-6">
        <div class="row">
          <div
