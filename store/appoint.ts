@@ -1074,7 +1074,7 @@ export const AppointStore = defineStore('appoint', {
 
     async CancelAppointment() {
       this.searchapp.remark = this.remark;
-      console.log(this.searchapp);
+   
       try {
         const data = await ApiService.post('/appointment/cancelapp', this.searchapp).then(reps => {
 
@@ -1088,7 +1088,17 @@ export const AppointStore = defineStore('appoint', {
     async UpdateStatusApp() {
 
       this.formver.remarkcheck = this.veggies;
-      console.log(this.formver);
+      this.formver.ap_number = this.searchapp.ap_number;
+
+      try {
+        const data = await ApiService.post('/appointment/veri', this.formver).then(reps => {
+
+        });
+        return data;
+      } catch (error) {
+        return false;
+      }
+    
     },
 
 
