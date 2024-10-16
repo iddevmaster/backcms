@@ -1087,9 +1087,9 @@ export const AppointStore = defineStore('appoint', {
     },
     async UpdateStatusApp() {
 
-      this.formver.remarkcheck = this.veggies;
+      this.formver.remarkcheck = JSON.stringify(this.veggies);
       this.formver.ap_number = this.searchapp.ap_number;
-
+   
       try {
         const data = await ApiService.post('/appointment/veri', this.formver).then(reps => {
 
