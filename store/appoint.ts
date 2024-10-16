@@ -17,6 +17,7 @@ export const AppointStore = defineStore('appoint', {
     remark: "ເຫດຜົນທີ່ຍົກເລີກໃຫ້ຂຽນໃສ່ບ່ອນນີ້",
     event: [],
     user: [],
+    course:null,
     userall: [],
     total_page_user: 0,
     start_date: '',
@@ -146,7 +147,7 @@ export const AppointStore = defineStore('appoint', {
     dataapp: {
 
     },
-    score: null,
+    score: [],
     totalscore: 0,
     formhistory: {
       page: 1,
@@ -159,18 +160,18 @@ export const AppointStore = defineStore('appoint', {
     formscoreT: {
       score: "",
       mr_status: "fail",
-      ref_number:null,
-      remark:null,
+      ref_number: null,
+      remark: null,
     },
     formscoreP: {
       score: "",
       mr_status: "fail",
-      ref_number:null,
-      remark:null,
+      ref_number: null,
+      remark: null,
     },
     formver: {
-      division:"",
-      remarkcheck:[]
+      division: "1",
+      remarkcheck: []
     },
     veggies: [
       { id: 1, name: "ຂໍ້ມູນທີ່ປ້ອນໃນລະບົບ ແລະ ເອກະສານທີ່ຍື່ນ ກົງກັນ", selected: false },
@@ -178,7 +179,7 @@ export const AppointStore = defineStore('appoint', {
       { id: 3, name: "ມີເອກະສານ ຜ່ານການຮຽນ ຈາກໂຮງຮຽນການຂັບຂີ່ (ສຳລັບ ປະເພດ B ຂື້ນໄປ)", selected: false },
       { id: 4, name: "ຜ່ານເກນ ແລະ ເງື່ອນໄຂ (ເຊັ່ນ: ອາຍຸ, ອ່ານອອກຂຽນໄດ້, ກວດການແນມເຫັນ, ບອດສີ, ບໍ່ຖືກຍຶດຫຼືໂຈະໃບຂັບຂີ່ ...)", selected: false }
     ],
-    ScoreReqTh:false,
+    ScoreReqTh: false,
     status_score: "create",
     status_scoreP: "create",
     status_status: "",
@@ -190,9 +191,9 @@ export const AppointStore = defineStore('appoint', {
       mr_status: 'pass',
       dlt_code: "A",
       identification_number: null,
-      user_id_staff:null,
-      ref_number:null,
-      remark:null,
+      user_id_staff: null,
+      ref_number: null,
+      remark: null,
     },
 
   }
@@ -652,50 +653,64 @@ export const AppointStore = defineStore('appoint', {
 
     },
 
-    async fetchAppPresentTodayReset(){
+    async fetchAppPresentTodayReset() {
 
-this.dlt_today.A_1 = []
-this.dlt_today.A_2 = []
-this.dlt_today.A1_1 = []
-this.dlt_today.A1_2 = []
-this.dlt_today.A2_1 = []
-this.dlt_today.A2_2 = []
-this.dlt_today.A3_1 = []
-this.dlt_today.A3_2 = []
-this.dlt_today.B_1 = []
-this.dlt_today.B_2 = []
-this.dlt_today.C_1 = []
-this.dlt_today.C_2 = []
-this.dlt_today.C1_1 = []
-this.dlt_today.C1_2 = []
-this.dlt_today.C2_1 = []
-this.dlt_today.C2_2 = []
-this.dlt_today.D_1 = []
-this.dlt_today.D_2 = []
-this.dlt_today.D1_1 = []
-this.dlt_today.D1_2 = []
-this.dlt_today.D2_1 = []
-this.dlt_today.D2_2 = []
-this.dlt_today.E_1 = []
-this.dlt_today.E_2 = []
-this.dlt_today.E1_1 = []
-this.dlt_today.E1_2 = []
+      this.dlt_today.A_1 = []
+      this.dlt_today.A_2 = []
+      this.dlt_today.A1_1 = []
+      this.dlt_today.A1_2 = []
+      this.dlt_today.A2_1 = []
+      this.dlt_today.A2_2 = []
+      this.dlt_today.A3_1 = []
+      this.dlt_today.A3_2 = []
+      this.dlt_today.B_1 = []
+      this.dlt_today.B_2 = []
+      this.dlt_today.C_1 = []
+      this.dlt_today.C_2 = []
+      this.dlt_today.C1_1 = []
+      this.dlt_today.C1_2 = []
+      this.dlt_today.C2_1 = []
+      this.dlt_today.C2_2 = []
+      this.dlt_today.D_1 = []
+      this.dlt_today.D_2 = []
+      this.dlt_today.D1_1 = []
+      this.dlt_today.D1_2 = []
+      this.dlt_today.D2_1 = []
+      this.dlt_today.D2_2 = []
+      this.dlt_today.E_1 = []
+      this.dlt_today.E_2 = []
+      this.dlt_today.E1_1 = []
+      this.dlt_today.E1_2 = []
 
- 
+
+
+    },
+    async fetchAppCourse() {
+
+      try {
+        const data = await ApiService.get('/course/coursetotalquest').then(response => {
+
+     this.course = response.data;
+     console.log(this.course);
+        });
+        return true
+      } catch (error) {
+        return false;
+      }
 
     },
 
     async fetchAppPresentToday() {
 
-     
+
       try {
         const data = await ApiService.post('/appointment/dateappointment').then(response => {
 
           for (let i = 0; i < response.data.length; i++) {
-            if (response.data[i].dlt_code == 'A' && response.data[i].type == 1){
+            if (response.data[i].dlt_code == 'A' && response.data[i].type == 1) {
               this.dlt_today.A_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'A' && response.data[i].type == 2){
+            if (response.data[i].dlt_code == 'A' && response.data[i].type == 2) {
               this.dlt_today.A1_2.push(response.data[i])
             }
             if (response.data[i].dlt_code == 'A1' && response.data[i].type == 1) {
@@ -771,8 +786,6 @@ this.dlt_today.E1_2 = []
               this.dlt_today.E1_2.push(response.data[i])
             }
           }
-
-console.log(this.dlt_today);
         });
         return true
       } catch (error) {
@@ -789,7 +802,7 @@ console.log(this.dlt_today);
       this.formselectapp.identification_number = item.identification_number;
       this.formselectapp.user_id = item.user_id;
       this.formselectapp.st_id = item.user_id;
-      console.log(this.formselectapp);
+   
     },
 
     async SaveUserRerv() {
@@ -812,11 +825,11 @@ console.log(this.dlt_today);
     async fetchAppNumber() {
       try {
         const data = await ApiService.post('/appointment/dateappointment/appbyuser', this.searchapp).then(rep => {
-          console.log(rep);
+
           this.dataapp = rep.data;
           this.history_user = rep.data[0].user_id
           this.select_dlt_app = rep.data[0].dlt_code;
-       
+
         });
         return data;
       } catch (error) {
@@ -831,11 +844,12 @@ console.log(this.dlt_today);
           const data = await ApiService.post('/course/learn/history/' + this.history_user, this.formhistory).then(rep => {
 
             let d = rep.data.data;
-          
+
             let hist = d.find(obj => obj.course_code == this.select_dlt_app);
-          
+
             this.history = hist;
-            
+
+
 
           });
           return data;
@@ -847,11 +861,15 @@ console.log(this.dlt_today);
 
 
     async fetchHistoryExam() {
+ 
       if (this.history_user != 0) {
+       
         try {
           const data = await ApiService.get('/exam/history/?course_id=' + this.history.course_id + '&user_id=' + this.history_user).then(reps => {
+          
             this.score = reps.data
-           
+            
+
           });
           return data;
         } catch (error) {
@@ -877,10 +895,10 @@ console.log(this.dlt_today);
 
     async fetchExamScore() {
       this.formscorefull.course_code = this.select_dlt_app
+     
       try {
         const data = await ApiService.post('/exam/main/get/one', this.formscorefull).then(reps => {
           this.totalscore = reps.data[0];
-
         });
         return data;
       } catch (error) {
@@ -891,20 +909,20 @@ console.log(this.dlt_today);
     async fetchResultScore() {
       try {
         const data = await ApiService.get('/main_result/list/?user_id=' + this.history_user).then(reps => {
-      
+
           if (reps.data.length > 0) {
-       
+
             this.dlt_score = reps.data.find((obj => obj.dlt_code == "A1") && (obj => obj.mr_learn_type == 1));
             this.dlt_scoreP = reps.data.find((obj => obj.dlt_code == "A1") && (obj => obj.mr_learn_type == 2));
 
-c
-           
+
+
             if (this.dlt_score) {
               this.status_score = 'update';
               this.formscoreT.score = this.dlt_score.mr_score
               this.formscoreT.mr_status = this.dlt_score.mr_status
               this.status_status = this.dlt_score.mr_status;
-           
+
 
               this.formscoreT.ref_number = this.dlt_score.ref_number;
               this.formscoreT.remark = this.dlt_score.remark;
@@ -937,7 +955,7 @@ c
           if (reps.data.length > 0) {
             this.dlt_score = reps.data
             this.dlt_score = this.dlt_score.find(obj => obj.dlt_code == "A1");
-           
+
             if (this.dlt_score) {
               this.status_score = 'update';
               this.formscore.score = this.dlt_score.mr_score
@@ -968,10 +986,10 @@ c
         this.formresult.user_id_staff = this.user_id;
         this.formresult.ref_number = this.formscoreT.ref_number;
         this.formresult.remark = this.formscoreT.remark;
-      
+
         try {
           const data = await ApiService.put('/main_result/update/' + this.dlt_score.mr_id, this.formresult).then(response => {
-          
+
             if (response.status == 200) {
               return true;
             }
@@ -990,7 +1008,7 @@ c
         this.formresult.user_id_staff = this.user_id;
         this.formresult.ref_number = this.formscoreT.ref_number;
         this.formresult.remark = this.formscoreT.remark;
- 
+
         try {
           const data = await ApiService.post('/main_result/create', this.formresult).then(response => {
             if (response.status == 200) {
@@ -1014,10 +1032,10 @@ c
         this.formresult.user_id_staff = this.user_id;
         this.formresult.ref_number = this.formscoreP.ref_number;
         this.formresult.remark = this.formscoreP.remark;
-      
+
         // try {
         //   const data = await ApiService.put('/main_result/update/' + this.dlt_score.mr_id, this.formresult).then(response => {
-          
+
         //     if (response.status == 200) {
         //       return true;
         //     }
@@ -1037,8 +1055,8 @@ c
         this.formresult.ref_number = this.formscoreP.ref_number;
         this.formresult.remark = this.formscoreP.remark;
 
-      
- 
+
+
         try {
           const data = await ApiService.post('/main_result/create', this.formresult).then(response => {
             if (response.status == 200) {
@@ -1055,12 +1073,12 @@ c
 
 
     async CancelAppointment() {
-     this.searchapp.remark = this.remark;
-     console.log(this.searchapp);
+      this.searchapp.remark = this.remark;
+      console.log(this.searchapp);
       try {
-        const data = await ApiService.post('/appointment/cancelapp',this.searchapp).then(reps => {
-   
-    this.remark = "";
+        const data = await ApiService.post('/appointment/cancelapp', this.searchapp).then(reps => {
+
+          this.remark = "";
         });
         return data;
       } catch (error) {
@@ -1069,10 +1087,10 @@ c
     },
     async UpdateStatusApp() {
 
-this.formver.remarkcheck = this.veggies;
-console.log(this.formver);
-     },
- 
+      this.formver.remarkcheck = this.veggies;
+      console.log(this.formver);
+    },
+
 
 
 

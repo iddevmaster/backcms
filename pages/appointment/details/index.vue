@@ -31,6 +31,7 @@ if(apnumber){
   store.searchapp.ap_number = apnumber;
  await store.fetchAppNumber();
  await store.fetchHistoryCourse();
+
  if(store.history){
   await store.fetchHistoryExam();
   await store.fetchExamScore();

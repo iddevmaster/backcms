@@ -58,7 +58,14 @@
                             class="img-uploader-content"
                             style="padding: 5px"
                           >
-                            <img
+                            <img v-if="store.dataapp[0].user_img"
+                                :src="coverimage(store.dataapp[0].user_img)"
+                              alt="avatar"
+                              class="img-fluid"
+                              width="200"
+                              height="200"
+                            />
+                            <img v-else
                               src="../../assets/images/person-avatar.jpg"
                               alt="avatar"
                               class="img-fluid"
@@ -475,7 +482,7 @@
                   {{ store.history.progress }}%
                 </label>
               </div>
-              <div class="form-group row" v-if="store.score">
+              <div class="form-group row" v-if="store.score.length > 0">
                 <label
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm"
@@ -752,7 +759,7 @@
               class="common__login__input form-control"
               type="text"
               maxlength="50"
-               v-model="store.formver.division"
+               v-model="store.formver.division" disabled
             />
           </label>
         </div>
