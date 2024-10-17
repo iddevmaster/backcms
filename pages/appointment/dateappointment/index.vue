@@ -54,19 +54,14 @@ const GotoDetails = async (item) => {
 };
 
 const CheckTotalque = (item) => {
+  let total = store.course.find((obj) => obj.course_code == item.dlt_code);
 
-
-
-let total = store.course.find(obj => obj.course_code == item.dlt_code);
-
-if(total){
-  return total.total_quest
-}else {
-  return '-';
-}
- 
+  if (total) {
+    return total.total_quest;
+  } else {
+    return "-";
+  }
 };
-
 
 function coverimage(i) {
   let result = i.slice(0, 6);
@@ -146,13 +141,15 @@ function coverimage(i) {
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
-                          <img v-if="item1.user_img"
+                          <img
+                            v-if="item1.user_img"
                             :src="coverimage(item1.user_img)"
                             class="card-img-top"
                             alt="..."
                             style="width: 200px"
                           />
-                          <img v-else
+                          <img
+                            v-else
                             src="../.././../public/img/logo.svg"
                             class="card-img-top"
                             alt="..."
@@ -189,7 +186,10 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item1.pratic"
                                 >
-                                  ຜົນປະຕິບັດ: <span style="color: green">{{ item1.pratic }} /100</span>
+                                  ຜົນປະຕິບັດ:
+                                  <span style="color: green"
+                                    >{{ item1.pratic }} /100</span
+                                  >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
                                   ຜົນປະຕິບັດ: -
@@ -241,13 +241,15 @@ function coverimage(i) {
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
-                          <img v-if="item.user_img"
+                          <img
+                            v-if="item.user_img"
                             :src="coverimage(item.user_img)"
                             class="card-img-top"
                             alt="..."
                             style="width: 200px"
                           />
-                          <img v-else
+                          <img
+                            v-else
                             src="../.././../public/img/logo.svg"
                             class="card-img-top"
                             alt="..."
@@ -272,7 +274,8 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ: {{ item.thero }} /  {{CheckTotalque(item)}}
+                                  ຜົນທິດສະດີ: {{ item.thero }} /
+                                  {{ CheckTotalque(item) }}
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
                                   ຜົນທິດສະດີ: -
@@ -330,25 +333,26 @@ function coverimage(i) {
                     v-for="(item, index) in store.dlt_today.A1_1"
                     :key="item"
                   >
-              
                     <div class="row" @click="GotoDetails(item)">
                       <div
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
-                          <img v-if="item.user_img"
+                          <img
+                            v-if="item.user_img"
                             :src="coverimage(item.user_img)"
                             class="card-img-top"
                             alt="..."
                             style="width: 200px"
                           />
-                          <img v-else
+                          <img
+                            v-else
                             src="../.././../public/img/logo.svg"
                             class="card-img-top"
                             alt="..."
                             style="width: 200px"
                           />
-                      
+
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
                               ID ນັດໝາຍ: {{ item.ap_number }}
@@ -359,7 +363,86 @@ function coverimage(i) {
                               {{ item.user_lastname }}
                             </h5>
                             <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
+                        
+                            <div v-if="item.app_status == 'C'">
+                              <p
+                                class="card-category mb-2"
+                                v-if="item.app_status == 'C'"
+                                style="color: red"
+                              >
+                                ສະຖານະ: Canceled
+                              </p>
+                            </div>
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == null
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document == '' ||
+                                    item.check_document == null) &&
+                                  item.app_status == 'Y'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending check document
+                              </p>
+                            </div>
+
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == 'pass'
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document != '' ||
+                                    item.check_document != null) &&
+                                  item.mr_status_t == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Theory Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t != null &&
+                                  item.mr_status_p == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Practical Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'fail' &&
+                                  item.mr_status_p == 'fail'
+                                "
+                                style="color: red"
+                              >
+                                ສະຖານະ: Failed Exam
+                              </p>
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'pass' &&
+                                  item.mr_status_p == 'pass'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Practical Exam
+                              </p>
+                            </div>
+
                             <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
 
                             <div class="media mt-4 mb-0">
@@ -368,9 +451,23 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ: 
-                                  <span style="color: red;" v-if="item.mr_status_t == 'fail'">  {{ item.thero }}/{{CheckTotalque(item)}}</span>
-                                  <span style="color: green;"  v-if="item.mr_status_t == 'pass'">  {{ item.thero }}/{{CheckTotalque(item)}}</span>
+                                  ຜົນທິດສະດີ:
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_t == 'fail'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_t == 'pass'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
                                   ຜົນທິດສະດີ: -
@@ -382,9 +479,19 @@ function coverimage(i) {
                                   v-if="item.pratic"
                                 >
                                   ຜົນປະຕິບັດ:
-                            
-                                <span style="color: red;" v-if="item.mr_status_p == 'fail'">  {{ item.pratic }}</span>
-                                <span style="color: green;"  v-if="item.mr_status_p == 'pass'">  {{ item.pratic }}</span>
+
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_p == 'fail'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_p == 'pass'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
                                   ຜົນປະຕິບັດ: -
@@ -436,13 +543,15 @@ function coverimage(i) {
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
-                          <img v-if="item.user_img"
+                          <img
+                            v-if="item.user_img"
                             :src="coverimage(item.user_img)"
                             class="card-img-top"
                             alt="..."
                             style="width: 200px"
                           />
-                          <img v-else
+                          <img
+                            v-else
                             src="../.././../public/img/logo.svg"
                             class="card-img-top"
                             alt="..."
@@ -467,9 +576,23 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ: 
-                                  <span style="color: red;" v-if="item.mr_status_t == 'fail'">  {{ item.thero }}/{{CheckTotalque(item)}}</span>
-                                  <span style="color: green;"  v-if="item.mr_status_t == 'pass'">  {{ item.thero }}/{{CheckTotalque(item)}}</span>
+                                  ຜົນທິດສະດີ:
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_t == 'fail'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_t == 'pass'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
                                   ຜົນທິດສະດີ: -
@@ -481,9 +604,19 @@ function coverimage(i) {
                                   v-if="item.pratic"
                                 >
                                   ຜົນປະຕິບັດ:
-                            
-                                <span style="color: red;" v-if="item.mr_status_p == 'fail'">  {{ item.pratic }}</span>
-                                <span style="color: green;"  v-if="item.mr_status_p == 'pass'">  {{ item.pratic }}</span>
+
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_p == 'fail'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_p == 'pass'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
                                   ຜົນປະຕິບັດ: -
@@ -535,13 +668,15 @@ function coverimage(i) {
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
-                          <img v-if="item.user_img"
+                          <img
+                            v-if="item.user_img"
                             :src="coverimage(item.user_img)"
                             class="card-img-top"
                             alt="..."
                             style="width: 200px"
                           />
-                          <img v-else
+                          <img
+                            v-else
                             src="../.././../public/img/logo.svg"
                             class="card-img-top"
                             alt="..."
@@ -566,9 +701,23 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ: 
-                                  <span style="color: red;" v-if="item.mr_status_t == 'fail'">  {{ item.thero }}/{{CheckTotalque(item)}}</span>
-                                  <span style="color: green;"  v-if="item.mr_status_t == 'pass'">  {{ item.thero }}/{{CheckTotalque(item)}}</span>
+                                  ຜົນທິດສະດີ:
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_t == 'fail'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_t == 'pass'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
                                   ຜົນທິດສະດີ: -
@@ -580,9 +729,19 @@ function coverimage(i) {
                                   v-if="item.pratic"
                                 >
                                   ຜົນປະຕິບັດ:
-                            
-                                <span style="color: red;" v-if="item.mr_status_p == 'fail'">  {{ item.pratic }}</span>
-                                <span style="color: green;"  v-if="item.mr_status_p == 'pass'">  {{ item.pratic }}</span>
+
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_p == 'fail'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_p == 'pass'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
                                   ຜົນປະຕິບັດ: -
@@ -659,9 +818,23 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ: 
-                                  <span style="color: red;" v-if="item.mr_status_t == 'fail'">  {{ item.thero }}/{{CheckTotalque(item)}}</span>
-                                  <span style="color: green;"  v-if="item.mr_status_t == 'pass'">  {{ item.thero }}/{{CheckTotalque(item)}}</span>
+                                  ຜົນທິດສະດີ:
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_t == 'fail'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_t == 'pass'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
                                   ຜົນທິດສະດີ: -
@@ -673,9 +846,19 @@ function coverimage(i) {
                                   v-if="item.pratic"
                                 >
                                   ຜົນປະຕິບັດ:
-                            
-                                <span style="color: red;" v-if="item.mr_status_p == 'fail'">  {{ item.pratic }}</span>
-                                <span style="color: green;"  v-if="item.mr_status_p == 'pass'">  {{ item.pratic }}</span>
+
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_p == 'fail'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_p == 'pass'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
                                   ຜົນປະຕິບັດ: -
@@ -727,13 +910,15 @@ function coverimage(i) {
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
-                          <img v-if="item.user_img"
+                          <img
+                            v-if="item.user_img"
                             :src="coverimage(item.user_img)"
                             class="card-img-top"
                             alt="..."
                             style="width: 200px"
                           />
-                          <img v-else
+                          <img
+                            v-else
                             src="../.././../public/img/logo.svg"
                             class="card-img-top"
                             alt="..."
@@ -757,9 +942,23 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ: 
-                                  <span style="color: red;" v-if="item.mr_status_t == 'fail'">  {{ item.thero }}/{{CheckTotalque(item)}}</span>
-                                  <span style="color: green;"  v-if="item.mr_status_t == 'pass'">  {{ item.thero }}/{{CheckTotalque(item)}}</span>
+                                  ຜົນທິດສະດີ:
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_t == 'fail'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_t == 'pass'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
                                   ຜົນທິດສະດີ: -
@@ -771,9 +970,19 @@ function coverimage(i) {
                                   v-if="item.pratic"
                                 >
                                   ຜົນປະຕິບັດ:
-                            
-                                <span style="color: red;" v-if="item.mr_status_p == 'fail'">  {{ item.pratic }}</span>
-                                <span style="color: green;"  v-if="item.mr_status_p == 'pass'">  {{ item.pratic }}</span>
+
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_p == 'fail'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_p == 'pass'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
                                   ຜົນປະຕິບັດ: -
@@ -825,7 +1034,8 @@ function coverimage(i) {
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
-                          <img v-if="item.user_img"
+                          <img
+                            v-if="item.user_img"
                             :src="coverimage(item.user_img)"
                             class="card-img-top"
                             alt="..."
@@ -856,9 +1066,23 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ: 
-                                  <span style="color: red;" v-if="item.mr_status_t == 'fail'">  {{ item.thero }}/{{CheckTotalque(item)}}</span>
-                                  <span style="color: green;"  v-if="item.mr_status_t == 'pass'">  {{ item.thero }}/{{CheckTotalque(item)}}</span>
+                                  ຜົນທິດສະດີ:
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_t == 'fail'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_t == 'pass'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
                                   ຜົນທິດສະດີ: -
@@ -870,9 +1094,19 @@ function coverimage(i) {
                                   v-if="item.pratic"
                                 >
                                   ຜົນປະຕິບັດ:
-                            
-                                <span style="color: red;" v-if="item.mr_status_p == 'fail'">  {{ item.pratic }}</span>
-                                <span style="color: green;"  v-if="item.mr_status_p == 'pass'">  {{ item.pratic }}</span>
+
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_p == 'fail'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_p == 'pass'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
                                   ຜົນປະຕິບັດ: -
@@ -924,7 +1158,8 @@ function coverimage(i) {
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
-                          <img v-if="item.user_img"
+                          <img
+                            v-if="item.user_img"
                             :src="coverimage(item.user_img)"
                             class="card-img-top"
                             alt="..."

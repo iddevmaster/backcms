@@ -827,13 +827,17 @@ export const AppointStore = defineStore('appoint', {
         const data = await ApiService.post('/appointment/dateappointment/appbyuser', this.searchapp).then(rep => {
 
           this.dataapp = rep.data;
+       
           this.history_user = rep.data[0].user_id
           this.select_dlt_app = rep.data[0].dlt_code;
+          if(JSON.parse(this.dataapp[0].remark_verify)){
+            this.veggies = JSON.parse(this.dataapp[0].remark_verify)
+          }
 
         });
         return data;
       } catch (error) {
-        return 502;
+        return false;
       }
 
 
