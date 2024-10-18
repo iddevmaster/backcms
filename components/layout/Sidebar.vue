@@ -448,6 +448,9 @@
              <li>
               <nuxt-link to="/appointment/user">{{ $t("menu_app_view_by_user") }}</nuxt-link>
             </li>
+            <li>
+              <nuxt-link to="/appointment/today">ເບິ່ງນັດໝາຍ ປະຈຳວັນ</nuxt-link>
+            </li>
           </ul>
         </li>
 
