@@ -71,29 +71,27 @@
           <td>{{ item.ap_number }}</td>
           <td>{{ item.user_firstname }} {{ item.user_lastname }}</td>
           <td>{{ item.check_document }}</td>
-          <td>{{ item.thero }}</td>
-          <td>{{ item.pratic }}</td>
-          <td>{{ item.pratic }}</td>
-          <!-- <td> {{item.user_reserve.user_prefrix}} {{ item.user_reserve.user_firstname }} {{ item.user_reserve.user_lastname }}
-          </td>
-          <td>{{ item.user_reserve.user_phone }}</td>
-          <td>{{ item.user_reserve.identification_number }}</td>
-          <td>{{ item.user_reserve.user_email }}</td>
+          <td  v-if="item.pratic">{{ item.thero }}</td>
+          <td v-else> - </td>
+          <td v-if="item.pratic">{{ item.pratic }} / 100</td>
+          <td v-else> - </td>
           <td>
-            <button
-              type="button"
-              class="btn btn-success mt-0"
-              style="background-color: #ce0000"
-              @click="del(item)"
-            >
-              <i class="bi bi-trash"></i>
-            </button>
-          </td> -->
+            
+            <a class="badge badge-light-primary text-start me-2 action-view" @click="viewApp(item)" >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z"    /></svg    ></a>
+  
+
+     
+        </td>
         </tr>
       </tbody>
     </table>
-
-    <div></div>
   </div>
   
 </template>
@@ -137,6 +135,13 @@ const format = (time) => {
 
 
 
+const viewApp = async (item) => {
+  store.searchapp.ap_number = item.ap_number;
+
+  localStorage.setItem("ap_number", item.ap_number);
+  await router.push("/appointment/details");
+};
+
 function coverttime(date) {
   const datetime = new Date(date);
   const options = {
@@ -147,8 +152,8 @@ function coverttime(date) {
     minute: "numeric",
     second: "numeric",
   };
-  const formattedDatetime = datetime.toLocaleString(undefined, options);
 
+  const formattedDatetime = datetime.toLocaleString(undefined, options);
   return formattedDatetime;
 }
 

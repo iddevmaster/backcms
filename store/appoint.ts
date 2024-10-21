@@ -709,9 +709,7 @@ export const AppointStore = defineStore('appoint', {
 
       try {
         const data = await ApiService.post('/appointment/dateappointment').then(response => {
-
 this.dlttoday = response.data
-console.log(this.dlttoday);
           for (let i = 0; i < response.data.length; i++) {
             if (response.data[i].dlt_code == 'A' && response.data[i].type == 1) {
               this.dlt_today.A_1.push(response.data[i])
