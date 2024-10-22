@@ -186,6 +186,7 @@ function coverimage(i) {
                                 </h4>
                               </div>
                               <div class="media-body">
+                                
                                 <h4
                                   class="media-heading mb-1"
                                   v-if="item1.pratic"
@@ -494,7 +495,7 @@ function coverimage(i) {
                                     style="color: green"
                                     v-if="item.mr_status_p == 'pass'"
                                   >
-                                    {{ item.pratic }}</span
+                                    {{ item.pratic }}/100</span
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
@@ -619,7 +620,7 @@ function coverimage(i) {
                                     style="color: green"
                                     v-if="item.mr_status_p == 'pass'"
                                   >
-                                    {{ item.pratic }}</span
+                                  {{ item.pratic }}/100</span
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
@@ -744,7 +745,7 @@ function coverimage(i) {
                                     style="color: green"
                                     v-if="item.mr_status_p == 'pass'"
                                   >
-                                    {{ item.pratic }}</span
+                                  {{ item.pratic }}/100</span
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
