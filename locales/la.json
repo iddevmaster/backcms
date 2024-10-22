@@ -675,6 +675,15 @@
 "Previous_comment":"ຄຳເຫັນຄັ້ງກ່ອນ",
 "Approval":"ການອະນຸມັດ",
 "user_details_people":"ລາຍລະອຽດ ຜູ້ໃຊ້ (ປະຊາຊົນ) ສົ່ງເຂົ້າມາ",
+
+
+"status_exam_driv_can":"ຍົກເລີກ",
+"status_exam_driv_pri":"ພິມບັດແລ້ວ",
+"status_exam_driv_pass":"ເສັງຜ່ານ",
+"status_exam_driv_fail":"ເສັງບໍ່ຜ່ານ",
+"status_exam_driv_pen_p":"ລໍຖ້າເສັງປະຕິບັດ",
+"status_exam_driv_pen_t":"ລໍຖ້າເສັງທິດສະດີ",
+"status_exam_driv_pen_check":"ລໍຖ້າກວດເອກະສານ",
   "" : ""
 
   

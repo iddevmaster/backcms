@@ -810,7 +810,7 @@ this.dlttoday = response.data
 
     async SaveUserRerv() {
 
-      this.formselectapp.ap_id = 238;
+      this.formselectapp.ap_id = 242;
       try {
         const data = await ApiService.post('/appointment/reserve/new/create', this.formselectapp).then(x => {
 
@@ -906,6 +906,7 @@ this.dlttoday = response.data
       try {
         const data = await ApiService.post('/exam/main/get/one', this.formscorefull).then(reps => {
           this.totalscore = reps.data[0];
+        
         });
         return data;
       } catch (error) {
@@ -945,6 +946,8 @@ this.dlttoday = response.data
               this.formscoreP.remark = this.dlt_scoreP.remark;
             }
           } else {
+            this.formscoreP.mr_status = ""
+            this.formscoreT.mr_status = ""
             this.status_score = 'create';
             this.status_scoreP = 'create';
           }
@@ -1029,7 +1032,35 @@ this.dlttoday = response.data
       }
     },
 
+    
+    async fetchdivi() {
+ 
+console.log(this.dataapp[0]);
 
+if(this.dataapp[0].st_id == null){
+  this.formdiv = {'ap_id':this.dataapp[0].ap_id,'stat':'new'};
+}
+
+if(this.dataapp[0].st_id != null){
+  this.formdiv = {'ap_id':this.dataapp[0].ap_id,'stat':'same'};
+}
+
+
+      try {
+        const data = await ApiService.post('/appointment/dateappointment/divso', this.formdiv).then(response => {
+       if(response.data == 0){
+        this.formver.division = this.dataapp[0].st_id
+       }else {
+        this.formver.division = response.data
+       }
+
+        });
+   
+      } catch (error) {
+        return false
+      }
+
+    },
     async SaveResultScorePra() {
       if (this.status_scoreP == 'update') {
         this.formresult.mr_score = parseInt(this.formscoreP.score);

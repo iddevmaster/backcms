@@ -673,6 +673,18 @@
 
 "user_details_people":"User details Approval",
 
+
+"status_exam_driv_can":"Canceled",
+"status_exam_driv_pri":"Printed Card",
+"status_exam_driv_pass":"Passed Exam",
+"status_exam_driv_fail":"Failed Exam",
+"status_exam_driv_pen_p":"Pending Practical Exam",
+"status_exam_driv_pen_t":"Pending Theory Exam",
+"status_exam_driv_pen_check":"Pending check document",
+
+
+
+
   "" : ""
 
 }

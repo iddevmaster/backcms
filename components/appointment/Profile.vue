@@ -459,17 +459,124 @@
               <div class="form-group row">
                 <label
                   for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm"
+                  class="col-sm-12 col-form-label col-form-label-sm" v-if="store.dataapp[0].id_card"
                 >
-                  ບໍ່ມີ
+                   {{ store.dataapp[0].id_card }}
+                </label>
+
+                <label
+                  for="company-name"
+                  class="col-sm-12 col-form-label col-form-label-sm" v-else
+                >
+                  ບໍ່ມີ 
                 </label>
               </div>
               <div class="form-group row">
                 <label
                   for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm"
+                  class="col-sm-12 col-form-label col-form-label-sm" 
                 >
-                  ເສັງຜ່ານ
+                  
+                
+                 
+                  <div v-if="store.dataapp[0].app_status == 'C'">
+                    {{ $t("status_exam_driv_can") }} 
+                  </div>
+
+
+<div
+                              v-if="
+                                store.dataapp[0].app_status == 'Y' &&
+                                store.dataapp[0].check_document == null
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (store.dataapp[0].check_document == '' ||
+                                  store.dataapp[0].check_document == null) &&
+                                  store.dataapp[0].app_status == 'Y'
+                                "
+                                style="color: green"
+                              >
+                              {{ $t("status_exam_driv_pen_check") }} 
+                              </p>
+                            </div>
+
+
+
+                            <div
+                              v-if="
+                                store.dataapp[0].app_status == 'Y' &&
+                                store.dataapp[0].check_document == 'pass'
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (store.dataapp[0].check_document != '' ||
+                                  store.dataapp[0].check_document != null) &&
+                                  store.formscoreT.mr_status == '' && store.formscoreP.mr_status == ''
+                                "
+                                style="color: green"
+                              >
+                              {{ $t("status_exam_driv_pen_t") }} 
+
+                       
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (store.dataapp[0].check_document != '' ||
+                                  store.dataapp[0].check_document != null) &&
+                                  store.formscoreP.mr_status == '' && store.formscoreT.mr_status != ''
+                                "
+                                style="color: green"
+                              >
+                              {{ $t("status_exam_driv_pen_p") }} 
+
+                       
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  store.formscoreT.mr_status != null &&
+                                  store.formscoreP.mr_status == null
+                                "
+                                style="color: green"
+                              >
+                              {{ $t("status_exam_driv_pen_t") }} 
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  store.formscoreT.mr_status == 'fail' ||
+                                  store.formscoreP.mr_status == 'fail'
+                                "
+                                style="color: red"
+                              >
+                              {{ $t("status_exam_driv_fail") }} 
+                              </p>
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  store.formscoreT.mr_status == 'pass' &&
+                                  store.formscoreP.mr_status == 'pass'
+                                "
+                                style="color: green"
+                              >
+
+                
+                               {{ $t("status_exam_driv_pass") }} 
+                              </p>
+                   
+                       
+                            </div>
+
+
                 </label>
               </div>
 
@@ -480,6 +587,15 @@
                 >
                  
                   {{ store.history.progress }}%
+                </label>
+              </div>
+              <div class="form-group row" v-else>
+                <label
+                  for="company-name"
+                  class="col-sm-12 col-form-label col-form-label-sm" 
+                >
+                 
+                0%
                 </label>
               </div>
               <div class="form-group row" v-if="store.score.length > 0">
@@ -504,7 +620,7 @@
             <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-6">
               <label
                 for="company-name"
-                class="col-sm-12 col-form-label col-form-label-sm"
+                class="col-sm-12 col-form-label col-form-label-sm" 
               >
                 ລຳດັບສອບເສັງ :</label
               >
@@ -512,9 +628,16 @@
             <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
               <label
                 for="company-name"
-                class="col-sm-12 col-form-label col-form-label-sm"
+                class="col-sm-12 col-form-label col-form-label-sm"  v-if="store.dataapp[0].st_id"
               >
-                1</label
+                {{store.dataapp[0].st_id}}</label
+              >
+
+              <label
+                for="company-name"
+                class="col-sm-12 col-form-label col-form-label-sm" v-else
+              >
+                -</label
               >
             </div>
             <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3"   v-if="store.dataapp[0].app_status == 'Y'">
@@ -1108,6 +1231,7 @@ const ModalC = async () => {
 
 
 const Modaldiv = async () => {
+  await store.fetchdivi();
   store.verify = true;
   store.ScoreReqTh = false
 
@@ -1223,10 +1347,8 @@ const CancelApp = async () => {
 const UpdateStatus = async () => {
   store.verify = false;
   let ver = await store.UpdateStatusApp();
+  await store.fetchAppNumber();
 }
-
-
-
 
 </script>
 

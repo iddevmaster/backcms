@@ -367,7 +367,9 @@ function coverimage(i) {
                               {{ item.user_prefrix }} {{ item.user_firstname }}
                               {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+                          
+                            <p class="card-category mb-2" v-if="item.id_card">ID ນັກຮຽນ: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>ID ນັກຮຽນ: ບໍ່ມີ</p>
                         
                             <div v-if="item.app_status == 'C'">
                               <p
@@ -448,7 +450,8 @@ function coverimage(i) {
                               </p>
                             </div>
 
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+                            <p class="card-category mb-2" v-if="item.st_id">ລຳດັບສອບເສັງ: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>ລຳດັບສອບເສັງ: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -745,7 +748,7 @@ function coverimage(i) {
                                     style="color: green"
                                     v-if="item.mr_status_p == 'pass'"
                                   >
-                                  {{ item.pratic }}/100</span
+                                    {{ item.pratic }}/100</span
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
