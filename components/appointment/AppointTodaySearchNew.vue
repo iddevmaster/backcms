@@ -12,6 +12,7 @@
                       :format="format"
                v-model="store.formsearchapptoday.ap_date_start"
                       :placeholder="$t('exp_update_acc_pehol')"
+                      
                     ></VueDatePicker>
   </div>
 
@@ -20,7 +21,7 @@
 
     <div class="col-lg-4 col-md-12 col-sm-12">
       <div class="form-group">
-        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light">Search</button>
+        <button class="btn btn-primary additem _effect--ripple waves-effect waves-light" @click="Fitterday">Search</button>
   </div>
 
    
@@ -45,7 +46,7 @@
             <!-- <input type="checkbox"  v-model="store.isAllSelected" @click="selectAll"> -->
           </th>
           <th @click="sortList('user_firstname')">
-           ช่วงเวลา &#8597;
+            ຊ່ອງເວລາ &#8597;
           </th>
           <!-- <th @click="sortList('user_name')">ยูสเซอร &#8597;</th> -->
           <!-- <th @click="sortList('user_email')">อีเมล &#8597;</th> -->
@@ -66,7 +67,8 @@
         
         <tr v-for="(item, index) in store.dlttoday">
           <td>{{ index + 1 }}</td>
-          <td>{{ item.type }}</td>
+          <td v-if="item.type == '1'">08.00</td>
+          <td v-else>16.00</td>
           <td>{{ item.dlt_code }}</td>
           <td>{{ item.ap_number }}</td>
           <td>{{ item.user_firstname }} {{ item.user_lastname }}</td>
@@ -141,6 +143,12 @@ const viewApp = async (item) => {
   localStorage.setItem("ap_number", item.ap_number);
   await router.push("/appointment/details");
 };
+
+const Fitterday = async () => {
+store.formsearchapptoday.ap_date_start = moment(store.formsearchapptoday.ap_date_start).tz('Asia/Bangkok').format('YYYY-MM-DD');
+await store.fetchAppPresentToday();
+};
+
 
 function coverttime(date) {
   const datetime = new Date(date);

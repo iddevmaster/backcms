@@ -24,6 +24,10 @@ const auth = useAuthStore();
 const router = useRouter();
 store.user_id = auth.user_id;
 
+const today = new Date();
+const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+store.formsearchapptoday.ap_date_start = date;
+
 await store.fetchAppPresentTodayReset();
 await store.fetchAppPresentToday();
 await store.fetchAppCourse();

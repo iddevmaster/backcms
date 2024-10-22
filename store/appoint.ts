@@ -705,10 +705,8 @@ export const AppointStore = defineStore('appoint', {
     },
 
     async fetchAppPresentToday() {
-
-
       try {
-        const data = await ApiService.post('/appointment/dateappointment').then(response => {
+        const data = await ApiService.post('/appointment/dateappointment',this.formsearchapptoday).then(response => {
 this.dlttoday = response.data
           for (let i = 0; i < response.data.length; i++) {
             if (response.data[i].dlt_code == 'A' && response.data[i].type == 1) {
