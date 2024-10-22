@@ -74,7 +74,7 @@
 
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 pt-3">
       <label for="exampleFormControlInput1">ID ນັກຮຽນ (ໃນລະບົບເກົ່າ, ສຳລັບປະເພດ B ຂື້ນໄປ ຕ້ອງໄດ້ຜ່ານໂຮງຮຽນ)</label>
-      <input type="text" class="form-control" id="inputEmail3" placeholder="ຕຢ: KH0012"  maxlength="20" 
+      <input type="text" class="form-control" id="inputEmail3" placeholder="ຕຢ: KH0012"  maxlength="20"  v-model="store.formselectapp.id_card"
        >
     </div>
 

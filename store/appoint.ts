@@ -140,7 +140,8 @@ export const AppointStore = defineStore('appoint', {
       user_full_name: "",
       identification_number: null,
       ap_id: null,
-      st_id: ""
+      st_id: "",
+      id_card:""
     },
     searchapp: {
       ap_number: null
@@ -803,7 +804,7 @@ this.dlttoday = response.data
       this.formselectapp.user_full_name = item.user_full_name;
       this.formselectapp.identification_number = item.identification_number;
       this.formselectapp.user_id = item.user_id;
-      this.formselectapp.st_id = item.user_id;
+     
    
     },
 
