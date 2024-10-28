@@ -338,10 +338,11 @@
           <div class="col-12 col-sm-12 col-lg-5 col-xl-5"></div>
 
           <div class="row m-1">
+            {{ storedlt.formdlt_new }}
             <div class="col-12 col-sm-12 col-md-12">
               <div class="form-group">
                 <label for="exampleInputEmail1">ຈຸດປະສົ່ງການເພິ່ມ:</label>
-                <select class="form-control">
+                <select class="form-control" v-model="storedlt.formdlt_new.type">
         <option value="new">{{ $t("pass_card") }}</option>
         <option value="renew">{{ $t("renew_card") }}</option>
         <option value="old">{{ $t("old_card") }}</option>
@@ -359,7 +360,15 @@
                   aria-describedby="emailHelp"
                   placeholder="A83M100"
                   disabled
+                  v-model="storedlt.formdlt_new.ap_number"
                 />
+                <span
+                          v-if="v$.ap_number.$error"
+                          class="text-xs text-red-500"
+                          style="color: red"
+                        >
+                        ນັດໝາຍ</span
+                        >
               </div>
             </div>
 
@@ -372,7 +381,17 @@
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="ຕົວຢ່າງ: ຂສ 0012345"
+
+
+                   v-model="storedlt.formdlt_new.number_licen"
                 />
+                <span
+                          v-if="v$.number_licen.$error"
+                          class="text-xs text-red-500"
+                          style="color: red"
+                        >
+                        ເລກທີ</span
+                        >
               </div>
             </div>
 
@@ -385,7 +404,17 @@
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="ຕົວຢ່າງ: ທ້າວ ກກກກກກ ຂຂຂຂຂຂຂ"
+
+                     v-model="storedlt.formdlt_new.address_lic"
                 />
+
+                <span
+                          v-if="v$.address_lic.$error"
+                          class="text-xs text-red-500"
+                          style="color: red"
+                        >
+                        ອອກຊື່</span
+                        >
               </div>
             </div>
 
@@ -394,6 +423,13 @@
                 <label for="exampleInputEmail1">ວັນທີອອກບັດ:</label>
                 <VueDatePicker v-model="storedlt.formdlt_new.ap_date_start" :format="format_start"  :disabled-dates="isDateDisabled" required ></VueDatePicker>
               </div>
+              <span
+                          v-if="v$.ap_date_start.$error"
+                          class="text-xs text-red-500"
+                          style="color: red"
+                        >
+                        ວັນທີອອກບັດ</span
+                        >
             </div>
 
             <div class="col-12 col-sm-12 col-md-12 pt-2">
@@ -401,6 +437,13 @@
                 <label for="exampleInputEmail1">ວັນທີໝົດອາຍຸ:</label>
                 <VueDatePicker v-model="storedlt.formdlt_new.ap_date_end" :format="format_end"  :disabled-dates="isDateDisabledEnd" required></VueDatePicker>
               </div>
+              <span
+                          v-if="v$.ap_date_end.$error"
+                          class="text-xs text-red-500"
+                          style="color: red"
+                        >
+                        ວັນທີໝົດອາຍຸ</span
+                        >
             </div>
 
 
@@ -458,12 +501,20 @@
                   </div>
             
               </div>
+
+              <span
+                          v-if="v$.image_dlt.$error"
+                          class="text-xs text-red-500"
+                          style="color: red"
+                        >
+                          Update Image Licen</span
+                        >
             </div>
 
             <div class="col-12 col-sm-12 col-md-12 pt-2">
               <div class="form-group">
                 <div class="col-sm-12">
-                  <button     style="width: 100%;"
+                  <button     style="width: 100%;" @click="Save()"
                             class="changeImg btn btn-primary"
                           
                           >
@@ -529,11 +580,62 @@ const router = useRouter();
 const auth = useAuthStore();
 
 const fileInputFont = ref(null);
+
+const { SaveDLT } = storeToRefs(storedlt);
 onMounted(() => {
   if (process.client) {
     fileInputFont.value.addEventListener("change", changeFileFont);
 
   }
+});
+
+const rules = computed(() => {
+  return {
+    image_dlt: {
+      required: helpers.withMessage(
+        "The Course Code field is required",
+        required
+      ),
+      minLength: minLength(1),
+    },
+    address_lic: {
+      required: helpers.withMessage(
+        "The Course Code field is required",
+        required
+      ),
+      minLength: minLength(1),
+    },
+    number_licen: {
+      required: helpers.withMessage(
+        "The Course Code field is required",
+        required
+      ),
+      minLength: minLength(1),
+    },
+    ap_date_start: {
+      required: helpers.withMessage(
+        "The Course Code field is required",
+        required
+      ),
+      minLength: minLength(1),
+    },
+    ap_date_end: {
+      required: helpers.withMessage(
+        "The Course Code field is required",
+        required
+      ),
+      minLength: minLength(1),
+    },
+    ap_number: {
+      required: helpers.withMessage(
+        "The Course Code field is required",
+        required
+      ),
+      minLength: minLength(1),
+    },
+    
+
+  };
 });
 
 store.formlog.user_admin = auth.user_id;
@@ -549,6 +651,8 @@ const changeFont = () => {
   // Trigger a click event on the file input element
   fileInputFont.value.click();
 };
+
+
 
 
 const changeFileFont = async (event) => {
@@ -578,18 +682,25 @@ return false;
 const Hide = async () => {
   store.ModalApp = false;
 };
+const v$ = useVuelidate(rules, SaveDLT);
 const Save = async () => {
-  store.formlog.des = "Approve";
-  await store.UpdatePeddingByOneComment();
-  await store.UpdateLogDataInsert();
-  store.ModalApp = false;
-  toast.success("ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ");
-  if (user_type.value == "1") {
-    await router.push("/users/approve");
+
+  v$.value.$validate();
+  if (!v$.value.$error) {
+
+    Swal.fire({
+    allowEscapeKey: false,
+    allowOutsideClick: false,
+    didOpen: () => {
+      Swal.showLoading()
+    },
+    
+  });
+  
+  
+
   }
-  if (user_type.value == "2") {
-    await router.push("/users/approvestaff");
-  }
+ 
 };
 
 const Reback = async () => {

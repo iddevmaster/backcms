@@ -54,6 +54,10 @@ export const DltStore = defineStore('dlt', {
       ap_date_start:null,
       ap_date_end:null,
       image_dlt:null,
+      number_licen:null,
+      address_lic:null,
+      ap_number:null,
+      type:"new",
     },
     user_create:null,
     dtlall: [],
@@ -453,6 +457,12 @@ this.formadddtl.expiry_date = "";
     
   
     
+       },
+
+
+       async SaveDLT() {
+        console.log('save');
+
        },
 
 

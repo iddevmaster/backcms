@@ -32,7 +32,7 @@ const store = ExamquestionStore();
 const toast = useToast();
 const router = useRouter();
 
-const { FormExamq } = storeToRefs(store);
+const { SaveDLT } = storeToRefs(store);
 
 // fetchdata();
 
