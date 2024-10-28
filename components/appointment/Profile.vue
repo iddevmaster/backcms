@@ -753,7 +753,7 @@
           <div class="row" v-if="store.dataapp[0].app_status == 'Y'">
             <div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12" style="text-align: right;
 ">
-         <button type="button" class="btn btn-primary"  @click="ModalP()">
+         <button type="button" class="btn btn-primary"  @click="ModalDri()">
           ເພິ່ມ ໃບຂັບຂີ່ ໃຫ້ຜູ້ໃຊ້
               </button>
             </div>
@@ -1349,6 +1349,13 @@ const UpdateStatus = async () => {
   let ver = await store.UpdateStatusApp();
   await store.fetchAppNumber();
 }
+
+const ModalDri = async () => {
+console.log('ok',store.dataapp[0]);
+await router.push("/drivinglicense/view/"+store.dataapp[0].user_id);
+}
+
+
 
 </script>
 

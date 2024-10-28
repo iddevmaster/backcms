@@ -682,7 +682,9 @@
 "status_exam_driv_pen_t":"Pending Theory Exam",
 "status_exam_driv_pen_check":"Pending check document",
 
-
+"pass_card":"New Pass Exam",
+"renew_card":"Renew Expired Card",
+"old_card":"Card from old system",
 
 
   "" : ""

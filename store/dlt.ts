@@ -50,6 +50,10 @@ export const DltStore = defineStore('dlt', {
       issue_date: "",
       expiry_date: "",
     },
+    formdlt_new: {
+      ap_date_start:null,
+      ap_date_end:null,
+    },
     user_create:null,
     dtlall: [],
     mydtla: [],
