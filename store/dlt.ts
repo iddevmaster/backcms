@@ -53,6 +53,7 @@ export const DltStore = defineStore('dlt', {
     formdlt_new: {
       ap_date_start:null,
       ap_date_end:null,
+      image_dlt:null,
     },
     user_create:null,
     dtlall: [],
@@ -434,6 +435,25 @@ this.formadddtl.expiry_date = "";
       //   return false
       // }
     },
+
+    async UploadImageDLT() {
+
+      if (this.formdlt_new.image_dlt) {
+       let formData = new FormData();
+       formData.append('files', this.formdlt_new.image_dlt);
+       try {
+         const data = await ApiService.upload('/media_file/upload/file', formData);
+         this.formdlt_new.image_dlt = data.data[0].path
+    
+         return true;
+       } catch (error) {
+         return false;
+       }
+     }
+    
+  
+    
+       },
 
 
 

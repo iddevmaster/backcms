@@ -1,18 +1,39 @@
 <template>
   <div class="widget-content widget-content-area br-8 p-3">
     <div class="widget-header">
+
+
       <div class="row p-3">
-        <div class="col-10 col-sm-12 col-md-10">
-          <div class="form-group row">
-            <h5>{{ $t("user_details_people") }}</h5>
-          </div>
+        <div class="col-lg-6 col-md-4 col-sm-4">
+          <h5>ເພິ່ມ ໃບຂັບຂີ່ ໃຫ້ຜູ້ໃຊ້</h5>
         </div>
-        <div class="col-12 col-md-2">
-          <div class="row">
-            <button class="btn btn-primary" @click="Reback()">
-              {{ $t("user_profile_button_back") }}
-            </button>
-          </div>
+
+        <div class="col-lg-1 col-md-4 col-sm-4">
+          <label for="inputEmail3" class="col-sm-12 col-form-label">
+             Username :</label
+          >
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-4">
+          <input
+            id="t-text"
+            type="text"
+            name="txt"
+            placeholder="A83M100"
+            class="form-control"
+ 
+            maxlength="30"
+          />
+        </div>
+
+        <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
+          <button
+            type="button"
+            class="btn btn-primary"
+            style="width: 100%; height: 100%; margin-top: auto"
+            @click="SearchApp()"
+          >
+            Search
+          </button>
         </div>
       </div>
       <hr style="margin-top: 1px" />
@@ -378,26 +399,77 @@
             <div class="col-12 col-sm-12 col-md-12 pt-2">
               <div class="form-group">
                 <label for="exampleInputEmail1">ວັນທີໝົດອາຍຸ:</label>
-                <VueDatePicker v-model="storedlt.formdlt_new.ap_date_end" :format="format_end"  :disabled-dates="isDateDisabled" required></VueDatePicker>
+                <VueDatePicker v-model="storedlt.formdlt_new.ap_date_end" :format="format_end"  :disabled-dates="isDateDisabledEnd" required></VueDatePicker>
+              </div>
+            </div>
+
+
+
+            <div class="col-12 col-sm-12 col-md-12 pt-2">
+              <div class="form-group">
+                <div class="col-sm-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <span>ຮູບໃບຂັບຂີ່ :</span
+                        ><span class="text-xs text-red-500" style="color: red"
+                          >ກະລຸນາສະແກນບັດຕົວຈິງ, ແນະນຳຂະໜາດ 1000x650 px, ບໍ່ເກີນ 1MB</span
+                        >
+                        <span style="float: inline-end">
+                          <input
+                            type="file"
+                           ref="fileInputFont"
+                            style="display: none"
+                          />
+                          <button     @click="changeFont"
+                            class="changeImg btn btn-success"
+                          
+                          >
+                            Browse
+                          </button>
+                        </span>
+                      </div>
+                      <div
+                        class="card-body" v-if="storedlt.formdlt_new.image_dlt"
+                      
+                      >
+                        <img
+                          class="aboutimg__1"
+                           :src="coverimage(storedlt.formdlt_new.image_dlt)"
+                          alt="aboutimg"
+                          style="width: 100%"
+                        />
+                      </div>
+
+                      <div
+                        class="card-body" v-else
+                      
+                      >
+                        <img
+                          class="aboutimg__1"
+                           src="../../assets/images/no_photo.jpg"
+                          alt="aboutimg"
+                          style="width: 100%"
+                        />
+                      </div>
+                      
+           
+                    </div>
+              
+                  </div>
+            
               </div>
             </div>
 
             <div class="col-12 col-sm-12 col-md-12 pt-2">
               <div class="form-group">
-                <label for="exampleInputEmail1">ຮູບໃບຂັບຂີ່ :</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  placeholder="ຕົວຢ່າງ: ທ້າວ ກກກກກກ ຂຂຂຂຂຂຂ"
-                />
-              </div>
-            </div>
-
-            <div class="col-12 col-sm-12 col-md-12 pt-2">
-              <div class="form-group">
-               x
+                <div class="col-sm-12">
+                  <button     style="width: 100%;"
+                            class="changeImg btn btn-primary"
+                          
+                          >
+                          ບັນທຶກ
+                          </button>
+                  </div>
             
               </div>
             </div>
@@ -442,13 +514,13 @@ import {
   helpers,
 } from "@vuelidate/validators";
 
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
 import Swal from "sweetalert2";
 import ApiService from "../../services/api.service";
 
 const { locale, setLocale } = useI18n();
-
+const date = ref(new Date());
 const toast = useToast();
 const store = usersStore();
 const storedlt = DltStore();
@@ -456,12 +528,51 @@ const user_type = useCookie("user_type"); // useCookie new hook in nuxt 3
 const router = useRouter();
 const auth = useAuthStore();
 
+const fileInputFont = ref(null);
+onMounted(() => {
+  if (process.client) {
+    fileInputFont.value.addEventListener("change", changeFileFont);
+
+  }
+});
+
 store.formlog.user_admin = auth.user_id;
 const CheckApp = async (item) => {
   store.ModalApp = true;
   store.status_app = item;
 
   // await router.push("/users/approvestaff");
+};
+
+const changeFont = () => {
+  console.log('changeFont');
+  // Trigger a click event on the file input element
+  fileInputFont.value.click();
+};
+
+
+const changeFileFont = async (event) => {
+  var inputs = event.target;
+  const file = event.target.files[0];
+
+  if (file && file.type.startsWith("image/")) {
+    if(file.size > 1000000){
+      Swal.fire({
+      text: "Over Size 1 mb!",
+      icon: "error",
+    });
+return false;
+    }
+    storedlt.formdlt_new.image_dlt = inputs.files[0];
+    storedlt.UploadImageDLT();
+  } else {
+    Swal.fire({
+      text: "Upload File Image Only!",
+      icon: "error",
+    });
+  }
+
+
 };
 
 const Hide = async () => {
@@ -483,6 +594,10 @@ const Save = async () => {
 
 const Reback = async () => {
   await router.push("/appointment/details");
+};
+
+const SearchApp = async () => {
+console.log('User');
 };
 
 
@@ -510,6 +625,29 @@ storedlt.formdlt_new.ap_date_end = moment.utc(isoFormatInUTC).tz('Asia/Bangkok')
 return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD');
 
 }
+
+const isDateDisabled = (date) => {
+
+
+
+const currentDate = new Date();
+    const disableBeforeDate = new Date(); // Adjust the date as needed
+    storedlt.formdlt_new.ap_date_end = null
+
+    return date < currentDate || date < disableBeforeDate;
+  };
+
+const isDateDisabledEnd = (date) => {
+
+const currentDate = new Date();
+ const disableBeforeDate = new Date(storedlt.formdlt_new.ap_date_start); // Adjust the date as needed
+if(!storedlt.formdlt_new.ap_date_start){
+return true;
+}
+
+return  date <= currentDate;
+}; 
+
 
 function coverimage(i) {
   let result = i.slice(0, 6);
