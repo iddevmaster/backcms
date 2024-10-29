@@ -25,6 +25,7 @@ export const AppointStore = defineStore('appoint', {
     selectedRow: {
       user_id: null
     },
+    location_id:null,
     dlttoday:[],
     app_present: [],
     app_user: [],
@@ -199,7 +200,10 @@ export const AppointStore = defineStore('appoint', {
     },
     formsearchapptoday: {
       ap_date_start: null,
+      location_id:null,
+      user_id:null,
     },
+    user_type:null
 
   }
 
@@ -706,6 +710,11 @@ export const AppointStore = defineStore('appoint', {
     },
 
     async fetchAppPresentToday() {
+      this.formsearchapptoday.user_id = this.user_id
+      this.formsearchapptoday.location_id = this.location_id
+      this.formsearchapptoday.user_type = this.user_type
+
+
       try {
         const data = await ApiService.post('/appointment/dateappointment',this.formsearchapptoday).then(response => {
 this.dlttoday = response.data

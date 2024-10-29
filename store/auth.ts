@@ -31,8 +31,10 @@ export const useAuthStore = defineStore('auth', {
       user_phone: null,
       user_type: null,
     },
+    location_id:null,
     detail: {
       user_img: null,
+      location_id:null
     },
     profiledetails:{},
     formadmin: {
@@ -142,6 +144,7 @@ export const useAuthStore = defineStore('auth', {
    this.users.user_phone = response.data.user_phone
    this.users.user_type = response.data.user_type
    this.detail.user_img = response.data.detail.user_img
+   this.detail.location_id = response.data.detail.location_id
         });
 
         return true;

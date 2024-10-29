@@ -23,6 +23,10 @@ const store = AppointStore();
 const auth = useAuthStore();
 const router = useRouter();
 store.user_id = auth.user_id;
+store.location_id = auth.detail.location_id;
+store.user_type = auth.users.user_type;
+
+
 
 const today = new Date();
 const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
