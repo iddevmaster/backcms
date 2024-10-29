@@ -359,7 +359,7 @@
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="A83M100"
-                  disabled
+                  
                   v-model="storedlt.formdlt_new.ap_number"
                 />
                 <span
@@ -374,16 +374,20 @@
 
             <div class="col-12 col-sm-12 col-md-12 pt-2">
               <div class="form-group">
-                <label for="exampleInputEmail1">ເລກທີ:</label>
+                <label for="exampleInputEmail1">ເລກທີ:</label><span style="color: red;"> * </span>
                 <input
                   type="text"
                   class="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="ຕົວຢ່າງ: ຂສ 0012345"
-
-
-                   v-model="storedlt.formdlt_new.number_licen"
+                 v-model="storedlt.formdlt_new.number_licen"
+                 :class="{
+                        'border-red-500 focus:border-red-500':
+                          v$.number_licen.$error,
+                        'border-[#42d392] ': !v$.number_licen.$invalid,
+                      }"
+                      @change="v$.number_licen.$touch"
                 />
                 <span
                           v-if="v$.number_licen.$error"
@@ -397,14 +401,19 @@
 
             <div class="col-12 col-sm-12 col-md-12 pt-2">
               <div class="form-group">
-                <label for="exampleInputEmail1">ອອກຊື່:</label>
+                <label for="exampleInputEmail1">ອອກຊື່:</label><span style="color: red;"> * </span>
                 <input
                   type="text"
                   class="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="ຕົວຢ່າງ: ທ້າວ ກກກກກກ ຂຂຂຂຂຂຂ"
-
+                  :class="{
+                        'border-red-500 focus:border-red-500':
+                          v$.address_lic.$error,
+                        'border-[#42d392] ': !v$.address_lic.$invalid,
+                      }"
+                      @change="v$.address_lic.$touch"
                      v-model="storedlt.formdlt_new.address_lic"
                 />
 
@@ -420,11 +429,11 @@
 
             <div class="col-12 col-sm-12 col-md-12 pt-2">
               <div class="form-group">
-                <label for="exampleInputEmail1">ວັນທີອອກບັດ:</label>
-                <VueDatePicker v-model="storedlt.formdlt_new.ap_date_start" :format="format_start"  :disabled-dates="isDateDisabled" required ></VueDatePicker>
+                <label for="exampleInputEmail1">ວັນທີອອກບັດ:</label><span style="color: red;"> * </span>
+                <VueDatePicker v-model="storedlt.formdlt_new.issue_date" :format="format_start"  :disabled-dates="isDateDisabled" required ></VueDatePicker>
               </div>
               <span
-                          v-if="v$.ap_date_start.$error"
+                          v-if="v$.issue_date.$error"
                           class="text-xs text-red-500"
                           style="color: red"
                         >
@@ -434,11 +443,11 @@
 
             <div class="col-12 col-sm-12 col-md-12 pt-2">
               <div class="form-group">
-                <label for="exampleInputEmail1">ວັນທີໝົດອາຍຸ:</label>
-                <VueDatePicker v-model="storedlt.formdlt_new.ap_date_end" :format="format_end"  :disabled-dates="isDateDisabledEnd" required></VueDatePicker>
+                <label for="exampleInputEmail1">ວັນທີໝົດອາຍຸ:</label><span style="color: red;"> * </span>
+                <VueDatePicker v-model="storedlt.formdlt_new.expiry_date" :format="format_end"  :disabled-dates="isDateDisabledEnd" required></VueDatePicker>
               </div>
               <span
-                          v-if="v$.ap_date_end.$error"
+                          v-if="v$.expiry_date.$error"
                           class="text-xs text-red-500"
                           style="color: red"
                         >
@@ -446,7 +455,29 @@
                         >
             </div>
 
-
+            <div class="col-12 col-sm-12 col-md-12 pt-2">
+              <label for="exampleInputEmail1">ປະເພດອະນຸຍາດ:</label><span style="color: red;"> * </span>
+              <div class="form-group">
+                
+                <label v-for="fruit in storedlt.dltc" :key="fruit" class="checkbox" style="padding-left: 3px;">
+                  {{ fruit }}
+      <input 
+        type="checkbox" 
+        :value="fruit" 
+        v-model="storedlt.formdlt_new.dlt_code" 
+      />
+      {{ fruit }}
+    </label>
+    {{ storedlt.formdlt_new.dlt_code }}
+              </div>
+              <span
+                          v-if="v$.dlt_code.$error"
+                          class="text-xs text-red-500"
+                          style="color: red"
+                        >
+                        ອອກຊື່</span
+                        >
+            </div>
 
             <div class="col-12 col-sm-12 col-md-12 pt-2">
               <div class="form-group">
@@ -539,6 +570,10 @@
     border-right: 2px solid rgb(241, 241, 241);
   }
 }
+.checkbox {
+
+  margin: 8px 5px;
+}
 </style>
 
 
@@ -559,8 +594,6 @@ import moment from 'moment-timezone';
 
 import {
   required,
-  email,
-  sameAs,
   minLength,
   helpers,
 } from "@vuelidate/validators";
@@ -579,66 +612,49 @@ const user_type = useCookie("user_type"); // useCookie new hook in nuxt 3
 const router = useRouter();
 const auth = useAuthStore();
 
+
+
 const fileInputFont = ref(null);
 
 const { SaveDLT } = storeToRefs(storedlt);
+
+
 onMounted(() => {
   if (process.client) {
     fileInputFont.value.addEventListener("change", changeFileFont);
-
   }
 });
 
 const rules = computed(() => {
   return {
     image_dlt: {
-      required: helpers.withMessage(
-        "The Course Code field is required",
-        required
-      ),
-      minLength: minLength(1),
+      required: required
     },
     address_lic: {
-      required: helpers.withMessage(
-        "The Course Code field is required",
-        required
-      ),
-      minLength: minLength(1),
+      required: required
     },
     number_licen: {
-      required: helpers.withMessage(
-        "The Course Code field is required",
-        required
-      ),
-      minLength: minLength(1),
+      required: required
     },
-    ap_date_start: {
-      required: helpers.withMessage(
-        "The Course Code field is required",
-        required
-      ),
-      minLength: minLength(1),
+    issue_date: {
+      required: required
     },
-    ap_date_end: {
-      required: helpers.withMessage(
-        "The Course Code field is required",
-        required
-      ),
-      minLength: minLength(1),
+    expiry_date: {
+      required: required
     },
     ap_number: {
-      required: helpers.withMessage(
-        "The Course Code field is required",
-        required
-      ),
-      minLength: minLength(1),
+      required: required
+    },
+    dlt_code: {
+      required: required
     },
     
-
+    
   };
 });
 
-store.formlog.user_admin = auth.user_id;
+storedlt.user_admin = auth.user_id;
+
 const CheckApp = async (item) => {
   store.ModalApp = true;
   store.status_app = item;
@@ -647,7 +663,6 @@ const CheckApp = async (item) => {
 };
 
 const changeFont = () => {
-  console.log('changeFont');
   // Trigger a click event on the file input element
   fileInputFont.value.click();
 };
@@ -679,15 +694,13 @@ return false;
 
 };
 
-const Hide = async () => {
-  store.ModalApp = false;
-};
 const v$ = useVuelidate(rules, SaveDLT);
 const Save = async () => {
 
   v$.value.$validate();
   if (!v$.value.$error) {
-
+await storedlt.updateolddlt()
+await storedlt.savedt()
     Swal.fire({
     allowEscapeKey: false,
     allowOutsideClick: false,
@@ -708,7 +721,7 @@ const Reback = async () => {
 };
 
 const SearchApp = async () => {
-console.log('User');
+
 };
 
 
@@ -718,7 +731,7 @@ const format_start = (xd) => {
 const isoFormatInUTC = xd.toISOString();
 //return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD HH:mm');
 
-storedlt.formdlt_new.ap_date_start = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
+storedlt.formdlt_new.issue_date = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
 return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD');
 
 //  return `Selected date is ${day}/${month}/${year}`;
@@ -732,7 +745,7 @@ const format_end = (ie) => {
 const isoFormatInUTC = ie.toISOString();
 
 
-storedlt.formdlt_new.ap_date_end = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
+storedlt.formdlt_new.expiry_date = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
 return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD');
 
 }
@@ -743,7 +756,7 @@ const isDateDisabled = (date) => {
 
 const currentDate = new Date();
     const disableBeforeDate = new Date(); // Adjust the date as needed
-    storedlt.formdlt_new.ap_date_end = null
+    storedlt.formdlt_new.expiry_date = null
 
     return date < currentDate || date < disableBeforeDate;
   };
@@ -751,8 +764,8 @@ const currentDate = new Date();
 const isDateDisabledEnd = (date) => {
 
 const currentDate = new Date();
- const disableBeforeDate = new Date(storedlt.formdlt_new.ap_date_start); // Adjust the date as needed
-if(!storedlt.formdlt_new.ap_date_start){
+ const disableBeforeDate = new Date(storedlt.formdlt_new.issue_date); // Adjust the date as needed
+if(!storedlt.formdlt_new.issue_date){
 return true;
 }
 

@@ -27,6 +27,7 @@ const auth = useAuthStore()
 const router = useRouter();
 store.user_id = auth.user_id
 store.formlog.user_id = router.currentRoute.value.params.id;
+storedlt.user_id = router.currentRoute.value.params.id;
 await store.fetchUsersByOneDLT(router.currentRoute.value.params.id);
 
 DltStore

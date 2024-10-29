@@ -17,6 +17,7 @@ export const DltStore = defineStore('dlt', {
     user_lastname:null,
     image_url:null,
     imagelist: null,
+    user_admin:null,
     imagelistFront: null,
     imagelistBack: null,
     imagelistFull: null,
@@ -50,14 +51,17 @@ export const DltStore = defineStore('dlt', {
       issue_date: "",
       expiry_date: "",
     },
+    dltc: ["A", "A1", "A2", "A3", "B", "C", "C1", "C2", "D", "D1", "D2", "E", "E1"],
+    selectedFruits: [], // Holds the selected checkboxes
     formdlt_new: {
-      ap_date_start:null,
-      ap_date_end:null,
+      issue_date:null,
+      expiry_date:null,
       image_dlt:null,
       number_licen:null,
       address_lic:null,
-      ap_number:null,
+      ap_number:'A8888888',
       type:"new",
+      dlt_code:[]
     },
     user_create:null,
     dtlall: [],
@@ -140,6 +144,9 @@ export const DltStore = defineStore('dlt', {
     },
     FormDLTadd(state) {
       return state.formadddtl;
+    },
+    SaveDLT(state) {
+      return state.formdlt_new;
     },
 
   },
@@ -459,9 +466,42 @@ this.formadddtl.expiry_date = "";
     
        },
 
+       async updateolddlt() {
 
-       async SaveDLT() {
-        console.log('save');
+        this.formdlt_new.user_create = this.user_admin
+        this.formdlt_new.user_id = this.user_id
+       
+        try {
+          const data = await ApiService.post('/dlt_card/old', this.formdlt_new).then(response => {
+         
+            console.log(response);
+          });
+  
+          return true
+  
+        } catch (error) {
+          return false;
+        }
+
+       },
+
+       async savedt() {
+        
+        this.formdlt_new.user_create = this.user_admin
+        this.formdlt_new.user_id = this.user_id
+
+   
+        try {
+          const data = await ApiService.post('/dlt_card/create/news', this.formdlt_new).then(response => {
+         
+            console.log(response);
+          });
+  
+          return true
+  
+        } catch (error) {
+          return false;
+        }
 
        },
 
