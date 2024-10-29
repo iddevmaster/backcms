@@ -18,9 +18,9 @@
             id="t-text"
             type="text"
             name="txt"
-            placeholder="A83M100"
+            placeholder="somsakj"
             class="form-control"
- 
+v-model="storedlt.username"
             maxlength="30"
           />
         </div>
@@ -39,7 +39,7 @@
       <hr style="margin-top: 1px" />
       <br />
 
-      <div class="row m-1">
+      <div class="row m-1" v-if="store.profile_by_one" >
         <div class="col-12 col-sm-12 col-xl-7 col-lg-7 mb-3"></div>
         <br />
 
@@ -342,7 +342,7 @@
             <div class="col-12 col-sm-12 col-md-12">
               <div class="form-group">
                 <label for="exampleInputEmail1">ຈຸດປະສົ່ງການເພິ່ມ:</label>
-                <select class="form-control" v-model="storedlt.formdlt_new.type">
+                <select class="form-control" v-model="storedlt.formdlt_new.type" @change="FitterCh($event)">
         <option value="new">{{ $t("pass_card") }}</option>
         <option value="renew">{{ $t("renew_card") }}</option>
         <option value="old">{{ $t("old_card") }}</option>
@@ -350,7 +350,7 @@
               </div>
             </div>
 
-            <div class="col-12 col-sm-12 col-md-12 pt-2">
+            <div class="col-12 col-sm-12 col-md-12 pt-2" v-if="storedlt.AppisShow">
               <div class="form-group">
                 <label for="exampleInputEmail1">ເຊື່ອມຫາ ID ນັດໝາຍ:</label>
                 <input
@@ -361,6 +361,7 @@
                   placeholder="A83M100"
                   
                   v-model="storedlt.formdlt_new.ap_number"
+                  
                 />
                 <span
                           v-if="v$.ap_number.$error"
@@ -620,9 +621,13 @@ const { SaveDLT } = storeToRefs(storedlt);
 
 
 onMounted(() => {
-  if (process.client) {
+  if(storedlt.user_id){
+    if (process.client) {
     fileInputFont.value.addEventListener("change", changeFileFont);
   }
+
+  }
+ 
 });
 
 const rules = computed(() => {
@@ -716,13 +721,33 @@ await storedlt.savedt()
  
 };
 
+
+
 const Reback = async () => {
   await router.push("/appointment/details");
 };
 
+
+
 const SearchApp = async () => {
 
+  
+
+  await router.push("/drivinglicense/view/"+storedlt.username);
 };
+
+const FitterCh = async (event) => {
+
+  
+console.log(event.target.value);
+if(event.target.value == 'renew' || event.target.value == 'old'){
+storedlt.AppisShow = false;
+}else {
+  storedlt.AppisShow = true;
+}
+
+};
+
 
 
 const format_start = (xd) => {
@@ -749,6 +774,8 @@ storedlt.formdlt_new.expiry_date = moment.utc(isoFormatInUTC).tz('Asia/Bangkok')
 return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD');
 
 }
+
+
 
 const isDateDisabled = (date) => {
 

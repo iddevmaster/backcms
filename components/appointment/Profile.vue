@@ -1351,8 +1351,8 @@ const UpdateStatus = async () => {
 }
 
 const ModalDri = async () => {
-console.log('ok',store.dataapp[0]);
-await router.push("/drivinglicense/view/"+store.dataapp[0].user_id);
+  // await router.push("/drivinglicense/view/"+store.dataapp[0].user_name);
+await router.push("/drivinglicense/view/"+store.dataapp[0].ap_number);
 }
 
 

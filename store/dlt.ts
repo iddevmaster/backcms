@@ -6,7 +6,9 @@ import moment from 'moment';
 export const DltStore = defineStore('dlt', {
   state: () => ({
     user_id: null,
+    username:null,
     dlt_code: "",
+    AppisShow:true,
     isDelete:false,
     isAdd:true,
     isEdit:false,
@@ -29,7 +31,9 @@ export const DltStore = defineStore('dlt', {
     disabledDatesEnd: {
       to: null,
     },
-  
+    searchapp: {
+      ap_number: null
+    },
     name: null,
     id: null,
     ap_id:null,
@@ -445,6 +449,27 @@ this.formadddtl.expiry_date = "";
       // } catch (error) {
       //   return false
       // }
+    },
+
+    async fetchAppNumberDLT(item) {
+
+      this.searchapp.ap_number = item
+      try {
+        const data = await ApiService.post('/appointment/dateappointment/appbyuser', this.searchapp).then(rep => {
+       
+          if(rep.data.length > 0){
+this.user_id = rep.data[0].user_id
+this.formdlt_new.ap_number = rep.data[0].ap_number
+          }else {
+            this.user_id = null
+          }
+        });
+        return data;
+      } catch (error) {
+        return false;
+      }
+
+
     },
 
     async UploadImageDLT() {

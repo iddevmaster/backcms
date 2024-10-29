@@ -26,11 +26,17 @@ const storedlt = DltStore()
 const auth = useAuthStore()
 const router = useRouter();
 store.user_id = auth.user_id
-store.formlog.user_id = router.currentRoute.value.params.id;
-storedlt.user_id = router.currentRoute.value.params.id;
-await store.fetchUsersByOneDLT(router.currentRoute.value.params.id);
 
-DltStore
+
+await storedlt.fetchAppNumberDLT(router.currentRoute.value.params.id);
+
+ if(storedlt.user_id){
+  await store.fetchUsersByOneDLT(storedlt.user_id);
+}
+
+
+
+
 
 
 
@@ -50,7 +56,7 @@ DltStore
         <div class="row layout-top-spacing">
          
           <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
-            <LicenView  ></LicenView>
+            <LicenView ></LicenView>
           </div>
           
         </div>
