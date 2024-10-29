@@ -762,6 +762,8 @@
           <div class="row">
 
             <div class="col-6 col-sm-12 col-md-6">
+
+            ຮູບໃບຂັບຂີ່ ຫຼ້າສຸດ:
               <div class="form-group row">
                 <img
                   src="../../assets/images/no_photo.jpg"

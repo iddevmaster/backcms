@@ -700,7 +700,7 @@ export const AppointStore = defineStore('appoint', {
         const data = await ApiService.get('/course/coursetotalquest').then(response => {
 
      this.course = response.data;
-     console.log(this.course);
+   
         });
         return true
       } catch (error) {
@@ -907,6 +907,25 @@ this.dlttoday = response.data
         return false;
       }
     },
+
+    async fetchDltUser() {
+
+
+try {
+  const data = await ApiService.get('/dlt_card/list/?user_id=' + this.dataapp[0].user_id).then(response => {
+
+
+console.log(response);
+
+  });
+  return data
+} catch (error) {
+  return false;
+}
+
+
+},
+    
 
 
     async fetchExamScore() {

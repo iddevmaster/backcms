@@ -34,10 +34,10 @@ if(apnumber){
  await store.fetchExamScore();
  await store.fetchResultScore();
 
+  await store.fetchDltUser();
+
  if(store.history){
   await store.fetchHistoryExam();
- 
-
  }
 
  await store.fetchDlt();
