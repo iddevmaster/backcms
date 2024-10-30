@@ -759,12 +759,20 @@
             </div>
           </div>
           <br>
-          <div class="row">
+          <div class="row" v-if="store.dlt_lastes">
 
             <div class="col-6 col-sm-12 col-md-6">
 
             ຮູບໃບຂັບຂີ່ ຫຼ້າສຸດ:
-              <div class="form-group row">
+              <div class="form-group row" v-if="store.dlt_lastes.front_img">
+                <img
+                  :src="coverimage(store.dlt_lastes.front_img)"
+                  class="img-fluid"
+                  width="80"
+                  height="80"
+                />
+              </div>
+              <div class="form-group row" v-else>
                 <img
                   src="../../assets/images/no_photo.jpg"
                   class="img-fluid"
@@ -775,32 +783,36 @@
             </div>
             <div class="col-6 col-sm-12 col-md-6 p-5">
               <div class="form-group row">
+              
                 <span style="font-size: 24px;">
-                  ເລກທີ: ຂສ  0037730
+                  ເລກທີ: {{ store.dlt_lastes.number_licen }}
                 </span>
               </div>
               <div class="form-group row">
                 
                 <span style="font-size: 24px;">
-                  ອອກຊື່: ທ້າວ ສົມສັກ ຈ່າງດາບຸດ
+                  ອອກຊື່: {{ store.dlt_lastes.address_lic }}
                 </span>
               </div>
               <div class="form-group row">
                 
                 <span style="font-size: 24px;">
-                  ປະເພດອະນຸຍາດ:  AB
+                  ປະເພດອະນຸຍາດ:  
+                  <span  v-for="i in store.dlt_lastes.dlt_types">
+                    {{ i.dlt_code }}
+                  </span>
                 </span>
               </div>
               <div class="form-group row">
                 
                 <span style="font-size: 24px;">
-                  ອອກວັນທີ: 28/12/2023
+                  ອອກວັນທີ: {{ store.dlt_lastes.issue_date }}
                 </span>
               </div>
               <div class="form-group row">
                 
                 <span style="font-size: 24px;">
-                  ໝົດອາຍຸ : 27/12/2028
+                  ໝົດອາຍຸ : {{ store.dlt_lastes.expiry_date }}
                 </span>
               </div>
               <div class="form-group row">

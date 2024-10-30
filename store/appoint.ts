@@ -144,6 +144,7 @@ export const AppointStore = defineStore('appoint', {
       st_id: "",
       id_card:""
     },
+    dlt_lastes:[],
     searchapp: {
       ap_number: null
     },
@@ -912,10 +913,13 @@ this.dlttoday = response.data
 
 
 try {
-  const data = await ApiService.get('/dlt_card/list/?user_id=' + this.dataapp[0].user_id).then(response => {
+  const data = await ApiService.get('/dlt_card/lastes/list?user_id=' + this.dataapp[0].user_id).then(response => {
 
 
-console.log(response);
+    if(response.data.length > 0){
+      this.dlt_lastes = response.data[0]
+    }
+
 
   });
   return data
@@ -1063,7 +1067,7 @@ console.log(response);
     
     async fetchdivi() {
  
-console.log(this.dataapp[0]);
+
 
 if(this.dataapp[0].st_id == null){
   this.formdiv = {'ap_id':this.dataapp[0].ap_id,'stat':'new'};
