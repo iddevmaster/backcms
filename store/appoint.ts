@@ -296,6 +296,36 @@ export const AppointStore = defineStore('appoint', {
 
     },
 
+    async fetchAppointmentNew() {
+
+      this.form.date_event = 0;
+      const appdata = {
+        ap_learn_type: this.form.ap_learn_type,
+        dlt_code: this.form.dlt_code
+      }
+      this.group = []
+
+      try {
+        this.event = []
+        const data = await ApiService.get('/appointment/event/new/?ap_learn_type=' + parseInt(this.form.ap_learn_type) + '&dlt_code=' + this.form.dlt_code + '').then(response => {
+
+          if (response.data.length > 0) {
+            this.event = response.data
+           console.log(this.event);
+            //  this.form.date_event = response.data[0].event
+          }
+
+
+          //this.form.date_event = response.data[0].event
+        });
+
+
+      } catch (error) {
+        return false;
+      }
+
+    },
+
 
     async fetchAppointmentEvent() {
       const appdata = {
@@ -304,6 +334,7 @@ export const AppointStore = defineStore('appoint', {
         dlt_code: this.form.dlt_code
       }
       this.group = []
+      console.log(appdata);
 
       try {
         const data = await ApiService.post('/appointment/list', appdata).then(response => {
@@ -820,15 +851,16 @@ this.dlttoday = response.data
 
     async SaveUserRerv() {
 
-      this.formselectapp.ap_id = 242;
+      this.formselectapp.ap_id = this.form.date_event;
+     
       try {
         const data = await ApiService.post('/appointment/reserve/new/create', this.formselectapp).then(x => {
 
-
+return true;
         });
         return data;
       } catch (error) {
-        return 502;
+        return false;
       }
 
 

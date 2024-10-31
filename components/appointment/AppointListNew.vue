@@ -8,7 +8,7 @@
 
     </div>
     <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12">
-{{ store.formselectapp }}
+
 </div>
 <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12">
 
@@ -18,9 +18,9 @@
     </div>
 
 </div>
-  <div class="row ps-4 mb-5">
 
-  
+{{ store.formselectapp }}
+  <div class="row ps-4 mb-5">
     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
       <label for="exampleFormControlInput1">Full Name</label>
       <input type="text" class="form-control" id="inputEmail3" placeholder="Full Name *"  maxlength="100"  v-model="store.formselectapp.user_full_name" disabled
@@ -60,15 +60,19 @@
 
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 pt-3">
       <label for="exampleFormControlInput1">Appointment time:</label>
-      <select @change="Search($event)"
+
+  
+      <select
       class="form-select form-select cateSelect" :class="store.event.length < 1 && 'bg-warning'"
         aria-label="Default select example"   v-model="store.form.date_event" 
-
+    
         :disabled="store.event.length < 1 ? true : false"
         >
         <option disabled selected :value="0">{{ $t('select') }}...</option>
         
-        <option v-for="(events, x) in store.event">{{events.event}}</option>
+        <option v-for="(events, x) in store.event" :value="events.ap_id">
+           {{format(events.ap_date_first)}} {{formatty(events.type)}}, Class {{events.dlt_code}} . Avalable: {{calcu(events.ap_quota,events.available)}} seats
+        </option>
       </select> 
     </div>
 
@@ -109,6 +113,7 @@ import Datepicker from "vuejs3-datepicker";
 import moment from "moment";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
+import Swal from "sweetalert2";
 const { locale, setLocale } = useI18n();
 const picked = ref(new Date());
 
@@ -118,7 +123,7 @@ const store = AppointStore();
 
 
 // await store.fetchUser()
-await store.fetchAppointment();
+// await store.fetchAppointment();
 const myOptionsUser = JSON.parse(JSON.stringify(store.users));
 const myUser = ref();
 
@@ -134,8 +139,26 @@ const UserCreate = () => {
 };
 
 const format = (time) => {
-  return moment(time).format("DD/MM/YYYY HH:mm");
+  return moment(time).format("DD/MM/YYYY");
 };
+
+
+const formatty = (i) => {
+  if(i == 1){
+    return '08:00';
+  }else {
+    return '16:00';
+  }
+
+};
+const calcu = (i,x) => {
+
+  let a = i-x;
+return a;
+};
+
+
+
 // store.fetchAppointment()
 
 const del = async (id) => {
@@ -143,17 +166,37 @@ const del = async (id) => {
 };
 
 const Search = async (event) => {
-  store.fetchAppointmentEvent();
+  store.fetchAppointmentNew();
 };
 
 const SearchApp = async () => {
-  store.fetchAppointment();
+  store.fetchAppointmentNew();
 };
 
 
 const SaveAppoint = async () => {
-  store.SaveUserRerv();
+
+  if(store.formselectapp.user_id == null){
+    Swal.fire({
+      text: 'Select User!',
+      icon: 'error',
+    });
+    return false;
+  }
+  if(store.form.date_event == null){
+    Swal.fire({
+      text: 'Appointment time!',
+      icon: 'error',
+    });
+    return false;
+}
+let save = await store.SaveUserRerv();
+if(save == true){
   toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
+}else {
+  toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
+}
+  
 };
 
 

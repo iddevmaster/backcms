@@ -22,7 +22,7 @@ const auth = useAuthStore()
 store.user_id = auth.user_id
 
 await store.fetchDlt();
-await store.fetchAppointmentEvent();
+await store.fetchAppointmentNew();
 
 
 </script>
