@@ -546,6 +546,7 @@ export const AppointStore = defineStore('appoint', {
 
     async fetchUser() {
       this.formuser.user_id = this.user_id;
+     
       try {
         const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
           const user = [];
@@ -589,9 +590,10 @@ export const AppointStore = defineStore('appoint', {
       this.formuser.user_id = this.user_id;
       this.formuser.verify_account = 'system_active';
 
+      console.log(this.formuser);
 
       const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
-        console.log(response);
+    
         this.user = response.data.data;
 
         this.total_page_user = response.data.total_page
