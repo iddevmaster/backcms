@@ -136,7 +136,7 @@ export const usersStore = defineStore('users', {
       user_village: '',
       user_address: '',
       location_id: null,
-      country_id: null,
+      country_id: 33,
       passpost_image:'',
       real_image:'',
       user_password:'',

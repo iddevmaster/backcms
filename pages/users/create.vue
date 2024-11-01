@@ -163,8 +163,6 @@ const save = async () => {
   v$.value.$validate();
   if (!v$.value.$error) {
     let check = await store.CheckPeople();
-
-   
     if (
       store.checkphone == false &&
       store.checkemail == false &&
@@ -176,7 +174,7 @@ const save = async () => {
       v$.value.$reset();
 
       await toast.success("ບັນທຶກສຳເລັດແລ້ວ");
-      await router.push('/users/staff');
+      await router.push('/users');
     } else {
       scrollToTop();
     }

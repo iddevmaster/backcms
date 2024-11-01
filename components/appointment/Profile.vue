@@ -314,100 +314,40 @@
             </div>
           </div>
 
-          <!-- <div class="row">
+          <div class="row">
             <div class="col-12 col-sm-12 col-md-12">
-        
               <div class="form-group row">
                 <label
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                 >
-                ສອບເສັງ ປະເພດ:  A : ລົດຈັກສອງລໍ້ ຄວາມແຮງບໍ່ເກີນ 125 cc
-
-
+                       
+                <span style="padding-right: 30px;"> ສອບເສັງ ປະເພດ: </span>
+                
+                <span > {{ store.dlt_select.dlt_code }}:{{ store.dlt_select.dlt_name_lo }} </span>
                 </label>
               </div>
 
-              <div class="form-group row">
-                <label
-                  for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
-                >
-                ID ນັກຮຽນ:
-                </label>
-              </div>
-
-              <div class="form-group row">
-                <label
-                  for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
-                >
-                ສະຖານະ:   ເສັງຜ່ານ
-                </label>
-              </div>
-
-              <div class="form-group row">
-                <label
-                  for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
-                >
-                % ຮຽນຫຼັກສູດ A ໃນ App:  72.25%
-                </label>
-              </div>
-
-              <div class="form-group row">
-                <label
-                  for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
-                >
-                ລຳດັບສອບເສັງ:   1
-                </label>
-              </div>
+          
 
 
-              <div class="form-group row">
-                <label
-                  for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
-                >
-                ຜົນທິດສະດີ:   19/20 ໂດຍ: staff1  ,  2024-04-01 10:22:41
-                </label>
-              </div>
-
-              <div class="form-group row">
-                <label
-                  for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
-                >
-                ຜົນປະຕິບັດ:  85/100 ໂດຍ: E-driving ,  2024-04-01 11:32:23
-                </label>
-              </div>
-
-              <div class="form-group row">
-                <label
-                  for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
-                >
-                ໝາຍເຫດ:   ເຫດຜົນທີ່ຍົກເລີກໃຫ້ຂຽນໃສ່ບ່ອນນີ້
-                </label>
-              </div>
             </div>
 
             
 
            
-          </div> -->
+          </div>
 
           <div class="row">
-            <div class="col-5 col-sm-12 col-md-5">
-              <div class="form-group row">
+            <div class="col-4 col-sm-12 col-md-4">
+              <!-- <div class="form-group row">
                 <label
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                 >
                   ສອບເສັງ ປະເພດ :
                 </label>
-              </div>
+              </div> -->
 
               <div class="form-group row">
                 <label
@@ -447,15 +387,12 @@
             </div>
 
             <div class="col-7 col-sm-12 col-md-7">
-              <div class="form-group row">
-                <label
-                  for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm"
-                >
-                {{ store.dlt_select.dlt_code }}:{{ store.dlt_select.dlt_name_lo }}
-                  </label
-                >
-              </div>
+              <!-- <div class="form-group row">
+          
+                
+                 
+                <span > {{ store.dlt_select.dlt_code }}:{{ store.dlt_select.dlt_name_lo }} </span>
+              </div> -->
               <div class="form-group row">
                 <label
                   for="company-name"

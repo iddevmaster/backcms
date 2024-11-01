@@ -13,6 +13,8 @@ import ApiService from "../../../services/api.service";
 
 import { useModalStore } from "@/store/modal";
 import { useToast } from "vue-toastification";
+import { useI18n } from "vue-i18n";
+const { locale, setLocale } = useI18n();
 definePageMeta({
   middleware: ["auth", "roles"],
   allowedRoles: [1, 2],
@@ -31,10 +33,11 @@ store.user_type = auth.users.user_type;
 const today = new Date();
 const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 store.formsearchapptoday.ap_date_start = date;
-
+await store.fetchDlt();
 await store.fetchAppPresentTodayReset();
 await store.fetchAppPresentToday();
 await store.fetchAppCourse();
+
 store.group = [];
 const closeModal = () => {
   store.closeModal();
@@ -70,6 +73,20 @@ const CheckTotalque = (item) => {
     return "-";
   }
 };
+
+
+const checkdlt = (item) => {
+
+
+
+
+const filteredData = store.dlt.filter(s => s.dlt_code == item[0].dlt_code);
+
+
+return filteredData;
+};
+
+
 
 function coverimage(i) {
   let result = i.slice(0, 6);
@@ -112,6 +129,8 @@ function coverimage(i) {
             <!-- <AppointListByGroup></AppointListByGroup> -->
           </div>
         </div>
+
+      
         <div id="toggleAccordion" class="no-icons accordion">
           <!-- A 1-->
 
@@ -128,6 +147,9 @@ function coverimage(i) {
                 >
                   ຊ່ອງເວລາ 08.00 - A : Two-wheels motocycle engine not exceed
                   125 cc
+                
+
+              
                 </div>
               </section>
             </div>
@@ -324,8 +346,10 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionA11"
                 >
-                  ຊ່ອງເວລາ 08.00 - A1 : Two-wheels motorcycle engine 125 cc and
-                  above
+                  ຊ່ອງເວລາ 08.00 - A1 :
+                  {{ locale == "la" ? checkdlt(store.dlt_today.A1_1)[0].dlt_name_lo : checkdlt(store.dlt_today.A1_1)[0].dlt_name_eng }}
+
+                 
                 </div>
               </section>
             </div>
@@ -532,8 +556,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionA12"
                 >
-                  ຊ່ອງເວລາ 16.00 - A1 : Two-wheels motorcycle engine 125 cc and
-                  above
+                  ຊ່ອງເວລາ 16.00 - A1 : {{ locale == "la" ? checkdlt(store.dlt_today.A1_1)[0].dlt_name_lo : checkdlt(store.dlt_today.A1_1)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -657,8 +680,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionA21"
                 >
-                  ຊ່ອງເວລາ 08.00 - A2 : Private three-wheels vehicle, Passenger
-                  vehicle with two-wheels and three-wheels
+                  ຊ່ອງເວລາ 08.00 - A2 : {{ locale == "la" ? checkdlt(store.dlt_today.A2_1)[0].dlt_name_lo : checkdlt(store.dlt_today.A1_1)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -782,8 +804,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionA22"
                 >
-                  ຊ່ອງເວລາ 16.00 - A2 : Private three-wheels vehicle, Passenger
-                  vehicle with two-wheels and three-wheels
+                  ຊ່ອງເວລາ 16.00 - A2 :{{ locale == "la" ? checkdlt(store.dlt_today.A2_2)[0].dlt_name_lo : checkdlt(store.dlt_today.A1_1)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -899,8 +920,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionA31"
                 >
-                  ຊ່ອງເວລາ 08.00 - A3 : Two-wheels tractor with trailer and
-                  Walk-behide Tractor
+                  ຊ່ອງເວລາ 08.00 - A3 :  {{ locale == "la" ? checkdlt(store.dlt_today.A3_1)[0].dlt_name_lo : checkdlt(store.dlt_today.A3_2)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -1023,8 +1043,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionA32"
                 >
-                  ຊ່ອງເວລາ 16.00 - A3 : Two-wheels tractor with trailer and
-                  Walk-behide Tractor
+                  ຊ່ອງເວລາ 16.00 - A3 :  {{ locale == "la" ? checkdlt(store.dlt_today.A3_2)[0].dlt_name_lo : checkdlt(store.dlt_today.A3_2)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -1147,8 +1166,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionB1"
                 >
-                  ຊ່ອງເວລາ 08.00 - B : Car with four-wheels, total weight not
-                  exceed 3500kg, not more than 9 seats including driver
+                  ຊ່ອງເວລາ 08.00 - B :  {{ locale == "la" ? checkdlt(store.dlt_today.B_1)[0].dlt_name_lo : checkdlt(store.dlt_today.B_1)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -1355,8 +1373,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionB2"
                 >
-                  ຊ່ອງເວລາ 16.00 - B : Car with four-wheels, total weight not
-                  exceed 3500kg, not more than 9 seats including driver
+                  ຊ່ອງເວລາ 16.00 - B : {{ locale == "la" ? checkdlt(store.dlt_today.B_2)[0].dlt_name_lo : checkdlt(store.dlt_today.B_2)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -1563,8 +1580,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionC1"
                 >
-                  ຊ່ອງເວລາ 08.00 - C : Cargo truck, total weight from 3,500 to
-                  7,500 kilograms
+                  ຊ່ອງເວລາ 08.00 - C :  {{ locale == "la" ? checkdlt(store.dlt_today.C_1)[0].dlt_name_lo : checkdlt(store.dlt_today.C_1)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -1771,8 +1787,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionC2"
                 >
-                  ຊ່ອງເວລາ 16.00 - C : Cargo truck, total weight from 3,500 to
-                  7,500 kilograms
+                  ຊ່ອງເວລາ 16.00 - C : {{ locale == "la" ? checkdlt(store.dlt_today.C_2)[0].dlt_name_lo : checkdlt(store.dlt_today.C_2)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
