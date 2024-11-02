@@ -590,7 +590,6 @@ export const AppointStore = defineStore('appoint', {
       this.formuser.user_id = this.user_id;
       this.formuser.verify_account = 'system_active';
 
-      console.log(this.formuser);
 
       const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
     

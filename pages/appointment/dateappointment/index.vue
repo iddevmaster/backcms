@@ -145,8 +145,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionA1"
                 >
-                  ຊ່ອງເວລາ 08.00 - A : Two-wheels motocycle engine not exceed
-                  125 cc
+                  ຊ່ອງເວລາ 08.00 - A : {{ locale == "la" ? checkdlt(store.dlt_today.A_1)[0].dlt_name_lo : checkdlt(store.dlt_today.A_1)[0].dlt_name_eng }}
                 
 
               
@@ -187,7 +186,7 @@ function coverimage(i) {
                           />
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: {{ item1.ap_number }}
+                              {{ $t("app_today_id") }}: {{ item1.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
@@ -195,9 +194,9 @@ function coverimage(i) {
                               {{ item1.user_firstname }}
                               {{ item1.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2">{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
                             <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+                            <p class="card-category mb-2">{{ $t("app_today_div") }}: 1</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -205,10 +204,10 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item1.thero"
                                 >
-                                  ຜົນທິດສະດີ: {{ item1.thero }}
+                                {{ $t("app_today_id") }}: {{ item1.thero }}
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນທິດສະດີ: -
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -217,13 +216,13 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item1.pratic"
                                 >
-                                  ຜົນປະຕິບັດ:
+                                {{ $t("app_today_pra") }}:
                                   <span style="color: green"
                                     >{{ item1.pratic }} /100</span
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນປະຕິບັດ: -
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -249,8 +248,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionA2"
                 >
-                  ຊ່ອງເວລາ 16.00 - A : Two-wheels motocycle engine not exceed
-                  125 cc
+                  ຊ່ອງເວລາ 16.00 - A : {{ locale == "la" ? checkdlt(store.dlt_today.A_2)[0].dlt_name_lo : checkdlt(store.dlt_today.A_2)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -288,16 +286,16 @@ function coverimage(i) {
                           />
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: {{ item.ap_number }}
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
                               {{ item.user_prefrix }} {{ item.user_firstname }}
                               {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2">{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
                             <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+                            <p class="card-category mb-2">{{ $t("app_today_div") }}: 1</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -305,11 +303,11 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ: {{ item.thero }} /
+                                {{ $t("app_today_ther") }}: {{ item.thero }} /
                                   {{ CheckTotalque(item) }}
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນທິດສະດີ: -
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -317,10 +315,10 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                  ຜົນປະຕິບັດ: {{ item.pratic }} /100
+                                {{ $t("app_today_pra") }}: {{ item.pratic }} /100
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນປະຕິບັດ: -
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -388,7 +386,7 @@ function coverimage(i) {
 
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: {{ item.ap_number }}
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
@@ -396,8 +394,8 @@ function coverimage(i) {
                               {{ item.user_lastname }}
                             </h5>
                           
-                            <p class="card-category mb-2" v-if="item.id_card">ID ນັກຮຽນ: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
                         
                             <div v-if="item.app_status == 'C'">
                               <p
@@ -478,8 +476,8 @@ function coverimage(i) {
                               </p>
                             </div>
 
-                            <p class="card-category mb-2" v-if="item.st_id">ລຳດັບສອບເສັງ: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>ລຳດັບສອບເສັງ: -</p>
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -487,7 +485,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ:
+                                {{ $t("app_today_ther") }}:
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -506,7 +504,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນທິດສະດີ: -
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -514,7 +512,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                  ຜົນປະຕິບັດ:
+                                {{ $t("app_today_pra") }}:
 
                                   <span
                                     style="color: red"
@@ -530,7 +528,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນປະຕິບັດ: -
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -594,16 +592,16 @@ function coverimage(i) {
                           />
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: {{ item.ap_number }}
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
                               {{ item.user_prefrix }} {{ item.user_firstname }}
                               {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2">{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
                             <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+                            <p class="card-category mb-2">{{ $t("app_today_div") }}: 1</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -611,7 +609,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ:
+                                {{ $t("app_today_ther") }}:
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -630,7 +628,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນທິດສະດີ: -
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -638,7 +636,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                  ຜົນປະຕິບັດ:
+                                {{ $t("app_today_pra") }}:
 
                                   <span
                                     style="color: red"
@@ -654,7 +652,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນປະຕິບັດ: -
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -718,16 +716,16 @@ function coverimage(i) {
                           />
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: {{ item.ap_number }}
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
                               {{ item.user_prefrix }} {{ item.user_firstname }}
                               {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2">{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
                             <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+                            <p class="card-category mb-2">{{ $t("app_today_div") }}: 1</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -735,7 +733,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ:
+                                {{ $t("app_today_ther") }}:
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -754,7 +752,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນທິດສະດີ: -
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -762,7 +760,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                  ຜົນປະຕິບັດ:
+                                {{ $t("app_today_pra") }}:
 
                                   <span
                                     style="color: red"
@@ -778,7 +776,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນປະຕິບັດ: -
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -834,16 +832,16 @@ function coverimage(i) {
                           />
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: {{ item.ap_number }}
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
                               {{ item.user_prefrix }} {{ item.user_firstname }}
                               {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2">{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
                             <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+                            <p class="card-category mb-2">{{ $t("app_today_div") }}: 1</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -851,7 +849,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ:
+                                {{ $t("app_today_ther") }}:
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -870,7 +868,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນທິດສະດີ: -
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -878,7 +876,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                  ຜົນປະຕິບັດ:
+                                {{ $t("app_today_pra") }}:
 
                                   <span
                                     style="color: red"
@@ -894,7 +892,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນປະຕິບັດ: -
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -958,23 +956,23 @@ function coverimage(i) {
                           />
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: {{ item.ap_number }}
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
                               {{ item.user_prefrix }} {{ item.user_firstname }}
                               {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2">{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
                             <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+                            <p class="card-category mb-2">{{ $t("app_today_div") }}: 1</p>
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
                                 <h4
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ:
+                                {{ $t("app_today_ther") }}:
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -993,7 +991,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນທິດສະດີ: -
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -1001,7 +999,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                  ຜົນປະຕິບັດ:
+                                {{ $t("app_today_pra") }}:
 
                                   <span
                                     style="color: red"
@@ -1017,7 +1015,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນປະຕິບັດ: -
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -1080,16 +1078,16 @@ function coverimage(i) {
                           />
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: {{ item.ap_number }}
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
                               {{ item.user_prefrix }} {{ item.user_firstname }}
                               {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2">{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
                             <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
+                            <p class="card-category mb-2">{{ $t("app_today_div") }}: 1</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -1097,7 +1095,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ:
+                                {{ $t("app_today_ther") }}:
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -1116,7 +1114,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນທິດສະດີ: -
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -1124,7 +1122,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                  ຜົນປະຕິບັດ:
+                                {{ $t("app_today_pra") }}:
 
                                   <span
                                     style="color: red"
@@ -1140,7 +1138,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນປະຕິບັດ: -
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -1205,7 +1203,7 @@ function coverimage(i) {
 
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: {{ item.ap_number }}
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
@@ -1213,8 +1211,8 @@ function coverimage(i) {
                               {{ item.user_lastname }}
                             </h5>
                           
-                            <p class="card-category mb-2" v-if="item.id_card">ID ນັກຮຽນ: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
                         
                             <div v-if="item.app_status == 'C'">
                               <p
@@ -1295,8 +1293,8 @@ function coverimage(i) {
                               </p>
                             </div>
 
-                            <p class="card-category mb-2" v-if="item.st_id">ລຳດັບສອບເສັງ: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>ລຳດັບສອບເສັງ: -</p>
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -1304,7 +1302,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ:
+                                {{ $t("app_today_ther") }}:
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -1323,7 +1321,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນທິດສະດີ: -
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -1331,7 +1329,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                  ຜົນປະຕິບັດ:
+                                {{ $t("app_today_pra") }}:
 
                                   <span
                                     style="color: red"
@@ -1347,7 +1345,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນປະຕິບັດ: -
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -1412,7 +1410,7 @@ function coverimage(i) {
 
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: {{ item.ap_number }}
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
@@ -1420,8 +1418,8 @@ function coverimage(i) {
                               {{ item.user_lastname }}
                             </h5>
                           
-                            <p class="card-category mb-2" v-if="item.id_card">ID ນັກຮຽນ: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
                         
                             <div v-if="item.app_status == 'C'">
                               <p
@@ -1502,8 +1500,8 @@ function coverimage(i) {
                               </p>
                             </div>
 
-                            <p class="card-category mb-2" v-if="item.st_id">ລຳດັບສອບເສັງ: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>ລຳດັບສອບເສັງ: -</p>
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -1511,7 +1509,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ:
+                                {{ $t("app_today_ther") }}:
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -1530,7 +1528,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນທິດສະດີ: -
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -1538,7 +1536,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                  ຜົນປະຕິບັດ:
+                                {{ $t("app_today_pra") }}:
 
                                   <span
                                     style="color: red"
@@ -1554,7 +1552,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນປະຕິບັດ: -
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -1619,7 +1617,7 @@ function coverimage(i) {
 
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: {{ item.ap_number }}
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
@@ -1627,8 +1625,8 @@ function coverimage(i) {
                               {{ item.user_lastname }}
                             </h5>
                           
-                            <p class="card-category mb-2" v-if="item.id_card">ID ນັກຮຽນ: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
                         
                             <div v-if="item.app_status == 'C'">
                               <p
@@ -1709,8 +1707,8 @@ function coverimage(i) {
                               </p>
                             </div>
 
-                            <p class="card-category mb-2" v-if="item.st_id">ລຳດັບສອບເສັງ: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>ລຳດັບສອບເສັງ: -</p>
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -1718,7 +1716,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ:
+                                {{ $t("app_today_ther") }}:
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -1737,7 +1735,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນທິດສະດີ: -
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -1745,7 +1743,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                  ຜົນປະຕິບັດ:
+                                {{ $t("app_today_pra") }}:
 
                                   <span
                                     style="color: red"
@@ -1761,7 +1759,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນປະຕິບັດ: -
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -1826,7 +1824,7 @@ function coverimage(i) {
 
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: {{ item.ap_number }}
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
@@ -1834,8 +1832,8 @@ function coverimage(i) {
                               {{ item.user_lastname }}
                             </h5>
                           
-                            <p class="card-category mb-2" v-if="item.id_card">ID ນັກຮຽນ: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
                         
                             <div v-if="item.app_status == 'C'">
                               <p
@@ -1916,8 +1914,8 @@ function coverimage(i) {
                               </p>
                             </div>
 
-                            <p class="card-category mb-2" v-if="item.st_id">ລຳດັບສອບເສັງ: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>ລຳດັບສອບເສັງ: -</p>
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -1925,7 +1923,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ:
+                                {{ $t("app_today_ther") }}:
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -1944,7 +1942,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນທິດສະດີ: -
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -1952,7 +1950,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                  ຜົນປະຕິບັດ:
+                                {{ $t("app_today_pra") }}:
 
                                   <span
                                     style="color: red"
@@ -1968,7 +1966,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນປະຕິບັດ: -
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -1994,8 +1992,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionC11"
                 >
-                  ຊ່ອງເວລາ 08.00 - C1 : Cargo truck, total weight exceed 7,500
-                  kilogram up to 15,000 kilograms
+                  ຊ່ອງເວລາ 08.00 - C1 : {{ locale == "la" ? checkdlt(store.dlt_today.C1_1)[0].dlt_name_lo : checkdlt(store.dlt_today.C1_1)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -2034,7 +2031,7 @@ function coverimage(i) {
 
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: {{ item.ap_number }}
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
@@ -2042,8 +2039,8 @@ function coverimage(i) {
                               {{ item.user_lastname }}
                             </h5>
                           
-                            <p class="card-category mb-2" v-if="item.id_card">ID ນັກຮຽນ: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
                         
                             <div v-if="item.app_status == 'C'">
                               <p
@@ -2124,8 +2121,8 @@ function coverimage(i) {
                               </p>
                             </div>
 
-                            <p class="card-category mb-2" v-if="item.st_id">ລຳດັບສອບເສັງ: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>ລຳດັບສອບເສັງ: -</p>
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -2133,7 +2130,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ:
+                                {{ $t("app_today_ther") }}:
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -2152,7 +2149,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນທິດສະດີ: -
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -2160,7 +2157,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                  ຜົນປະຕິບັດ:
+                                {{ $t("app_today_pra") }}:
 
                                   <span
                                     style="color: red"
@@ -2176,7 +2173,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນປະຕິບັດ: -
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -2202,8 +2199,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionC12"
                 >
-                  ຊ່ອງເວລາ 16.00 - C1 : Cargo truck, total weight exceed 7,500
-                  kilogram up to 15,000 kilograms
+                  ຊ່ອງເວລາ 16.00 - C1 : {{ locale == "la" ? checkdlt(store.dlt_today.C1_2)[0].dlt_name_lo : checkdlt(store.dlt_today.C1_2)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -2242,7 +2238,7 @@ function coverimage(i) {
 
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: {{ item.ap_number }}
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
@@ -2250,8 +2246,8 @@ function coverimage(i) {
                               {{ item.user_lastname }}
                             </h5>
                           
-                            <p class="card-category mb-2" v-if="item.id_card">ID ນັກຮຽນ: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
                         
                             <div v-if="item.app_status == 'C'">
                               <p
@@ -2332,8 +2328,8 @@ function coverimage(i) {
                               </p>
                             </div>
 
-                            <p class="card-category mb-2" v-if="item.st_id">ລຳດັບສອບເສັງ: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>ລຳດັບສອບເສັງ: -</p>
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -2341,7 +2337,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ:
+                                {{ $t("app_today_ther") }}:
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -2360,7 +2356,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນທິດສະດີ: -
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -2368,7 +2364,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                  ຜົນປະຕິບັດ:
+                                {{ $t("app_today_pra") }}:
 
                                   <span
                                     style="color: red"
@@ -2384,7 +2380,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນປະຕິບັດ: -
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -2410,8 +2406,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionC21"
                 >
-                  ຊ່ອງເວລາ 08.00 - C2 : Cargo truck, total weight exceed 15,000
-                  kilograms
+                  ຊ່ອງເວລາ 08.00 - C2 : {{ locale == "la" ? checkdlt(store.dlt_today.C2_1)[0].dlt_name_lo : checkdlt(store.dlt_today.C2_1)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -2450,7 +2445,7 @@ function coverimage(i) {
 
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: {{ item.ap_number }}
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
@@ -2458,8 +2453,8 @@ function coverimage(i) {
                               {{ item.user_lastname }}
                             </h5>
                           
-                            <p class="card-category mb-2" v-if="item.id_card">ID ນັກຮຽນ: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
                         
                             <div v-if="item.app_status == 'C'">
                               <p
@@ -2540,8 +2535,8 @@ function coverimage(i) {
                               </p>
                             </div>
 
-                            <p class="card-category mb-2" v-if="item.st_id">ລຳດັບສອບເສັງ: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>ລຳດັບສອບເສັງ: -</p>
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -2549,7 +2544,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ:
+                                {{ $t("app_today_ther") }}:
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -2568,7 +2563,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນທິດສະດີ: -
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -2576,7 +2571,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                  ຜົນປະຕິບັດ:
+                                {{ $t("app_today_pra") }}:
 
                                   <span
                                     style="color: red"
@@ -2592,7 +2587,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນປະຕິບັດ: -
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -2618,8 +2613,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionC22"
                 >
-                  ຊ່ອງເວລາ 16.00 - C2 : Cargo truck, total weight exceed 15,000
-                  kilograms
+                  ຊ່ອງເວລາ 16.00 - C2 : {{ locale == "la" ? checkdlt(store.dlt_today.C2_2)[0].dlt_name_lo : checkdlt(store.dlt_today.C2_2)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -2658,7 +2652,7 @@ function coverimage(i) {
 
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: {{ item.ap_number }}
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
@@ -2666,8 +2660,8 @@ function coverimage(i) {
                               {{ item.user_lastname }}
                             </h5>
                           
-                            <p class="card-category mb-2" v-if="item.id_card">ID ນັກຮຽນ: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>ID ນັກຮຽນ: ບໍ່ມີ</p>
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
                         
                             <div v-if="item.app_status == 'C'">
                               <p
@@ -2748,8 +2742,8 @@ function coverimage(i) {
                               </p>
                             </div>
 
-                            <p class="card-category mb-2" v-if="item.st_id">ລຳດັບສອບເສັງ: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>ລຳດັບສອບເສັງ: -</p>
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -2757,7 +2751,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                  ຜົນທິດສະດີ:
+                                {{ $t("app_today_ther") }}:
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -2776,7 +2770,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນທິດສະດີ: -
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -2784,7 +2778,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                  ຜົນປະຕິບັດ:
+                                {{ $t("app_today_pra") }}:
 
                                   <span
                                     style="color: red"
@@ -2800,7 +2794,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  ຜົນປະຕິບັດ: -
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -2826,8 +2820,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionD1"
                 >
-                  ຊ່ອງເວລາ 08.00 - D : Passenger vehicle with 4 wheels or more,
-                  not more than 15 seats
+                  ຊ່ອງເວລາ 08.00 - D : {{ locale == "la" ? checkdlt(store.dlt_today.D_1)[0].dlt_name_lo : checkdlt(store.dlt_today.D_1)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -2837,84 +2830,178 @@ function coverimage(i) {
               aria-labelledby="..."
               data-bs-parent="#toggleAccordion3"
             >
-              <div class="card-body">
+            <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="row">
+                  <div
+                    class="col-sm-6"
+                    v-for="(item, index) in store.dlt_today.D_1"
+                    :key="item"
+                  >
+                  <div class="row" @click="GotoDetails(item)">
                       <div
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
                           <img
+                            v-if="item.user_img"
+                            :src="coverimage(item.user_img)"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <img
+                            v-else
                             src="../.././../public/img/logo.svg"
                             class="card-img-top"
                             alt="..."
                             style="width: 200px"
                           />
+
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
+                              {{ item.user_prefrix }} {{ item.user_firstname }}
+                              {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
-                                </h4>
-                              </div>
+                          
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
+                        
+                            <div v-if="item.app_status == 'C'">
+                              <p
+                                class="card-category mb-2"
+                                v-if="item.app_status == 'C'"
+                                style="color: red"
+                              >
+                                ສະຖານະ: Canceled
+                              </p>
                             </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
-                            </h4>
-                            <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
-                            </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <span class="card-category mb-2">ສະຖານະ : </span
-                            ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-                            <p class="card-category mb-2 pt-2">
-                              ລຳດັບສອບເສັງ: 1
-                            </p>
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == null
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document == '' ||
+                                    item.check_document == null) &&
+                                  item.app_status == 'Y'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending check document
+                              </p>
+                            </div>
+
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == 'pass'
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document != '' ||
+                                    item.check_document != null) &&
+                                  item.mr_status_t == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Theory Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t != null &&
+                                  item.mr_status_p == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Practical Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'fail' &&
+                                  item.mr_status_p == 'fail'
+                                "
+                                style="color: red"
+                              >
+                                ສະຖານະ: Failed Exam
+                              </p>
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'pass' &&
+                                  item.mr_status_p == 'pass'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Practical Exam
+                              </p>
+                            </div>
+
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.thero"
+                                >
+                                {{ $t("app_today_ther") }}:
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_t == 'fail'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_t == 'pass'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.pratic"
+                                >
+                                {{ $t("app_today_pra") }}:
+
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_p == 'fail'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_p == 'pass'"
+                                  >
+                                    {{ item.pratic }}/100</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -2940,8 +3027,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionD2"
                 >
-                  ຊ່ອງເວລາ 16.00 - D : Passenger vehicle with 4 wheels or more,
-                  not more than 15 seats
+                  ຊ່ອງເວລາ 16.00 - D : {{ locale == "la" ? checkdlt(store.dlt_today.D_2)[0].dlt_name_lo : checkdlt(store.dlt_today.D_2)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -2951,84 +3037,178 @@ function coverimage(i) {
               aria-labelledby="..."
               data-bs-parent="#toggleAccordion3"
             >
-              <div class="card-body">
+            <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="row">
+                  <div
+                    class="col-sm-6"
+                    v-for="(item, index) in store.dlt_today.D_2"
+                    :key="item"
+                  >
+                  <div class="row" @click="GotoDetails(item)">
                       <div
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
                           <img
+                            v-if="item.user_img"
+                            :src="coverimage(item.user_img)"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <img
+                            v-else
                             src="../.././../public/img/logo.svg"
                             class="card-img-top"
                             alt="..."
                             style="width: 200px"
                           />
+
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
+                              {{ item.user_prefrix }} {{ item.user_firstname }}
+                              {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
-                                </h4>
-                              </div>
+                          
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
+                        
+                            <div v-if="item.app_status == 'C'">
+                              <p
+                                class="card-category mb-2"
+                                v-if="item.app_status == 'C'"
+                                style="color: red"
+                              >
+                                ສະຖານະ: Canceled
+                              </p>
                             </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
-                            </h4>
-                            <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
-                            </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <span class="card-category mb-2">ສະຖານະ : </span
-                            ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-                            <p class="card-category mb-2 pt-2">
-                              ລຳດັບສອບເສັງ: 1
-                            </p>
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == null
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document == '' ||
+                                    item.check_document == null) &&
+                                  item.app_status == 'Y'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending check document
+                              </p>
+                            </div>
+
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == 'pass'
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document != '' ||
+                                    item.check_document != null) &&
+                                  item.mr_status_t == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Theory Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t != null &&
+                                  item.mr_status_p == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Practical Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'fail' &&
+                                  item.mr_status_p == 'fail'
+                                "
+                                style="color: red"
+                              >
+                                ສະຖານະ: Failed Exam
+                              </p>
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'pass' &&
+                                  item.mr_status_p == 'pass'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Practical Exam
+                              </p>
+                            </div>
+
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.thero"
+                                >
+                                {{ $t("app_today_ther") }}:
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_t == 'fail'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_t == 'pass'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.pratic"
+                                >
+                                {{ $t("app_today_pra") }}:
+
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_p == 'fail'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_p == 'pass'"
+                                  >
+                                    {{ item.pratic }}/100</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -3054,8 +3234,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionD11"
                 >
-                  ຊ່ອງເວລາ 08.00 - D1 : Passenger vehicle from 16 seats to 35
-                  seats
+                  ຊ່ອງເວລາ 08.00 - D1 : {{ locale == "la" ? checkdlt(store.dlt_today.D1_1)[0].dlt_name_lo : checkdlt(store.dlt_today.D1_1)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -3065,84 +3244,178 @@ function coverimage(i) {
               aria-labelledby="..."
               data-bs-parent="#toggleAccordion3"
             >
-              <div class="card-body">
+            <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="row">
+                  <div
+                    class="col-sm-6"
+                    v-for="(item, index) in store.dlt_today.D1_1"
+                    :key="item"
+                  >
+                  <div class="row" @click="GotoDetails(item)">
                       <div
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
                           <img
+                            v-if="item.user_img"
+                            :src="coverimage(item.user_img)"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <img
+                            v-else
                             src="../.././../public/img/logo.svg"
                             class="card-img-top"
                             alt="..."
                             style="width: 200px"
                           />
+
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
+                              {{ item.user_prefrix }} {{ item.user_firstname }}
+                              {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
-                                </h4>
-                              </div>
+                          
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
+                        
+                            <div v-if="item.app_status == 'C'">
+                              <p
+                                class="card-category mb-2"
+                                v-if="item.app_status == 'C'"
+                                style="color: red"
+                              >
+                                ສະຖານະ: Canceled
+                              </p>
                             </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
-                            </h4>
-                            <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
-                            </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <span class="card-category mb-2">ສະຖານະ : </span
-                            ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-                            <p class="card-category mb-2 pt-2">
-                              ລຳດັບສອບເສັງ: 1
-                            </p>
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == null
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document == '' ||
+                                    item.check_document == null) &&
+                                  item.app_status == 'Y'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending check document
+                              </p>
+                            </div>
+
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == 'pass'
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document != '' ||
+                                    item.check_document != null) &&
+                                  item.mr_status_t == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Theory Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t != null &&
+                                  item.mr_status_p == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Practical Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'fail' &&
+                                  item.mr_status_p == 'fail'
+                                "
+                                style="color: red"
+                              >
+                                ສະຖານະ: Failed Exam
+                              </p>
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'pass' &&
+                                  item.mr_status_p == 'pass'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Practical Exam
+                              </p>
+                            </div>
+
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.thero"
+                                >
+                                {{ $t("app_today_ther") }}:
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_t == 'fail'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_t == 'pass'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.pratic"
+                                >
+                                {{ $t("app_today_pra") }}:
+
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_p == 'fail'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_p == 'pass'"
+                                  >
+                                    {{ item.pratic }}/100</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -3153,6 +3426,7 @@ function coverimage(i) {
                   </div>
                 </div>
               </div>
+           
             </div>
           </div>
 
@@ -3168,8 +3442,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionD12"
                 >
-                  ຊ່ອງເວລາ 16.00 - D1 : Passenger vehicle from 16 seats to 35
-                  seats
+                  ຊ່ອງເວລາ 16.00 - D1 : {{ locale == "la" ? checkdlt(store.dlt_today.D1_2)[0].dlt_name_lo : checkdlt(store.dlt_today.D1_2)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -3179,84 +3452,178 @@ function coverimage(i) {
               aria-labelledby="..."
               data-bs-parent="#toggleAccordion3"
             >
-              <div class="card-body">
+            <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="row">
+                  <div
+                    class="col-sm-6"
+                    v-for="(item, index) in store.dlt_today.D1_2"
+                    :key="item"
+                  >
+                  <div class="row" @click="GotoDetails(item)">
                       <div
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
                           <img
+                            v-if="item.user_img"
+                            :src="coverimage(item.user_img)"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <img
+                            v-else
                             src="../.././../public/img/logo.svg"
                             class="card-img-top"
                             alt="..."
                             style="width: 200px"
                           />
+
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
+                              {{ item.user_prefrix }} {{ item.user_firstname }}
+                              {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
-                                </h4>
-                              </div>
+                          
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
+                        
+                            <div v-if="item.app_status == 'C'">
+                              <p
+                                class="card-category mb-2"
+                                v-if="item.app_status == 'C'"
+                                style="color: red"
+                              >
+                                ສະຖານະ: Canceled
+                              </p>
                             </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
-                            </h4>
-                            <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
-                            </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <span class="card-category mb-2">ສະຖານະ : </span
-                            ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-                            <p class="card-category mb-2 pt-2">
-                              ລຳດັບສອບເສັງ: 1
-                            </p>
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == null
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document == '' ||
+                                    item.check_document == null) &&
+                                  item.app_status == 'Y'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending check document
+                              </p>
+                            </div>
+
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == 'pass'
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document != '' ||
+                                    item.check_document != null) &&
+                                  item.mr_status_t == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Theory Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t != null &&
+                                  item.mr_status_p == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Practical Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'fail' &&
+                                  item.mr_status_p == 'fail'
+                                "
+                                style="color: red"
+                              >
+                                ສະຖານະ: Failed Exam
+                              </p>
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'pass' &&
+                                  item.mr_status_p == 'pass'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Practical Exam
+                              </p>
+                            </div>
+
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.thero"
+                                >
+                                {{ $t("app_today_ther") }}:
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_t == 'fail'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_t == 'pass'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.pratic"
+                                >
+                                {{ $t("app_today_pra") }}:
+
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_p == 'fail'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_p == 'pass'"
+                                  >
+                                    {{ item.pratic }}/100</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -3282,7 +3649,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionD21"
                 >
-                  ຊ່ອງເວລາ 08.00 - D2 : Passenger vehicle from 36 seats or more
+                  ຊ່ອງເວລາ 08.00 - D2 : {{ locale == "la" ? checkdlt(store.dlt_today.D2_1)[0].dlt_name_lo : checkdlt(store.dlt_today.D2_1)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -3292,84 +3659,178 @@ function coverimage(i) {
               aria-labelledby="..."
               data-bs-parent="#toggleAccordion3"
             >
-              <div class="card-body">
+            <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="row">
+                  <div
+                    class="col-sm-6"
+                    v-for="(item, index) in store.dlt_today.D2_1"
+                    :key="item"
+                  >
+                  <div class="row" @click="GotoDetails(item)">
                       <div
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
                           <img
+                            v-if="item.user_img"
+                            :src="coverimage(item.user_img)"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <img
+                            v-else
                             src="../.././../public/img/logo.svg"
                             class="card-img-top"
                             alt="..."
                             style="width: 200px"
                           />
+
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
+                              {{ item.user_prefrix }} {{ item.user_firstname }}
+                              {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
-                                </h4>
-                              </div>
+                          
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
+                        
+                            <div v-if="item.app_status == 'C'">
+                              <p
+                                class="card-category mb-2"
+                                v-if="item.app_status == 'C'"
+                                style="color: red"
+                              >
+                                ສະຖານະ: Canceled
+                              </p>
                             </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
-                            </h4>
-                            <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
-                            </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <span class="card-category mb-2">ສະຖານະ : </span
-                            ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-                            <p class="card-category mb-2 pt-2">
-                              ລຳດັບສອບເສັງ: 1
-                            </p>
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == null
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document == '' ||
+                                    item.check_document == null) &&
+                                  item.app_status == 'Y'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending check document
+                              </p>
+                            </div>
+
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == 'pass'
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document != '' ||
+                                    item.check_document != null) &&
+                                  item.mr_status_t == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Theory Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t != null &&
+                                  item.mr_status_p == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Practical Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'fail' &&
+                                  item.mr_status_p == 'fail'
+                                "
+                                style="color: red"
+                              >
+                                ສະຖານະ: Failed Exam
+                              </p>
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'pass' &&
+                                  item.mr_status_p == 'pass'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Practical Exam
+                              </p>
+                            </div>
+
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.thero"
+                                >
+                                {{ $t("app_today_ther") }}:
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_t == 'fail'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_t == 'pass'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.pratic"
+                                >
+                                {{ $t("app_today_pra") }}:
+
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_p == 'fail'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_p == 'pass'"
+                                  >
+                                    {{ item.pratic }}/100</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -3395,7 +3856,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionD22"
                 >
-                  ຊ່ອງເວລາ 16.00 - D2 : Passenger vehicle from 36 seats or more
+                  ຊ່ອງເວລາ 16.00 - D2 : {{ locale == "la" ? checkdlt(store.dlt_today.D2_2)[0].dlt_name_lo : checkdlt(store.dlt_today.D2_2)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -3405,84 +3866,178 @@ function coverimage(i) {
               aria-labelledby="..."
               data-bs-parent="#toggleAccordion3"
             >
-              <div class="card-body">
+            <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="row">
+                  <div
+                    class="col-sm-6"
+                    v-for="(item, index) in store.dlt_today.D2_2"
+                    :key="item"
+                  >
+                  <div class="row" @click="GotoDetails(item)">
                       <div
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
                           <img
+                            v-if="item.user_img"
+                            :src="coverimage(item.user_img)"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <img
+                            v-else
                             src="../.././../public/img/logo.svg"
                             class="card-img-top"
                             alt="..."
                             style="width: 200px"
                           />
+
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
+                              {{ item.user_prefrix }} {{ item.user_firstname }}
+                              {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
-                                </h4>
-                              </div>
+                          
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
+                        
+                            <div v-if="item.app_status == 'C'">
+                              <p
+                                class="card-category mb-2"
+                                v-if="item.app_status == 'C'"
+                                style="color: red"
+                              >
+                                ສະຖານະ: Canceled
+                              </p>
                             </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
-                            </h4>
-                            <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
-                            </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <span class="card-category mb-2">ສະຖານະ : </span
-                            ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-                            <p class="card-category mb-2 pt-2">
-                              ລຳດັບສອບເສັງ: 1
-                            </p>
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == null
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document == '' ||
+                                    item.check_document == null) &&
+                                  item.app_status == 'Y'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending check document
+                              </p>
+                            </div>
+
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == 'pass'
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document != '' ||
+                                    item.check_document != null) &&
+                                  item.mr_status_t == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Theory Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t != null &&
+                                  item.mr_status_p == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Practical Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'fail' &&
+                                  item.mr_status_p == 'fail'
+                                "
+                                style="color: red"
+                              >
+                                ສະຖານະ: Failed Exam
+                              </p>
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'pass' &&
+                                  item.mr_status_p == 'pass'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Practical Exam
+                              </p>
+                            </div>
+
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.thero"
+                                >
+                                {{ $t("app_today_ther") }}:
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_t == 'fail'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_t == 'pass'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.pratic"
+                                >
+                                {{ $t("app_today_pra") }}:
+
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_p == 'fail'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_p == 'pass'"
+                                  >
+                                    {{ item.pratic }}/100</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -3508,9 +4063,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionE1"
                 >
-                  ຊ່ອງເວລາ 08.00 - E : Car (B), Cargo truck (C) and Passenger
-                  vehicle (D), having trailer total weight not exceed 750
-                  kilograms
+                  ຊ່ອງເວລາ 08.00 - E : {{ locale == "la" ? checkdlt(store.dlt_today.E_1)[0].dlt_name_lo : checkdlt(store.dlt_today.E_1)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -3520,84 +4073,178 @@ function coverimage(i) {
               aria-labelledby="..."
               data-bs-parent="#toggleAccordion3"
             >
-              <div class="card-body">
+            <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="row">
+                  <div
+                    class="col-sm-6"
+                    v-for="(item, index) in store.dlt_today.E_1"
+                    :key="item"
+                  >
+                  <div class="row" @click="GotoDetails(item)">
                       <div
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
                           <img
+                            v-if="item.user_img"
+                            :src="coverimage(item.user_img)"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <img
+                            v-else
                             src="../.././../public/img/logo.svg"
                             class="card-img-top"
                             alt="..."
                             style="width: 200px"
                           />
+
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
+                              {{ item.user_prefrix }} {{ item.user_firstname }}
+                              {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
-                                </h4>
-                              </div>
+                          
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
+                        
+                            <div v-if="item.app_status == 'C'">
+                              <p
+                                class="card-category mb-2"
+                                v-if="item.app_status == 'C'"
+                                style="color: red"
+                              >
+                                ສະຖານະ: Canceled
+                              </p>
                             </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
-                            </h4>
-                            <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
-                            </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <span class="card-category mb-2">ສະຖານະ : </span
-                            ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-                            <p class="card-category mb-2 pt-2">
-                              ລຳດັບສອບເສັງ: 1
-                            </p>
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == null
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document == '' ||
+                                    item.check_document == null) &&
+                                  item.app_status == 'Y'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending check document
+                              </p>
+                            </div>
+
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == 'pass'
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document != '' ||
+                                    item.check_document != null) &&
+                                  item.mr_status_t == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Theory Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t != null &&
+                                  item.mr_status_p == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Practical Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'fail' &&
+                                  item.mr_status_p == 'fail'
+                                "
+                                style="color: red"
+                              >
+                                ສະຖານະ: Failed Exam
+                              </p>
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'pass' &&
+                                  item.mr_status_p == 'pass'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Practical Exam
+                              </p>
+                            </div>
+
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.thero"
+                                >
+                                {{ $t("app_today_ther") }}:
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_t == 'fail'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_t == 'pass'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.pratic"
+                                >
+                                {{ $t("app_today_pra") }}:
+
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_p == 'fail'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_p == 'pass'"
+                                  >
+                                    {{ item.pratic }}/100</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -3623,9 +4270,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionE2"
                 >
-                  ຊ່ອງເວລາ 16.00 - E : Car (B), Cargo truck (C) and Passenger
-                  vehicle (D), having trailer total weight not exceed 750
-                  kilograms
+                  ຊ່ອງເວລາ 16.00 - E : {{ locale == "la" ? checkdlt(store.dlt_today.E_2)[0].dlt_name_lo : checkdlt(store.dlt_today.E_2)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -3635,84 +4280,178 @@ function coverimage(i) {
               aria-labelledby="..."
               data-bs-parent="#toggleAccordion3"
             >
-              <div class="card-body">
+            <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="row">
+                  <div
+                    class="col-sm-6"
+                    v-for="(item, index) in store.dlt_today.E_2"
+                    :key="item"
+                  >
+                  <div class="row" @click="GotoDetails(item)">
                       <div
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
                           <img
+                            v-if="item.user_img"
+                            :src="coverimage(item.user_img)"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <img
+                            v-else
                             src="../.././../public/img/logo.svg"
                             class="card-img-top"
                             alt="..."
                             style="width: 200px"
                           />
+
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
+                              {{ item.user_prefrix }} {{ item.user_firstname }}
+                              {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
-                                </h4>
-                              </div>
+                          
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
+                        
+                            <div v-if="item.app_status == 'C'">
+                              <p
+                                class="card-category mb-2"
+                                v-if="item.app_status == 'C'"
+                                style="color: red"
+                              >
+                                ສະຖານະ: Canceled
+                              </p>
                             </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
-                            </h4>
-                            <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
-                            </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <span class="card-category mb-2">ສະຖານະ : </span
-                            ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-                            <p class="card-category mb-2 pt-2">
-                              ລຳດັບສອບເສັງ: 1
-                            </p>
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == null
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document == '' ||
+                                    item.check_document == null) &&
+                                  item.app_status == 'Y'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending check document
+                              </p>
+                            </div>
+
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == 'pass'
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document != '' ||
+                                    item.check_document != null) &&
+                                  item.mr_status_t == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Theory Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t != null &&
+                                  item.mr_status_p == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Practical Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'fail' &&
+                                  item.mr_status_p == 'fail'
+                                "
+                                style="color: red"
+                              >
+                                ສະຖານະ: Failed Exam
+                              </p>
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'pass' &&
+                                  item.mr_status_p == 'pass'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Practical Exam
+                              </p>
+                            </div>
+
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.thero"
+                                >
+                                {{ $t("app_today_ther") }}:
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_t == 'fail'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_t == 'pass'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.pratic"
+                                >
+                                {{ $t("app_today_pra") }}:
+
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_p == 'fail'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_p == 'pass'"
+                                  >
+                                    {{ item.pratic }}/100</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -3738,8 +4477,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionE11"
                 >
-                  ຊ່ອງເວລາ 08.00 - E1 : Cargo truck (C2) having trailer total
-                  weight exceed 750 kilograms
+                  ຊ່ອງເວລາ 08.00 - E1 : {{ locale == "la" ? checkdlt(store.dlt_today.E1_1)[0].dlt_name_lo : checkdlt(store.dlt_today.E1_1)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -3749,84 +4487,178 @@ function coverimage(i) {
               aria-labelledby="..."
               data-bs-parent="#toggleAccordion3"
             >
-              <div class="card-body">
+            <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="row">
+                  <div
+                    class="col-sm-6"
+                    v-for="(item, index) in store.dlt_today.E1_1"
+                    :key="item"
+                  >
+                  <div class="row" @click="GotoDetails(item)">
                       <div
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
                           <img
+                            v-if="item.user_img"
+                            :src="coverimage(item.user_img)"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <img
+                            v-else
                             src="../.././../public/img/logo.svg"
                             class="card-img-top"
                             alt="..."
                             style="width: 200px"
                           />
+
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
+                              {{ item.user_prefrix }} {{ item.user_firstname }}
+                              {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
-                                </h4>
-                              </div>
+                          
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
+                        
+                            <div v-if="item.app_status == 'C'">
+                              <p
+                                class="card-category mb-2"
+                                v-if="item.app_status == 'C'"
+                                style="color: red"
+                              >
+                                ສະຖານະ: Canceled
+                              </p>
                             </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
-                            </h4>
-                            <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
-                            </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <span class="card-category mb-2">ສະຖານະ : </span
-                            ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-                            <p class="card-category mb-2 pt-2">
-                              ລຳດັບສອບເສັງ: 1
-                            </p>
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == null
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document == '' ||
+                                    item.check_document == null) &&
+                                  item.app_status == 'Y'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending check document
+                              </p>
+                            </div>
+
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == 'pass'
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document != '' ||
+                                    item.check_document != null) &&
+                                  item.mr_status_t == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Theory Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t != null &&
+                                  item.mr_status_p == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Practical Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'fail' &&
+                                  item.mr_status_p == 'fail'
+                                "
+                                style="color: red"
+                              >
+                                ສະຖານະ: Failed Exam
+                              </p>
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'pass' &&
+                                  item.mr_status_p == 'pass'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Practical Exam
+                              </p>
+                            </div>
+
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.thero"
+                                >
+                                {{ $t("app_today_ther") }}:
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_t == 'fail'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_t == 'pass'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.pratic"
+                                >
+                                {{ $t("app_today_pra") }}:
+
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_p == 'fail'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_p == 'pass'"
+                                  >
+                                    {{ item.pratic }}/100</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
@@ -3852,8 +4684,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionE12"
                 >
-                  ຊ່ອງເວລາ 16.00 - E1 : Cargo truck (C2) having trailer total
-                  weight exceed 750 kilograms
+                  ຊ່ອງເວລາ 16.00 - E1 :  {{ locale == "la" ? checkdlt(store.dlt_today.E1_2)[0].dlt_name_lo : checkdlt(store.dlt_today.E1_2)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
@@ -3863,84 +4694,178 @@ function coverimage(i) {
               aria-labelledby="..."
               data-bs-parent="#toggleAccordion3"
             >
-              <div class="card-body">
+            <div class="card-body">
                 <div class="row">
-                  <div class="col-sm-6">
-                    <div class="row">
+                  <div
+                    class="col-sm-6"
+                    v-for="(item, index) in store.dlt_today.E1_2"
+                    :key="item"
+                  >
+                  <div class="row" @click="GotoDetails(item)">
                       <div
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
                         <div class="card style-3">
                           <img
+                            v-if="item.user_img"
+                            :src="coverimage(item.user_img)"
+                            class="card-img-top"
+                            alt="..."
+                            style="width: 200px"
+                          />
+                          <img
+                            v-else
                             src="../.././../public/img/logo.svg"
                             class="card-img-top"
                             alt="..."
                             style="width: 200px"
                           />
+
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
+                              {{ $t("app_today_id") }}: {{ item.ap_number }}
                             </h4>
 
                             <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
+                              {{ item.user_prefrix }} {{ item.user_firstname }}
+                              {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">ລຳດັບສອບເສັງ: 1</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
-                                </h4>
-                              </div>
+                          
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
+                        
+                            <div v-if="item.app_status == 'C'">
+                              <p
+                                class="card-category mb-2"
+                                v-if="item.app_status == 'C'"
+                                style="color: red"
+                              >
+                                ສະຖານະ: Canceled
+                              </p>
                             </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="row">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              ID ນັດໝາຍ: A83M100
-                            </h4>
-                            <h5 class="media-heading mb-1">
-                              ທ. ສົມສັກ ຈ່າງດາບຸດ
-                            </h5>
-                            <p class="card-category mb-2">ID ນັກຮຽນ: ບໍ່ມີ</p>
-                            <span class="card-category mb-2">ສະຖານະ : </span
-                            ><span style="color: red">ລໍຖ້າກວດເອກະສານ</span>
-                            <p class="card-category mb-2 pt-2">
-                              ລຳດັບສອບເສັງ: 1
-                            </p>
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == null
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document == '' ||
+                                    item.check_document == null) &&
+                                  item.app_status == 'Y'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending check document
+                              </p>
+                            </div>
+
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == 'pass'
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document != '' ||
+                                    item.check_document != null) &&
+                                  item.mr_status_t == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Theory Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t != null &&
+                                  item.mr_status_p == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Practical Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'fail' &&
+                                  item.mr_status_p == 'fail'
+                                "
+                                style="color: red"
+                              >
+                                ສະຖານະ: Failed Exam
+                              </p>
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'pass' &&
+                                  item.mr_status_p == 'pass'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Practical Exam
+                              </p>
+                            </div>
+
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນທິດສະດີ: 18/20
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.thero"
+                                >
+                                {{ $t("app_today_ther") }}:
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_t == 'fail'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_t == 'pass'"
+                                  >
+                                    {{ item.thero }}/{{
+                                      CheckTotalque(item)
+                                    }}</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_ther") }}: -
                                 </h4>
                               </div>
                               <div class="media-body">
-                                <h4 class="media-heading mb-1">
-                                  ຜົນປະຕິບັດ: 85/100
+                                <h4
+                                  class="media-heading mb-1"
+                                  v-if="item.pratic"
+                                >
+                                {{ $t("app_today_pra") }}:
+
+                                  <span
+                                    style="color: red"
+                                    v-if="item.mr_status_p == 'fail'"
+                                  >
+                                    {{ item.pratic }}</span
+                                  >
+                                  <span
+                                    style="color: green"
+                                    v-if="item.mr_status_p == 'pass'"
+                                  >
+                                    {{ item.pratic }}/100</span
+                                  >
+                                </h4>
+                                <h4 class="media-heading mb-1" v-else>
+                                  {{ $t("app_today_pra") }}: -
                                 </h4>
                               </div>
                             </div>
