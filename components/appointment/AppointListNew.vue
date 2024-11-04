@@ -193,7 +193,9 @@ const SaveAppoint = async () => {
 let save = await store.SaveUserRerv();
 
 if(save.status == 200){
-  toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
+ await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
+
+ await router.push('/appointment/dateappointment');
 }
 if(save.status == 201){
   toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ ມີຢູ່ແລ້ວ')
