@@ -57,7 +57,7 @@
       </select>
     </div>
 
-
+{{ store.form }}
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 pt-3">
       <label for="exampleFormControlInput1">Appointment time:</label>
 
@@ -70,7 +70,7 @@
         >
         <option disabled selected :value="0">{{ $t('select') }}...</option>
         
-        <option v-for="(events, x) in store.event" :value="events.ap_id">
+        <option v-for="(events, x) in store.event" :value="events">
            {{format(events.ap_date_first)}} {{formatty(events.type)}}, Class {{events.dlt_code}} . Avalable: {{calcu(events.ap_quota,events.available)}} seats
         </option>
       </select> 

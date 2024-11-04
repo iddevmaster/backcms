@@ -852,11 +852,12 @@ this.dlttoday = response.data
 
     async SaveUserRerv() {
 
-      this.formselectapp.ap_id = this.form.date_event;
-     
+      this.formselectapp.ap_id = this.form.date_event.ap_id;
+      this.formselectapp.ap_date_first = this.form.date_event.ap_date_first;
+   
       try {
         const data = await ApiService.post('/appointment/reserve/new/create', this.formselectapp).then(x => {
-
+console.log(x);
 return true;
         });
         return data;
