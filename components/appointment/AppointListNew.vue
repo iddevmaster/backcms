@@ -19,7 +19,7 @@
 
 </div>
 
-{{ store.formselectapp }}
+
   <div class="row ps-4 mb-5">
     <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
       <label for="exampleFormControlInput1">Full Name</label>
@@ -57,7 +57,7 @@
       </select>
     </div>
 
-{{ store.form }}
+
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 pt-3">
       <label for="exampleFormControlInput1">Appointment time:</label>
 
@@ -191,11 +191,22 @@ const SaveAppoint = async () => {
     return false;
 }
 let save = await store.SaveUserRerv();
-if(save == true){
+
+if(save.status == 200){
   toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
-}else {
-  toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
 }
+if(save.status == 201){
+  toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ ມີຢູ່ແລ້ວ')
+}
+if(save.status == 202){
+  toast.error('QUATA ເຕັມ')
+}
+
+// if(save == true){
+//   toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
+// }else {
+//   toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
+// }
   
 };
 
