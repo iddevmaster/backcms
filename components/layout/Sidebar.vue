@@ -45,16 +45,17 @@
           <div class="profile-content">
             <h6 class="" v-if="store.users">{{ store.users.user_name }}</h6>
             <p class="">{{ store.users.user_email }}</p>
+            {{ store.detail.province_name }}
           </div>
         </div>
       </div>
 
+     
       <div class="shadow-bottom"></div>
-      <ul class="list-unstyled menu-categories" id="accordionExample" >
-      
 
-  
-                  
+
+      <ul class="list-unstyled menu-categories" id="accordionExample" >
+            
          <li class="menu">
           
           <a

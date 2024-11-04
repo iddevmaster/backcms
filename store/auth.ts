@@ -145,6 +145,10 @@ export const useAuthStore = defineStore('auth', {
    this.users.user_type = response.data.user_type
    this.detail.user_img = response.data.detail.user_img
    this.detail.location_id = response.data.detail.location_id
+   this.detail.province_name = response.data.detail.location.province_name
+
+   console.log(response);
+   
         });
 
         return true;
