@@ -27,6 +27,7 @@ await store.fetchUsersByOneAdminProfile(router.currentRoute.value.params.id);
 await store.fetchUsersByOneComment();
 await store.fetchUsersLog(router.currentRoute.value.params.id);
 await store.fetchUsersLogApporv(router.currentRoute.value.params.id);
+await store.fetchUsersDLT(router.currentRoute.value.params.id);
 
 
 

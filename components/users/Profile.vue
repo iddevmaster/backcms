@@ -28,10 +28,8 @@
         </div>
         <br>
         
-        <div class="col-12  col-sm-7 col-xl-7 col-lg-7 your-element">
-         
-    
-
+        <div class="col-12  col-sm-6 col-xl-6 col-lg-6 your-element">
+        
             <div class="col-12 col-sm-7 col-xl-12 col-lg-12">
 
               <div class="form-group row">
@@ -398,12 +396,73 @@
             </div>
          
         </div>
-        <!-- <div class="col-12 col-lg-5 col-xl-5" v-if="store.profile_by_one[0].status == 'W'">
-          <div class="col-12 col-sm-12 col-lg-5 col-xl-5">
-          <button class="btn btn-danger">{{ $t("user_profile_button_edit") }}</button>
-        </div>
+        <div class="col-12 col-lg-6 col-xl-6" v-if="store.dlt_lastes.length > 0">
+          <div class="row">
+
+<div class="col-5 col-sm-12 col-md-5" >
+  <h5>ຮູບໃບຂັບຂີ່</h5>
+  <div class="form-group row" v-if="store.dlt_lastes[0].front_img">
+    <img
+      :src="coverimage(store.dlt_lastes[0].front_img)"
+      class="img-fluid"
+      width="80"
+      height="80"
+    />
+  </div>
+
+  <div class="form-group row" v-else>
+    <img
+      src="../../assets/images/no_photo.jpg"
+      class="img-fluid"
+      width="80"
+      height="80"
+    />
+  </div>
+</div>
+<div class="col-7 col-sm-12 col-md-7 p-5">
+  <div class="form-group row">
+  
+    <span style="font-size: 24px;">
+      ເລກທີ: {{store.dlt_lastes[0].number_licen}}
+    </span>
+  </div>
+  <div class="form-group row">
+    
+    <span style="font-size: 24px;">
+      ອອກຊື່:   {{store.dlt_lastes[0].address_lic}}
+    </span>
+  </div>
+  <div class="form-group row">
+    
+    <span style="font-size: 24px;">
+      ປະເພດອະນຸຍາດ:   {{store.dlt_lastes[0].dlt}}
       
-        </div> -->
+    </span>
+  </div>
+  <div class="form-group row">
+    
+    <span style="font-size: 24px;">
+      ອອກວັນທີ: {{store.dlt_lastes[0].issue_date}}
+    </span>
+  </div>
+  <div class="form-group row">
+    
+    <span style="font-size: 24px;">
+      ໝົດອາຍຸ :  {{store.dlt_lastes[0].expiry_date}}
+    </span>
+  </div>
+  <div class="form-group row">
+   
+    <span style="font-size: 24px;">
+      ອອກທີ່: ກຄພຂ ຈຳປາສັກ
+    </span>
+  </div>
+</div>
+
+</div>
+
+      
+        </div>
       </div>
     </div>
   </div>

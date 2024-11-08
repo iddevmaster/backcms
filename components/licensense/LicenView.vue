@@ -338,7 +338,7 @@ v-model="storedlt.username"
           <div class="col-12 col-sm-12 col-lg-5 col-xl-5"></div>
 
           <div class="row m-1">
-            {{ storedlt.formdlt_new }}
+      
             <div class="col-12 col-sm-12 col-md-12">
               <div class="form-group">
                 <label for="exampleInputEmail1">ຈຸດປະສົ່ງການເພິ່ມ:</label>
@@ -467,9 +467,9 @@ v-model="storedlt.username"
         :value="fruit" 
         v-model="storedlt.formdlt_new.dlt_code" 
       />
-      {{ fruit }}
+     
     </label>
-    {{ storedlt.formdlt_new.dlt_code }}
+ 
               </div>
               <span
                           v-if="v$.dlt_code.$error"
@@ -704,8 +704,7 @@ const Save = async () => {
 
   v$.value.$validate();
   if (!v$.value.$error) {
-await storedlt.updateolddlt()
-await storedlt.savedt()
+
     Swal.fire({
     allowEscapeKey: false,
     allowOutsideClick: false,
@@ -714,7 +713,20 @@ await storedlt.savedt()
     },
     
   });
-  
+
+  await storedlt.updateolddlt()
+let save = await storedlt.savedt()
+  console.log(save)
+  if(save == true){
+    setTimeout(() => {
+  Swal.fire({
+    icon: 'success',
+    title: 'Complete!',
+    text: 'Data has been successfully.',
+    timer: 1000
+  });
+}, 1500);
+  }
   
 
   }
@@ -738,8 +750,6 @@ const SearchApp = async () => {
 
 const FitterCh = async (event) => {
 
-  
-console.log(event.target.value);
 if(event.target.value == 'renew' || event.target.value == 'old'){
 storedlt.AppisShow = false;
 }else {
@@ -766,9 +776,7 @@ return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD');
 
 const format_end = (ie) => {
 
-
 const isoFormatInUTC = ie.toISOString();
-
 
 storedlt.formdlt_new.expiry_date = moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DDTHH:mm:ss');
 return moment.utc(isoFormatInUTC).tz('Asia/Bangkok').format('YYYY-MM-DD');

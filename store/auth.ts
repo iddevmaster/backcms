@@ -147,7 +147,7 @@ export const useAuthStore = defineStore('auth', {
    this.detail.location_id = response.data.detail.location_id
    this.detail.province_name = response.data.detail.location.province_name
 
-   console.log(response);
+
    
         });
 

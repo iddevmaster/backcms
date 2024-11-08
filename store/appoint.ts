@@ -857,7 +857,6 @@ this.dlttoday = response.data
    
       try {
         const data = await ApiService.post('/appointment/reserve/new/create', this.formselectapp).then(x => {
-console.log(x);
 return x;
         });
         return data;
@@ -948,10 +947,9 @@ return x;
 
 try {
   const data = await ApiService.get('/dlt_card/lastes/list?user_id=' + this.dataapp[0].user_id).then(response => {
-
-
+console.log(response.data)
     if(response.data.length > 0){
-      this.dlt_lastes = response.data[0]
+      this.dlt_lastes = response.data
     }
 
 

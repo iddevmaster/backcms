@@ -518,11 +518,13 @@ this.formdlt_new.ap_number = rep.data[0].ap_number
    
         try {
           const data = await ApiService.post('/dlt_card/create/news', this.formdlt_new).then(response => {
-         
-            console.log(response);
+    
+            if(response.status == 200){
+return true
+            }
           });
   
-          return true
+          return data
   
         } catch (error) {
           return false;

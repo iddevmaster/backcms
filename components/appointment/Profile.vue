@@ -338,6 +338,163 @@
            
           </div>
 
+          
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12">
+              <div class="form-group row">
+                <label
+                  for="company-name"
+                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
+                >  
+                <span style="padding-right: 30px;"> ID ນັກຮຽນ: </span>
+                <span  v-if="store.dataapp[0].id_card"> {{ store.dlt_select.dlt_code }}:{{ store.dlt_select.dlt_name_lo }} </span>
+                <span  v-else> ບໍ່ມີ  </span>
+                </label>
+              </div>
+            </div>       
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12">
+              <div class="form-group row">
+                <label
+                  for="company-name"
+                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
+                >  
+                <span style="padding-right: 30px;">  ສະຖານະ: </span>
+                <span  v-if="store.dataapp[0].app_status == 'C'">  {{ $t("status_exam_driv_can") }}</span>
+
+
+                <span
+                              v-if="
+                                store.dataapp[0].app_status == 'Y' &&
+                                store.dataapp[0].check_document == null
+                              "
+                            >
+                              <span
+                                class="card-category mb-2"
+                                v-if="
+                                  (store.dataapp[0].check_document == '' ||
+                                  store.dataapp[0].check_document == null) &&
+                                  store.dataapp[0].app_status == 'Y'
+                                "
+                                style="color: green"
+                              >
+                              {{ $t("status_exam_driv_pen_check") }} 
+                              </span>
+                            </span>
+
+
+                            <span
+                              v-if="
+                                store.dataapp[0].app_status == 'Y' &&
+                                store.dataapp[0].check_document == 'pass'
+                              "
+                            >
+                              <span
+                                class="card-category mb-2"
+                                v-if="
+                                  (store.dataapp[0].check_document != '' ||
+                                  store.dataapp[0].check_document != null) &&
+                                  store.formscoreT.mr_status == '' && store.formscoreP.mr_status == ''
+                                "
+                                style="color: green"
+                              >
+                              {{ $t("status_exam_driv_pen_t") }} 
+
+                       
+                              </span>
+
+                              <span
+                                class="card-category mb-2"
+                                v-if="
+                                  (store.dataapp[0].check_document != '' ||
+                                  store.dataapp[0].check_document != null) &&
+                                  store.formscoreP.mr_status == '' && store.formscoreT.mr_status != ''
+                                "
+                                style="color: green"
+                              >
+                              {{ $t("status_exam_driv_pen_p") }} 
+
+                       
+                              </span>
+
+                              <span
+                                class="card-category mb-2"
+                                v-if="
+                                  store.formscoreT.mr_status != null &&
+                                  store.formscoreP.mr_status == null
+                                "
+                                style="color: green"
+                              >
+                              {{ $t("status_exam_driv_pen_t") }} 
+                              </span>
+
+                              <span
+                                class="card-category mb-2"
+                                v-if="
+                                  store.formscoreT.mr_status == 'fail' ||
+                                  store.formscoreP.mr_status == 'fail'
+                                "
+                                style="color: red"
+                              >
+                              {{ $t("status_exam_driv_fail") }} 
+                              </span>
+                              <span
+                                class="card-category mb-2"
+                                v-if="
+                                  store.formscoreT.mr_status == 'pass' &&
+                                  store.formscoreP.mr_status == 'pass'
+                                "
+                                style="color: green"
+                              >
+
+                
+                               {{ $t("status_exam_driv_pass") }} 
+                              </span>
+                   
+                       
+                            </span>
+
+
+                <span  v-else> ບໍ່ມີ  </span>
+                </label>
+              </div>
+            </div>       
+          </div>
+    
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12">
+              <div class="form-group row">
+                <label
+                  for="company-name"
+                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
+                >  
+                <span style="padding-right: 30px;">   %ຮຽນຫຼັກສູດ {{store.dataapp[0].dlt_code}} ໃນ App: </span>
+                <span   v-if="store.history"> {{ store.history.progress }}%</span>
+                <span  v-else> 0%  </span>
+                </label>
+              </div>
+            </div>       
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12">
+              <div class="form-group row">
+                <label
+                  for="company-name"
+                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
+                >  
+                <span style="padding-right: 30px;">  ຄະແນນສູງສຸດ ທີ່ເຮັດແບບທົດສອບ ໃນApp: </span>
+                <span    v-if="store.score.length > 0">  {{store.score[0].er_score_total}}/{{store.score[0].er_question_total}}</span>
+                <span  v-else> -  </span>
+                </label>
+              </div>
+            </div>       
+          </div>
+
+          
+
           <div class="row">
             <div class="col-4 col-sm-12 col-md-4">
               <!-- <div class="form-group row">
@@ -345,71 +502,33 @@
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                 >
-                  ສອບເສັງ ປະເພດ :
+                  ສະຖານະ:
                 </label>
               </div> -->
 
-              <div class="form-group row">
-                <label
-                  for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
-                >
-                  ID ນັກຮຽນ:
-                </label>
-              </div>
-
-              <div class="form-group row">
-                <label
-                  for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm fot-bl"
-                >
-                  ສະຖານະ:
-                </label>
-              </div>
-
-              <div class="form-group row">
+              <!-- <div class="form-group row">
                 <label
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                 >
                   ຮຽນຫຼັກສູດ {{store.dataapp[0].dlt_code}} ໃນ App:
                 </label>
-              </div>
+              </div> -->
 
-              <div class="form-group row">
+              <!-- <div class="form-group row">
                 <label
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm fot-bl"
                 >
                   ຄະແນນສູງສຸດ ທີ່ເຮັດແບບທົດສອບ ໃນApp:
                 </label>
-              </div>
+              </div> -->
             </div>
 
             <div class="col-7 col-sm-12 col-md-7">
-              <!-- <div class="form-group row">
-          
-                
-                 
-                <span > {{ store.dlt_select.dlt_code }}:{{ store.dlt_select.dlt_name_lo }} </span>
-              </div> -->
+     
               <div class="form-group row">
-                <label
-                  for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm" v-if="store.dataapp[0].id_card"
-                >
-                   {{ store.dataapp[0].id_card }}
-                </label>
-
-                <label
-                  for="company-name"
-                  class="col-sm-12 col-form-label col-form-label-sm" v-else
-                >
-                  ບໍ່ມີ 
-                </label>
-              </div>
-              <div class="form-group row">
-                <label
+                <!-- <label
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm" 
                 >
@@ -514,10 +633,10 @@
                             </div>
 
 
-                </label>
+                </label> -->
               </div>
 
-              <div class="form-group row" v-if="store.history">
+              <!-- <div class="form-group row" v-if="store.history">
                 <label
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm" 
@@ -534,8 +653,8 @@
                  
                 0%
                 </label>
-              </div>
-              <div class="form-group row" v-if="store.score.length > 0">
+              </div> -->
+              <!-- <div class="form-group row" v-if="store.score.length > 0">
                 <label
                   for="company-name"
                   class="col-sm-12 col-form-label col-form-label-sm"
@@ -550,10 +669,12 @@
                 >
                  -
                 </label>
-              </div>
+              </div> -->
             </div>
           </div>
-          <div class="row">
+          <div class="row" style="
+    padding: 3px;
+">
             <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-6">
               <label
                 for="company-name"
@@ -578,11 +699,15 @@
               >
             </div>
             <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3"   v-if="store.dataapp[0].app_status == 'Y'">
-              <button type="button" class="btn btn-primary" @click="Modaldiv()">ບັນທຶກ</button>
+              <button type="button" class="btn btn-primary btn-sm" style="
+    margin-top: 1px;
+" @click="Modaldiv()">ບັນທຶກ</button>
             </div>
           </div>
 
-          <div class="row">
+          <div class="row" style="
+    padding: 3px;
+">
             <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-6">
               <label
                 for="company-name"
@@ -621,14 +746,18 @@
               >
             </div>
             <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3" v-if="store.dataapp[0].app_status == 'Y'">
-              <button type="button" class="btn btn-primary"  @click="ModalT()">
+              <button type="button" class="btn btn-primary btn-sm" style="
+    margin-top: 1px;
+"  @click="ModalT()">
                 ບັນທຶກ ຜົນທິດສະດີ
               </button>
             </div>
           </div>
 
 
-          <div class="row">
+          <div class="row" style="
+    padding: 3px;
+">
             <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-6">
               <label
                 for="company-name"
@@ -667,7 +796,9 @@
               >
             </div>
             <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3" v-if="store.dataapp[0].app_status == 'Y'">
-              <button type="button" class="btn btn-primary"  @click="ModalP()">
+              <button type="button" class="btn btn-primary btn-sm" style="
+    margin-top: 1px;
+"  @click="ModalP()">
                 ບັນທຶກ ຜົນປະຕິບັດ
               </button>
             </div>
@@ -676,7 +807,9 @@
 
 
 
-          <div class="row">
+          <div class="row" style="
+    padding: 3px;
+">
             <div class="col-12 col-sm-12 col-md-12 col-xl-12 col-lg-12">
               <label
                 for="company-name"
@@ -696,14 +829,14 @@
             </div>
           </div>
           <br>
-          <div class="row" v-if="store.dlt_lastes">
+          <div class="row" v-if="store.dlt_lastes.length > 0"  v-for="(event, index) in store.dlt_lastes">
 
-            <div class="col-6 col-sm-12 col-md-6">
+            <div class="col-6 col-sm-12 col-md-6" >
 
-            ຮູບໃບຂັບຂີ່ ຫຼ້າສຸດ:
-              <div class="form-group row" v-if="store.dlt_lastes.front_img">
+            ຮູບໃບຂັບຂີ່ ຫຼ້າສຸດ: 
+              <div class="form-group row" v-if="event.front_img">
                 <img
-                  :src="coverimage(store.dlt_lastes.front_img)"
+                  :src="coverimage(event.front_img)"
                   class="img-fluid"
                   width="80"
                   height="80"
@@ -722,20 +855,20 @@
               <div class="form-group row">
               
                 <span style="font-size: 24px;">
-                  ເລກທີ: {{ store.dlt_lastes.number_licen }}
+                  ເລກທີ: {{ event.number_licen }}
                 </span>
               </div>
               <div class="form-group row">
                 
                 <span style="font-size: 24px;">
-                  ອອກຊື່: {{ store.dlt_lastes.address_lic }}
+                  ອອກຊື່:  {{ event.address_lic }}
                 </span>
               </div>
               <div class="form-group row">
                 
                 <span style="font-size: 24px;">
                   ປະເພດອະນຸຍາດ:  
-                  <span  v-for="i in store.dlt_lastes.dlt_types">
+                  <span  v-for="i in event.dlt_types">
                     {{ i.dlt_code }}
                   </span>
                 </span>
@@ -743,13 +876,13 @@
               <div class="form-group row">
                 
                 <span style="font-size: 24px;">
-                  ອອກວັນທີ: {{ store.dlt_lastes.issue_date }}
+                  ອອກວັນທີ: {{ event.issue_date }}
                 </span>
               </div>
               <div class="form-group row">
                 
                 <span style="font-size: 24px;">
-                  ໝົດອາຍຸ : {{ store.dlt_lastes.expiry_date }}
+                  ໝົດອາຍຸ : {{ event.expiry_date }}
                 </span>
               </div>
               <div class="form-group row">

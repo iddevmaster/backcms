@@ -191,6 +191,8 @@ formupdatestatus:{
   user_id:null,
   user_admin:null
 },
+dlt_lastes:[],
+dlt_all:[],
 
   }
 
@@ -361,7 +363,6 @@ formupdatestatus:{
       this.formsearch.user_id = this.user_id;
 
 
-      console.log(this.formsearch);
 
     
       try {
@@ -590,8 +591,7 @@ user_id:this.formDetailEdit.user_id,user_village:this.formDetailEdit.user_villag
 
     async selectstatus(item) {
 
-    
-     console.log(item);
+  
     },
 
   
@@ -777,8 +777,10 @@ const a = {verify_account:'system_active',identification_number:response.data[0]
     async fetchUsersByOneDLT(item) {
       this.formsearchUser.user_admin_id = this.user_id;
       this.formsearchUser.user_search_id = item;
+
+    
       const data = await ApiService.post('/user/list/get/driv', this.formsearchUser).then(response => {
-      console.log(response);
+     
    this.profile_by_one = response.data;
 
     });
@@ -932,7 +934,7 @@ async UpdateLogDataInsert() {
 async UpdateUserByAdmin() {
   
   const data = await ApiService.put('/user/update/renew'+this.formeditapeple.user_id, this.formeditapeple).then(response => {
-    console.log(response);
+ 
 });
 
 
@@ -1201,7 +1203,6 @@ this.formlog.user_admin = this.user_id
 this.formlog.user_id = this.formsearchUser.user_search_id
 this.formlog.des = 'Approve';
 
-console.log(this.formlog);
              
         try {
           
@@ -1218,8 +1219,30 @@ console.log(this.formlog);
         
       },
 
+      async fetchUsersDLT(item) {
 
-  
+        try {
+          
+          const data = await ApiService.get('/dlt_card/listall/?user_id='+item).then(response => {
+
+if(response.data.length > 0){
+  for (var i = 0; i < response.data.length; i++) { 
+ 
+    if(response.data[i].status == 'Y'){
+      this.dlt_lastes.push(response.data[i]);
+    }else {
+      this.dlt_all.push(response.data[i]);
+    }
+  }
+  console.log(this.dlt_lastes);
+  console.log(this.dlt_all);
+}
+
+          });
+        } catch (error) {
+          return false;
+        }
+      }
 
 
   },
