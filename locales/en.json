@@ -694,6 +694,27 @@
 "app_today_ther":"ຜົນທິດສະດີ:",
 
 
+"profile_dlt_image":"Image",
+"profile_dlt_number_lic":"No",
+"profile_dlt_address_lic":"Out at",
+"profile_dlt_type":"Permission type",
+"profile_dlt_iss_day":"Release date",
+"profile_dlt_exp_day":"Expired date",
+"profile_dlt_ppt_a":"ອອກທີ່",
+"profile_dlt_status":"Status",
+"profile_dlt_edit":"edit",
+"profile_dlt_status_edit":" Edit status ",
+"profile_dlt_note":"Note",
+
+
+"profile_table_dlt":"Type",
+"profile_table_dlt_num":"No",
+"profile_table_dlt_add":"Out at",
+"profile_table_dlt_iss":"Date",
+"profile_table_dlt_admin":"Recorder",
+"profile_table_dlt_type":"Objective",
+
+
 
   "" : ""
 

@@ -696,6 +696,26 @@
 "app_today_pra":"ຜົນປະຕິບັດ:",
 "app_today_ther":"ຜົນທິດສະດີ:",
 
+
+"profile_dlt_image":"ຮູບໃບຂັບຂີ່",
+"profile_dlt_number_lic":"ເລກທີ",
+"profile_dlt_address_lic":"ອອກຊື່",
+"profile_dlt_type":"ປະເພດອະນຸຍາດ",
+"profile_dlt_iss_day":"ອອກວັນທີ",
+"profile_dlt_exp_day":"ໝົດອາຍຸ",
+"profile_dlt_ppt_a":"ອອກທີ່",
+"profile_dlt_status":"ສະຖານະ",
+"profile_dlt_edit":"ສະຖານະ",
+"profile_dlt_status_edit":" ແກ້ໄຂ ສະຖານະ ",
+"profile_dlt_note":"ໝາຍເຫດ",
+
+"profile_table_dlt":"ປະເພດ",
+"profile_table_dlt_num":"ເລກທີ",
+"profile_table_dlt_add":"ອອກທີ",
+"profile_table_dlt_iss":"ວັນທີ",
+"profile_table_dlt_admin":"ຜູ້ບັນທຶກ",
+"profile_table_dlt_type":"ຈຸດປະສົງ",
+
   "" : ""
 
   

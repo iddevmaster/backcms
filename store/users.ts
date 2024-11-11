@@ -1222,7 +1222,6 @@ this.formlog.des = 'Approve';
       async fetchUsersDLT(item) {
 
         try {
-          
           const data = await ApiService.get('/dlt_card/listall/?user_id='+item).then(response => {
 
 if(response.data.length > 0){
@@ -1234,8 +1233,7 @@ if(response.data.length > 0){
       this.dlt_all.push(response.data[i]);
     }
   }
-  console.log(this.dlt_lastes);
-  console.log(this.dlt_all);
+
 }
 
           });
