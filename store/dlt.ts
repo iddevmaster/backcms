@@ -8,6 +8,7 @@ export const DltStore = defineStore('dlt', {
     user_id: null,
     username:null,
     dlt_code: "",
+    mydlt:[],
     AppisShow:true,
     isDelete:false,
     isAdd:true,
@@ -24,6 +25,11 @@ export const DltStore = defineStore('dlt', {
     imagelistBack: null,
     imagelistFull: null,
     imagelistAdd: null,
+    total_page: null,
+    limit_page: null,
+    current_page: null,
+    total_filter: null,
+    total: null,
     time:8640000,
     disabledDates: { ////f
       from: null,
@@ -71,6 +77,11 @@ export const DltStore = defineStore('dlt', {
     dtlall: [],
     mydtla: [],
     StatusMethod:"",
+    formsearchdlt:{
+      page: 1,
+      per_page: 1,
+      search: '',
+    },
     dlt: [
       {
           "dlt_code": "A",
@@ -531,6 +542,36 @@ return true
         }
 
        },
+
+       async fetchdltuser() {
+     
+
+        try {
+          const data = await ApiService.post('/dlt_card/listallway', this.formsearchdlt).then(response => {
+
+
+
+         this.mydlt = response.data
+         this.total_page = response.data.total_page
+         this.limit_page = response.data.limit_page
+         this.current_page = response.data.current_page
+         this.total_filter = response.data.total_filter
+         this.total = response.data.total
+
+     
+          });
+          return data;
+        } catch (error) {
+          return false;
+        }
+  
+  
+      },
+
+      setCurrentPageq(page) {
+        this.formsearchdlt.page = page
+      },
+  
 
 
 

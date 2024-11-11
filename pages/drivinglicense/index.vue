@@ -13,7 +13,6 @@ import { useModalStore } from '@/store/modal';
 import DLT from '@/components/licensense/DLT.vue'
 
 
-import Alert from '@/components/layout/Alert.vue';
 import { useToast } from 'vue-toastification'
 import ApiService  from "../../../services/api.service";
 definePageMeta({
@@ -26,6 +25,8 @@ const storedlt = DltStore()
 const auth = useAuthStore()
 const router = useRouter();
 store.user_id = auth.user_id
+
+
 
 </script>
 
