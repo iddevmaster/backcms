@@ -148,7 +148,17 @@ export const DltStore = defineStore('dlt', {
           "dlt_name_lo": "ລົດຂົນສົ່ງສິນຄ້າ (C2) ແກ່ຫາງລາກນ້ຳໜັກລວມເກີນກວ່າ 750 ກິໂລກຣາມ",
           "dlt_name_eng": "Cargo truck (C2) having trailer total weight exceed 750 kilograms"
       }
-    ]
+    ],
+    foreditdlt:{
+      number_licen:"",
+      address_lic:"",
+      expiry_date:"",
+      issue_date:"",
+      image_dlt:"",
+      dlt_code:"",
+      ap_number:"",
+      type:"",
+    }
 
   }
   ),
@@ -162,6 +172,9 @@ export const DltStore = defineStore('dlt', {
     },
     SaveDLT(state) {
       return state.formdlt_new;
+    },
+    UpdateSaveDLT(state) {
+      return state.foreditdlt;
     },
 
   },
@@ -467,7 +480,6 @@ this.formadddtl.expiry_date = "";
       this.searchapp.ap_number = item
       try {
         const data = await ApiService.post('/appointment/dateappointment/appbyuser', this.searchapp).then(rep => {
-       
           if(rep.data.length > 0){
 this.user_id = rep.data[0].user_id
 this.formdlt_new.ap_number = rep.data[0].ap_number
@@ -483,6 +495,36 @@ this.formdlt_new.ap_number = rep.data[0].ap_number
 
     },
 
+    async fetchAppNumberDLT_ID(item) {
+
+      this.searchapp.ap_number = item
+      try {
+        const data = await ApiService.get('/dlt_card/lastesid/list/?id='+this.searchapp.ap_number).then(rep => {
+
+     this.foreditdlt.ap_number = rep.data[0].id
+     this.foreditdlt.number_licen = rep.data[0].number_licen
+     this.foreditdlt.address_lic = rep.data[0].address_lic
+     this.foreditdlt.expiry_date = rep.data[0].expiry_date
+     this.foreditdlt.issue_date = rep.data[0].issue_date
+     this.foreditdlt.type = rep.data[0].type
+     this.foreditdlt.image_dlt = rep.data[0].front_img
+
+  let code = [];
+   if(rep.data[0].dlt_types.length > 0){
+     for (var i = 0; i < rep.data[0].dlt_types.length; i++) {
+      code.push(rep.data[0].dlt_types[i].dlt_code);
+     }
+     this.foreditdlt.dlt_code = code;
+ }
+        });
+        return data;
+      } catch (error) {
+        return false;
+      }
+    },
+
+
+  
     async UploadImageDLT() {
 
       if (this.formdlt_new.image_dlt) {
@@ -540,6 +582,35 @@ return true
         } catch (error) {
           return false;
         }
+
+       },
+
+       async updatesavedt() {
+        
+        this.foreditdlt.user_create = this.user_admin
+        this.foreditdlt.user_id = this.user_id
+
+
+        try {
+          const data = await ApiService.put('/dlt_card/updatenew/'+this.foreditdlt.ap_number, this.foreditdlt).then(response => {
+            console.log(response);
+     
+          return true;
+          });
+  
+          return data;
+      
+        } catch (error) {
+          return false;
+        } 
+
+
+       },
+       async updatesavedttype() {
+        
+        this.foreditdlt.user_create = this.user_admin
+        this.foreditdlt.user_id = this.user_id
+return true
 
        },
 

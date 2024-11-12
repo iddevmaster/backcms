@@ -16,22 +16,27 @@
         <tr>
           <th >#</th>
           <th >
-            ເລກທີ
+         
+            {{ $t("profile_table_dlt_num") }}
           </th>
           <th>
-            ອອກຊື່
+         
+            {{ $t("profile_table_dlt_add") }}
           </th>
           <th>
-            ປະເພດ
+         
+            {{ $t("profile_table_dlt") }}
           </th>
           <th>
-            ວັນທີໝົດອາຍຸ
+            {{ $t("profile_dlt_exp_day") }}
+         
           </th>
           <th>
-            ເວລາບັນທຶກ
+         
+            {{ $t("profile_table_save_time") }}
           </th>
           <th>
-            ຜູ້ບັນທຶກ
+            {{ $t("profile_table_who_savee") }}
           </th>
           <th>
             Action
@@ -71,7 +76,7 @@
                 <path d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z"    /></svg    ></a>
   
           <NuxtLink >
-            <a class="badge badge-light-primary text-start me-2 action-edit">
+            <a class="badge badge-light-primary text-start me-2 action-edit"  @click="EditDri(item)">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -224,7 +229,15 @@ const setCurrentPageclick = async (page) => {
  await stores.setCurrentPageq (page)
   await stores.fetchdltuser()
 };
+
+const EditDri = async (item) => {
+
+
+router.push("/drivinglicense/edit/"+item.id);
+};
   
+
+
 
 const Prev = async () => {
   if (stores.formsearchdlt.page == 1) {
