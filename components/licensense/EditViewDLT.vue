@@ -13,7 +13,7 @@
           class="col-8 col-lg-8 col-xl-8"
           
         >
-       {{ storedlt.foreditdlt }}
+      
           <div class="row m-1">
       
             <div class="col-8 col-sm-12 col-md-12">
@@ -36,8 +36,8 @@
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="A83M100"
-                  
-                  v-model="storedlt.foreditdlt.ap_number"
+                  disabled
+                  v-model="storedlt.foreditdlt.ap_number" 
                   
                 />
                 <span
@@ -59,7 +59,7 @@
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="ຕົວຢ່າງ: ຂສ 0012345"
-                 v-model="storedlt.foreditdlt.number_licen"
+                 v-model="storedlt.foreditdlt.number_licen" 
                  :class="{
                         'border-red-500 focus:border-red-500':
                           v$.number_licen.$error,
@@ -294,15 +294,11 @@ const auth = useAuthStore();
 
 const fileInputFont = ref(null);
 
-const { SaveDLT } = storeToRefs(storedlt);
 const { UpdateSaveDLT } = storeToRefs(storedlt);
 
 onMounted(() => {
-  if(storedlt.user_id){
-    if (process.client) {
+  if (process.client) {
     fileInputFont.value.addEventListener("change", changeFileFont);
-  }
-
   }
  
 });
@@ -353,6 +349,7 @@ const changeFont = () => {
 
 
 const changeFileFont = async (event) => {
+  console.log('changeFileFont');
   var inputs = event.target;
   const file = event.target.files[0];
 
@@ -364,7 +361,7 @@ const changeFileFont = async (event) => {
     });
 return false;
     }
-    storedlt.formdlt_new.image_dlt = inputs.files[0];
+    storedlt.foreditdlt.image_dlt = inputs.files[0];
     storedlt.UploadImageDLT();
   } else {
     Swal.fire({

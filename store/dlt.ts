@@ -539,7 +539,20 @@ this.formdlt_new.ap_number = rep.data[0].ap_number
          return false;
        }
      }
-    
+
+     if (this.foreditdlt.image_dlt) {
+      let formData = new FormData();
+      formData.append('files', this.foreditdlt.image_dlt);
+      try {
+        const data = await ApiService.upload('/media_file/upload/file', formData);
+        this.foreditdlt.image_dlt = data.data[0].path
+   
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+     
   
     
        },
