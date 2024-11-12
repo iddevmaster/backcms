@@ -193,6 +193,7 @@ formupdatestatus:{
 },
 dlt_lastes:[],
 dlt_all:[],
+modal_update_status_dlt:false
 
   }
 

@@ -520,6 +520,8 @@
               <button
                 type="button"
                 class="btn btn-danger"
+
+                @click="modalDlt()"
              
               >
               {{ $t("profile_dlt_status_edit") }}
@@ -657,6 +659,70 @@
       </div>
     </div>
   </div>
+
+
+  <div class="modal" v-if="store.modal_update_status_dlt">
+    <div class="modal-content" id="deleteConformationLabel">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">ຢືນຢັນ ?</h1>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >{{ $t("profile_dlt_status") }} :</label
+          >
+          <label
+            for="inputEmail3"
+            class="col-sm-8 col-form-label"
+            style="color: chartreuse"
+          >
+            <select
+              class="common__login__input px-2 form-control"
+              aria-label="Default select example"
+             
+            >
+
+
+           
+              <option value="Active">ນຳໃຊ້</option>
+              <option value="Temporary">ງົດໃຊ້ຊົ່ວຄາວ</option>
+              <option value="Permanent">ງົດໃຊ້ຖາວອນ</option>
+              <option value="Expired">ໝົດອາຍຸ</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="form-group row">
+          <label for="inputEmail3" class="col-sm-4 col-form-label"
+            >ໝາຍເຫດ :</label
+          >
+          <label for="inputEmail3" class="col-sm-8 col-form-label">
+            <textarea
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+              placeholder="ໝາຍເຫດ"
+              v-model="store.comment_details"
+            >
+            </textarea>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          @click="Hide()"
+        >
+          ຍົກເລີກ
+        </button>
+        <button type="button" class="btn btn-primary" @click="UpdateStatusDLT()">
+          ຢືນຢັນ
+        </button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style  scoped>
@@ -738,6 +804,11 @@ const Hide = async () => {
   store.modal_update_status = false;
 };
 
+const modalDlt = async () => {
+  store.modal_update_status_dlt = true;
+ 
+};
+
 const BackUser = async () => {
   if (user_type.value == "1") {
     await router.push("/users");
@@ -773,6 +844,12 @@ const UpdateStatus = async () => {
   await store.fetchUsersLogApporv(router.currentRoute.value.params.id);
   store.comment_details = "";
 };
+
+const UpdateStatusDLT = async () => {
+  store.modal_update_status_dlt = false;
+}
+
+
 
 const Save = async () => {
   await store.UpdatePeddingByOneComment();
