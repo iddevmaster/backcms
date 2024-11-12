@@ -13,7 +13,7 @@
           class="col-8 col-lg-8 col-xl-8"
           
         >
-       
+       {{ storedlt.foreditdlt }}
           <div class="row m-1">
       
             <div class="col-8 col-sm-12 col-md-12">
