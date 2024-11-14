@@ -512,7 +512,9 @@
             <div class="row p-1">
             <div class="col-6 col-sm-6 col-md-6">
               
-              <span class="centered-text"> {{ $t("profile_dlt_status") }}:  Active </span>
+              <span class="centered-text"> {{ $t("profile_dlt_status") }}:   <span v-if="store.dlt_lastes[0].type_status == 'Active'" style="color: #11901e;" > {{ store.dlt_lastes[0].type_status }}</span>
+              <span v-else style="color: #ff0000;" > {{ store.dlt_lastes[0].type_status }}</span>
+            </span> 
               </div>
 
               <div class="col-6 col-sm-6 col-md-6">
@@ -848,7 +850,8 @@ const UpdateStatus = async () => {
 const UpdateStatusDLT = async () => {
   store.modal_update_status_dlt = false;
 
-  store.UpdateUsersDLTStatus();
+  await store.UpdateUsersDLTStatus();
+
 }
 
 

@@ -196,7 +196,7 @@ dlt_all:[],
 modal_update_status_dlt:false,
 form_dlt_status:{
   id:"",
-  type_status:"Temporary",
+  type_status:"Active",
   etc:""
 },
   }
@@ -1234,6 +1234,8 @@ if(response.data.length > 0){
  
     if(response.data[i].status == 'Y'){
       this.dlt_lastes.push(response.data[i]);
+
+      this.form_dlt_status.type_status = response.data[i].type_status
     }else {
       this.dlt_all.push(response.data[i]);
     }
@@ -1253,7 +1255,7 @@ this.form_dlt_status.id = this.dlt_lastes[0].id
 
 try {    
   const data = await ApiService.post('/dlt_card/updatedltstatus',this.form_dlt_status).then(response => {
-console.log(response);
+    this.dlt_lastes[0].type_status = this.form_dlt_status.type_status
   });
 } catch (error) {
   return false;
