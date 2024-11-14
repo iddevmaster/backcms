@@ -193,8 +193,12 @@ formupdatestatus:{
 },
 dlt_lastes:[],
 dlt_all:[],
-modal_update_status_dlt:false
-
+modal_update_status_dlt:false,
+form_dlt_status:{
+  id:"",
+  type_status:"Temporary",
+  etc:""
+},
   }
 
   ),
@@ -1241,6 +1245,21 @@ if(response.data.length > 0){
         } catch (error) {
           return false;
         }
+      },
+
+
+      async UpdateUsersDLTStatus() {
+this.form_dlt_status.id = this.dlt_lastes[0].id
+
+try {    
+  const data = await ApiService.post('/dlt_card/updatedltstatus',this.form_dlt_status).then(response => {
+console.log(response);
+  });
+} catch (error) {
+  return false;
+}
+
+
       }
 
 

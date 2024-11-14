@@ -678,7 +678,7 @@
           >
             <select
               class="common__login__input px-2 form-control"
-              aria-label="Default select example"
+              aria-label="Default select example" v-model="store.form_dlt_status.type_status"
              
             >
 
@@ -702,7 +702,7 @@
               id="exampleFormControlTextarea1"
               rows="3"
               placeholder="ໝາຍເຫດ"
-              v-model="store.comment_details"
+              v-model="store.form_dlt_status.etc"
             >
             </textarea>
           </label>
@@ -847,6 +847,8 @@ const UpdateStatus = async () => {
 
 const UpdateStatusDLT = async () => {
   store.modal_update_status_dlt = false;
+
+  store.UpdateUsersDLTStatus();
 }
 
 
