@@ -10,7 +10,7 @@ import { usersStore } from '@/store/users'
 import { DltStore } from '@/store/dlt'
 
 import { useModalStore } from '@/store/modal';
-import DLT from '@/components/licensense/DLT.vue'
+import DLTALL from '@/components/licensense/DLTALL.vue'
 
 
 import { useToast } from 'vue-toastification'
@@ -27,7 +27,6 @@ const router = useRouter();
 store.user_id = auth.user_id
 storedlt.user_id = auth.user_id
 storedlt.mydlt = []
-
 
 
 </script>
@@ -49,7 +48,7 @@ storedlt.mydlt = []
         <div class="row layout-top-spacing">
           <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
             <div class="widget-content widget-content-area br-8 p-3">
-              <DLT></DLT>
+              <DLTALL></DLTALL>
             </div>
           </div>
         </div>

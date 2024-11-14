@@ -1236,6 +1236,8 @@ if(response.data.length > 0){
       this.dlt_lastes.push(response.data[i]);
 
       this.form_dlt_status.type_status = response.data[i].type_status
+      this.form_dlt_status.etc = response.data[i].etc
+      
     }else {
       this.dlt_all.push(response.data[i]);
     }
@@ -1256,6 +1258,7 @@ this.form_dlt_status.id = this.dlt_lastes[0].id
 try {    
   const data = await ApiService.post('/dlt_card/updatedltstatus',this.form_dlt_status).then(response => {
     this.dlt_lastes[0].type_status = this.form_dlt_status.type_status
+    this.dlt_lastes[0].etc = this.form_dlt_status.etc
   });
 } catch (error) {
   return false;

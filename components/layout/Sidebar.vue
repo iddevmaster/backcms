@@ -465,6 +465,15 @@
 
         </li>
 
+
+        <li class="menu">
+
+<div class="dropdown-toggle" >
+  <nuxt-link to="/drivinglicense/all"><i class="bi bi-calendar-plus menu-icon"></i> ກວດ ໃບຂັບຂີ່ (ທຸກແຂວງ)</nuxt-link>
+</div>
+
+</li>
+
         
         <li class="menu">
           <a
@@ -807,6 +816,23 @@
 
           </ul>
         </li>
+
+        <li class="menu">
+
+<div class="dropdown-toggle" >
+  <nuxt-link to="/drivinglicense"><i class="bi bi-calendar-plus menu-icon"></i> ຄົ້ນຫາ ໃບຂັບຂີ່</nuxt-link>
+</div>
+
+</li>
+
+
+<li class="menu">
+
+<div class="dropdown-toggle" >
+<nuxt-link to="/drivinglicense/all"><i class="bi bi-calendar-plus menu-icon"></i> ກວດ ໃບຂັບຂີ່ (ທຸກແຂວງ)</nuxt-link>
+</div>
+
+</li>
 
         <li class="menu">
           <a

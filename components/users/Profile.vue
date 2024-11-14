@@ -804,6 +804,7 @@ const CheckApp = async (item) => {
 const Hide = async () => {
   store.ModalApp = false;
   store.modal_update_status = false;
+  store.modal_update_status_dlt = false;
 };
 
 const modalDlt = async () => {

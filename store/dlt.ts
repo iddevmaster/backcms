@@ -79,7 +79,7 @@ export const DltStore = defineStore('dlt', {
     StatusMethod:"",
     formsearchdlt:{
       page: 1,
-      per_page: 1,
+      per_page: 50,
       search: '',
     },
     dlt: [
@@ -498,6 +498,7 @@ this.formdlt_new.ap_number = rep.data[0].ap_number
     async fetchAppNumberDLT_ID(item) {
 
       this.searchapp.ap_number = item
+      console.log(this.searchapp.ap_number);
       try {
         const data = await ApiService.get('/dlt_card/lastesid/list/?id='+this.searchapp.ap_number).then(rep => {
 
@@ -628,12 +629,9 @@ return true
        },
 
        async fetchdltuser() {
-     
-
+this.formsearchdlt.user_id = this.user_id;
         try {
           const data = await ApiService.post('/dlt_card/listallway', this.formsearchdlt).then(response => {
-
-
 
          this.mydlt = response.data
          this.total_page = response.data.total_page
@@ -648,9 +646,30 @@ return true
         } catch (error) {
           return false;
         }
-  
-  
+
       },
+
+      async fetchdltOneuser() {
+        this.formsearchdlt.user_id = this.user_id;
+        console.log(this.formsearchdlt);
+                try {
+                  const data = await ApiService.post('/dlt_card/listoneway', this.formsearchdlt).then(response => {
+        console.log(response);
+                 this.mydlt = response.data
+                 this.total_page = response.data.total_page
+                 this.limit_page = response.data.limit_page
+                 this.current_page = response.data.current_page
+                 this.total_filter = response.data.total_filter
+                 this.total = response.data.total
+        
+             
+                  });
+                  return data;
+                } catch (error) {
+                  return false;
+                }
+        
+              },
 
       setCurrentPageq(page) {
         this.formsearchdlt.page = page

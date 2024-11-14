@@ -33,10 +33,10 @@
           </th>
           <th>
          
-            {{ $t("profile_table_save_time") }}
+            ແຂວງ
           </th>
           <th>
-            {{ $t("profile_table_who_savee") }}
+            ສະຖານະ
           </th>
           <th>
             Action
@@ -46,7 +46,7 @@
       <tbody>
 
         <tr v-for="(item ,index) in stores.mydlt.data" :key="item.id">
-
+      
           <td> 
 
 
@@ -61,8 +61,8 @@
           <td>   {{ item.address_lic }} </td>
           <td>  {{ item.dlt }}</td>
           <td>  {{ item.expiry_date }}</td>
-          <td> {{ item.crt_date }} </td>
-          <td> {{ item.full_name_create }} </td>
+          <td> {{ item.province_name }} </td>
+          <td> {{ item.type_status }} </td>
         
           <td>
             
@@ -76,7 +76,7 @@
                 <path d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z"    /></svg    ></a>
   
           <NuxtLink >
-            <a class="badge badge-light-primary text-start me-2 action-edit"  @click="EditDri(item.ids)">
+            <a class="badge badge-light-primary text-start me-2 action-edit"  @click="EditDri(item)">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -218,21 +218,22 @@ const toast = useToast()
 const stores = DltStore()
 
 
-await stores.fetchdltOneuser();
+await stores.fetchdltuser();
 const searchData = async () => {
-  await stores.fetchdltOneuser() 
+  await stores.fetchdltuser() 
 };
 
 
 
 const setCurrentPageclick = async (page) => {
  await stores.setCurrentPageq (page)
-  await stores.fetchdltOneuser()
+  await stores.fetchdltuser()
 };
 
 const EditDri = async (item) => {
 
-router.push("/drivinglicense/edit/"+item);
+
+router.push("/drivinglicense/edit/"+item.id);
 };
   
 
@@ -240,13 +241,13 @@ router.push("/drivinglicense/edit/"+item);
 
 const Prev = async () => {
   if (stores.formsearchdlt.page == 1) {
-    await stores.fetchdltOneuser();
+    await stores.fetchdltuser();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   } else {
     stores.formsearchdlt.page -= 1;
-    await stores.fetchdltOneuser();
+    await stores.fetchdltuser();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
@@ -256,13 +257,13 @@ const Prev = async () => {
 const Next = async () => {
   if (stores.formsearchdlt.page == stores.total_page) {
     stores.formsearchdlt.page = stores.total_page;
-    await stores.fetchdltOneuser();
+    await stores.fetchdltuser();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
   } else {
     stores.formsearchdlt.page += 1;
-    await stores.fetchdltOneuser();
+    await stores.fetchdltuser();
     await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
       timeout: 50,
     });
