@@ -46,10 +46,8 @@
       <tbody>
 
         <tr v-for="(item ,index) in stores.mydlt.data" :key="item.id">
-      
+  
           <td> 
-
-
             {{
               stores.formsearchdlt.page * stores.formsearchdlt.per_page -
               (stores.formsearchdlt.per_page - index) +
@@ -233,7 +231,7 @@ const setCurrentPageclick = async (page) => {
 const EditDri = async (item) => {
 
 
-router.push("/drivinglicense/edit/"+item.id);
+router.push("/drivinglicense/edit/"+item.ids);
 };
   
 
