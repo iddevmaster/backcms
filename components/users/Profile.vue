@@ -2,18 +2,29 @@
   <div class="widget-content widget-content-area br-8 p-3">
     <div class="widget-header">
       <div class="row p-3">
-        <div class="col-10 col-sm-12 col-md-10">
+        <div class="col-10 col-sm-12 col-md-9">
           <div class="form-group row">
             <h5>{{ $t("profile_details_de") }}</h5>
           </div>
         </div>
-        <div class="col-12 col-md-2">
-          <div class="row">
-            <button class="btn btn-primary" @click="BackUser()">
-              {{ $t("user_profile_button_back") }}
+        <div class="col-12 col-md-3" style="
+    text-align: end;
+">
+         
+            <button class="btn btn-primary m-1" @click="BackUser()">
+              <i class="bi bi-arrow-left"></i> {{ $t("user_profile_button_back") }}
             </button>
-          </div>
+
+            <button class="btn btn-success m-1" @click="BackUser()">
+              ປະຫວັດຮຽນ
+            </button>
+
+            
+       
+          
         </div>
+
+
       </div>
       <hr style="margin-top: 1px" />
       <br />
