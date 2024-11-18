@@ -39,7 +39,7 @@ storedlt.mydlt = []
         <nav class="breadcrumb-style-one" aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">ຄົ້ນຫາຜູ້ໃຊ້</a></li>
-            <li class="breadcrumb-item active" aria-current="page"> (ປະຊາຊົນ ສະເພາະແຂວງຕົນເອງ)</li>
+            <li class="breadcrumb-item active" aria-current="page"> ກວດໃບຂັບຂີ່  (ທຸກແຂວງ)</li>
           </ol>
         </nav>
       </div>

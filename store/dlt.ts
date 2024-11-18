@@ -29,6 +29,7 @@ export const DltStore = defineStore('dlt', {
     limit_page: null,
     current_page: null,
     total_filter: null,
+    exp_date: false,
     total: null,
     time:8640000,
     disabledDates: { ////f
@@ -480,6 +481,28 @@ this.formadddtl.expiry_date = "";
       this.searchapp.ap_number = item
       try {
         const data = await ApiService.post('/appointment/dateappointment/appbyuser', this.searchapp).then(rep => {
+
+          if(rep.data.length > 0){
+this.user_id = rep.data[0].user_id
+this.formdlt_new.ap_number = rep.data[0].ap_number
+          }else {
+            this.user_id = null
+          }
+        });
+        return data;
+      } catch (error) {
+        return false;
+      }
+
+
+    },
+
+    async fetchAppNumberDLTID(item) {
+
+      this.searchapp.ap_number = item
+      try {
+        const data = await ApiService.post('/appointment/dateappointment/appbyuser', this.searchapp).then(rep => {
+
           if(rep.data.length > 0){
 this.user_id = rep.data[0].user_id
 this.formdlt_new.ap_number = rep.data[0].ap_number
@@ -498,10 +521,9 @@ this.formdlt_new.ap_number = rep.data[0].ap_number
     async fetchAppNumberDLT_ID(item) {
 
       this.searchapp.ap_number = item
-      console.log(this.searchapp.ap_number);
+   
       try {
         const data = await ApiService.get('/dlt_card/lastesid/list/?id='+this.searchapp.ap_number).then(rep => {
-
      this.foreditdlt.ap_number = rep.data[0].id
      this.foreditdlt.number_licen = rep.data[0].number_licen
      this.foreditdlt.address_lic = rep.data[0].address_lic

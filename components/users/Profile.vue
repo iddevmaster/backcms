@@ -448,7 +448,7 @@
               <button
                 type="button"
                 class="btn btn-danger"
-                @click="EditUser(store.profile_by_one[0].user_id)"
+                @click="EditDlt(store.dlt_lastes)"
               >
                 {{ $t("user_profile_button_edit") }}
               </button>
@@ -854,6 +854,12 @@ const UpdateStatusDLT = async () => {
   await store.UpdateUsersDLTStatus();
 
 }
+
+const EditDlt = async (item) => {
+await router.push("/drivinglicense/edit/"+item[0].id);
+}
+
+
 
 
 
