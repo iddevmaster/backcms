@@ -86,15 +86,26 @@ export const AppointStore = defineStore('appoint', {
     selectedTimeZone: 'Asia/Bangkok',
     locale: 'en',
     dateFormat: 'yyyy-MM-dd HH:mm:ss',
+    selectedDateTime:null,
     forminsert: {
-      ap_learn_type: '2',
       ap_quota: "",
       ap_date_start: null,
       ap_date_end: null,
       ap_remark: "",
       user_id: "",
-      dlt_code: "A1",
     },
+    forminsertnew: {
+      ap_quota: "",
+      ap_date_start: null,
+      ap_date_end: null,
+      ap_remark: "",
+      user_id: "",
+      selectedDateTime:"",
+      dlt_code:[],
+      day:[]
+    },
+    dltc: ["A", "A1", "A2", "A3", "B", "C", "C1", "C2", "D", "D1", "D2", "E", "E1"],
+    day: ["ຈັນ", "ອັງຄານ", "ພຸດ", "ພະຫັດ", "ສຸກ", "ເສົາ", "ອາທິດ"],
     formserchrreserve: {
       page: 1,
       per_per: 3,
