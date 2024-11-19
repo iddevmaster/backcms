@@ -15,7 +15,7 @@
               <i class="bi bi-arrow-left"></i> {{ $t("user_profile_button_back") }}
             </button>
 
-            <button class="btn btn-success m-1" @click="BackUser()">
+            <button class="btn btn-success m-1" @click="History(store.profile_by_one[0].user_id)">
               ປະຫວັດຮຽນ
             </button>
 
@@ -831,6 +831,13 @@ const BackUser = async () => {
     await router.push("/users/staff");
   }
 };
+
+const History = async (item) => {
+ 
+  await router.push("/history/"+item);
+}
+
+
 
 const EditUser = async (item) => {
   if (user_type.value == "1") {
