@@ -40,7 +40,8 @@ export const HistoryStore = defineStore('history', {
     async getLeanning() {
       try {
         const data = await ApiService.post('/course/learn/history/' + this.user_id, this.formhistory).then(rep => {
-      if(rep.data){
+          this.learn = [];
+      if(rep.data.data.length > 0){
         this.learn.push(rep.data.data);
       }
         });
@@ -53,13 +54,14 @@ export const HistoryStore = defineStore('history', {
     async ResultEx() {
       try {
         const data = await ApiService.get('/main_result/listprat/?user_id=' + this.user_id).then(rep => {
-     
-      if(rep.data){
+          this.result = [];
+      if(rep.data.length > 0){
         this.result.push(rep.data);
       }
 
-      console.log(this.result);
+
         });
+     
         return data;
       } catch (error) {
         return false;

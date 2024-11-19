@@ -180,7 +180,7 @@
                 ></path></svg  ></a>
             
         
-                <button class="button2 m-1" @click="viewProfile(user.user_id)">{{ $t("button_record") }}</button>
+                <button class="button2 m-1" @click="viewHist(user.user_id)">{{ $t("button_record") }}</button>
               
           </td>
         </tr>
@@ -318,6 +318,13 @@ const viewProfile = async (item) => {
  
   await router.push("/users/profile/"+ item);
 };
+
+const viewHist = async (item) => {
+ 
+ await router.push("/history/"+ item);
+};
+
+
 
 const selchk = async (x) => {
   await selectone(x);
