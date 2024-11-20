@@ -19,7 +19,7 @@
         </button>
       </div>
     </div>
-{{ store.forminsertnew }}
+    {{ store.forminsertnew }}
     <div class="col-sm-12 p-2">
       <label for="exampleFormControlInput1">{{
         $t("menu_app_app_start")
@@ -30,10 +30,18 @@
         :format="format"
         :enable-time-picker="false"
         :disabled-dates="isDateDisabled"
-         :placeholder="$t('exp_update_acc_pehol')"
+        :placeholder="$t('exp_update_acc_pehol')"
         required
       ></VueDatePicker>
     </div>
+
+    <span
+                          v-if="v$.ap_date_start.$error"
+                          class="text-xs text-red-500"
+                          style="color: red"
+                        >
+                        ap_date_start</span
+                        >
 
     <div class="col-sm-12 p-2">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_end") }}</label
@@ -45,11 +53,17 @@
         :format="format"
         :enable-time-picker="false"
         :disabled-dates="isDateDisabledEnd"
-         :placeholder="$t('exp_update_acc_pehol')"
+        :placeholder="$t('exp_update_acc_pehol')"
       ></VueDatePicker>
-
-
     </div>
+
+    <span
+                          v-if="v$.ap_date_end.$error"
+                          class="text-xs text-red-500"
+                          style="color: red"
+                        >
+                        ap_date_end</span
+                        >
 
     <div class="col-12 col-sm-12 col-md-12 pt-2">
       <label for="exampleInputEmail1">ປະເພດອະນຸຍາດ:</label
@@ -62,22 +76,41 @@
           style="padding: 0.5%"
         >
           {{ fruit }}
-          <input type="checkbox" :value="fruit"   v-model="store.forminsertnew.day" />
+          <input
+            type="checkbox"
+            :value="fruit"
+            v-model="store.forminsertnew.day"
+          />
         </label>
       </div>
     </div>
 
+    <span
+                          v-if="v$.day.$error"
+                          class="text-xs text-red-500"
+                          style="color: red"
+                        >
+                        day</span
+                        >
+
     <div class="col-sm-12 p-2">
       <label for="exampleFormControlInput1">ເວລາເລິ່ມ:</label>
-     <VueDatePicker
+      <VueDatePicker
         v-model="store.forminsertnew.selectedDateTime"
         required
         :format="natee"
-    :placeholder="$t('exp_update_acc_pehol')"
-    time-picker
+        :placeholder="$t('exp_update_acc_pehol')"
+        time-picker
       ></VueDatePicker>
     </div>
-   
+
+    <span
+                          v-if="v$.selectedDateTime.$error"
+                          class="text-xs text-red-500"
+                          style="color: red"
+                        >
+                        selectedDateTime</span
+                        >
 
     <div class="col-12 col-sm-12 col-md-12 pt-2">
       <label for="exampleInputEmail1">ປະເພດອະນຸຍາດ:</label
@@ -90,10 +123,22 @@
           style="padding: 0.5%"
         >
           {{ fruit }}
-          <input type="checkbox" :value="fruit"  v-model="store.forminsertnew.dlt_code" />
+          <input
+            type="checkbox"
+            :value="fruit"
+            v-model="store.forminsertnew.dlt_code"
+          />
         </label>
       </div>
     </div>
+
+    <span
+                          v-if="v$.dlt_code.$error"
+                          class="text-xs text-red-500"
+                          style="color: red"
+                        >
+                        dlt_code</span
+                        >
 
     <div class="col-sm-12 p-2">
       <label for="exampleFormControlInput1">ຈຳນວນທີ່ເຮັດໄດ້:</label>
@@ -105,12 +150,20 @@
         maxlength="20"
         v-model="store.forminsertnew.ap_quota"
         :class="{
-          'border-red-500 focus:border-red-500': v$.ap_remark.$error,
-          'border-[#42d392] ': !v$.ap_remark.$invalid,
+          'border-red-500 focus:border-red-500': v$.ap_quota.$error,
+          'border-[#42d392] ': !v$.ap_quota.$invalid,
         }"
-        @change="v$.ap_remark.$touch"
+        @change="v$.ap_quota.$touch"
         autocomplete="off"
       />
+
+      <span
+        v-if="v$.ap_quota.$error"
+        class="text-xs text-red-500"
+        style="color: red"
+      >
+        ຈຳນວນທີ່ເຮັດໄດ້</span
+      >
     </div>
   </div>
 
@@ -143,7 +196,7 @@ const toast = useToast();
 const router = useRouter();
 const store = AppointStore();
 
-const { FormInsert } = storeToRefs(store);
+const { FormAppoint } = storeToRefs(store);
 const { ResetForm } = AppointStore();
 
 const date = ref(new Date());
@@ -158,19 +211,16 @@ const format = (date) => {
 };
 
 const natee = (time) => {
-  if (!time) return '';
-      const options = {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false, // Use 24-hour format; set to true for 12-hour format
-      };
-  
-      return new Intl.DateTimeFormat('en-GB', options).format(new Date(time));
+  if (!time) return "";
+  const options = {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false, // Use 24-hour format; set to true for 12-hour format
+  };
+
+  return new Intl.DateTimeFormat("en-GB", options).format(new Date(time));
 };
-
-
-
 
 const rules = computed(() => {
   return {
@@ -178,12 +228,14 @@ const rules = computed(() => {
       required: helpers.withMessage("The Quota field is required", required),
       minLength: minLength(1),
     },
-    ap_remark: {
+    selectedDateTime: {
       required: helpers.withMessage("The Remark field is required", required),
       minLength: minLength(1),
     },
     ap_date_start: { required },
     ap_date_end: { required },
+    day: { required },
+    dlt_code: { required },
   };
 });
 
@@ -210,14 +262,14 @@ const backToUser = async () => {
   router.go(-1);
 };
 
-const v$ = useVuelidate(rules, FormInsert);
+const v$ = useVuelidate(rules, FormAppoint);
 
 const save = async () => {
   v$.value.$validate();
 
-  toast.error("ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ");
+
   if (!v$.value.$error) {
-    // let checktime = await disabledDates()
+    const data = await store.SaveFormAPPNew();
     //     if(checktime == false){
     //       store.AlertEndtime  = true
     // return false;

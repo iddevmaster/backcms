@@ -98,7 +98,6 @@ export const AppointStore = defineStore('appoint', {
       ap_quota: "",
       ap_date_start: null,
       ap_date_end: null,
-      ap_remark: "",
       user_id: "",
       selectedDateTime:"",
       dlt_code:[],
@@ -233,6 +232,9 @@ export const AppointStore = defineStore('appoint', {
     },
     FormEdit(state) {
       return state.formedit;
+    },
+    FormAppoint(state) {
+      return state.forminsertnew;
     },
   },
 
@@ -391,7 +393,29 @@ export const AppointStore = defineStore('appoint', {
       }
     },
 
+    async SaveFormAPPNew() {
 
+
+
+const currentDate = new Date(this.forminsertnew.ap_date_start).toISOString().split('T')[0];
+const currentDateEnd = new Date(this.forminsertnew.ap_date_end).toISOString().split('T')[0];
+
+this.forminsertnew.ap_date_start = currentDate
+this.forminsertnew.ap_date_end = currentDateEnd
+
+
+try {
+
+  const data = await ApiService.post('/appointment/newcreate',this.forminsertnew).then(response => {
+
+   console.log(response);
+  });
+
+
+} catch (error) {
+  return false;
+}
+    },
 
 
     async SaveFormAPP() {
