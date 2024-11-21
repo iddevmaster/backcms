@@ -781,90 +781,66 @@ try {
       this.formsearchapptoday.location_id = this.location_id
       this.formsearchapptoday.user_type = this.user_type
 
-
+      console.log(this.formsearchapptoday);
       try {
         const data = await ApiService.post('/appointment/dateappointment',this.formsearchapptoday).then(response => {
+
+          console.log(response.data);
 this.dlttoday = response.data
-console.log(response.datay);
+
           for (let i = 0; i < response.data.length; i++) {
-            if (response.data[i].dlt_code == 'A' && response.data[i].type == 1) {
+            if (response.data[i].dlt_code == 'A' ) {
               this.dlt_today.A_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'A' && response.data[i].type == 2) {
-              this.dlt_today.A1_2.push(response.data[i])
-            }
-            if (response.data[i].dlt_code == 'A1' && response.data[i].type == 1) {
+       
+            if (response.data[i].dlt_code == 'A1' ) {
               this.dlt_today.A1_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'A1' && response.data[i].type == 2) {
-              this.dlt_today.A1_2.push(response.data[i])
-            }
-            if (response.data[i].dlt_code == 'A2' && response.data[i].type == 1) {
+          
+            if (response.data[i].dlt_code == 'A2' ) {
               this.dlt_today.A2_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'A2' && response.data[i].type == 2) {
-              this.dlt_today.A2_2.push(response.data[i])
-            }
-            if (response.data[i].dlt_code == 'A3' && response.data[i].type == 1) {
+        
+            if (response.data[i].dlt_code == 'A3' ) {
               this.dlt_today.A3_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'A3' && response.data[i].type == 2) {
-              this.dlt_today.A3_2.push(response.data[i])
-            }
-            if (response.data[i].dlt_code == 'B' && response.data[i].type == 1) {
+         
+            if (response.data[i].dlt_code == 'B' ) {
               this.dlt_today.B_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'B' && response.data[i].type == 2) {
-              this.dlt_today.B_2.push(response.data[i])
-            }
-            if (response.data[i].dlt_code == 'C' && response.data[i].type == 1) {
+          
+            if (response.data[i].dlt_code == 'C' ) {
               this.dlt_today.C_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'C' && response.data[i].type == 2) {
-              this.dlt_today.C_2.push(response.data[i])
-            }
-            if (response.data[i].dlt_code == 'C1' && response.data[i].type == 1) {
+           
+            if (response.data[i].dlt_code == 'C1' ) {
               this.dlt_today.C1_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'C1' && response.data[i].type == 2) {
-              this.dlt_today.C1_2.push(response.data[i])
-            }
-            if (response.data[i].dlt_code == 'C2' && response.data[i].type == 1) {
+           
+            if (response.data[i].dlt_code == 'C2' ) {
               this.dlt_today.C2_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'C2' && response.data[i].type == 2) {
-              this.dlt_today.C2_2.push(response.data[i])
-            }
-            if (response.data[i].dlt_code == 'D' && response.data[i].type == 1) {
+           
+            if (response.data[i].dlt_code == 'D' ) {
               this.dlt_today.D_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'D' && response.data[i].type == 2) {
-              this.dlt_today.D_2.push(response.data[i])
-            }
-            if (response.data[i].dlt_code == 'D1' && response.data[i].type == 1) {
+          
+            if (response.data[i].dlt_code == 'D1' ) {
               this.dlt_today.D_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'D1' && response.data[i].type == 2) {
-              this.dlt_today.D1_2.push(response.data[i])
-            }
-            if (response.data[i].dlt_code == 'D2' && response.data[i].type == 1) {
+        
+            if (response.data[i].dlt_code == 'D2' ) {
               this.dlt_today.D2_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'D2' && response.data[i].type == 2) {
-              this.dlt_today.D2_2.push(response.data[i])
-            }
-            if (response.data[i].dlt_code == 'E' && response.data[i].type == 1) {
+           
+            if (response.data[i].dlt_code == 'E' ) {
               this.dlt_today.E_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'E' && response.data[i].type == 2) {
-              this.dlt_today.E_2.push(response.data[i])
-            }
-            if (response.data[i].dlt_code == 'E1' && response.data[i].type == 1) {
+            
+            if (response.data[i].dlt_code == 'E1' ) {
               this.dlt_today.E1_1.push(response.data[i])
             }
-            if (response.data[i].dlt_code == 'E1' && response.data[i].type == 2) {
-              this.dlt_today.E1_2.push(response.data[i])
-            }
+            
           }
         });
         return true
