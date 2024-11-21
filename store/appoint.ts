@@ -321,10 +321,10 @@ export const AppointStore = defineStore('appoint', {
       try {
         this.event = []
         const data = await ApiService.get('/appointment/event/new/?ap_learn_type=' + parseInt(this.form.ap_learn_type) + '&dlt_code=' + this.form.dlt_code + '').then(response => {
-          console.log(response);
+        
           if (response.data.length > 0) {
             this.event = response.data
-           console.log(this.event);
+       
             //  this.form.date_event = response.data[0].event
           }
 

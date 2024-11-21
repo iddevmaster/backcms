@@ -165,6 +165,17 @@
         ຈຳນວນທີ່ເຮັດໄດ້</span
       >
     </div>
+
+
+    
+    <div class="col-sm-12 p-2">
+      <label for="exampleFormControlInput1">ຈຳນວນທີ່ເຮັດໄດ້:</label>
+      <select class="form-select form-select" aria-label="Default select example" disabled >
+        <option value="ກຄພຂ ສະຫວັນນະເຂດ" selected>ກຄພຂ ສະຫວັນນະເຂດ</option>
+      </select>
+
+     
+    </div>
   </div>
 
   <div class="row mb-4"></div>
