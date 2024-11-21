@@ -785,6 +785,7 @@ try {
       try {
         const data = await ApiService.post('/appointment/dateappointment',this.formsearchapptoday).then(response => {
 this.dlttoday = response.data
+console.log(response.datay);
           for (let i = 0; i < response.data.length; i++) {
             if (response.data[i].dlt_code == 'A' && response.data[i].type == 1) {
               this.dlt_today.A_1.push(response.data[i])
