@@ -321,7 +321,7 @@ export const AppointStore = defineStore('appoint', {
       try {
         this.event = []
         const data = await ApiService.get('/appointment/event/new/?ap_learn_type=' + parseInt(this.form.ap_learn_type) + '&dlt_code=' + this.form.dlt_code + '').then(response => {
-
+          console.log(response);
           if (response.data.length > 0) {
             this.event = response.data
            console.log(this.event);
@@ -402,7 +402,6 @@ const currentDateEnd = new Date(this.forminsertnew.ap_date_end).toISOString().sp
 
 this.forminsertnew.ap_date_start = currentDate
 this.forminsertnew.ap_date_end = currentDateEnd
-
 
 try {
 
@@ -889,10 +888,15 @@ this.dlttoday = response.data
 
       this.formselectapp.ap_id = this.form.date_event.ap_id;
       this.formselectapp.ap_date_first = this.form.date_event.ap_date_first;
+      this.formselectapp.dlt_code = this.form.dlt_code
+
+
+     
    
       try {
         const data = await ApiService.post('/appointment/reserve/new/create', this.formselectapp).then(x => {
-return x;
+          return x.data.status;
+
         });
         return data;
       } catch (error) {

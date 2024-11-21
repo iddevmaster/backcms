@@ -71,7 +71,7 @@
         <option disabled selected :value="0">{{ $t('select') }}...</option>
         
         <option v-for="(events, x) in store.event" :value="events">
-           {{format(events.ap_date_first)}} {{formatty(events.type)}}, Class {{events.dlt_code}} . Avalable: {{calcu(events.ap_quota,events.available)}} seats
+           {{format(events.ap_date_first)}} {{events.time}}, Class {{events.dlt_code}} . Avalable: {{calcu(events.ap_quota,events.available)}} seats
         </option>
       </select> 
     </div>
@@ -191,25 +191,20 @@ const SaveAppoint = async () => {
     return false;
 }
 let save = await store.SaveUserRerv();
-
-if(save.status == 200){
+console.log(save);
+if(save == 200){
  await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
 
  await router.push('/appointment/dateappointment');
 }
-if(save.status == 201){
+if(save == 201){
   toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ ມີຢູ່ແລ້ວ')
 }
-if(save.status == 202){
+if(save == 202){
   toast.error('QUATA ເຕັມ')
 }
 
-// if(save == true){
-//   toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
-// }else {
-//   toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
-// }
-  
+
 };
 
 
