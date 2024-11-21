@@ -145,7 +145,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionA1"
                 >
-                  ຊ່ອງເວລາ 08.00 - A : {{ locale == "la" ? checkdlt(store.dlt_today.A_1)[0].dlt_name_lo : checkdlt(store.dlt_today.A_1)[0].dlt_name_eng }}
+                  ຊ່ອງເວລາ {{store.dlt_today}} - A : {{ locale == "la" ? checkdlt(store.dlt_today.A_1)[0].dlt_name_lo : checkdlt(store.dlt_today.A_1)[0].dlt_name_eng }}
                 
 
               
@@ -344,7 +344,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionA11"
                 >
-                  ຊ່ອງເວລາ 08.00 - A1 :
+                  ຊ່ອງເວລາ {{store.dlt_today.A1_1[0].time}} - A1 :
                   {{ locale == "la" ? checkdlt(store.dlt_today.A1_1)[0].dlt_name_lo : checkdlt(store.dlt_today.A1_1)[0].dlt_name_eng }}
 
                  
@@ -543,129 +543,7 @@ function coverimage(i) {
           </div>
 
           <!-- A1 2-->
-          <div class="card mb-1" v-if="store.dlt_today.A1_2.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionA12"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionA12"
-                >
-                  ຊ່ອງເວລາ 16.00 - A1 : {{ locale == "la" ? checkdlt(store.dlt_today.A1_1)[0].dlt_name_lo : checkdlt(store.dlt_today.A1_1)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionA12"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-              <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.A1_2"
-                    :key="item"
-                  >
-                    <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            v-else
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                            <p class="card-category mb-2">{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">{{ $t("app_today_div") }}: 1</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                  {{ item.pratic }}/100</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+         
           <!-- A2 1-->
           <div class="card mb-1" v-if="store.dlt_today.A2_1.length > 0">
             <div class="card-header" id="...">
@@ -791,121 +669,7 @@ function coverimage(i) {
           </div>
 
           <!-- A2 2-->
-          <div class="card mb-1" v-if="store.dlt_today.A2_2.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionA22"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionA22"
-                >
-                  ຊ່ອງເວລາ 16.00 - A2 :{{ locale == "la" ? checkdlt(store.dlt_today.A2_2)[0].dlt_name_lo : checkdlt(store.dlt_today.A1_1)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionA22"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-              <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.A2_2"
-                    :key="item"
-                  >
-                    <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                            <p class="card-category mb-2">{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">{{ $t("app_today_div") }}: 1</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
+        
           <!-- A3 1-->
           <div class="card mb-1" v-if="store.dlt_today.A3_1.length > 0">
             <div class="card-header" id="...">
@@ -1164,7 +928,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionB1"
                 >
-                  ຊ່ອງເວລາ 08.00 - B :  {{ locale == "la" ? checkdlt(store.dlt_today.B_1)[0].dlt_name_lo : checkdlt(store.dlt_today.B_1)[0].dlt_name_eng }}
+                  ຊ່ອງເວລາ {{store.dlt_today.B_1[0].time}} - B :  {{ locale == "la" ? checkdlt(store.dlt_today.B_1)[0].dlt_name_lo : checkdlt(store.dlt_today.B_1)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
