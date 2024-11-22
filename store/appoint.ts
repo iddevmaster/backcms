@@ -316,17 +316,35 @@ export const AppointStore = defineStore('appoint', {
     },
 
     async fetchAppointmentlist() {
- 
+
+console.log(this.formlistapp);
 try {
   const data = await ApiService.post('/appointment/listall',this.formlistapp).then(response => {
     this.applist = response.data
   });
-
-
 } catch (error) {
   return false;
 }
     },
+
+    async fetchAppointmentlistFitter() {
+  
+
+
+
+    this.formlistapp.ap_date_start = new Date(this.formlistapp.ap_date_start).toISOString().slice(0, 10);
+    this.formlistapp.ap_date_end = new Date(this.formlistapp.ap_date_end).toISOString().slice(0, 10);
+  
+     try {
+       const data = await ApiService.post('/appointment/listall',this.formlistapp).then(response => {
+        this.applist = [];
+         this.applist = response.data
+       });
+     } catch (error) {
+       return false;
+     }
+         },
+     
 
 
     async fetchAppointmentNew() {

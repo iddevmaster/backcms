@@ -2,23 +2,32 @@
   <div class="row layout-top-spacing">
 
 
-    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
-      <label for="inputEmail3" class="col-sm-12 col-form-label">ສະຖານະ</label>
+
+    
+    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+      <label for="inputEmail3" class="col-sm-12 col-form-label">Filter</label>
+
+    </div>
+    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+
       <VueDatePicker
-        v-model="store.forminsertnew.ap_date_start"
+        v-model="store.formlistapp.ap_date_start"
         :format="format"
         :enable-time-picker="false"
-        :disabled-dates="isDateDisabled"
+  
         :placeholder="$t('exp_update_acc_pehol')"
         required
       ></VueDatePicker>
     </div>
 
+    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
+      <label for="inputEmail3" class="col-sm-12 col-form-label">ຫາ</label>
 
-    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
-      <label for="inputEmail3" class="col-sm-12 col-form-label">ສະຖານະ</label>
+    </div>
+    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+
       <VueDatePicker
-        v-model="store.forminsertnew.ap_date_end"
+        v-model="store.formlistapp.ap_date_end"
         required
         :format="format"
         :enable-time-picker="false"
@@ -29,8 +38,7 @@
 
 
     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
-      <label for="inputEmail3" class="col-sm-12 col-form-label"></label>
-     <button class="btn btn-success"> ค้นหา</button>
+     <button class="btn btn-success form-control" @click="Fitter()"> ค้นหา</button>
     </div>
 
   </div>
@@ -178,7 +186,12 @@ const toast = useToast();
 const store = AppointStore();
 const auth = useAuthStore();
  store.formlistapp.ap_date_start = new Date().toISOString().slice(0, 10);
- store.formlistapp.ap_date_end = new Date().toISOString().slice(0, 10);
+
+ const currentDate = new Date();
+ const nextWeek = new Date(currentDate);
+ nextWeek.setDate(currentDate.getDate() + 14);
+
+ store.formlistapp.ap_date_end = nextWeek.toISOString().slice(0, 10)
 
 await store.fetchAppointmentlist();
 
@@ -197,6 +210,13 @@ const isDateDisabled = (date) => {
   store.formlistapp.ap_date_end = null;
 
   return date < currentDate || date < disableBeforeDate;
+};
+
+
+
+
+const Fitter = async () => {
+  await store.fetchAppointmentlistFitter();
 };
 
 const isDateDisabledEnd = (date) => {
