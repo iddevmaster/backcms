@@ -169,9 +169,10 @@
 
     
     <div class="col-sm-12 p-2">
-      <label for="exampleFormControlInput1">ຈຳນວນທີ່ເຮັດໄດ້:</label>
-      <select class="form-select form-select" aria-label="Default select example" disabled >
+      <label for="exampleFormControlInput1">ออก ณ :</label>
+      <select class="form-select form-select" aria-label="Default select example"   v-model="store.peop_addrs">
         <option value="ກຄພຂ ສະຫວັນນະເຂດ" selected>ກຄພຂ ສະຫວັນນະເຂດ</option>
+        <option value="ກຄພຂ ຈຳປາສັກ" >ກຄພຂ ຈຳປາສັກ</option>
       </select>
 
      

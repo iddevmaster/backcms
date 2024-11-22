@@ -73,6 +73,13 @@ export const AppointStore = defineStore('appoint', {
       ap_learn_type: 1,
       present_day: ''
     },
+    formlistapp:{
+      page: 1,
+      per_page: 50,
+      search: '',
+      ap_date_start:"",
+      ap_date_end:"",
+    },
     history: null,
     formedit: {
       ap_learn_type: null,
@@ -110,6 +117,7 @@ export const AppointStore = defineStore('appoint', {
       per_per: 3,
       search: ""
     },
+    peop_addrs:'ກຄພຂ ສະຫວັນນະເຂດ',
     group: [],
     // end_date:moment(String(null)).format('YYYY-mm-dd'),
     dlt: [],
@@ -199,6 +207,7 @@ export const AppointStore = defineStore('appoint', {
     status_status: "",
     status_statusP: "",
     dlt_score: [],
+    applist: [],
     formresult: {
       mr_score: null,
       mr_learn_type: 1,
@@ -281,7 +290,6 @@ export const AppointStore = defineStore('appoint', {
     },
 
     async fetchAppointment() {
-
       this.form.date_event = 0;
       const appdata = {
         ap_learn_type: this.form.ap_learn_type,
@@ -301,13 +309,25 @@ export const AppointStore = defineStore('appoint', {
 
           //this.form.date_event = response.data[0].event
         });
-
-
       } catch (error) {
         return navigateTo('/maintenance');
       }
 
     },
+
+    async fetchAppointmentlist() {
+ 
+try {
+  const data = await ApiService.post('/appointment/listall',this.formlistapp).then(response => {
+    this.applist = response.data
+  });
+
+
+} catch (error) {
+  return false;
+}
+    },
+
 
     async fetchAppointmentNew() {
 
@@ -402,6 +422,7 @@ const currentDateEnd = new Date(this.forminsertnew.ap_date_end).toISOString().sp
 
 this.forminsertnew.ap_date_start = currentDate
 this.forminsertnew.ap_date_end = currentDateEnd
+this.forminsertnew.peop_addrs = this.peop_addrs
 
 try {
 

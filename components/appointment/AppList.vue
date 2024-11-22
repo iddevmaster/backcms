@@ -2,66 +2,43 @@
   <div class="row layout-top-spacing">
 
 
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
-      <select
-        class="form-select form-select"
-        aria-label="Default select example"
-   
-      >
-        <option value="">
-          <span v-if="locale == 'la'">{{ $t("all") }}</span>
-          <span v-if="locale == 'en'">{{ $t("all") }}</span>
-          <span v-if="locale == 'th'">{{ $t("all") }}</span>
-          <span></span>
-        </option>
-        <option value="1">
-          <span v-if="locale == 'la'">{{ $t("admin") }}</span>
-          <span v-if="locale == 'en'">{{ $t("admin") }}</span>
-          <span v-if="locale == 'th'">{{ $t("admin") }}</span>
-        </option>
-        <option value="2">
-          <span v-if="locale == 'la'">{{ $t("officer") }}</span>
-          <span v-if="locale == 'en'">{{ $t("officer") }}</span>
-          <span v-if="locale == 'th'">{{ $t("officer") }}</span>
-        </option>
-        <option value="3">
-          <span v-if="locale == 'la'">{{ $t("population") }}</span>
-          <span v-if="locale == 'en'">{{ $t("population") }}</span>
-          <span v-if="locale == 'th'">{{ $t("population") }}</span>
-        </option>
-      </select>
-    </div>
-
-    <div class="col-xl-1 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
+    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
       <label for="inputEmail3" class="col-sm-12 col-form-label">ສະຖານະ</label>
-    </div>
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4 ms-auto">
-      <select
-        class="form-select form-select"
-        aria-label="Default select example"
-      
-      >
-        <option value="">ທັງໝົດ</option>
-        <option value="unactive">{{ $t("unactive") }}</option>
-        <option value="phone_active">{{ $t("phone_active") }}</option>
-        <option value="system_unactive">{{ $t("system_unactive") }}</option>
-        <option value="system_active">{{ $t("system_active") }}</option>
-      </select>
+      <VueDatePicker
+        v-model="store.forminsertnew.ap_date_start"
+        :format="format"
+        :enable-time-picker="false"
+        :disabled-dates="isDateDisabled"
+        :placeholder="$t('exp_update_acc_pehol')"
+        required
+      ></VueDatePicker>
     </div>
 
-    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 mb-4">
-      <select
-        class="form-select form-select"
-        aria-label="Default select example"
-     
-      >
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="50">50</option>
-      </select>
+
+    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-5">
+      <label for="inputEmail3" class="col-sm-12 col-form-label">ສະຖານະ</label>
+      <VueDatePicker
+        v-model="store.forminsertnew.ap_date_end"
+        required
+        :format="format"
+        :enable-time-picker="false"
+        :disabled-dates="isDateDisabledEnd"
+        :placeholder="$t('exp_update_acc_pehol')"
+      ></VueDatePicker>
     </div>
+
+
+    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+      <label for="inputEmail3" class="col-sm-12 col-form-label"></label>
+     <button class="btn btn-success"> ค้นหา</button>
+    </div>
+
   </div>
-  <div class="table-responsive">
+
+
+  <div class="row layout-top-spacing">
+
+    <div class="table-responsive">
     <table id="example" class="table table-bordered" style="width: 100%">
       <thead>
         <tr class="cours_move">
@@ -85,13 +62,27 @@
           <th class="no-content">Action</th>
         </tr>
       </thead>
-      <tbody>
-    
+      <tbody >
+        <tr v-for="(item,index) in store.applist" :key="item.ap_id" >
+        <td>{{ item.ap_id }}</td>
+        <td>{{ item.ap_date_first }}</td>
+        <td>{{ item.time }}</td>
+        <td>{{ item.dlt }}</td> 
+        <td>{{ item.quata }}</td>
+        <td>{{ item.available }}</td>
+        <td>{{ item.ap_id }}</td>
+        <td>{{ item.ap_id }}</td>
+        <td><button> T</button></td>
+        </tr>
       </tbody>
     </table>
 
     <div></div>
   </div>
+
+
+</div>
+
   <!-- <div class="row">
     <span
       >Showing {{ (store.current_page - 1) * store.formsearch.per_page + 1 }} to
@@ -175,8 +166,8 @@ import "jquery/dist/jquery.min.js";
 //Datatable Modules
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
-import $ from "jquery";
-import Paginate from "vuejs-paginate-next";
+import VueDatePicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
 import { useToast } from "vue-toastification";
 import moment from "moment-timezone";
 import { useI18n } from "vue-i18n";
@@ -186,9 +177,38 @@ const router = useRouter();
 const toast = useToast();
 const store = AppointStore();
 const auth = useAuthStore();
+ store.formlistapp.ap_date_start = new Date().toISOString().slice(0, 10);
+ store.formlistapp.ap_date_end = new Date().toISOString().slice(0, 10);
+
+await store.fetchAppointmentlist();
+
+const date = ref(new Date());
+const format = (date) => {
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+};
 
 
+const isDateDisabled = (date) => {
+  const currentDate = new Date();
+  const disableBeforeDate = new Date(); // Adjust the date as needed
+  store.formlistapp.ap_date_end = null;
 
+  return date < currentDate || date < disableBeforeDate;
+};
+
+const isDateDisabledEnd = (date) => {
+  const currentDate = new Date();
+  const disableBeforeDate = new Date(store.formlistapp.ap_date_start); // Adjust the date as needed
+
+  if (!store.formlistapp.ap_date_start) {
+    return true;
+  }
+
+  return date < currentDate || date == disableBeforeDate;
+};
 
 
 function coverttime(date) {
@@ -202,7 +222,6 @@ function coverttime(date) {
     second: "numeric",
   };
   const formattedDatetime = datetime.toLocaleString(undefined, options);
-
   return formattedDatetime;
 }
 
