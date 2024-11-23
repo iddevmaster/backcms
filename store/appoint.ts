@@ -263,6 +263,11 @@ export const AppointStore = defineStore('appoint', {
       this.isAllSelected = false
     },
 
+    async setCurrentPageAPP(page) {
+      this.formlistapp.page = page
+    
+    },
+  
     sortLists(sortBy) {
       if (this.sortedbyASC) {
         this.posts.data.sort((x, y) => (x[sortBy] > y[sortBy] ? -1 : 1));
@@ -317,10 +322,16 @@ export const AppointStore = defineStore('appoint', {
 
     async fetchAppointmentlist() {
 
-console.log(this.formlistapp);
+
 try {
   const data = await ApiService.post('/appointment/listall',this.formlistapp).then(response => {
-    this.applist = response.data
+    this.applist = response.data.data
+    this.total_page = response.data.total_page
+    this.limit_page = response.data.limit_page
+    this.current_page = response.data.current_page
+    this.total_filter = response.data.total_filter
+    this.total = response.data.total
+
   });
 } catch (error) {
   return false;
@@ -329,16 +340,14 @@ try {
 
     async fetchAppointmentlistFitter() {
   
-
-
-
     this.formlistapp.ap_date_start = new Date(this.formlistapp.ap_date_start).toISOString().slice(0, 10);
     this.formlistapp.ap_date_end = new Date(this.formlistapp.ap_date_end).toISOString().slice(0, 10);
   
      try {
        const data = await ApiService.post('/appointment/listall',this.formlistapp).then(response => {
         this.applist = [];
-         this.applist = response.data
+         this.applist = response.data.data
+         
        });
      } catch (error) {
        return false;

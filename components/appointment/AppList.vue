@@ -2,13 +2,11 @@
   <div class="row layout-top-spacing">
 
 
-
-    
     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
       <label for="inputEmail3" class="col-sm-12 col-form-label">Filter</label>
 
     </div>
-    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+    <div class="col-xl-2 col-lg-5 col-md-5 col-sm-2">
 
       <VueDatePicker
         v-model="store.formlistapp.ap_date_start"
@@ -24,7 +22,7 @@
       <label for="inputEmail3" class="col-sm-12 col-form-label">ຫາ</label>
 
     </div>
-    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+    <div class="col-xl-2 col-lg-5 col-md-5 col-sm-2">
 
       <VueDatePicker
         v-model="store.formlistapp.ap_date_end"
@@ -37,8 +35,8 @@
     </div>
 
 
-    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
-     <button class="btn btn-success form-control" @click="Fitter()"> ค้นหา</button>
+    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mt-auto">
+     <button class="btn btn-success" style="margin: 1px;" @click="Fitter()"> ค้นหา</button>
     </div>
 
   </div>
@@ -80,7 +78,26 @@
         <td>{{ item.available }}</td>
         <td>{{ item.ap_id }}</td>
         <td>{{ item.ap_id }}</td>
-        <td><button> T</button></td>
+        <td>
+          
+            
+            <a class="badge badge-light-primary text-start me-2 action-view" @click="viewData(item)" >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z"    /></svg    ></a>
+  
+        
+          
+       
+      
+             
+            
+        </td>
+      
         </tr>
       </tbody>
     </table>
@@ -89,25 +106,65 @@
   </div>
 
 
-</div>
-
-  <!-- <div class="row">
-    <span
-      >Showing {{ (store.current_page - 1) * store.formsearch.per_page + 1 }} to
-      {{
-        Math.min(store.current_page * store.formsearch.per_page, store.total)
-      }}
-      of {{ store.total }} entries</span
-    >
-
-    <div class="col-xl-12 col-lg-12">
-      <div class="pagination-no_spacing" v-if="posts_statff.total_page > 1">
+  <div>
+    <div class="dt--pagination" v-if="store.total_page > 1">
+      <div
+        class="dataTables_paginate paging_simple_numbers"
+        id="zero-config_paginate"
+      >
         <ul class="pagination">
-          <li>
+          <li
+            class="paginate_button page-item previous"
+            id="zero-config_previous"
+            @click="Prev()"
+          >
             <a
-              href="javascript:void(0);"
-              class="prev"
-              @click="validatePNumberDown()"
+              href="#"
+              aria-controls="zero-config"
+              data-dt-idx="0"
+              tabindex="0"
+              class="page-link"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="feather feather-arrow-left"
+              >
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline></svg ></a>
+          </li>
+          <li
+            class="paginate_button page-item"
+            v-for="page in store.total_page"
+            :key="page"
+          >
+            <a
+              href="#"
+              aria-controls="zero-config"
+              data-dt-idx="1"
+              tabindex="0"
+              class="page-link"
+              :class="{ bgcx: page === store.formlistapp.page }"
+              @click="setCurrentPageclick(page)"
+            >
+              {{ page }}</a
+            >
+          </li>
+          <li class="paginate_button page-item next" id="zero-config_next">
+            <a
+              href="#"
+              aria-controls="zero-config"
+              @click="Next()"
+              data-dt-idx="4"
+              tabindex="0"
+              class="page-link"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -118,48 +175,21 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="feather feather-chevron-left"
+                class="feather feather-arrow-right"
               >
-                <polyline points="15 18 9 12 15 6"></polyline></svg  ></a>
-          </li>
-          <li>
-            <div class="col-xs-1">
-              <input
-                id="ex1"
-                type="number"
-                style="width: 50px"
-                v-model="store.formsearch.page"
-                @input="validatePNumber($event)"
-              />
-            </div>
-          </li>
-          <li><a href="javascript:void(0);">/</a></li>
-          <li>
-            <a href="javascript:void(0);">{{ store.total_page }}</a>
-          </li>
-          <li>
-            <a
-              href="javascript:void(0);"
-              class="next"
-              @click="validatePNumberUp()"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-chevron-right"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline></svg ></a>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline></svg ></a>
           </li>
         </ul>
       </div>
     </div>
-  </div> -->
+  </div>
+</div>
+
+
+
+
+
 </template>
 
 
@@ -213,9 +243,20 @@ const isDateDisabled = (date) => {
 };
 
 
+const setCurrentPageclick = async (page) => {
+  await store.setCurrentPageAPP(page)
+  await store.fetchAppointmentlistFitter();
 
+
+};
 
 const Fitter = async () => {
+  if(store.formlistapp.ap_date_start == null){
+    return false;
+  }
+  if(store.formlistapp.ap_date_end == null){
+return false;
+}
   await store.fetchAppointmentlistFitter();
 };
 
@@ -229,6 +270,52 @@ const isDateDisabledEnd = (date) => {
 
   return date < currentDate || date == disableBeforeDate;
 };
+
+
+const Prev = async () => {
+
+if (store.formlistapp.page == 1) {
+  await store.fetchAppointmentlistFitter();
+  await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+    timeout: 50,
+  });
+} else {
+  store.formlistapp.page -= 1;
+  await store.fetchAppointmentlistFitter();
+  await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+    timeout: 50,
+  });
+}
+};
+
+
+
+
+const Next = async () => {
+
+
+if (store.formlistapp.page == store.total_page) {
+ 
+  store.formlistapp.page = store.total_page;
+await store.fetchAppointmentlistFitter();
+  await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+    timeout: 50,
+  });
+} else {
+  store.formlistapp.page += 1;
+await store.fetchAppointmentlistFitter();
+ 
+}
+
+};
+
+
+const viewData = async () => {
+
+
+console.log('Fitter Data');
+};
+
 
 
 function coverttime(date) {
