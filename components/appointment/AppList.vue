@@ -35,8 +35,12 @@
     </div>
 
 
-    <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mt-auto">
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-auto">
      <button class="btn btn-success" style="margin: 1px;" @click="Fitter()"> ค้นหา</button>
+    </div>
+
+    <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 mt-auto">
+     <button class="btn btn-primary" style="margin: 1px;" @click="Fittt()"> ສ້າງຊ່ວງເວລານັດໝາຍ</button>
     </div>
 
   </div>
@@ -304,9 +308,17 @@ const Fitter = async () => {
   if(store.formlistapp.ap_date_end == null){
 return false;
 }
+
+
+
+
   await store.fetchAppointmentlistFitter();
 };
 
+
+const Fittt = async () => {
+  await router.push('/appointment/dateappointment');
+}
 const isDateDisabledEnd = (date) => {
   const currentDate = new Date();
   const disableBeforeDate = new Date(store.formlistapp.ap_date_start); // Adjust the date as needed

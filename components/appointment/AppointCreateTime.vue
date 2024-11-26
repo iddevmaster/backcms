@@ -19,7 +19,6 @@
         </button>
       </div>
     </div>
-    {{ store.forminsertnew }}
     <div class="col-sm-12 p-2">
       <label for="exampleFormControlInput1">{{
         $t("menu_app_app_start")
@@ -282,19 +281,11 @@ const save = async () => {
 
   if (!v$.value.$error) {
     const data = await store.SaveFormAPPNew();
-    //     if(checktime == false){
-    //       store.AlertEndtime  = true
-    // return false;
-    // }
-    //    const data = await store.SaveFormAPP();
-    // if (data == 200) {
-    //   store.AlertEndtime  = false;
-    // await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
-    //  await   store.ResetForm();
-    //  await router.push('/appointment');
-    // } else {
-    //   toast.error('ລົ້ມເຫລວໃນການບັນທຶກຂໍ້ມູນ')
-    // }
+ if(data === true){
+  await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
+  await router.push('/appointment');
+ }
+
   }
 };
 

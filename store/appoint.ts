@@ -172,6 +172,7 @@ export const AppointStore = defineStore('appoint', {
     },
     score: [],
     totalscore: 0,
+    
     formhistory: {
       page: 1,
       per_page: 100,
@@ -325,7 +326,7 @@ export const AppointStore = defineStore('appoint', {
      
 
       this.formlistapp.user_id = this.user_id
-      
+
 
 try {
   const data = await ApiService.post('/appointment/listall',this.formlistapp).then(response => {
@@ -459,11 +460,10 @@ this.forminsertnew.peop_addrs = this.peop_addrs
 try {
 
   const data = await ApiService.post('/appointment/newcreate',this.forminsertnew).then(response => {
-
-   console.log(response);
+   return true;
   });
 
-
+  return true;
 } catch (error) {
   return false;
 }
@@ -803,31 +803,31 @@ try {
     async fetchAppPresentTodayReset() {
 
       this.dlt_today.A_1 = []
-      this.dlt_today.A_2 = []
+
       this.dlt_today.A1_1 = []
-      this.dlt_today.A1_2 = []
+   
       this.dlt_today.A2_1 = []
-      this.dlt_today.A2_2 = []
+ 
       this.dlt_today.A3_1 = []
-      this.dlt_today.A3_2 = []
+   
       this.dlt_today.B_1 = []
-      this.dlt_today.B_2 = []
+   
       this.dlt_today.C_1 = []
-      this.dlt_today.C_2 = []
+ 
       this.dlt_today.C1_1 = []
-      this.dlt_today.C1_2 = []
+ 
       this.dlt_today.C2_1 = []
-      this.dlt_today.C2_2 = []
+    
       this.dlt_today.D_1 = []
-      this.dlt_today.D_2 = []
+  
       this.dlt_today.D1_1 = []
-      this.dlt_today.D1_2 = []
+ 
       this.dlt_today.D2_1 = []
-      this.dlt_today.D2_2 = []
+ 
       this.dlt_today.E_1 = []
-      this.dlt_today.E_2 = []
+ 
       this.dlt_today.E1_1 = []
-      this.dlt_today.E1_2 = []
+
 
 
 
@@ -852,12 +852,13 @@ try {
       this.formsearchapptoday.location_id = this.location_id
       this.formsearchapptoday.user_type = this.user_type
 
-      console.log(this.formsearchapptoday);
+     
       try {
         const data = await ApiService.post('/appointment/dateappointment',this.formsearchapptoday).then(response => {
 
-          console.log(response.data);
 this.dlttoday = response.data
+
+
 
           for (let i = 0; i < response.data.length; i++) {
             if (response.data[i].dlt_code == 'A' ) {
@@ -956,13 +957,16 @@ this.dlttoday = response.data
 
 
     async fetchAppNumber() {
+ 
       try {
         const data = await ApiService.post('/appointment/dateappointment/appbyuser', this.searchapp).then(rep => {
 
           this.dataapp = rep.data;
        
           this.history_user = rep.data[0].user_id
-          this.select_dlt_app = rep.data[0].dlt_code;
+          this.select_dlt_app = rep.data[0].dlt_types;
+        
+    
           if(JSON.parse(this.dataapp[0].remark_verify)){
             this.veggies = JSON.parse(this.dataapp[0].remark_verify)
           }
@@ -1016,11 +1020,14 @@ this.dlttoday = response.data
     },
 
     async fetchDlt() {
+   
       try {
         const data = await ApiService.get('/master_data/drivinglicense_type').then(reps => {
 
+       
           this.dlt = reps.data;
           this.dlt_select = this.dlt.find(obj => obj.dlt_code == this.select_dlt_app);
+         
 
         });
         return data;
@@ -1034,7 +1041,7 @@ this.dlttoday = response.data
 
 try {
   const data = await ApiService.get('/dlt_card/lastes/list?user_id=' + this.dataapp[0].user_id).then(response => {
-console.log(response.data)
+
     if(response.data.length > 0){
       this.dlt_lastes = response.data
     }
@@ -1053,10 +1060,12 @@ console.log(response.data)
 
     async fetchExamScore() {
       this.formscorefull.course_code = this.select_dlt_app
-     
       try {
         const data = await ApiService.post('/exam/main/get/one', this.formscorefull).then(reps => {
+      
           this.totalscore = reps.data[0];
+
+        
         
         });
         return data;
@@ -1071,10 +1080,10 @@ console.log(response.data)
 
           if (reps.data.length > 0) {
 
-            this.dlt_score = reps.data.find((obj => obj.dlt_code == "A1") && (obj => obj.mr_learn_type == 1));
-            this.dlt_scoreP = reps.data.find((obj => obj.dlt_code == "A1") && (obj => obj.mr_learn_type == 2));
+            this.dlt_score = reps.data.find((obj => obj.dlt_code == 'C') || (obj => obj.mr_learn_type === 3));
+            this.dlt_scoreP = reps.data.find((obj => obj.dlt_code == 'C') || (obj => obj.mr_learn_type === 4));
 
-
+            console.log(this.dlt_score);
 
             if (this.dlt_score) {
               this.status_score = 'update';
@@ -1143,10 +1152,12 @@ console.log(response.data)
         this.formresult.mr_score = parseInt(this.formscoreT.score);
         this.formresult.mr_status = this.formscoreT.mr_status
         this.formresult.identification_number = this.dataapp[0].identification_number
-        this.formresult.dlt_code = this.dataapp[0].dlt_code
+        this.formresult.dlt_code = this.dataapp[0].dlt_types
         this.formresult.user_id_staff = this.user_id;
         this.formresult.ref_number = this.formscoreT.ref_number;
         this.formresult.remark = this.formscoreT.remark;
+        this.formresult.mr_learn_type = 1;
+        this.formresult.ap_number = this.dataapp[0].ap_number;
 
         try {
           const data = await ApiService.put('/main_result/update/' + this.dlt_score.mr_id, this.formresult).then(response => {
@@ -1162,13 +1173,17 @@ console.log(response.data)
 
       }
       if (this.status_score == 'create') {
+        this.formresult.mr_learn_type = 1;
         this.formresult.mr_score = parseInt(this.formscoreT.score);
         this.formresult.mr_status = this.formscoreT.mr_status
         this.formresult.identification_number = this.dataapp[0].identification_number
-        this.formresult.dlt_code = this.dataapp[0].dlt_code
+        this.formresult.dlt_code = this.dataapp[0].dlt_types
         this.formresult.user_id_staff = this.user_id;
         this.formresult.ref_number = this.formscoreT.ref_number;
         this.formresult.remark = this.formscoreT.remark;
+        this.formresult.ap_number = this.dataapp[0].ap_number;
+
+console.log(this.dataapp[0]);
 
         try {
           const data = await ApiService.post('/main_result/create', this.formresult).then(response => {
@@ -1217,35 +1232,40 @@ if(this.dataapp[0].st_id != null){
         this.formresult.mr_score = parseInt(this.formscoreP.score);
         this.formresult.mr_status = this.formscoreP.mr_status
         this.formresult.identification_number = this.dataapp[0].identification_number
-        this.formresult.dlt_code = this.dataapp[0].dlt_code
+        this.formresult.dlt_code = this.dataapp[0].dlt_types
         this.formresult.user_id_staff = this.user_id;
         this.formresult.ref_number = this.formscoreP.ref_number;
         this.formresult.remark = this.formscoreP.remark;
-
-        // try {
-        //   const data = await ApiService.put('/main_result/update/' + this.dlt_score.mr_id, this.formresult).then(response => {
-
-        //     if (response.status == 200) {
-        //       return true;
-        //     }
-        //   });
-        //   return data;
-        // } catch (error) {
-        //   return false
-        // }
+        this.formresult.mr_learn_type = 2;
+        this.formresult.ap_number = this.dataapp[0].ap_number;
+console.log(this.formresult);
+   
+        try {
+          const data = await ApiService.put('/main_result/update/' + this.dlt_score.mr_id, this.formresult).then(response => {
+            if (response.status == 200) {
+              return true;
+            }
+          });
+          return data;
+        } catch (error) {
+          return false
+        }
 
       }
       if (this.status_scoreP == 'create') {
+        this.formresult.mr_learn_type = 2;
         this.formresult.mr_score = parseInt(this.formscoreP.score);
+        this.formresult.app_number = this.dataapp[0].app_number;
         this.formresult.mr_status = this.formscoreP.mr_status
         this.formresult.identification_number = this.dataapp[0].identification_number
-        this.formresult.dlt_code = this.dataapp[0].dlt_code
+        this.formresult.dlt_code = this.dataapp[0].dlt_types
         this.formresult.user_id_staff = this.user_id;
         this.formresult.ref_number = this.formscoreP.ref_number;
         this.formresult.remark = this.formscoreP.remark;
-
-
-
+        this.formresult.ap_number = this.dataapp[0].ap_number;
+      
+      
+console.log(this.formresult.ap_number);
         try {
           const data = await ApiService.post('/main_result/create', this.formresult).then(response => {
             if (response.status == 200) {

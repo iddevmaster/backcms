@@ -67,6 +67,8 @@ const GotoDetails = async (item) => {
 const CheckTotalque = (item) => {
   let total = store.course.find((obj) => obj.course_code == item.dlt_code);
 
+  console.log(store.course);
+
   if (total) {
     return total.total_quest;
   } else {
@@ -344,7 +346,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionA11"
                 >
-                  ຊ່ອງເວລາ {{store.dlt_today.A1_1[0].time}} - A1 :
+                  ຊ່ອງເວລາ {{store.dlt_today.A1_1[0].time}} - A1 
                   {{ locale == "la" ? checkdlt(store.dlt_today.A1_1)[0].dlt_name_lo : checkdlt(store.dlt_today.A1_1)[0].dlt_name_eng }}
 
                  
@@ -485,7 +487,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                {{ $t("app_today_ther") }}:
+                                {{ $t("app_today_ther") }}
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -504,7 +506,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
+                                  {{ $t("app_today_ther") }} -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -512,7 +514,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                {{ $t("app_today_pra") }}:
+                                {{ $t("app_today_pra") }}
 
                                   <span
                                     style="color: red"
@@ -528,7 +530,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
+                                  {{ $t("app_today_pra") }} -
                                 </h4>
                               </div>
                             </div>
@@ -542,9 +544,6 @@ function coverimage(i) {
             </div>
           </div>
 
-          <!-- A1 2-->
-         
-          <!-- A2 1-->
           <div class="card mb-1" v-if="store.dlt_today.A2_1.length > 0">
             <div class="card-header" id="...">
               <section class="mb-0 mt-0">
@@ -552,16 +551,19 @@ function coverimage(i) {
                   role="menu"
                   class="collapsed accordion-buttonaa"
                   data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionA21"
+                  data-bs-target="#defaultAccordionA11"
                   aria-expanded="false"
-                  aria-controls="defaultAccordionA21"
+                  aria-controls="defaultAccordionA11"
                 >
-                  ຊ່ອງເວລາ 08.00 - A2 : {{ locale == "la" ? checkdlt(store.dlt_today.A2_1)[0].dlt_name_lo : checkdlt(store.dlt_today.A1_1)[0].dlt_name_eng }}
+                  ຊ່ອງເວລາ {{store.dlt_today.A2_1[0].time}} - A2 
+                  {{ locale == "la" ? checkdlt(store.dlt_today.A2_1)[0].dlt_name_lo : checkdlt(store.dlt_today.A2_1)[0].dlt_name_eng }}
+
+                 
                 </div>
               </section>
             </div>
             <div
-              id="defaultAccordionA21"
+              id="defaultAccordionA11"
               class="collapse"
               aria-labelledby="..."
               data-bs-parent="#toggleAccordion3"
@@ -592,6 +594,7 @@ function coverimage(i) {
                             alt="..."
                             style="width: 200px"
                           />
+
                           <div class="card-body px-0 py-0">
                             <h4 class="media-heading mb-1">
                               {{ $t("app_today_id") }}: {{ item.ap_number }}
@@ -601,9 +604,91 @@ function coverimage(i) {
                               {{ item.user_prefrix }} {{ item.user_firstname }}
                               {{ item.user_lastname }}
                             </h5>
-                            <p class="card-category mb-2">{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">{{ $t("app_today_div") }}: 1</p>
+                          
+                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
+                        
+                            <div v-if="item.app_status == 'C'">
+                              <p
+                                class="card-category mb-2"
+                                v-if="item.app_status == 'C'"
+                                style="color: red"
+                              >
+                                ສະຖານະ: Canceled
+                              </p>
+                            </div>
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == null
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document == '' ||
+                                    item.check_document == null) &&
+                                  item.app_status == 'Y'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending check document
+                              </p>
+                            </div>
+
+                            <div
+                              v-if="
+                                item.app_status == 'Y' &&
+                                item.check_document == 'pass'
+                              "
+                            >
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  (item.check_document != '' ||
+                                    item.check_document != null) &&
+                                  item.mr_status_t == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Theory Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t != null &&
+                                  item.mr_status_p == null
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Pending Practical Exam
+                              </p>
+
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'fail' &&
+                                  item.mr_status_p == 'fail'
+                                "
+                                style="color: red"
+                              >
+                                ສະຖານະ: Failed Exam
+                              </p>
+                              <p
+                                class="card-category mb-2"
+                                v-if="
+                                  item.mr_status_t == 'pass' &&
+                                  item.mr_status_p == 'pass'
+                                "
+                                style="color: green"
+                              >
+                                ສະຖານະ: Practical Exam
+                              </p>
+                            </div>
+
+                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
+                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
 
                             <div class="media mt-4 mb-0">
                               <div class="media-body">
@@ -611,7 +696,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                {{ $t("app_today_ther") }}:
+                                {{ $t("app_today_ther") }}
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -630,7 +715,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
+                                  {{ $t("app_today_ther") }} -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -638,7 +723,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                {{ $t("app_today_pra") }}:
+                                {{ $t("app_today_pra") }}
 
                                   <span
                                     style="color: red"
@@ -654,7 +739,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
+                                  {{ $t("app_today_pra") }} -
                                 </h4>
                               </div>
                             </div>
@@ -668,255 +753,7 @@ function coverimage(i) {
             </div>
           </div>
 
-          <!-- A2 2-->
-        
-          <!-- A3 1-->
-          <div class="card mb-1" v-if="store.dlt_today.A3_1.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionA31"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionA31"
-                >
-                  ຊ່ອງເວລາ 08.00 - A3 :  {{ locale == "la" ? checkdlt(store.dlt_today.A3_1)[0].dlt_name_lo : checkdlt(store.dlt_today.A3_2)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionA31"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-              <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.A3_1"
-                    :key="item"
-                  >
-                    <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            v-else
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
 
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                            <p class="card-category mb-2">{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">{{ $t("app_today_div") }}: 1</p>
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- A3 2-->
-          <div class="card mb-1" v-if="store.dlt_today.A3_2.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionA32"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionA32"
-                >
-                  ຊ່ອງເວລາ 16.00 - A3 :  {{ locale == "la" ? checkdlt(store.dlt_today.A3_2)[0].dlt_name_lo : checkdlt(store.dlt_today.A3_2)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionA32"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-              <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.A3_2"
-                    :key="item"
-                  >
-                    <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                            <p class="card-category mb-2">{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                            <p class="card-category mb-2">ສະຖານະ: ເສັງຜ່ານ</p>
-                            <p class="card-category mb-2">{{ $t("app_today_div") }}: 1</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- B 1-->
           <div class="card mb-1" v-if="store.dlt_today.B_1.length > 0">
             <div class="card-header" id="...">
               <section class="mb-0 mt-0">
@@ -924,16 +761,19 @@ function coverimage(i) {
                   role="menu"
                   class="collapsed accordion-buttonaa"
                   data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionB1"
+                  data-bs-target="#defaultAccordionB"
                   aria-expanded="false"
-                  aria-controls="defaultAccordionB1"
+                  aria-controls="defaultAccordionB"
                 >
-                  ຊ່ອງເວລາ {{store.dlt_today.B_1[0].time}} - B :  {{ locale == "la" ? checkdlt(store.dlt_today.B_1)[0].dlt_name_lo : checkdlt(store.dlt_today.B_1)[0].dlt_name_eng }}
+                  ຊ່ອງເວລາ {{store.dlt_today.B_1[0].time}} - B
+                  {{ locale == "la" ? checkdlt(store.dlt_today.B_1)[0].dlt_name_lo : checkdlt(store.dlt_today.B_1)[0].dlt_name_eng }}
+
+                 
                 </div>
               </section>
             </div>
             <div
-              id="defaultAccordionB1"
+              id="defaultAccordionB"
               class="collapse"
               aria-labelledby="..."
               data-bs-parent="#toggleAccordion3"
@@ -945,7 +785,7 @@ function coverimage(i) {
                     v-for="(item, index) in store.dlt_today.B_1"
                     :key="item"
                   >
-                  <div class="row" @click="GotoDetails(item)">
+                    <div class="row" @click="GotoDetails(item)">
                       <div
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
@@ -1066,7 +906,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                {{ $t("app_today_ther") }}:
+                                {{ $t("app_today_ther") }}
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -1085,7 +925,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
+                                  {{ $t("app_today_ther") }} -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -1093,7 +933,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                {{ $t("app_today_pra") }}:
+                                {{ $t("app_today_pra") }}
 
                                   <span
                                     style="color: red"
@@ -1109,7 +949,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
+                                  {{ $t("app_today_pra") }} -
                                 </h4>
                               </div>
                             </div>
@@ -1123,24 +963,27 @@ function coverimage(i) {
             </div>
           </div>
 
-          <!-- B 2-->
-          <div class="card mb-1" v-if="store.dlt_today.B_2.length > 0">
+
+          <div class="card mb-1" v-if="store.dlt_today.C_1.length > 0">
             <div class="card-header" id="...">
               <section class="mb-0 mt-0">
                 <div
                   role="menu"
                   class="collapsed accordion-buttonaa"
                   data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionB2"
+                  data-bs-target="#defaultAccordionC"
                   aria-expanded="false"
-                  aria-controls="defaultAccordionB2"
+                  aria-controls="defaultAccordionAC"
                 >
-                  ຊ່ອງເວລາ 16.00 - B : {{ locale == "la" ? checkdlt(store.dlt_today.B_2)[0].dlt_name_lo : checkdlt(store.dlt_today.B_2)[0].dlt_name_eng }}
+                  ຊ່ອງເວລາ {{store.dlt_today.C_1[0].time}} - C
+                  {{ locale == "la" ? checkdlt(store.dlt_today.C_1)[0].dlt_name_lo : checkdlt(store.dlt_today.C_1)[0].dlt_name_eng }}
+
+                
                 </div>
               </section>
             </div>
             <div
-              id="defaultAccordionB2"
+              id="defaultAccordionC"
               class="collapse"
               aria-labelledby="..."
               data-bs-parent="#toggleAccordion3"
@@ -1149,217 +992,10 @@ function coverimage(i) {
                 <div class="row">
                   <div
                     class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.B_2"
-                    :key="item"
-                  >
-                  <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            v-else
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                          
-                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                        
-                            <div v-if="item.app_status == 'C'">
-                              <p
-                                class="card-category mb-2"
-                                v-if="item.app_status == 'C'"
-                                style="color: red"
-                              >
-                                ສະຖານະ: Canceled
-                              </p>
-                            </div>
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == null
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document == '' ||
-                                    item.check_document == null) &&
-                                  item.app_status == 'Y'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending check document
-                              </p>
-                            </div>
-
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == 'pass'
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document != '' ||
-                                    item.check_document != null) &&
-                                  item.mr_status_t == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Theory Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t != null &&
-                                  item.mr_status_p == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Practical Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'fail' &&
-                                  item.mr_status_p == 'fail'
-                                "
-                                style="color: red"
-                              >
-                                ສະຖານະ: Failed Exam
-                              </p>
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'pass' &&
-                                  item.mr_status_p == 'pass'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Practical Exam
-                              </p>
-                            </div>
-
-                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}/100</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- C 1-->
-          <div class="card mb-1" v-if="store.dlt_today.C_1.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionC1"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionC1"
-                >
-                  ຊ່ອງເວລາ 08.00 - C :  {{ locale == "la" ? checkdlt(store.dlt_today.C_1)[0].dlt_name_lo : checkdlt(store.dlt_today.C_1)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionC1"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-            <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
                     v-for="(item, index) in store.dlt_today.C_1"
                     :key="item"
                   >
-                  <div class="row" @click="GotoDetails(item)">
+                    <div class="row" @click="GotoDetails(item)">
                       <div
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
@@ -1480,7 +1116,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                {{ $t("app_today_ther") }}:
+                                {{ $t("app_today_ther") }}
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -1499,7 +1135,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
+                                  {{ $t("app_today_ther") }} -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -1507,7 +1143,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                {{ $t("app_today_pra") }}:
+                                {{ $t("app_today_pra") }}
 
                                   <span
                                     style="color: red"
@@ -1523,7 +1159,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
+                                  {{ $t("app_today_pra") }} -
                                 </h4>
                               </div>
                             </div>
@@ -1537,1042 +1173,7 @@ function coverimage(i) {
             </div>
           </div>
 
-          <!-- C 2-->
-          <div class="card mb-1" v-if="store.dlt_today.C_2.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionC2"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionC2"
-                >
-                  ຊ່ອງເວລາ 16.00 - C : {{ locale == "la" ? checkdlt(store.dlt_today.C_2)[0].dlt_name_lo : checkdlt(store.dlt_today.C_2)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionC2"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-            <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.C_2"
-                    :key="item"
-                  >
-                  <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            v-else
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
 
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                          
-                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                        
-                            <div v-if="item.app_status == 'C'">
-                              <p
-                                class="card-category mb-2"
-                                v-if="item.app_status == 'C'"
-                                style="color: red"
-                              >
-                                ສະຖານະ: Canceled
-                              </p>
-                            </div>
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == null
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document == '' ||
-                                    item.check_document == null) &&
-                                  item.app_status == 'Y'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending check document
-                              </p>
-                            </div>
-
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == 'pass'
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document != '' ||
-                                    item.check_document != null) &&
-                                  item.mr_status_t == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Theory Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t != null &&
-                                  item.mr_status_p == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Practical Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'fail' &&
-                                  item.mr_status_p == 'fail'
-                                "
-                                style="color: red"
-                              >
-                                ສະຖານະ: Failed Exam
-                              </p>
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'pass' &&
-                                  item.mr_status_p == 'pass'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Practical Exam
-                              </p>
-                            </div>
-
-                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}/100</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- C11 -->
-          <div class="card mb-1" v-if="store.dlt_today.C1_1.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionC11"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionC11"
-                >
-                  ຊ່ອງເວລາ 08.00 - C1 : {{ locale == "la" ? checkdlt(store.dlt_today.C1_1)[0].dlt_name_lo : checkdlt(store.dlt_today.C1_1)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionC11"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-            <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.C1_1"
-                    :key="item"
-                  >
-                  <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            v-else
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                          
-                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                        
-                            <div v-if="item.app_status == 'C'">
-                              <p
-                                class="card-category mb-2"
-                                v-if="item.app_status == 'C'"
-                                style="color: red"
-                              >
-                                ສະຖານະ: Canceled
-                              </p>
-                            </div>
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == null
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document == '' ||
-                                    item.check_document == null) &&
-                                  item.app_status == 'Y'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending check document
-                              </p>
-                            </div>
-
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == 'pass'
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document != '' ||
-                                    item.check_document != null) &&
-                                  item.mr_status_t == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Theory Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t != null &&
-                                  item.mr_status_p == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Practical Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'fail' &&
-                                  item.mr_status_p == 'fail'
-                                "
-                                style="color: red"
-                              >
-                                ສະຖານະ: Failed Exam
-                              </p>
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'pass' &&
-                                  item.mr_status_p == 'pass'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Practical Exam
-                              </p>
-                            </div>
-
-                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}/100</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- C1 2-->
-          <div class="card mb-1" v-if="store.dlt_today.C1_2.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionC12"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionC12"
-                >
-                  ຊ່ອງເວລາ 16.00 - C1 : {{ locale == "la" ? checkdlt(store.dlt_today.C1_2)[0].dlt_name_lo : checkdlt(store.dlt_today.C1_2)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionC12"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-            <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.C1_2"
-                    :key="item"
-                  >
-                  <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            v-else
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                          
-                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                        
-                            <div v-if="item.app_status == 'C'">
-                              <p
-                                class="card-category mb-2"
-                                v-if="item.app_status == 'C'"
-                                style="color: red"
-                              >
-                                ສະຖານະ: Canceled
-                              </p>
-                            </div>
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == null
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document == '' ||
-                                    item.check_document == null) &&
-                                  item.app_status == 'Y'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending check document
-                              </p>
-                            </div>
-
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == 'pass'
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document != '' ||
-                                    item.check_document != null) &&
-                                  item.mr_status_t == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Theory Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t != null &&
-                                  item.mr_status_p == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Practical Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'fail' &&
-                                  item.mr_status_p == 'fail'
-                                "
-                                style="color: red"
-                              >
-                                ສະຖານະ: Failed Exam
-                              </p>
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'pass' &&
-                                  item.mr_status_p == 'pass'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Practical Exam
-                              </p>
-                            </div>
-
-                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}/100</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- C2 1-->
-          <div class="card mb-1" v-if="store.dlt_today.C2_1.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionC21"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionC21"
-                >
-                  ຊ່ອງເວລາ 08.00 - C2 : {{ locale == "la" ? checkdlt(store.dlt_today.C2_1)[0].dlt_name_lo : checkdlt(store.dlt_today.C2_1)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionC21"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-            <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.C2_1"
-                    :key="item"
-                  >
-                  <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            v-else
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                          
-                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                        
-                            <div v-if="item.app_status == 'C'">
-                              <p
-                                class="card-category mb-2"
-                                v-if="item.app_status == 'C'"
-                                style="color: red"
-                              >
-                                ສະຖານະ: Canceled
-                              </p>
-                            </div>
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == null
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document == '' ||
-                                    item.check_document == null) &&
-                                  item.app_status == 'Y'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending check document
-                              </p>
-                            </div>
-
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == 'pass'
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document != '' ||
-                                    item.check_document != null) &&
-                                  item.mr_status_t == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Theory Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t != null &&
-                                  item.mr_status_p == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Practical Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'fail' &&
-                                  item.mr_status_p == 'fail'
-                                "
-                                style="color: red"
-                              >
-                                ສະຖານະ: Failed Exam
-                              </p>
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'pass' &&
-                                  item.mr_status_p == 'pass'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Practical Exam
-                              </p>
-                            </div>
-
-                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}/100</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- C2 2-->
-          <div class="card mb-1" v-if="store.dlt_today.C2_2.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionC22"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionC22"
-                >
-                  ຊ່ອງເວລາ 16.00 - C2 : {{ locale == "la" ? checkdlt(store.dlt_today.C2_2)[0].dlt_name_lo : checkdlt(store.dlt_today.C2_2)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionC22"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-            <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.C2_2"
-                    :key="item"
-                  >
-                  <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            v-else
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                          
-                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                        
-                            <div v-if="item.app_status == 'C'">
-                              <p
-                                class="card-category mb-2"
-                                v-if="item.app_status == 'C'"
-                                style="color: red"
-                              >
-                                ສະຖານະ: Canceled
-                              </p>
-                            </div>
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == null
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document == '' ||
-                                    item.check_document == null) &&
-                                  item.app_status == 'Y'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending check document
-                              </p>
-                            </div>
-
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == 'pass'
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document != '' ||
-                                    item.check_document != null) &&
-                                  item.mr_status_t == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Theory Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t != null &&
-                                  item.mr_status_p == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Practical Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'fail' &&
-                                  item.mr_status_p == 'fail'
-                                "
-                                style="color: red"
-                              >
-                                ສະຖານະ: Failed Exam
-                              </p>
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'pass' &&
-                                  item.mr_status_p == 'pass'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Practical Exam
-                              </p>
-                            </div>
-
-                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}/100</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- D 1-->
           <div class="card mb-1" v-if="store.dlt_today.D_1.length > 0">
             <div class="card-header" id="...">
               <section class="mb-0 mt-0">
@@ -2580,28 +1181,31 @@ function coverimage(i) {
                   role="menu"
                   class="collapsed accordion-buttonaa"
                   data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionD1"
+                  data-bs-target="#defaultAccordionA11"
                   aria-expanded="false"
-                  aria-controls="defaultAccordionD1"
+                  aria-controls="defaultAccordionA11"
                 >
-                  ຊ່ອງເວລາ 08.00 - D : {{ locale == "la" ? checkdlt(store.dlt_today.D_1)[0].dlt_name_lo : checkdlt(store.dlt_today.D_1)[0].dlt_name_eng }}
+                  ຊ່ອງເວລາ {{store.dlt_today.D_1[0].time}} - C
+                  {{ locale == "la" ? checkdlt(store.dlt_today.D_1)[0].dlt_name_lo : checkdlt(store.dlt_today.D_1)[0].dlt_name_eng }}
+
+                
                 </div>
               </section>
             </div>
             <div
-              id="defaultAccordionD1"
+              id="defaultAccordionA11"
               class="collapse"
               aria-labelledby="..."
               data-bs-parent="#toggleAccordion3"
             >
-            <div class="card-body">
+              <div class="card-body">
                 <div class="row">
                   <div
                     class="col-sm-6"
                     v-for="(item, index) in store.dlt_today.D_1"
                     :key="item"
                   >
-                  <div class="row" @click="GotoDetails(item)">
+                    <div class="row" @click="GotoDetails(item)">
                       <div
                         class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
                       >
@@ -2722,7 +1326,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.thero"
                                 >
-                                {{ $t("app_today_ther") }}:
+                                {{ $t("app_today_ther") }}
                                   <span
                                     style="color: red"
                                     v-if="item.mr_status_t == 'fail'"
@@ -2741,7 +1345,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
+                                  {{ $t("app_today_ther") }} -
                                 </h4>
                               </div>
                               <div class="media-body">
@@ -2749,7 +1353,7 @@ function coverimage(i) {
                                   class="media-heading mb-1"
                                   v-if="item.pratic"
                                 >
-                                {{ $t("app_today_pra") }}:
+                                {{ $t("app_today_pra") }}
 
                                   <span
                                     style="color: red"
@@ -2765,1871 +1369,7 @@ function coverimage(i) {
                                   >
                                 </h4>
                                 <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- D 2-->
-          <div class="card mb-1" v-if="store.dlt_today.D_2.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionD2"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionD2"
-                >
-                  ຊ່ອງເວລາ 16.00 - D : {{ locale == "la" ? checkdlt(store.dlt_today.D_2)[0].dlt_name_lo : checkdlt(store.dlt_today.D_2)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionD2"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-            <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.D_2"
-                    :key="item"
-                  >
-                  <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            v-else
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                          
-                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                        
-                            <div v-if="item.app_status == 'C'">
-                              <p
-                                class="card-category mb-2"
-                                v-if="item.app_status == 'C'"
-                                style="color: red"
-                              >
-                                ສະຖານະ: Canceled
-                              </p>
-                            </div>
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == null
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document == '' ||
-                                    item.check_document == null) &&
-                                  item.app_status == 'Y'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending check document
-                              </p>
-                            </div>
-
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == 'pass'
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document != '' ||
-                                    item.check_document != null) &&
-                                  item.mr_status_t == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Theory Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t != null &&
-                                  item.mr_status_p == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Practical Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'fail' &&
-                                  item.mr_status_p == 'fail'
-                                "
-                                style="color: red"
-                              >
-                                ສະຖານະ: Failed Exam
-                              </p>
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'pass' &&
-                                  item.mr_status_p == 'pass'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Practical Exam
-                              </p>
-                            </div>
-
-                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}/100</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- D1 1-->
-          <div class="card mb-1" v-if="store.dlt_today.D1_1.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionD11"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionD11"
-                >
-                  ຊ່ອງເວລາ 08.00 - D1 : {{ locale == "la" ? checkdlt(store.dlt_today.D1_1)[0].dlt_name_lo : checkdlt(store.dlt_today.D1_1)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionD11"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-            <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.D1_1"
-                    :key="item"
-                  >
-                  <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            v-else
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                          
-                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                        
-                            <div v-if="item.app_status == 'C'">
-                              <p
-                                class="card-category mb-2"
-                                v-if="item.app_status == 'C'"
-                                style="color: red"
-                              >
-                                ສະຖານະ: Canceled
-                              </p>
-                            </div>
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == null
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document == '' ||
-                                    item.check_document == null) &&
-                                  item.app_status == 'Y'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending check document
-                              </p>
-                            </div>
-
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == 'pass'
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document != '' ||
-                                    item.check_document != null) &&
-                                  item.mr_status_t == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Theory Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t != null &&
-                                  item.mr_status_p == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Practical Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'fail' &&
-                                  item.mr_status_p == 'fail'
-                                "
-                                style="color: red"
-                              >
-                                ສະຖານະ: Failed Exam
-                              </p>
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'pass' &&
-                                  item.mr_status_p == 'pass'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Practical Exam
-                              </p>
-                            </div>
-
-                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}/100</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-           
-            </div>
-          </div>
-
-          <!--D1 2-->
-          <div class="card mb-1" v-if="store.dlt_today.D1_2.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionD12"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionD12"
-                >
-                  ຊ່ອງເວລາ 16.00 - D1 : {{ locale == "la" ? checkdlt(store.dlt_today.D1_2)[0].dlt_name_lo : checkdlt(store.dlt_today.D1_2)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionD12"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-            <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.D1_2"
-                    :key="item"
-                  >
-                  <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            v-else
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                          
-                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                        
-                            <div v-if="item.app_status == 'C'">
-                              <p
-                                class="card-category mb-2"
-                                v-if="item.app_status == 'C'"
-                                style="color: red"
-                              >
-                                ສະຖານະ: Canceled
-                              </p>
-                            </div>
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == null
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document == '' ||
-                                    item.check_document == null) &&
-                                  item.app_status == 'Y'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending check document
-                              </p>
-                            </div>
-
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == 'pass'
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document != '' ||
-                                    item.check_document != null) &&
-                                  item.mr_status_t == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Theory Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t != null &&
-                                  item.mr_status_p == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Practical Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'fail' &&
-                                  item.mr_status_p == 'fail'
-                                "
-                                style="color: red"
-                              >
-                                ສະຖານະ: Failed Exam
-                              </p>
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'pass' &&
-                                  item.mr_status_p == 'pass'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Practical Exam
-                              </p>
-                            </div>
-
-                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}/100</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- D2 1-->
-          <div class="card mb-1" v-if="store.dlt_today.D2_1.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionD21"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionD21"
-                >
-                  ຊ່ອງເວລາ 08.00 - D2 : {{ locale == "la" ? checkdlt(store.dlt_today.D2_1)[0].dlt_name_lo : checkdlt(store.dlt_today.D2_1)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionD21"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-            <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.D2_1"
-                    :key="item"
-                  >
-                  <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            v-else
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                          
-                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                        
-                            <div v-if="item.app_status == 'C'">
-                              <p
-                                class="card-category mb-2"
-                                v-if="item.app_status == 'C'"
-                                style="color: red"
-                              >
-                                ສະຖານະ: Canceled
-                              </p>
-                            </div>
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == null
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document == '' ||
-                                    item.check_document == null) &&
-                                  item.app_status == 'Y'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending check document
-                              </p>
-                            </div>
-
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == 'pass'
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document != '' ||
-                                    item.check_document != null) &&
-                                  item.mr_status_t == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Theory Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t != null &&
-                                  item.mr_status_p == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Practical Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'fail' &&
-                                  item.mr_status_p == 'fail'
-                                "
-                                style="color: red"
-                              >
-                                ສະຖານະ: Failed Exam
-                              </p>
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'pass' &&
-                                  item.mr_status_p == 'pass'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Practical Exam
-                              </p>
-                            </div>
-
-                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}/100</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- D2 2-->
-          <div class="card mb-1" v-if="store.dlt_today.D2_2.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionD22"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionD22"
-                >
-                  ຊ່ອງເວລາ 16.00 - D2 : {{ locale == "la" ? checkdlt(store.dlt_today.D2_2)[0].dlt_name_lo : checkdlt(store.dlt_today.D2_2)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionD22"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-            <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.D2_2"
-                    :key="item"
-                  >
-                  <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            v-else
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                          
-                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                        
-                            <div v-if="item.app_status == 'C'">
-                              <p
-                                class="card-category mb-2"
-                                v-if="item.app_status == 'C'"
-                                style="color: red"
-                              >
-                                ສະຖານະ: Canceled
-                              </p>
-                            </div>
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == null
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document == '' ||
-                                    item.check_document == null) &&
-                                  item.app_status == 'Y'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending check document
-                              </p>
-                            </div>
-
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == 'pass'
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document != '' ||
-                                    item.check_document != null) &&
-                                  item.mr_status_t == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Theory Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t != null &&
-                                  item.mr_status_p == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Practical Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'fail' &&
-                                  item.mr_status_p == 'fail'
-                                "
-                                style="color: red"
-                              >
-                                ສະຖານະ: Failed Exam
-                              </p>
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'pass' &&
-                                  item.mr_status_p == 'pass'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Practical Exam
-                              </p>
-                            </div>
-
-                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}/100</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- E 1-->
-          <div class="card mb-1" v-if="store.dlt_today.E_1.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionE1"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionE1"
-                >
-                  ຊ່ອງເວລາ 08.00 - E : {{ locale == "la" ? checkdlt(store.dlt_today.E_1)[0].dlt_name_lo : checkdlt(store.dlt_today.E_1)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionE1"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-            <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.E_1"
-                    :key="item"
-                  >
-                  <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            v-else
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                          
-                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                        
-                            <div v-if="item.app_status == 'C'">
-                              <p
-                                class="card-category mb-2"
-                                v-if="item.app_status == 'C'"
-                                style="color: red"
-                              >
-                                ສະຖານະ: Canceled
-                              </p>
-                            </div>
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == null
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document == '' ||
-                                    item.check_document == null) &&
-                                  item.app_status == 'Y'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending check document
-                              </p>
-                            </div>
-
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == 'pass'
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document != '' ||
-                                    item.check_document != null) &&
-                                  item.mr_status_t == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Theory Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t != null &&
-                                  item.mr_status_p == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Practical Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'fail' &&
-                                  item.mr_status_p == 'fail'
-                                "
-                                style="color: red"
-                              >
-                                ສະຖານະ: Failed Exam
-                              </p>
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'pass' &&
-                                  item.mr_status_p == 'pass'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Practical Exam
-                              </p>
-                            </div>
-
-                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}/100</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- E 2-->
-          <div class="card mb-1" v-if="store.dlt_today.E_2.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionE2"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionE2"
-                >
-                  ຊ່ອງເວລາ 16.00 - E : {{ locale == "la" ? checkdlt(store.dlt_today.E_2)[0].dlt_name_lo : checkdlt(store.dlt_today.E_2)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionE2"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-            <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.E_2"
-                    :key="item"
-                  >
-                  <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            v-else
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                          
-                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                        
-                            <div v-if="item.app_status == 'C'">
-                              <p
-                                class="card-category mb-2"
-                                v-if="item.app_status == 'C'"
-                                style="color: red"
-                              >
-                                ສະຖານະ: Canceled
-                              </p>
-                            </div>
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == null
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document == '' ||
-                                    item.check_document == null) &&
-                                  item.app_status == 'Y'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending check document
-                              </p>
-                            </div>
-
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == 'pass'
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document != '' ||
-                                    item.check_document != null) &&
-                                  item.mr_status_t == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Theory Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t != null &&
-                                  item.mr_status_p == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Practical Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'fail' &&
-                                  item.mr_status_p == 'fail'
-                                "
-                                style="color: red"
-                              >
-                                ສະຖານະ: Failed Exam
-                              </p>
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'pass' &&
-                                  item.mr_status_p == 'pass'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Practical Exam
-                              </p>
-                            </div>
-
-                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}/100</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- E1 1-->
-          <div class="card mb-1" v-if="store.dlt_today.E1_1.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionE11"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionE11"
-                >
-                  ຊ່ອງເວລາ 08.00 - E1 : {{ locale == "la" ? checkdlt(store.dlt_today.E1_1)[0].dlt_name_lo : checkdlt(store.dlt_today.E1_1)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionE11"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-            <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.E1_1"
-                    :key="item"
-                  >
-                  <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            v-else
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                          
-                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                        
-                            <div v-if="item.app_status == 'C'">
-                              <p
-                                class="card-category mb-2"
-                                v-if="item.app_status == 'C'"
-                                style="color: red"
-                              >
-                                ສະຖານະ: Canceled
-                              </p>
-                            </div>
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == null
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document == '' ||
-                                    item.check_document == null) &&
-                                  item.app_status == 'Y'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending check document
-                              </p>
-                            </div>
-
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == 'pass'
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document != '' ||
-                                    item.check_document != null) &&
-                                  item.mr_status_t == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Theory Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t != null &&
-                                  item.mr_status_p == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Practical Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'fail' &&
-                                  item.mr_status_p == 'fail'
-                                "
-                                style="color: red"
-                              >
-                                ສະຖານະ: Failed Exam
-                              </p>
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'pass' &&
-                                  item.mr_status_p == 'pass'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Practical Exam
-                              </p>
-                            </div>
-
-                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}/100</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
-                                </h4>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- E1 2-->
-          <div class="card mb-1" v-if="store.dlt_today.E1_2.length > 0">
-            <div class="card-header" id="...">
-              <section class="mb-0 mt-0">
-                <div
-                  role="menu"
-                  class="collapsed accordion-buttonaa"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#defaultAccordionE12"
-                  aria-expanded="false"
-                  aria-controls="defaultAccordionE12"
-                >
-                  ຊ່ອງເວລາ 16.00 - E1 :  {{ locale == "la" ? checkdlt(store.dlt_today.E1_2)[0].dlt_name_lo : checkdlt(store.dlt_today.E1_2)[0].dlt_name_eng }}
-                </div>
-              </section>
-            </div>
-            <div
-              id="defaultAccordionE12"
-              class="collapse"
-              aria-labelledby="..."
-              data-bs-parent="#toggleAccordion3"
-            >
-            <div class="card-body">
-                <div class="row">
-                  <div
-                    class="col-sm-6"
-                    v-for="(item, index) in store.dlt_today.E1_2"
-                    :key="item"
-                  >
-                  <div class="row" @click="GotoDetails(item)">
-                      <div
-                        class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 col-sm-12/"
-                      >
-                        <div class="card style-3">
-                          <img
-                            v-if="item.user_img"
-                            :src="coverimage(item.user_img)"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-                          <img
-                            v-else
-                            src="../.././../public/img/logo.svg"
-                            class="card-img-top"
-                            alt="..."
-                            style="width: 200px"
-                          />
-
-                          <div class="card-body px-0 py-0">
-                            <h4 class="media-heading mb-1">
-                              {{ $t("app_today_id") }}: {{ item.ap_number }}
-                            </h4>
-
-                            <h5 class="media-heading mb-1">
-                              {{ item.user_prefrix }} {{ item.user_firstname }}
-                              {{ item.user_lastname }}
-                            </h5>
-                          
-                            <p class="card-category mb-2" v-if="item.id_card">{{ $t("app_today_ppt") }}: {{item.id_card}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_ppt") }}: ບໍ່ມີ</p>
-                        
-                            <div v-if="item.app_status == 'C'">
-                              <p
-                                class="card-category mb-2"
-                                v-if="item.app_status == 'C'"
-                                style="color: red"
-                              >
-                                ສະຖານະ: Canceled
-                              </p>
-                            </div>
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == null
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document == '' ||
-                                    item.check_document == null) &&
-                                  item.app_status == 'Y'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending check document
-                              </p>
-                            </div>
-
-                            <div
-                              v-if="
-                                item.app_status == 'Y' &&
-                                item.check_document == 'pass'
-                              "
-                            >
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  (item.check_document != '' ||
-                                    item.check_document != null) &&
-                                  item.mr_status_t == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Theory Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t != null &&
-                                  item.mr_status_p == null
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Pending Practical Exam
-                              </p>
-
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'fail' &&
-                                  item.mr_status_p == 'fail'
-                                "
-                                style="color: red"
-                              >
-                                ສະຖານະ: Failed Exam
-                              </p>
-                              <p
-                                class="card-category mb-2"
-                                v-if="
-                                  item.mr_status_t == 'pass' &&
-                                  item.mr_status_p == 'pass'
-                                "
-                                style="color: green"
-                              >
-                                ສະຖານະ: Practical Exam
-                              </p>
-                            </div>
-
-                            <p class="card-category mb-2" v-if="item.st_id">{{ $t("app_today_div") }}: {{item.st_id}}</p>
-                            <p class="card-category mb-2" v-else>{{ $t("app_today_div") }}: -</p>
-
-                            <div class="media mt-4 mb-0">
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.thero"
-                                >
-                                {{ $t("app_today_ther") }}:
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_t == 'fail'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_t == 'pass'"
-                                  >
-                                    {{ item.thero }}/{{
-                                      CheckTotalque(item)
-                                    }}</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_ther") }}: -
-                                </h4>
-                              </div>
-                              <div class="media-body">
-                                <h4
-                                  class="media-heading mb-1"
-                                  v-if="item.pratic"
-                                >
-                                {{ $t("app_today_pra") }}:
-
-                                  <span
-                                    style="color: red"
-                                    v-if="item.mr_status_p == 'fail'"
-                                  >
-                                    {{ item.pratic }}</span
-                                  >
-                                  <span
-                                    style="color: green"
-                                    v-if="item.mr_status_p == 'pass'"
-                                  >
-                                    {{ item.pratic }}/100</span
-                                  >
-                                </h4>
-                                <h4 class="media-heading mb-1" v-else>
-                                  {{ $t("app_today_pra") }}: -
+                                  {{ $t("app_today_pra") }} -
                                 </h4>
                               </div>
                             </div>

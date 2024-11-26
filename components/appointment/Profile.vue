@@ -1397,7 +1397,7 @@ const filterIAscoreB = async (event) => {
 };
 
 const UpdateThero = async () => {
-
+  store.formresult.mr_learn_type = 1;
  
  
   if(store.formscoreT.score == ""){
@@ -1413,6 +1413,7 @@ return false;
 }
 
 const UpdatePra= async () => {
+  store.formresult.mr_learn_type = 2;
   if(store.formscoreP.score == ""){
     store.ScoreReqTh = true
 return false;
