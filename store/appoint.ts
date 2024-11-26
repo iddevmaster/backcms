@@ -73,6 +73,7 @@ export const AppointStore = defineStore('appoint', {
       ap_learn_type: 1,
       present_day: ''
     },
+    modalGroupDlt:false,
     formlistapp:{
       page: 1,
       per_page: 50,
@@ -761,6 +762,24 @@ try {
       } catch (error) {
 
       }
+    },
+
+    async fetchGROUPDlt(item) {
+
+      const fit = {id:item.ap_id}
+      this.group_event = [];
+      try {
+        const data = await ApiService.post('/appointment/totalquata',fit).then(response => {
+        this.group_event = response.data
+        console.log(this.group_event.length);
+
+        });
+        return true
+      } catch (error) {
+
+        return false;
+      }
+
     },
 
     async fetchAppPresent() {

@@ -70,14 +70,20 @@
       </thead>
       <tbody >
         <tr v-for="(item,index) in store.applist" :key="item.ap_id" >
-        <td>{{ item.ap_id }}</td>
+        <td>
+          {{
+              store.formlistapp.page * store.formlistapp.per_page -
+              (store.formlistapp.per_page - index) +
+              1
+            }}
+        </td>
         <td>{{ item.ap_date_first }}</td>
         <td>{{ item.time }}</td>
         <td>{{ item.dlt }}</td> 
         <td>{{ item.quata }}</td>
         <td>{{ item.available }}</td>
-        <td>{{ item.ap_id }}</td>
-        <td>{{ item.ap_id }}</td>
+        <td>{{ item.user_firstname }}</td>
+        <td>{{ item.user_full }}</td>
         <td>
           
             
@@ -187,6 +193,45 @@
 </div>
 
 
+<div class="modal" v-if="store.modalGroupDlt">
+    <div class="modal-content" id="deleteConformationLabel">
+      <div class="modal-header">
+        <h1 class="modal-title" id="exampleModalLabel">
+         
+        </h1>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>DLT</th>
+        <th>QUATA</th>
+        <th>Available</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  v-for="(item,index) in store.group_event" :key="item.ap_id">
+        <td>{{item.dlt_code}}</td>
+        <td>{{item.ap_quota}}</td>
+        <td>{{item.alva}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          @click="Hide()"
+        >
+          ปิด
+        </button>
+    
+      </div>
+    </div>
+  </div>
 
 
 
@@ -243,11 +288,13 @@ const isDateDisabled = (date) => {
 };
 
 
+const Hide = async () => {
+store.modalGroupDlt = false;
+};
+
 const setCurrentPageclick = async (page) => {
   await store.setCurrentPageAPP(page)
   await store.fetchAppointmentlistFitter();
-
-
 };
 
 const Fitter = async () => {
@@ -310,10 +357,10 @@ await store.fetchAppointmentlistFitter();
 };
 
 
-const viewData = async () => {
+const viewData = async (item) => {
 
-
-console.log('Fitter Data');
+await store.fetchGROUPDlt(item);
+store.modalGroupDlt = true;
 };
 
 
