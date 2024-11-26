@@ -322,10 +322,14 @@ export const AppointStore = defineStore('appoint', {
     },
 
     async fetchAppointmentlist() {
+     
 
+      this.formlistapp.user_id = this.user_id
+      
 
 try {
   const data = await ApiService.post('/appointment/listall',this.formlistapp).then(response => {
+   
     this.applist = response.data.data
     this.total_page = response.data.total_page
     this.limit_page = response.data.limit_page
