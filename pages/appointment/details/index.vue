@@ -30,6 +30,7 @@ const apnumber = localStorage.getItem('ap_number');
 if(apnumber){
   store.searchapp.ap_number = apnumber;
  await store.fetchAppNumber();
+ await store.fetchAppCourse();
  await store.fetchHistoryCourse();
  await store.fetchExamScore();
  await store.fetchResultScore();

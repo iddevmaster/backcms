@@ -708,12 +708,14 @@
           <div class="row" style="
     padding: 3px;
 ">
+
             <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-6">
+     
               <label
                 for="company-name"
                 class="col-sm-12 col-form-label col-form-label-sm" v-if="store.status_score == 'create'"
               >
-            
+             
                 ຜົນທິດສະດີ:   -  </label
               >
 
@@ -723,14 +725,18 @@
               >
            
                 ຜົນທິດສະດີ:  
-             
-                <span v-if="store.status_status == 'pass'" style="color: green;"> {{store.dlt_score.mr_score}}/{{store.totalscore.total_question}}</span>
-                <span v-if="store.status_status == 'fail'" style="color: red;"> {{store.dlt_score.mr_score}}/{{store.totalscore.total_question}}</span>
+            
+                <span v-if="store.status_status == 'pass'" style="color: green;"> {{store.dlt_score[0].mr_score}}/{{store.totalscore.total_question}}</span>
+                <span v-if="store.status_status == 'fail'" style="color: red;"> {{store.dlt_score[0].mr_score}}/{{store.totalscore.total_question}}</span>
   
                 </label
               >
             </div>
+
+          
             <div class="col-6 col-sm-6 col-md-6 col-xl-6 col-lg-6">
+
+           
               <label
                 for="company-name"
                 class="col-sm-12 col-form-label col-form-label-sm" v-if="store.status_score == 'create'"
@@ -742,7 +748,7 @@
                 for="company-name"
                 class="col-sm-12 col-form-label col-form-label-sm" v-else
               >
-                ໂດຍ: {{store.dlt_score.user_name}} , {{store.dlt_score.time}}</label
+                ໂດຍ: {{store.dlt_score[0].user_name}} , {{store.dlt_score[0].time}}</label
               >
             </div>
             <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3" v-if="store.dataapp[0].app_status == 'Y'">
@@ -774,8 +780,8 @@
            
               ຜົນປະຕິບັດ:  
              
-                <span v-if="store.status_statusP == 'pass'" style="color: green;"> {{store.dlt_scoreP.mr_score}}/100</span>
-                <span v-if="store.status_statusP == 'fail'" style="color: red;"> {{store.dlt_scoreP.mr_score}}/100</span>
+                <span v-if="store.status_statusP == 'pass'" style="color: green;"> {{store.dlt_scoreP[0].mr_score}}/100</span>
+                <span v-if="store.status_statusP == 'fail'" style="color: red;"> {{store.dlt_scoreP[0].mr_score}}/100</span>
   
                 </label
               >
@@ -792,7 +798,7 @@
                 for="company-name"
                 class="col-sm-12 col-form-label col-form-label-sm" v-else
               >
-              ໂດຍ: {{store.dlt_scoreP.user_name}} ,{{store.dlt_scoreP.time}}</label
+              ໂດຍ: {{store.dlt_scoreP[0].user_name}} ,{{store.dlt_scoreP[0].time}}</label
               >
             </div>
             <div class="col-3 col-sm-3 col-md-3 col-xl-3 col-lg-3" v-if="store.dataapp[0].app_status == 'Y'">
@@ -830,7 +836,6 @@
           </div>
           <br>
           <div class="row" v-if="store.dlt_lastes.length > 0"  v-for="(event, index) in store.dlt_lastes">
-
             <div class="col-6 col-sm-12 col-md-6" >
 
             ຮູບໃບຂັບຂີ່ ຫຼ້າສຸດ: 

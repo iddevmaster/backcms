@@ -209,6 +209,7 @@ export const AppointStore = defineStore('appoint', {
     status_status: "",
     status_statusP: "",
     dlt_score: [],
+    dlt_scoreP:[],
     applist: [],
     formresult: {
       mr_score: null,
@@ -858,6 +859,7 @@ try {
 
 this.dlttoday = response.data
 
+console.log(response.data);
 
 
           for (let i = 0; i < response.data.length; i++) {
@@ -1060,6 +1062,12 @@ try {
 
     async fetchExamScore() {
       this.formscorefull.course_code = this.select_dlt_app
+
+ 
+
+  let total = this.course.find((obj) => obj.course_code == this.select_dlt_app);
+  console.log(total);
+  this.totalscore = total.total_quest;
       try {
         const data = await ApiService.post('/exam/main/get/one', this.formscorefull).then(reps => {
       
@@ -1077,39 +1085,55 @@ try {
     async fetchResultScore() {
       try {
         const data = await ApiService.get('/main_result/list/?user_id=' + this.history_user).then(reps => {
-
           if (reps.data.length > 0) {
+            this.dlt_score = [];
+            this.dlt_scoreP = [];
+            this.status_score = 'create';
+            this.status_scoreP = 'create';
+          
 
-            this.dlt_score = reps.data.find((obj => obj.dlt_code == 'C') || (obj => obj.mr_learn_type === 3));
-            this.dlt_scoreP = reps.data.find((obj => obj.dlt_code == 'C') || (obj => obj.mr_learn_type === 4));
+            for (var i = 0; i < reps.data.length; i++) {
+           
+            if((reps.data[i].dlt_code == this.select_dlt_app) && (reps.data[i].mr_learn_type == 1)) {
+            
+              this.dlt_score.push(reps.data[i]);
+            }
 
-            console.log(this.dlt_score);
+            if((reps.data[i].dlt_code == this.select_dlt_app) && (reps.data[i].mr_learn_type == 2)) {
+          
+          
+              this.dlt_scoreP.push(reps.data[i]);
+            }
+          }
 
-            if (this.dlt_score) {
+   
+            if (this.dlt_score.length > 0) {
               this.status_score = 'update';
-              this.formscoreT.score = this.dlt_score.mr_score
-              this.formscoreT.mr_status = this.dlt_score.mr_status
-              this.status_status = this.dlt_score.mr_status;
+              this.formscoreT.score = this.dlt_score[0].mr_score
+              this.formscoreT.mr_status = this.dlt_score[0].mr_status
+              this.status_status = this.dlt_score[0].mr_status;
 
-
-              this.formscoreT.ref_number = this.dlt_score.ref_number;
-              this.formscoreT.remark = this.dlt_score.remark;
+        
+              this.formscoreT.ref_number = this.dlt_score[0].ref_number;
+              this.formscoreT.remark = this.dlt_score[0].remark;
+             
             }
 
-            if (this.dlt_scoreP) {
+            if (this.dlt_scoreP.length > 0) {
               this.status_scoreP = 'update';
-              this.formscoreP.score = this.dlt_scoreP.mr_score
-              this.formscoreP.mr_status = this.dlt_scoreP.mr_status
-              this.status_statusP = this.dlt_scoreP.mr_status;
+              this.formscoreP.score = this.dlt_scoreP[0].mr_score
+              this.formscoreP.mr_status = this.dlt_scoreP[0].mr_status
+              this.status_statusP = this.dlt_scoreP[0].mr_status;
+              
 
-              this.formscoreP.ref_number = this.dlt_scoreP.ref_number;
-              this.formscoreP.remark = this.dlt_scoreP.remark;
+              this.formscoreP.ref_number = this.dlt_scoreP[0].ref_number;
+              this.formscoreP.remark = this.dlt_scoreP[0].remark;
             }
+            
           } else {
             this.formscoreP.mr_status = ""
             this.formscoreT.mr_status = ""
-            this.status_score = 'create';
-            this.status_scoreP = 'create';
+      
           }
         });
         return data;
@@ -1204,11 +1228,11 @@ console.log(this.dataapp[0]);
 
 
 if(this.dataapp[0].st_id == null){
-  this.formdiv = {'ap_id':this.dataapp[0].ap_id,'stat':'new'};
+  this.formdiv = {'ap_id':this.dataapp[0].ap_id,'stat':'new',dlt_code:this.dataapp[0].dlt_types};
 }
 
 if(this.dataapp[0].st_id != null){
-  this.formdiv = {'ap_id':this.dataapp[0].ap_id,'stat':'same'};
+  this.formdiv = {'ap_id':this.dataapp[0].ap_id,'stat':'same',dlt_code:this.dataapp[0].dlt_types};
 }
 
 
@@ -1298,6 +1322,7 @@ console.log(this.formresult.ap_number);
 
       this.formver.remarkcheck = JSON.stringify(this.veggies);
       this.formver.ap_number = this.searchapp.ap_number;
+      
    
       try {
         const data = await ApiService.post('/appointment/veri', this.formver).then(reps => {

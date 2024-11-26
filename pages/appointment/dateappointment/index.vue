@@ -67,8 +67,6 @@ const GotoDetails = async (item) => {
 const CheckTotalque = (item) => {
   let total = store.course.find((obj) => obj.course_code == item.dlt_code);
 
-  console.log(store.course);
-
   if (total) {
     return total.total_quest;
   } else {
@@ -1185,7 +1183,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionA11"
                 >
-                  ຊ່ອງເວລາ {{store.dlt_today.D_1[0].time}} - C
+                  ຊ່ອງເວລາ {{store.dlt_today.D_1[0].time}} - D
                   {{ locale == "la" ? checkdlt(store.dlt_today.D_1)[0].dlt_name_lo : checkdlt(store.dlt_today.D_1)[0].dlt_name_eng }}
 
                 
