@@ -1066,7 +1066,7 @@ try {
  
 
   let total = this.course.find((obj) => obj.course_code == this.select_dlt_app);
-  console.log(total);
+
   this.totalscore = total.total_quest;
       try {
         const data = await ApiService.post('/exam/main/get/one', this.formscorefull).then(reps => {
@@ -1207,7 +1207,6 @@ try {
         this.formresult.remark = this.formscoreT.remark;
         this.formresult.ap_number = this.dataapp[0].ap_number;
 
-console.log(this.dataapp[0]);
 
         try {
           const data = await ApiService.post('/main_result/create', this.formresult).then(response => {
@@ -1262,7 +1261,7 @@ if(this.dataapp[0].st_id != null){
         this.formresult.remark = this.formscoreP.remark;
         this.formresult.mr_learn_type = 2;
         this.formresult.ap_number = this.dataapp[0].ap_number;
-console.log(this.formresult);
+
    
         try {
           const data = await ApiService.put('/main_result/update/' + this.dlt_score.mr_id, this.formresult).then(response => {
@@ -1289,7 +1288,7 @@ console.log(this.formresult);
         this.formresult.ap_number = this.dataapp[0].ap_number;
       
       
-console.log(this.formresult.ap_number);
+
         try {
           const data = await ApiService.post('/main_result/create', this.formresult).then(response => {
             if (response.status == 200) {

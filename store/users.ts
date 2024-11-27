@@ -1231,13 +1231,10 @@ this.formlog.des = 'Approve';
 
 if(response.data.length > 0){
   for (var i = 0; i < response.data.length; i++) { 
- 
     if(response.data[i].status == 'Y'){
       this.dlt_lastes.push(response.data[i]);
-
       this.form_dlt_status.type_status = response.data[i].type_status
       this.form_dlt_status.etc = response.data[i].etc
-      
     }else {
       this.dlt_all.push(response.data[i]);
     }
