@@ -145,10 +145,7 @@ function coverimage(i) {
                   aria-expanded="false"
                   aria-controls="defaultAccordionA1"
                 >
-                  ຊ່ອງເວລາ {{store.dlt_today}} - A : {{ locale == "la" ? checkdlt(store.dlt_today.A_1)[0].dlt_name_lo : checkdlt(store.dlt_today.A_1)[0].dlt_name_eng }}
-                
-
-              
+                  ຊ່ອງເວລາ {{store.dlt_today.A_1[0].time}} - A : {{ locale == "la" ? checkdlt(store.dlt_today.A_1)[0].dlt_name_lo : checkdlt(store.dlt_today.A_1)[0].dlt_name_eng }}
                 </div>
               </section>
             </div>
