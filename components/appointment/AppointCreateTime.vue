@@ -261,11 +261,12 @@ const isDateDisabledEnd = (date) => {
   const currentDate = new Date();
   const disableBeforeDate = new Date(store.forminsertnew.ap_date_start); // Adjust the date as needed
 
+
   if (!store.forminsertnew.ap_date_start) {
     return true;
   }
 
-  return date < currentDate || date == disableBeforeDate;
+  return  date <= disableBeforeDate;
 };
 
 const backToUser = async () => {
