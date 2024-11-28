@@ -13,7 +13,7 @@ import { useModalStore } from '@/store/modal';
 import { useToast } from 'vue-toastification'
 definePageMeta({
   middleware: ['auth','roles'],
-  allowedRoles: [1]
+  allowedRoles: [1,2]
 })
 const toast = useToast()
 const store = AppointStore()
