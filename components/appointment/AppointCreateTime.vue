@@ -35,12 +35,12 @@
     </div>
 
     <span
-                          v-if="v$.ap_date_start.$error"
-                          class="text-xs text-red-500"
-                          style="color: red"
-                        >
-                        ap_date_start</span
-                        >
+      v-if="v$.ap_date_start.$error"
+      class="text-xs text-red-500"
+      style="color: red"
+    >
+      ap_date_start</span
+    >
 
     <div class="col-sm-12 p-2">
       <label for="exampleFormControlInput1">{{ $t("menu_app_app_end") }}</label
@@ -57,40 +57,36 @@
     </div>
 
     <span
-                          v-if="v$.ap_date_end.$error"
-                          class="text-xs text-red-500"
-                          style="color: red"
-                        >
-                        ap_date_end</span
-                        >
+      v-if="v$.ap_date_end.$error"
+      class="text-xs text-red-500"
+      style="color: red"
+    >
+      ap_date_end</span
+    >
 
     <div class="col-12 col-sm-12 col-md-12 pt-2">
       <label for="exampleInputEmail1">ປະເພດອະນຸຍາດ:</label
       ><span style="color: red"> * </span>
       <div class="form-group">
         <label
-          v-for="fruit in store.day"
+          v-for="fruit in store.forminsertnew.day"
           :key="fruit"
           class="checkbox"
           style="padding: 0.5%"
         >
-          {{ fruit }}
+          {{ fruit.days }}
           <input
             type="checkbox"
-            :value="fruit"
-            v-model="store.forminsertnew.day"
+          v-model="fruit.select"
           />
+          
         </label>
       </div>
     </div>
 
-    <span
-                          v-if="v$.day.$error"
-                          class="text-xs text-red-500"
-                          style="color: red"
-                        >
-                        day</span
-                        >
+    <span v-if="v$.day.$error" class="text-xs text-red-500" style="color: red">
+      day</span
+    >
 
     <div class="col-sm-12 p-2">
       <label for="exampleFormControlInput1">ເວລາເລິ່ມ:</label>
@@ -104,12 +100,12 @@
     </div>
 
     <span
-                          v-if="v$.selectedDateTime.$error"
-                          class="text-xs text-red-500"
-                          style="color: red"
-                        >
-                        selectedDateTime</span
-                        >
+      v-if="v$.selectedDateTime.$error"
+      class="text-xs text-red-500"
+      style="color: red"
+    >
+      selectedDateTime</span
+    >
 
     <div class="col-12 col-sm-12 col-md-12 pt-2">
       <label for="exampleInputEmail1">ປະເພດອະນຸຍາດ:</label
@@ -132,12 +128,12 @@
     </div>
 
     <span
-                          v-if="v$.dlt_code.$error"
-                          class="text-xs text-red-500"
-                          style="color: red"
-                        >
-                        dlt_code</span
-                        >
+      v-if="v$.dlt_code.$error"
+      class="text-xs text-red-500"
+      style="color: red"
+    >
+      dlt_code</span
+    >
 
     <div class="col-sm-12 p-2">
       <label for="exampleFormControlInput1">ຈຳນວນທີ່ເຮັດໄດ້:</label>
@@ -165,15 +161,21 @@
       >
     </div>
 
-
-    
     <div class="col-sm-12 p-2">
       <label for="exampleFormControlInput1">ออก ณ :</label>
-      <select class="form-select form-select" aria-label="Default select example"   v-model="store.forminsertnew.province_code">
-        <option   v-for="(item, index) in store.provi" :key="item.province_code" :value="item.province_code">{{item.name}} - {{item.province_name}}</option>
+      <select
+        class="form-select form-select"
+        aria-label="Default select example"
+        v-model="store.forminsertnew.group_id"
+      >
+        <option
+          v-for="(item, index) in store.provi"
+          :key="item.province_code"
+          :value="item.province_code"
+        >
+          {{ item.name }} - {{ item.province_name }}
+        </option>
       </select>
-
-     
     </div>
   </div>
 
@@ -200,6 +202,7 @@ import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import moment from "moment-timezone";
 import { useI18n } from "vue-i18n";
+   import Swal from 'sweetalert2';
 const { locale, setLocale } = useI18n();
 
 const toast = useToast();
@@ -261,12 +264,11 @@ const isDateDisabledEnd = (date) => {
   const currentDate = new Date();
   const disableBeforeDate = new Date(store.forminsertnew.ap_date_start); // Adjust the date as needed
 
-
   if (!store.forminsertnew.ap_date_start) {
     return true;
   }
 
-  return  date <= disableBeforeDate;
+  return date <= disableBeforeDate;
 };
 
 const backToUser = async () => {
@@ -277,15 +279,31 @@ const v$ = useVuelidate(rules, FormAppoint);
 
 const save = async () => {
   v$.value.$validate();
-
-
   if (!v$.value.$error) {
     const data = await store.SaveFormAPPNew();
- if(data === true){
-  await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
-  await router.push('/appointment');
- }
+    console.log(data.length);
+    if (data.length == 0) {
+      await toast.success("ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ");
+      await router.push("/appointment");
+    }
+    if (data.length > 0) {
 
+
+     const htmlContent = data
+        .map(
+          (item) =>
+            `<p style="color:red;"><strong>${item.day}:</strong> ${item.dlt} already exists  </p>`
+        )
+        .join("");
+
+      Swal.fire({
+        title: "List of Items",
+        html: htmlContent,
+        icon: "success",
+        confirmButtonText: "Close",
+      });
+  //    await router.push("/appointment");
+    }
   }
 };
 

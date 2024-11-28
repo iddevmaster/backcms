@@ -191,7 +191,7 @@ const SaveAppoint = async () => {
     return false;
 }
 let save = await store.SaveUserRerv();
-console.log(save);
+
 if(save == 200){
  await toast.success('ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ');
 

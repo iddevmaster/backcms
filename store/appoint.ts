@@ -103,6 +103,7 @@ export const AppointStore = defineStore('appoint', {
       ap_remark: "",
       user_id: "",
     },
+   
     forminsertnew: {
       ap_quota: "",
       ap_date_start: null,
@@ -111,10 +112,13 @@ export const AppointStore = defineStore('appoint', {
       selectedDateTime:"",
       dlt_code:[],
       province_code:null,
-      day:[]
+      group_id:null,
+      day: [{days:"ອາທິດ",select:false},{days:"ຈັນ",select:false},{days:"ອັງຄານ",select:false},{days:"ພຸດ",select:false},{days:"ພະຫັດ",select:false},{days:"ສຸກ",select:false},{days:"ເສົາ",select:false}
+      ],
     },
     dltc: ["A", "A1", "A2", "A3", "B", "C", "C1", "C2", "D", "D1", "D2", "E", "E1"],
-    day: ["ຈັນ", "ອັງຄານ", "ພຸດ", "ພະຫັດ", "ສຸກ", "ເສົາ", "ອາທິດ"],
+    day: [{days:"ຈັນ",select:false},{days:"ອັງຄານ",select:false},{days:"ພຸດ",select:false},{days:"ພະຫັດ",select:false},{days:"ສຸກ",select:false},{days:"ເສົາ",select:false},{days:"ອາທິດ",select:false}
+    ],
     formserchrreserve: {
       page: 1,
       per_per: 3,
@@ -456,10 +460,11 @@ try {
 
     Fitter(id) {
 
+      console.log(id);
+let a = this.provi.find(x => x.group_id == id);
 
-let a = this.provi.find(x => x.province_code == id);
 
-return a.province_name;
+return a.name +'-'+a.province_name;
     },
 
     async SaveFormAPPNew() {
@@ -471,15 +476,16 @@ const currentDateEnd = new Date(this.forminsertnew.ap_date_end).toISOString().sp
 
 this.forminsertnew.ap_date_start = currentDate
 this.forminsertnew.ap_date_end = currentDateEnd
-this.forminsertnew.peop_addrs = "ກຄພຂ -" + this.Fitter(this.forminsertnew.province_code)
+
+this.forminsertnew.peop_addrs = this.Fitter(this.forminsertnew.group_id);
+
 
 try {
-
   const data = await ApiService.post('/appointment/newcreate',this.forminsertnew).then(response => {
-   return true;
+   return response.data.dayfalse;
   });
 
-  return true;
+  return data;
 } catch (error) {
   return false;
 }
@@ -1354,9 +1360,11 @@ this.formprovice.user_id = this.user_id
 
       try {
         const data = await ApiService.post('/master_data/provice', this.formprovice).then(reps => {
+          console.log(reps);
 this.provi = reps.data.data;
 
-this.forminsertnew.province_code = reps.data.data[0].province_code
+this.forminsertnew.group_id = reps.data.data[0].group_id
+
         });
         return data;
       } catch (error) {
