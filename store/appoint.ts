@@ -370,6 +370,7 @@ try {
 
     async fetchAppointmentNew() {
 
+
       this.form.date_event = 0;
       const appdata = {
         ap_learn_type: this.form.ap_learn_type,
@@ -379,7 +380,7 @@ try {
 
       try {
         this.event = []
-        const data = await ApiService.get('/appointment/event/new/?ap_learn_type=' + parseInt(this.form.ap_learn_type) + '&dlt_code=' + this.form.dlt_code + '').then(response => {
+        const data = await ApiService.get('/appointment/event/new/?ap_learn_type=' + parseInt(this.form.ap_learn_type) + '&dlt_code=' + this.form.dlt_code + '&user_id=' +this.user_id).then(response => {
         
           if (response.data.length > 0) {
             this.event = response.data

@@ -71,7 +71,7 @@
         <option disabled selected :value="0">{{ $t('select') }}...</option>
         
         <option v-for="(events, x) in store.event" :value="events">
-           {{format(events.ap_date_first)}} {{events.time}}, Class {{events.dlt_code}} . Avalable: {{calcu(events.ap_quota,events.available)}} seats
+           {{format(events.ap_date_first)}} {{events.time}}, Class {{events.dlt_code}} . Avalable: {{calcu(events.ap_quota,events.available)}} seats  {{events.province_name}} 
         </option>
       </select> 
     </div>
