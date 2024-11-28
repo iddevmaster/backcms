@@ -87,7 +87,7 @@
         <td>{{ item.quata }}</td>
         <td>{{ item.available }}</td>
         <td>{{ item.user_firstname }}</td>
-        <td>{{ item.user_full }}</td>
+        <td>{{ item.peop_addrs }}</td>
         <td>
           
             

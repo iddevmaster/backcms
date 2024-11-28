@@ -281,7 +281,6 @@ const save = async () => {
   v$.value.$validate();
   if (!v$.value.$error) {
     const data = await store.SaveFormAPPNew();
-    console.log(data.length);
     if (data.length == 0) {
       await toast.success("ບັນທຶກຂໍ້ມູນສຳເລັດແລ້ວ");
       await router.push("/appointment");

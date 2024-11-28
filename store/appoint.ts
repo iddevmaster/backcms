@@ -333,11 +333,7 @@ export const AppointStore = defineStore('appoint', {
     },
 
     async fetchAppointmentlist() {
-     
-
       this.formlistapp.user_id = this.user_id
-
-
 try {
   const data = await ApiService.post('/appointment/listall',this.formlistapp).then(response => {
    
@@ -797,7 +793,7 @@ try {
       try {
         const data = await ApiService.post('/appointment/totalquata',fit).then(response => {
         this.group_event = response.data
-        console.log(this.group_event.length);
+      
 
         });
         return true
