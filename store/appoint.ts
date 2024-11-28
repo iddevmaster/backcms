@@ -377,6 +377,7 @@ try {
         dlt_code: this.form.dlt_code
       }
       this.group = []
+      console.log(this.user_id);
 
       try {
         this.event = []

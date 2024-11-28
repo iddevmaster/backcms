@@ -711,6 +711,7 @@
         </div>
       </div>
 
+    
       <div class="profile-info">
         <div class="user-info">
           <div class="profile-img" v-if="store.detail.user_img">
@@ -723,9 +724,14 @@
           <div class="profile-content">
             <h6 class="" v-if="store.users">{{ store.users.user_name }}</h6>
             <p class="">{{ store.users.user_email }}</p>
+            {{ store.detail.province_name }}
           </div>
         </div>
       </div>
+
+
+
+      
 
       <div class="shadow-bottom"></div>
       <ul class="list-unstyled menu-categories" id="accordionExample" >
