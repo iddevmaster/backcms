@@ -169,9 +169,8 @@
     
     <div class="col-sm-12 p-2">
       <label for="exampleFormControlInput1">ออก ณ :</label>
-      <select class="form-select form-select" aria-label="Default select example"   v-model="store.peop_addrs">
-        <option value="ກຄພຂ ສະຫວັນນະເຂດ" selected>ກຄພຂ ສະຫວັນນະເຂດ</option>
-        <option value="ກຄພຂ ຈຳປາສັກ" >ກຄພຂ ຈຳປາສັກ</option>
+      <select class="form-select form-select" aria-label="Default select example"   v-model="store.forminsertnew.province_code">
+        <option   v-for="(item, index) in store.provi" :key="item.province_code" :value="item.province_code">ກຄພຂ - {{item.province_name}}</option>
       </select>
 
      

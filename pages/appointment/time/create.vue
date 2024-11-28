@@ -21,6 +21,8 @@ const auth = useAuthStore()
 store.user_id = auth.user_id
 store.forminsertnew.user_id = auth.user_id
 
+await store.provice();
+
 </script>
 
 <template>

@@ -14,6 +14,7 @@ export const AppointStore = defineStore('appoint', {
     isDelUser: false,
     ChooseBefore: false,
     searchData: "",
+    provi:[],
     remark: "ເຫດຜົນທີ່ຍົກເລີກໃຫ້ຂຽນໃສ່ບ່ອນນີ້",
     event: [],
     user: [],
@@ -109,6 +110,7 @@ export const AppointStore = defineStore('appoint', {
       user_id: "",
       selectedDateTime:"",
       dlt_code:[],
+      province_code:null,
       day:[]
     },
     dltc: ["A", "A1", "A2", "A3", "B", "C", "C1", "C2", "D", "D1", "D2", "E", "E1"],
@@ -196,6 +198,9 @@ export const AppointStore = defineStore('appoint', {
     formver: {
       division: "1",
       remarkcheck: []
+    },
+    formprovice: {
+    user_id:null
     },
     veggies: [
       { id: 1, name: "ຂໍ້ມູນທີ່ປ້ອນໃນລະບົບ ແລະ ເອກະສານທີ່ຍື່ນ ກົງກັນ", selected: false },
@@ -447,6 +452,14 @@ try {
       }
     },
 
+    Fitter(id) {
+
+
+let a = this.provi.find(x => x.province_code == id);
+
+return a.province_name;
+    },
+
     async SaveFormAPPNew() {
 
 
@@ -456,7 +469,7 @@ const currentDateEnd = new Date(this.forminsertnew.ap_date_end).toISOString().sp
 
 this.forminsertnew.ap_date_start = currentDate
 this.forminsertnew.ap_date_end = currentDateEnd
-this.forminsertnew.peop_addrs = this.peop_addrs
+this.forminsertnew.peop_addrs = "ກຄພຂ -" + this.Fitter(this.forminsertnew.province_code)
 
 try {
 
@@ -1332,6 +1345,22 @@ if(this.dataapp[0].st_id != null){
         return false;
       }
     
+    },
+
+    async provice() {
+this.formprovice.user_id = this.user_id
+
+      try {
+        const data = await ApiService.post('/master_data/provice', this.formprovice).then(reps => {
+this.provi = reps.data.data;
+
+this.forminsertnew.province_code = reps.data.data[0].province_code
+        });
+        return data;
+      } catch (error) {
+        return false;
+      }
+
     },
 
 
