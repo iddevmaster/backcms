@@ -170,8 +170,8 @@
       >
         <option
           v-for="(item, index) in store.provi"
-          :key="item.province_code"
-          :value="item.province_code"
+          :key="item.group_id"
+          :value="item.group_id"
         >
           {{ item.name }} - {{ item.province_name }}
         </option>
