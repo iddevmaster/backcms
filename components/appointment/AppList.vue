@@ -1,18 +1,13 @@
 <template>
   <div class="row layout-top-spacing">
-
-
     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
       <label for="inputEmail3" class="col-sm-12 col-form-label">Filter</label>
-
     </div>
     <div class="col-xl-2 col-lg-5 col-md-5 col-sm-2">
-
       <VueDatePicker
         v-model="store.formlistapp.ap_date_start"
         :format="format"
         :enable-time-picker="false"
-  
         :placeholder="$t('exp_update_acc_pehol')"
         required
       ></VueDatePicker>
@@ -20,10 +15,8 @@
 
     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
       <label for="inputEmail3" class="col-sm-12 col-form-label">ຫາ</label>
-
     </div>
     <div class="col-xl-2 col-lg-5 col-md-5 col-sm-2">
-
       <VueDatePicker
         v-model="store.formlistapp.ap_date_end"
         required
@@ -34,194 +27,180 @@
       ></VueDatePicker>
     </div>
 
-
     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-auto">
-     <button class="btn btn-success" style="margin: 1px;" @click="Fitter()"> ค้นหา</button>
+      <button class="btn btn-success" style="margin: 1px" @click="Fitter()">
+        ค้นหา
+      </button>
     </div>
 
     <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 mt-auto">
-     <button class="btn btn-primary" style="margin: 1px;" @click="Fittt()"> ສ້າງຊ່ວງເວລານັດໝາຍ</button>
+      <button class="btn btn-primary" style="margin: 1px" @click="Fittt()">
+        ສ້າງຊ່ວງເວລານັດໝາຍ
+      </button>
     </div>
-
   </div>
-
 
   <div class="row layout-top-spacing">
-
     <div class="table-responsive">
-    <table id="example" class="table table-bordered" style="width: 100%">
-      <thead>
-        <tr class="cours_move">
-          <th>
-          #
-          </th>
-          <th>
-            ວັນທີ
-          </th>
-    
-          <th>
-            ເວລາ ເລິ່ມ
-          </th>
-          <th>
-            ປະເພດໃບຂັບຂີ່
-          </th>
-          <th>ຈຳນວນຮັບໄດ້ລວມ</th>
-          <th>ນັດໝາຍແລ້ວ</th>
-          <th>ສ້າງໂດຍ</th>
-          <th class="no-content">ສະຖານີ່</th>
-          <th class="no-content">Action</th>
-        </tr>
-      </thead>
-      <tbody >
-        <tr v-for="(item,index) in store.applist" :key="item.ap_id" >
-        <td>
-          {{
-              store.formlistapp.page * store.formlistapp.per_page -
-              (store.formlistapp.per_page - index) +
-              1
-            }}
-        </td>
-        <td>{{ item.ap_date_first }}</td>
-        <td>{{ item.time }}</td>
-        <td>{{ item.dlt }}</td> 
-        <td>{{ item.quata }}</td>
-        <td>{{ item.available }}</td>
-        <td>{{ item.user_firstname }}</td>
-        <td>{{ item.peop_addrs }}</td>
-        <td>
-          
+      <table id="example" class="table table-bordered" style="width: 100%">
+        <thead>
+          <tr class="cours_move">
+            <th>#</th>
+            <th>ວັນທີ</th>
+
+            <th>ເວລາ ເລິ່ມ</th>
+            <th>ປະເພດໃບຂັບຂີ່</th>
+            <th>ຈຳນວນຮັບໄດ້ລວມ</th>
+            <th>ນັດໝາຍແລ້ວ</th>
+            <th>ສ້າງໂດຍ</th>
+            <th class="no-content">ສະຖານີ່</th>
+            <th class="no-content">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in store.applist" :key="item.ap_id">
+            <td>
+              {{
+                store.formlistapp.page * store.formlistapp.per_page -
+                (store.formlistapp.per_page - index) +
+                1
+              }}
+            </td>
+            <td>{{ item.ap_date_first }}</td>
+            <td>{{ item.time }}</td>
+            <td>{{ item.dlt }}</td>
+            <td>{{ item.quata }}</td>
+            <td>{{ item.available }}</td>
+            <td>{{ item.user_firstname }}</td>
+            <td>{{ item.peop_addrs }}</td>
+            <td>
+              <a
+                class="badge badge-light-primary text-start me-2 action-view"
+                @click="viewData(item)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <path  d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z"  /></svg  ></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div></div>
+    </div>
+
+    <div>
+      <div class="dt--pagination" v-if="store.total_page > 0">
+        <div
+          class="dataTables_paginate paging_simple_numbers"
+          id="zero-config_paginate"
+        >
+          <ul class="pagination">
+            <li
+              class="paginate_button page-item previous"
+              id="zero-config_previous"
+              @click="Prev()"
+            >
+              <a
+                href="#"
+                aria-controls="zero-config"
+                data-dt-idx="0"
+                tabindex="0"
+                class="page-link"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-arrow-left"
+                >
+                  <line x1="19" y1="12" x2="5" y2="12"></line>
+                  <polyline points="12 19 5 12 12 5"></polyline></svg
+              ></a>
+            </li>
+
             
-            <a class="badge badge-light-primary text-start me-2 action-view" @click="viewData(item)" >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <path d="M15 12c0 1.654-1.346 3-3 3s-3-1.346-3-3 1.346-3 3-3 3 1.346 3 3zm9-.449s-4.252 8.449-11.985 8.449c-7.18 0-12.015-8.449-12.015-8.449s4.446-7.551 12.015-7.551c7.694 0 11.985 7.551 11.985 7.551zm-7 .449c0-2.757-2.243-5-5-5s-5 2.243-5 5 2.243 5 5 5 5-2.243 5-5z"    /></svg    ></a>
-  
-        
-          
-       
-      
-             
+            <li
+              class="paginate_button page-item"
+              v-for="page in store.total_page"
+              :key="page"
+            >
+
             
-        </td>
-      
-        </tr>
-      </tbody>
-    </table>
-
-    <div></div>
-  </div>
-
-
-  <div>
-    <div class="dt--pagination" v-if="store.total_page > 1">
-      <div
-        class="dataTables_paginate paging_simple_numbers"
-        id="zero-config_paginate"
-      >
-        <ul class="pagination">
-          <li
-            class="paginate_button page-item previous"
-            id="zero-config_previous"
-            @click="Prev()"
-          >
-            <a
-              href="#"
-              aria-controls="zero-config"
-              data-dt-idx="0"
-              tabindex="0"
-              class="page-link"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-arrow-left"
+              <a
+                href="#"
+                aria-controls="zero-config"
+                data-dt-idx="1"
+                tabindex="0"
+                class="page-link"
+                :class="{ bgcx: page === store.formlistapp.page }"
+                @click="setCurrentPageclick(page)"
               >
-                <line x1="19" y1="12" x2="5" y2="12"></line>
-                <polyline points="12 19 5 12 12 5"></polyline></svg ></a>
-          </li>
-          <li
-            class="paginate_button page-item"
-            v-for="page in store.total_page"
-            :key="page"
-          >
-            <a
-              href="#"
-              aria-controls="zero-config"
-              data-dt-idx="1"
-              tabindex="0"
-              class="page-link"
-              :class="{ bgcx: page === store.formlistapp.page }"
-              @click="setCurrentPageclick(page)"
-            >
-              {{ page }}</a
-            >
-          </li>
-          <li class="paginate_button page-item next" id="zero-config_next">
-            <a
-              href="#"
-              aria-controls="zero-config"
-              @click="Next()"
-              data-dt-idx="4"
-              tabindex="0"
-              class="page-link"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-arrow-right"
+                {{ page }}</a
               >
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline></svg ></a>
-          </li>
-        </ul>
+            </li>
+            <li class="paginate_button page-item next" id="zero-config_next">
+              <a
+                href="#"
+                aria-controls="zero-config"
+                @click="Next()"
+                data-dt-idx="4"
+                tabindex="0"
+                class="page-link"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-arrow-right"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline></svg
+              ></a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-
-<div class="modal" v-if="store.modalGroupDlt">
+  <div class="modal" v-if="store.modalGroupDlt">
     <div class="modal-content" id="deleteConformationLabel">
       <div class="modal-header">
-        <h1 class="modal-title" id="exampleModalLabel">
-         
-        </h1>
+        <h1 class="modal-title" id="exampleModalLabel"></h1>
       </div>
       <div class="modal-body">
         <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>DLT</th>
-        <th>QUATA</th>
-        <th>Available</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr  v-for="(item,index) in store.group_event" :key="item.ap_id">
-        <td>{{item.dlt_code}}</td>
-        <td>{{item.ap_quota}}</td>
-        <td>{{item.alva}}</td>
-      </tr>
-
-    </tbody>
-  </table>
+          <thead>
+            <tr>
+              <th>DLT</th>
+              <th>QUATA</th>
+              <th>Available</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, index) in store.group_event" :key="item.ap_id">
+              <td>{{ item.dlt_code }}</td>
+              <td>{{ item.ap_quota }}</td>
+              <td>{{ item.alva }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div class="modal-footer">
         <button
@@ -232,13 +211,9 @@
         >
           ปิด
         </button>
-    
       </div>
     </div>
   </div>
-
-
-
 </template>
 
 
@@ -264,13 +239,13 @@ const router = useRouter();
 const toast = useToast();
 const store = AppointStore();
 const auth = useAuthStore();
- store.formlistapp.ap_date_start = new Date().toISOString().slice(0, 10);
+store.formlistapp.ap_date_start = new Date().toISOString().slice(0, 10);
 
- const currentDate = new Date();
- const nextWeek = new Date(currentDate);
- nextWeek.setDate(currentDate.getDate() + 14);
+const currentDate = new Date();
+const nextWeek = new Date(currentDate);
+nextWeek.setDate(currentDate.getDate() + 14);
 
- store.formlistapp.ap_date_end = nextWeek.toISOString().slice(0, 10)
+store.formlistapp.ap_date_end = nextWeek.toISOString().slice(0, 10);
 
 await store.fetchAppointmentlist();
 
@@ -282,7 +257,6 @@ const format = (date) => {
   return `${day}/${month}/${year}`;
 };
 
-
 const isDateDisabled = (date) => {
   const currentDate = new Date();
   const disableBeforeDate = new Date(); // Adjust the date as needed
@@ -291,34 +265,29 @@ const isDateDisabled = (date) => {
   return date < currentDate || date < disableBeforeDate;
 };
 
-
 const Hide = async () => {
-store.modalGroupDlt = false;
+  store.modalGroupDlt = false;
 };
 
 const setCurrentPageclick = async (page) => {
-  await store.setCurrentPageAPP(page)
+  await store.setCurrentPageAPP(page);
   await store.fetchAppointmentlistFitter();
 };
 
 const Fitter = async () => {
-  if(store.formlistapp.ap_date_start == null){
+  if (store.formlistapp.ap_date_start == null) {
     return false;
   }
-  if(store.formlistapp.ap_date_end == null){
-return false;
-}
-
-
-
+  if (store.formlistapp.ap_date_end == null) {
+    return false;
+  }
 
   await store.fetchAppointmentlistFitter();
 };
 
-
 const Fittt = async () => {
-  await router.push('/appointment/dateappointment');
-}
+  await router.push("/appointment/dateappointment");
+};
 const isDateDisabledEnd = (date) => {
   const currentDate = new Date();
   const disableBeforeDate = new Date(store.formlistapp.ap_date_start); // Adjust the date as needed
@@ -330,52 +299,38 @@ const isDateDisabledEnd = (date) => {
   return date < currentDate || date == disableBeforeDate;
 };
 
-
 const Prev = async () => {
-
-if (store.formlistapp.page == 1) {
-  await store.fetchAppointmentlistFitter();
-  await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
-    timeout: 50,
-  });
-} else {
-  store.formlistapp.page -= 1;
-  await store.fetchAppointmentlistFitter();
-  await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
-    timeout: 50,
-  });
-}
+  if (store.formlistapp.page == 1) {
+    await store.fetchAppointmentlistFitter();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else {
+    store.formlistapp.page -= 1;
+    await store.fetchAppointmentlistFitter();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  }
 };
-
-
-
 
 const Next = async () => {
-
-
-if (store.formlistapp.page == store.total_page) {
- 
-  store.formlistapp.page = store.total_page;
-await store.fetchAppointmentlistFitter();
-  await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
-    timeout: 50,
-  });
-} else {
-  store.formlistapp.page += 1;
-await store.fetchAppointmentlistFitter();
- 
-}
-
+  if (store.formlistapp.page == store.total_page) {
+    store.formlistapp.page = store.total_page;
+    await store.fetchAppointmentlistFitter();
+    await toast.info("ກຳລັງໂຫຼດຂໍ້ມູນ", {
+      timeout: 50,
+    });
+  } else {
+    store.formlistapp.page += 1;
+    await store.fetchAppointmentlistFitter();
+  }
 };
-
 
 const viewData = async (item) => {
-
-await store.fetchGROUPDlt(item);
-store.modalGroupDlt = true;
+  await store.fetchGROUPDlt(item);
+  store.modalGroupDlt = true;
 };
-
-
 
 function coverttime(date) {
   const datetime = new Date(date);
@@ -390,8 +345,6 @@ function coverttime(date) {
   const formattedDatetime = datetime.toLocaleString(undefined, options);
   return formattedDatetime;
 }
-
-
 </script>
 <style>
 .dt--pagination {
@@ -402,9 +355,8 @@ function coverttime(date) {
   cursor: pointer;
 }
 
-
 .button {
-  background-color: #04AA6D; /* Green */
+  background-color: #04aa6d; /* Green */
   border: none;
   color: white;
   padding: 16px 32px;
@@ -418,30 +370,30 @@ function coverttime(date) {
 }
 
 .button1 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #04AA6D;
+  background-color: white;
+  color: black;
+  border: 2px solid #04aa6d;
 }
 
 .button1:hover {
-  background-color: #04AA6D;
+  background-color: #04aa6d;
   color: white;
 }
 
 .button2 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #008CBA;
+  background-color: white;
+  color: black;
+  border: 2px solid #008cba;
 }
 
 .button2:hover {
-  background-color: #008CBA;
+  background-color: #008cba;
   color: white;
 }
 
 .button3 {
-  background-color: white; 
-  color: black; 
+  background-color: white;
+  color: black;
   border: 2px solid #f44336;
 }
 
@@ -456,7 +408,9 @@ function coverttime(date) {
   border: 2px solid #e7e7e7;
 }
 
-.button4:hover {background-color: #e7e7e7;}
+.button4:hover {
+  background-color: #e7e7e7;
+}
 
 .button5 {
   background-color: white;

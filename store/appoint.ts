@@ -10,6 +10,7 @@ export const AppointStore = defineStore('appoint', {
   state: () => ({
     isOpen: false,
     isDelAP: false,
+    progroud:[],
     AlertEndtime: false,
     isDelUser: false,
     ChooseBefore: false,
@@ -23,9 +24,11 @@ export const AppointStore = defineStore('appoint', {
     total_page_user: 0,
     start_date: '',
     reservebyap: [],
+    proviall:[],
     selectedRow: {
       user_id: null
     },
+    grouppro_id:null,
     location_id:null,
     dlttoday:[],
     app_present: [],
@@ -344,6 +347,8 @@ try {
     this.total_filter = response.data.total_filter
     this.total = response.data.total
 
+
+
   });
 } catch (error) {
   return false;
@@ -358,7 +363,13 @@ try {
      try {
        const data = await ApiService.post('/appointment/listall',this.formlistapp).then(response => {
         this.applist = [];
+
          this.applist = response.data.data
+         this.total_page = response.data.total_page
+         this.limit_page = response.data.limit_page
+         this.current_page = response.data.current_page
+         this.total_filter = response.data.total_filter
+         this.total = response.data.total
          
        });
      } catch (error) {
@@ -382,7 +393,7 @@ try {
       try {
         this.event = []
         const data = await ApiService.get('/appointment/event/new/?ap_learn_type=' + parseInt(this.form.ap_learn_type) + '&dlt_code=' + this.form.dlt_code + '&user_id=' +this.user_id).then(response => {
-        
+        console.log(response);
           if (response.data.length > 0) {
             this.event = response.data
        
@@ -457,7 +468,7 @@ try {
     Fitter(id) {
 
       console.log(id);
-let a = this.provi.find(x => x.group_id == id);
+let a = this.provi.find(x => x.group == id);
 
 
 return a.name +'-'+a.province_name;
@@ -697,7 +708,7 @@ try {
 
 
       const data = await ApiService.post('/user/list?user_type=3', this.formuser).then(response => {
-    
+
         this.user = response.data.data;
 
         this.total_page_user = response.data.total_page
@@ -869,14 +880,15 @@ try {
       this.formsearchapptoday.user_id = this.user_id
       this.formsearchapptoday.location_id = this.location_id
       this.formsearchapptoday.user_type = this.user_type
-
+      this.formsearchapptoday.group = this.grouppro_id
+     
+    
      
       try {
         const data = await ApiService.post('/appointment/dateappointment',this.formsearchapptoday).then(response => {
-
 this.dlttoday = response.data
 
-console.log(response.data);
+
 
 
           for (let i = 0; i < response.data.length; i++) {
@@ -1356,11 +1368,8 @@ this.formprovice.user_id = this.user_id
 
       try {
         const data = await ApiService.post('/master_data/provice', this.formprovice).then(reps => {
-          console.log(reps);
 this.provi = reps.data.data;
-
-this.forminsertnew.group_id = reps.data.data[0].group_id
-
+this.forminsertnew.group_id = reps.data.data[0].group
         });
         return data;
       } catch (error) {
@@ -1369,12 +1378,45 @@ this.forminsertnew.group_id = reps.data.data[0].group_id
 
     },
 
+    async fetchProv() {
+      this.formprovice.user_id = this.user_id
+      
+            try {
+              const data = await ApiService.post('/master_data/proviceall', this.formprovice).then(reps => {
+      this.proviall = reps.data.data;
+    
+      this.proivall_id = reps.data.data[0].province_code
+  
+  
+              });
+              return data;
+            } catch (error) {
+              return false;
+            }
+      
+          },
 
 
+          async fetchGroupProvs() {
+        
+            
+          
+                  try {
+                    const data = await ApiService.post('/master_data/provicegroup', {province_code:parseInt(this.proivall_id)}).then(reps => {
+                      this.progroud = [];
+       this.progroud = reps.data.data;
+     
+       this.grouppro_id = reps.data.data[0].group_id
+        
+                    });
+                    return data;
+                  } catch (error) {
+                    return false;
+                  }
+            
+                },
 
-
-
-
+ 
   },
 
 });
