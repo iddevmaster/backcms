@@ -66,7 +66,7 @@
                 1
               }}
             </td>
-            <td>{{ item.ap_date_first }}</td>
+            <td>{{ item.ap_date_first }} {{ item.day }}</td>
             <td>{{ item.time }}</td>
             <td>{{ item.dlt }}</td>
             <td>{{ item.quata }}</td>
