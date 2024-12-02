@@ -1,7 +1,8 @@
 <template>
   <div class="row layout-top-spacing">
     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1">
-      <label for="inputEmail3" class="col-sm-12 col-form-label">Filter</label>
+      <label for="inputEmail3" class="col-sm-12 col-form-label">ການກັ່ນຕອງ
+</label>
     </div>
     <div class="col-xl-2 col-lg-5 col-md-5 col-sm-2">
       <VueDatePicker
@@ -27,13 +28,13 @@
       ></VueDatePicker>
     </div>
 
-    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mt-auto">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mt-auto">
       <button class="btn btn-success" style="margin: 1px" @click="Fitter()">
-        ค้นหา
+        ຊອກຫາ
       </button>
     </div>
 
-    <div class="col-xl-2 col-lg-4 col-md-12 col-sm-12 mt-auto">
+    <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 mt-auto">
       <button class="btn btn-primary" style="margin: 1px" @click="Fittt()">
         ສ້າງຊ່ວງເວລານັດໝາຍ
       </button>
@@ -66,7 +67,7 @@
                 1
               }}
             </td>
-            <td>{{ item.ap_date_first }} {{ item.day }}</td>
+            <td>{{ item.ap_date_first }} - {{ item.day }}</td>
             <td>{{ item.time }}</td>
             <td>{{ item.dlt }}</td>
             <td>{{ item.quata }}</td>
