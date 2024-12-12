@@ -471,7 +471,7 @@ try {
     Fitter(id) {
 
       console.log(id);
-let a = this.provi.find(x => x.group == id);
+let a = this.provi.find(x => x.group_id == id);
 
 
 return a.name +'-'+a.province_name;
@@ -488,7 +488,7 @@ this.forminsertnew.ap_date_start = currentDate
 this.forminsertnew.ap_date_end = currentDateEnd
 
 this.forminsertnew.peop_addrs = this.Fitter(this.forminsertnew.group_id);
-
+console.log(this.forminsertnew.group_id);
 
 try {
   const data = await ApiService.post('/appointment/newcreate',this.forminsertnew).then(response => {
@@ -907,11 +907,11 @@ console.log(this.applistfitter);
       this.formsearchapptoday.location_id = this.location_id
       this.formsearchapptoday.group = this.grouppro_id
      
-      console.log(this.formsearchapptoday);
+
      
       try {
-        const data = await ApiService.post('/appointment/dateappointmentlist',this.formsearchapptoday).then(response => {
-        
+        const data = await ApiService.post('/appointment/dateappointment',this.formsearchapptoday).then(response => {
+        console.log(response);
 this.dlttoday = response.data
           for (let i = 0; i < response.data.length; i++) {
             if (response.data[i].dlt_code == 'A' ) {
@@ -1391,7 +1391,10 @@ this.formprovice.user_id = this.user_id
       try {
         const data = await ApiService.post('/master_data/provice', this.formprovice).then(reps => {
 this.provi = reps.data.data;
-this.forminsertnew.group_id = reps.data.data[0].group
+
+this.forminsertnew.group_id = reps.data.data[0].group_id
+
+
         });
         return data;
       } catch (error) {
@@ -1419,16 +1422,18 @@ this.forminsertnew.group_id = reps.data.data[0].group
           },
 
 
-          async fetchGroupProvs() {
+     async fetchGroupProvs() {
         
-            
+          
           
                   try {
                     const data = await ApiService.post('/master_data/provicegroup', {province_code:parseInt(this.proivall_id)}).then(reps => {
                       this.progroud = [];
        this.progroud = reps.data.data;
-     
+    
+  
        this.grouppro_id = reps.data.data[0].group_id
+   
         
                     });
                     return data;

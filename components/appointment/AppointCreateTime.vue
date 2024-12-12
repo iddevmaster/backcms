@@ -171,7 +171,7 @@
         <option
           v-for="(item, index) in store.provi"
           :key="item.group_id"
-          :value="item.group"
+          :value="item.group_id"
         >
           {{ item.name }} - {{ item.province_name }}
         </option>
@@ -180,7 +180,6 @@
   </div>
 
   <div class="row mb-4"></div>
-
   <button type="button" class="btn btn-primary" @click="save()">
     {{ $t("menu_app_app_save") }}
   </button>

@@ -21,13 +21,13 @@ definePageMeta({
 });
 const toast = useToast();
 const store = AppointStore();
-
+const user_type = useCookie("user_type"); // useCookie new hook in nuxt 3
 const auth = useAuthStore();
 const router = useRouter();
 store.user_id = auth.user_id;
 store.location_id = auth.detail.location_id;
 store.user_type = auth.users.user_type;
-
+store.formsearchapptoday.user_type = user_type.value
 
 
 const today = new Date();
