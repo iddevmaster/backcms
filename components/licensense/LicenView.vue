@@ -5,7 +5,7 @@
 
       <div class="row p-3">
         <div class="col-lg-6 col-md-4 col-sm-4">
-          <h5>ເພິ່ມ ໃບຂັບຂີ່ ໃຫ້ຜູ້ໃຊ້</h5>
+          <h5>{{ $t("add_dlt_add_on_dlt") }}</h5>
         </div>
 
         <div class="col-lg-1 col-md-4 col-sm-4">
@@ -341,7 +341,7 @@ v-model="storedlt.username"
       
             <div class="col-12 col-sm-12 col-md-12">
               <div class="form-group">
-                <label for="exampleInputEmail1">ຈຸດປະສົ່ງການເພິ່ມ:</label>
+                <label for="exampleInputEmail1">{{ $t("add_dlt_add_on") }}:</label>
                 <select class="form-control" v-model="storedlt.formdlt_new.type" @change="FitterCh($event)">
         <option value="new">{{ $t("pass_card") }}</option>
         <option value="renew">{{ $t("renew_card") }}</option>
@@ -352,13 +352,13 @@ v-model="storedlt.username"
 
             <div class="col-12 col-sm-12 col-md-12 pt-2" v-if="storedlt.AppisShow">
               <div class="form-group">
-                <label for="exampleInputEmail1">ເຊື່ອມຫາ ID ນັດໝາຍ:</label>
+                <label for="exampleInputEmail1">{{ $t("add_dlt_id_app") }}:</label>
                 <input
                   type="text"
                   class="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
-                  placeholder="A83M100"
+                  placeholder="A83M100" disabled
                   
                   v-model="storedlt.formdlt_new.ap_number"
                   
@@ -375,7 +375,7 @@ v-model="storedlt.username"
 
             <div class="col-12 col-sm-12 col-md-12 pt-2">
               <div class="form-group">
-                <label for="exampleInputEmail1">ເລກທີ:</label><span style="color: red;"> * </span>
+                <label for="exampleInputEmail1">{{ $t("add_dlt_id_number") }}:</label><span style="color: red;"> * </span>
                 <input
                   type="text"
                   class="form-control"
@@ -395,14 +395,14 @@ v-model="storedlt.username"
                           class="text-xs text-red-500"
                           style="color: red"
                         >
-                        ເລກທີ</span
+                        {{ $t("add_dlt_id_number") }}</span
                         >
               </div>
             </div>
 
             <div class="col-12 col-sm-12 col-md-12 pt-2">
               <div class="form-group">
-                <label for="exampleInputEmail1">ອອກຊື່:</label><span style="color: red;"> * </span>
+                <label for="exampleInputEmail1">{{ $t("add_dlt_at_name") }}:</label><span style="color: red;"> * </span>
                 <input
                   type="text"
                   class="form-control"
@@ -423,14 +423,14 @@ v-model="storedlt.username"
                           class="text-xs text-red-500"
                           style="color: red"
                         >
-                        ອອກຊື່</span
+                        {{ $t("add_dlt_at_name") }}</span
                         >
               </div>
             </div>
 
             <div class="col-12 col-sm-12 col-md-12 pt-2">
               <div class="form-group">
-                <label for="exampleInputEmail1">ວັນທີອອກບັດ:</label><span style="color: red;"> * </span>
+                <label for="exampleInputEmail1">{{ $t("add_dlt_at_iss_day") }}:</label><span style="color: red;"> * </span>
                 <VueDatePicker v-model="storedlt.formdlt_new.issue_date" :format="format_start"  :disabled-dates="isDateDisabled" required ></VueDatePicker>
               </div>
               <span
@@ -438,13 +438,13 @@ v-model="storedlt.username"
                           class="text-xs text-red-500"
                           style="color: red"
                         >
-                        ວັນທີອອກບັດ</span
+                        {{ $t("add_dlt_at_iss_day") }}</span
                         >
             </div>
 
             <div class="col-12 col-sm-12 col-md-12 pt-2">
               <div class="form-group">
-                <label for="exampleInputEmail1">ວັນທີໝົດອາຍຸ:</label><span style="color: red;"> * </span>
+                <label for="exampleInputEmail1">{{ $t("add_dlt_at_iss_exp") }}:</label><span style="color: red;"> * </span>
                 <VueDatePicker v-model="storedlt.formdlt_new.expiry_date" :format="format_end"  :disabled-dates="isDateDisabledEnd" required></VueDatePicker>
               </div>
               <span
@@ -452,12 +452,12 @@ v-model="storedlt.username"
                           class="text-xs text-red-500"
                           style="color: red"
                         >
-                        ວັນທີໝົດອາຍຸ</span
+                        {{ $t("add_dlt_at_iss_exp") }}</span
                         >
             </div>
 
             <div class="col-12 col-sm-12 col-md-12 pt-2">
-              <label for="exampleInputEmail1">ປະເພດອະນຸຍາດ:</label><span style="color: red;"> * </span>
+              <label for="exampleInputEmail1">{{ $t("add_dlt_at_dlt_type") }}:</label><span style="color: red;"> * </span>
               <div class="form-group">
                 
                 <label v-for="fruit in storedlt.dltc" :key="fruit" class="checkbox" style="padding-left: 3px;">
@@ -550,7 +550,7 @@ v-model="storedlt.username"
                             class="changeImg btn btn-primary"
                           
                           >
-                          ບັນທຶກ
+                          {{ $t("add_dlt_at_button") }}
                           </button>
                   </div>
             
