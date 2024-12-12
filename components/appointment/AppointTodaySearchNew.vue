@@ -65,10 +65,10 @@
       </thead>
       <tbody>
         
-        <tr v-for="(item, index) in store.dlttoday">
+        <tr v-for="(item, index) in store.applistfitter">
           <td>{{ index + 1 }}</td>
-          <td v-if="item.type == '1'">08.00</td>
-          <td v-else>16.00</td>
+
+          <td>{{item.time}}</td>
           <td>{{ item.dlt_code }}</td>
           <td>{{ item.ap_number }}</td>
           <td>{{ item.user_firstname }} {{ item.user_lastname }}</td>
@@ -146,7 +146,7 @@ const viewApp = async (item) => {
 
 const Fitterday = async () => {
 store.formsearchapptoday.ap_date_start = moment(store.formsearchapptoday.ap_date_start).tz('Asia/Bangkok').format('YYYY-MM-DD');
-await store.fetchAppPresentToday();
+await store.fetchAppPresentFitter();
 };
 
 

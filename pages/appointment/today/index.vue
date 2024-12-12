@@ -16,12 +16,17 @@ definePageMeta({
   middleware: ['auth','roles'],
   allowedRoles: [1,2]
 })
+const user_type = useCookie("user_type"); // useCookie new hook in nuxt 3
+
 const toast = useToast()
 const store = AppointStore()
 
 const auth = useAuthStore()
 const router = useRouter();
 store.user_id = auth.user_id
+
+
+
 
 store.group = []; 
 const closeModal = () => {
@@ -31,8 +36,10 @@ const closeModal = () => {
 const today = new Date();
 const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 store.formsearchapptoday.ap_date_start = date;
-await store.fetchAppPresentToday();
+store.formsearchapptoday.user_type = user_type.value
+
                  
+await store.fetchAppPresentFitter();
               
               
 

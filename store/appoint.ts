@@ -15,6 +15,7 @@ export const AppointStore = defineStore('appoint', {
     isDelUser: false,
     ChooseBefore: false,
     searchData: "",
+    applistfitter:[],
     provi:[],
     remark: "ເຫດຜົນທີ່ຍົກເລີກໃຫ້ຂຽນໃສ່ບ່ອນນີ້",
     event: [],
@@ -237,6 +238,8 @@ export const AppointStore = defineStore('appoint', {
       ap_date_start: null,
       location_id:null,
       user_id:null,
+      user_type:null,
+      group:null,
     },
     user_type:null
 
@@ -875,22 +878,41 @@ try {
       }
 
     },
+    
+    async fetchAppPresentFitter() {
+
+      this.formsearchapptoday.user_id = this.user_id
+      this.formsearchapptoday.location_id = this.location_id
+      this.formsearchapptoday.group = this.grouppro_id
+     
+
+     
+      try {
+        const data = await ApiService.post('/appointment/dateappointmentlist',this.formsearchapptoday).then(response => {
+        
+     
+this.applistfitter = response.data
+console.log(this.applistfitter);
+      
+        });
+        return true
+      } catch (error) {
+        return false;
+      }
+
+    },
 
     async fetchAppPresentToday() {
       this.formsearchapptoday.user_id = this.user_id
       this.formsearchapptoday.location_id = this.location_id
-      this.formsearchapptoday.user_type = this.user_type
       this.formsearchapptoday.group = this.grouppro_id
      
-    
+      console.log(this.formsearchapptoday);
      
       try {
-        const data = await ApiService.post('/appointment/dateappointment',this.formsearchapptoday).then(response => {
+        const data = await ApiService.post('/appointment/dateappointmentlist',this.formsearchapptoday).then(response => {
+        
 this.dlttoday = response.data
-
-
-
-
           for (let i = 0; i < response.data.length; i++) {
             if (response.data[i].dlt_code == 'A' ) {
               this.dlt_today.A_1.push(response.data[i])
