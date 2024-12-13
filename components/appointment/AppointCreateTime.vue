@@ -135,6 +135,8 @@
       dlt_code</span
     >
 
+
+
     <div class="col-sm-12 p-2">
       <label for="exampleFormControlInput1">ຈຳນວນທີ່ເຮັດໄດ້:</label>
       <input
@@ -171,7 +173,7 @@
         <option
           v-for="(item, index) in store.provi"
           :key="item.group_id"
-          :value="item.group_id"
+          :value="item.group"
         >
           {{ item.name }} - {{ item.province_name }}
         </option>

@@ -343,6 +343,7 @@ export const AppointStore = defineStore('appoint', {
 try {
   const data = await ApiService.post('/appointment/listall',this.formlistapp).then(response => {
    
+
     this.applist = response.data.data
     this.total_page = response.data.total_page
     this.limit_page = response.data.limit_page
@@ -470,8 +471,7 @@ try {
 
     Fitter(id) {
 
-      console.log(id);
-let a = this.provi.find(x => x.group_id == id);
+let a = this.provi.find(x => x.group == id);
 
 
 return a.name +'-'+a.province_name;
@@ -1392,8 +1392,9 @@ this.formprovice.user_id = this.user_id
         const data = await ApiService.post('/master_data/provice', this.formprovice).then(reps => {
 this.provi = reps.data.data;
 
-this.forminsertnew.group_id = reps.data.data[0].group_id
+this.forminsertnew.group_id = reps.data.data[0].group
 
+console.log(reps.data.data);
 
         });
         return data;

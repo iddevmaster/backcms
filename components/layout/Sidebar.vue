@@ -443,18 +443,20 @@
               <!-- <nuxt-link to="/appointment">{{ $t("menu_app_manage_all") }}</nuxt-link> -->
             </li>
             <li>
-              <nuxt-link to="/appointment/user/create">{{ $t("menu_app_app_create") }}</nuxt-link>
+              <nuxt-link to="/appointment">{{ $t("menu_app_view_by_user") }}</nuxt-link>
             </li>
+         
             <li>
               <nuxt-link to="/appointment/time/create">ເພິ່ມຊ່ວງເວລານັດໝາຍ</nuxt-link>
             </li>
             
          
-             <li>
-              <nuxt-link to="/appointment/user">{{ $t("menu_app_view_by_user") }}</nuxt-link>
-            </li>
+            
             <li>
               <nuxt-link to="/appointment/today">ເບິ່ງນັດໝາຍ ປະຈຳວັນ</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/appointment/user/create">{{ $t("menu_app_app_create") }}</nuxt-link>
             </li>
           </ul>
         </li>
@@ -832,18 +834,20 @@
               <!-- <nuxt-link to="/appointment">{{ $t("menu_app_manage_all") }}</nuxt-link> -->
             </li>
             <li>
-              <nuxt-link to="/appointment/user/create">{{ $t("menu_app_app_create") }}</nuxt-link>
+              <nuxt-link to="/appointment">{{ $t("menu_app_view_by_user") }}</nuxt-link>
             </li>
+         
             <li>
               <nuxt-link to="/appointment/time/create">ເພິ່ມຊ່ວງເວລານັດໝາຍ</nuxt-link>
             </li>
             
          
-             <li>
-              <nuxt-link to="/appointment/user">{{ $t("menu_app_view_by_user") }}</nuxt-link>
-            </li>
+            
             <li>
               <nuxt-link to="/appointment/today">ເບິ່ງນັດໝາຍ ປະຈຳວັນ</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/appointment/user/create">{{ $t("menu_app_app_create") }}</nuxt-link>
             </li>
           </ul>
         </li>
