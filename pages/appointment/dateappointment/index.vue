@@ -160,7 +160,7 @@ function coverimage(i) {
         name="txt"
         placeholder="$t('search')"
         class="form-control"
-        value="ค้นหา"
+        :value="$t('app_today_search')"
 style="
     background-color: rgb(15, 119, 223);
     color: white;
@@ -176,14 +176,7 @@ style="
 
           <div class="col-xl-2 col-lg-2 col-sm-12 layout-spacing">
    
-   <input  
-id="t-text"
-type="button"
-name="txt"
-placeholder="$t('search')"
-class="form-control"
-value="ເພິ່ມນັດໝາຍ"
-style="
+   <input  id="t-text" type="button" name="txt" placeholder="$t('search')" class="form-control" :value="$t('app_today_addapp')" style="
 background-color: rgb(15, 119, 223);
 color: white;
 "
